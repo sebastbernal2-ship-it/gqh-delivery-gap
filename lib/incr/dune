@@ -1,0 +1,6 @@
+(library
+ (name incr)
+ (public_name incr))
+
+;; incr is a self-contained incremental computation engine with no dependencies
+;; beyond the OCaml stdlib. No Base, no Core, no external deps.

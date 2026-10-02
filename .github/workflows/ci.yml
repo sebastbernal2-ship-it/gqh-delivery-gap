@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use OCaml 5.2
+      uses: ocaml/setup-ocaml@v3
+      with:
+        ocaml-compiler: "5.2"
+
+    - name: Install dependencies
+      run: |
+        opam install --deps-only --yes .
+        opam install --yes ocamlformat
+
+    - name: Check formatting
+      run: |
+        opam exec -- ocamlformat --check src/*.ml src/*.mli test/*.ml examples/*.ml 2>/dev/null || \
+          (echo "Run 'ocamlformat --inplace src/*.ml src/*.mli test/*.ml examples/*.ml' to fix formatting" && exit 1)
+
+    - name: Build
+      run: opam exec -- dune build
+
+    - name: Run tests
+      run: opam exec -- dune runtest
