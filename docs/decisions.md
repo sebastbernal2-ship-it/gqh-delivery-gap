@@ -651,3 +651,27 @@ answer to the question the study was asked, and it is worth more than a fitted r
 **What it does not rule out.** The mechanism itself is measured and large: promises move in a modal
 one-year step, and 64 percent of projects slip. The negative here is about *firm equity returns as the
 target*, not about the phenomenon. Any next test should change the target rather than the story.
+
+---
+
+## 2026-10-03: The aggregate revision is a trend, the placebo explains the significant cells, and the note is written
+
+**Third test, and its diagnostic.** The aggregate capacity revision, traded as a market-neutral pair of
+contractors and equipment against merchant generation and utilities, returns +0.29 percent a month gross
+and +0.07 percent net at ten basis points per leg, with a max drawdown of 37.8 percent. The diagnostic
+matters more: the next-year signal is positive in 89 percent of months because the capacity promised for the
+following year grew at a median 41.7 percent a year, so that row is a nearly static pair rather than a test
+of a signal. The balanced definition, positive in half the months, is negative after costs.
+**Selectivity is not a plateau.** Trading the largest third of revisions gives +0.56 percent a month net
+against minus 0.15 percent at the median cut. That is monotone in selectivity across 25 observations with a
+Sharpe of 0.28, which points at selection rather than at a parameter plateau, and it is reported as such.
+**Placebo control.** Re-running the group study with each event's date swapped for another date the same firm
+also published something gives seven cells with |t| above 2 against two in the real data, and an identical
+average cell mean (+0.284 against +0.281 percent). The pipeline does not invent associations, so the real
+cells are noise at this sample size.
+**The deliverable.** `docs/note.pdf`, four pages, generated from `docs/note.html` by the headless chromium
+that ships with the editor tooling, because the machine has no PDF toolchain and installing one was not
+necessary. The note states the measurement, the three tests, the failure of each, the placebo, the risk and
+liquidity plans, and the sealed window with the one command that opens it.
+**What remains for the captain.** The sealed test has not been run: the rule says a named owner opens it once
+and reports whatever it says.

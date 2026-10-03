@@ -21,7 +21,9 @@ from __future__ import annotations
 
 import calendar
 import datetime as dt
+import json
 import re
+import time
 from dataclasses import dataclass, asdict
 from pathlib import Path
 
@@ -63,6 +65,38 @@ def vintage_url(year: int, month: int) -> str:
     return f"{BASE}/archive/xls/{vintage_name(year, month)}"
 
 
+def vintage_index(session=None, cache: Path | None = None) -> dict[tuple[int, int], str]:
+    """Month to file URL, taken from the page's own link list.
+
+    Constructing a URL by hand fails for early years, where only some months exist and the path differs,
+    so the published list is the authority. It is cached because the page changes monthly, not hourly.
+    """
+    cache = cache if cache is not None else CACHE
+    cache.mkdir(parents=True, exist_ok=True)
+    index_file = cache / "vintage-index.json"
+    if index_file.exists():
+        try:
+            stored = json.loads(index_file.read_text())
+            return {(int(year), int(month)): url for (year, month), url in
+                    ((key.split("-"), value) for key, value in stored.items())}
+        except (OSError, ValueError):
+            pass
+    session = session or requests.Session()
+    page = session.get(BASE + "/", headers={"User-Agent": USER_AGENT}, timeout=90).text
+    found: dict[str, str] = {}
+    for href in re.findall(r'href="([^"]+\.xlsx)"', page, re.I):
+        match = re.search(r"([a-z]+)_generator(\d{4})\.xlsx", href, re.I)
+        if not match:
+            continue
+        month_name, year = match.group(1).lower(), int(match.group(2))
+        number = next((i for i, name in enumerate(calendar.month_name)
+                       if i and name.lower() == month_name), None)
+        if number:
+            found[f"{year:04d}-{number:02d}"] = "https://www.eia.gov" + href
+    index_file.write_text(json.dumps(found))
+    return {(int(key[:4]), int(key[5:])): url for key, url in found.items()}
+
+
 def fetch_vintage(year: int, month: int, session=None, cache: Path | None = None) -> Path:
     """Download a vintage once. The cache is the whole rate-limit story: these files are not small."""
     cache = cache if cache is not None else CACHE
@@ -72,12 +106,22 @@ def fetch_vintage(year: int, month: int, session=None, cache: Path | None = None
         return target
     session = session or requests.Session()
     headers = {"User-Agent": USER_AGENT}
-    for url in (f"{BASE}/xls/{vintage_name(year, month)}",
-                vintage_url(year, month)):
-        response = session.get(url, headers=headers, timeout=180)
-        if response.status_code == 200 and response.content[:2] == b"PK":
-            target.write_bytes(response.content)
-            return target
+    candidates = [url for (y, m), url in vintage_index(session, cache).items()
+                  if (y, m) == (year, month)]
+    candidates += [f"{BASE}/xls/{vintage_name(year, month)}", vintage_url(year, month)]
+    # Twelve megabytes over a shared link times out often enough that a single attempt is not a plan.
+    delay = 5
+    for attempt in range(3):
+        for url in candidates:
+            try:
+                response = session.get(url, headers=headers, timeout=300)
+            except requests.RequestException:
+                continue
+            if response.status_code == 200 and response.content[:2] == b"PK":
+                target.write_bytes(response.content)
+                return target
+        time.sleep(delay)
+        delay *= 2
     raise RuntimeError(f"no vintage file served for {year}-{month:02d}")
 
 

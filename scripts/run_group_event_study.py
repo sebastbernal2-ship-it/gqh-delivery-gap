@@ -79,6 +79,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--history-end", default=dt.date.today().isoformat())
     parser.add_argument("--out", default="results/group-event-study.csv")
     parser.add_argument("--summary", action="store_true")
+    parser.add_argument("--placebo", action="store_true",
+                        help="shuffle the dates within each firm, to check the pipeline cannot invent an association")
+    parser.add_argument("--seed", type=int, default=20261003)
     args = parser.parse_args(argv)
 
     horizons = [int(h) for h in args.horizons.split(",")]
@@ -97,6 +100,18 @@ def main(argv: list[str] | None = None) -> int:
     if not events:
         print("no usable events")
         return 1
+    if args.placebo:
+        # Swap each event's date for another date the same firm also published something, which keeps the
+        # firm, the reporting calendar and the price history intact while breaking the link to the revision.
+        import random
+        rng = random.Random(args.seed)
+        by_ticker: dict[str, list[str]] = defaultdict(list)
+        for event in events:
+            by_ticker[event["ticker"]].append(event["available"])
+        for event in events:
+            options = by_ticker[event["ticker"]]
+            event["available"] = rng.choice(options)
+        print("PLACEBO RUN: dates shuffled within each firm")
     print(f"usable events with a ticker and a surprise: {len(events)}")
     print("without a ticker, so not priced here: "
           f"{sum(1 for r in rows if not r.get('ticker'))} of {len(rows)} rows")
