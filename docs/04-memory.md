@@ -76,6 +76,23 @@ by code and not by good intentions.
 If an entry you wanted to share gets dropped, do not loosen the filter. Write the fact into `docs/`,
 at its owner, where a person can review it in a diff.
 
+### Capture is mechanical
+
+Nothing here depends on a person remembering a command.
+
+1. **The agent.** `hippo hook install pi` (and `codex`, `claude-code`, `cursor`, `opencode`,
+   `openclaw`, whichever you use) writes capture instructions into `AGENTS.md`, `CLAUDE.md`, or
+   `.cursorrules`, so the session runs `hippo context --auto` at the start and captures a short
+   summary at the end. Those files are committed, so every clone carries the instructions.
+2. **The commit.** `.githooks/pre-commit` runs the share step on every commit and stages
+   `memory/`. Enable it once per clone with `make bootstrap`, or by hand:
+   `git config core.hooksPath .githooks`. It never blocks a commit.
+3. **Scope, not tags.** If the store lives inside the repo, every entry in it is project scope by
+   construction, so an untagged memory is shared without anyone tagging anything. If the store
+   lives outside the repo, the default is deny and only project-tagged entries are shared.
+
+Redaction and the credential rules apply in both modes.
+
 ### Why not `hippo import --file`
 
 Because it does not do what the name suggests. Import parses the JSON as plain text and writes one

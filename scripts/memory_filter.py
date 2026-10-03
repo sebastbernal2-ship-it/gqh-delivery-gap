@@ -64,16 +64,23 @@ def looks_secret(text: str) -> bool:
     return bool(SECRET_VALUE.search(text) or SECRET_ASSIGNMENT.search(text))
 
 
-def filter_entries(entries, share_tag: str = "gqh"):
-    """Return the shareable subset, redacted, deduped by id, sorted by id."""
+PROJECT_TAGS = ("quanthacks", "gator-quant-hacks")
+
+
+def filter_entries(entries, share_tag: str = "gqh", store_scoped: bool = False):
+    """Return the shareable subset, redacted, deduped by id, sorted by id.
+
+    store_scoped=True means the memory store lives inside the repo, so every entry in
+    it is project scope by construction and no human tagging is required. Otherwise
+    the default is deny and the share tag decides.
+    """
     kept: dict[str, dict] = {}
     for raw in entries:
         if not isinstance(raw, dict):
             continue
         tags = [str(t) for t in raw.get("tags", []) or []]
-        if share_tag not in tags and not any(
-            t in ("quanthacks", "gator-quant-hacks") for t in tags
-        ):
+        tagged = share_tag in tags or any(t in PROJECT_TAGS for t in tags)
+        if not tagged and not store_scoped:
             continue
         content = redact(str(raw.get("content", "")))
         if not content.strip() or looks_secret(content):
@@ -117,14 +124,17 @@ def render_markdown(entries) -> str:
 
 
 def main(argv: list[str]) -> int:
-    if len(argv) != 3:
-        print("usage: memory_filter.py <raw-export.json> <out-dir>", file=sys.stderr)
+    args = [a for a in argv[1:] if not a.startswith("--")]
+    store_scoped = "--store-scoped" in argv
+    if len(args) != 2:
+        print("usage: memory_filter.py [--store-scoped] <raw-export.json> <out-dir>",
+              file=sys.stderr)
         return 2
-    raw_path, out_dir = Path(argv[1]), Path(argv[2])
+    raw_path, out_dir = Path(args[0]), Path(args[1])
     entries = json.loads(raw_path.read_text()) if raw_path.exists() else []
     if isinstance(entries, dict):
         entries = entries.get("memories", [])
-    shared = filter_entries(entries)
+    shared = filter_entries(entries, store_scoped=store_scoped)
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "shared.json").write_text(json.dumps(shared, indent=2) + "\n")
     (out_dir / "SHARED.md").write_text(render_markdown(shared))
