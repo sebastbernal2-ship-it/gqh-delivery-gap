@@ -675,3 +675,27 @@ necessary. The note states the measurement, the three tests, the failure of each
 liquidity plans, and the sealed window with the one command that opens it.
 **What remains for the captain.** The sealed test has not been run: the rule says a named owner opens it once
 and reports whatever it says.
+
+---
+
+## 2026-10-03: Snowflake is the historical research layer, not the execution path
+
+**Decision.** Adopt Snowflake as the shared historical integration and reproducible feature-panel
+layer. Keep TigerData as the operational/time-series store and keep q/kdb+, C++ and OCaml on the
+execution-sensitive path. Snowflake must not be queried per tick or per order.
+
+**Context.** The team has a verified AWS GPU Spot archive in TigerData, Massive 8-K access, equity
+market data and a need to join them without look-ahead. Snowflake can centralize raw/normalized/
+feature/research layers and give teammates the same point-in-time panel. It is not a reason to
+replace a low-latency time-series engine or a typed arithmetic engine.
+
+**First slice.** Load a small AWS compute sample, declared equity basket and filing metadata. Build
+features for compute price changes, observation age, regional dispersion, filing availability and
+market controls. Export the point-in-time panel to Parquet/q and run the chronological backtest
+without requiring Snowflake at execution time.
+
+**Boundaries.** Raw source files remain immutable and versioned. Every feature carries event,
+availability and ingestion timestamps. Realized outcomes are labels only. Snowpark ML, Cortex,
+Feature Store, Laya and GPU training are optional follow-ons gated by a simple baseline and
+point-in-time validation. No Snowflake account, edition, credits or credentials are asserted by
+this decision.

@@ -13,6 +13,7 @@ thesis, live implementation or measured alpha is asserted here.
 5. [Technical boundaries](technical-boundaries.md): proposed components, numerical contracts and compute separation.
 6. [Next steps](next-steps.md): the small base case and the gate before scaling.
 7. [Writing style](../../writing/style.md): how to express uncertainty and results.
+8. [Snowflake path](snowflake-path.md): the adopted research/data boundary and first integration slice.
 
 Each topic has one owner document. Link instead of copying it into another summary. The source
 audit owns provider/access details; the data plan owns what to collect; the technical proposal
