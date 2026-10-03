@@ -1,9 +1,11 @@
 # HiPerGator
 
-Job scripts and environments for the cluster. One directory per approach, so two ideas can be
+Cluster access and compute work live here. Shared account/setup notes belong in `hpc/setup/`;
+job scripts and environments belong in one directory per research approach, so two ideas can be
 tried in parallel without fighting over the same files.
 
 ```
+hpc/setup/               non-secret cluster access and setup handoff
 hpc/<approach>/          job scripts, environment spec, and a README saying what it computes
 hpc/<approach>/README.md what it runs, what it needs, what it produced
 ```
