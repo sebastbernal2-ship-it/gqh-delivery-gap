@@ -87,6 +87,7 @@ test:
 	@python3 tests/test_xbrl.py
 	@python3 tests/test_eia.py
 	@python3 tests/test_event.py
+	@python3 tests/test_universe.py
 
 # Credential scan over every file. This repo is public.
 secrets:

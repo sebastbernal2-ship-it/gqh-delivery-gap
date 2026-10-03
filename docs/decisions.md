@@ -625,3 +625,29 @@ drift. The direction our mechanism predicts, a negative surprise, shows nothing.
 **Next, if this channel is pursued.** Widen the universe by a mechanical industry rule rather than by hand,
 so the sample is not one contractor's history, and report each industry group separately instead of pooling
 into the best cell.
+
+---
+
+## 2026-10-03: Breadth tested, and the naive revision-to-price trade does not survive it
+
+**The universe rule, declared before any return was seen.** Every filer that reports remaining
+performance obligations at least three times between 2015Q1 and 2024Q3, grouped by its own SIC code.
+Nothing hand-picked: 1,285 filers report the field, 382 fall inside a declared industry group
+(datacenter 303, equipment 52, utility 23, contractor 4) and 903 form a placebo group.
+**The panel.** 5,663 timestamped revisions across those 382 companies, 4,634 usable in the development
+window, 267 flagged as sealed and excluded, and every row carries either an acceptance timestamp (the
+four pilot firms) or a filing date at day resolution, labelled rather than hidden.
+**The result, and it is negative.** Fifty cells reported, being four groups by two surprise directions by
+five horizons. Nothing is both economically meaningful and statistically strong in the direction the chain
+predicts. A downward surprise, which should be the bad news, is flat or mildly positive in every group:
+contractor +2.40 percent at twenty sessions (t=1.33, the wrong sign), datacenter +0.87 percent at ten
+(t=1.82, also the wrong sign, with a negative median), equipment within a whisker of zero everywhere. The
+only cells pointing the right way are modest: electricity services at minus 1.18 percent over ten sessions
+(t=minus 1.65, n=87) and the upward side of the contractor group at plus 3.03 percent (t=2.61), which is
+the same PWR drift seen in the two-firm pass.
+**What this rules out.** A strategy that reads a published obligation revision and takes a position in the
+disclosing firm, at horizons of one to twenty sessions, is not supported by this data. That is the honest
+answer to the question the study was asked, and it is worth more than a fitted result on three firms.
+**What it does not rule out.** The mechanism itself is measured and large: promises move in a modal
+one-year step, and 64 percent of projects slip. The negative here is about *firm equity returns as the
+target*, not about the phenomenon. Any next test should change the target rather than the story.

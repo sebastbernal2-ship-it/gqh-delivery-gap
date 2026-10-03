@@ -58,3 +58,6 @@ results/edgar-cache/
 
 # Local EIA vintage cache: public data, kept out of the repo.
 results/eia-cache/
+
+# Local price cache: fetched, never committed.
+results/bar-cache/
