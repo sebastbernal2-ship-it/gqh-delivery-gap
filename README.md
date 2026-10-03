@@ -104,3 +104,39 @@ dependencies, and prints the sync protocol.
 ## Aidan research context
 
 [Aidan's handoff](docs/inbox/aidan-2026-10-03/README.md) preserves this conversation's strategy evolution, corrections, advanced-method research and proposed implementation contracts. Read it alongside Vishnu's handoff; both are research proposals, not promoted theses.
+
+## The submission
+
+Callsign **VECTOR**, Gator Quant Hacks 2026, Systematic Trading track.
+
+- **The note, five pages or fewer**: [docs/note.pdf](docs/note.pdf), generated from [docs/note.html](docs/note.html).
+- **What it says in one line**: promised delivery in this buildout is measurable and systematically late,
+  and three increasingly broad tests fail to turn that into a firm-level return signal.
+- **The measured mechanism**: 3,783 promise revisions across nine annual vintages, a modal slip of exactly
+  twelve months, 64 percent of promised generators arriving late, and a 33 to 94 day lag between a period
+  end and the filing that makes it public.
+- **The claim path, with a falsifier per edge**: [docs/chains/t-capacity-revision.jsonl](docs/chains/t-capacity-revision.jsonl).
+- **Every negative result, with its numbers**: [docs/decisions.md](docs/decisions.md).
+
+### Reproduce it
+
+```sh
+make bootstrap
+make check                      # secrets, ledger, structure, paths, owners, chain, graph link
+make test                       # twelve suites
+python scripts/build_capacity_expectations.py          # 111 monthly vintages to one panel
+python scripts/build_delivery_panel.py --years 2015-2023
+python scripts/build_filings_register.py --tickers PWR,ETN,EME,DLR
+python scripts/build_obligation_panel.py --tickers PWR,ETN
+python scripts/build_rpo_universe.py && python scripts/build_rpo_events.py
+python scripts/run_group_event_study.py --placebo
+python scripts/run_capacity_strategy.py
+```
+
+The out-of-sample window is the final 24 monthly vintages, 2022-10 to 2024-09. Nothing in the note uses
+them. One command opens it, once, and reports whatever it says:
+
+```sh
+python scripts/run_capacity_strategy.py --open-sealed
+```
+

@@ -179,7 +179,6 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--end-quarter", default="2024Q3")
     parser.add_argument("--history-start", default="2015-01-01")
     parser.add_argument("--history-end", default=dt.date.today().isoformat())
-    parser.add_argument("--out", default="results/rpo-frames.csv")
     parser.add_argument("--universe-out", default="results/rpo-universe.csv")
     parser.add_argument("--max-filers", type=int, default=1200)
     parser.add_argument("--summary", action="store_true")
