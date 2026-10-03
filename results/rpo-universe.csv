@@ -1,0 +1,1286 @@
+cik,name,ticker,sic,sic_description,group,facts,first_end,last_end
+1750,AAR CORP,AIR,3720,Aircraft & Parts,other,24,2018-08-31,2024-08-31
+2488,ADVANCED MICRO DEVICES INC,AMD,3674,Semiconductors & Related Devices,equipment,27,2018-03-31,2024-09-28
+2969,"Air Products & Chemicals, Inc.",APD,2810,Industrial Inorganic Chemicals,other,24,2018-12-31,2024-09-30
+3570,"Cheniere Energy, Inc.",LNG,4924,Natural Gas Distribution,other,9,2017-12-31,2019-12-31
+4904,AMERICAN ELECTRIC POWER CO INC,AEP,4911,Electric Services,utility,27,2018-03-31,2024-09-30
+5981,AMERICAN VANGUARD CORP,AVD,2870,Agricultural Chemicals,other,10,2018-03-31,2021-12-31
+6845,"APOGEE ENTERPRISES, INC.",APOG,3231,"Glass Products, Made of  Purchased Glass",other,17,2020-08-29,2024-08-31
+6955,ENERPAC TOOL GROUP CORP,EPAC,3590,Misc Industrial & Commercial Machinery & Equipment,other,24,2018-11-30,2024-08-31
+8063,ASTRONICS CORP,ATRO,3728,"Aircraft Parts & Auxiliary Equipment, NEC",other,23,2018-03-31,2024-09-28
+8947,AZZ INC,AZZ,3470,"Coating, Engraving & Allied Services",other,5,2018-05-31,2020-02-29
+9092,BADGER METER INC,BMI,3824,Totalizing Fluid Meters & Counting Devices,other,26,2018-03-31,2024-09-30
+9389,BALL Corp,BALL,3411,Metal Cans,other,9,2019-03-31,2021-09-30
+9984,BARNES GROUP INC,,3490,Miscellaneous Fabricated Metal Products,other,27,2018-03-31,2024-09-30
+10048,BARNWELL INDUSTRIES INC,BRN,1311,Crude Petroleum & Natural Gas,other,22,2018-12-31,2024-03-31
+10456,BAXTER INTERNATIONAL INC,BAX,3841,Surgical & Medical Instruments & Apparatus,other,27,2018-03-31,2024-09-30
+12927,BOEING CO,BA,3721,Aircraft,other,27,2018-03-31,2024-09-30
+14930,BRUNSWICK CORP,BC,3510,Engines & Turbines,equipment,23,2018-03-31,2024-09-28
+15615,MASTEC INC,MTZ,1623,"Water, Sewer, Pipeline, Comm & Power Line Construction",other,27,2018-03-31,2024-09-30
+16058,CACI INTERNATIONAL INC /DE/,CACI,7373,Services-Computer Integrated Systems Design,other,25,2018-09-30,2024-09-30
+16099,LUB LIQUIDATING TRUST,,5812,Retail-Eating  Places,other,8,2018-12-19,2020-08-26
+18230,CATERPILLAR INC,CAT,3531,Construction Machinery & Equip,other,24,2018-03-31,2024-09-30
+18926,"Lumen Technologies, Inc.",LUMN,4813,Telephone Communications (No Radiotelephone),datacenter,27,2018-03-31,2024-09-30
+19446,CANTEL MEDICAL LLC,,3841,Surgical & Medical Instruments & Apparatus,other,11,2018-10-31,2021-04-30
+19871,CHICAGO RIVET & MACHINE CO,CVR,3540,Metalworkg Machinery & Equipment,other,5,2019-06-30,2023-12-31
+20212,Churchill Downs Inc,CHDN,7948,"Services-Racing, Including Track Operation",other,22,2018-09-30,2024-09-30
+20520,"Frontier Communications Parent, Inc.",,4813,Telephone Communications (No Radiotelephone),datacenter,23,2018-03-31,2024-09-30
+21175,CNA FINANCIAL CORP,CNA,6331,"Fire, Marine & Casualty Insurance",other,3,2018-03-31,2018-09-30
+21510,COHERENT INC,,3826,Laboratory Analytical Instruments,other,15,2018-09-29,2022-04-02
+21535,COHU INC,COHU,3825,Instruments For Meas & Testing of  Electricity & Elec Signals,other,24,2018-12-29,2024-09-28
+22444,COMMERCIAL METALS Co,CMC,3312,"Steel Works, Blast Furnaces & Rolling Mills (Coke Ovens)",other,18,2020-02-29,2024-08-31
+23111,COMPUTER TASK GROUP INC,,7371,Services-Computer Programming Services,datacenter,4,2018-03-30,2018-12-31
+23197,COMTECH TELECOMMUNICATIONS CORP /DE/,CMTL,3663,Radio & Tv Broadcasting & Communications Equipment,other,6,2018-10-31,2020-04-30
+25445,"Crane NXT, Co.",CXT,3490,Miscellaneous Fabricated Metal Products,other,27,2018-03-31,2024-09-30
+25475,CRAWFORD & CO,CRD-A,6411,"Insurance Agents, Brokers & Service",other,27,2018-03-31,2024-09-30
+26076,CUBIC CORP /DE/,,3829,"Measuring & Controlling Devices, NEC",other,10,2018-12-31,2021-03-31
+26172,CUMMINS INC,CMI,3510,Engines & Turbines,equipment,27,2018-04-01,2024-09-30
+26324,CURTISS WRIGHT CORP,CW,3590,Misc Industrial & Commercial Machinery & Equipment,other,27,2018-03-31,2024-09-30
+28823,"DIEBOLD NIXDORF, Inc",DBD,3578,Calculating & Accounting Machines (No Electronic Computers),other,22,2018-03-31,2024-09-30
+28917,"DILLARD'S, INC.",DDS,5311,Retail-Department Stores,other,28,2018-02-03,2024-11-02
+29905,DOVER Corp,DOV,3530,"Construction, Mining & Materials Handling Machinery & Equip",other,27,2018-03-31,2024-09-30
+30305,DUCOMMUN INC /DE/,DCO,3728,"Aircraft Parts & Auxiliary Equipment, NEC",other,23,2018-12-31,2024-09-28
+30625,FLOWSERVE CORP,FLS,3561,Pumps & Pumping Equipment,other,24,2018-03-31,2024-09-30
+30697,Wendy's Co,WEN,5810,Retail-Eating & Drinking Places,other,25,2018-04-01,2024-09-29
+31235,EASTMAN KODAK CO,KODK,3861,Photographic Equipment & Supplies,other,11,2018-03-31,2024-09-30
+31462,ECOLAB INC.,ECL,2840,"Soap, Detergents, Cleang Preparations, Perfumes, Cosmetics",other,28,2017-12-31,2024-09-30
+32604,EMERSON ELECTRIC CO,EMR,3600,Electronic & Other Electrical Equipment (No Computer Equip),equipment,24,2018-12-31,2024-09-30
+33185,EQUIFAX INC,EFX,7320,"Services-Consumer Credit Reporting, Collection Agencies",other,27,2018-03-31,2024-09-30
+36047,"CORELOGIC, INC.",,7374,Services-Computer Processing & Data Preparation,datacenter,13,2018-03-31,2021-03-31
+36270,M&T BANK CORP,MTB,6022,State Commercial Banks,other,27,2018-03-31,2024-09-30
+36377,"FIRST HAWAIIAN, INC.",FHB,6022,State Commercial Banks,other,23,2018-03-31,2024-09-30
+37785,FMC CORP,FMC,2800,Chemicals & Allied Products,other,4,2018-03-31,2018-12-31
+40533,GENERAL DYNAMICS CORP,GD,3730,Ship & Boat Building & Repairing,other,7,2017-07-02,2023-12-31
+40545,GENERAL ELECTRIC CO,GE,3600,Electronic & Other Electrical Equipment (No Computer Equip),equipment,27,2018-03-31,2024-09-30
+40888,"AEROJET ROCKETDYNE HOLDINGS, INC.",,3760,Guided Missiles & Space Vehicles & Parts,other,21,2018-03-31,2023-03-31
+42316,GOLDFIELD CORP,,1623,"Water, Sewer, Pipeline, Comm & Power Line Construction",other,11,2018-03-31,2020-09-30
+42682,GORMAN RUPP CO,GRC,3561,Pumps & Pumping Equipment,other,4,2018-03-31,2018-12-31
+45919,HARTE HANKS INC,HHS,7331,Services-Direct Mail Advertising Services,other,20,2018-06-30,2024-09-30
+46080,"HASBRO, INC.",HAS,3944,"Games, Toys & Children's Vehicles (No Dolls & Bicycles)",other,16,2020-12-27,2024-09-29
+46765,"Helmerich & Payne, Inc.",HP,1381,Drilling Oil & Gas Wells,other,24,2018-12-31,2024-09-30
+47217,HP INC,HPQ,3570,Computer & office Equipment,other,24,2019-01-31,2024-10-31
+48039,HollyFrontier Corp,,2911,Petroleum Refining,other,4,2018-03-31,2020-12-31
+48898,HUBBELL INC,HUBB,3670,Electronic Components & Accessories,other,6,2018-03-31,2020-09-30
+49754,"Dine Brands Global, Inc.",DIN,5812,Retail-Eating  Places,other,26,2018-06-30,2024-09-30
+50725,GRIFFON CORP,GFF,3442,"Metal Doors, Sash, Frames, Moldings & Trim",other,11,2018-12-31,2021-06-30
+51143,INTERNATIONAL BUSINESS MACHINES CORP,IBM,3570,Computer & office Equipment,other,27,2018-03-31,2024-09-30
+51644,"INTERPUBLIC GROUP OF COMPANIES, INC.",,7311,Services-Advertising Agencies,other,24,2018-12-31,2024-09-30
+52988,JACOBS SOLUTIONS INC.,J,1600,Heavy Construction Other Than Bldg Const - Contractors,other,14,2020-06-26,2024-09-27
+54381,KAMAN Corp,,3760,Guided Missiles & Space Vehicles & Parts,other,24,2018-03-30,2023-12-31
+54480,KANSAS CITY SOUTHERN,,4011,"Railroads, Line-Haul Operating",other,3,2018-03-31,2018-09-30
+56047,KIRBY CORP,KEX,4400,Water Transportation,other,4,2018-03-31,2018-12-31
+56679,KORN FERRY,KFY,7361,Services-Employment Agencies,other,26,2018-07-31,2024-10-31
+60086,LOEWS CORP,L,6331,"Fire, Marine & Casualty Insurance",other,27,2018-03-31,2024-09-30
+60714,"LSB INDUSTRIES, INC.",LXU,2810,Industrial Inorganic Chemicals,other,12,2021-12-31,2024-09-30
+62709,"MARSH & MCLENNAN COMPANIES, INC.",MRSH,6411,"Insurance Agents, Brokers & Service",other,3,2018-03-31,2018-09-30
+64040,S&P Global Inc.,SPGI,7320,"Services-Consumer Credit Reporting, Collection Agencies",other,25,2018-09-30,2024-09-30
+64996,MERCURY GENERAL CORP,MCY,6331,"Fire, Marine & Casualty Insurance",other,24,2018-12-31,2024-09-30
+67716,MDU RESOURCES GROUP INC,MDU,4924,Natural Gas Distribution,other,19,2020-03-31,2024-09-30
+67887,MOOG INC.,MOG-A,3590,Misc Industrial & Commercial Machinery & Equipment,other,24,2018-12-29,2024-09-28
+68505,"Motorola Solutions, Inc.",MSI,3663,Radio & Tv Broadcasting & Communications Equipment,other,23,2018-03-31,2024-09-28
+68622,QWEST CORP,,4813,Telephone Communications (No Radiotelephone),datacenter,27,2018-03-31,2024-09-30
+68709,MTS SYSTEMS CORP,,3829,"Measuring & Controlling Devices, NEC",other,9,2018-12-29,2021-01-02
+69733,"NATHANS FAMOUS, INC.",NATH,5812,Retail-Eating  Places,other,26,2018-06-24,2024-09-29
+70318,TENET HEALTHCARE CORP,THC,8062,"Services-General Medical & Surgical Hospitals, NEC",other,3,2024-03-31,2024-09-30
+70415,GP STRATEGIES CORP,,8200,Services-Educational Services,other,14,2018-03-31,2021-06-30
+70487,NRC HEALTH,NRC,8731,Services-Commercial Physical & Biological Research,other,7,2018-03-31,2019-09-30
+70866,NCR Voyix Corp,VYX,3578,Calculating & Accounting Machines (No Electronic Computers),other,27,2018-03-31,2024-09-30
+71691,NEW YORK TIMES CO,NYT,2711,Newspapers: Publishing or  Publishing & Printing,other,22,2018-04-01,2024-09-30
+72207,NOBLE ENERGY INC,,1311,Crude Petroleum & Natural Gas,other,9,2018-03-31,2020-06-30
+72444,"Vaxart, Inc.",VXRT,2836,"Biological Products, (No Diagnostic Substances)",other,10,2019-03-31,2021-12-31
+73756,OCEANEERING INTERNATIONAL INC,OII,1389,"Oil & Gas Field Services, NEC",other,21,2019-09-30,2024-09-30
+73887,Bristow Group Inc,,4522,"Air Transportation, Nonscheduled",other,6,2018-06-30,2019-09-30
+75208,OVERSEAS SHIPHOLDING GROUP INC,,4412,Deep Sea Foreign Transportation of  Freight,other,11,2018-06-30,2021-06-30
+75679,"GCI, LLC",,4813,Telephone Communications (No Radiotelephone),datacenter,3,2018-03-31,2018-09-30
+76063,"PANHANDLE EASTERN PIPE LINE COMPANY, LP",,4922,Natural Gas Transmission,other,6,2018-06-30,2021-12-31
+76321,PARKER DRILLING CO /DE/,,1381,Drilling Oil & Gas Wells,other,4,2018-03-31,2018-12-31
+76334,Parker-Hannifin Corp,PH,3490,Miscellaneous Fabricated Metal Products,other,25,2018-09-30,2024-09-30
+77360,PENTAIR plc,PNR,3550,Special Industry Machinery (No Metalworking Machinery),other,4,2018-03-31,2018-12-31
+78003,PFIZER INC,PFE,2834,Pharmaceutical Preparations,other,8,2021-12-31,2023-10-01
+78814,PITNEY BOWES INC /DE/,PBI,3579,"Office Machines, NEC",other,18,2018-03-31,2024-03-31
+80420,POWELL INDUSTRIES INC,POWL,3613,Switchgear & Switchboard Apparatus,equipment,24,2018-12-31,2024-09-30
+85961,RYDER SYSTEM INC,R,7510,Services-Auto Rental & Leasing (No Drivers),other,23,2019-03-31,2024-09-30
+88121,SEABOARD CORP /DE/,SEB,5150,Wholesale-Farm Product Raw Materials,other,7,2018-03-31,2019-09-28
+88205,"SPX Technologies, Inc.",SPXC,3540,Metalworkg Machinery & Equipment,other,27,2018-03-31,2024-09-28
+90168,SIFCO INDUSTRIES INC,SIF,3724,Aircraft Engines & Engine Parts,other,24,2018-12-31,2024-09-30
+91440,Snap-on Inc,SNA,3420,"Cutlery, Handtools & General Hardware",other,9,2019-03-30,2021-10-02
+92122,SOUTHERN CO,SO,4911,Electric Services,utility,4,2018-03-31,2018-12-31
+95574,"SUPERIOR GROUP OF COMPANIES, INC.",SGC,2300,Apparel & Other Finishd Prods of  Fabrics & Similar Matl,other,4,2018-03-31,2018-12-31
+96271,TAMPA ELECTRIC CO,,4911,Electric Services,utility,27,2018-03-31,2024-09-30
+97134,TENNANT CO,TNC,3580,Refrigeration & Service Industry Machinery,other,16,2020-12-31,2024-09-30
+97210,"TERADYNE, INC",TER,3825,Instruments For Meas & Testing of  Electricity & Elec Signals,other,15,2020-12-31,2024-09-29
+97745,THERMO FISHER SCIENTIFIC INC.,TMO,3829,"Measuring & Controlling Devices, NEC",other,27,2018-03-31,2024-09-28
+98362,TIMKEN CO,TKR,3562,Ball & Roller Bearings,other,27,2018-03-31,2024-09-30
+98752,TOROTEL INC,,3677,"Electronic Coils, Transformers & Other Inductors",other,6,2019-04-30,2020-07-31
+99250,"TRANSCONTINENTAL GAS PIPE LINE COMPANY, LLC",,4922,Natural Gas Transmission,other,17,2020-06-30,2024-09-30
+100591,ARGAN INC,AGX,1700,Construction - Special Trade Contractors,other,9,2018-04-30,2021-01-31
+100885,UNION PACIFIC CORP,UNP,4011,"Railroads, Line-Haul Operating",other,10,2017-12-31,2023-12-31
+101829,RTX Corp,RTX,3724,Aircraft Engines & Engine Parts,other,27,2018-03-31,2024-09-30
+101830,SPRINT LLC,,4813,Telephone Communications (No Radiotelephone),datacenter,7,2018-06-30,2019-12-31
+102729,VALMONT INDUSTRIES INC,VMI,3440,Fabricated Structural Metal Products,other,15,2020-12-26,2024-09-28
+102752,VSE CORP,VSEC,8711,Services-Engineering Services,other,21,2018-03-31,2023-03-31
+103145,VEECO INSTRUMENTS INC,VECO,3559,"Special Industry Machinery, NEC",other,26,2018-06-30,2024-09-30
+103379,V F CORP,VFC,2320,"Men's & Boys' Furnishgs, Work Clothg, & Allied Garments",other,16,2018-06-30,2024-09-28
+104918,AVISTA CORP,AVA,4931,Electric & Other Services Combined,utility,27,2018-03-31,2024-09-30
+105634,"EMCOR Group, Inc.",EME,1731,Electrical Work,contractor,27,2018-03-31,2024-09-30
+106040,WESTERN DIGITAL CORP,WDC,3572,Computer Storage Devices,other,18,2018-09-28,2022-12-30
+106455,WESTMORELAND COAL Co,,1221,Bituminous Coal & Lignite Surface Mining,other,3,2018-03-31,2018-09-30
+107140,"JOHN WILEY & SONS, INC.",WLY,2731,Books: Publishing or  Publishing & Printing,other,26,2018-07-31,2024-10-31
+107263,"WILLIAMS COMPANIES, INC.",WMB,4922,Natural Gas Transmission,other,18,2020-06-30,2024-09-30
+108312,"Woodward, Inc.",WWD,3620,Electrical Industrial Apparatus,other,24,2018-12-31,2024-09-30
+108516,"WORTHINGTON ENTERPRISES, INC.",WOR,3310,"Steel Works, Blast Furnaces & Rolling & Finishing Mills",other,9,2020-08-31,2023-02-28
+110019,NORTHWEST PIPELINE LLC,,4922,Natural Gas Transmission,other,18,2020-06-30,2024-09-30
+202058,"L3HARRIS TECHNOLOGIES, INC. /DE/",LHX,3812,"Search, Detection, Navigation, Guidance, Aeronautical Sys",other,16,2018-09-28,2024-09-27
+203527,VARIAN MEDICAL SYSTEMS INC,,3845,Electromedical & Electrotherapeutic Apparatus,other,4,2017-12-29,2018-09-28
+216228,ITT INC.,ITT,3561,Pumps & Pumping Equipment,other,18,2018-12-31,2024-09-28
+217346,TEXTRON INC,TXT,3720,Aircraft & Parts,other,27,2018-03-31,2024-09-28
+225648,COVANTA HOLDING CORP,,4991,Cogeneration Services & Small Power Producers,utility,15,2018-03-31,2021-09-30
+275880,PARSONS CORP,PSN,7373,Services-Computer Integrated Systems Design,other,23,2019-03-31,2024-09-30
+277948,CSX CORP,CSX,4011,"Railroads, Line-Haul Operating",other,4,2018-09-30,2019-09-30
+313143,HAEMONETICS CORP,HAE,3841,Surgical & Medical Instruments & Apparatus,other,26,2018-06-30,2024-09-28
+313616,DANAHER CORP /DE/,DHR,3823,"Industrial Instruments For Measurement, Display, and Control",equipment,26,2018-03-30,2024-09-27
+314808,Valaris Ltd,VAL,1381,Drilling Oil & Gas Wells,other,25,2018-03-31,2024-09-30
+315189,DEERE & CO,DE,3523,Farm Machinery & Equipment,other,24,2019-01-27,2024-10-27
+315213,ROBERT HALF INC.,RHI,7363,Services-Help Supply Services,other,27,2018-03-31,2024-09-30
+317340,MIKROS SYSTEMS CORP,,3829,"Measuring & Controlling Devices, NEC",other,3,2018-03-31,2018-09-30
+319201,KLA CORP,KLAC,3827,Optical Instruments & Lenses,other,25,2018-09-30,2024-09-30
+319815,MAXWELL TECHNOLOGIES INC,,3690,"Miscellaneous Electrical Machinery, Equipment & Supplies",other,3,2018-09-30,2019-03-31
+320121,TELOS CORP,TLS,7373,Services-Computer Integrated Systems Design,other,27,2018-03-31,2024-09-30
+350698,"AUTONATION, INC.",AN,5500,Retail-Auto Dealers & Gasoline Stations,other,27,2018-03-31,2024-09-30
+352825,FOSTER L B CO,FSTR,5051,Wholesale-Metals Service Centers & of fices,other,27,2018-03-31,2024-09-30
+353020,Aegion Corp,,1623,"Water, Sewer, Pipeline, Comm & Power Line Construction",other,4,2018-03-31,2019-03-31
+354190,Arthur J. Gallagher & Co.,AJG,6411,"Insurance Agents, Brokers & Service",other,27,2018-03-31,2024-09-30
+354908,"Teledyne FLIR, LLC",,3812,"Search, Detection, Navigation, Guidance, Aeronautical Sys",other,13,2018-03-31,2021-03-31
+354950,"HOME DEPOT, INC.",HD,5211,Retail-Lumber & Other Building Materials Dealers,other,17,2020-02-02,2024-10-27
+354963,SHENANDOAH TELECOMMUNICATIONS CO/VA/,SHEN,4813,Telephone Communications (No Radiotelephone),datacenter,19,2018-03-31,2022-09-30
+355999,ESSENDANT INC,,5110,Wholesale-Paper & Paper Products,other,4,2017-12-31,2018-09-30
+356037,CSP INC /MA/,CSPI,7373,Services-Computer Integrated Systems Design,other,24,2018-12-31,2024-09-30
+700923,MYR GROUP INC.,MYRG,1623,"Water, Sewer, Pipeline, Comm & Power Line Construction",other,27,2018-03-31,2024-09-30
+703351,"BRINKER INTERNATIONAL, INC",EAT,5812,Retail-Eating  Places,other,16,2018-09-26,2024-09-25
+703361,Renesas Electronics America Inc.,,3674,Semiconductors & Related Devices,equipment,3,2018-07-01,2018-12-30
+704415,"TIVITY HEALTH, INC.",,8090,"Services-Misc Health & Allied Services, NEC",other,6,2019-03-31,2020-06-30
+707549,LAM RESEARCH CORP,LRCX,3559,"Special Industry Machinery, NEC",other,25,2018-09-23,2024-09-29
+708818,"NEXTGEN HEALTHCARE, INC.",,7373,Services-Computer Integrated Systems Design,other,19,2019-03-31,2023-09-30
+708819,MCDERMOTT INTERNATIONAL INC,,3443,Fabricated Plate Work (Boiler Shops),other,10,2017-12-31,2020-03-31
+708821,PAR TECHNOLOGY CORP,PAR,3578,Calculating & Accounting Machines (No Electronic Computers),other,26,2017-12-31,2024-09-30
+709283,QUANTUM CORP /DE/,QMCO,3572,Computer Storage Devices,other,23,2019-03-31,2024-09-30
+712034,ACCO BRANDS Corp,ACCO,2780,"Blankbooks, Looseleaf Binders & Bookbindg & Relatd Work",other,3,2018-03-31,2018-09-30
+713425,"LOGILITY SUPPLY CHAIN SOLUTIONS, INC",,7372,Services-Prepackaged Software,datacenter,26,2018-07-31,2024-10-31
+715957,"DOMINION ENERGY, INC",D,4911,Electric Services,utility,22,2018-03-31,2023-06-30
+716133,CINCINNATI BELL INC,,4813,Telephone Communications (No Radiotelephone),datacenter,25,2018-09-30,2024-09-30
+716314,GRAHAM CORP,GHM,3560,General Industrial Machinery & Equipment,other,26,2018-06-30,2024-09-30
+716643,REGIS CORP,RGS,7200,Services-Personal Services,other,24,2018-09-30,2024-09-30
+717423,MURPHY OIL CORP,MUR,1311,Crude Petroleum & Natural Gas,other,4,2018-03-31,2019-03-31
+717806,"FIRST US BANCSHARES, INC.",FUSB,6022,State Commercial Banks,other,12,2018-09-30,2021-09-30
+718877,"Activision Blizzard, Inc.",,7372,Services-Prepackaged Software,datacenter,22,2018-03-31,2023-06-30
+718937,STAAR SURGICAL CO,STAA,3851,Ophthalmic Goods,other,6,2018-12-28,2023-12-29
+719274,"GRESHAM WORLDWIDE, INC.",,3825,Instruments For Meas & Testing of  Electricity & Elec Signals,other,4,2018-09-29,2023-12-31
+719494,"Inrad Optics, Inc.",,3679,"Electronic Components, NEC",equipment,19,2018-03-31,2024-03-31
+720500,AMTECH SYSTEMS INC,ASYS,3559,"Special Industry Machinery, NEC",other,6,2022-09-30,2024-09-30
+721683,TOTAL SYSTEM SERVICES INC,,7389,"Services-Business Services, NEC",other,6,2018-03-31,2019-06-30
+723125,MICRON TECHNOLOGY INC,MU,3674,Semiconductors & Related Devices,equipment,5,2020-05-28,2021-06-03
+723188,"COMMUNITY FINANCIAL SYSTEM, INC.",CBU,6021,National Commercial Banks,other,27,2017-12-31,2024-09-30
+723531,PAYCHEX INC,PAYX,8700,"Services-Engineering, Accounting, Research, Management",other,9,2021-11-30,2024-08-31
+727207,"Accelerate Diagnostics, Inc",,3826,Laboratory Analytical Instruments,other,27,2018-03-31,2024-09-30
+729580,BEL FUSE INC /NJ,BELFA,3677,"Electronic Coils, Transformers & Other Inductors",other,15,2018-03-31,2022-09-30
+730255,CalAmp Corp.,,3663,Radio & Tv Broadcasting & Communications Equipment,other,23,2018-05-31,2023-11-30
+731012,HEALTHCARE SERVICES GROUP INC,HCSG,8050,Services-Nursing & Personal Care Facilities,other,19,2019-06-30,2023-12-31
+731766,UNITEDHEALTH GROUP INC,UNH,6324,Hospital & Medical Service Plans,other,8,2022-12-31,2024-09-30
+732026,TRIO-TECH INTERNATIONAL,TRT,3559,"Special Industry Machinery, NEC",other,15,2020-03-31,2024-09-30
+732717,AT&T INC.,T,4813,Telephone Communications (No Radiotelephone),datacenter,27,2018-03-31,2024-09-30
+733269,"LiveRamp Holdings, Inc.",RAMP,7374,Services-Computer Processing & Data Preparation,datacenter,26,2018-06-30,2024-09-30
+743238,"SHYFT GROUP, INC.",,3531,Construction Machinery & Equip,other,6,2018-03-31,2019-09-30
+745308,ST JOE Co,JOE,6552,Land Subdividers & Developers (No Cemeteries),other,16,2020-12-31,2024-09-30
+746838,UNISYS CORP,UIS,7373,Services-Computer Integrated Systems Design,other,27,2018-03-31,2024-09-30
+749251,GARTNER INC,IT,8741,Services-Management Services,other,24,2018-03-31,2024-09-30
+749660,ICAD INC,,3841,Surgical & Medical Instruments & Apparatus,other,6,2023-06-30,2024-09-30
+752714,MCGRATH RENTCORP,MGRC,7359,"Services-Equipment Rental & Leasing, NEC",other,4,2023-12-31,2024-09-30
+758743,VIDEO DISPLAY CORP,,3670,Electronic Components & Accessories,other,3,2019-02-28,2021-02-28
+761238,RADA ELECTRONIC INDUSTRIES LTD,,5065,"Wholesale-Electronic Parts & Equipment, NEC",other,6,2018-06-30,2020-12-31
+764195,VBI Vaccines Inc/BC,,2834,Pharmaceutical Preparations,other,22,2018-12-31,2024-03-31
+766792,CVD EQUIPMENT CORP,CVV,3559,"Special Industry Machinery, NEC",other,5,2023-09-30,2024-09-30
+769397,"Autodesk, Inc.",ADSK,7372,Services-Prepackaged Software,datacenter,14,2018-04-30,2023-01-31
+771266,KOPIN CORP,KOPN,3674,Semiconductors & Related Devices,equipment,27,2018-03-31,2024-09-28
+771497,ABM INDUSTRIES INC /DE/,ABM,7340,Services-To Dwellings & Other Buildings,other,6,2021-07-31,2024-10-31
+773840,HONEYWELL INTERNATIONAL INC,HON,3724,Aircraft Engines & Engine Parts,other,27,2018-03-31,2024-09-30
+773910,ANADARKO PETROLEUM CORP,,1311,Crude Petroleum & Natural Gas,other,3,2018-03-31,2018-09-30
+775158,OSHKOSH CORP,OSK,3711,Motor Vehicles & Passenger Car Bodies,other,24,2018-12-31,2024-09-30
+779152,JACK HENRY & ASSOCIATES INC,JKHY,7373,Services-Computer Integrated Systems Design,other,25,2018-09-30,2024-09-30
+780571,"ITRON, INC.",ITRI,3825,Instruments For Meas & Testing of  Electricity & Elec Signals,other,11,2018-03-31,2022-12-31
+789019,MICROSOFT CORP,MSFT,7372,Services-Prepackaged Software,datacenter,29,2017-09-30,2024-09-30
+789933,NACCO INDUSTRIES INC,NC,1221,Bituminous Coal & Lignite Surface Mining,other,3,2018-03-31,2018-09-30
+793306,BLUE DOLPHIN ENERGY CO,BDCO,1311,Crude Petroleum & Natural Gas,other,4,2023-12-31,2024-09-30
+793524,RESEARCH FRONTIERS INC,REFR,6794,Patent Owners & Lessors,other,5,2018-03-31,2019-12-31
+793952,"HARLEY-DAVIDSON, INC.",HOG,3751,"Motorcycles, Bicycles & Parts",other,3,2018-04-01,2018-09-30
+794323,"Level 3 Parent, LLC",,4813,Telephone Communications (No Radiotelephone),datacenter,27,2018-03-31,2024-09-30
+795212,Kaspien Holdings Inc.,,5735,Retail-Record & Prerecorded Tape Stores,other,3,2018-02-03,2020-02-01
+796343,ADOBE INC.,ADBE,7372,Services-Prepackaged Software,datacenter,23,2019-03-01,2024-08-30
+797468,OCCIDENTAL PETROLEUM CORP /DE/,OXY,1311,Crude Petroleum & Natural Gas,other,3,2020-03-31,2020-09-30
+797721,VIASAT INC,VSAT,4899,"Communications Services, NEC",other,26,2018-06-30,2024-09-30
+804328,QUALCOMM INC/DE,QCOM,3663,Radio & Tv Broadcasting & Communications Equipment,other,14,2018-12-30,2022-12-25
+804753,CERNER Corp,,7373,Services-Computer Integrated Systems Design,other,17,2018-03-31,2022-03-31
+805022,"BUCKEYE PARTNERS, L.P.",,4610,Pipe Lines (No Natural Gas),other,3,2018-03-31,2018-09-30
+807707,VOXX International Corp,,5065,"Wholesale-Electronic Parts & Equipment, NEC",other,10,2018-05-31,2020-08-31
+807863,MITEK SYSTEMS INC,MITK,3577,"Computer Peripheral Equipment, NEC",other,3,2022-09-30,2024-09-30
+807882,JACK IN THE BOX INC,JACK,5812,Retail-Eating  Places,other,21,2019-09-29,2024-09-29
+808326,EMCORE CORP,,3674,Semiconductors & Related Devices,equipment,9,2018-12-31,2024-09-30
+808362,Baker Hughes Holdings LLC,,3533,Oil & Gas Field Machinery & Equipment,other,24,2017-12-31,2023-09-30
+808450,NAVISTAR INTERNATIONAL CORP,,3711,Motor Vehicles & Passenger Car Bodies,other,3,2019-01-31,2020-07-31
+808461,"GRIZZLY MERGER SUB 1, LLC",,4813,Telephone Communications (No Radiotelephone),datacenter,3,2018-03-31,2018-09-30
+810332,REPUBLIC AIRWAYS HOLDINGS INC.,RJET,4512,"Air Transportation, Scheduled",other,18,2020-06-30,2024-09-30
+811212,"ThermoGenesis Holdings, Inc.",,3821,Laboratory Apparatus & Furniture,other,23,2018-03-31,2024-03-31
+812149,Regional Brands Inc.,,5031,"Wholesale-Lumber, Plywood, Millwork & Wood Panels",other,7,2018-03-31,2019-09-30
+813672,CADENCE DESIGN SYSTEMS INC,CDNS,7372,Services-Prepackaged Software,datacenter,27,2018-03-31,2024-09-30
+813828,Paramount Global,,4833,Television Broadcasting Stations,other,27,2018-03-31,2024-09-30
+814547,FAIR ISAAC CORP,FICO,7389,"Services-Business Services, NEC",other,21,2019-09-30,2024-09-30
+814549,EBIX INC,,7373,Services-Computer Integrated Systems Design,other,5,2018-12-31,2022-12-31
+816761,TERADATA CORP /DE/,TDC,7372,Services-Prepackaged Software,datacenter,27,2018-03-31,2024-09-30
+819793,ALBANY INTERNATIONAL CORP /DE/,AIN,2221,"Broadwoven Fabric Mills, Man Made Fiber & Silk",other,27,2018-03-31,2024-09-30
+821130,"ARRAY DIGITAL INFRASTRUCTURE, INC.",AD,4812,Radiotelephone Communications,other,27,2018-03-31,2024-09-30
+831641,TETRA TECH INC,TTEK,8711,Services-Engineering Services,other,24,2018-12-30,2024-09-29
+832428,E.W. SCRIPPS Co,SSP,4833,Television Broadcasting Stations,other,9,2018-12-31,2020-12-31
+832488,"MAM SOFTWARE GROUP, INC.",,7372,Services-Prepackaged Software,datacenter,4,2018-09-30,2019-06-30
+833444,Johnson Controls International plc,JCI,3585,Air-Cond & Warm Air Heatg Equip & Comm & Indl Refrig Equip,other,19,2018-12-31,2024-09-30
+836690,INNOVATIVE SOLUTIONS & SUPPORT INC,IA,7371,Services-Computer Programming Services,datacenter,10,2018-12-31,2021-03-31
+839087,VASO Corp,VASO,3845,Electromedical & Electrotherapeutic Apparatus,other,16,2018-03-31,2023-12-31
+844965,TETRA TECHNOLOGIES INC,TTI,1311,Crude Petroleum & Natural Gas,other,9,2018-03-31,2020-09-30
+846913,"FUEL TECH, INC.",FTEK,3564,Industrial & Commercial Fans & Blowers & Air Purifing Equip,other,28,2017-12-31,2024-09-30
+849395,CRH PUBLIC LTD CO,CRH,3241,"Cement, Hydraulic",other,4,2023-12-31,2024-09-30
+849399,Gen Digital Inc.,GEN,7372,Services-Prepackaged Software,datacenter,24,2018-06-29,2024-09-27
+852772,DENNY'S Corp,,5812,Retail-Eating  Places,other,12,2018-03-28,2024-09-25
+854775,DIGI INTERNATIONAL INC,DGII,3576,Computer Communications Equipment,other,20,2018-12-31,2024-09-30
+855612,ZIX CORP,,7374,Services-Computer Processing & Data Preparation,datacenter,12,2018-03-31,2021-09-30
+855654,"ImmunoGen, Inc.",,2834,Pharmaceutical Preparations,other,23,2018-03-31,2023-09-30
+857005,PTC INC.,PTC,7372,Services-Prepackaged Software,datacenter,21,2018-12-29,2024-09-30
+857737,"ICONIX BRAND GROUP, INC.",,3140,"Footwear, (No Rubber)",other,4,2018-03-31,2019-10-01
+858470,Coterra Energy Inc.,,1311,Crude Petroleum & Natural Gas,other,12,2018-03-31,2023-12-31
+858877,"CISCO SYSTEMS, INC.",CSCO,3576,Computer Communications Equipment,other,25,2018-10-27,2024-10-26
+859737,HOLOGIC INC,,3844,X-Ray Apparatus & Tubes & Related Irradiation Apparatus,other,23,2018-09-29,2024-09-28
+860543,Jacksam Corp,,4833,Television Broadcasting Stations,other,3,2019-03-31,2020-06-30
+860546,COPT DEFENSE PROPERTIES,CDP,6798,Real Estate Investment Trusts,datacenter,5,2019-12-31,2021-12-31
+860731,TYLER TECHNOLOGIES INC,TYL,7372,Services-Prepackaged Software,datacenter,27,2018-03-31,2024-09-30
+861459,GRANITE CONSTRUCTION INC,GVA,1600,Heavy Construction Other Than Bldg Const - Contractors,other,28,2018-01-01,2024-09-30
+862692,CRYO CELL INTERNATIONAL INC,CCEL,8090,"Services-Misc Health & Allied Services, NEC",other,23,2019-02-28,2024-08-31
+864240,SYPRIS SOLUTIONS INC,SYPR,3823,"Industrial Instruments For Measurement, Display, and Control",equipment,27,2018-04-01,2024-09-29
+864749,TRIMBLE INC.,TRMB,3829,"Measuring & Controlling Devices, NEC",other,25,2018-03-30,2024-09-27
+866273,MATRIX SERVICE CO,MTRX,1700,Construction - Special Trade Contractors,other,25,2018-09-30,2024-09-30
+866706,ESCO TECHNOLOGIES INC,ESE,3669,"Communications Equipment, NEC",other,17,2018-12-31,2023-06-30
+866829,"HORNBECK OFFSHORE SERVICES, INC.",HOS,1389,"Oil & Gas Field Services, NEC",other,22,2018-03-31,2024-09-30
+867374,ELECTRONICS FOR IMAGING INC,,3576,Computer Communications Equipment,other,3,2018-03-31,2018-09-30
+868278,"ProPhase Labs, Inc.",PRPH,2834,Pharmaceutical Preparations,other,3,2021-12-31,2023-12-31
+868857,AECOM,ACM,8711,Services-Engineering Services,other,24,2018-12-31,2024-09-30
+870826,"Legacy IMBDS, Inc.",,5961,Retail-Catalog & Mail-Order Houses,other,7,2018-05-05,2019-11-02
+874238,"STERLING INFRASTRUCTURE, INC.",STRL,1600,Heavy Construction Other Than Bldg Const - Contractors,other,27,2018-03-31,2024-09-30
+874761,AES CORP,AES,4991,Cogeneration Services & Small Power Producers,utility,27,2018-03-31,2024-09-30
+874866,CORVEL CORP,CRVL,6411,"Insurance Agents, Brokers & Service",other,26,2018-06-30,2024-09-30
+876167,PROGRESS SOFTWARE CORP /MA,PRGS,7372,Services-Prepackaged Software,datacenter,23,2019-02-28,2024-08-31
+876378,"ASENSUS SURGICAL, INC.",,3841,Surgical & Medical Instruments & Apparatus,other,16,2018-03-31,2021-12-31
+876883,Stagwell Inc,STGW,7311,Services-Advertising Agencies,other,19,2020-03-31,2024-09-30
+877212,ZEBRA TECHNOLOGIES CORP,ZBRA,3560,General Industrial Machinery & Equipment,other,8,2018-03-31,2019-12-31
+877890,CITRIX SYSTEMS INC,,7372,Services-Prepackaged Software,datacenter,14,2018-03-31,2022-06-30
+879585,"ATN International, Inc.",ATNI,4813,Telephone Communications (No Radiotelephone),datacenter,9,2018-03-31,2023-12-31
+880266,AGCO CORP /DE,AGCO,3523,Farm Machinery & Equipment,other,4,2018-03-31,2018-12-31
+880285,ENBRIDGE ENERGY PARTNERS LP,,4610,Pipe Lines (No Natural Gas),other,3,2018-03-31,2018-09-30
+882835,ROPER TECHNOLOGIES INC,ROP,3823,"Industrial Instruments For Measurement, Display, and Control",equipment,27,2018-03-31,2024-09-30
+883241,SYNOPSYS INC,SNPS,7372,Services-Prepackaged Software,datacenter,24,2019-01-31,2024-10-31
+883943,CHRISTOPHER & BANKS CORP,,5621,Retail-Women's Clothing Stores,other,7,2018-05-05,2020-10-31
+884144,ASURE SOFTWARE INC,ASUR,7373,Services-Computer Integrated Systems Design,other,27,2018-03-31,2024-09-30
+884650,INFINITE GROUP INC,,7372,Services-Prepackaged Software,datacenter,11,2021-06-30,2024-09-30
+885740,SAPIENS INTERNATIONAL CORP N V,,7372,Services-Prepackaged Software,datacenter,7,2018-12-31,2023-12-31
+885975,CINEMARK USA INC /TX,,7830,Services-Motion Picture Theaters,other,9,2018-03-31,2022-06-30
+886128,FUELCELL ENERGY INC,FCEL,3620,Electrical Industrial Apparatus,other,7,2019-01-31,2020-07-31
+886206,FRANKLIN COVEY CO,FC,8741,Services-Management Services,other,24,2018-11-30,2024-08-31
+886346,KADANT INC,KAI,3550,Special Industry Machinery (No Metalworking Machinery),other,20,2019-12-28,2024-09-28
+887226,PERCEPTRON INC/MI,,3827,Optical Instruments & Lenses,other,9,2018-09-30,2020-09-30
+887936,"FTI CONSULTING, INC",FCN,8742,Services-Management Consulting Services,other,5,2018-03-31,2020-12-31
+889348,CPI AEROSTRUCTURES INC,CVU,3728,"Aircraft Parts & Auxiliary Equipment, NEC",other,24,2018-03-31,2024-09-30
+889900,PATTERSON UTI ENERGY INC,PTEN,1381,Drilling Oil & Gas Wells,other,8,2022-12-31,2024-09-30
+892482,Qumu Corp,,7372,Services-Prepackaged Software,datacenter,14,2018-03-31,2022-09-30
+892537,MANTECH INTERNATIONAL CORP,,8741,Services-Management Services,other,18,2018-03-31,2022-06-30
+892553,CHART INDUSTRIES INC,,3443,Fabricated Plate Work (Boiler Shops),other,27,2018-03-31,2024-09-30
+893538,SM Energy Co,SM,1311,Crude Petroleum & Natural Gas,other,26,2018-06-30,2024-09-30
+896429,"CANTALOUPE, INC.",,3578,Calculating & Accounting Machines (No Electronic Computers),other,21,2018-09-30,2024-09-30
+896493,"Hyperscale Data, Inc.",GPUS,3533,Oil & Gas Field Machinery & Equipment,other,8,2018-12-31,2020-12-31
+896494,SENSTAR TECHNOLOGIES LTD.,,3669,"Communications Equipment, NEC",other,6,2018-12-31,2023-06-30
+896622,"APTARGROUP, INC.",ATR,3089,"Plastics Products, NEC",other,14,2018-01-01,2021-03-31
+896841,"AVID TECHNOLOGY, INC.",,7372,Services-Prepackaged Software,datacenter,20,2018-12-31,2023-09-30
+899923,MYRIAD GENETICS INC,MYGN,2835,In Vitro & In Vivo Diagnostic Substances,other,12,2018-09-30,2021-06-30
+903129,Gentherm Inc,THRM,3714,Motor Vehicle Parts & Accessories,other,13,2018-03-31,2021-03-31
+907242,MONARCH CASINO & RESORT INC,MCRI,7011,Hotels & Motels,other,21,2019-09-30,2024-09-30
+908311,Creative Media & Community Trust Corp,CMCT,6798,Real Estate Investment Trusts,datacenter,26,2018-06-30,2024-09-30
+908315,WINMARK CORP,WINA,5900,Retail-Miscellaneous Retail,other,27,2018-03-31,2024-09-28
+909494,TUCOWS INC /PA/,TCX,7374,Services-Computer Processing & Data Preparation,datacenter,9,2018-03-31,2023-12-31
+910612,CBL & ASSOCIATES PROPERTIES INC,CBL,6798,Real Estate Investment Trusts,datacenter,24,2018-03-31,2024-09-30
+910638,3D SYSTEMS CORP,DDD,7372,Services-Prepackaged Software,datacenter,26,2018-06-30,2024-09-30
+912093,VIAVI SOLUTIONS INC.,VIAV,3674,Semiconductors & Related Devices,equipment,25,2018-09-29,2024-09-28
+914025,PLANTRONICS INC /CA/,,3661,Telephone & Telegraph Apparatus,other,15,2018-09-30,2022-04-02
+915358,SIGMATRON INTERNATIONAL INC,,3672,Printed Circuit Boards,other,22,2019-07-31,2024-10-31
+915779,DAKTRONICS INC /SD/,DAKT,3990,Miscellaneous Manufacturing Industries,other,26,2018-07-28,2024-10-26
+916076,MARTIN MARIETTA MATERIALS INC,MLM,1400,Mining & Quarrying of  Nonmetallic Minerals (No Fuels),other,32,2016-12-31,2024-09-30
+916529,AROTECH CORP,,3690,"Miscellaneous Electrical Machinery, Equipment & Supplies",other,7,2018-03-31,2019-09-30
+917273,RAMBUS INC,RMBS,3674,Semiconductors & Related Devices,equipment,27,2018-03-31,2024-09-30
+917491,FARO TECHNOLOGIES INC,,3829,"Measuring & Controlling Devices, NEC",other,5,2018-03-31,2019-12-31
+917520,INTEGRA LIFESCIENCES HOLDINGS CORP,IART,3841,Surgical & Medical Instruments & Apparatus,other,3,2018-03-31,2018-09-30
+920148,LABCORP HOLDINGS INC.,LH,8071,Services-Medical Laboratories,other,21,2018-03-31,2023-03-31
+920522,"ESSEX PROPERTY TRUST, INC.",ESS,6798,Real Estate Investment Trusts,datacenter,27,2018-03-31,2024-09-30
+921112,LIBERTY PROPERTY TRUST,,6798,Real Estate Investment Trusts,datacenter,7,2018-03-31,2019-09-30
+921582,IMAX CORP,IMAX,3861,Photographic Equipment & Supplies,other,15,2018-03-31,2021-09-30
+922521,FALCONSTOR SOFTWARE INC,FALC,7372,Services-Prepackaged Software,datacenter,14,2019-12-31,2023-03-31
+923120,GREENBRIER COMPANIES INC,GBX,3743,Railroad Equipment,other,3,2023-11-30,2024-05-31
+924383,Genasys Inc.,GNSS,3651,Household Audio & Video Equipment,other,24,2018-12-31,2024-09-30
+924515,GUIDED THERAPEUTICS INC,GTHP,3845,Electromedical & Electrotherapeutic Apparatus,other,6,2021-12-31,2023-09-30
+926282,"ADTRAN Holdings, Inc.",ADTN,3661,Telephone & Telegraph Apparatus,other,15,2018-03-31,2021-09-30
+926326,"OMNICELL, INC.",OMCL,3571,Electronic Computers,other,7,2023-03-31,2024-09-30
+928340,Consolidated Water Co. Ltd.,CWCO,4941,Water Supply,other,3,2020-03-31,2020-09-30
+929351,STARZ ENTERTAINMENT CORP /CN/,STRZ,7812,Services-Motion Picture & Video Tape Production,other,26,2018-06-30,2024-09-30
+931148,GRAFTECH INTERNATIONAL LTD,EAF,3620,Electrical Industrial Apparatus,other,8,2018-03-31,2019-12-31
+932696,INSIGHT ENTERPRISES INC,NSIT,5961,Retail-Catalog & Mail-Order Houses,other,6,2018-03-31,2019-06-30
+933974,"Azenta, Inc.",AZTA,3559,"Special Industry Machinery, NEC",other,24,2018-12-31,2024-09-30
+934612,"BURLINGTON NORTHERN SANTA FE, LLC",,4011,"Railroads, Line-Haul Operating",other,28,2018-01-01,2024-09-30
+934648,SPEEDWAY MOTORSPORTS LLC,,7948,"Services-Racing, Including Track Operation",other,4,2018-03-31,2019-06-30
+935036,"ACI WORLDWIDE, INC.",ACIW,7372,Services-Prepackaged Software,datacenter,27,2018-03-31,2024-09-30
+935494,NATIONAL INSTRUMENTS CORP,,7372,Services-Prepackaged Software,datacenter,21,2018-06-30,2023-06-30
+936340,DTE ENERGY CO,DTE,4911,Electric Services,utility,16,2018-03-31,2023-06-30
+936395,CIENA CORP,CIEN,3661,Telephone & Telegraph Apparatus,other,24,2019-01-31,2024-11-02
+936468,LOCKHEED MARTIN CORP,LMT,3760,Guided Missiles & Space Vehicles & Parts,other,27,2018-03-25,2024-09-29
+937098,"TRINET GROUP, INC.",TNET,7389,"Services-Business Services, NEC",other,19,2019-12-31,2024-09-30
+937556,MASIMO CORP,,3845,Electromedical & Electrotherapeutic Apparatus,other,16,2018-03-31,2023-12-30
+939767,"EXELIXIS, INC.",EXEL,2836,"Biological Products, (No Diagnostic Substances)",other,13,2020-01-03,2023-09-29
+943452,WESTINGHOUSE AIR BRAKE TECHNOLOGIES CORP,WAB,3743,Railroad Equipment,other,3,2018-12-31,2021-12-31
+944480,GSE SYSTEMS INC,,7372,Services-Prepackaged Software,datacenter,13,2018-03-31,2023-12-31
+945114,GLOBAL INDUSTRIAL Co,GIC,5084,Wholesale-Industrial Machinery & Equipment,other,25,2018-06-30,2024-09-30
+946581,TAKE TWO INTERACTIVE SOFTWARE INC,TTWO,7372,Services-Prepackaged Software,datacenter,22,2018-06-30,2024-09-30
+949039,"DIAMOND OFFSHORE DRILLING, INC.",,1381,Drilling Oil & Gas Wells,other,26,2018-03-31,2024-06-30
+949158,CRAY INC,,3571,Electronic Computers,other,5,2018-06-30,2019-06-30
+1000694,NOVAVAX INC,NVAX,2836,"Biological Products, (No Diagnostic Substances)",other,3,2020-12-31,2023-09-30
+1000697,WATERS CORP /DE/,WAT,3826,Laboratory Analytical Instruments,other,27,2017-12-31,2024-09-28
+1001385,"NWPX Infrastructure, Inc.",NWPX,3317,Steel Pipe & Tubes,other,27,2018-03-31,2024-09-30
+1001902,INTEVAC INC,,3559,"Special Industry Machinery, NEC",other,27,2018-03-31,2024-09-28
+1002047,"NetApp, Inc.",NTAP,3572,Computer Storage Devices,other,13,2018-07-27,2021-07-30
+1002517,"Nuance Communications, Inc.",,7372,Services-Prepackaged Software,datacenter,12,2019-03-31,2021-12-31
+1002638,OPEN TEXT CORP,OTEX,7373,Services-Computer Integrated Systems Design,other,18,2018-09-30,2024-09-30
+1003078,MSC INDUSTRIAL DIRECT CO INC,MSM,5084,Wholesale-Industrial Machinery & Equipment,other,25,2018-09-01,2024-08-31
+1003935,NICE Ltd.,NICE,7372,Services-Prepackaged Software,datacenter,6,2018-12-31,2023-12-31
+1005210,SUBURBAN PROPANE PARTNERS LP,SPH,5900,Retail-Miscellaneous Retail,other,20,2018-12-29,2024-09-28
+1005229,COLUMBUS MCKINNON CORP,CMCO,3531,Construction Machinery & Equip,other,18,2020-06-30,2024-09-30
+1005757,CSG SYSTEMS INTERNATIONAL INC,CSGS,7374,Services-Computer Processing & Data Preparation,datacenter,27,2018-03-31,2024-09-30
+1006281,"Protalix BioTherapeutics, Inc.",PLX,2836,"Biological Products, (No Diagnostic Substances)",other,6,2018-03-31,2019-09-30
+1008586,STREAMLINE HEALTH SOLUTIONS INC.,,7373,Services-Computer Integrated Systems Design,other,24,2018-04-30,2024-10-31
+1009759,"Capstone Energy Plus, Inc.",CEPL,3510,Engines & Turbines,equipment,5,2022-03-31,2024-03-31
+1009891,AIR INDUSTRIES GROUP,AIRI,3728,"Aircraft Parts & Auxiliary Equipment, NEC",other,3,2023-12-31,2024-09-30
+1010086,SIGA TECHNOLOGIES INC,SIGA,2834,Pharmaceutical Preparations,other,24,2018-03-31,2024-09-30
+1011432,"CYNERGISTEK, INC",,7389,"Services-Business Services, NEC",other,4,2020-12-31,2022-06-30
+1012100,SEALED AIR CORP/DE,,2820,"Plastic Material, Synth Resin/Rubber, Cellulos (No Glass)",other,26,2018-06-30,2024-09-30
+1012477,AVADEL PHARMACEUTICALS PLC,,2834,Pharmaceutical Preparations,other,3,2018-09-30,2019-12-31
+1013462,ANSYS INC,,7372,Services-Prepackaged Software,datacenter,27,2018-03-31,2024-09-30
+1013857,PEGASYSTEMS INC,PEGA,7374,Services-Computer Processing & Data Preparation,datacenter,27,2018-03-31,2024-09-30
+1015328,WINTRUST FINANCIAL CORP,WTFC,6022,State Commercial Banks,other,21,2018-03-31,2023-12-31
+1015739,AWARE INC /MA/,AWRE,7372,Services-Prepackaged Software,datacenter,24,2018-09-30,2024-09-30
+1015922,CHECK POINT SOFTWARE TECHNOLOGIES LTD,CHKP,7372,Services-Prepackaged Software,datacenter,6,2018-12-31,2023-12-31
+1016125,ULTIMATE SOFTWARE GROUP INC,,7372,Services-Prepackaged Software,datacenter,5,2018-03-31,2019-03-31
+1016169,"ANTARES PHARMA, INC.",,3841,Surgical & Medical Instruments & Apparatus,other,16,2018-03-31,2021-12-31
+1016838,RADCOM LTD,RDCM,3577,"Computer Peripheral Equipment, NEC",other,8,2018-06-30,2023-12-31
+1017303,TRANSACT TECHNOLOGIES INC,TACT,3577,"Computer Peripheral Equipment, NEC",other,25,2018-09-30,2024-09-30
+1017673,DOVER MOTORSPORTS LLC,,7900,Services-Amusement & Recreation Services,other,14,2018-06-30,2021-09-30
+1017968,EDGEWATER TECHNOLOGY INC/DE/,,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,3,2018-03-31,2018-09-30
+1018724,AMAZON COM INC,AMZN,5961,Retail-Catalog & Mail-Order Houses,other,10,2018-03-31,2020-06-30
+1018963,ATI INC,ATI,3317,Steel Pipe & Tubes,other,32,2016-12-31,2024-09-29
+1019671,SEACHANGE INTERNATIONAL INC,,7372,Services-Prepackaged Software,datacenter,21,2018-04-30,2023-04-30
+1019737,NAVIGANT CONSULTING INC,,8742,Services-Management Consulting Services,other,6,2018-03-31,2019-06-30
+1021162,TRIUMPH GROUP INC,,3720,Aircraft & Parts,other,26,2018-06-30,2024-09-30
+1021270,"BBQ HOLDINGS, INC.",,5812,Retail-Eating  Places,other,19,2017-12-31,2022-07-03
+1021860,NOV Inc.,NOV,3533,Oil & Gas Field Machinery & Equipment,other,27,2018-03-31,2024-09-30
+1022408,EPLUS INC,PLUS,5045,Wholesale-Computers & Peripheral Equipment & Software,other,26,2018-06-30,2024-09-30
+1023128,LITHIA MOTORS INC,LAD,5500,Retail-Auto Dealers & Gasoline Stations,other,5,2019-12-31,2023-12-31
+1023313,"FORRESTER RESEARCH, INC.",FORR,8700,"Services-Engineering, Accounting, Research, Management",other,27,2018-03-31,2024-09-30
+1023459,"Simulations Plus, Inc.",SLP,7373,Services-Computer Integrated Systems Design,other,21,2019-02-28,2024-08-31
+1023731,8X8 INC /DE/,EGHT,7374,Services-Computer Processing & Data Preparation,datacenter,16,2018-06-30,2024-09-30
+1023994,OLENOX INDUSTRIES INC.,OLOX,5030,Wholesale-Lumber & Other Construction Materials,other,27,2018-03-31,2024-09-30
+1024478,"ROCKWELL AUTOMATION, INC",ROK,3829,"Measuring & Controlling Devices, NEC",other,24,2018-12-31,2024-09-30
+1025561,SharpLink Gaming Ltd.,,7372,Services-Prepackaged Software,datacenter,5,2021-12-31,2023-09-30
+1029744,SONIC FOUNDRY INC,,3663,Radio & Tv Broadcasting & Communications Equipment,other,11,2019-09-30,2022-12-31
+1031308,BENTLEY SYSTEMS INC,BSY,7372,Services-Prepackaged Software,datacenter,17,2020-09-30,2024-09-30
+1031623,GULF ISLAND FABRICATION INC,,3440,Fabricated Structural Metal Products,other,21,2018-03-31,2024-09-30
+1032208,SEMPRA,SRE,4932,Gas & Other Services Combined,other,20,2018-03-31,2024-09-30
+1032220,"MAXIMUS, INC.",MMS,7389,"Services-Business Services, NEC",other,24,2018-12-31,2024-09-30
+1035267,INTUITIVE SURGICAL INC,ISRG,3842,"Orthopedic, Prosthetic & Surgical Appliances & Supplies",other,13,2018-03-31,2021-09-30
+1035983,COMFORT SYSTEMS USA INC,FIX,1731,Electrical Work,contractor,3,2018-03-31,2018-09-30
+1036044,"INVE Technologies, Inc.",INVE,3577,"Computer Peripheral Equipment, NEC",other,25,2018-03-31,2024-03-31
+1036188,QAD INC,,7372,Services-Prepackaged Software,datacenter,14,2018-04-30,2021-07-31
+1037016,NII HOLDINGS INC,,4812,Radiotelephone Communications,other,4,2018-06-30,2019-03-31
+1037868,AMETEK INC/,AME,3823,"Industrial Instruments For Measurement, Display, and Control",equipment,9,2018-03-31,2020-03-31
+1038133,HESKA CORP,,2835,In Vitro & In Vivo Diagnostic Substances,other,20,2018-06-30,2023-03-31
+1039065,OSI SYSTEMS INC,OSIS,3674,Semiconductors & Related Devices,equipment,25,2018-09-30,2024-09-30
+1039101,"L3 TECHNOLOGIES, INC.",,3663,Radio & Tv Broadcasting & Communications Equipment,other,5,2018-03-30,2019-03-29
+1039280,NETSOL TECHNOLOGIES INC,NTWK,7372,Services-Prepackaged Software,datacenter,24,2018-09-30,2024-09-30
+1039399,FORMFACTOR INC,FORM,3674,Semiconductors & Related Devices,equipment,27,2018-03-31,2024-09-28
+1039684,ONEOK INC /NEW/,OKE,4923,Natural Gas Transmisison & Distribution,other,27,2018-03-31,2024-09-30
+1040161,"PIXELWORKS, INC",PXLW,7372,Services-Prepackaged Software,datacenter,12,2019-03-31,2021-12-31
+1040470,AEHR TEST SYSTEMS,AEHR,3825,Instruments For Meas & Testing of  Electricity & Elec Signals,other,23,2018-08-31,2024-02-29
+1040896,"Intellicheck, Inc.",IDN,7372,Services-Prepackaged Software,datacenter,24,2018-12-31,2024-09-30
+1041024,"ROCKWELL MEDICAL, INC.",RMTI,2834,Pharmaceutical Preparations,other,25,2017-12-31,2024-09-30
+1041368,RIVERVIEW BANCORP INC,RVSB,6035,"Savings Institution, Federally Chartered",other,15,2021-03-31,2024-09-30
+1042893,"Innovex International, Inc.",INVX,3533,Oil & Gas Field Machinery & Equipment,other,27,2018-03-31,2024-09-30
+1043186,"Stabilis Solutions, Inc.",SLNG,4924,Natural Gas Distribution,other,4,2017-12-31,2020-12-31
+1043604,JUNIPER NETWORKS INC,,3576,Computer Communications Equipment,other,23,2018-03-31,2024-09-30
+1044777,OneSpan Inc.,OSPN,7373,Services-Computer Integrated Systems Design,other,26,2018-03-31,2024-09-30
+1045309,W R GRACE & CO,,2800,Chemicals & Allied Products,other,14,2018-03-31,2021-06-30
+1045810,NVIDIA CORP,NVDA,3674,Semiconductors & Related Devices,equipment,24,2019-01-27,2024-10-27
+1046311,CHOICE HOTELS INTERNATIONAL INC /DE,CHH,7011,Hotels & Motels,other,27,2018-03-31,2024-09-30
+1046995,EMAGIN CORP,,3674,Semiconductors & Related Devices,equipment,6,2018-03-31,2019-06-30
+1047122,RAYTHEON CO/,,3812,"Search, Detection, Navigation, Guidance, Aeronautical Sys",other,11,2017-07-02,2019-12-31
+1047862,CONSOLIDATED EDISON INC,ED,4931,Electric & Other Services Combined,utility,20,2018-03-31,2022-12-31
+1048268,"IES Holdings, Inc.",IESC,1731,Electrical Work,contractor,22,2019-06-30,2024-09-30
+1048695,"F5, INC.",FFIV,3576,Computer Communications Equipment,other,24,2018-12-31,2024-09-30
+1049521,MERCURY SYSTEMS INC,MRCY,3670,Electronic Components & Accessories,other,23,2019-03-31,2024-09-27
+1050140,DESCARTES SYSTEMS GROUP INC,DSGX,7372,Services-Prepackaged Software,datacenter,7,2019-01-31,2024-07-31
+1050446,Strategy Inc,MSTR,6199,Finance Services,other,27,2018-03-31,2024-09-30
+1050606,"SALEM MEDIA GROUP, INC. /DE/",SALM,4832,Radio Broadcasting Stations,other,23,2018-03-31,2023-09-30
+1050915,"QUANTA SERVICES, INC.",PWR,1731,Electrical Work,contractor,27,2018-03-31,2024-09-30
+1051470,CROWN CASTLE INC.,CCI,6798,Real Estate Investment Trusts,datacenter,26,2017-12-31,2024-09-30
+1051512,TELEPHONE & DATA SYSTEMS INC /DE/,TDS,4813,Telephone Communications (No Radiotelephone),datacenter,27,2018-03-31,2024-09-30
+1051514,"STRATA Skin Sciences, Inc.",SSKN,3841,Surgical & Medical Instruments & Apparatus,other,27,2018-03-31,2024-09-30
+1052054,"Symbolic Logic, Inc.",,7371,Services-Computer Programming Services,datacenter,15,2018-03-31,2021-09-30
+1052595,Red Lion Hotels CORP,,7011,Hotels & Motels,other,9,2018-03-31,2020-09-30
+1056288,"FEDERATED HERMES, INC.",FHI,6282,Investment Advice,other,24,2018-12-31,2024-09-30
+1056696,MANHATTAN ASSOCIATES INC,MANH,7372,Services-Prepackaged Software,datacenter,27,2018-03-31,2024-09-30
+1056903,AMERICAN STATES WATER CO,AWR,4941,Water Supply,other,23,2018-03-31,2023-12-31
+1057352,"COSTAR GROUP, INC.",CSGP,7389,"Services-Business Services, NEC",other,26,2018-03-31,2024-09-30
+1058290,COGNIZANT TECHNOLOGY SOLUTIONS CORP,CTSH,7371,Services-Computer Programming Services,datacenter,27,2018-03-31,2024-09-30
+1058623,CUMULUS MEDIA INC,CMLS,4832,Radio Broadcasting Stations,other,3,2018-03-31,2018-09-30
+1058811,IMMERSION CORP,IMMR,3577,"Computer Peripheral Equipment, NEC",other,13,2018-03-31,2021-09-30
+1059262,SP Plus Corp,,7510,Services-Auto Rental & Leasing (No Drivers),other,25,2018-03-31,2024-03-31
+1060955,ICON PLC,ICLR,8731,Services-Commercial Physical & Biological Research,other,27,2018-03-31,2024-09-30
+1061219,ENTERPRISE PRODUCTS PARTNERS L.P.,EPD,4922,Natural Gas Transmission,other,18,2018-06-30,2024-09-30
+1062579,AMDOCS LTD,DOX,7371,Services-Computer Programming Services,datacenter,4,2019-09-30,2022-09-30
+1065059,CENTRUS ENERGY CORP,LEU,1400,Mining & Quarrying of  Nonmetallic Minerals (No Fuels),other,18,2019-12-31,2024-09-30
+1065332,NIC INC,,7389,"Services-Business Services, NEC",other,7,2018-03-31,2019-09-30
+1066194,EGAIN Corp,EGAN,7372,Services-Prepackaged Software,datacenter,25,2018-09-30,2024-09-30
+1067837,"AUDACY, INC.",,4832,Radio Broadcasting Stations,other,8,2019-06-30,2022-12-31
+1069183,"AXON ENTERPRISE, INC.",AXON,3480,"Ordnance & Accessories, (No Vehicles/Guided Missiles)",other,18,2018-03-31,2024-09-30
+1069258,"KRATOS DEFENSE & SECURITY SOLUTIONS, INC.",KTOS,3760,Guided Missiles & Space Vehicles & Parts,other,27,2018-04-01,2024-09-29
+1069878,TREX CO INC,TREX,2400,Lumber & Wood Products (No Furniture),other,19,2018-03-31,2022-09-30
+1070081,"PTC THERAPEUTICS, INC.",PTCT,2834,Pharmaceutical Preparations,other,12,2018-09-30,2024-09-30
+1070235,BLACKBERRY Ltd,BB,7372,Services-Prepackaged Software,datacenter,20,2019-02-28,2024-08-31
+1070412,CNX Resources Corp,CNX,1311,Crude Petroleum & Natural Gas,other,27,2018-03-31,2024-09-30
+1070423,PLAINS ALL AMERICAN PIPELINE LP,PAA,4610,Pipe Lines (No Natural Gas),other,3,2018-03-31,2018-09-30
+1073349,BOTTOMLINE TECHNOLOGIES INC,,7372,Services-Prepackaged Software,datacenter,15,2018-09-30,2022-03-31
+1077183,NEOGENOMICS INC,NEO,8734,Services-Testing Laboratories,other,7,2018-03-31,2021-12-31
+1078207,BOWFLEX INC.,,3949,"Sporting & Athletic Goods, NEC",other,19,2018-03-31,2022-12-31
+1078271,EXTREME NETWORKS INC,EXTR,3576,Computer Communications Equipment,other,29,2017-09-30,2024-09-30
+1080709,ARENA PHARMACEUTICALS INC,,2834,Pharmaceutical Preparations,other,3,2018-03-31,2018-09-30
+1081316,BERKSHIRE HATHAWAY ENERGY CO,,4900,"Electric, Gas & Sanitary Services",other,14,2018-03-31,2023-09-30
+1081745,"INTELLINETICS, INC.",INLX,7372,Services-Prepackaged Software,datacenter,27,2018-03-31,2024-09-30
+1084048,"ZIFF DAVIS, INC.",ZD,4822,Telegraph & Other Message Communications,other,10,2022-06-30,2024-09-30
+1084577,CYREN Ltd.,,7372,Services-Prepackaged Software,datacenter,12,2019-12-31,2022-09-30
+1084991,NATURAL GAS SERVICES GROUP INC,NGS,1389,"Oil & Gas Field Services, NEC",other,9,2018-03-31,2022-09-30
+1086222,AKAMAI TECHNOLOGIES INC,AKAM,7389,"Services-Business Services, NEC",other,27,2018-03-31,2024-09-30
+1086600,ALLIANCE RESOURCE PARTNERS LP,ARLP,1221,Bituminous Coal & Lignite Surface Mining,other,26,2018-03-31,2024-09-30
+1086745,"Fabric.AI, Inc.",FABC,4899,"Communications Services, NEC",other,4,2017-06-30,2018-09-30
+1087423,RED HAT INC,,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,5,2018-05-31,2019-05-31
+1089511,ALASKA COMMUNICATIONS SYSTEMS GROUP INC,,4813,Telephone Communications (No Radiotelephone),datacenter,12,2018-03-31,2021-03-31
+1089819,Cleco Corporate Holdings LLC,,4911,Electric Services,utility,24,2018-03-31,2024-09-30
+1090872,"AGILENT TECHNOLOGIES, INC.",A,3826,Laboratory Analytical Instruments,other,10,2019-01-31,2024-10-31
+1091587,ABB LTD,ABLZF,3613,Switchgear & Switchboard Apparatus,equipment,6,2018-12-31,2023-12-31
+1091883,CIRCOR INTERNATIONAL INC,,3490,Miscellaneous Fabricated Metal Products,other,22,2018-04-01,2023-07-02
+1091907,"WORLD WRESTLING ENTERTAINMENT, LLC",,7812,Services-Motion Picture & Video Tape Production,other,22,2018-03-31,2023-06-30
+1092796,"SMITH & WESSON BRANDS, INC.",SWBI,3480,"Ordnance & Accessories, (No Vehicles/Guided Missiles)",other,3,2018-07-31,2019-04-30
+1093691,PLUG POWER INC,PLUG,3620,Electrical Industrial Apparatus,other,27,2018-03-31,2024-09-30
+1094084,TELKONET INC,TKOI,3822,Auto Controls For Regulating Residential & Comml Environments,other,17,2018-12-31,2022-12-31
+1094285,TELEDYNE TECHNOLOGIES INC,TDY,3812,"Search, Detection, Navigation, Guidance, Aeronautical Sys",other,27,2018-04-01,2024-09-29
+1094366,RADWARE LTD,RDWR,7389,"Services-Business Services, NEC",other,6,2018-12-31,2023-12-31
+1095130,"IOTACOMM, INC.",,7389,"Services-Business Services, NEC",other,7,2018-08-31,2020-02-29
+1095315,PFSWEB INC,,7389,"Services-Business Services, NEC",other,18,2018-03-31,2023-06-30
+1095565,HEALTHSTREAM INC,HSTM,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,27,2018-03-31,2024-09-30
+1096376,NUTRI SYSTEM INC /DE/,,5961,Retail-Catalog & Mail-Order Houses,other,4,2018-03-31,2018-12-31
+1096385,VECTREN CORP,,4932,Gas & Other Services Combined,other,3,2018-03-31,2018-09-30
+1097149,ALIGN TECHNOLOGY INC,ALGN,3842,"Orthopedic, Prosthetic & Surgical Appliances & Supplies",other,16,2018-06-30,2023-12-31
+1097864,ON SEMICONDUCTOR CORP,ON,3674,Semiconductors & Related Devices,equipment,12,2021-12-31,2024-09-27
+1100682,"CHARLES RIVER LABORATORIES INTERNATIONAL, INC.",CRL,8731,Services-Commercial Physical & Biological Research,other,22,2018-03-31,2024-09-28
+1101239,EQUINIX INC,EQIX,6798,Real Estate Investment Trusts,datacenter,27,2018-03-31,2024-09-30
+1102934,"CMC Materials, Inc.",,3674,Semiconductors & Related Devices,equipment,11,2018-12-31,2021-09-30
+1102993,LIVEPERSON INC,LPSN,7372,Services-Prepackaged Software,datacenter,18,2020-06-30,2024-09-30
+1104657,MATERION Corp,MTRN,3460,Metal Forgings & Stampings,other,27,2018-03-30,2024-09-27
+1107421,"Alaunos Therapeutics, Inc.",TCRT,2834,Pharmaceutical Preparations,other,6,2018-03-31,2020-12-31
+1107843,"QUALYS, INC.",QLYS,7372,Services-Prepackaged Software,datacenter,22,2018-09-30,2024-09-30
+1108524,"Salesforce, Inc.",CRM,7372,Services-Prepackaged Software,datacenter,27,2018-04-30,2024-10-31
+1108967,"Orbital Infrastructure Group, Inc.",,5065,"Wholesale-Electronic Parts & Equipment, NEC",other,6,2021-12-31,2023-03-31
+1109354,BRUKER CORP,BRKR,3826,Laboratory Analytical Instruments,other,24,2018-03-31,2024-09-30
+1109357,EXELON CORP,EXC,4931,Electric & Other Services Combined,utility,20,2018-03-31,2024-09-30
+1110611,ON24 INC.,ONTF,7372,Services-Prepackaged Software,datacenter,14,2021-03-31,2024-09-30
+1110803,"ILLUMINA, INC.",ILMN,3826,Laboratory Analytical Instruments,other,21,2018-12-30,2024-09-29
+1110805,NuStar Energy L.P.,,4610,Pipe Lines (No Natural Gas),other,23,2018-03-31,2024-03-31
+1111863,SIERRA WIRELESS INC,,3663,Radio & Tv Broadcasting & Communications Equipment,other,4,2018-12-31,2021-12-31
+1111928,IPG PHOTONICS CORP,IPGP,3674,Semiconductors & Related Devices,equipment,23,2018-03-31,2024-09-30
+1115222,DUN & BRADSTREET CORP/NW,,7320,"Services-Consumer Credit Reporting, Collection Agencies",other,3,2018-03-31,2018-09-30
+1118417,"MODEL N, INC.",,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,4,2018-12-31,2021-09-30
+1119769,CERAGON NETWORKS LTD,CRNT,3663,Radio & Tv Broadcasting & Communications Equipment,other,13,2018-06-30,2024-06-30
+1120193,"NASDAQ, INC.",NDAQ,6200,"Security & Commodity Brokers, Dealers, Exchanges & Services",other,13,2018-03-31,2024-09-30
+1120914,PDF SOLUTIONS INC,PDFS,7372,Services-Prepackaged Software,datacenter,24,2018-03-31,2024-03-31
+1121142,Maxar Technologies Inc.,,3663,Radio & Tv Broadcasting & Communications Equipment,other,16,2019-03-31,2023-03-31
+1121484,"OIL STATES INTERNATIONAL, INC",OIS,3533,Oil & Gas Field Machinery & Equipment,other,12,2018-03-31,2021-09-30
+1122063,"FTE Networks, Inc.",,4813,Telephone Communications (No Radiotelephone),datacenter,4,2018-03-31,2018-12-31
+1122388,ELLIE MAE INC,,7372,Services-Prepackaged Software,datacenter,4,2018-03-31,2018-12-31
+1122904,"NETGEAR, INC.",NTGR,3576,Computer Communications Equipment,other,27,2018-04-01,2024-09-29
+1123360,GLOBAL PAYMENTS INC,GPN,7389,"Services-Business Services, NEC",other,21,2019-09-30,2024-09-30
+1123596,"BAB, INC.",BABB,5812,Retail-Eating  Places,other,21,2019-02-28,2024-02-29
+1124198,FLUOR CORP,FLR,1600,Heavy Construction Other Than Bldg Const - Contractors,other,27,2018-03-31,2024-09-30
+1124610,VMWARE LLC,,7372,Services-Prepackaged Software,datacenter,22,2018-05-04,2023-08-04
+1124796,"NLIGHT, INC.",LASR,3674,Semiconductors & Related Devices,equipment,3,2024-03-31,2024-09-30
+1124804,Veradigm Inc.,,7373,Services-Computer Integrated Systems Design,other,19,2018-03-31,2022-09-30
+1126975,"Magellan Midstream Partners, L.P.",,4610,Pipe Lines (No Natural Gas),other,22,2018-03-31,2023-06-30
+1128353,ENERTECK CORP,,2890,Miscellaneous Chemical Products,other,6,2022-03-31,2023-06-30
+1130310,CENTERPOINT ENERGY INC,CNP,4911,Electric Services,utility,14,2019-12-31,2023-03-31
+1131227,Hercules Sub LLC,,4400,Water Transportation,other,4,2018-03-31,2018-12-31
+1131554,SYNCHRONOSS TECHNOLOGIES INC,,7371,Services-Computer Programming Services,datacenter,26,2018-03-31,2024-09-30
+1133421,NORTHROP GRUMMAN CORP /DE/,NOC,3812,"Search, Detection, Navigation, Guidance, Aeronautical Sys",other,27,2018-03-31,2024-09-30
+1136294,"NOS4-1, Inc.",,1600,Heavy Construction Other Than Bldg Const - Contractors,other,16,2019-03-31,2023-06-30
+1136352,Crestwood Equity Partners LP,,4923,Natural Gas Transmisison & Distribution,other,18,2018-03-31,2023-09-30
+1136869,"ZIMMER BIOMET HOLDINGS, INC.",ZBH,3842,"Orthopedic, Prosthetic & Surgical Appliances & Supplies",other,9,2018-03-31,2023-12-31
+1136893,"Fidelity National Information Services, Inc.",FIS,7389,"Services-Business Services, NEC",other,28,2017-12-31,2024-09-30
+1137091,"POWER SOLUTIONS INTERNATIONAL, INC.",PSIX,3510,Engines & Turbines,equipment,19,2020-03-31,2024-09-30
+1138639,Infinera Corp,,3661,Telephone & Telegraph Apparatus,other,27,2018-03-31,2024-09-28
+1138723,ACCURAY INC,ARAY,3841,Surgical & Medical Instruments & Apparatus,other,25,2018-09-30,2024-09-30
+1140536,WILLIS TOWERS WATSON PLC,WTW,6411,"Insurance Agents, Brokers & Service",other,27,2018-03-31,2024-09-30
+1141284,ACTELIS NETWORKS INC,ASNS,3669,"Communications Equipment, NEC",other,12,2021-12-31,2024-09-30
+1141391,Mastercard Inc,MA,7389,"Services-Business Services, NEC",other,6,2018-03-31,2020-12-31
+1144879,Applied Digital Corp.,APLD,7374,Services-Computer Processing & Data Preparation,datacenter,6,2022-02-28,2023-05-31
+1145057,"FORESCOUT TECHNOLOGIES, INC",,3577,"Computer Peripheral Equipment, NEC",other,10,2018-03-31,2020-06-30
+1145197,INSULET CORP,PODD,3841,Surgical & Medical Instruments & Apparatus,other,12,2018-12-31,2021-09-30
+1156041,"ABUNDIA GLOBAL IMPACT GROUP, INC.",AGIG,1311,Crude Petroleum & Natural Gas,other,18,2020-06-30,2024-09-30
+1157408,"Stride, Inc.",LRN,8200,Services-Educational Services,other,25,2018-09-30,2024-09-30
+1157806,ENCANA CORP,,1311,Crude Petroleum & Natural Gas,other,7,2018-03-31,2019-09-30
+1158172,"COMSCORE, INC.",SCOR,7389,"Services-Business Services, NEC",other,26,2018-03-31,2024-09-30
+1158863,"WAGEWORKS, INC.",,7389,"Services-Business Services, NEC",other,5,2018-03-31,2019-06-30
+1159167,IROBOT CORP,,3630,Household Appliances,other,19,2020-03-28,2024-09-28
+1160951,"DUCK CREEK TECHNOLOGIES, INC.",,7372,Services-Prepackaged Software,datacenter,9,2020-11-30,2022-11-30
+1161154,"Energy Transfer Operating, L.P.",,4610,Pipe Lines (No Natural Gas),other,7,2018-03-31,2020-12-31
+1162194,STANDARD BIOTOOLS INC.,LAB,2834,Pharmaceutical Preparations,other,27,2018-03-31,2024-09-30
+1162461,CUTERA INC,,3845,Electromedical & Electrotherapeutic Apparatus,other,24,2018-03-31,2024-09-30
+1164863,Enpro Inc.,NPO,3050,"Gaskets, Packg & Sealg Devices & Rubber & Plastics Hose",other,19,2018-03-31,2023-09-30
+1166003,"XPO, Inc.",XPO,4700,Transportation Services,other,19,2018-03-31,2022-09-30
+1166388,VERINT SYSTEMS INC,,7373,Services-Computer Integrated Systems Design,other,27,2018-04-30,2024-10-31
+1167419,"Riot Platforms, Inc.",RIOT,6199,Finance Services,other,9,2021-12-31,2024-09-30
+1169561,COMMVAULT SYSTEMS INC,CVLT,7372,Services-Prepackaged Software,datacenter,29,2017-06-30,2024-09-30
+1169652,CHANNELADVISOR CORP,,7372,Services-Prepackaged Software,datacenter,15,2018-03-31,2022-09-30
+1171486,NATURAL RESOURCE PARTNERS LP,NRP,1221,Bituminous Coal & Lignite Surface Mining,other,18,2018-03-31,2022-06-30
+1176334,MARTIN MIDSTREAM PARTNERS L.P.,MMLP,5171,Wholesale-Petroleum Bulk Stations & Terminals,other,22,2018-03-31,2024-09-30
+1179060,"EnLink Midstream Partners, LP",,4922,Natural Gas Transmission,other,11,2018-03-31,2020-09-30
+1183765,"Molecular Templates, Inc.",,2834,Pharmaceutical Preparations,other,3,2018-03-31,2018-09-30
+1195734,POTBELLY CORP,,5812,Retail-Eating  Places,other,27,2018-04-01,2024-09-29
+1200375,"CODEXIS, INC.",CDXS,2860,Industrial Organic Chemicals,other,20,2018-03-31,2023-09-30
+1207074,VIRTUSA CORP,,7371,Services-Computer Programming Services,datacenter,11,2018-06-30,2020-12-31
+1227282,Strata Power Corp,SPOWF,1311,Crude Petroleum & Natural Gas,other,3,2021-12-31,2023-12-31
+1237746,"Endurance International Group Holdings, Inc.",,7372,Services-Prepackaged Software,datacenter,6,2018-03-31,2020-09-30
+1239819,LUNA INNOVATIONS INC,,8731,Services-Commercial Physical & Biological Research,other,8,2021-12-31,2023-09-30
+1253176,VAPOTHERM INC,,3841,Surgical & Medical Instruments & Apparatus,other,23,2018-12-31,2024-06-30
+1259515,CONTROL4 CORP,,3670,Electronic Components & Accessories,other,5,2018-03-31,2019-03-31
+1261333,"DOCUSIGN, INC.",DOCU,7372,Services-Prepackaged Software,datacenter,27,2018-04-30,2024-10-31
+1262039,"Fortinet, Inc.",FTNT,3577,"Computer Peripheral Equipment, NEC",other,27,2018-03-31,2024-09-30
+1262104,"Lite Strategy, Inc.",LITS,2834,Pharmaceutical Preparations,other,11,2018-09-30,2021-03-31
+1269021,PORTOLA PHARMACEUTICALS INC,,2834,Pharmaceutical Preparations,other,9,2018-03-31,2020-03-31
+1272830,VONAGE HOLDINGS CORP,,4813,Telephone Communications (No Radiotelephone),datacenter,4,2019-12-31,2022-03-31
+1272842,AIRGAIN INC,AIRG,3663,Radio & Tv Broadcasting & Communications Equipment,other,3,2024-03-31,2024-09-30
+1275158,NOODLES & Co,NDLS,5812,Retail-Eating  Places,other,3,2018-04-03,2018-10-02
+1276187,Energy Transfer LP,ET,4922,Natural Gas Transmission,other,20,2018-03-31,2024-09-30
+1278021,MARKETAXESS HOLDINGS INC,MKTX,6211,"Security Brokers, Dealers & Flotation Companies",other,3,2018-03-31,2018-09-30
+1279620,"Zoned Properties, Inc.",ZDPY,6512,Opeators of  Nonresidential Buildings,other,8,2022-12-31,2024-09-30
+1280058,BLACKBAUD INC,BLKB,7372,Services-Prepackaged Software,datacenter,8,2018-03-31,2019-12-31
+1280263,AMBARELLA INC,AMBA,3674,Semiconductors & Related Devices,equipment,4,2024-01-31,2024-10-31
+1282266,"WINDSTREAM HOLDINGS, INC.",,4813,Telephone Communications (No Radiotelephone),datacenter,9,2018-03-31,2020-06-30
+1283140,HOLLY ENERGY PARTNERS LP,,4610,Pipe Lines (No Natural Gas),other,20,2018-03-31,2023-09-30
+1283699,"T-Mobile US, Inc.",TMUS,4812,Radiotelephone Communications,other,3,2018-03-31,2018-09-30
+1286131,STONEMOR PARTNERS LP,,7200,Services-Personal Services,other,8,2017-12-31,2019-09-30
+1286681,DOMINOS PIZZA INC,DPZ,5140,Wholesale-Groceries & Related Products,other,3,2022-01-02,2023-12-31
+1287098,"MAXCYTE, INC.",MXCT,8731,Services-Commercial Physical & Biological Research,other,14,2021-06-30,2024-09-30
+1287808,"Hill International, Inc.",,8711,Services-Engineering Services,other,19,2018-03-31,2022-09-30
+1288359,OTELCO INC.,,4813,Telephone Communications (No Radiotelephone),datacenter,12,2018-03-31,2020-12-31
+1288847,"Five9, Inc.",FIVN,7374,Services-Computer Processing & Data Preparation,datacenter,25,2018-03-31,2024-09-30
+1289308,EnerSys,ENS,3690,"Miscellaneous Electrical Machinery, Equipment & Supplies",other,26,2018-07-01,2024-09-29
+1289340,"Stereotaxis, Inc.",STXS,3845,Electromedical & Electrotherapeutic Apparatus,other,27,2018-03-31,2024-09-30
+1289419,"Morningstar, Inc.",MORN,6282,Investment Advice,other,26,2018-03-31,2024-09-30
+1289848,Huron Consulting Group Inc.,HURN,8742,Services-Management Consulting Services,other,27,2018-03-31,2024-09-30
+1289945,"Spok Holdings, Inc",SPOK,4812,Radiotelephone Communications,other,20,2019-12-31,2024-09-30
+1293818,CapForce Inc.,CFOR,8071,Services-Medical Laboratories,other,5,2018-03-31,2019-12-31
+1294133,Inogen Inc,INGN,3842,"Orthopedic, Prosthetic & Surgical Appliances & Supplies",other,19,2017-12-31,2023-12-31
+1303652,Tableau Software Inc,,7372,Services-Prepackaged Software,datacenter,6,2018-03-31,2019-06-30
+1306830,Celanese Corp,CE,2820,"Plastic Material, Synth Resin/Rubber, Cellulos (No Glass)",other,27,2018-03-31,2024-09-30
+1308547,"Dolby Laboratories, Inc.",DLB,6794,Patent Owners & Lessors,other,24,2018-12-28,2024-09-27
+1309108,WEX Inc.,WEX,7389,"Services-Business Services, NEC",other,21,2018-03-31,2024-09-30
+1310067,SEARS HOLDINGS CORP,,5311,Retail-Department Stores,other,3,2018-05-05,2018-11-03
+1314727,Sonos Inc,SONO,3651,Household Audio & Video Equipment,other,23,2019-03-30,2024-09-28
+1315255,"GTT Communications, Inc.",,4813,Telephone Communications (No Radiotelephone),datacenter,9,2018-01-01,2020-03-31
+1318605,"Tesla, Inc.",TSLA,3711,Motor Vehicles & Passenger Car Bodies,other,7,2023-03-31,2024-09-30
+1319161,Warner Music Group Corp.,WMG,7900,Services-Amusement & Recreation Services,other,24,2018-12-31,2024-09-30
+1319229,TransMontaigne Partners LLC,,4610,Pipe Lines (No Natural Gas),other,27,2018-03-31,2024-09-30
+1320350,"LENSAR, Inc.",LNSR,3841,Surgical & Medical Instruments & Apparatus,other,17,2020-09-30,2024-09-30
+1320760,"TSS, Inc.",TSSI,8742,Services-Management Consulting Services,other,4,2019-06-30,2024-09-30
+1320854,"FreightCar America, Inc.",RAIL,3743,Railroad Equipment,other,22,2018-12-31,2024-09-30
+1321655,Palantir Technologies Inc.,PLTR,7372,Services-Prepackaged Software,datacenter,17,2020-09-30,2024-09-30
+1324272,"Ruths Hospitality Group, Inc.",,5812,Retail-Eating  Places,other,6,2017-12-31,2022-12-25
+1324404,"CF Industries Holdings, Inc.",CF,2870,Agricultural Chemicals,other,26,2018-06-30,2024-09-30
+1324948,RBC Bearings INC,RBC,3562,Ball & Roller Bearings,other,26,2018-06-30,2024-09-28
+1327567,Palo Alto Networks Inc,PANW,3577,"Computer Peripheral Equipment, NEC",other,25,2018-10-31,2024-10-31
+1327688,OOMA INC,OOMA,7374,Services-Computer Processing & Data Preparation,datacenter,8,2018-04-30,2020-01-31
+1328792,TECHPRECISION CORP,TPCS,3440,Fabricated Structural Metal Products,other,26,2018-06-30,2024-09-30
+1330436,Liquidia Technologies Inc,,3841,Surgical & Medical Instruments & Apparatus,other,4,2018-06-30,2019-03-31
+1333835,Casa Systems Inc,,3663,Radio & Tv Broadcasting & Communications Equipment,other,19,2019-03-31,2023-09-30
+1334978,"Clear Channel Outdoor Holdings, Inc.",CCO,7310,Services-Advertising,other,21,2018-06-30,2024-09-30
+1336047,"Boardwalk Pipeline Partners, LP",,4922,Natural Gas Transmission,other,11,2018-03-31,2024-09-30
+1336920,"Leidos Holdings, Inc.",LDOS,7373,Services-Computer Integrated Systems Design,other,27,2018-03-30,2024-09-27
+1337298,FutureFuel Corp.,FF,2860,Industrial Organic Chemicals,other,5,2018-03-31,2019-03-31
+1337619,"ENVESTNET, INC.",,7389,"Services-Business Services, NEC",other,27,2018-03-31,2024-09-30
+1338065,"DCP Midstream, LP",,4922,Natural Gas Transmission,other,19,2018-12-31,2023-06-30
+1339947,Viacom Inc.,,4841,Cable & Other Pay Television Services,other,4,2018-12-31,2019-09-30
+1340127,Carbonite Inc,,7374,Services-Computer Processing & Data Preparation,datacenter,7,2018-03-31,2019-09-30
+1341439,ORACLE CORP,ORCL,7372,Services-Prepackaged Software,datacenter,25,2018-08-31,2024-08-31
+1343304,AVEDRO INC,,2834,Pharmaceutical Preparations,other,3,2019-03-31,2019-09-30
+1346830,"Tvardi Therapeutics, Inc.",TVRD,2834,Pharmaceutical Preparations,other,4,2018-03-31,2018-12-31
+1347652,"CorEnergy Infrastructure Trust, Inc.",,6798,Real Estate Investment Trusts,datacenter,12,2018-03-31,2020-12-31
+1347858,"22nd Century Group, Inc.",XXII,2111,Cigarettes,other,3,2018-12-31,2020-03-31
+1348036,"AVALARA, INC.",,7372,Services-Prepackaged Software,datacenter,14,2019-03-31,2022-06-30
+1351285,ROSETTA STONE INC,,7372,Services-Prepackaged Software,datacenter,8,2018-09-30,2020-06-30
+1351636,"SOUNDTHINKING, INC.",SSTI,7372,Services-Prepackaged Software,datacenter,19,2018-03-31,2024-09-30
+1353283,SPLUNK INC,,7372,Services-Prepackaged Software,datacenter,23,2018-04-30,2023-10-31
+1353538,"Appgate, Inc.",,7372,Services-Prepackaged Software,datacenter,8,2021-12-31,2023-09-30
+1355754,INSTRUCTURE INC,,7372,Services-Prepackaged Software,datacenter,8,2018-03-31,2019-12-31
+1355839,INTELLIGENT PROTECTION MANAGEMENT CORP.,IPM,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,6,2018-06-30,2019-09-30
+1356104,"Mellanox Technologies, Ltd.",,3674,Semiconductors & Related Devices,equipment,4,2019-03-31,2019-12-31
+1356570,WNS (HOLDINGS) LTD,,7389,"Services-Business Services, NEC",other,3,2024-03-31,2024-09-30
+1357204,"DUNKIN' BRANDS GROUP, INC.",,5810,Retail-Eating & Drinking Places,other,5,2018-06-30,2020-09-26
+1357450,"Hollysys Automation Technologies, Ltd.",,3620,Electrical Industrial Apparatus,other,9,2018-12-31,2023-06-30
+1357615,"KBR, INC.",KBR,1600,Heavy Construction Other Than Bldg Const - Contractors,other,27,2018-03-31,2024-09-27
+1357971,Energy Services of America CORP,ESOA,1623,"Water, Sewer, Pipeline, Comm & Power Line Construction",other,24,2018-12-31,2024-09-30
+1361113,VARONIS SYSTEMS INC,VRNS,7372,Services-Prepackaged Software,datacenter,6,2023-06-30,2024-09-30
+1361538,Primoris Services Corp,PRIM,1623,"Water, Sewer, Pipeline, Comm & Power Line Construction",other,27,2018-03-31,2024-09-30
+1361658,Travel & Leisure Co.,TNL,7011,Hotels & Motels,other,3,2018-03-31,2018-09-30
+1362004,"ICF International, Inc.",ICFI,8742,Services-Management Consulting Services,other,4,2018-01-01,2018-09-30
+1364954,"CHEGG, INC",CHGG,8200,Services-Educational Services,other,9,2018-03-31,2020-03-31
+1365916,"AMYRIS, INC.",,2860,Industrial Organic Chemicals,other,20,2018-03-31,2022-12-31
+1366561,SMARTSHEET INC,,7372,Services-Prepackaged Software,datacenter,18,2019-04-30,2024-10-31
+1366868,"Globalstar, Inc.",GSAT,4899,"Communications Services, NEC",other,3,2018-03-31,2018-09-30
+1367064,"Archrock Partners, L.P.",,4922,Natural Gas Transmission,other,8,2018-03-31,2019-12-31
+1367644,Emergent BioSolutions Inc.,EBS,2834,Pharmaceutical Preparations,other,27,2018-03-31,2024-09-30
+1368148,"ATHERSYS, INC / NEW",,2834,Pharmaceutical Preparations,other,4,2018-12-31,2019-09-30
+1368265,Clean Energy Fuels Corp.,CLNE,4932,Gas & Other Services Combined,other,27,2018-03-31,2024-09-30
+1368622,AeroVironment Inc,AVAV,3721,Aircraft,other,26,2018-07-28,2024-10-26
+1370880,"Mandiant, Inc.",,3577,"Computer Peripheral Equipment, NEC",other,18,2018-03-31,2022-06-30
+1370946,Owens Corning,OC,3290,"Abrasive, Asbestos & Misc Nonmetallic Mineral Prods",other,9,2018-03-31,2023-12-31
+1371489,Information Services Group Inc.,III,8742,Services-Management Consulting Services,other,27,2018-03-31,2024-09-30
+1372020,Great Lakes Dredge & Dock CORP,,1600,Heavy Construction Other Than Bldg Const - Contractors,other,27,2018-03-31,2024-09-30
+1372299,"Ocugen, Inc.",OCGN,2836,"Biological Products, (No Diagnostic Substances)",other,3,2017-12-31,2018-12-31
+1372414,"AEROHIVE NETWORKS, INC",,7373,Services-Computer Integrated Systems Design,other,6,2018-03-31,2019-06-30
+1372612,BOX INC,BOX,7372,Services-Prepackaged Software,datacenter,26,2018-07-31,2024-10-31
+1373670,"Green Brick Partners, Inc.",GRBK,1531,Operative Builders,other,22,2018-03-31,2024-09-30
+1373707,TETRAPHASE PHARMACEUTICALS INC,,2834,Pharmaceutical Preparations,other,4,2019-03-31,2019-12-31
+1373715,"ServiceNow, Inc.",NOW,7372,Services-Prepackaged Software,datacenter,27,2018-03-31,2024-09-30
+1375365,"Super Micro Computer, Inc.",SMCI,3571,Electronic Computers,other,25,2018-09-30,2024-09-30
+1375877,Canadian Solar Inc.,CSIQ,3674,Semiconductors & Related Devices,equipment,3,2021-12-31,2023-12-31
+1376793,"Cavitation Technologies, Inc.",CVAT,0700,Agricultural Services,other,8,2018-06-30,2020-03-31
+1377121,"Protagonist Therapeutics, Inc",PTGX,2834,Pharmaceutical Preparations,other,7,2017-12-31,2021-03-31
+1377149,CareView Communications Inc,CRVW,3663,Radio & Tv Broadcasting & Communications Equipment,other,14,2021-03-31,2024-09-30
+1377630,"National CineMedia, Inc.",NCMI,7310,Services-Advertising,other,7,2018-03-29,2019-09-26
+1377789,"AVIAT NETWORKS, INC.",AVNW,3663,Radio & Tv Broadcasting & Communications Equipment,other,6,2019-12-27,2021-07-02
+1378140,"Ocean Power Technologies, Inc.",OPTT,4911,Electric Services,utility,25,2018-07-31,2024-10-31
+1378590,"Bridgeline Digital, Inc.",BLIN,7372,Services-Prepackaged Software,datacenter,12,2018-12-31,2021-09-30
+1383650,"Cheniere Energy Partners, L.P.",CQP,4924,Natural Gas Distribution,other,9,2017-12-31,2019-12-31
+1384905,"RingCentral, Inc.",RNG,7374,Services-Computer Processing & Data Preparation,datacenter,23,2019-03-31,2024-09-30
+1385280,"Cinemark Holdings, Inc.",CNK,7830,Services-Motion Picture Theaters,other,8,2018-03-31,2023-12-31
+1385292,Monotype Imaging Holdings Inc.,,7371,Services-Computer Programming Services,datacenter,6,2018-03-31,2019-06-30
+1385867,Coupa Software Inc,,7372,Services-Prepackaged Software,datacenter,19,2018-04-30,2022-10-31
+1389002,MARIN SOFTWARE INC,,7374,Services-Computer Processing & Data Preparation,datacenter,20,2019-12-31,2024-09-30
+1389050,"Archrock, Inc.",AROC,4922,Natural Gas Transmission,other,27,2018-03-31,2024-09-30
+1389545,Stablecoin Development Corp,SDEV,6199,Finance Services,other,3,2018-06-30,2018-12-31
+1390478,"SELLAS Life Sciences Group, Inc.",SLS,2834,Pharmaceutical Preparations,other,4,2020-12-31,2022-12-31
+1392091,"Blueknight Energy Partners, L.P.",,4610,Pipe Lines (No Natural Gas),other,18,2018-03-31,2022-06-30
+1392972,"PROS Holdings, Inc.",,7371,Services-Computer Programming Services,datacenter,26,2018-06-30,2024-09-30
+1393584,American Well Corp,AMWL,7389,"Services-Business Services, NEC",other,18,2019-12-31,2024-09-30
+1393883,"DHI GROUP, INC.",DHX,7389,"Services-Business Services, NEC",other,6,2018-03-31,2023-12-31
+1394056,"ONE STOP SYSTEMS, INC.",OSS,3571,Electronic Computers,other,3,2024-03-31,2024-09-30
+1394074,"Spectra Energy Partners, LP",,4922,Natural Gas Transmission,other,5,2018-03-31,2019-12-31
+1394638,"Driveitaway Holdings, Inc.",DWAY,8200,Services-Educational Services,other,10,2019-09-30,2021-12-31
+1398659,Genpact LTD,G,8742,Services-Management Consulting Services,other,26,2018-03-31,2024-09-30
+1401564,"First Financial Northwest, Inc.",,6022,State Commercial Banks,other,27,2018-03-31,2024-09-30
+1401680,Cornerstone OnDemand Inc,,7372,Services-Prepackaged Software,datacenter,13,2018-06-30,2021-06-30
+1401708,"NS Wind Down Co., Inc.",,2836,"Biological Products, (No Diagnostic Substances)",other,10,2018-03-31,2022-12-31
+1401914,"Dare Bioscience, Inc.",DARE,2834,Pharmaceutical Preparations,other,4,2023-09-30,2024-06-30
+1402057,CDW Corp,CDW,5961,Retail-Catalog & Mail-Order Houses,other,3,2018-03-31,2018-09-30
+1402436,SS&C Technologies Holdings Inc,SSNC,7372,Services-Prepackaged Software,datacenter,26,2018-03-31,2024-09-30
+1402829,Orion Group Holdings Inc,ORN,1600,Heavy Construction Other Than Bldg Const - Contractors,other,24,2018-03-31,2024-09-30
+1403161,VISA INC.,V,7389,"Services-Business Services, NEC",other,8,2020-09-30,2024-09-30
+1404123,1Life Healthcare Inc,,8011,Services-Offices & Clinics of  Doctors of  Medicine,other,13,2019-12-31,2022-12-31
+1404655,HUBSPOT INC,HUBS,7372,Services-Prepackaged Software,datacenter,27,2018-03-31,2024-09-30
+1405495,"InterDigital, Inc.",IDCC,6794,Patent Owners & Lessors,other,16,2018-03-31,2024-09-30
+1406666,"CALIX, INC",CALX,4899,"Communications Services, NEC",other,26,2018-03-31,2024-09-28
+1408198,MSCI Inc.,MSCI,7389,"Services-Business Services, NEC",other,27,2018-03-31,2024-09-30
+1409269,Venus Concept Inc.,VERO,3841,Surgical & Medical Instruments & Apparatus,other,3,2019-03-31,2019-09-30
+1409970,"Happen, Inc.",HAPN,6141,Personal Credit Institutions,other,9,2018-09-30,2020-09-30
+1410384,"Q2 Holdings, Inc.",QTWO,7372,Services-Prepackaged Software,datacenter,27,2018-03-31,2024-09-30
+1411057,"Cannabis Bioscience International Holdings, Inc.",CBIH,8731,Services-Commercial Physical & Biological Research,other,5,2023-05-31,2024-08-31
+1411690,"Bionano Genomics, Inc.",BNGO,3826,Laboratory Analytical Instruments,other,20,2019-12-31,2024-09-30
+1412270,Care.com Inc,,7200,Services-Personal Services,other,3,2018-03-31,2018-09-29
+1412347,"Westmoreland Resource Partners, LP",,1221,Bituminous Coal & Lignite Surface Mining,other,4,2018-03-31,2018-12-31
+1413745,Yueda Digital Holding,YDKG,6199,Finance Services,other,7,2018-12-31,2024-06-30
+1413898,DallasNews Corp,,2711,Newspapers: Publishing or  Publishing & Printing,other,7,2018-03-31,2019-09-30
+1414475,"Western Midstream Operating, LP",,4922,Natural Gas Transmission,other,3,2018-03-31,2018-09-30
+1415404,EchoStar CORP,ECHO,4899,"Communications Services, NEC",other,25,2018-03-31,2024-09-30
+1417398,"Hillenbrand, Inc.",,3990,Miscellaneous Manufacturing Industries,other,8,2018-12-31,2024-06-30
+1417663,"SANUWAVE Health, Inc.",SNWV,3841,Surgical & Medical Instruments & Apparatus,other,3,2019-12-31,2020-06-30
+1418091,"TWITTER, INC.",,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,18,2018-03-31,2022-06-30
+1418100,Avaya Holdings Corp.,,7372,Services-Prepackaged Software,datacenter,17,2018-12-31,2022-12-31
+1420302,"LogMeIn, Inc.",,7372,Services-Prepackaged Software,datacenter,10,2018-03-31,2020-06-30
+1421517,"Energy Recovery, Inc.",ERII,3559,"Special Industry Machinery, NEC",other,24,2018-03-31,2024-09-30
+1422841,AquaVenture Holdings Ltd,,4941,Water Supply,other,3,2018-03-31,2018-09-30
+1423774,ZUORA INC,,7372,Services-Prepackaged Software,datacenter,23,2019-04-30,2024-10-31
+1423902,"Western Midstream Partners, LP",WES,4922,Natural Gas Transmission,other,21,2018-03-31,2024-09-30
+1424755,Travelport Worldwide LTD,,4700,Transportation Services,other,5,2018-03-31,2019-03-31
+1424929,FOX FACTORY HOLDING CORP,FOXF,3751,"Motorcycles, Bicycles & Parts",other,3,2021-10-01,2023-12-29
+1425292,"CVR PARTNERS, LP",UAN,2870,Agricultural Chemicals,other,27,2018-03-31,2024-09-30
+1428336,"HEALTHEQUITY, INC.",HQY,7389,"Services-Business Services, NEC",other,25,2018-01-31,2024-10-31
+1428439,"ROKU, INC",ROKU,4841,Cable & Other Pay Television Services,other,27,2018-03-31,2024-09-30
+1429764,Blink Charging Co.,BLNK,3690,"Miscellaneous Electrical Machinery, Equipment & Supplies",other,4,2019-12-31,2022-03-31
+1431695,Olo Inc.,,7389,"Services-Business Services, NEC",other,15,2021-03-31,2024-09-30
+1432133,KALTURA INC,KLTR,7372,Services-Prepackaged Software,datacenter,14,2021-06-30,2024-09-30
+1433195,APPFOLIO INC,APPF,7372,Services-Prepackaged Software,datacenter,4,2022-12-31,2023-09-30
+1433660,JBT MAREL Corp,JBTM,3550,Special Industry Machinery (No Metalworking Machinery),other,27,2018-03-31,2024-09-30
+1433714,"CASTLIGHT HEALTH, INC.",,7374,Services-Computer Processing & Data Preparation,datacenter,15,2018-03-31,2021-09-30
+1434728,"Global Water Resources, Inc.",GWRS,4941,Water Supply,other,10,2020-06-30,2022-09-30
+1437107,"Warner Bros. Discovery, Inc.",WBD,4841,Cable & Other Pay Television Services,other,3,2023-03-31,2023-09-30
+1437352,"EVERBRIDGE, INC.",,7372,Services-Prepackaged Software,datacenter,3,2018-06-30,2018-12-31
+1439222,"AGIOS PHARMACEUTICALS, INC.",AGIO,2834,Pharmaceutical Preparations,other,11,2018-03-31,2020-09-30
+1439288,Zurn Elkay Water Solutions Corp,ZWS,3560,General Industrial Machinery & Equipment,other,27,2018-03-31,2024-09-30
+1441683,APPIAN CORP,APPN,7372,Services-Prepackaged Software,datacenter,20,2019-12-31,2024-09-30
+1441816,"MongoDB, Inc.",MDB,7372,Services-Prepackaged Software,datacenter,14,2019-04-30,2024-01-31
+1442145,"Verisk Analytics, Inc.",VRSK,7374,Services-Computer Processing & Data Preparation,datacenter,27,2018-03-31,2024-09-30
+1443646,Booz Allen Hamilton Holding Corp,BAH,8742,Services-Management Consulting Services,other,26,2018-06-30,2024-09-30
+1445305,WORKIVA INC,WK,7372,Services-Prepackaged Software,datacenter,24,2018-03-31,2024-09-30
+1447669,TWILIO INC,TWLO,7372,Services-Prepackaged Software,datacenter,13,2020-12-31,2024-09-30
+1448038,Redwood Mortgage Investors IX,RWDMU,6500,Real Estate,other,7,2021-03-31,2022-09-30
+1448056,"NEW RELIC, INC.",,7372,Services-Prepackaged Software,datacenter,22,2018-06-30,2023-09-30
+1448431,OptimizeRx Corp,OPRX,7389,"Services-Business Services, NEC",other,3,2021-12-31,2024-03-31
+1449488,CSI Compressco LP,,1389,"Oil & Gas Field Services, NEC",other,22,2018-03-31,2023-12-31
+1452872,"ARC Group, Inc.",,6794,Patent Owners & Lessors,other,5,2018-12-31,2019-12-31
+1453687,"Cartesian Therapeutics, Inc.",RNAC,2834,Pharmaceutical Preparations,other,27,2018-03-31,2024-09-30
+1453814,"Medidata Solutions, Inc.",,7372,Services-Prepackaged Software,datacenter,6,2018-03-31,2019-06-30
+1455684,"TPI COMPOSITES, INC",TPICQ,3510,Engines & Turbines,equipment,27,2018-03-31,2024-09-30
+1455863,AMERICOLD REALTY TRUST,COLD,6798,Real Estate Investment Trusts,datacenter,27,2018-03-31,2024-09-30
+1458891,Noble Corp,,1381,Drilling Oil & Gas Wells,other,14,2018-03-31,2022-06-30
+1462056,"Backblaze, Inc.",BLZE,7372,Services-Prepackaged Software,datacenter,5,2023-09-30,2024-09-30
+1463101,"Enphase Energy, Inc.",ENPH,3674,Semiconductors & Related Devices,equipment,27,2018-03-31,2024-09-30
+1463172,"Zendesk, Inc.",,7374,Services-Computer Processing & Data Preparation,datacenter,19,2018-03-31,2022-09-30
+1463972,Vuzix Corp,VUZI,3663,Radio & Tv Broadcasting & Communications Equipment,other,26,2018-03-31,2024-09-30
+1467154,"NVN Liquidation, Inc.",,2834,Pharmaceutical Preparations,other,17,2018-03-31,2022-12-31
+1467373,Accenture plc,ACN,7389,"Services-Business Services, NEC",other,23,2018-11-30,2024-08-31
+1467623,"DROPBOX, INC.",DBX,7372,Services-Prepackaged Software,datacenter,13,2018-03-31,2021-06-30
+1467761,"FiEE, Inc.",FIEE,3661,Telephone & Telegraph Apparatus,other,6,2021-03-31,2023-12-31
+1468174,Hyatt Hotels Corp,H,7011,Hotels & Motels,other,27,2018-03-31,2024-09-30
+1468492,HeartSciences Inc.,HSCS,6199,Finance Services,other,11,2022-04-30,2024-10-31
+1468666,SecureWorks Corp,,7372,Services-Prepackaged Software,datacenter,23,2018-05-04,2024-11-01
+1468929,"NEXGEL, INC.",NXGL,3841,Surgical & Medical Instruments & Apparatus,other,17,2019-12-31,2024-09-30
+1469372,MSG NETWORKS INC.,,4841,Cable & Other Pay Television Services,other,11,2018-09-30,2021-03-31
+1470099,"MOBILEIRON, INC.",,7372,Services-Prepackaged Software,datacenter,10,2018-06-30,2020-09-30
+1474432,"Everpure, Inc.",P,3572,Computer Storage Devices,other,20,2020-02-02,2024-11-03
+1474439,"Telenav, Inc.",,3812,"Search, Detection, Navigation, Guidance, Aeronautical Sys",other,9,2018-09-30,2020-12-31
+1474735,GENERAC HOLDINGS INC.,GNRC,3621,Motors & Generators,equipment,24,2018-12-31,2024-09-30
+1474903,"BGSF, INC.",BGSF,7363,Services-Help Supply Services,other,9,2018-04-01,2020-09-27
+1477333,"Cloudflare, Inc.",NET,7372,Services-Prepackaged Software,datacenter,21,2019-09-30,2024-09-30
+1477720,"Asana, Inc.",ASAN,7372,Services-Prepackaged Software,datacenter,9,2021-01-31,2024-10-31
+1478242,IQVIA HOLDINGS INC.,IQV,8731,Services-Commercial Physical & Biological Research,other,27,2018-03-31,2024-09-30
+1479290,"Revance Therapeutics, Inc.",,2834,Pharmaceutical Preparations,other,18,2019-12-31,2024-09-30
+1481646,"Accolade, Inc.",,7389,"Services-Business Services, NEC",other,18,2020-05-31,2024-08-31
+1481792,"Quad/Graphics, Inc.",QUAD,2750,Commercial Printing,other,12,2018-03-31,2023-12-31
+1482541,BNB Standard Corp,BNC,0700,Agricultural Services,other,24,2018-12-31,2024-09-30
+1484612,"Outset Medical, Inc.",OM,3845,Electromedical & Electrotherapeutic Apparatus,other,17,2020-09-30,2024-09-30
+1485003,Carisma Therapeutics Inc.,CARM,2834,Pharmaceutical Preparations,other,9,2020-09-30,2024-09-30
+1486159,Chord Energy Corp,CHRD,1311,Crude Petroleum & Natural Gas,other,8,2019-12-31,2021-09-30
+1486957,"BWX Technologies, Inc.",BWXT,3510,Engines & Turbines,equipment,23,2018-03-31,2024-09-30
+1487101,KEYW HOLDING CORP,,7373,Services-Computer Integrated Systems Design,other,5,2018-03-31,2019-03-31
+1488139,"Ameresco, Inc.",AMRC,1700,Construction - Special Trade Contractors,other,27,2018-03-31,2024-09-30
+1489096,"Thermon Group Holdings, Inc.",,3620,Electrical Industrial Apparatus,other,14,2018-06-30,2023-12-31
+1490978,"Schrodinger, Inc.",SDGR,2834,Pharmaceutical Preparations,other,18,2020-03-31,2024-09-30
+1492674,"T2 Biosystems, Inc.",,3841,Surgical & Medical Instruments & Apparatus,other,12,2018-03-31,2020-12-31
+1494259,"CarGurus, Inc.",CARG,7374,Services-Computer Processing & Data Preparation,datacenter,22,2019-06-30,2024-09-30
+1498828,Howard Hughes Corp,,6798,Real Estate Investment Trusts,datacenter,27,2018-03-31,2024-09-30
+1500435,"GoPro, Inc.",GPRO,3861,Photographic Equipment & Supplies,other,12,2018-06-30,2021-03-31
+1501585,"HUNTINGTON INGALLS INDUSTRIES, INC.",HII,3730,Ship & Boat Building & Repairing,other,27,2018-03-31,2024-09-30
+1502034,"GNC HOLDINGS, INC.",,5400,Retail-Food Stores,other,3,2018-12-31,2020-06-30
+1502756,ZAYO GROUP LLC,,4813,Telephone Communications (No Radiotelephone),datacenter,6,2018-09-30,2019-12-31
+1503274,Quanterix Corp,QTRX,3826,Laboratory Analytical Instruments,other,21,2019-03-31,2024-09-30
+1504461,NGL Energy Partners LP,NGL,4922,Natural Gas Transmission,other,21,2018-06-30,2024-09-30
+1505155,"Upland Software, Inc.",UPLD,7372,Services-Prepackaged Software,datacenter,9,2018-03-31,2024-09-30
+1505611,"DecisionPoint Systems, Inc.",,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,4,2022-12-31,2024-03-31
+1506307,"KINDER MORGAN, INC.",KMI,4922,Natural Gas Transmission,other,27,2018-03-31,2024-09-30
+1507615,ANDEAVOR LOGISTICS LP,,4610,Pipe Lines (No Natural Gas),other,6,2018-03-31,2019-06-30
+1512077,Global Eagle Entertainment Inc.,,4899,"Communications Services, NEC",other,8,2018-03-31,2020-06-30
+1513965,"Third Coast Midstream, LLC",,4922,Natural Gas Transmission,other,3,2018-03-31,2018-09-30
+1514183,"Silo Pharma, Inc.",SILO,2834,Pharmaceutical Preparations,other,4,2023-03-31,2023-12-31
+1514226,"Delta Tucker Holdings, Inc.",,4581,"Airports, Flying Fields & Airport Terminal Services",other,5,2018-06-30,2019-06-30
+1514732,"SAExploration Holdings, Inc.",,1382,Oil & Gas Field Exploration Services,other,11,2018-03-31,2020-09-30
+1517342,PACIFIC DRILLING S.A.,,1381,Drilling Oil & Gas Wells,other,5,2018-12-31,2020-09-30
+1517375,"Sprout Social, Inc.",SPT,7372,Services-Prepackaged Software,datacenter,16,2019-12-31,2024-09-30
+1517413,"Fastly, Inc.",FSLY,7372,Services-Prepackaged Software,datacenter,22,2019-06-30,2024-09-30
+1521332,Aptiv PLC,APTV,3714,Motor Vehicle Parts & Accessories,other,8,2022-12-31,2024-09-30
+1522540,"Marqeta, Inc.",MQ,7372,Services-Prepackaged Software,datacenter,3,2024-03-31,2024-09-30
+1522727,"USA Compression Partners, LP",USAC,4922,Natural Gas Transmission,other,20,2019-12-31,2024-09-30
+1524472,Xylem Inc.,XYL,3561,Pumps & Pumping Equipment,other,27,2018-03-31,2024-09-30
+1525221,Bristow Group Inc.,VTOL,4522,"Air Transportation, Nonscheduled",other,15,2020-03-31,2023-09-30
+1525773,Intelsat S.A.,,4899,"Communications Services, NEC",other,9,2018-12-31,2021-09-30
+1527190,"National CineMedia, LLC",,7310,Services-Advertising,other,6,2018-03-29,2019-06-27
+1528287,NeuroPace Inc,NPCE,3841,Surgical & Medical Instruments & Apparatus,other,3,2024-03-31,2024-09-30
+1528396,"Guidewire Software, Inc.",GWRE,7372,Services-Prepackaged Software,datacenter,25,2018-10-31,2024-10-31
+1528557,"Corindus Vascular Robotics, Inc.",,3841,Surgical & Medical Instruments & Apparatus,other,6,2018-03-31,2019-06-30
+1528930,"Franchise Group, Inc.",,6794,Patent Owners & Lessors,other,6,2018-07-31,2021-12-25
+1529274,"ALKAMI TECHNOLOGY, INC.",ALKT,7372,Services-Prepackaged Software,datacenter,15,2021-03-31,2024-09-30
+1529628,"Smart Sand, Inc.",SND,1400,Mining & Quarrying of  Nonmetallic Minerals (No Fuels),other,14,2019-03-31,2024-09-30
+1530721,Capri Holdings Ltd,CPRI,3100,Leather & Leather Products,other,12,2018-03-31,2024-09-28
+1531152,"BJ's Wholesale Club Holdings, Inc.",BJ,5331,Retail-Variety Stores,other,14,2019-02-02,2023-01-28
+1532961,"NV5 Global, Inc.",,7380,Services-Miscellaneous Business Services,other,27,2018-03-31,2024-09-28
+1533758,Hughes Satellite Systems Corp,,4899,"Communications Services, NEC",other,25,2018-03-31,2024-09-30
+1534154,authID Inc.,AUID,7372,Services-Prepackaged Software,datacenter,6,2018-12-31,2024-09-30
+1534675,Tecnoglass Holdings Inc.,TGLS,3211,Flat Glass,other,27,2018-03-31,2024-09-30
+1534701,Phillips 66,PSX,2911,Petroleum Refining,other,10,2018-03-31,2024-09-30
+1535079,MCX Technologies Corp,,7372,Services-Prepackaged Software,datacenter,8,2018-03-31,2020-06-30
+1535379,"Cloudera, Inc.",,7372,Services-Prepackaged Software,datacenter,10,2019-01-31,2021-07-31
+1535527,"CrowdStrike Holdings, Inc.",CRWD,7372,Services-Prepackaged Software,datacenter,23,2019-04-30,2024-10-31
+1537028,"Independence Contract Drilling, Inc.",,1381,Drilling Oil & Gas Wells,other,13,2018-03-31,2023-12-31
+1537054,Gogo Inc.,GOGO,4899,"Communications Services, NEC",other,21,2018-03-31,2024-09-30
+1537435,TECOGEN INC.,TGEN,3585,Air-Cond & Warm Air Heatg Equip & Comm & Indl Refrig Equip,other,26,2018-06-30,2024-09-30
+1539838,"Diamondback Energy, Inc.",FANG,1311,Crude Petroleum & Natural Gas,other,3,2021-12-31,2023-12-31
+1540184,"Medallia, Inc.",,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,9,2019-01-31,2021-07-31
+1540755,"Anaplan, Inc.",,7372,Services-Prepackaged Software,datacenter,16,2018-01-31,2022-04-30
+1540947,"EQM Midstream Partners, LP",,4922,Natural Gas Transmission,other,4,2018-03-31,2020-03-31
+1543151,"Uber Technologies, Inc",UBER,7389,"Services-Business Services, NEC",other,17,2019-03-31,2023-12-31
+1544229,"Engility Holdings, Inc.",,8711,Services-Engineering Services,other,3,2018-03-30,2018-09-28
+1544522,Freshworks Inc.,FRSH,7372,Services-Prepackaged Software,datacenter,13,2021-09-30,2024-09-30
+1545654,"Alexander & Baldwin, Inc.",,6798,Real Estate Investment Trusts,datacenter,18,2018-03-31,2022-09-30
+1549346,"Shutterstock, Inc.",SSTK,7374,Services-Computer Processing & Data Preparation,datacenter,6,2023-06-30,2024-09-30
+1551182,Eaton Corp plc,ETN,3590,Misc Industrial & Commercial Machinery & Equipment,other,15,2020-09-30,2024-03-31
+1552000,MPLX LP,MPLX,4610,Pipe Lines (No Natural Gas),other,25,2018-09-30,2024-09-30
+1552033,TransUnion,TRU,7320,"Services-Consumer Credit Reporting, Collection Agencies",other,4,2023-12-31,2024-09-30
+1552797,"Delek Logistics Partners, LP",DKL,4610,Pipe Lines (No Natural Gas),other,24,2018-03-31,2024-09-30
+1555279,908 Devices Inc.,MASS,3826,Laboratory Analytical Instruments,other,14,2021-03-31,2024-09-30
+1556148,"Infor, Inc.",,7372,Services-Prepackaged Software,datacenter,7,2018-07-31,2020-01-31
+1558785,"CVR Refining, LP",,2911,Petroleum Refining,other,3,2018-03-31,2018-09-30
+1559865,"EVERTEC, Inc.",EVTC,7374,Services-Computer Processing & Data Preparation,datacenter,24,2018-03-31,2024-09-30
+1560143,WYTEC INTERNATIONAL INC,WYTC,4822,Telegraph & Other Message Communications,other,4,2023-12-31,2024-09-30
+1560258,"electroCore, Inc.",ECOR,3845,Electromedical & Electrotherapeutic Apparatus,other,14,2018-06-30,2022-09-30
+1561550,"Datadog, Inc.",DDOG,7372,Services-Prepackaged Software,datacenter,13,2020-12-31,2024-09-30
+1561627,ExOne Co,,3555,Printing Trades Machinery & Equipment,other,11,2019-03-31,2021-09-30
+1561660,Pattern Energy Group Inc.,,4911,Electric Services,utility,6,2018-03-31,2019-09-30
+1563922,Greenbacker Renewable Energy Co LLC,,4911,Electric Services,utility,11,2021-12-31,2024-09-30
+1564708,NEWS CORP,NWSA,2711,Newspapers: Publishing or  Publishing & Printing,other,25,2018-09-30,2024-09-30
+1565687,"Intapp, Inc.",INTA,7372,Services-Prepackaged Software,datacenter,13,2021-09-30,2024-09-30
+1566469,"NantHealth, Inc.",,7374,Services-Computer Processing & Data Preparation,datacenter,23,2018-03-31,2023-09-30
+1566895,"nCino OpCo, Inc.",,7372,Services-Prepackaged Software,datacenter,6,2020-07-31,2021-10-31
+1567094,CNH Industrial N.V.,CNH,3531,Construction Machinery & Equip,other,24,2018-03-31,2024-09-30
+1568100,"PagerDuty, Inc.",PD,7372,Services-Prepackaged Software,datacenter,24,2019-01-31,2024-10-31
+1569187,"AH Realty Trust, Inc.",AHRT,6500,Real Estate,other,33,2015-12-31,2024-09-30
+1569345,"Sprinklr, Inc.",CXM,7372,Services-Prepackaged Software,datacenter,14,2021-07-31,2024-10-31
+1571123,Science Applications International Corp,SAIC,7373,Services-Computer Integrated Systems Design,other,23,2018-05-04,2023-11-03
+1571949,"Intercontinental Exchange, Inc.",ICE,6200,"Security & Commodity Brokers, Dealers, Exchanges & Services",other,4,2023-12-31,2024-09-30
+1571996,Dell Technologies Inc.,DELL,3571,Electronic Computers,other,27,2018-05-04,2024-11-01
+1572910,PHILLIPS 66 PARTNERS LP,,4610,Pipe Lines (No Natural Gas),other,11,2018-03-31,2021-12-31
+1574135,"Pivotal Software, Inc.",,7372,Services-Prepackaged Software,datacenter,8,2018-02-02,2019-11-01
+1576169,"Benefitfocus, Inc.",,7372,Services-Prepackaged Software,datacenter,19,2018-03-31,2022-09-30
+1576197,"Strategic Environmental & Energy Resources, Inc.",SENR,4955,Hazardous Waste Management,other,27,2018-03-31,2024-09-30
+1576789,Wix.com Ltd.,WIX,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,3,2021-12-31,2023-12-31
+1577445,Odysight.ai Inc.,ODYS,7373,Services-Computer Integrated Systems Design,other,20,2019-12-31,2024-09-30
+1577526,"C3.ai, Inc.",AI,7372,Services-Prepackaged Software,datacenter,16,2021-01-31,2024-10-31
+1577916,"Premier, Inc.",,8741,Services-Management Services,other,23,2018-09-30,2024-09-30
+1579877,OUTFRONT Media Inc.,OUT,6798,Real Estate Investment Trusts,datacenter,5,2018-03-31,2019-12-31
+1580808,"A10 Networks, Inc.",ATEN,3576,Computer Communications Equipment,other,26,2018-03-31,2024-09-30
+1580905,"Installed Building Products, Inc.",IBP,1520,General Bldg Contractors - Residential Bldgs,other,26,2018-03-31,2024-09-30
+1581280,Twist Bioscience Corp,TWST,2836,"Biological Products, (No Diagnostic Substances)",other,8,2022-09-30,2024-09-30
+1581760,"Life360, Inc.",LIF,7374,Services-Computer Processing & Data Preparation,datacenter,10,2022-06-30,2024-09-30
+1581990,PLAINS GP HOLDINGS LP,PAGP,4610,Pipe Lines (No Natural Gas),other,3,2018-03-31,2018-09-30
+1582982,"CareCloud, Inc.",CCLD,7372,Services-Prepackaged Software,datacenter,6,2018-03-31,2024-06-30
+1583708,"SentinelOne, Inc.",S,7372,Services-Prepackaged Software,datacenter,14,2021-07-31,2024-10-31
+1584423,"APX Group Holdings, Inc.",,7374,Services-Computer Processing & Data Preparation,datacenter,9,2018-03-31,2020-03-31
+1585521,"Zoom Communications, Inc.",ZM,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,22,2019-07-31,2024-10-31
+1585583,"Del Taco Restaurants, Inc.",,5812,Retail-Eating  Places,other,10,2018-03-27,2021-12-28
+1590584,Civeo Corp,CVEO,7000,"Hotels, Rooming Houses, Camps & Other Lodging Places",other,27,2018-03-31,2024-09-30
+1590955,"Paycom Software, Inc.",PAYC,7372,Services-Prepackaged Software,datacenter,3,2018-03-31,2018-09-30
+1591698,Paylocity Holding Corp,PCTY,7372,Services-Prepackaged Software,datacenter,21,2019-09-30,2024-09-30
+1591763,"Enable Midstream Partners, LP",,4922,Natural Gas Transmission,other,4,2018-03-31,2018-12-31
+1592000,"EnLink Midstream, LLC",,4922,Natural Gas Transmission,other,27,2018-03-31,2024-09-30
+1592057,"Enviva, LLC",,2400,Lumber & Wood Products (No Furniture),other,20,2018-03-31,2023-12-31
+1592379,"Papa Murphy's Holdings, Inc.",,5812,Retail-Eating  Places,other,5,2018-04-02,2019-04-01
+1596532,"Arista Networks, Inc.",ANET,3576,Computer Communications Equipment,other,19,2018-06-30,2022-12-31
+1596783,"Catalent, Inc.",,2834,Pharmaceutical Preparations,other,10,2018-09-30,2024-09-30
+1598110,CyberArk Software Ltd.,,7372,Services-Prepackaged Software,datacenter,7,2018-12-31,2024-06-30
+1598968,Antero Midstream Partners LP,,4922,Natural Gas Transmission,other,4,2018-03-31,2018-12-31
+1599947,"TerraForm Power NY Holdings, Inc.",,4911,Electric Services,utility,3,2018-12-31,2019-12-31
+1601046,"Keysight Technologies, Inc.",KEYS,3823,"Industrial Instruments For Measurement, Display, and Control",equipment,24,2019-01-31,2024-10-31
+1601548,"V2X, Inc.",VVX,8744,Services-Facilities Support Management Services,other,27,2017-12-31,2024-09-27
+1603145,"XPLR Infrastructure, LP",XIFR,4911,Electric Services,utility,5,2018-03-31,2019-03-31
+1603286,"Dominion Energy Midstream Partners, LP",,4922,Natural Gas Transmission,other,3,2018-03-31,2018-09-30
+1603923,Weatherford International plc,WFRD,3533,Oil & Gas Field Machinery & Equipment,other,4,2018-03-31,2022-06-30
+1604643,Evoqua Water Technologies Corp.,,3580,Refrigeration & Service Industry Machinery,other,18,2018-12-31,2023-03-31
+1604778,"Qorvo, Inc.",QRVO,3674,Semiconductors & Related Devices,equipment,9,2017-07-01,2024-03-30
+1605810,"Porter Holding International, Inc.",,5810,Retail-Eating & Drinking Places,other,6,2019-03-31,2020-06-30
+1606366,"El Pollo Loco Holdings, Inc.",LOCO,5812,Retail-Eating  Places,other,6,2020-03-25,2021-09-29
+1607939,"Udemy, Inc.",,8200,Services-Educational Services,other,13,2021-09-30,2024-09-30
+1608249,"Zayo Group Holdings, Inc.",,4813,Telephone Communications (No Radiotelephone),datacenter,6,2018-06-30,2019-12-31
+1609151,"Weave Communications, Inc.",WEAV,7372,Services-Prepackaged Software,datacenter,3,2021-12-31,2022-06-30
+1609702,"CDK Global, Inc.",,7389,"Services-Business Services, NEC",other,15,2018-09-30,2022-03-31
+1609711,GoDaddy Inc.,GDDY,7373,Services-Computer Integrated Systems Design,other,24,2018-03-31,2024-09-30
+1610418,CNX Midstream Partners LP,,4922,Natural Gas Transmission,other,9,2018-03-31,2020-06-30
+1610466,"Shell Midstream Partners, L.P.",,4610,Pipe Lines (No Natural Gas),other,14,2018-03-31,2022-06-30
+1610532,"Hortonworks, Inc.",,7372,Services-Prepackaged Software,datacenter,3,2018-03-31,2018-09-30
+1610682,USD Partners LP,USDP,4013,Railroad Switching & Terminal Establishments,other,16,2018-03-31,2023-03-31
+1610950,"Syneos Health, Inc.",,8731,Services-Commercial Physical & Biological Research,other,22,2018-03-31,2023-06-30
+1611052,"PROCORE TECHNOLOGIES, INC.",PCOR,7372,Services-Prepackaged Software,datacenter,14,2021-06-30,2024-09-30
+1612630,JOINT Corp,JYNT,6794,Patent Owners & Lessors,other,26,2018-03-31,2024-09-30
+1613103,Medtronic plc,MDT,3845,Electromedical & Electrotherapeutic Apparatus,other,26,2018-07-27,2024-10-25
+1613859,"PRA Health Sciences, Inc.",,8731,Services-Commercial Physical & Biological Research,other,5,2018-03-31,2021-03-31
+1614178,"Yext, Inc.",YEXT,7374,Services-Computer Processing & Data Preparation,datacenter,24,2019-01-31,2024-10-31
+1615055,IsoPlexis Corp,,3826,Laboratory Analytical Instruments,other,6,2021-09-30,2022-12-31
+1615063,"Inspired Entertainment, Inc.",INSE,7372,Services-Prepackaged Software,datacenter,6,2022-12-31,2024-09-30
+1615165,"Veritone, Inc.",VERI,7374,Services-Computer Processing & Data Preparation,datacenter,20,2019-12-31,2024-09-30
+1615817,King Merger Sub II LLC,,1389,"Oil & Gas Field Services, NEC",other,3,2018-12-31,2019-06-30
+1616262,"Rocky Mountain Chocolate Factory, Inc.",RMCF,2060,Sugar & Confectionery Products,other,26,2018-05-31,2024-08-31
+1616533,"Penguin Solutions, Inc.",PENG,3674,Semiconductors & Related Devices,equipment,24,2018-11-30,2024-08-30
+1617553,"ZIPRECRUITER, INC.",ZIP,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,3,2021-09-30,2022-03-31
+1618755,Restaurant Brands International Limited Partnership,QSP,5812,Retail-Eating  Places,other,24,2018-06-30,2024-09-30
+1618756,Restaurant Brands International Inc.,QSR,5812,Retail-Eating  Places,other,24,2018-06-30,2024-09-30
+1619762,Brightstar Lottery PLC,BRSL,7990,Services-Miscellaneous Amusement & Recreation,other,4,2020-12-31,2023-12-31
+1619856,"Caribou Biosciences, Inc.",CRBU,2836,"Biological Products, (No Diagnostic Substances)",other,15,2020-12-31,2024-09-30
+1620179,"Exela Technologies, Inc.",,7389,"Services-Business Services, NEC",other,24,2018-12-31,2024-09-30
+1620280,Uniti Group LLC,,6798,Real Estate Investment Trusts,datacenter,8,2022-12-31,2024-09-30
+1620533,Shake Shack Inc.,SHAK,5810,Retail-Eating & Drinking Places,other,27,2018-03-28,2024-09-25
+1621227,Adaptimmune Therapeutics PLC,,2836,"Biological Products, (No Diagnostic Substances)",other,13,2018-03-31,2024-09-30
+1622229,"Cogent Biosciences, Inc.",COGT,2834,Pharmaceutical Preparations,other,3,2018-03-31,2018-09-30
+1623925,Antero Midstream Corp,AM,4922,Natural Gas Transmission,other,3,2019-03-31,2019-09-30
+1624512,Boxlight Corp,BOXL,8200,Services-Educational Services,other,20,2019-12-31,2024-09-30
+1624899,STERIS Ltd,,3842,"Orthopedic, Prosthetic & Surgical Appliances & Supplies",other,3,2018-06-30,2018-12-31
+1625641,"CS Disco, Inc.",LAW,7372,Services-Prepackaged Software,datacenter,14,2021-06-30,2024-09-30
+1625791,Kornit Digital Ltd.,KRNT,3555,Printing Trades Machinery & Equipment,other,3,2020-12-31,2022-12-31
+1627014,"Black Knight, Inc.",,7372,Services-Prepackaged Software,datacenter,21,2018-03-31,2023-09-30
+1627475,"UPWORK, INC",UPWK,7374,Services-Computer Processing & Data Preparation,datacenter,20,2019-12-31,2024-09-30
+1627857,"Sailpoint Technologies Holdings, Inc.",,7372,Services-Prepackaged Software,datacenter,15,2018-12-31,2022-06-30
+1628908,"Evolent Health, Inc.",EVH,8741,Services-Management Services,other,27,2018-03-31,2024-09-30
+1630805,"Babcock & Wilcox Enterprises, Inc.",BW,3433,"Heating Equipment, Except Electric & Warm Air Furnaces",other,17,2020-06-30,2024-09-30
+1631825,"Presidio, Inc.",,5045,Wholesale-Computers & Peripheral Equipment & Software,other,5,2018-09-30,2019-09-30
+1633931,"QXO Insulation, LLC",,1700,Construction - Special Trade Contractors,other,16,2020-12-31,2024-09-30
+1633978,Lumentum Holdings Inc.,LITE,3669,"Communications Equipment, NEC",other,11,2018-09-29,2021-04-03
+1634997,"Avangrid, Inc.",,4911,Electric Services,utility,21,2018-09-30,2024-09-30
+1635282,"Rimini Street, Inc.",RMNI,7389,"Services-Business Services, NEC",other,9,2022-03-31,2024-09-30
+1636422,"Health Catalyst, Inc.",HCAT,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,22,2019-06-30,2024-09-30
+1636519,Madison Square Garden Sports Corp.,MSGS,7990,Services-Miscellaneous Amusement & Recreation,other,19,2018-09-30,2024-09-30
+1637207,"Planet Fitness, Inc.",PLNT,7997,Services-Membership Sports & Recreation Clubs,other,27,2018-03-31,2024-09-30
+1638290,"MasterCraft Boat Holdings, Inc.",MCFT,3730,Ship & Boat Building & Repairing,other,4,2023-10-01,2024-09-29
+1640147,Snowflake Inc.,SNOW,7372,Services-Prepackaged Software,datacenter,17,2020-10-31,2024-10-31
+1641991,"SPX FLOW, Inc.",,3540,Metalworkg Machinery & Equipment,other,16,2018-03-31,2021-12-31
+1642896,Samsara Inc.,IOT,7373,Services-Computer Integrated Systems Design,other,11,2022-04-30,2024-11-02
+1643269,"Sumo Logic, Inc.",,7372,Services-Prepackaged Software,datacenter,10,2020-10-31,2023-01-31
+1643615,"Onterris, Inc.",ONT,8742,Services-Management Consulting Services,other,19,2019-12-31,2024-09-30
+1644440,GCP Applied Technologies Inc.,,2800,Chemicals & Allied Products,other,9,2018-03-31,2020-03-31
+1644675,Mimecast Ltd,,7372,Services-Prepackaged Software,datacenter,15,2018-06-30,2021-12-31
+1644903,"cbdMD, Inc.",YCBD,2844,"Perfumes, Cosmetics & Other Toilet Preparations",other,14,2019-09-30,2024-09-30
+1645460,"Cue Biopharma, Inc.",CUE,2834,Pharmaceutical Preparations,other,19,2018-06-30,2022-12-31
+1645494,ARRIS International plc,,3663,Radio & Tv Broadcasting & Communications Equipment,other,4,2018-03-31,2018-12-31
+1645590,Hewlett Packard Enterprise Co,HPE,3570,Computer & office Equipment,other,21,2019-01-31,2024-10-31
+1645842,Zymergen Inc.,,8731,Services-Commercial Physical & Biological Research,other,6,2021-03-31,2022-06-30
+1647513,Noble Midstream Partners LP,,4610,Pipe Lines (No Natural Gas),other,9,2018-12-31,2020-12-31
+1648893,Nuvectra Corp,,3841,Surgical & Medical Instruments & Apparatus,other,5,2018-03-31,2019-03-31
+1650164,"Toast, Inc.",TOST,7374,Services-Computer Processing & Data Preparation,datacenter,13,2021-09-30,2024-09-30
+1650372,Atlassian Corp,TEAM,7372,Services-Prepackaged Software,datacenter,9,2022-09-30,2024-09-30
+1650729,"SiteOne Landscape Supply, Inc.",SITE,5040,Wholesale-Professional & Commercial Equipment & Supplies,other,25,2018-04-01,2024-09-29
+1650962,"Welbilt, Inc.",,3580,Refrigeration & Service Industry Machinery,other,4,2017-12-31,2018-09-30
+1651235,"Acacia Communications, Inc.",,3674,Semiconductors & Related Devices,equipment,8,2019-03-31,2020-12-31
+1651944,"DermTech, Inc.",,8071,Services-Medical Laboratories,other,14,2020-12-31,2024-03-31
+1652044,Alphabet Inc.,GOOGL,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,20,2019-12-31,2024-09-30
+1652133,Oasis Midstream Partners LP,,1381,Drilling Oil & Gas Wells,other,10,2019-06-30,2021-09-30
+1652362,"Infrastructure & Energy Alternatives, Inc.",,6770,Blank Checks,other,11,2019-12-31,2022-06-30
+1653482,Gitlab Inc.,GTLB,7372,Services-Prepackaged Software,datacenter,14,2021-01-31,2024-10-31
+1655020,"Extraction Oil & Gas, Inc.",,1311,Crude Petroleum & Natural Gas,other,3,2019-09-30,2020-03-31
+1655759,"ARVINAS, INC.",ARVN,2834,Pharmaceutical Preparations,other,25,2018-09-30,2024-09-30
+1659166,Fortive Corp,FTV,3823,"Industrial Instruments For Measurement, Display, and Control",equipment,26,2018-06-29,2024-09-27
+1660134,"Okta, Inc.",OKTA,7372,Services-Prepackaged Software,datacenter,27,2018-04-30,2024-10-31
+1660280,"Tenable Holdings, Inc.",TENB,7372,Services-Prepackaged Software,datacenter,25,2018-06-30,2024-09-30
+1662991,Sezzle Inc.,SEZL,7389,"Services-Business Services, NEC",other,10,2021-12-31,2024-09-30
+1664998,"KnowBe4, Inc.",,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,8,2020-12-31,2022-09-30
+1665300,"Phunware, Inc.",PHUN,7374,Services-Computer Processing & Data Preparation,datacenter,21,2019-09-30,2024-09-30
+1666071,"Cardlytics, Inc.",CDLX,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,13,2021-09-30,2024-09-30
+1666134,"BLACKLINE, INC.",BL,7372,Services-Prepackaged Software,datacenter,27,2018-03-31,2024-09-30
+1667011,"Arteris, Inc.",AIP,3674,Semiconductors & Related Devices,equipment,14,2020-12-31,2024-09-30
+1668105,Talend S.A.,,7372,Services-Prepackaged Software,datacenter,11,2018-12-31,2021-06-30
+1668397,"Medpace Holdings, Inc.",MEDP,8731,Services-Commercial Physical & Biological Research,other,27,2018-03-31,2024-09-30
+1669779,"Camping World Holdings, Inc.",CWH,5500,Retail-Auto Dealers & Gasoline Stations,other,27,2018-03-31,2024-09-30
+1674168,Hilton Grand Vacations Inc.,HGV,7000,"Hotels, Rooming Houses, Camps & Other Lodging Places",other,3,2018-03-31,2018-09-30
+1675820,TiVo Corp,,6794,Patent Owners & Lessors,other,9,2018-03-31,2020-03-31
+1676238,"Braze, Inc.",BRZE,7372,Services-Prepackaged Software,datacenter,16,2021-01-31,2024-10-31
+1676725,"IDEAYA Biosciences, Inc.",IDYA,2834,Pharmaceutical Preparations,other,12,2020-12-31,2023-09-30
+1677703,CONDUENT Inc,CNDT,7389,"Services-Business Services, NEC",other,27,2018-03-31,2024-09-30
+1679268,"MAMMOTH ENERGY SERVICES, INC.",TUSK,1389,"Oil & Gas Field Services, NEC",other,16,2018-03-31,2022-09-30
+1680247,ProPetro Holding Corp.,PUMP,1389,"Oil & Gas Field Services, NEC",other,8,2018-03-31,2023-12-31
+1681459,TechnipFMC plc,FTI,3533,Oil & Gas Field Machinery & Equipment,other,5,2018-03-31,2023-12-31
+1681622,Varex Imaging Corp,VREX,3679,"Electronic Components, NEC",equipment,7,2018-12-28,2020-07-03
+1682265,Onar Holding Corp,ONAR,7310,Services-Advertising,other,9,2018-12-31,2024-09-30
+1682745,VERRA MOBILITY Corp,VRRM,4700,Transportation Services,other,4,2023-12-31,2024-09-30
+1682852,"Moderna, Inc.",MRNA,2836,"Biological Products, (No Diagnostic Substances)",other,8,2019-03-31,2020-12-31
+1687221,"REV Group, Inc.",,3711,Motor Vehicles & Passenger Car Bodies,other,10,2019-01-31,2024-10-31
+1687932,"J.Jill, Inc.",JILL,2330,"Women's, Misses':  and Juniors Outerwear",other,23,2018-05-05,2024-11-02
+1688476,NEXTIER OILFIELD SOLUTIONS INC.,,1389,"Oil & Gas Field Services, NEC",other,6,2019-12-31,2022-12-31
+1688568,DXC Technology Co,DXC,7374,Services-Computer Processing & Data Preparation,datacenter,26,2018-06-30,2024-09-30
+1689382,Trilogy International Partners Inc.,,4812,Radiotelephone Communications,other,3,2019-12-31,2021-12-31
+1689657,"Bruker Cellular Analysis, Inc.",,3826,Laboratory Analytical Instruments,other,12,2020-09-30,2023-06-30
+1689923,"Alteryx, Inc.",,7372,Services-Prepackaged Software,datacenter,21,2018-12-31,2023-12-31
+1690666,Xperi Corp,,3674,Semiconductors & Related Devices,equipment,10,2017-12-31,2020-03-31
+1690680,"NEWMARK GROUP, INC.",NMRK,6531,Real Estate Agents & Managers (For Others),other,12,2021-12-31,2024-09-30
+1691445,FinVolution Group,FINV,6163,Loan Brokers,other,4,2020-12-31,2023-12-31
+1692063,"Schneider National, Inc.",SNDR,4213,Trucking (No Local),other,26,2018-03-31,2024-09-30
+1692705,High Templar Tech Ltd,HTT,6199,Finance Services,other,5,2018-12-31,2022-12-31
+1692787,Kinetik Holdings Inc.,KNTK,4922,Natural Gas Transmission,other,11,2022-03-31,2024-09-30
+1692819,Vistra Corp.,VST,4911,Electric Services,utility,4,2018-09-30,2024-09-30
+1693317,"Cheniere Corpus Christi Holdings, LLC",,4924,Natural Gas Distribution,other,5,2018-12-31,2019-12-31
+1696558,"Jerash Holdings (US), Inc.",JRSH,2300,Apparel & Other Finishd Prods of  Fabrics & Similar Matl,other,3,2019-06-30,2019-12-31
+1697500,"Solaris Energy Infrastructure, Inc.",SEI,3533,Oil & Gas Field Machinery & Equipment,other,5,2018-12-31,2019-12-31
+1697851,"Rekor Systems, Inc.",REKR,3669,"Communications Equipment, NEC",other,13,2020-12-31,2024-09-30
+1699838,"Confluent, Inc.",,7372,Services-Prepackaged Software,datacenter,14,2021-06-30,2024-09-30
+1701040,CISION LTD.,,7372,Services-Prepackaged Software,datacenter,4,2018-12-31,2019-09-30
+1701051,"WideOpenWest, Inc.",,4841,Cable & Other Pay Television Services,other,17,2018-03-31,2022-09-30
+1701605,Baker Hughes Co,BKR,3533,Oil & Gas Field Machinery & Equipment,other,28,2017-12-31,2024-09-30
+1701732,Altair Engineering Inc.,,7372,Services-Prepackaged Software,datacenter,20,2019-12-31,2024-09-30
+1704715,"Alpha Metallurgical Resources, Inc.",AMR,1221,Bituminous Coal & Lignite Surface Mining,other,25,2018-09-30,2024-09-30
+1704720,"Cannae Holdings, Inc.",CNNE,5810,Retail-Eating & Drinking Places,other,4,2018-03-31,2018-12-31
+1707753,Elastic N.V.,ESTC,7372,Services-Prepackaged Software,datacenter,25,2018-10-31,2024-10-31
+1707925,LINDE PLC,LIN,2810,Industrial Inorganic Chemicals,other,19,2019-06-30,2024-09-30
+1708035,Ecovyst Inc.,ECVT,2800,Chemicals & Allied Products,other,4,2019-09-30,2020-06-30
+1708301,BP Midstream Partners LP,,4610,Pipe Lines (No Natural Gas),other,13,2018-12-31,2021-12-31
+1708341,"All In FutureTech Alliance, Inc.",AIFA,7900,Services-Amusement & Recreation Services,other,7,2018-12-31,2023-12-31
+1710155,"National Vision Holdings, Inc.",EYE,3851,Ophthalmic Goods,other,8,2018-03-31,2023-12-30
+1710583,"Switch, Inc.",,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,12,2019-12-31,2022-09-30
+1712184,Liberty Latin America Ltd.,LILA,4841,Cable & Other Pay Television Services,other,11,2018-12-31,2021-12-31
+1712189,Target Hospitality Corp.,TH,7000,"Hotels, Rooming Houses, Camps & Other Lodging Places",other,20,2019-12-31,2024-09-30
+1712923,"GreenSky, Inc.",,7389,"Services-Business Services, NEC",other,13,2018-06-30,2021-12-31
+1713445,"Reddit, Inc.",RDDT,7374,Services-Computer Processing & Data Preparation,datacenter,3,2024-03-31,2024-09-30
+1713683,"Zscaler, Inc.",ZS,7371,Services-Computer Programming Services,datacenter,27,2018-04-30,2024-10-31
+1713952,"Vivint Smart Home, Inc.",,7381,"Services-Detective, Guard & Armored Car Services",other,12,2020-03-31,2022-12-31
+1715433,Leader Capital Holdings Corp.,LCHD,7371,Services-Computer Programming Services,datacenter,11,2020-11-30,2023-05-31
+1716583,Hyzon Motors Inc.,,3620,Electrical Industrial Apparatus,other,12,2020-12-31,2024-03-31
+1718108,"Surface Oncology, Inc.",,2836,"Biological Products, (No Diagnostic Substances)",other,3,2020-12-31,2022-12-31
+1718227,"Construction Partners, Inc.",ROAD,1600,Heavy Construction Other Than Bldg Const - Contractors,other,22,2018-12-31,2024-09-30
+1720116,"Red Violet, Inc.",RDVT,7372,Services-Prepackaged Software,datacenter,20,2018-03-31,2023-12-31
+1720635,nVent Electric plc,NVT,3550,Special Industry Machinery (No Metalworking Machinery),other,3,2018-03-31,2018-09-30
+1720671,"HashiCorp, Inc.",,7371,Services-Computer Programming Services,datacenter,8,2023-01-31,2024-10-31
+1720821,PAE Inc,,8700,"Services-Engineering, Accounting, Research, Management",other,8,2019-12-31,2021-09-26
+1721386,Landsea Homes Corp,,1531,Operative Builders,other,15,2020-12-31,2024-09-30
+1721947,Jamf Holding Corp.,,7372,Services-Prepackaged Software,datacenter,16,2020-12-31,2024-09-30
+1722608,"iQIYI, Inc.",IQ,7841,Services-Video Tape Rental,other,3,2022-12-31,2024-09-30
+1722684,"WYNDHAM HOTELS & RESORTS, INC.",WH,7011,Hotels & Motels,other,10,2018-03-31,2024-09-30
+1723648,"LiveVox Holdings, Inc.",,7374,Services-Computer Processing & Data Preparation,datacenter,10,2021-06-30,2023-09-30
+1723866,"Select Interior Concepts, Inc.",,1520,General Bldg Contractors - Residential Bldgs,other,6,2019-12-31,2021-03-31
+1724570,DATTO HOLDING CORP.,,7372,Services-Prepackaged Software,datacenter,5,2019-12-31,2022-03-31
+1724670,Perspecta Inc.,,7374,Services-Computer Processing & Data Preparation,datacenter,5,2018-09-30,2021-01-01
+1724755,GreenTree Hospitality Group Ltd.,GHG,7011,Hotels & Motels,other,5,2019-12-31,2023-12-31
+1725033,X Financial,XYF,6199,Finance Services,other,6,2018-12-31,2023-12-31
+1725579,"Pluralsight, Inc.",,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,8,2019-03-31,2020-12-31
+1729750,"Kubient, Inc.",,7373,Services-Computer Integrated Systems Design,other,12,2019-09-30,2023-03-31
+1730168,Broadcom Inc.,AVGO,3674,Semiconductors & Related Devices,equipment,15,2021-05-02,2024-11-03
+1730346,"Charah Solutions, Inc.",,4955,Hazardous Waste Management,other,14,2019-12-31,2023-03-31
+1731388,EuroDry Ltd.,EDRY,4400,Water Transportation,other,4,2022-06-30,2023-12-31
+1733998,Northwest Natural Holding Co,NWN,4924,Natural Gas Distribution,other,17,2020-09-30,2024-09-30
+1734713,"BrightView Holdings, Inc.",BV,0700,Agricultural Services,other,24,2018-12-31,2024-09-30
+1734722,"UiPath, Inc.",PATH,7372,Services-Prepackaged Software,datacenter,15,2021-04-30,2024-10-31
+1736865,"Golden Developing Solutions, Inc.",,5900,Retail-Miscellaneous Retail,other,3,2020-12-31,2022-12-31
+1736946,"Arlo Technologies, Inc.",ARLO,7381,"Services-Detective, Guard & Armored Car Services",other,22,2018-09-30,2023-12-31
+1737339,Aurora Mobile Ltd,JG,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,7,2019-12-31,2023-12-31
+1738177,Cambium Networks Corp,CMBMF,3663,Radio & Tv Broadcasting & Communications Equipment,other,15,2018-12-31,2022-12-31
+1738699,Wisekey International Holding S.A.,WKEY,7374,Services-Computer Processing & Data Preparation,datacenter,4,2020-12-31,2023-12-31
+1739942,SolarWinds Corp,,7372,Services-Prepackaged Software,datacenter,23,2019-03-31,2024-09-30
+1743725,"GRID DYNAMICS HOLDINGS, INC.",GDYN,7372,Services-Prepackaged Software,datacenter,4,2023-12-31,2024-09-30
+1744489,Walt Disney Co,DIS,7990,Services-Miscellaneous Amusement & Recreation,other,24,2018-12-29,2024-09-28
+1744494,"ADVENT TECHNOLOGIES HOLDINGS, INC.",ADNH,3690,"Miscellaneous Electrical Machinery, Equipment & Supplies",other,6,2021-06-30,2022-12-31
+1747009,Midstream Co LLC,,4922,Natural Gas Transmission,other,20,2018-09-30,2024-06-30
+1747748,Qualtrics International Inc.,,7372,Services-Prepackaged Software,datacenter,11,2019-12-31,2023-03-31
+1749723,New Fortress Energy Inc.,NFE,4924,Natural Gas Distribution,other,23,2019-03-31,2024-09-30
+1751143,"ATLAS TECHNICAL CONSULTANTS, INC.",,8742,Services-Management Consulting Services,other,9,2019-12-31,2022-09-30
+1751788,DOW INC.,DOW,2821,"Plastic Materials, Synth Resins & Nonvulcan Elastomers",other,20,2019-12-31,2024-09-30
+1753539,BlackSky Technology Inc.,BKSY,3663,Radio & Tv Broadcasting & Communications Equipment,other,11,2021-09-30,2024-09-30
+1753886,Stonemor Inc.,,7200,Services-Personal Services,other,12,2018-12-31,2022-06-30
+1754820,"Desktop Metal, Inc.",,3559,"Special Industry Machinery, NEC",other,12,2021-12-31,2024-09-30
+1755672,"Corteva, Inc.",CTVA,0100,Agricultural Production-Crops,other,26,2018-06-30,2024-09-30
+1755953,American Bitcoin Corp.,ABTC,6199,Finance Services,other,4,2020-12-31,2023-12-31
+1756262,"TransMedics Group, Inc.",TMDX,3845,Electromedical & Electrotherapeutic Apparatus,other,16,2018-12-29,2022-09-30
+1756497,Change Healthcare Inc.,,7374,Services-Computer Processing & Data Preparation,datacenter,10,2020-03-31,2022-06-30
+1757073,Envista Holdings Corp,NVST,3843,Dental Equipment & Supplies,other,21,2019-09-27,2024-09-27
+1757399,Tufin Software Technologies Ltd.,,7373,Services-Computer Integrated Systems Design,other,7,2017-12-31,2021-12-31
+1757898,STERIS plc,STE,3842,"Orthopedic, Prosthetic & Surgical Appliances & Supplies",other,23,2019-03-31,2024-09-30
+1757932,"Romeo Power, Inc.",,3714,Motor Vehicle Parts & Accessories,other,6,2020-12-31,2022-06-30
+1758766,"STEM, INC.",STEM,7373,Services-Computer Integrated Systems Design,other,16,2020-12-31,2024-09-30
+1760965,"Kontoor Brands, Inc.",KTB,2320,"Men's & Boys' Furnishgs, Work Clothg, & Allied Garments",other,9,2022-04-02,2024-09-28
+1762303,"AVITA Medical, Inc.",RCEL,3841,Surgical & Medical Instruments & Apparatus,other,19,2019-06-30,2024-09-30
+1764046,CLARIVATE PLC,CLVT,7374,Services-Computer Processing & Data Preparation,datacenter,12,2020-03-31,2022-12-31
+1764925,"Slack Technologies, Inc.",,7372,Services-Prepackaged Software,datacenter,8,2019-07-31,2021-04-30
+1766363,"Endeavor Group Holdings, Inc.",,7900,Services-Amusement & Recreation Services,other,13,2021-03-31,2024-09-30
+1767042,"Kodiak Gas Services, Inc.",KGS,4922,Natural Gas Transmission,other,6,2023-06-30,2024-09-30
+1768012,"Golden Nugget Online Gaming, Inc.",,7372,Services-Prepackaged Software,datacenter,5,2020-12-31,2021-12-31
+1768267,Cerence Inc.,CRNC,7372,Services-Prepackaged Software,datacenter,20,2019-12-31,2024-09-30
+1770141,"UpHealth, Inc.",,8000,Services-Health Services,other,9,2021-06-30,2023-06-30
+1770561,Coronado Global Resources Inc.,CODQL,1220,Silver Ores,other,6,2018-12-31,2023-12-31
+1770787,"10x Genomics, Inc.",TXG,3826,Laboratory Analytical Instruments,other,21,2019-09-30,2024-09-30
+1772695,Sunnova Energy International Inc.,,4931,Electric & Other Services Combined,utility,22,2019-06-30,2024-09-30
+1773383,"Dynatrace, Inc.",DT,7372,Services-Prepackaged Software,datacenter,22,2019-06-30,2024-09-30
+1774155,BTRS Holdings Inc.,,7371,Services-Computer Programming Services,datacenter,7,2021-03-31,2022-09-30
+1776909,CuriosityStream Inc.,CURI,7812,Services-Motion Picture & Video Tape Production,other,9,2019-12-31,2024-09-30
+1777393,"ChargePoint Holdings, Inc.",CHPT,3690,"Miscellaneous Electrical Machinery, Equipment & Supplies",other,3,2021-04-30,2024-01-31
+1777921,"AvePoint, Inc.",AVPT,7372,Services-Prepackaged Software,datacenter,6,2023-03-31,2024-09-30
+1777946,"IronNet, Inc.",,7372,Services-Prepackaged Software,datacenter,9,2021-10-31,2023-10-31
+1781335,Otis Worldwide Corp,OTIS,3600,Electronic & Other Electrical Equipment (No Computer Equip),equipment,20,2019-12-31,2024-09-30
+1782309,Skillful Craftsman Education Technology Ltd,EDTK,8200,Services-Educational Services,other,10,2019-03-31,2024-09-30
+1783180,CARRIER GLOBAL Corp,CARR,3585,Air-Cond & Warm Air Heatg Equip & Comm & Indl Refrig Equip,other,5,2019-12-31,2020-12-31
+1783317,McAfee Corp.,,7372,Services-Prepackaged Software,datacenter,6,2020-09-26,2021-12-25
+1784535,"Porch Group, Inc.",PRCH,6321,Accident & Health Insurance,other,8,2019-12-31,2021-09-30
+1786352,"BILL Holdings, Inc.",BILL,7372,Services-Prepackaged Software,datacenter,20,2019-12-31,2024-09-30
+1786842,Vontier Corp,VNT,3824,Totalizing Fluid Meters & Counting Devices,other,17,2020-09-25,2024-09-27
+1787640,"Convey Health Solutions Holdings, Inc.",,8090,"Services-Misc Health & Allied Services, NEC",other,5,2021-06-30,2022-06-30
+1788717,F45 Training Holdings Inc.,,5040,Wholesale-Professional & Commercial Equipment & Supplies,other,7,2021-12-31,2023-06-30
+1788999,Xperi Inc.,XPER,7372,Services-Prepackaged Software,datacenter,10,2021-12-31,2024-09-30
+1792267,Burning Rock Biotech Ltd,BNR,8071,Services-Medical Laboratories,other,5,2020-12-31,2023-12-31
+1792580,Ovintiv Inc.,OVV,1311,Crude Petroleum & Natural Gas,other,20,2019-12-31,2024-09-30
+1793294,"PPD, Inc.",,8731,Services-Commercial Physical & Biological Research,other,8,2019-12-31,2021-09-30
+1794515,ZoomInfo Technologies Inc.,GTM,7372,Services-Prepackaged Software,datacenter,19,2019-12-31,2024-09-30
+1794905,"Cyxtera Technologies, Inc.",,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,8,2020-12-31,2023-03-31
+1795250,Sphere Entertainment Co.,SPHR,7900,Services-Amusement & Recreation Services,other,11,2020-12-31,2024-09-30
+1795589,Kingsoft Cloud Holdings Ltd,KC,7372,Services-Prepackaged Software,datacenter,6,2020-12-31,2023-12-31
+1796209,APi Group Corp,APG,7340,Services-To Dwellings & Other Buildings,other,16,2020-12-31,2024-09-30
+1799208,"Dun & Bradstreet Holdings, Inc.",,7320,"Services-Consumer Credit Reporting, Collection Agencies",other,18,2020-06-30,2024-09-30
+1799332,GAN Ltd,,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,10,2021-12-31,2024-09-30
+1800667,JFrog Ltd,FROG,7372,Services-Prepackaged Software,datacenter,17,2020-09-30,2024-09-30
+1800682,"Cano Health, Inc.",,8011,Services-Offices & Clinics of  Doctors of  Medicine,other,9,2021-12-31,2023-12-31
+1802156,"Xponential Fitness, Inc.",XPOF,7990,Services-Miscellaneous Amusement & Recreation,other,14,2021-06-30,2024-09-30
+1803696,Adeia Inc.,ADEA,4841,Cable & Other Pay Television Services,other,19,2019-12-31,2024-09-30
+1803914,"Playboy, Inc.",PLBY,5900,Retail-Miscellaneous Retail,other,15,2021-03-31,2024-09-30
+1804176,"Butterfly Network, Inc.",BFLY,3844,X-Ray Apparatus & Tubes & Related Irradiation Apparatus,other,15,2021-03-31,2024-09-30
+1805385,"Evolv Technologies Holdings, Inc.",EVLV,3577,"Computer Peripheral Equipment, NEC",other,13,2021-09-30,2024-09-30
+1805651,"MARKETWISE, INC.",MKTW,7372,Services-Prepackaged Software,datacenter,13,2021-09-30,2024-09-30
+1806837,"Vertex, Inc.",VERX,7372,Services-Prepackaged Software,datacenter,4,2020-12-31,2023-12-31
+1807192,Chindata Group Holdings Ltd,,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,3,2020-12-31,2022-12-31
+1810019,"Rackspace Technology, Inc.",RXT,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,18,2020-06-30,2024-09-30
+1810806,Unity Software Inc.,U,7372,Services-Prepackaged Software,datacenter,17,2020-09-30,2024-09-30
+1813756,WeWork Inc.,,6512,Opeators of  Nonresidential Buildings,other,7,2021-12-31,2023-06-30
+1814329,"Astra Space, Inc.",,4700,Transportation Services,other,8,2020-12-31,2023-12-31
+1814974,"BBX Capital, Inc.",,5400,Retail-Food Stores,other,3,2023-03-31,2023-09-30
+1815442,"Kymera Therapeutics, Inc.",KYMR,2836,"Biological Products, (No Diagnostic Substances)",other,3,2024-03-31,2024-09-30
+1816017,"Spire Global, Inc.",SPIR,4899,"Communications Services, NEC",other,13,2021-09-30,2024-09-30
+1816233,"Sharecare, Inc.",,8000,Services-Health Services,other,12,2021-09-30,2024-06-30
+1818201,CCC Intelligent Solutions Holdings Inc.,CCC,7372,Services-Prepackaged Software,datacenter,13,2021-09-30,2024-09-30
+1819394,"Matterport, Inc./DE",,7372,Services-Prepackaged Software,datacenter,14,2020-12-31,2024-09-30
+1819516,Wheels Up Experience Inc.,UP,4522,"Air Transportation, Nonscheduled",other,7,2023-03-31,2024-09-30
+1819584,Volta Inc.,,3790,Miscellaneous Transportation Equipment,other,7,2020-12-31,2022-12-31
+1819810,Redwire Corp,RDW,3760,Guided Missiles & Space Vehicles & Parts,other,12,2021-09-30,2024-09-30
+1819928,"DoubleVerify Holdings, Inc.",DV,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,4,2023-12-31,2024-09-30
+1819974,"SkyWater Technology, LLC",SKYT,3674,Semiconductors & Related Devices,equipment,7,2021-04-04,2022-10-02
+1819994,Rocket Lab Corp,RKLB,3760,Guided Missiles & Space Vehicles & Parts,other,14,2020-12-31,2024-09-30
+1820302,"Bakkt, Inc.",BKKT,6199,Finance Services,other,16,2020-12-31,2024-09-30
+1820630,Proterra Inc,,3711,Motor Vehicles & Passenger Car Bodies,other,10,2021-06-30,2023-09-30
+1820721,"Array Technologies, Inc.",ARRY,3674,Semiconductors & Related Devices,equipment,17,2020-09-30,2024-09-30
+1820872,"Global Business Travel Group, Inc.",GBTG,4700,Transportation Services,other,4,2022-06-30,2023-09-30
+1821159,EVgo Inc.,EVGO,7500,"Services-Automotive Repair, Services & Parking",other,12,2021-12-31,2024-09-30
+1822145,Presto Automation Inc.,,7372,Services-Prepackaged Software,datacenter,6,2022-12-31,2024-03-31
+1822462,Foghorn Therapeutics Inc.,FHTX,2834,Pharmaceutical Preparations,other,5,2020-09-30,2021-09-30
+1823466,"FiscalNote Holdings, Inc.",NOTE,7389,"Services-Business Services, NEC",other,9,2022-09-30,2024-09-30
+1823766,Archaea Energy Inc.,,4932,Gas & Other Services Combined,other,5,2021-09-30,2022-09-30
+1823882,Airspan Networks Holdings Inc.,,3663,Radio & Tv Broadcasting & Communications Equipment,other,10,2020-12-31,2023-12-31
+1824814,Cognyte Software Ltd.,CGNT,7372,Services-Prepackaged Software,datacenter,5,2020-01-31,2024-01-31
+1824920,"IonQ, Inc.",IONQ,7373,Services-Computer Integrated Systems Design,other,5,2021-09-30,2024-09-30
+1826000,"Latch, Inc.",LTCH,5072,Wholesale-Hardware,other,11,2021-06-30,2023-12-31
+1826681,Palladyne AI Corp.,PDYN,7372,Services-Prepackaged Software,datacenter,12,2021-09-30,2024-09-30
+1827090,"Certara, Inc.",CERT,7372,Services-Prepackaged Software,datacenter,12,2019-12-31,2024-09-30
+1828522,"eFFECTOR Therapeutics, Inc.",,2834,Pharmaceutical Preparations,other,11,2021-09-30,2024-03-31
+1828536,"Energy Vault Holdings, Inc.",NRGV,3690,"Miscellaneous Electrical Machinery, Equipment & Supplies",other,11,2022-03-31,2024-09-30
+1828723,"Altus Power, Inc.",,4911,Electric Services,utility,4,2023-12-31,2024-09-30
+1828962,"Cricut, Inc.",CRCT,3559,"Special Industry Machinery, NEC",other,15,2021-03-31,2024-09-30
+1828972,"BuzzFeed, Inc.",BZFD,4899,"Communications Services, NEC",other,9,2021-12-31,2023-12-31
+1829118,Tuya Inc.,TUYA,7372,Services-Prepackaged Software,datacenter,4,2020-12-31,2023-12-31
+1829280,Forian Inc.,FORA,7374,Services-Computer Processing & Data Preparation,datacenter,13,2020-12-31,2024-09-30
+1830214,"Ginkgo Bioworks Holdings, Inc.",DNA,2836,"Biological Products, (No Diagnostic Substances)",other,15,2019-12-31,2024-09-30
+1831840,"SEMrush Holdings, Inc.",SEMR,7372,Services-Prepackaged Software,datacenter,7,2023-03-31,2024-09-30
+1831915,"Cytek Biosciences, Inc.",CTKB,3826,Laboratory Analytical Instruments,other,12,2021-06-30,2024-09-30
+1833756,"Leonardo DRS, Inc.",DRS,3812,"Search, Detection, Navigation, Guidance, Aeronautical Sys",other,16,2020-12-31,2024-09-30
+1833769,"Hyperfine, Inc.",HYPR,3845,Electromedical & Electrotherapeutic Apparatus,other,13,2020-12-31,2024-09-30
+1834488,"N-able, Inc.",NABL,7372,Services-Prepackaged Software,datacenter,14,2021-06-30,2024-09-30
+1834489,Genius Sports Ltd,GENI,7990,Services-Miscellaneous Amusement & Recreation,other,5,2020-12-31,2023-12-31
+1835512,Terran Orbital Corp,,3760,Guided Missiles & Space Vehicles & Parts,other,9,2022-03-31,2024-03-31
+1835654,Innoviz Technologies Ltd.,INVZ,3714,Motor Vehicle Parts & Accessories,other,7,2020-12-31,2024-06-30
+1835830,"Klaviyo, Inc.",KVYO,7372,Services-Prepackaged Software,datacenter,5,2023-09-30,2024-09-30
+1836056,"Ambrx Biopharma Cayman, Inc.",,2836,"Biological Products, (No Diagnostic Substances)",other,6,2020-12-31,2023-06-30
+1836833,Planet Labs PBC,PL,3663,Radio & Tv Broadcasting & Communications Equipment,other,12,2022-01-31,2024-10-31
+1836875,Nuvve Holding Corp.,NVVE,3690,"Miscellaneous Electrical Machinery, Equipment & Supplies",other,14,2021-06-30,2024-09-30
+1836981,"BigBear.ai Holdings, Inc.",BBAI,7372,Services-Prepackaged Software,datacenter,9,2021-12-31,2023-12-31
+1837240,Symbotic Inc.,SYM,3569,"General Industrial Machinery & Equipment, NEC",other,10,2022-06-25,2024-09-28
+1838359,"Rigetti Computing, Inc.",RGTI,7371,Services-Computer Programming Services,datacenter,11,2022-03-31,2024-09-30
+1839341,"Core Scientific, Inc./tx",CORZ,6199,Finance Services,other,6,2021-03-31,2022-09-30
+1839530,"XBP Global Holdings, Inc.",XBP,7389,"Services-Business Services, NEC",other,4,2023-12-31,2024-09-30
+1839839,"Janus International Group, Inc.",JBI,3442,"Metal Doors, Sash, Frames, Moldings & Trim",other,7,2022-01-01,2023-07-01
+1840292,"Heliogen, Inc.",,4911,Electric Services,utility,8,2021-12-31,2024-09-30
+1840856,"SOUNDHOUND AI, INC.",SOUN,7372,Services-Prepackaged Software,datacenter,9,2022-03-31,2024-09-30
+1841156,"Paymentus Holdings, Inc.",PAY,7389,"Services-Business Services, NEC",other,13,2021-09-30,2024-09-30
+1841800,"Nogin, Inc.",,7389,"Services-Business Services, NEC",other,6,2020-12-31,2023-09-30
+1841804,"INSTRUCTURE HOLDINGS, INC.",,7372,Services-Prepackaged Software,datacenter,15,2020-12-31,2024-09-30
+1841925,"indie Semiconductor, Inc.",INDI,3674,Semiconductors & Related Devices,equipment,14,2021-06-30,2024-09-30
+1841968,"Ridgepost Capital, Inc.",RPC,6282,Investment Advice,other,4,2023-12-31,2024-09-30
+1842022,"DT Midstream, Inc.",DTM,4922,Natural Gas Transmission,other,14,2021-06-30,2024-09-30
+1842279,OPAL Fuels Inc.,OPAL,4932,Gas & Other Services Combined,other,9,2022-09-30,2024-09-30
+1842731,SIMILARWEB LTD.,SMWB,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,3,2021-12-31,2023-12-31
+1843588,REE Automotive Ltd.,REEAF,3711,Motor Vehicles & Passenger Car Bodies,other,5,2021-12-31,2023-12-31
+1843724,"LanzaTech Global, Inc.",LNZA,2860,Industrial Organic Chemicals,other,8,2022-12-31,2024-09-30
+1844392,"Marpai, Inc.",MRAI,8090,"Services-Misc Health & Allied Services, NEC",other,11,2021-09-30,2024-03-31
+1844452,"Intuitive Machines, Inc.",LUNR,3812,"Search, Detection, Navigation, Guidance, Aeronautical Sys",other,6,2023-06-30,2024-09-30
+1845022,"Couchbase, Inc.",,7372,Services-Prepackaged Software,datacenter,14,2021-07-31,2024-10-31
+1847584,WalkMe Ltd.,,7372,Services-Prepackaged Software,datacenter,4,2020-12-31,2023-12-31
+1847590,Bowman Consulting Group Ltd.,BWMN,8742,Services-Management Consulting Services,other,15,2021-03-31,2024-09-30
+1849820,"Nauticus Robotics, Inc.",KITT,3569,"General Industrial Machinery & Equipment, NEC",other,7,2022-06-30,2024-09-30
+1850119,"Century Therapeutics, Inc.",IPSC,2836,"Biological Products, (No Diagnostic Substances)",other,7,2022-01-07,2023-12-31
+1852131,Nextpower Inc.,NXT,3674,Semiconductors & Related Devices,equipment,8,2022-12-31,2024-09-27
+1852244,"GXO Logistics, Inc.",GXO,4700,Transportation Services,other,14,2021-06-30,2024-09-30
+1853145,EverCommerce Inc.,EVCM,7372,Services-Prepackaged Software,datacenter,14,2021-06-30,2024-09-30
+1854139,Zevia PBC,ZVIA,2086,Bottled & Canned Soft Drinks & Carbonated Waters,other,15,2020-12-31,2024-09-30
+1854445,"Brightline Interactive, Inc./NV",BTLN,7371,Services-Computer Programming Services,datacenter,10,2022-06-30,2024-09-30
+1854587,Cellebrite DI Ltd.,CLBT,7372,Services-Prepackaged Software,datacenter,3,2020-12-31,2022-12-31
+1855747,"Blend Labs, Inc.",BLND,7370,"Services-Computer Programming, Data Processing, Etc.",datacenter,14,2021-06-30,2024-09-30
+1857154,"Krispy Kreme, Inc.",DNUT,5400,Retail-Food Stores,other,3,2022-01-02,2023-12-31
+1858257,"AvidXchange Holdings, Inc.",,7372,Services-Prepackaged Software,datacenter,14,2020-12-31,2024-09-30
+1860543,"Cadre Holdings, Inc.",CDRE,3842,"Orthopedic, Prosthetic & Surgical Appliances & Supplies",other,13,2021-09-30,2024-09-30
+1861795,Definitive Healthcare Corp.,DH,7372,Services-Prepackaged Software,datacenter,14,2020-12-31,2024-09-30
+1861841,Arbe Robotics Ltd.,ARBE,7373,Services-Computer Integrated Systems Design,other,5,2021-12-31,2024-09-30
+1866550,"Thoughtworks Holding, Inc.",,7371,Services-Computer Programming Services,datacenter,3,2024-03-31,2024-09-30
+1866581,Dutch Bros Inc.,BROS,5810,Retail-Eating & Drinking Places,other,12,2021-12-31,2024-09-30
+1866692,"Amplitude, Inc.",AMPL,7372,Services-Prepackaged Software,datacenter,14,2020-12-31,2024-09-30
+1867072,"Kyndryl Holdings, Inc.",KD,7373,Services-Computer Integrated Systems Design,other,13,2021-09-30,2024-09-30
+1868275,Constellation Energy Corp,CEG,4911,Electric Services,utility,11,2022-03-31,2024-09-30
+1868778,Informatica Inc.,,7372,Services-Prepackaged Software,datacenter,14,2020-12-31,2024-09-30
+1868912,"Enfusion, Inc.",,7372,Services-Prepackaged Software,datacenter,10,2021-12-31,2024-09-30
+1868941,"Fluence Energy, Inc.",FLNC,3690,"Miscellaneous Electrical Machinery, Equipment & Supplies",other,12,2021-12-31,2024-09-30
+1879403,La Rosa Holdings Corp.,LRHC,6531,Real Estate Agents & Managers (For Others),other,3,2024-03-31,2024-09-30
+1881487,ProFrac Holding Corp.,ACDC,1389,"Oil & Gas Field Services, NEC",other,8,2022-12-31,2024-09-30
+1883814,"Southland Holdings, Inc.",SLND,1600,Heavy Construction Other Than Bldg Const - Contractors,other,10,2022-03-31,2024-09-30
+1887944,Shimmick Corp,SHIM,1600,Heavy Construction Other Than Bldg Const - Contractors,other,5,2023-09-29,2024-09-27
+1888447,"Excelerate Energy, Inc.",EE,4924,Natural Gas Distribution,other,11,2022-03-31,2024-09-30
+1895262,Noble Corp plc,NE,1381,Drilling Oil & Gas Wells,other,5,2022-09-30,2023-12-31
+1897982,"Aspen Technology, Inc.",,7371,Services-Computer Programming Services,datacenter,8,2022-12-31,2024-09-30
+1899287,"Amprius Technologies, Inc.",AMPX,3690,"Miscellaneous Electrical Machinery, Equipment & Supplies",other,9,2022-09-30,2024-09-30
+1901440,UL Solutions Inc.,ULS,8734,Services-Testing Laboratories,other,3,2024-03-31,2024-09-30
+1902733,"nCino, Inc.",NCNO,7372,Services-Prepackaged Software,datacenter,12,2022-01-31,2024-10-31
+1907982,D-Wave Quantum Inc.,QBTS,7374,Services-Computer Processing & Data Preparation,datacenter,11,2021-12-31,2024-09-30
+1929561,"RXO, Inc.",RXO,4700,Transportation Services,other,9,2022-09-30,2024-09-30
+1929589,MariaDB plc,,7372,Services-Prepackaged Software,datacenter,7,2022-12-31,2024-06-30
+1932393,GE HealthCare Technologies Inc.,GEHC,3844,X-Ray Apparatus & Tubes & Related Irradiation Apparatus,other,7,2023-03-31,2024-09-30
+1943289,"Silvaco Group, Inc.",SVCO,7372,Services-Prepackaged Software,datacenter,3,2024-03-31,2024-09-30
+1943896,"Rubrik, Inc.",RBRK,7372,Services-Prepackaged Software,datacenter,3,2024-04-30,2024-10-31
+1944013,Crane Co,CR,3490,Miscellaneous Fabricated Metal Products,other,7,2023-03-31,2024-09-30
+1948099,Mingteng International Corp Inc.,MTEN,3442,"Metal Doors, Sash, Frames, Moldings & Trim",other,3,2022-12-31,2024-06-30
+1951222,SEALSQ Corp,LAES,3674,Semiconductors & Related Devices,equipment,4,2021-12-31,2024-06-30
+1952073,Madison Square Garden Entertainment Corp.,MSGE,7990,Services-Miscellaneous Amusement & Recreation,other,5,2023-06-30,2024-09-30
+1955520,Knife River Corp,KNF,1400,Mining & Quarrying of  Nonmetallic Minerals (No Fuels),other,7,2023-03-31,2024-09-30
+1965040,Fortrea Holdings Inc.,FTRE,8071,Services-Medical Laboratories,other,6,2023-06-30,2024-09-30
+1967680,Veralto Corp,VLTO,3825,Instruments For Meas & Testing of  Electricity & Elec Signals,other,5,2023-09-29,2024-09-27
+1973239,ARM HOLDINGS PLC /UK,ARM,3674,Semiconductors & Related Devices,equipment,5,2023-09-30,2024-09-30
+1973266,"TKO Group Holdings, Inc.",TKO,7900,Services-Amusement & Recreation Services,other,5,2023-09-30,2024-09-30
+1974138,NCR Atleos Corp,NATL,3578,Calculating & Accounting Machines (No Electronic Computers),other,6,2023-06-30,2024-09-30
+1981599,"Centuri Holdings, Inc.",CTRI,4923,Natural Gas Transmisison & Distribution,other,3,2024-03-31,2024-09-29
+1981792,Howard Hughes Holdings Inc.,HHH,6798,Real Estate Investment Trusts,datacenter,5,2023-09-30,2024-09-30
+1993400,Fatpipe Inc/UT,FATN,7372,Services-Prepackaged Software,datacenter,3,2024-03-31,2024-09-30
+1996810,GE Vernova Inc.,GEV,3600,Electronic & Other Electrical Equipment (No Computer Equip),equipment,3,2024-03-31,2024-09-30
+2006191,Lionsgate Studios Holding Corp.,,7812,Services-Motion Picture & Video Tape Production,other,3,2024-03-31,2024-09-30
