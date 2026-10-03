@@ -532,3 +532,23 @@ retried; a 403 with a JSON body is a throttle and is retried with backoff. The c
 **Not a delay label.** Filings enumerate disclosure. A backlog increase is not a missed deadline, so rows
 carry item numbers and document links, never a delay flag. Press-release precedence is unresolved on every
 row and labelled as such.
+
+---
+
+## 2026-10-03: The chain resolves completely, and the graph has no equities
+
+**Landed.** `outcome:firm:abnormal-return` is in the QuantGraph with the same treatment as its siblings,
+committed there as `b9e25f6`: 17 nodes, 19 representations, 136 canonical pairs, zero comparisons, causal
+ceiling descriptive only, and a blocker naming the missing benchmark definition, horizon, field binding
+and point-in-time evidence. Our chain now reads **7 resolved nodes, 0 proposed, 6 resolved sources**, so
+the study proposes nothing that does not exist.
+**Finding: this graph has no equity space.** Its 3,232 assets are market symbols (FX and commodities) and
+its 1,900 entities are refineries, ports, products and markets. Searching the four candidate firms by
+ticker and by name returns nothing, and EMCOR appeared only as part of "Premcor". So an equity instrument
+node cannot be resolved today, and the expression edge's instrument leg has no home in either repo yet.
+**Consequence.** Either the graph grows an equity asset space, or the instrument lives as a proposal in
+our own log. This does not block the panel, the structure stage or the price side, since those use daily
+bars by ticker rather than graph assets.
+**Housekeeping.** The unzipped spreadsheet at the graph repo root is gone. That checkout is again carrying
+uncommitted graph work (now committed as `b9e25f6`) and roughly 180 untracked entries, so the unlanded-work
+risk stands until its owner commits the engine and the research reports.

@@ -59,5 +59,17 @@
     "layer": "episodic",
     "confidence": "verified",
     "pinned": false
+  },
+  {
+    "id": "mem_d36cbdcf89be",
+    "content": "Committing in projects/quanthacks from this harness fails on index writes: git add and commit report a missing lock file error although no lock file and no git process exist (read only git works; the same error appeared in the algoterminal checkout). Working path: set GIT_INDEX_FILE to a temp path, run read-tree HEAD, add the paths, commit, then copy that temp index over the repository git index via a computed path so git status returns to clean. Also: the SEC refuses a User-Agent containing a URL (an HTML 403 that mimics throttling); a plain project name plus contact address form is accepted.",
+    "tags": [
+      "gqh",
+      "quanthacks"
+    ],
+    "created": "2026-10-03T08:12:12.979Z",
+    "layer": "episodic",
+    "confidence": "verified",
+    "pinned": false
   }
 ]
