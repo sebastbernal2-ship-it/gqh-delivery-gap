@@ -80,12 +80,16 @@ def main() -> int:
         else:
             print(f"ok   {name}")
 
-    check_eq("a complete record has no missing sections",
-             missing_sections("## Hypothesis\nx\n## Data\ny\n## Methodology\nz\n## Results\nw"), [])
-    check_eq("a missing section is named",
-             missing_sections("## Hypothesis\nx\n## Data\ny"), ["Methodology", "Results"])
+    complete = ("## Hypothesis\nx\n## Data\ny\n## Structure\ns\n## Methodology\nm\n## Results\nr\n"
+                "## Novelty\nn\n## Risk and contingencies\nk\n## Liquidity and capital\nl")
+    check_eq("a complete record has no missing sections", missing_sections(complete), [])
+    check_eq("a missing criterion section is named",
+             missing_sections("## Hypothesis\nx\n## Data\ny"), ["Structure", "Methodology",
+                                                                "Results", "Novelty", "Risk",
+                                                                "Liquidity"])
     check_eq("headings are matched case insensitively and with numbering",
-             missing_sections("## 1. hypothesis\n## 2. DATA\n## 3. Methodology\n## 4. Results"), [])
+             missing_sections("## 1. hypothesis\n## 2. DATA\n## 3. Structure\n## 4. Methodology\n"
+                              "## 5. Results\n## 6. Novelty\n## 7. Risk\n## 8. Liquidity"), [])
     check("an active thesis with a note missing sections fails the ledger",
           validate_records([record()], notes_exist=False,
                            note_texts={"docs/theses/t-delivery-gap.md": "## Hypothesis\nonly"}),

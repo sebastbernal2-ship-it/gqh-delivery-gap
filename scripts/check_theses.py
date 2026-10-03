@@ -16,8 +16,10 @@ ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "docs" / "theses" / "index.jsonl"
 REQUIRED = ["id", "title", "status", "owner", "date", "note"]
 STATUSES = {"active", "parked", "superseded", "retired"}
-# An active thesis is an Investment Proposal, in the shape the training material uses.
-SECTIONS = ["Hypothesis", "Data", "Methodology", "Results"]
+# An active thesis carries one section per rubric criterion, so the rubric is a structural
+# requirement rather than an aspiration. See docs/alignment.md section 15.
+SECTIONS = ["Hypothesis", "Data", "Structure", "Methodology", "Results", "Novelty",
+            "Risk", "Liquidity"]
 
 
 def missing_sections(note_text: str) -> list[str]:
