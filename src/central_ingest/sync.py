@@ -23,7 +23,7 @@ LOCAL_ENV_KEYS = {
     "TIGERDATA_URL", "TIGERDATA_PASSWORD", "SNOWFLAKE_CONNECTION_NAME", "SNOWFLAKE_ACCOUNT",
     "SNOWFLAKE_USER", "SNOWFLAKE_PASSWORD", "SNOWFLAKE_WAREHOUSE",
     "SNOWFLAKE_ROLE", "SNOWFLAKE_PRIVATE_KEY_FILE", "MASSIVE_API_KEY",
-    "GQH_MASSIVE_TEAM_STRATEGY_LICENSE",
+    "GQH_MASSIVE_TEAM_STRATEGY_LICENSE", "EDGAR_USER_AGENT", "FMP_API_KEY",
 }
 
 
@@ -48,6 +48,7 @@ class Source:
     required: tuple[str, ...]
     event_field: str
     available_field: str = ""
+    license_status: str = "source terms not assessed by loader; review before external redistribution"
 
 
 SOURCES: dict[str, Source] = {
@@ -100,6 +101,32 @@ CREATE TABLE IF NOT EXISTS VECTOR_RESEARCH.RAW.SOURCE_RECORDS (
     LOADED_AT TIMESTAMP_TZ NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     PRIMARY KEY (SOURCE_ID, BATCH_SHA256, ROW_INDEX)
 )"""
+
+TIGER_MANIFEST_DDL = """
+CREATE TABLE IF NOT EXISTS public.gqh_ingestion_manifests (
+    source_id text NOT NULL,
+    batch_sha256 char(64) NOT NULL,
+    retrieved_at timestamptz NOT NULL,
+    source_url text NOT NULL,
+    row_count bigint NOT NULL,
+    source_license text NOT NULL,
+    manifest_json jsonb NOT NULL,
+    PRIMARY KEY (source_id, batch_sha256)
+)
+"""
+
+SNOWFLAKE_MANIFEST_DDL = """
+CREATE TABLE IF NOT EXISTS VECTOR_RESEARCH.RAW.INGESTION_MANIFESTS (
+    SOURCE_ID VARCHAR NOT NULL,
+    BATCH_SHA256 VARCHAR NOT NULL,
+    RETRIEVED_AT TIMESTAMP_TZ NOT NULL,
+    SOURCE_URL VARCHAR NOT NULL,
+    ROW_COUNT NUMBER(38,0) NOT NULL,
+    SOURCE_LICENSE VARCHAR NOT NULL,
+    MANIFEST_JSON VARCHAR NOT NULL,
+    PRIMARY KEY (SOURCE_ID, BATCH_SHA256)
+)
+"""
 
 
 def canonical(row: dict[str, Any]) -> str:
@@ -214,13 +241,25 @@ def read_massive(source_id: str, start: str, end: str, tickers: list[str]) -> tu
     if not os.getenv("SSL_CERT_FILE"):
         import certifi
         os.environ["SSL_CERT_FILE"] = certifi.where()
-    from massive import DISCLOSURE_FIELDS, request_json, get_bars
+    from massive import (DISCLOSURE_FIELDS, request_json, get_bars,
+                         get_corporate_actions, get_ticker_events, get_ticker_details)
 
     rows: list[dict[str, Any]] = []
     for ticker in tickers or ["PWR", "ETN", "EME", "DLR", "SPY"]:
         ticker = ticker.upper()
-        if source_id == "massive_bars":
-            rows.extend(get_bars(ticker, start, end, key))
+        if source_id in ("massive_bars", "massive_bars_unadjusted"):
+            rows.extend(get_bars(ticker, start, end, key, adjusted=(source_id == "massive_bars")))
+            continue
+        if source_id in ("massive_splits", "massive_dividends"):
+            action = "splits" if source_id == "massive_splits" else "dividends"
+            rows.extend(get_corporate_actions(action, ticker, start, end, key))
+            continue
+        if source_id == "massive_ticker_events":
+            rows.extend(get_ticker_events(ticker, key))
+            continue
+        if source_id == "massive_ticker_metadata":
+            rows.append(get_ticker_details(ticker, start, key))
+            rows.append(get_ticker_details(ticker, end, key))
             continue
         query = urlencode({"tickers": ticker, "filing_date.gte": start,
                            "filing_date.lte": end, "limit": 1000})
@@ -238,11 +277,23 @@ def read_massive(source_id: str, start: str, end: str, tickers: list[str]) -> tu
             identity = (row["accession_number"], row.get("tertiary_category"), row.get("supporting_text"))
             unique[identity] = row
         rows = sorted(unique.values(), key=lambda row: (row["filing_date"], row["accession_number"], row.get("tertiary_category") or ""))
+    if not rows and source_id in {"massive_splits", "massive_dividends", "massive_ticker_events"}:
+        rows = [{"record_kind": "empty_interval_receipt", "ticker": ticker.upper(),
+                 "requested_from": start, "requested_to": end, "result_count": 0}
+                for ticker in (tickers or ["PWR", "ETN", "EME", "DLR", "SPY"])]
     if not rows:
         raise ValueError(f"{source_id}: no observations returned")
-    if source_id == "massive_bars":
-        return rows, Source("", "https://api.massive.com/v2/aggs/ticker/", ("ticker", "bar_time_utc"), "bar_time_utc")
-    return rows, Source("", "https://api.massive.com/stocks/filings/8-K/vX/disclosures", ("accession_number", "filing_date"), "filing_date")
+    massive_license = "Massive GQH sponsor permission confirmed by project lead; project-scoped use"
+    source_info = {
+        "massive_bars": Source("", "https://api.massive.com/v2/aggs/ticker/", ("ticker", "bar_time_utc"), "bar_time_utc", license_status=massive_license),
+        "massive_bars_unadjusted": Source("", "https://api.massive.com/v2/aggs/ticker/", ("ticker", "bar_time_utc"), "bar_time_utc", license_status=massive_license),
+        "massive_8k": Source("", "https://api.massive.com/stocks/filings/8-K/vX/disclosures", ("accession_number", "filing_date"), "filing_date", license_status=massive_license),
+        "massive_splits": Source("", "https://api.massive.com/stocks/v1/splits", ("ticker", "execution_date"), "execution_date", license_status=massive_license),
+        "massive_dividends": Source("", "https://api.massive.com/stocks/v1/dividends", ("ticker", "ex_dividend_date"), "ex_dividend_date", license_status=massive_license),
+        "massive_ticker_events": Source("", "https://api.massive.com/vX/reference/tickers/{id}/events", ("ticker",), "ticker", license_status=massive_license),
+        "massive_ticker_metadata": Source("", "https://api.massive.com/v3/reference/tickers/{ticker}?date={as_of_date}", ("requested_ticker", "as_of_date"), "as_of_date", license_status=massive_license),
+    }
+    return rows, source_info[source_id]
 
 
 def make_batch(source_id: str, rows: list[dict[str, Any]], source: Source) -> tuple[str, list[tuple]]:
@@ -258,13 +309,14 @@ def make_batch(source_id: str, rows: list[dict[str, Any]], source: Source) -> tu
     return batch_sha, encoded
 
 
-def tiger_load(url: str, source_id: str, batch_sha: str, encoded: list[tuple]) -> int:
+def tiger_load(url: str, source_id: str, batch_sha: str, encoded: list[tuple], manifest: dict[str, Any]) -> int:
     import psycopg
 
     with psycopg.connect(url, password=os.getenv("TIGERDATA_PASSWORD"), connect_timeout=20) as connection:
         with connection.cursor() as cursor:
             cursor.execute(TIGER_TABLE_DDL)
             cursor.execute(TIGER_INDEX_DDL)
+            cursor.execute(TIGER_MANIFEST_DDL)
             cursor.executemany("""
                 INSERT INTO public.gqh_source_records
                     (source_id,batch_sha256,row_index,event_time_text,available_at_text,
@@ -281,11 +333,19 @@ def tiger_load(url: str, source_id: str, batch_sha: str, encoded: list[tuple]) -
                 (source_id, batch_sha))
             if [row[0] for row in cursor.fetchall()] != [row[7] for row in encoded]:
                 raise RuntimeError("TigerData row hash reconciliation failed")
+            cursor.execute("""INSERT INTO public.gqh_ingestion_manifests
+                (source_id,batch_sha256,retrieved_at,source_url,row_count,source_license,manifest_json)
+                VALUES (%s,%s,%s,%s,%s,%s,%s::jsonb)
+                ON CONFLICT (source_id,batch_sha256) DO UPDATE SET
+                    retrieved_at=EXCLUDED.retrieved_at, row_count=EXCLUDED.row_count,
+                    source_license=EXCLUDED.source_license, manifest_json=EXCLUDED.manifest_json""",
+                (source_id, batch_sha, manifest["retrieved_at_utc"], manifest["source_url"],
+                 len(encoded), manifest["license"], canonical(manifest)))
         connection.commit()
     return count
 
 
-def snowflake_load(source_id: str, batch_sha: str, encoded: list[tuple]) -> int:
+def snowflake_load(source_id: str, batch_sha: str, encoded: list[tuple], manifest: dict[str, Any]) -> int:
     import snowflake.connector
 
     name = os.getenv("SNOWFLAKE_CONNECTION_NAME")
@@ -309,6 +369,7 @@ def snowflake_load(source_id: str, batch_sha: str, encoded: list[tuple]) -> int:
     try:
         with connection.cursor() as cursor:
             cursor.execute(SNOWFLAKE_DDL)
+            cursor.execute(SNOWFLAKE_MANIFEST_DDL)
             cursor.execute("""CREATE TEMPORARY TABLE GQH_LOAD_STAGE (
                 SOURCE_ID VARCHAR, BATCH_SHA256 VARCHAR, ROW_INDEX NUMBER(38,0),
                 EVENT_TIME_TEXT VARCHAR, AVAILABLE_AT_TEXT VARCHAR, SOURCE_URL VARCHAR,
@@ -332,6 +393,18 @@ def snowflake_load(source_id: str, batch_sha: str, encoded: list[tuple]) -> int:
                 (source_id, batch_sha))
             if [row[0] for row in cursor.fetchall()] != [row[7] for row in encoded]:
                 raise RuntimeError("Snowflake row hash reconciliation failed")
+            cursor.execute("""MERGE INTO VECTOR_RESEARCH.RAW.INGESTION_MANIFESTS t
+                USING (SELECT %s SOURCE_ID,%s BATCH_SHA256,%s RETRIEVED_AT,%s SOURCE_URL,
+                       %s ROW_COUNT,%s SOURCE_LICENSE,%s MANIFEST_JSON) s
+                ON t.SOURCE_ID=s.SOURCE_ID AND t.BATCH_SHA256=s.BATCH_SHA256
+                WHEN MATCHED THEN UPDATE SET RETRIEVED_AT=s.RETRIEVED_AT,ROW_COUNT=s.ROW_COUNT,
+                    SOURCE_LICENSE=s.SOURCE_LICENSE,MANIFEST_JSON=s.MANIFEST_JSON
+                WHEN NOT MATCHED THEN INSERT
+                    (SOURCE_ID,BATCH_SHA256,RETRIEVED_AT,SOURCE_URL,ROW_COUNT,SOURCE_LICENSE,MANIFEST_JSON)
+                    VALUES (s.SOURCE_ID,s.BATCH_SHA256,s.RETRIEVED_AT,s.SOURCE_URL,s.ROW_COUNT,
+                            s.SOURCE_LICENSE,s.MANIFEST_JSON)""",
+                (source_id, batch_sha, manifest["retrieved_at_utc"], manifest["source_url"],
+                 len(encoded), manifest["license"], canonical(manifest)))
         connection.commit()
         return count
     finally:
@@ -342,15 +415,20 @@ def main() -> int:
     load_local_env()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--list", action="store_true")
-    parser.add_argument("--source", choices=sorted(SOURCES) + sorted(M3_FILES) + ["eia923_pjm_2024", "massive_bars", "massive_8k"])
+    parser.add_argument("--source", choices=sorted(SOURCES) + sorted(M3_FILES) + [
+        "eia923_pjm_2024", "massive_bars", "massive_bars_unadjusted", "massive_8k",
+        "massive_splits", "massive_dividends", "massive_ticker_events", "massive_ticker_metadata"])
     parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--target", choices=("both", "snowflake", "tigerdata"), default="both")
+    parser.add_argument("--target", choices=("both", "snowflake", "tigerdata"), default="snowflake",
+                        help="defaults to Snowflake; use both only after confirming TigerData capacity")
     parser.add_argument("--from", dest="start")
     parser.add_argument("--to", dest="end")
     parser.add_argument("--ticker", action="append", default=[])
     args = parser.parse_args()
     if args.list:
-        print("\n".join(sorted(SOURCES) + sorted(M3_FILES) + ["eia923_pjm_2024", "massive_bars", "massive_8k"]))
+        print("\n".join(sorted(SOURCES) + sorted(M3_FILES) + [
+            "eia923_pjm_2024", "massive_bars", "massive_bars_unadjusted", "massive_8k",
+            "massive_splits", "massive_dividends", "massive_ticker_events", "massive_ticker_metadata"]))
         return 0
     if not args.source:
         parser.error("--source is required unless --list is used")
@@ -375,8 +453,17 @@ def main() -> int:
         if args.dry_run:
             print(f"validated {args.source}: rows={len(encoded)} batch_sha256={batch_sha}; no database writes")
             return 0
-        snow_count = snowflake_load(args.source, batch_sha, encoded) if args.target in ("both", "snowflake") else "skipped"
-        tiger_count = tiger_load(os.environ["TIGERDATA_URL"], args.source, batch_sha, encoded) if args.target in ("both", "tigerdata") else "skipped"
+        manifest = {
+            "source_id": args.source, "batch_sha256": batch_sha,
+            "retrieved_at_utc": datetime.now(timezone.utc).isoformat(),
+            "source_path": source.path, "source_url": source.url,
+            "requested_from": args.start, "requested_to": args.end,
+            "tickers": [ticker.upper() for ticker in (args.ticker or ["PWR", "ETN", "EME", "DLR", "SPY"])],
+            "row_count": len(encoded), "license": source.license_status,
+            "availability_note": "available_at is populated only when source provides a timestamp; this batch time is retrieval/ingest time, not historical public availability",
+        }
+        snow_count = snowflake_load(args.source, batch_sha, encoded, manifest) if args.target in ("both", "snowflake") else "skipped"
+        tiger_count = tiger_load(os.environ["TIGERDATA_URL"], args.source, batch_sha, encoded, manifest) if args.target in ("both", "tigerdata") else "skipped"
         print(f"loaded {args.source}: source={len(encoded)} snowflake={snow_count} tigerdata={tiger_count} batch_sha256={batch_sha}")
         return 0
     except (OSError, ValueError, RuntimeError, KeyError) as exc:

@@ -20,6 +20,8 @@ research conversation; older load-status statements there are not the latest ope
 8. [Snowflake path](snowflake-path.md): the adopted research/data boundary and first integration slice.
 9. [Central ingestion handoff](central-ingest-handoff.md): verified shared tables, Massive API,
    source counts, operator workflow, and remaining gaps.
+10. [Strategy feature contract](strategy-feature-contract.md): current feature readiness, the
+    minimum point-in-time event/market schema, and gates before strategy claims.
 
 Each topic has one owner document. Link instead of copying it into another summary. The source
 audit owns provider/access details; the data plan owns what to collect; the technical proposal

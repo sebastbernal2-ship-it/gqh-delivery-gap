@@ -30,6 +30,7 @@ One table. A path appears once, with one person.
 | `docs/inbox/aidan-2026-10-03/`, `docs/thinking/aidan-2026-10-03.md` | aidanq06 | Strategy specification, reasoning, implementation contracts, advanced-method research |
 | `hpc/README.md`, `hpc/setup/` | lucyrunner | HiPerGator routing, account access and environment setup |
 | `hpc/probabilistic-council/` | lucyrunner | Synthetic calibrated council and bounded classical/quantum distribution benchmarks |
+| `hpc/kdb-timeseries/` | vshnu1 | Shared kdb+/q HDB for validated historical time-series research on HiPerGator |
 | `src/aws_compute/` | vshnu1 | Exact-price AWS GPU archive normalization and TigerData ingestion |
 | `src/snowflake/` | vshnu1 | Snowflake research schemas and point-in-time feature-panel bootstrap |
 | `src/central_ingest/` | vshnu1 | Idempotent shared Snowflake and TigerData source loading |

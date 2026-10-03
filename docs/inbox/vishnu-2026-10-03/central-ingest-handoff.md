@@ -82,6 +82,39 @@ TigerData database size after these loads was 731,944,639 bytes; the console pre
 a 750 MiB free-service storage allowance. The team's credit does not itself verify that this
 service has been upgraded. Check its actual plan/limit before another large TigerData load.
 
+## Requested event-study package (2026-10-03 follow-up)
+
+The Massive daily panel is extended beyond the original adjusted-bars load. Adjusted and
+unadjusted OHLCV for PWR, ETN, EME, DLR and SPY cover 2016-01-01 through 2026-10-02 (13,515
+rows per version in the verified batches). Separate corporate-action and metadata batches are
+also in both stores: 204 dividends, five explicit split interval receipts (no split rows in the
+requested interval), five ticker-event receipts, and ten start/end ticker metadata snapshots.
+The loader/manifests retain request URL, retrieval time, hash, count, and the project lead's
+sponsor-permission assertion. These are current Massive snapshots, not point-in-time adjusted
+prices. Do not infer that no ticker-history changes exist outside the specific endpoint coverage
+tested.
+
+The EIA-860M vintage archive was ingested by `src/central_ingest/eia860m.py`: original monthly
+XLSX plus all three-sheet generator rows are in Snowflake, with vintage month-end availability,
+entity/plant/generator identifiers, owner, state, capacity, planned/actual month, status, source
+URL, retrieval time and source-file SHA-256. Available vintages cover 2016-01 through 2026-08
+in Snowflake. The archive index lists 2026-09 but that file was not served (three download
+attempts failed); 2026-08 is the newest verified release. TigerData has compact state/technology
+summaries through 2022-12 only. Its database reached 786,011,839 bytes against the previously
+observed 750 MiB allowance, so **do not write more TigerData rows until the service storage
+allowance is confirmed/expanded**. Snowflake is the complete query layer for the raw EIA panel.
+Resume idempotently with `--target snowflake` (or `--target both` only after confirming
+TigerData capacity).
+
+The existing `sec_filings` load is only the accession register (776 rows, 2015–2026), not raw
+filing/exhibit content. A real SEC request User-Agent using the project lead's contact was
+verified against a public filing (HTTP 200). The batch archive downloader and raw document stage
+upload are running, but completion has not been reconciled at this handoff. Do not report the raw
+SEC archive as complete until all selected accession packages, stage files and document hashes
+are reconciled against the input register. Historical PIT estimates are also not loaded; no entitlement to
+true estimate revision vintages has been verified. Current consensus data is not a substitute for
+historical as-of estimates.
+
 ## Teammate access and immediate next action
 
 1. Pull commit `91ed86f` or later on `main`; read `src/central_ingest/README.md` for the
@@ -94,6 +127,9 @@ service has been upgraded. Check its actual plan/limit before another large Tige
    to Massive 8-K enrichment by accession, keep source vintage/hash, define company/plant
    exposures before using EIA, and run an equity-only baseline before adding compute context.
    This ingestion commit did **not** build features, a backtest, a scheduler, or an OOS result.
+   Current feature inventory and explicit readiness gates are maintained in the
+   [strategy feature contract](strategy-feature-contract.md); it supersedes older shorthand that
+   could be read as saying the stock-strategy inputs were already complete.
 
 ## Provenance of new workbooks
 
