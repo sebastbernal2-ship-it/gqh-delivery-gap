@@ -72,12 +72,6 @@ def tstat(values: list[float]) -> float | None:
     return statistics.mean(values) / (spread / math.sqrt(len(values))) if spread else None
 
 
-def cluster_tstat(values_by_cluster: dict[str, list[float]]) -> float | None:
-    """Use one mean per reporting week so clustered events do not count as independent."""
-    means = [statistics.mean(values) for values in values_by_cluster.values() if values]
-    return tstat(means)
-
-
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--events", default="results/rpo-events.csv")
@@ -98,16 +92,10 @@ def main(argv: list[str] | None = None) -> int:
     for row in rows:
         if str(row.get("in_sealed_window", "")).lower() in ("true", "1"):
             continue
-        if row.get("expectation_status") != "measured":
-            continue
         if not row.get("surprise") or not row.get("earliest_availability_utc") or not row.get("ticker"):
             continue
-        available = row["earliest_availability_utc"]
-        stamp = dt.date.fromisoformat(available[:10])
-        cluster = f"{stamp.isocalendar().year}-W{stamp.isocalendar().week:02d}"
         events.append({"ticker": row["ticker"], "group": row["group"],
-                       "surprise": float(row["surprise"]), "available": available,
-                       "cluster": cluster,
+                       "surprise": float(row["surprise"]), "available": row["earliest_availability_utc"],
                        "change": float(row["change"]) if row.get("change") else None})
     if not events:
         print("no usable events")
@@ -124,7 +112,7 @@ def main(argv: list[str] | None = None) -> int:
             options = by_ticker[event["ticker"]]
             event["available"] = rng.choice(options)
         print("PLACEBO RUN: dates shuffled within each firm")
-    print(f"usable events with a ticker and a measured expectation: {len(events)}")
+    print(f"usable events with a ticker and a surprise: {len(events)}")
     print("without a ticker, so not priced here: "
           f"{sum(1 for r in rows if not r.get('ticker'))} of {len(rows)} rows")
 
@@ -158,34 +146,28 @@ def main(argv: list[str] | None = None) -> int:
 
     lines = []
     cells = 0
-    lines.append(f"{'group':11s} {'sign':5s} {'horizon':>7s} {'n':>6s} {'clusters':>8s} {'mean':>9s} {'median':>9s} {'t':>6s} {'cluster-t':>9s}")
+    lines.append(f"{'group':11s} {'sign':5s} {'horizon':>7s} {'n':>6s} {'mean':>9s} {'median':>9s} {'t':>6s}")
     out_rows = []
     for (group, sign), group_events in sorted(buckets.items()):
         for horizon in horizons:
             values = [e[f"abnormal_{horizon}"] for e in group_events
                       if e.get(f"abnormal_{horizon}") is not None]
-            by_cluster: dict[str, list[float]] = defaultdict(list)
-            for event in group_events:
-                value = event.get(f"abnormal_{horizon}")
-                if value is not None:
-                    by_cluster[event["cluster"]].append(value)
             if len(values) < 20:
                 continue
             cells += 1
-            lines.append(f"{group:11s} {sign:5s} {horizon:>7d} {len(values):>6d} {len(by_cluster):>8d} "
+            lines.append(f"{group:11s} {sign:5s} {horizon:>7d} {len(values):>6d} "
                          f"{statistics.mean(values):>8.2%} {statistics.median(values):>8.2%} "
-                         f"{(tstat(values) or 0):>6.2f} {(cluster_tstat(by_cluster) or 0):>9.2f}")
+                         f"{(tstat(values) or 0):>6.2f}")
             out_rows.append({"group": group, "sign": sign, "horizon": horizon, "n": len(values),
-                             "clusters": len(by_cluster), "mean_abnormal": statistics.mean(values),
-                             "median_abnormal": statistics.median(values), "t": tstat(values),
-                             "cluster_t": cluster_tstat(by_cluster)})
+                             "mean_abnormal": statistics.mean(values),
+                             "median_abnormal": statistics.median(values),
+                             "t": tstat(values)})
 
     if not args.summary:
         out = ROOT / args.out
         with out.open("w", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=["group", "sign", "horizon", "n", "clusters",
-                                                        "mean_abnormal", "median_abnormal", "t", "cluster_t"],
-                                            lineterminator="\n")
+            writer = csv.DictWriter(handle, fieldnames=["group", "sign", "horizon", "n",
+                                                        "mean_abnormal", "median_abnormal", "t"])
             writer.writeheader()
             writer.writerows(out_rows)
         print(f"wrote {args.out} ({len(out_rows)} rows)")
@@ -194,7 +176,7 @@ def main(argv: list[str] | None = None) -> int:
     print("\n".join(lines))
     print(f"\ncells examined: {cells} (group, sign, horizon). Every one is reported above.")
     print("Choosing the best cell from this table would be tuning, so nothing is chosen here.")
-    print("Events cluster in reporting weeks. The cluster-t column uses one mean per reporting week.")
+    print("Events cluster in reporting weeks, so the effective sample is smaller than n.")
     return 0
 
 

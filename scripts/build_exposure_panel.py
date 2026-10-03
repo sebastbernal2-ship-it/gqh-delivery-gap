@@ -27,11 +27,9 @@ sys.path.insert(0, str(ROOT / "src"))
 from edgar.filings import TICKERS_URL, get_json, session  # noqa: E402
 from join.entities import coverage, match_entities  # noqa: E402
 
-MATCH_FIELDS = ["entity_name", "status", "score", "runner_up", "title", "ticker", "cik",
-                "segment", "direction", "weight", "economic_channel", "identity_vintage", "source_receipt"]
+MATCH_FIELDS = ["entity_name", "status", "score", "runner_up", "title", "ticker", "cik"]
 PANEL_FIELDS = ["ticker", "entity_name", "pair", "technology", "state", "slips", "slipped_mw",
-                "median_slip_months", "available_from", "status", "segment", "direction", "weight",
-                "economic_channel", "identity_vintage", "evidence", "source_receipt"]
+                "median_slip_months", "available_from", "source_receipt"]
 
 
 def load_candidates(s) -> list[tuple[str, int, str]]:
@@ -124,17 +122,9 @@ def main(argv: list[str] | None = None) -> int:
         row["ticker"] = verified["ticker"] if verified else ""
         row["cik"] = verified["cik"] if verified else ""
         row["title"] = verified.get("evidence", "") if verified else proposal.get("title", "")
-        for field in ("segment", "direction", "weight", "economic_channel", "identity_vintage",
-                      "source_receipt"):
-            row[field] = verified.get(field, "") if verified else ""
 
     grouped: dict[tuple, dict] = defaultdict(lambda: {"slips": 0, "slipped_mw": 0.0, "months": [],
-                                                      "available_from": "", "state": "",
-                                                      "status": "unmatched", "segment": "",
-                                                      "direction": "", "weight": "",
-                                                      "economic_channel": "",
-                                                      "identity_vintage": "", "evidence": "",
-                                                      "source_receipt": ""})
+                                                      "available_from": "", "state": ""})
     for row in revisions:
         key = (row["ticker"] or "", row["entity_name"], row["pair"], row["technology"])
         bucket = grouped[key]
@@ -147,14 +137,6 @@ def main(argv: list[str] | None = None) -> int:
         if not bucket["available_from"] or row["available_after"] > bucket["available_from"]:
             bucket["available_from"] = row["available_after"]
         bucket["state"] = row.get("state", "")
-        if row.get("match_status") == "verified":
-            bucket["status"] = "verified"
-            for field in ("segment", "direction", "weight", "economic_channel",
-                          "identity_vintage", "source_receipt"):
-                bucket[field] = row.get(field, "")
-            bucket["evidence"] = row.get("title", "")
-        elif bucket["status"] != "verified":
-            bucket["status"] = row.get("match_status", "unmatched")
 
     panel = []
     for (ticker, entity, pair, technology), bucket in grouped.items():
@@ -165,12 +147,7 @@ def main(argv: list[str] | None = None) -> int:
             "slipped_mw": round(bucket["slipped_mw"], 1),
             "median_slip_months": months[len(months) // 2],
             "available_from": bucket["available_from"],
-            "status": bucket["status"], "segment": bucket["segment"],
-            "direction": bucket["direction"], "weight": bucket["weight"],
-            "economic_channel": bucket["economic_channel"],
-            "identity_vintage": bucket["identity_vintage"],
-            "evidence": bucket["evidence"],
-            "source_receipt": bucket["source_receipt"] or "https://www.eia.gov/electricity/data/eia860m/",
+            "source_receipt": "https://www.eia.gov/electricity/data/eia860m/",
         })
     panel.sort(key=lambda r: (-r["slipped_mw"], r["entity_name"]))
 
@@ -181,7 +158,7 @@ def main(argv: list[str] | None = None) -> int:
             out = ROOT / name
             out.parent.mkdir(parents=True, exist_ok=True)
             with out.open("w", newline="") as handle:
-                writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
+                writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
                 writer.writeheader()
                 writer.writerows(rows)
             print(f"wrote {name} ({len(rows)} rows)")

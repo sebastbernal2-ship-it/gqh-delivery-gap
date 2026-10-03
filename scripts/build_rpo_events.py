@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Pass two: turn the industry universe into timestamped revisions with an expectation.
 
-For each selected company: the reported value of remaining performance obligations per period and
-the change against the previous report. A reported balance is not an expectation, so this script does
-not manufacture a surprise.
+For each selected company: the reported value of remaining performance obligations per period, the
+change against the previous report, and a surprise measured against that company's own typical change.
 
 Where the timestamp comes from, stated plainly:
 
@@ -35,9 +34,8 @@ from edgar.filings import sealed_start  # noqa: E402
 from edgar.xbrl import facts_url  # noqa: E402
 
 FIELDS = ["cik", "name", "ticker", "sic", "group", "period_end", "value", "previous_value", "change",
-          "typical_change", "legacy_surprise", "surprise", "expectation_kind", "expectation_status",
-          "form", "accession", "earliest_availability_utc", "availability_resolution",
-          "in_sealed_window", "source_receipt"]
+          "typical_change", "surprise", "form", "accession", "earliest_availability_utc",
+          "availability_resolution", "in_sealed_window", "source_receipt"]
 
 
 def facts_by_cik(period_list: list[str]) -> dict[int, list[dict]]:
@@ -120,10 +118,7 @@ def main(argv: list[str] | None = None) -> int:
                 "value": value, "previous_value": values[-1] if values else "",
                 "change": change if change is not None else "",
                 "typical_change": typical if typical is not None else "",
-                "legacy_surprise": (change - typical) if (change is not None and typical is not None) else "",
-                "surprise": "",
-                "expectation_kind": "",
-                "expectation_status": "missing",
+                "surprise": (change - typical) if (change is not None and typical is not None) else "",
                 "form": form, "accession": row["accn"],
                 "earliest_availability_utc": availability,
                 "availability_resolution": ("acceptance timestamp" if acceptance
@@ -141,13 +136,13 @@ def main(argv: list[str] | None = None) -> int:
     out = ROOT / args.out
     out.parent.mkdir(parents=True, exist_ok=True)
     with out.open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=FIELDS, extrasaction="ignore", lineterminator="\n")
+        writer = csv.DictWriter(handle, fieldnames=FIELDS, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(events)
     print(f"wrote {args.out} ({len(events)} events)")
 
     sealed = [e for e in events if e["in_sealed_window"]]
-    usable = [e for e in events if not e["in_sealed_window"] and e["expectation_status"] == "measured"]
+    usable = [e for e in events if not e["in_sealed_window"] and e["surprise"] != ""]
     by_group: dict[str, dict] = defaultdict(lambda: {"companies": set(), "events": 0, "usable": 0,
                                                      "acceptance": 0})
     for event in events:
@@ -156,16 +151,15 @@ def main(argv: list[str] | None = None) -> int:
         bucket["events"] += 1
         if event["availability_resolution"] == "acceptance timestamp":
             bucket["acceptance"] += 1
-        if not event["in_sealed_window"] and event["expectation_status"] == "measured":
+        if not event["in_sealed_window"] and event["surprise"] != "":
             bucket["usable"] += 1
     print("")
-    print(f"{'group':11s} {'companies':>9s} {'events':>7s} {'measured exp.':>13s} {'acceptance':>10s}")
+    print(f"{'group':11s} {'companies':>9s} {'events':>7s} {'with surprise':>13s} {'acceptance':>10s}")
     for group, bucket in sorted(by_group.items(), key=lambda kv: -kv[1]["usable"]):
         print(f"{group:11s} {len(bucket['companies']):>9d} {bucket['events']:>7d} "
               f"{bucket['usable']:>13d} {bucket['acceptance']:>10d}")
     print(f"\nsealed events flagged and excluded from every summary: {len(sealed)}")
-    print(f"events with a measured expectation in the development window: {len(usable)}")
-    print("The legacy_surprise field is retained for audit only and cannot drive a strategy.")
+    print(f"events usable in the development window: {len(usable)}")
     return 0
 
 
