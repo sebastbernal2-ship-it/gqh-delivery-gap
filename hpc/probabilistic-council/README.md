@@ -23,6 +23,9 @@ choice, HPG/Vultr roles, and build gates.
 - `run-jevlike.slurm`: HPG synthetic train → evaluate → export → C++ compile → parity workflow.
 - `run-cpp.slurm`: compile and run the C++ council smoke workload.
 - `INTERFACE.md`: probability, identity, calibration and fusion contracts.
+- `specialist_lab.py`: synthetic-only comparison of one all-feature JevLike, three feature-view
+  JevLike specialists, a numeric baseline and calibrated pools. See [SPECIALIST_LAB.md](SPECIALIST_LAB.md)
+  for the declared experiment, timestamp/label contract, commands and real-data bottlenecks.
 
 The Slurm workflow uses synthetic choices to validate plumbing and numerical agreement. It is not
 evidence of decision quality, finance performance, calibration, or usefulness on a target task.
