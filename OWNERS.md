@@ -21,7 +21,14 @@ nobody writes to that path.
 
 | Path | Person |
 |---|---|
-| (to be assigned) | |
+| `docs/inbox/vishnu-2026-10-03/` | Vishnu, via his documentation agent; conversation handoff and proposals |
+| `docs/thinking/vishnu-2026-10-03.md` | Vishnu, via his documentation agent; reconstructed conversation history |
+| `docs/writing/style.md` | Vishnu, via his documentation agent; initial writing conventions |
+| `.cursor/rules/gqh-context.mdc` | Vishnu, via his documentation agent; handoff routing |
 
 Add a row per area of work as soon as it exists. Do not pre-create rows for work nobody has
 started.
+
+These assignments cover the documentation requested in Vishnu's chat. They do not assign
+implementation, OOS access, or strategy approval to that agent. Claim a concrete component here
+before starting it; do not assume a proposed architecture is already implemented.

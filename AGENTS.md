@@ -19,6 +19,11 @@ There is no P&L leaderboard. Judges score reasoning and rerun the code.
 
 Do not re-derive what is already settled. `docs/decisions.md` is the record.
 
+For Vishnu's current research context, next read `docs/inbox/vishnu-2026-10-03/README.md` and
+follow its routing. It is a conversation handoff, not a promoted thesis. Shared memory includes
+archived results and superseded paths; resolve them against the current branch and linked owners.
+Do not infer live code, verified access, or an approved OOS split from an old memory entry.
+
 ## Where a fact goes
 
 One owner per fact. Never copy a fact into a second file, link to the owner instead.

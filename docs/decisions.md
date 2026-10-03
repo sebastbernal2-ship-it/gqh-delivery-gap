@@ -145,3 +145,21 @@ pre-push hook, without blocking. Seven tests cover the report logic (tests/test_
 **Alternatives.** Requiring pull requests for every change was rejected: it adds a merge step per
 change and the deadline is measured in hours. One long-lived branch per person was rejected: it
 delays every conflict to the worst possible moment.
+ 
+---
+
+## 2026-10-03: Vishnu's conversation is captured without promoting a trading thesis
+
+**Decision.** Store this chat's handoff in `docs/inbox/vishnu-2026-10-03/`, its reconstructed
+thinking history in `docs/thinking/vishnu-2026-10-03.md`, and writing conventions in
+`docs/writing/style.md`. README and agent guidance route readers there. OWNERS names the writer
+for those actual documents; proposed code/HPC components remain unassigned and unimplemented.
+
+**Context.** The user asked to push current progress, revisions, intuition and scalable technical
+boundaries for other agents. Main has no promoted thesis; shared memory includes archived work.
+The handoff distinguishes that historical work from current capabilities and separates reported
+access from tested downloads. Earlier missing assistant responses are not fabricated.
+
+**Scope.** This is a documentation/coordination decision, not approval of a universe, signal,
+OOS split or trading leg. Alignment content remains a proposal for its shared owner. Frozen brief,
+generated CURRENT and the empty thesis ledger are unchanged. No credentials or raw data are added.

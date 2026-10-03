@@ -1,0 +1,15 @@
+---
+description: Route agents to current GQH context and prevent old brainstorms becoming assumed facts
+alwaysApply: true
+---
+
+# Context before implementation
+
+- Read `AGENTS.md` and follow its session protocol.
+- Read `docs/inbox/vishnu-2026-10-03/README.md` for Vishnu's conversation handoff.
+- The handoff is a proposal package, not a live thesis or a completed implementation.
+- Resolve rules in `docs/brief.md`, decisions in `docs/decisions.md`, and claims in the thesis ledger.
+- Preserve the distinction between user-reported access, documentation verification and tested downloads.
+- Do not reactivate archived results, preassign trade legs, or tune on OOS by implication.
+- Claim a path in `OWNERS.md` before building a component; add its README when it exists.
+- Use the proposed numerical/data contracts in the handoff as review inputs, not unchecked code specs.
