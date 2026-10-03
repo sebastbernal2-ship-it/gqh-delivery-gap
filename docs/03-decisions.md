@@ -51,3 +51,25 @@ are caches. If it is not in the repo, it is not shared.
 their own.
 **Alternatives.** A private repo until submission was offered and rejected: a broken link at the
 deadline is a bigger risk than early visibility.
+
+---
+
+## 2026-10-03: Memory capture is mechanical, not a habit
+
+**Decision.** Three automatic layers, no remembered commands.
+1. Agent hook: `hippo hook install pi` and `codex` write capture instructions into the committed
+   `AGENTS.md`, so a session injects context at the start and captures a summary at the end.
+2. Commit hook: `.githooks/pre-commit` refreshes the shared memory on every commit and stages
+   `memory/`, enabled per clone by `make bootstrap` or `git config core.hooksPath .githooks`.
+3. Opt-in timer: `make schedule` runs `scripts/autoshare.sh` every 15 minutes, which commits and
+   pushes only the memory files, never work in progress.
+
+**Context.** The captain rejected relying on anyone remembering `make remember`. Capture had to
+happen without a human step.
+**Alternatives.** Requiring a share tag on every memory was rejected as the primary rule: it makes
+capture depend on discipline. Replaced by the scope rule: if the store lives inside the repo, every
+entry in it is project scope by construction. The tag remains the rule only when the store lives
+outside the repo.
+**Evidence.** An untagged memory written at 04:32 travelled into commit `1f68040` through a plain
+`git commit` with no memory command run by hand. The hook exits 0 when hippo is absent or when
+there is nothing to share, so it can never block a teammate.
