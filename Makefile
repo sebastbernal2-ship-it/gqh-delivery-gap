@@ -86,10 +86,10 @@ test:
 	@python3 tests/test_edgar.py
 	@python3 tests/test_xbrl.py
 	@python3 tests/test_eia.py
-	@python3 tests/test_massive_ingest.py
 	@python3 tests/test_event.py
 	@python3 tests/test_universe.py
 	@python3 tests/test_scan.py
+	@python3 tests/test_quantgraph_manifest.py
 	@python3 tests/test_scan_stats.py
 	@python3 tests/test_scan_report.py
 	@python3 tests/test_scan_fdr.py
@@ -121,6 +121,7 @@ check: secrets
 	@python3 scripts/link_algoterminal.py
 	@python3 scripts/render_current.py --check
 	@python3 scripts/check_scan.py
+	@python3 scripts/check_quantgraph_manifest.py
 	@python3 scripts/check_ideas.py
 	@python3 scripts/render_ideas.py --check
 

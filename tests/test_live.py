@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from live.hyperliquid import (  # noqa: E402
-    MARKETS, count_overdispersion, refractory_excess, returns, trigger,
+    MARKETS, count_overdispersion, refractory_excess, returns, safe, trigger,
 )
 
 failures: list[str] = []
@@ -44,6 +44,15 @@ check("a large move with an open interest fall triggers", trigger(spike, [1000.0
 check("a short series cannot trigger", trigger([100.0, 110.0], [1000.0, 900.0]), False)
 check("a flat series cannot trigger on a zero denominator", trigger([100.0] * 80, [1000.0] * 80), False)
 
+# A collection run must survive a dropped connection: one timeout is not the end of a tape.
+def _explode(*_args, **_kwargs):
+    raise TimeoutError("the connection dropped")
+
+
+check("a failed read returns nothing instead of raising", safe(_explode), None)
+check("a successful read passes its value through", safe(lambda x: x * 2, 21), 42)
+check("arguments are forwarded", safe(lambda a, b: a + b, 1, 2), 3)
+
 clustered = count_overdispersion([0, 0, 5, 0, 0, 6, 0, 1, 0, 0])
 poissonish = count_overdispersion([1, 1, 1, 1, 1, 1, 1, 1])
 check("clustered counts are called overdispersed", clustered["overdispersed"], True)
@@ -59,6 +68,6 @@ check("too few gaps gives nothing", refractory_excess([1.0]), None)
 
 if failures:
     print("\n".join(f"  FAIL {f}" for f in failures))
-    print(f"\n{18 - len(failures)}/18 passed")
+    print(f"\n{21 - len(failures)}/21 passed")
     raise SystemExit(1)
-print("\n18/18 passed")
+print("\n21/21 passed")
