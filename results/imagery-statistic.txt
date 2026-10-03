@@ -1,0 +1,7 @@
+usable sites 24
+spearman +0.3007
+permutation_p 0.0875
+null_median -0.0013
+null_p95 +0.3484
+late_median_texture +0.300
+early_median_texture +0.265

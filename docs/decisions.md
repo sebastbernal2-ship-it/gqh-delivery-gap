@@ -1002,3 +1002,20 @@ business hosts are exposed to total compute demand, not to the dispersion betwee
 **Consequence**: gate four fails on evidence, so the candidate closes. The dispersion finding stands as a truth
 about the market and has no equity instrument. It reopens only if the rental market itself becomes holdable,
 which needs an executed rental series or a physical counterparty.
+
+## 2026-10-03: The imagery direction ends at ten metres, and the market map becomes the base
+
+**Two decisions, both from running the declared work.**
+
+**The imagery test.** Forty sites were declared, twenty four produced a usable pair, and the pre-registered
+statistic came in at plus 0.30 with a permutation p of 0.087, inside the null's ninety fifth percentile of 0.348.
+Late sites and early sites are indistinguishable. The stated falsifier required the correlation to sit outside the
+null and to beat a date placebo, and the first condition already fails, so the direction ends here. The date
+placebo was not run because the verdict does not depend on it, and that is stated rather than glossed.
+
+**The market map.** Participants, constraints, flows, instruments and their mappings to measured nodes are now a
+validated artifact in `docs/market/`, with a checker that refuses a flow without a participant, an instrument
+without a node or a stated reason, a record without a falsifier, and a flow that nothing we measure connects to.
+Five new nodes were declared to attach the flows that had no measurement: equipment lead time share, index
+reconstitution quantity, dealer hedge demand, data centre lease rate, and project financing draws. The map is the
+base that everything else attaches to, and it is generated and checked by `make market` and `make check`.
