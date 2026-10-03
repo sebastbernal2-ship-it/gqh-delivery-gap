@@ -107,3 +107,18 @@ lag.
 a second kind, `make check` would either reject it or stop checking anything.
 **Alternatives.** Putting the state variable under `data/` was rejected because `data/` is
 gitignored and the note must quote a committed number.
+
+---
+
+## 2026-10-03: Teammates get write access as collaborators, not forks
+
+**Decision.** aidanq06, vshnu1, and lucyrunner are invited to `gqh-delivery-gap` with write
+permission. They push to `main` inside the paths they own, which is what the one-writer-per-path
+rule assumes.
+**Context.** The workflow is built around direct commits with `make sync` before and `make save`
+after. A fork and pull request flow would add a merge step per change with a deadline inside 30
+hours.
+**Alternatives.** Fork and pull request was offered and rejected. Pushing everything through one
+account was rejected because it breaks authorship and creates merge races.
+**Open.** Workstream ownership in `OWNERS.md` is still unassigned. Until a row has a name, nobody
+writes to that path.

@@ -2,6 +2,23 @@
 
 One writer per path. Two writers on one file is the only way this repo breaks.
 
+## The four of us
+
+| GitHub | Role |
+|---|---|
+| sebastbernal2-ship-it | repo owner, has push |
+| aidanq06 | invited, write permission |
+| vshnu1 | invited, write permission |
+| lucyrunner | invited, write permission |
+
+An invitation is not access until it is accepted. Each person accepts the GitHub invite, then runs
+`make bootstrap` once and `make doctor` to confirm.
+
+## Who takes which workstream
+
+Fill this in tonight, one name per row. Until a row has a name, that path has no owner and nobody
+should write to it.
+
 | Workstream | Person | Owns these paths |
 |---|---|---|
 | W0 Data and harness | TBD | `data/`, `src/common/`, `docs/04-memory.md`, `results/costs.json` |
