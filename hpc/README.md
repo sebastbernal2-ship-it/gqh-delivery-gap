@@ -10,6 +10,10 @@ hpc/<approach>/          job scripts, environment spec, and a README saying what
 hpc/<approach>/README.md what it runs, what it needs, what it produced
 ```
 
+The first probabilistic-council pilot is in [`probabilistic-council/`](probabilistic-council/README.md).
+It is CPU-only and synthetic; it validates the distribution and job interfaces, not the trading
+idea or any model's predictive value.
+
 ## Rules
 
 1. Scripts are committed. Outputs are not. Keep runs, logs, and result blobs outside the repo or
