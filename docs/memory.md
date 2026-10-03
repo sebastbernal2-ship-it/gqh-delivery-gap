@@ -111,7 +111,7 @@ missing entry. It is idempotent. `tests/test_memory_absorb.py` covers the diff l
 
 ### One time seed
 
-`bash scripts/memory-seed-shared.sh` rebuilds the shared files from every memory in the project
+`bash scripts/memory-share.sh` rebuilds the shared files from every memory in the project
 store, ignoring the share tag. Use it once, when a store already holds a body of project memory,
 and review the diff before committing.
 

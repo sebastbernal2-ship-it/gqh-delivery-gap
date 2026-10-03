@@ -29,7 +29,9 @@ note "resolved store: ${STORE:-none}"
 case "$STORE" in
   "$ROOT") note "scope: this repo only (good)" ;;
   "") bad "no store found. Run: make bootstrap" ;;
-  *) bad "store is OUTSIDE the repo at $STORE. Project memories here can appear in other projects' sessions. Fix: run make bootstrap so this repo gets its own store." ;;
+  *) note "store resolved to $STORE, outside this repo (hippo found a store in a parent directory)"
+     note "sharing stays safe: make share runs in tagged mode and only ever adds"
+     note "your own recall may mix with that directory's projects. Run hippo init here for a local store" ;;
 esac
 
 if command -v hippo >/dev/null 2>&1; then
@@ -126,10 +128,10 @@ PYEOF
   if [ "$active" -eq 0 ]; then
     note "no active thesis recorded. The team is between positions (allowed, but say so out loud)."
   fi
-  if [ docs/CURRENT.md -ot docs/theses/index.jsonl ]; then
-    bad "docs/CURRENT.md is older than the ledger. Run: make current"
+  if python3 scripts/render_current.py --check >/dev/null 2>&1; then
+    note "docs/CURRENT.md matches the ledger"
   else
-    note "docs/CURRENT.md is current with the ledger"
+    bad "docs/CURRENT.md does not match the ledger. Run: make current"
   fi
 else
   bad "docs/theses/index.jsonl is missing: there is no ledger to record the position in"

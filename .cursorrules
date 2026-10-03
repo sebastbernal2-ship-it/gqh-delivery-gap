@@ -6,8 +6,8 @@ session, before writing anything.
 Short version:
 
 1. Run `make sync` before you start. It pulls the team's work and loads their shared memory.
-2. Read `memory/SHARED.md`, then `docs/brief.md`, `docs/01-idea.md`, `docs/02-system.md`,
-   `docs/decisions.md`.
+2. Read `memory/SHARED.md`, then `docs/CURRENT.md`, `docs/brief.md`, `docs/decisions.md`,
+   `docs/workflow.md`.
 3. Work only in the paths your workstream owns: `OWNERS.md`.
 4. Every number the note quotes comes from `results/`. Regenerate, never hand-edit.
 5. Write the hypothesis and the falsifier before looking at results. Never open the

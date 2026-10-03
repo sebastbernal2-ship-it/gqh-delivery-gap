@@ -73,6 +73,8 @@ secrets:
 check: secrets
 	@python3 scripts/check_theses.py
 	@python3 scripts/check_structure.py
+	@python3 scripts/check_paths.py
+	@python3 scripts/render_current.py --check
 
 status:
 	@git status -sb

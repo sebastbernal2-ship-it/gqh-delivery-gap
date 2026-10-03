@@ -61,11 +61,22 @@ def assign(name: str, value: str, sep: str = " = ") -> str:
     return name + sep + value
 
 
+@case("code that merely mentions a token name is kept")
+def _():
+    for text in [
+        'TOKEN = re.compile(r"docs/")',
+        'token = df["token"]',
+        "auth_token = get_token(request)",
+    ]:
+        out = filter_entries([entry(text)], SHARE)
+        assert len(out) == 1, (text, out)
+
+
 @case("api key assignments are dropped")
 def _():
     for text in [
         assign("OPENAI_API_KEY", fake("sk-proj-"), "="),
-        assign("client_secret", "abc12345"),
+        assign("client_secret", "abc12345wxyz"),
         assign("GITHUB_TOKEN", fake("ghp_", "abcdefghijklmnopqrstuvwxyz"), "="),
         fake("AIzaSy", "A1b2C3d4E5f6G7h8I9j0K1l2M3n4O5p6"),
         "-----BEGIN " + "OPENSSH PRIVATE KEY-----",

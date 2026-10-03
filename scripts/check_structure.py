@@ -7,11 +7,14 @@ Two rules only, both cheap to satisfy and expensive to lose:
    what it is for without reading the code.
 2. The repo root stays a short list. New things go in a named area, not in the root.
 
-Run by `make check`. Add a new area deliberately: add it to TOP_LEVEL and say why in
-docs/decisions.md.
+This reads git, not the filesystem. Local junk (a virtual environment, caches, an egg-info
+directory, a scratch notebook) must never fail the check for someone else's clone.
+
+Run by `make check`.
 """
 from __future__ import annotations
 
+import subprocess
 import sys
 from pathlib import Path
 
@@ -23,62 +26,57 @@ TOP_LEVEL = {
     "tests",
 }
 AREAS = ["src", "hpc"]
-# Directories that are never part of the layout.
-IGNORED = {"." "git", "." "hippo", "." "pi", "." "venv", "__pycache__"}
 
 
-def visible(entry: Path) -> bool:
-    return entry.name not in IGNORED
+def tracked_paths(root: Path) -> list[str]:
+    out = subprocess.run(["git", "ls-files", "--cached", "--others", "--exclude-standard"], cwd=root, capture_output=True, text=True)
+    return [line for line in out.stdout.splitlines() if line.strip()]
 
 
-def problems(root: Path, top_level=TOP_LEVEL, areas=AREAS) -> list[str]:
-    out: list[str] = []
-    for entry in sorted(root.iterdir()):
-        if not visible(entry) or entry.name.startswith("."):
-            continue
-        if entry.name not in top_level:
-            out.append(f"{entry.name}: not a known area. Put it inside one, or add it to "
-                       f"scripts/check_structure.py and say why in docs/decisions.md")
+def problems(tracked: list[str], top_level=TOP_LEVEL, areas=AREAS) -> list[str]:
+    found: list[str] = []
+    top = {path.split("/")[0] for path in tracked}
+    for name in sorted(top - top_level):
+        found.append(f"{name}: not a known area. Put it inside one, or add it to "
+                     f"scripts/check_structure.py and say why in docs/decisions.md")
     for area in areas:
-        base = root / area
-        if not base.is_dir():
-            continue
-        for child in sorted(base.iterdir()):
-            if not child.is_dir() or child.name == "__pycache__":
-                continue
-            if not (child / "README.md").exists():
-                out.append(f"{area}/{child.name}/ has no README.md. One paragraph is enough: "
-                           f"what it is, who owns it, how to run it")
-    return out
+        prefix = f"{area}/"
+        components = {path.split("/")[1] for path in tracked
+                      if path.startswith(prefix) and path.count("/") >= 2}
+        for component in sorted(components):
+            readme = f"{area}/{component}/README.md"
+            if readme not in tracked:
+                found.append(f"{area}/{component}/ has no README.md. One paragraph is enough: "
+                             f"what it is, who owns it, how to run it")
+    return found
 
 
-def inventory(root: Path, areas=AREAS) -> list[str]:
+def inventory(tracked: list[str], areas=AREAS) -> list[str]:
     lines = []
     for area in areas:
-        base = root / area
-        if not base.is_dir():
-            continue
-        children = [c.name for c in sorted(base.iterdir())
-                    if c.is_dir() and c.name != "__pycache__"]
-        lines.append(f"  {area}/: {', '.join(children) if children else '(empty)'}")
-    docs = root / "docs"
-    if docs.is_dir():
-        papers = sorted(d.name for d in docs.iterdir() if d.is_file())
-        lines.append(f"  docs/: {', '.join(papers)}")
+        prefix = f"{area}/"
+        components = sorted({path.split("/")[1] for path in tracked
+                             if path.startswith(prefix) and path.count("/") >= 2})
+        lines.append(f"  {area}/: {', '.join(components) if components else '(empty)'}")
+    docs = sorted({path.split("/")[1] for path in tracked
+                   if path.startswith("docs/") and path.count("/") == 1})
+    if docs:
+        lines.append(f"  docs/: {', '.join(docs)}")
     return lines
 
 
 def main() -> int:
-    found = problems(ROOT)
+    tracked = tracked_paths(ROOT)
+    found = problems(tracked)
     print("inventory:")
-    for line in inventory(ROOT):
+    for line in inventory(tracked):
         print(line)
     if found:
         print("structure problems:")
         for problem in found:
             print(f"  - {problem}")
         return 1
-    print("structure: clean")
+    print(f"structure: clean ({len(tracked)} tracked files)")
     return 0
 
 

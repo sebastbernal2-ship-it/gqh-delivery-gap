@@ -21,13 +21,14 @@ WIN_HOME = re.compile(r"(/mnt/[a-z]/Users/|[A-Za-z]:\\Users\\)[A-Za-z0-9._-]+")
 MAC_HOME = re.compile(r"/Users/[A-Za-z0-9._-]+")
 
 # Assignment of a credential-looking name to a value.
-# A credential name assigned to a value. The value must look like a value: at least
-# six characters from the key alphabet, optionally quoted. This keeps prose such as
-# "never commit api keys" out of the net while still catching a pasted key.
+# A credential name assigned to a value. The value has to look like a credential:
+# quoted and at least six characters, or bare and at least twelve characters from the key
+# alphabet. Without that, ordinary code fails the gate: `TOKEN = re.compile(...)` and
+# `token = df["token"]` are not leaks, and a gate that cries wolf gets switched off.
 SECRET_ASSIGNMENT = re.compile(
     r"(?i)\b(api[_-]?key|apikey|secret|client[_-]?secret|password|passwd|passphrase"
     r"|private[_-]?key|access[_-]?token|auth[_-]?token|refresh[_-]?token|token|bearer)\b"
-    r"\s*[:=]\s*[\"']?[A-Za-z0-9_.\-]{6,}"
+    r"\s*[:=]\s*(?:[\"'][^\"']{6,}[\"']|[A-Za-z0-9+/_\-]{12,})"
 )
 
 # Credential value shapes, even without a name in front.

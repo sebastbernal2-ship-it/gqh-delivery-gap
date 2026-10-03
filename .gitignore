@@ -1,4 +1,10 @@
-# Data is fetched, never committed
+# Credentials never ship
+.env
+.env.*
+*.pem
+*.key
+
+# Data is fetched or produced, never committed
 data/*
 !data/README.md
 
@@ -9,15 +15,31 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .ipynb_checkpoints/
-.env
-.env.*
 *.egg-info/
+.ruff_cache/
+.mypy_cache/
 
-# Large local artifacts
+# Local artifacts and run output
 *.parquet
 *.db
 *.duckdb
 *.zip
+*.log
+*.out
+*.err
+*.npz
+*.npy
+*.h5
+*.hdf5
+*.pt
+*.ckpt
+*.safetensors
+runs/
+outputs/
+wandb/
+.DS_Store
+
+# Local agent state
 .hippo/
 .pi/
 
@@ -27,6 +49,6 @@ memory/*.json
 memory/*.md
 !memory/SHARED.md
 
-# Scratch clone directories
+# Scratch directories for testing the new-device path
 _devtest/
 _clonetest/

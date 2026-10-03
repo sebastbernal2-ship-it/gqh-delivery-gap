@@ -2,9 +2,10 @@
 """Tests for the structure check.
 
 Run: python3 tests/test_structure.py
+
+The check reads git's tracked files, so local junk never fails it.
 """
 import sys
-import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
@@ -12,14 +13,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 from check_structure import problems  # noqa: E402
 
 TOP = {"docs", "src", "hpc", "README.md"}
-
-
-def build(root: Path, tree: dict) -> None:
-    for name, files in tree.items():
-        directory = root / name
-        directory.mkdir(parents=True, exist_ok=True)
-        for f in files or []:
-            (directory / f).write_text("x")
 
 
 def main() -> int:
@@ -32,30 +25,17 @@ def main() -> int:
         else:
             print(f"ok   {name}")
 
-    with tempfile.TemporaryDirectory() as d:
-        root = Path(d)
-        build(root, {"src": [], "hpc": [], "docs": [], "README.md": []})
-        check("named areas with no components pass", problems(root, TOP, ["src", "hpc"]))
+    check("known areas with no components pass", problems(["docs/README.md", "src/README.md"], TOP))
+    check("an unknown root entry fails",
+          problems(["docs/README.md", "scratch/x.py"], TOP), expect_empty=False)
+    check("a component without its own README fails",
+          problems(["src/README.md", "src/strat/core.py"], TOP), expect_empty=False)
+    check("a documented component passes",
+          problems(["src/README.md", "src/strat/README.md", "hpc/slurm/README.md"], TOP))
+    check("a stray local file that git ignores never appears here",
+          problems(["src/README.md"], TOP))
 
-    with tempfile.TemporaryDirectory() as d:
-        root = Path(d)
-        build(root, {"src": [], "hpc": [], "docs": [], "README.md": [], "scratch": []})
-        check("an unknown root entry fails", problems(root, TOP, ["src", "hpc"]), expect_empty=False)
-
-    with tempfile.TemporaryDirectory() as d:
-        root = Path(d)
-        build(root, {"src": [], "hpc": [], "docs": [], "README.md": []})
-        build(root, {"src/strat": []})
-        check("a component without its own README fails", problems(root, TOP, ["src", "hpc"]),
-              expect_empty=False)
-
-    with tempfile.TemporaryDirectory() as d:
-        root = Path(d)
-        build(root, {"src": [], "hpc": [], "docs": [], "README.md": []})
-        build(root, {"src/strat": ["README.md"], "hpc/slurm": ["README.md"]})
-        check("documented components pass", problems(root, TOP, ["src", "hpc"]))
-
-    print(f"\n{4 - len(failures)}/4 passed")
+    print(f"\n{5 - len(failures)}/5 passed")
     return 1 if failures else 0
 
 
