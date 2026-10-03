@@ -1,4 +1,4 @@
-.PHONY: sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test secrets check status
+.PHONY: sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test secrets check strategy-check manifest pdf-check gate-status status
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -87,6 +87,18 @@ test:
 	@python3 tests/test_xbrl.py
 	@python3 tests/test_eia.py
 	@python3 tests/test_event.py
+	@python3 tests/test_strategy_contracts.py
+	@python3 tests/test_market_runner.py
+	@python3 tests/test_market_control_panel.py
+	@python3 tests/test_tradeability_panel.py
+	@python3 tests/test_crosswalk_review.py
+	@python3 tests/test_pdf_renderer.py
+	@python3 tests/test_strategy_builders.py
+	@python3 tests/test_strategy_sources.py
+	@python3 tests/test_strategy_e2e.py
+	@python3 tests/test_run_manifest.py
+	@python3 tests/test_controls_metrics.py
+	@python3 tests/test_strategy_identification.py
 	@python3 tests/test_universe.py
 	@python3 tests/test_scan.py
 	@python3 tests/test_quantgraph_manifest.py
@@ -117,6 +129,23 @@ ideas:
 # Credential scan over every file. This repo is public.
 secrets:
 	@python3 scripts/scan_secrets.py
+
+# Validate any supplied typed strategy package. Usage: make strategy-check EVENTS=...
+strategy-check:
+	@test -n "$(EVENTS)$(EXPOSURES)$(PHYSICAL)$(TRADES)$(CROSSWALK)" || (echo 'usage: make strategy-check EVENTS=... [EXPOSURES=...] [PHYSICAL=...] [TRADES=...]' && exit 1)
+	@python3 scripts/check_strategy_ledger.py $(if $(EVENTS),--events $(EVENTS),) $(if $(EXPOSURES),--exposures $(EXPOSURES),) $(if $(PHYSICAL),--physical $(PHYSICAL),) $(if $(TRADES),--trades $(TRADES),) $(if $(CROSSWALK),--crosswalk $(CROSSWALK),)
+
+# Hash current strategy inputs and record the code revision.
+manifest:
+	@python3 scripts/build_run_manifest.py
+
+# Report the closed or open strategy promotion gate.
+gate-status:
+	@python3 scripts/report_promotion_gate.py
+
+# Report the selected HTML-to-PDF renderer. Use RENDER=1 to render when installed.
+pdf-check:
+	@python3 scripts/check_pdf_renderer.py $(if $(RENDER),--render,)
 
 # Public repo gate: no credentials, and the ledger is valid.
 check: secrets

@@ -34,8 +34,14 @@ from factors.queue import state_panel  # noqa: E402
 from factors.weather import known_at as weather_known_at, monthly_series, state_anomaly, state_codes  # noqa: E402
 
 CACHE = ROOT / "data" / "promise-series"
-FACTORS = ["precip_anomaly", "drought_severity", "gas_level", "rate_level", "lead_time_share_negative",
-           "lead_time_growth", "pipeline_momentum", "promise_horizon_months"]
+ENVIRONMENT_FACTORS = ["precip_anomaly", "drought_severity", "gas_level", "rate_level",
+                       "lead_time_share_negative", "lead_time_growth", "pipeline_momentum",
+                       "promise_horizon_months"]
+# The bottleneck set passes the relevance gate: every one of these names a payer. Construction spending says
+# who is trying to build, supply chain pressure and delivery times say how long they wait.
+BOTTLENECK_FACTORS = ["dc_construction_musd", "power_construction_musd", "equipment_construction_musd",
+                      "gscpi", "delivery_times", "promise_horizon_months", "pipeline_momentum"]
+FACTORS = ENVIRONMENT_FACTORS
 FIELDS = ["month", "state", "technology", "capacity", "log_capacity", "age_months", "start_year",
           "event"] + FACTORS
 
@@ -74,7 +80,11 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", default="results/delivery-model-panel.csv")
     parser.add_argument("--end", default="2022-09")
+    parser.add_argument("--factor-set", choices=("environment", "bottleneck"), default="environment")
     args = parser.parse_args(argv)
+    factors = BOTTLENECK_FACTORS if args.factor_set == "bottleneck" else ENVIRONMENT_FACTORS
+    fields = ["month", "state", "technology", "capacity", "log_capacity", "age_months", "start_year",
+              "event"] + factors
 
     observed = load_generators()
     print(f"generators in the cache: {len(observed)}")
@@ -91,6 +101,16 @@ def main(argv: list[str] | None = None) -> int:
     lead_share = {g: {m: v["share_negative"] for m, v in r.items()} for g, r in backlog.items()}
     lead_growth = {g: trailing_growth(r) for g, r in backlog.items()}
     congestion = state_panel()
+    bottleneck: dict[str, dict[str, float]] = {}
+    if args.factor_set == "bottleneck":
+        import csv as _csv
+        source = ROOT / "results" / "bottleneck-factors.csv"
+        if not source.exists():
+            raise SystemExit("run scripts/build_bottleneck_factors.py first")
+        with source.open() as handle:
+            for row in _csv.DictReader(handle):
+                bottleneck[row["month"]] = row
+        print(f"bottleneck months available: {len(bottleneck)}")
 
     rows: list[dict] = []
     events = 0
@@ -131,6 +151,18 @@ def main(argv: list[str] | None = None) -> int:
                 "pipeline_momentum": congestion_row.get("pipeline_momentum"),
                 "promise_horizon_months": congestion_row.get("promise_horizon_months"),
             }
+            if args.factor_set == "bottleneck":
+                # Two months of lag, declared as conservative for all three publishers.
+                source_month = shift_month(month, -2)
+                source_row = bottleneck.get(source_month, {})
+                for factor in BOTTLENECK_FACTORS:
+                    raw = source_row.get(factor)
+                    try:
+                        record[factor] = float(raw) if raw not in (None, "") else None
+                    except (TypeError, ValueError):
+                        record[factor] = None
+                record["promise_horizon_months"] = congestion_row.get("promise_horizon_months")
+                record["pipeline_momentum"] = congestion_row.get("pipeline_momentum")
             rows.append(record)
             events += record["event"]
             month = shift_month(month, 1)
@@ -138,14 +170,14 @@ def main(argv: list[str] | None = None) -> int:
     out = ROOT / args.out
     out.parent.mkdir(parents=True, exist_ok=True)
     with out.open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=FIELDS, extrasaction="ignore")
+        writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
 
     print(f"wrote {args.out}: {len(rows)} project months, {events} revision months "
           f"({events / len(rows):.1%})")
     print("factor coverage:")
-    for factor in FACTORS:
+    for factor in factors:
         present = sum(1 for row in rows if row[factor] is not None and row[factor] == row[factor])
         print(f"  {factor:26s} {present:7d} of {len(rows)} ({present / len(rows):5.1%})")
     print("technologies:", dict(sorted(technologies.items(), key=lambda kv: -kv[1])[:6]))

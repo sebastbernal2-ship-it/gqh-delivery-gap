@@ -42,13 +42,24 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from models.hazard import auc, bootstrap, fit, log_likelihood, odds_ratios  # noqa: E402
 
-FACTORS = ["precip_anomaly", "drought_severity", "gas_level", "rate_level", "lead_time_share_negative",
-           "lead_time_growth", "pipeline_momentum", "promise_horizon_months"]
-EXPLORATORY = {"gas_level", "rate_level"}
+ENVIRONMENT_FACTORS = ["precip_anomaly", "drought_severity", "gas_level", "rate_level",
+                       "lead_time_share_negative", "lead_time_growth", "pipeline_momentum",
+                       "promise_horizon_months"]
+BOTTLENECK_FACTORS = ["dc_construction_musd", "power_construction_musd", "equipment_construction_musd",
+                      "gscpi", "delivery_times", "promise_horizon_months", "pipeline_momentum"]
+# Declared signs for the bottleneck set, written before fitting: more building and longer waits are both
+# expected to raise the chance that a promise moves.
+FACTORS = ENVIRONMENT_FACTORS
+EXPLORATORY: set[str] = {"gas_level", "rate_level"}
 SPLIT = "2020-01"
 WATER_DEPENDENT = ("Conventional Hydroelectric", "Natural Gas Fired Combined Cycle",
                    "Natural Gas Fired Combustion Turbine", "Natural Gas Internal Combustion Engine")
 CONSTRUCTION_HEAVY = ("Solar Photovoltaic", "Onshore Wind Turbine", "Batteries")
+# For the bottleneck set the split is about heavy equipment: turbines, transformers and switchgear dominate
+# these technologies, while solar and batteries are mostly panels, cells and inverters.
+EQUIPMENT_HEAVY = ("Onshore Wind Turbine", "Natural Gas Fired Combined Cycle",
+                   "Natural Gas Fired Combustion Turbine", "Conventional Hydroelectric")
+EQUIPMENT_LIGHT = ("Solar Photovoltaic", "Batteries")
 
 def load(path: Path) -> list[dict]:
     with path.open() as handle:
@@ -71,11 +82,22 @@ def median_by_technology(rows: list[dict], factor: str) -> dict[str, float]:
     return out
 
 
-def build(rows: list[dict], technologies: list[str]):
+def build(rows: list[dict], technologies: list[str], month_effects: bool = False,
+          interaction_group: tuple[str, ...] | None = None):
     """Controls, then factors with imputation flags. Returns names, matrix, outcome and months."""
     imputation = {factor: median_by_technology(rows, factor) for factor in FACTORS}
     names = ["log_capacity", "age_months", "start_year"] + [f"tech_{t[:14]}" for t in technologies]
     names += FACTORS + [f"missing_{f}" for f in FACTORS]
+    month_names: list[str] = []
+    interaction_names: list[str] = []
+    if month_effects:
+        # Market wide factors are identical for every project in a month, so a time trend absorbs them. Month
+        # effects remove that trend and leave the identification to differential exposure.
+        month_names = [m for m in sorted({row["month"] for row in rows})][1:]
+        names += [f"month_{m}" for m in month_names]
+    if interaction_group:
+        interaction_names = [f"{factor}_x_group" for factor in FACTORS]
+        names += interaction_names
     matrix, outcome, months = [], [], []
     for row in rows:
         technology = row["technology"]
@@ -87,6 +109,11 @@ def build(rows: list[dict], technologies: list[str]):
             feature.append(value if value is not None else imputation[factor].get(technology, 0.0))
         for factor in FACTORS:
             feature.append(0.0 if number(row[factor]) is not None else 1.0)
+        if month_effects:
+            feature += [1.0 if row["month"] == m else 0.0 for m in month_names]
+        if interaction_group:
+            inside = 1.0 if row["technology"] in interaction_group else 0.0
+            feature += [feature[3 + len(technologies) + FACTORS.index(f)] * inside for f in FACTORS]
         matrix.append(feature)
         outcome.append(float(row["event"]))
         months.append(row["month"])
@@ -119,8 +146,11 @@ def placebo_block(x, months, start: int, end: int, seed: int = 11):
     return out
 
 
-def fit_group(rows: list[dict], technologies: list[str], start: int, end: int, trials: int):
-    names, x, y, months = build(rows, technologies)
+def fit_group(rows: list[dict], technologies: list[str], start: int, end: int, trials: int,
+              group: tuple[str, ...] | None = None, month_effects: bool = False):
+    """Fit one subset and return its odds ratios by name, for the specificity comparison."""
+    names, x, y, months = build(rows, technologies, month_effects=month_effects,
+                                interaction_group=group)
     train = np.array([m < SPLIT for m in months])
     x_train, x_test = standardise(x[train], x[~train], start, end)
     weights, _ = fit(x_train, y[train])
@@ -132,18 +162,32 @@ def fit_group(rows: list[dict], technologies: list[str], start: int, end: int, t
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--panel", default="results/delivery-model-panel.csv")
+    parser.add_argument("--factor-set", choices=("environment", "bottleneck"), default="environment")
+    parser.add_argument("--month-effects", action="store_true",
+                        help="absorb the calendar so market wide factors are identified by differential exposure")
+    parser.add_argument("--interaction-group", default="",
+                        help="comma separated technologies that form the exposed group for interactions")
     parser.add_argument("--view", default="results/delivery-model.md")
     parser.add_argument("--coefficients", default="results/delivery-model-coefficients.csv")
     args = parser.parse_args(argv)
 
+    global FACTORS, EXPLORATORY
+    if args.factor_set == "bottleneck":
+        FACTORS = BOTTLENECK_FACTORS
+        EXPLORATORY = set()
+        print("bottleneck factor set: signs declared before fitting. Construction spending and delivery times "
+              "are both expected to raise the chance of a revision.")
+    group = tuple(t.strip() for t in args.interaction_group.split(",") if t.strip()) or None
     rows = load(ROOT / args.panel)
     counts: dict[str, int] = defaultdict(int)
     for row in rows:
         counts[row["technology"]] += 1
     technologies = [t for t, _ in sorted(counts.items(), key=lambda kv: -kv[1])[:8]]
-    names, x, y, months = build(rows, technologies)
+    names, x, y, months = build(rows, technologies, month_effects=args.month_effects,
+                                interaction_group=group)
     controls_end = 3 + len(technologies)
     factor_end = controls_end + len(FACTORS)
+    print(f"features: {len(names)} | month effects: {args.month_effects} | interaction group: {group}")
 
     train = np.array([m < SPLIT for m in months])
     print(f"rows: {len(rows)}  train: {int(train.sum())}  test: {int((~train).sum())}")
@@ -177,6 +221,10 @@ def main(argv: list[str] | None = None) -> int:
     for position, name in enumerate(names):
         if position < controls_end:
             continue
+        if args.month_effects and name.startswith("month_"):
+            continue
+        if args.month_effects and not name.endswith("_x_group"):
+            continue
         ratio = ratios[position]
         note = "exploratory, no sign declared" if name in EXPLORATORY else ""
         flag = "spans one" if ratio["spans_one"] else "clear of one"
@@ -194,32 +242,39 @@ def main(argv: list[str] | None = None) -> int:
 
     print("")
     print("specificity: the same model on two groups the mechanism treats differently")
-    print(f"{'group':22s} {'rows':>7s} {'drought OR':>11s} {'precip OR':>11s}")
+    if args.factor_set == "bottleneck":
+        pairs = (("equipment heavy", EQUIPMENT_HEAVY), ("equipment light", EQUIPMENT_LIGHT))
+        focus = ("gscpi", "delivery_times")
+    else:
+        pairs = (("water dependent", WATER_DEPENDENT), ("construction heavy", CONSTRUCTION_HEAVY))
+        focus = ("drought_severity", "precip_anomaly")
+    print(f"{'group':20s} {'rows':>7s} {focus[0][:11]:>12s} {focus[1][:12]:>13s}")
     lines = []
-    for label, group in (("water dependent", WATER_DEPENDENT), ("construction heavy", CONSTRUCTION_HEAVY)):
+    for label, group in pairs:
         subset = [row for row in rows if row["technology"] in group]
         if len(subset) < 500:
             print(f"{label:22s} {len(subset):>7d} too few rows")
             continue
-        by_name, _, _, _, _ = fit_group(subset, technologies, controls_end, factor_end, 12)
-        drought = by_name.get("drought_severity", {})
-        precip = by_name.get("precip_anomaly", {})
-        print(f"{label:22s} {len(subset):>7d} {drought.get('odds_ratio', float('nan')):>11.3f} "
-              f"{precip.get('odds_ratio', float('nan')):>11.3f}")
+        by_name, _, _, _, _ = fit_group(subset, technologies, controls_end, factor_end, 12, group,
+                                        args.month_effects)
+        first = by_name.get(focus[0], {})
+        second = by_name.get(focus[1], {})
+        print(f"{label:20s} {len(subset):>7d} {first.get('odds_ratio', float('nan')):>12.3f} "
+              f"{second.get('odds_ratio', float('nan')):>13.3f}")
         lines.append(f"| {label} | {len(subset)} | "
-                     f"{drought.get('odds_ratio', float('nan')):.3f} "
-                     f"[{drought.get('odds_low', float('nan')):.3f}, "
-                     f"{drought.get('odds_high', float('nan')):.3f}] | "
-                     f"{precip.get('odds_ratio', float('nan')):.3f} "
-                     f"[{precip.get('odds_low', float('nan')):.3f}, "
-                     f"{precip.get('odds_high', float('nan')):.3f}] |")
+                     f"{first.get('odds_ratio', float('nan')):.3f} "
+                     f"[{first.get('odds_low', float('nan')):.3f}, "
+                     f"{first.get('odds_high', float('nan')):.3f}] | "
+                     f"{second.get('odds_ratio', float('nan')):.3f} "
+                     f"[{second.get('odds_low', float('nan')):.3f}, "
+                     f"{second.get('odds_high', float('nan')):.3f}] |")
 
     view = ["# What moves delivery", "",
             "Generated by `make delivery-model`. The object is a project promise, not a price.", "",
             f"Rows: {len(rows)} project months, {int(y.sum())} of them revision months. "
             f"Training through 2019, testing from 2020.", "",
             "## Specificity", "",
-            "| group | rows | drought odds ratio | precipitation odds ratio |",
+            f"| group | rows | {focus[0]} odds ratio | {focus[1]} odds ratio |",
             "|---|---|---|---|"] + lines + [
             "", "Signs were declared before fitting. Drought and precipitation are expected to raise the",
             "chance of a revision. Fuel and rates carry no declared sign, so their coefficients are",
