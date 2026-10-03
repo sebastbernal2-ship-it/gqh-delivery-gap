@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "GQH 2026 Systematic Trading entry"
 requires-python = ">=3.11"
 # Dependencies are added when code needs them, and recorded in docs/decisions.md.
-dependencies = []
+dependencies = ["psycopg[binary]"]  # read-only TigerData access, see docs/decisions.md
 
 [tool.setuptools]
 packages = []

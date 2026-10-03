@@ -27,7 +27,9 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from check_scan import load, pairs  # noqa: E402
+from scan.windows import FIREWALL, clip, describe, get  # noqa: E402
 from scan.series import build  # noqa: E402
+from scan.report import summarise as correction_summary  # noqa: E402
 from scan.stats import measure, multiplicity_report  # noqa: E402
 
 FIELDS = ["pair", "a", "b", "series_a", "series_b", "coverage", "n", "level_rho", "change_rho",
@@ -45,8 +47,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--expectations", default="results/capacity-expectations.csv")
     parser.add_argument("--events", default="results/rpo-events.csv")
     parser.add_argument("--out", default="results/scan-pairs.csv")
+    parser.add_argument("--window", default="compute-era",
+                        help="which declared study window this measurement belongs to")
     parser.add_argument("--summary", action="store_true")
     args = parser.parse_args(argv)
+    window = get(args.window)
 
     nodes = load()
     declared = pairs(nodes)
@@ -67,7 +72,7 @@ def main(argv: list[str] | None = None) -> int:
     for pair in measurable:
         for label_a in by_node.get(pair["a"], []):
             for label_b in by_node.get(pair["b"], []):
-                xs, ys, months = align(series[label_a], series[label_b])
+                xs, ys, months = align(clip(series[label_a], window), clip(series[label_b], window))
                 if len(months) < 12:
                     rows.append({"pair": f"{label_a} ~ {label_b}", "a": pair["a"], "b": pair["b"],
                                  "series_a": label_a, "series_b": label_b, "coverage": "too few months",
@@ -93,7 +98,13 @@ def main(argv: list[str] | None = None) -> int:
         print(f"wrote {args.out} ({len(rows)} rows)")
 
     print("")
+    print(f"measured inside the {window.name} window: development {window.history_start} to "
+          f"{window.development_end}, holdout {window.sealed_start} to {window.sealed_end} untouched")
+    print(FIREWALL)
+    print("")
     print(multiplicity_report(results))
+    print("")
+    print(correction_summary(rows, {node["id"]: node for node in nodes}))
     print("")
     print("series-level counts, since a node may contribute more than one representation:")
     counts: dict[str, int] = {}

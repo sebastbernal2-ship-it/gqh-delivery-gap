@@ -721,3 +721,25 @@ is labelled as exploration.
 AI-infrastructure story depends on becomes measurable instead of merely declared.
 **Order of operations this fixes.** The window is fixed first, then the compute series is measured. Deciding
 it after seeing an association would have been post-hoc, and that is exactly the failure the rubric caps.
+
+---
+
+## 2026-10-03: Two studies, two windows, one firewall
+
+**The declaration.** The mechanism and strategy study keeps its history from 2015-07 with its twenty-four
+month holdout from 2022-10. The compute era study has its own window: history from 2022-06 because that is
+where the AWS spot archive begins, development to 2024-03, holdout 2024-04 to 2024-09.
+**Why not one window.** Re-running everything inside the compute window was measured and it costs too much:
+with a twelve-month lookback on twenty-two months of history the capacity strategy has about ten monthly
+observations, which is not a tested strategy but an untestable one. The compute era study gets its twenty-two
+months of discovery, and the strategy keeps a window in which it can actually be tested.
+**The firewall.** Nothing measured in the compute era study may change the design of the mechanism and
+strategy study. The overlap is real: the compute development window sits inside the strategy holdout, so
+without this rule a discovery in one would quietly spend the other's held-out data.
+**Both windows are code, not prose.** `src/scan/windows.py` declares them, `clip` refuses to hand out holdout
+months unless asked, and the scan prints which window it measured in. Tests assert the overlap explicitly
+rather than hiding it.
+**Dependency added.** `psycopg[binary]` in the project environment, for read-only access to the TigerData
+table. The connection string lives only in the environment or an ignored file, is never printed, never
+logged, never written to a tracked file, and a driver failure is reported by type only, because driver
+messages can quote the string.
