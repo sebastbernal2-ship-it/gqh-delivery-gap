@@ -1,0 +1,22 @@
+# Data is fetched, never committed
+data/*
+!data/README.md
+
+# Environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.env
+.env.*
+*.egg-info/
+
+# Large local artifacts
+*.parquet
+*.db
+*.duckdb
+*.zip
+.hippo/
+.pi/

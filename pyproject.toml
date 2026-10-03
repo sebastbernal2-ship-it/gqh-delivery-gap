@@ -1,0 +1,15 @@
+[project]
+name = "gqh-delivery-gap"
+version = "0.1.0"
+description = "GQH 2026 Systematic Trading entry: the delivery gap in the AI capex complex"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy",
+  "pandas",
+  "scipy",
+  "pyarrow",
+  "matplotlib",
+]
+
+[tool.setuptools]
+packages = ["src"]
