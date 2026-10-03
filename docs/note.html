@@ -59,11 +59,25 @@ promise that moved is a revision.</p>
 <tr><td>Promised against realized</td><td class="n">64% late</td><td>of 721 generators promised in 2015 and running by 2023; median 2 months, worst 83</td></tr>
 <tr><td>Concentration</td><td class="n">solar 1,682</td><td>then onshore wind 435, hydro 371, batteries 362, gas CC 272</td></tr>
 </table>
-<p>A monthly series over 111 vintages adds the second finding: the capacity promised for the next calendar
-year grew at a <strong>median 41.7 percent per year</strong> across 2016&ndash;2024. The buildout's pipeline
-expanded relentlessly, and slippage never reversed it. Any naive "slippage" signal is therefore positive in
-89 percent of months, which turns out to be the trap described in section 4.</p>
+<p>A monthly series over 111 vintages adds the second finding: the capacity promised for the next year grew
+at a <strong>median 41.7 percent per year</strong> across 2016&ndash;2024, so slippage never reversed the
+pipeline. Any naive slippage signal is therefore positive in 89 percent of months, which is the trap in
+section 4.</p>
 
+
+<p><strong>The shape of a revision, at monthly resolution.</strong> Tracking 6,407 generators across the
+development vintages gives a sharper picture than the annual comparison can. A first revision arrives quickly,
+a median of <strong>5 months</strong> after a project first appears, and it is usually small: <strong>36
+percent of first revisions are a nudge of one month or less</strong>, while 27 percent are six months or more.
+Excluding nudges, <strong>44 percent of tracked generators</strong> still had a real revision. The hazard rises
+with age rather than falling (23 percent in the first six months, 44 percent between one and two years), so a
+promise is not safer for having survived. Between annual snapshots, where those increments accumulate, the
+modal move is twelve months.</p>
+<p>That decomposition matters for the search rather than only for the description. **A revision signal built
+from all revisions is dominated by month-sized noise**, which is one plausible reason the firm-level tests
+found so little: the median revision carries almost no information, and whatever is there lives in the tail.
+Any future signal should be defined on revisions of six months or more, and that is a change of definition
+made on mechanism evidence rather than on a result.</p>
 <h2>3. Firm level: what a company discloses about itself</h2>
 <p>Project revisions rarely belong to a listed company: an EIA entity is a developer or operator, and only
 <strong>6.2 percent</strong> of slipped capacity sits with an entity whose name carries a large listed owner,
@@ -76,8 +90,8 @@ joins to an acceptance timestamp.</p>
 <tr><td>ETN remaining performance obligations</td><td class="n">15 facts</td><td class="n">median 33 days</td></tr>
 <tr><td>PWR unapproved change orders</td><td class="n">26 facts</td><td class="n">median 94 days</td></tr>
 </table>
-<p>Remaining obligations fall as work is delivered, so a fall is a revision to the disclosed book and not a
-delay, which is why each change is also measured against the firm's own typical change.</p>
+<p>Remaining obligations fall as work is delivered, so a fall is a revision to the disclosed book, not a
+delay, and each change is measured against the firm's own typical change.</p>
 
 <h2>4. Three tests, and the honest answer each gave</h2>
 <h3>Test one: the disclosing firm's own price</h3>
@@ -210,9 +224,12 @@ is that capacity is moot until an association survives its own placebo.</p>
 
 <h2>8. Evidence discipline</h2>
 <ul>
-<li><strong>Variants tried, stated:</strong> 50 group cells, six strategy cells, three selectivity
-thresholds, and 51 scan pairs with two post-measurement corrections and one specificity test. All are
-reported, including the ones that fail.</li>
+<li><strong>Variants tried, stated in one place:</strong> <code>docs/variants.md</code>, generated from the
+artifacts. Across every search, <strong>135 comparisons produced 6 survivors against 5.5 expected by
+chance.</strong> The control is reported separately because it measures the pipeline rather than the search,
+and it produced <strong>7 against 2.5 expected</strong>, which says our calibrated threshold is on the loose
+side for autocorrelated series and is why the family correction and the specificity test are not optional.
+Measurements with no null test are listed apart and excluded from those counts.</li>
 <li><strong>Every signal lagged:</strong> a filing is usable at its acceptance timestamp plus a declared
 processing lag; a monthly inventory is usable at the end of its own month. Fills are the close of the first
 session strictly after that moment, and the code refuses same-bar fills.</li>
