@@ -55,3 +55,6 @@ _clonetest/
 
 # Local EDGAR cache: a local convenience, never committed.
 results/edgar-cache/
+
+# Local EIA vintage cache: public data, kept out of the repo.
+results/eia-cache/

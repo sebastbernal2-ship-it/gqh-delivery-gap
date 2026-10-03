@@ -575,3 +575,27 @@ That is the window in which a revision can be read before it is broadly reflecte
 **Bug worth remembering.** Reading the register back from CSV turned `"False"` into a truthy string, so the
 sealed window was briefly summarised as development. A test now pins that behaviour, because a sealed leak
 is silent and fatal to the submission.
+
+---
+
+## 2026-10-03: The mechanism is measured, and the modal slip is exactly one year
+
+**What was built.** A panel over nine EIA-860M vintages, November 2015 to November 2023, one file per
+year at the same month so the comparisons are like for like. Two measurements come out of it.
+
+**Promises that moved.** Between consecutive vintages, 3,783 promises moved: 3,687 later, 96 earlier.
+Median slip 12 months, mean 13.2, worst 120. The most common slips are 12 months (797 cases), 24 (334),
+6 (256) and 9 (177). **The modal revision is exactly one year**, which says a schedule does not drift
+month by month: it is rolled forward a year at a time. Another 3,451 generators left the planned sheet,
+mostly by starting to run, and 711 were formally cancelled or postponed.
+**By technology**, slipped promises are concentrated: solar 1,682, onshore wind 435, hydro 371, batteries
+362, gas combined cycle 272, gas combustion turbine 188.
+**Promised against realized.** Of the 721 generators promised in the 2015 vintage that were running by
+2023, 464 (64 percent) ran later than promised, median 2 months late, mean 5.8, worst 83.
+**Two bugs found by the tests, both real.** A hardcoded column index meant the 2015 promises came out
+blank until named columns replaced numeric positions. And the summary divided by zero when no realization
+was comparable, which crashed after the data had already been written.
+**What this does and does not support.** It supports the mechanism: promised delivery is a published,
+measurable, frequently revised quantity, and the revision is large and slow, not noise. It does not yet
+connect a revision to a firm's cash or to a price, and nothing here is a trade. The next step is the join
+to firms, which needs the entity-to-project link rather than a sector aggregate.
