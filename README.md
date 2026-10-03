@@ -100,3 +100,7 @@ make bootstrap
 
 `make bootstrap` checks your tooling, creates the virtual environment, installs the
 dependencies, and prints the sync protocol.
+
+## Aidan research context
+
+[Aidan's handoff](docs/inbox/aidan-2026-10-03/README.md) preserves this conversation's strategy evolution, corrections, advanced-method research and proposed implementation contracts. Read it alongside Vishnu's handoff; both are research proposals, not promoted theses.

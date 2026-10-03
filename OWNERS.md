@@ -32,3 +32,14 @@ started.
 These assignments cover the documentation requested in Vishnu's chat. They do not assign
 implementation, OOS access, or strategy approval to that agent. Claim a concrete component here
 before starting it; do not assume a proposed architecture is already implemented.
+
+## Aidan documentation handoff, 2026-10-03
+
+Authorized by Aidan to publish this conversation and its structural proposal.
+
+| Path | Person |
+|---|---|
+| `docs/inbox/aidan-2026-10-03/` | aidanq06 via his documentation agent; research and implementation proposals |
+| `docs/thinking/aidan-2026-10-03.md` | aidanq06 via his documentation agent; reconstructed reasoning history |
+
+This assignment does not assign runtime components or OOS authority. Existing teammate ownership remains in force.

@@ -188,3 +188,13 @@ and prose that merely looks path-shaped, because a gate that cries wolf gets swi
 correct. Entries asserting the parked attempt's out-of-sample split were removed, and `docs/memory.md`
 now states the rule: an entry records what was known when it was written, the branch wins over the
 entry, and stale entries are fixed at the source.
+
+---
+
+## 2026-10-03: Publish Aidan research as a linked handoff, preserve proposal status
+
+**Decision.** At Aidan's request, publish the conversation history and proposed implementation contracts in `docs/inbox/aidan-2026-10-03/`, with the historical reasoning in `docs/thinking/aidan-2026-10-03.md`. Link the existing provider audit and writing conventions rather than duplicate their ownership.
+
+**Reason.** The team needs the corrections and intuition behind the design, not just a final slogan. Separate physical forecasts, financial signals, risk, execution and independent cluster workloads through explicit contracts before parallel implementation.
+
+**Boundary.** This adopts the documentation placement, not the proposed trading rule, runtime languages, OOS dates or every advanced method. No active thesis is promoted and the archive stays parked. The generated current-position file is unchanged.
