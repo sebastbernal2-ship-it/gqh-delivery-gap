@@ -1,4 +1,4 @@
-.PHONY: sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test secrets check strategy-check manifest pdf-check gate-status status
+.PHONY: market sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test secrets check strategy-check manifest pdf-check gate-status status
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -74,6 +74,7 @@ absorb:
 	@bash scripts/memory-absorb.sh
 
 test:
+	@python3 tests/test_market_map.py
 	@python3 tests/test_memory_filter.py
 	@python3 tests/test_memory_absorb.py
 	@python3 tests/test_thesis_index.py
@@ -149,6 +150,7 @@ pdf-check:
 
 # Public repo gate: no credentials, and the ledger is valid.
 check: secrets
+	@python3 scripts/check_market_map.py
 	@python3 scripts/check_theses.py
 	@python3 scripts/check_structure.py
 	@python3 scripts/check_paths.py
@@ -163,3 +165,8 @@ check: secrets
 
 status:
 	@git status -sb
+
+# Regenerate the market map view and validate it: who is forced, by what, and into which instrument.
+market:
+	@python3 scripts/render_market_map.py
+	@python3 scripts/check_market_map.py

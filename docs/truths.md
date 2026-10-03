@@ -155,6 +155,20 @@ estate across many tenants. Server and infrastructure suppliers are diversified,
 HPE's server segment at 53 percent and one rental like line at 18 percent.
 
 
+## T16. Ten metre imagery does not separate construction states well enough to read delivery
+
+**Statement**: on 24 labelled sites the declared statistic, the Spearman correlation between surface texture change
+and months of delivery slip, is plus 0.30 with a permutation p of 0.087, and the late group is indistinguishable
+from the early group, plus 0.30 against plus 0.27. The signal that looked like plus 0.72 on eight sites did not
+hold.
+**Evidence**: `results/imagery-probe-40.csv` and `results/imagery-statistic.txt`, against the pre-registration in
+`docs/plan/imagery-test.md`.
+**Scope**: 40 declared sites, 24 of which produced a usable cloud free scene pair, ten metre Sentinel-2 pixels,
+wind and solar sites.
+**Consequence**: the physical progress direction ends at this resolution and this design. It also establishes a
+feasibility fact: sixteen of forty sites could not produce a usable before and after pair at all, mostly for want
+of a cloud free control patch inside the scene.
+
 ---
 
 # What these truths are pointing at
