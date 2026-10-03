@@ -1,1 +1,1 @@
-entity_name,ticker,cik,evidence,status
+entity_name,ticker,cik,segment,direction,weight,economic_channel,evidence,status,identity_vintage,source_receipt

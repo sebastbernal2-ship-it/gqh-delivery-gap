@@ -42,6 +42,7 @@ wandb/
 # Local agent state
 .hippo/
 .pi/
+graphify-out/
 
 # Memory: the team's shared files are committed, private device exports are not.
 memory/*.json
