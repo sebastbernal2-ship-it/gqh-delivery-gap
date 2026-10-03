@@ -20,15 +20,19 @@ that is published every month and read by almost nobody. We measure the slip as 
 cost between promised and realized delivery dates, and we trade the spread between the
 names that can deliver and the names priced as if they already had.
 
-Full statement in `docs/01-idea.md`. Execution plan in `docs/02-system.md`.
+That thesis is parked while the team's direction settles. The live position is always in
+`docs/CURRENT.md`, which is generated from `docs/theses/index.jsonl`. Nothing in this repo is
+frozen except `docs/00-brief.md` (the track's own rules) and the measurement contract.
 
 ## Layout
 
 | Path | Owner | Holds |
 |---|---|---|
 | `docs/00-brief.md` | fixed | The track facts: deadline, rubric, out-of-sample rule |
-| `docs/01-idea.md` | W1 | The strategy and its mechanism |
-| `docs/02-system.md` | W1 | Engines, workstreams, timeline, cuts |
+| `docs/CURRENT.md` | generated | The live position, regenerated from the ledger |
+| `docs/theses/` | one writer per file | One record per thesis, append-only ledger |
+| `docs/inbox/` | anyone | Drafts and half ideas. No rules, no template |
+| `docs/history/` | nobody | Superseded snapshots, kept as evidence of what we rejected |
 | `docs/03-decisions.md` | append only | Every settled decision, newest at the bottom |
 | `docs/04-memory.md` | W0 | How shared memory and sync work |
 | `memory/SHARED.md` | generated | The team's memory, readable |
