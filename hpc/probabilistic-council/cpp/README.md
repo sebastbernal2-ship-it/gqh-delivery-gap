@@ -30,14 +30,17 @@ cmake --build build-cpp --parallel
 ./build-cpp/council_synthetic_pilot
 ```
 
-On HiPerGator, copy this approach directory to writable scratch or Blue storage, then submit
-`sbatch run-cpp.slurm`. The Slurm job builds with the system C++17 compiler and runs a seeded
-synthetic example. It does not use financial observations or Laya weights. No C++ Laya inference
-adapter, GPU path, data loader, model registry, or execution policy is included yet.
+The native JevLike tiny scorer is part of the library. Export a tiny checkpoint with
+`python3 jevlike/export_tiny_cpp.py`, then call `JevLikeTinyScorer::load()` and `score()`; the
+`jevlike_predict` example is built by `run-jevlike.slurm`. `run-cpp.slurm` builds the standalone
+council smoke workload. Both use synthetic fixtures and contain no financial observations.
+The scorer does not support the optional frozen Hugging Face encoder or GPU inference. Its loader
+checks format and finite tensor values; a serving layer must verify the export manifest hashes.
 
 ## HiPerGator run record
 
 Verified 2026-10-03: Slurm job `44557427` compiled the C++17 library and synthetic pilot on
 HiPerGator, then completed in three seconds with exit code `0` and empty stderr. Stdout reported 120
 synthetic evaluation rows and the parallel fused distribution. This is a software smoke result only;
-it contains no market observations, Laya weights, or financial forecast.
+it contains no market observations, JevLike weights, or financial forecast. A JevLike
+training/export and Python-to-C++ parity run has not yet been recorded.

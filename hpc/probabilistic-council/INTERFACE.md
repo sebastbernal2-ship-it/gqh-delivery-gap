@@ -1,4 +1,4 @@
-# Synthetic council pilot interface
+# Probabilistic council and JevLike interfaces
 
 Contract version: `0.1.0`
 Owner: `lucyrunner`
@@ -11,7 +11,7 @@ job. This fixture is synthetic and makes no financial forecast.
 The fixture generator creates synthetic rows with a binary outcome (`no`, `yes`), one numeric
 feature, and a discrete regime. Specialist adapters return both outcome probabilities summing to
 one, the context they cover, and a stable specialist id. The pilot has two transparent synthetic
-specialists. It does not load Laya weights or external data.
+specialists. It does not load model weights or external data.
 
 The pipeline uses disjoint chronological partitions for fitting, regime-conditional specialist
 temperature calibration, regime-conditional reliability weighting, pool-level temperature
@@ -75,9 +75,11 @@ Runtime contract `council-distribution-0.2.0`. See [`council/README.md`](council
 for API details. The engine validates specialist class order, full probability mass, version and
 time metadata; fits specialist temperatures, context reliability weights, and pool calibration from
 three separate data partitions; supports linear and logarithmic pooling; and returns the fused
-distribution with abstention and uncertainty diagnostics. `LayaChoiceSpecialist` adapts Laya's
-typed `choice` probability map when the optional Laya package and weights are installed. The
-engine remains independent of Laya and quantum packages.
+distribution with abstention and uncertainty diagnostics. `JevLikeChoiceSpecialist` adapts an
+initialized JevLike scorer's option probabilities to this contract. The separate native C++
+`JevLikeTinyScorer` loads the versioned tiny-byte-encoder export. Neither path silently downloads a
+checkpoint or calibrates raw probabilities; calibration is fitted by the council on a designated
+partition. See [`STACK.md`](STACK.md) for current product scope.
 
 Run the deterministic integrated fixture with:
 
