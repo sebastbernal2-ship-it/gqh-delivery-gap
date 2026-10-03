@@ -41,7 +41,7 @@ Measure the distance between our conditional distribution and the market implied
 Measure whether a project is actually being built from imagery, which is an independent read on delivery that depends on nobody's disclosure.
 
 - **status**: running
-- **rationale**: The attribution ceiling is 6.2 percent because exposure lives in documents nobody publishes. A physical measure sidesteps the disclosure question entirely: a site either has foundations, steel and switchgear or it does not. First probe, eight labelled sites at ten metre resolution: brightness change was noise, and texture change correlated +0.72 with months of slip, which is a reason for the next probe rather than a result, especially with four features tried on eight sites.
+- **rationale**: The attribution ceiling is 6.2 percent because exposure lives in documents nobody publishes. A physical measure sidesteps the disclosure question entirely: a site either has foundations, steel and switchgear or it does not. First probe, eight labelled sites at ten metre resolution: brightness change was noise, and texture change correlated +0.72 with months of slip, a reason for the next probe rather than a result.
 - **needs**: public satellite imagery, Sentinel and Landsat, free and global; a labelled sample of known delivery outcomes to calibrate the vision model
 - **capacity**: site specific and labour heavy, so a small book is a natural fit and a large one cannot be built from it
 - **falsifier**: imagery derived progress adds nothing over the published schedule, or it cannot be scored reliably against known outcomes
