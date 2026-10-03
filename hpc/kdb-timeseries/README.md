@@ -53,12 +53,16 @@ the approved KX package and license delivery method.
 
 ## Local/offline tests
 
-The exporter’s normalization and manifest logic can be unit-tested without credentials or a live
-database:
+The exporter and job wrappers can be tested without credentials, Slurm or a live database:
 
 ```sh
 python3 -m unittest discover -s hpc/kdb-timeseries/tests -v
 ```
+
+Wrapper tests use a stub q process to check spooled-script execution, receipt provenance,
+checksum/row-count rejection, failed-loader behavior and version protection. They do **not**
+execute the q loader or verify an HDB. See [VALIDATION.md](VALIDATION.md) for root causes,
+evidence boundaries and the remaining cluster acceptance steps.
 
 ## HiperGator smoke and build
 
@@ -67,15 +71,20 @@ From a HiPerGator login node after software approval and installation:
 ```sh
 export Q_BIN=/approved/path/to/q
 export HPG_BLUE_DIR=/blue/<allocation>/<shared-project-path>
+export GQH_REPO_ROOT=/absolute/shared/path/to/gqh-delivery-gap
 blue_quota
 mkdir -p "$HPG_BLUE_DIR/gqh-kdb/logs"
 cd "$HPG_BLUE_DIR/gqh-kdb/logs"
-sbatch /path/to/gqh-delivery-gap/hpc/kdb-timeseries/slurm/smoke.slurm
+sbatch "$GQH_REPO_ROOT/hpc/kdb-timeseries/slurm/smoke.slurm"
 ```
 
 The smoke job creates a small synthetic date-partitioned HDB under Blue and checks its schema,
 partition dates, rows and integer price fields. It writes logs to the submission directory and
 does not need TigerData, Snowflake, a Massive key, or market data.
+
+Both Slurm wrappers require exported `GQH_REPO_ROOT`, pointing to a checkout visible on compute
+nodes. They reject missing, relative or wrong-component paths. The script location is a Slurm
+spool copy and the submission directory may contain only logs, so neither locates the repository.
 
 After the smoke job passes, stage a verified export TSV under Blue and use `slurm/build-bars.slurm`
 with `GQH_KDB_INPUT_TSV` and `GQH_KDB_OUTPUT_DIR`. Build destinations must be new/empty paths;
@@ -87,8 +96,13 @@ Example once the export TSV and manifest have been transferred to Blue:
 ```sh
 export GQH_KDB_INPUT_TSV="$HPG_BLUE_DIR/gqh-kdb/staging/massive-bars.tsv"
 export GQH_KDB_OUTPUT_DIR="$HPG_BLUE_DIR/gqh-kdb/hdb/massive-bars-v001"
-sbatch /path/to/gqh-delivery-gap/hpc/kdb-timeseries/slurm/build-bars.slurm
+sbatch "$GQH_REPO_ROOT/hpc/kdb-timeseries/slurm/build-bars.slurm"
 ```
+
+The build verifies input body hash and row count before claiming the version directory. If q
+fails, its partial output is retained and no success receipt is written; investigate it and choose
+a fresh version for retry. A receipt means the loader exited successfully, not that restore or
+source reconciliation passed. The wrapper never overwrites an existing version or receipt.
 
 The current batch export command is:
 
