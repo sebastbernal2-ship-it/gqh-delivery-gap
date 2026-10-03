@@ -86,6 +86,7 @@ test:
 	@python3 tests/test_edgar.py
 	@python3 tests/test_xbrl.py
 	@python3 tests/test_eia.py
+	@python3 tests/test_massive_ingest.py
 	@python3 tests/test_event.py
 	@python3 tests/test_universe.py
 	@python3 tests/test_scan.py
