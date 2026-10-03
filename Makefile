@@ -91,6 +91,7 @@ test:
 	@python3 tests/test_scan.py
 	@python3 tests/test_scan_stats.py
 	@python3 tests/test_scan_report.py
+	@python3 tests/test_scan_fdr.py
 	@python3 tests/test_scan_compute.py
 	@python3 tests/test_scan_windows.py
 
