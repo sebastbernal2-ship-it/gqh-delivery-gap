@@ -12,7 +12,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
-from check_paths import references  # noqa: E402
+from check_paths import references, strip_foreign_fences  # noqa: E402
 
 
 def main() -> int:
@@ -41,7 +41,19 @@ def main() -> int:
           references("`docs/brief.md` and `docs/decisions.md`"),
           ["docs/brief.md", "docs/decisions.md"])
 
-    print(f"\n{6 - len(failures)}/6 passed")
+    # A fenced block tagged as belonging to another checkout is that repo's business, not ours.
+    text = ("run these in the sibling checkout:\n"
+            "```sh foreign-repo=algoterminal-data\n"
+            "python scripts/validate_quant_graph.py\n"
+            "```\n"
+            "and this one is ours: `docs/brief.md`\n")
+    check("a foreign repo fence is skipped, the rest is checked",
+          references(strip_foreign_fences(text)), ["docs/brief.md"])
+    check("an untagged fence is still checked",
+          references(strip_foreign_fences("```sh\npython scripts/nope.py\n```")),
+          ["scripts/nope.py"])
+
+    print(f"\n{8 - len(failures)}/8 passed")
     return 1 if failures else 0
 
 
