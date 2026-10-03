@@ -28,8 +28,8 @@ STORE="$(resolve_store "$ROOT")"
 note "resolved store: ${STORE:-none}"
 case "$STORE" in
   "$ROOT") note "scope: this repo only (good)" ;;
-  "") bad "no store found. Run: hippo init --no-hooks --no-schedule" ;;
-  *) bad "store is OUTSIDE the repo at $STORE. Project memories here can appear in other projects' sessions. Fix: create a store at the repo root and move the entries." ;;
+  "") bad "no store found. Run: make bootstrap" ;;
+  *) bad "store is OUTSIDE the repo at $STORE. Project memories here can appear in other projects' sessions. Fix: run make bootstrap so this repo gets its own store." ;;
 esac
 
 if command -v hippo >/dev/null 2>&1; then
@@ -86,7 +86,7 @@ echo "3. capture and shared memory"
 if [ "$(git config core.hooksPath)" = ".githooks" ]; then
   note "commit hook enabled (good)"
 else
-  bad "commit hook not enabled. Run: make bootstrap, or git config core.hooksPath .githooks"
+  bad "commit hook not enabled. Run: make bootstrap"
 fi
 if [ -s memory/shared.json ]; then
   note "shared memory: $(python3 -c 'import json;print(len(json.load(open("memory/shared.json"))))') entries"
@@ -100,6 +100,10 @@ else
 fi
 echo
 
+if [ "$problems" -gt 0 ]; then
+  echo "first run on a new machine: make bootstrap fixes all of the above"
+  echo
+fi
 if [ "$problems" -eq 0 ]; then
   echo "result: healthy"
 else
