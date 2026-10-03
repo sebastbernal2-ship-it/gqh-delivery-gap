@@ -81,7 +81,8 @@ SIC_GROUP = {
 }
 
 EVENT_FIELDS = ["cik", "name", "ticker", "sic", "group", "period_end", "value", "previous_value",
-                "change", "typical_change", "surprise", "form", "accession", "acceptance_utc",
+                "change", "typical_change", "legacy_surprise", "surprise", "expectation_kind",
+                "expectation_status", "form", "accession", "acceptance_utc",
                 "earliest_availability_utc", "availability_resolution", "in_sealed_window",
                 "source_receipt"]
 UNIVERSE_FIELDS = ["cik", "name", "ticker", "sic", "sic_description", "group", "facts", "first_end",

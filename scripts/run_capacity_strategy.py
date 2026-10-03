@@ -44,6 +44,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from event.study import sessions  # noqa: E402
+from strategy.tradeability import net_return  # noqa: E402
 
 BAR_CACHE = ROOT / "results" / "bar-cache"
 
@@ -197,10 +198,20 @@ def main(argv: list[str] | None = None) -> int:
         print("no usable signal periods")
         return 1
 
+    # Store the two declared cost scenarios in the result, not only in the console summary.
+    for signal in SIGNALS:
+        series = [r for r in rows if r["signal"] == signal]
+        flips = sum(1 for a, b in zip(series, series[1:]) if a["position"] != b["position"])
+        turnover = (len(series) + flips) / len(series) if series else 0.0
+        for row in series:
+            row["turnover"] = turnover
+            row["net10"] = net_return(row["gross"], turnover * 10, turnover * 10)
+            row["net20"] = net_return(row["gross"], turnover * 20, turnover * 20)
+
     if not args.open_sealed:
         out = ROOT / args.out
         with out.open("w", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+            writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
             writer.writeheader()
             writer.writerows(rows)
         print(f"wrote {args.out} ({len(rows)} rows)")
@@ -215,8 +226,8 @@ def main(argv: list[str] | None = None) -> int:
         gross = [r["gross"] for r in series]
         flips = sum(1 for a, b in zip(series, series[1:]) if a["position"] != b["position"])
         turnover = (len(series) + flips) / len(series)
-        net10 = [g - turnover * 2 * COST_PER_LEG for g in gross]
-        net20 = [g - turnover * 2 * 2 * COST_PER_LEG for g in gross]
+        net10 = [net_return(g, turnover * 10, turnover * 10) for g in gross]
+        net20 = [net_return(g, turnover * 20, turnover * 20) for g in gross]
         equity = _curve(net10)
         print(f"{signal:17s} {len(series):>4d} {flips:>6d} {statistics.mean(gross):>7.2%} "
               f"{statistics.mean(net10):>7.2%} {statistics.mean(net20):>7.2%} "
@@ -238,8 +249,8 @@ def main(argv: list[str] | None = None) -> int:
             gross = [float(r["gross"]) for r in subset]
             flips = sum(1 for a, b in zip(subset, subset[1:]) if a["position"] != b["position"])
             turnover = (len(subset) + flips) / len(subset)
-            net10 = [g - turnover * 2 * COST_PER_LEG for g in gross]
-            net20 = [g - turnover * 4 * COST_PER_LEG for g in gross]
+            net10 = [net_return(g, turnover * 10, turnover * 10) for g in gross]
+            net20 = [net_return(g, turnover * 20, turnover * 20) for g in gross]
             print(f"{label:>6s} {len(subset):>4d} {statistics.mean(gross):>7.2%} "
                   f"{statistics.mean(net10):>7.2%} {statistics.mean(net20):>7.2%} {_sharpe(net10):>7.2f}")
     print("")

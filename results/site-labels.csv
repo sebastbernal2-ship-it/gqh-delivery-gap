@@ -7,3 +7,26 @@ plant_id,generator_id,plant_name,entity_name,technology,state,capacity_mw,latitu
 62952,CRW01,Cheyenne Ridge Wind Farm,Public Service Co of Colorado,Onshore Wind Turbine,CO,498.4,39.016944,-102.2113,2020-12,2020-08,-4,2019-11,2022-09
 61028,STG1,Hickory Run Energy Station,"Hickory Run Energy, LLC",Natural Gas Fired Combined Cycle,PA,450.0,40.994444,-80.43,2020-02,2020-05,3,2019-11,2022-09
 62562,HILO,"High Lonesome Wind Power, LLC","High Lonesome Wind Power, LLC",Onshore Wind Turbine,TX,449.5,31.171652,-101.8811,2019-12,2021-07,19,2019-11,2022-09
+63255,2WPSO,2W Permian Solar Project,"2W Permian Solar, LLC",Solar Photovoltaic,TX,420.0,32.116388,-102.5283,2021-05,2021-08,3,2019-11,2022-09
+62563,HPWF,High Prairie Wind Farm,"TG High Prairie Wind, LLC",Onshore Wind Turbine,MO,400.0,40.398244,-92.51861,2020-09,2020-12,3,2019-11,2022-09
+55460,ST1,Indeck Niles Energy Center,"Indeck Niles, LLC",Natural Gas Fired Combined Cycle,MI,397.8,41.862114,-86.22139,2022-02,2022-07,5,2019-11,2022-09
+645,GT5,Big Bend,Tampa Electric Co,Natural Gas Fired Combustion Turbine,FL,392.0,27.7944,-82.4036,2021-06,2021-12,6,2019-11,2022-09
+62837,FW2,Frontier Windpower II,"Frontier Windpower II, LLC",Onshore Wind Turbine,OK,351.8,36.82478,-97.02978,2020-09,2021-02,5,2019-11,2022-09
+62945,FJSOL,Fighting Jays Solar Project,"AP Solar 2, LLC",Solar Photovoltaic,TX,350.0,29.358425,-95.74639,2021-05,2022-06,13,2019-11,2022-09
+62620,SD,Sage Draw Wind,"Sage Draw Wind, LLC",Onshore Wind Turbine,TX,338.4,33.303497,-101.6572,2020-04,2021-08,16,2019-11,2022-09
+63327,46001,"Diamond Spring, LLC",Allete Clean Energy,Onshore Wind Turbine,OK,303.0,34.487369,-96.78046,2020-06,2020-12,6,2019-11,2022-09
+62481,NRW1,Neosho Ridge Wind Energy Center,Empire District Electric Co,Onshore Wind Turbine,KS,301.0,37.485357,-95.37673,2020-12,2021-05,5,2019-11,2022-09
+61161,GEN01,Broadlands Wind Farm,Harvest Ridge Wind Farm,Onshore Wind Turbine,IL,300.0,39.83188,-88.0723,2020-01,2020-07,6,2019-11,2022-09
+63100,WTG,Prairie Hill Wind Project,Engie North America,Onshore Wind Turbine,TX,300.0,31.549868,-96.90407,2020-08,2020-12,4,2019-11,2022-09
+62955,GEN1,Badger Hollow Solar Farm LLC,Invenergy Services LLC,Solar Photovoltaic,WI,300.0,42.94556,-90.34942,2020-12,2021-11,11,2019-11,2022-09
+260,BAT1,Dynegy Moss Landing Power Plant,Dynegy -Moss Landing LLC,Batteries,CA,300.0,36.804837,-121.7822,2021-12,2021-05,-7,2019-11,2022-09
+63320,IPTTN,Titan Solar Project,"IP Titan, LLC",Solar Photovoltaic,TX,260.0,31.70038,-104.4581,2021-06,2021-12,6,2019-11,2022-09
+62483,PV1,Taygete Energy Project LLC,"7X Energy, Inc.",Solar Photovoltaic,TX,255.0,31.165245,-103.1259,2020-12,2021-03,3,2019-11,2022-09
+60928,1,New Orleans Power,"Entergy New Orleans, LLC",Natural Gas Fired Combustion Turbine,LA,250.0,30.0081,-89.9372,2020-01,2020-05,4,2019-11,2022-09
+62142,AM-TX,Amadeus Wind Farm,Amadeus Wind LLC,Onshore Wind Turbine,TX,250.0,32.96736,-100.5643,2020-08,2020-12,4,2019-11,2022-09
+62364,WT1,Nobles 2 Wind Project,"Tenaska Nobles 2 Power Partners, LLC",Onshore Wind Turbine,MN,250.0,43.789636,-95.85277,2020-09,2020-12,3,2019-11,2022-09
+61346,PV1,RE Maplewood,RE Maplewood LLC,Solar Photovoltaic,TX,250.0,30.976638,-102.2578,2020-12,2021-10,10,2019-11,2022-09
+62175,DIBLO,Diablo Energy Storage,"Diablo Energy Storage, LLC",Batteries,CA,250.0,38.028792,-121.9006,2021-03,2022-04,13,2019-11,2022-09
+62547,AQUAM,Aquamarine,Aquamarine Westside LLC,Solar Photovoltaic,CA,250.0,36.189722,-119.9042,2021-05,2021-09,4,2019-11,2022-09
+61920,GSM01,Galloway 1 Solar Farm,225DD 8me LLC,Solar Photovoltaic,TX,250.0,31.435932,-99.79661,2021-06,2021-10,4,2019-11,2022-09
+63300,IPAT1,Athos Solar Project,"IP Athos, LLC",Solar Photovoltaic,CA,250.0,33.751283,-115.355,2021-12,2022-06,6,2019-11,2022-09

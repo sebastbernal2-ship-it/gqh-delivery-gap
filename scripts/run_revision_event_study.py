@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from edgar.filings import sealed_start  # noqa: E402
-from event.study import abnormal, summarise, surprise, window_return  # noqa: E402
+from event.study import abnormal, revision_surprise, summarise, window_return  # noqa: E402
 
 BENCHMARK = {"PWR": "XLI", "EME": "XLI", "ETN": "XLI", "DLR": "XLRE"}
 MARKET = "SPY"
@@ -71,6 +71,8 @@ def revisions(panel_path: Path, horizons: list[int]) -> list[dict]:
             continue
         out.append({"ticker": row["ticker"], "concept": row["concept"],
                     "period_end": row["period_end"], "change": change,
+                    "prior_expectation": row.get("prior_expectation", ""),
+                    "expectation_kind": row.get("expectation_kind", ""),
                     "available": row["earliest_availability_utc"],
                     "benchmark": BENCHMARK.get(row["ticker"], MARKET)})
     return out
@@ -114,11 +116,17 @@ def main(argv: list[str] | None = None) -> int:
             row[f"abnormal_{horizon}"] = abnormal(raw, bench)
             row[f"abnormal_market_{horizon}"] = abnormal(raw, market)
         row["typical_change"] = statistics.median(history[key]) if history[key] else None
-        row["surprise"] = surprise(event["change"], history[key]) if history[key] else None
+        try:
+            prior = float(event["prior_expectation"]) if event["prior_expectation"] != "" else None
+        except (TypeError, ValueError):
+            prior = None
+        row["surprise"] = revision_surprise(event["change"], prior)
+        row["expectation_status"] = "measured" if prior is not None else "missing prior expectation"
         history[key].append(event["change"])
         rows.append(row)
 
-    fields = (["ticker", "concept", "period_end", "change", "typical_change", "surprise",
+    fields = (["ticker", "concept", "period_end", "change", "prior_expectation",
+               "expectation_kind", "expectation_status", "typical_change", "surprise",
                "available", "benchmark"]
               + [f"{kind}_{h}" for h in horizons for kind in ("raw", "abnormal", "abnormal_market")])
     if not args.summary:
