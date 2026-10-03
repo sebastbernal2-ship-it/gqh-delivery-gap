@@ -25,6 +25,12 @@ identity. So the key must come from an AWS account. Two routes, both small:
 The cleanest fit with the current architecture is route two, or route one with the pipeline owner holding the key
 and landing the result as tables beside the other twenty one sources, which is how everything else arrived.
 
+## Correction: the archive is free through a mirror
+
+The section below still assumed the S3 bucket was the only route. It is not. Free mirrors of the same chain, the
+fill files and the L2 book, are published as parquet over plain HTTPS by a dataset host that needs no account. So
+the AWS identity question is closed, and the row that follows belongs with the rows that need no account.
+
 ## Fixable by us, with no account and no purchase
 
 | Blocker | The fix | Evidence it is fixable |

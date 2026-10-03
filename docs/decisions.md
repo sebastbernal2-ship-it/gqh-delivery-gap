@@ -1019,3 +1019,16 @@ without a node or a stated reason, a record without a falsifier, and a flow that
 Five new nodes were declared to attach the flows that had no measurement: equipment lead time share, index
 reconstitution quantity, dealer hedge demand, data centre lease rate, and project financing draws. The map is the
 base that everything else attaches to, and it is generated and checked by `make market` and `make check`.
+
+## 2026-10-03: No AWS account is needed, because the archive is mirrored free
+
+**Decision**: drop the AWS credential request. The venue's archive is requester pays on S3, which refuses
+anonymous callers, and I read that as needing a cloud account. It does not: the same chain is mirrored on a public
+dataset host as parquet over plain HTTPS, including the fill files already converted from lz4, the L2 book archive,
+and a prepared liquidation panel.
+
+**Context**: the captain asked why AWS was needed at all, which is the right question. Adding a vendor, a card and
+an egress bill to reach data published for free is exactly the availability driven reasoning this project bans.
+
+**Consequence**: the forced flow candidate can be tested on history with a plain download today, and kdb+/q or
+Snowflake can read parquet without an AWS identity anywhere in the path.

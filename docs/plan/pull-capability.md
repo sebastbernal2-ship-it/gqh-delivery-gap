@@ -5,6 +5,23 @@ a paywall, a raw cloud credential, or a bot wall, no. The single most valuable o
 away, with a documented path, and our earlier failure on it was our fault for guessing keys instead of reading the
 documentation.
 
+## Correction: no AWS account is needed
+
+I asked for an AWS key. That was wrong, and the challenge was right. The archive being requester pays on S3 only
+means the bucket refuses anonymous callers. It does not mean S3 is the only route to the same bytes.
+
+Free mirrors of the same chain are on a dataset host that serves over plain HTTPS, with no account and no billing:
+
+| Mirror | Contents | Size |
+|---|---|---|
+| `gionuibk/hyperliquid-node-fills-by-block` | the archive's fill files, already converted from lz4 to parquet, named by the date they cover | 1,078 files |
+| `gionuibk/hyperliquidL2Book-v2` | the L2 book archive, with a catalog file describing the layout | 76,990 files |
+| `craftify2221/hyperliquid-fills-raw` | fills and account values, partitioned by date from 2025-10 | 1,908 files |
+| `craftify2221/hyperliquid-builder-liquidation-panel` | a prepared liquidation panel with loss cut and exposure tables | 518 files |
+
+The correct approach was the free mirror, not the paid bucket. Requesting a cloud credential would have added a
+vendor, a card and an egress bill to reach data that is already published for nothing.
+
 ## What we pull ourselves today, with code already in the repo
 
 | Source | What we get | Shape of the work |
