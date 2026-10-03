@@ -55,7 +55,7 @@ rename breaks it. Each node carries `type`, `metadata.status`, and `layer` as ex
 formula or mapping is not yet specified, use the existing convention for an unfinished definition, such
 as `pending_preregistration`.
 
-**Required by the sibling study's first chain (six):**
+**Required by the sibling study's first chain (seven):**
 
 | id | layer | type | meaning |
 |---|---|---|---|
@@ -63,6 +63,7 @@ as `pending_preregistration`.
 | `feature:power:energized-capacity` | feature | derived_feature | what actually came online, with its publication time |
 | `feature:power:delivery-revision` | feature | derived_feature | the published change between promised and realized delivery for a named project |
 | `outcome:firm:revenue-timing-revision` | outcome | outcome | whose revenue or cost timing moves, and by how much |
+| `outcome:firm:abnormal-return` | outcome | outcome | the price side: return net of a matched benchmark at the chosen horizon |
 | `feature:compute:rental-price-index` | feature | derived_feature | realized scarcity price of deliverable compute |
 | `feature:positioning:perp-funding-rate` | feature | derived_feature | what leveraged participants pay to stay long |
 
@@ -169,3 +170,11 @@ When their session reports which ids landed, our `docs/chains/t-capacity-revisio
 lines from `node_proposed` to `node_resolved`, because our link check treats a proposed node that now
 exists as an error, and the reverse as an error too. That is deliberate: it keeps the two repos agreeing
 about what exists. The flip is a one-line-per-node edit and a new commit.
+
+## Amendment, 2026-10-03, after the chain was tightened
+
+1. One more required node: `outcome:firm:abnormal-return`. The price side of the chain had no node, so
+   the price test had nothing to point at. Without it the mispricing claim cannot be represented.
+2. Please also report, without creating anything, which of these already exist as `asset` nodes:
+   `PWR`, `ETN`, `EME`, `DLR`. Our pilot universe is undecided and these are the candidates from both
+   handoffs. If they exist, send the ids so we resolve them instead of authoring a placeholder.
