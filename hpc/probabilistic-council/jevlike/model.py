@@ -127,8 +127,9 @@ def make_system(config: dict, device: torch.device):
 
 
 def trainable_state(model: nn.Module) -> dict[str, torch.Tensor]:
+    """Own an immutable CPU snapshot, even when training already runs on CPU."""
     return {
-        name: parameter.detach().cpu()
+        name: parameter.detach().cpu().clone()
         for name, parameter in model.named_parameters() if parameter.requires_grad
     }
 
