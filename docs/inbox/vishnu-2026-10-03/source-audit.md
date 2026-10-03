@@ -29,12 +29,18 @@ selection was not browser-verified. Do not infer a fixed per-stock price or buy 
 
 ### Equity-provider result — Alpaca leads on access, Tiingo Starter is disqualified for shared storage
 
-**No authenticated API sample has been fetched yet.** We checked process-environment *names only*;
-no Tiingo or Alpaca credentials are present in this shell, and the open browser has neither provider
-session. Thus ticker coverage/date ranges remain untested; do not call either source downloaded or
-load provider data into Snowflake/TigerData yet.
+**Alpaca Basic account and API were tested 2026-10-03.** The signed-in account showed Market Data
+status `Basic` (paper-trading account). A credential pair was entered by the user into the private,
+mode-0600 local file `~/.config/gqh/alpaca.env`; do not record its contents, commit it, or paste it
+into chat. Read-only historical requests used `feed=sip`, `timeframe=1Day`, `adjustment=all`,
+`start=2016-01-01`, and `end=2026-10-02T23:59:00Z`. The first attempt ending on the current date
+was rejected as recent SIP; ending on the last completed session succeeded. Each of PWR, ETN, EME,
+DLR and SPY returned 2,703 rows from 2016-01-04 through 2026-10-02 in three pages; no duplicate
+dates, nonascending timestamps, invalid OHLCV values, or OHLC consistency failures were observed.
+The maximum gap between returned dates was four calendar days. The responses were inspected in
+memory only and were **not** retained or loaded into Snowflake/TigerData.
 
-**Alpaca Basic is the next account-level probe.** Current official docs describe the free Basic
+**Alpaca Basic is the viable data-access candidate, pending group-use permission.** Current official docs describe the free Basic
 plan as historical equity data since 2016, 200 historical API calls/minute, and live IEX. The FAQ
 says historical SIP requests are available without the paid plan when the requested end is at least
 15 minutes old; SIP is the consolidated multi-exchange feed, unlike IEX-only data. Bars support
@@ -45,7 +51,8 @@ coverage diagnostic. Capture bars count, first/last date, duplicates, gaps, and 
 The API requires key+secret headers. Alpaca's basic market-data terms are framed for nonprofessional
 individuals and prohibit reproducing/distributing market data without written consent, so first
 confirm that sharing a research copy among this hackathon team and persisting it in shared DBs is
-allowed. Until that is confirmed, no shared warehouse load.
+allowed. Until Alpaca confirms team use/retention in writing or a suitable license is obtained, no
+shared warehouse load. The historical coverage test is verified; a team-usable data license is not.
 
 Sources: [Basic plan](https://docs.alpaca.markets/us/v1.1/docs/about-market-data-api),
 [historical SIP delay rule](https://docs.alpaca.markets/us/docs/market-data-faq),

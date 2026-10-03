@@ -108,8 +108,11 @@ The next data onboarding is deliberately phased:
    disclosures in Snowflake; put only compact, dated event/features and the selected market bars
    into TigerData if q needs as-of joins/replay. SEC text is not sent wholesale to TigerData.
    Massive's competition 8-K event tags stay a separately labeled enrichment/benchmark, not the
-   canonical filing timestamp or replacement for source documents. Equity bars remain gated on a
-   real entitlement/date-range/licensing check of one free provider; no bars are currently loaded.
+   canonical filing timestamp or replacement for source documents. Alpaca Basic was tested for
+   daily SIP bars (2,703 rows per PWR/ETN/EME/DLR/SPY, 2016-01-04 through 2026-10-02, 3 pages per
+   ticker; no duplicate dates or OHLCV sanity failures). No bars were stored. The remaining gate is
+   written permission/licensing for shared team retention in Snowflake/TigerData; until that is
+   resolved, use SEC filings and other public-permission sources but do not load Alpaca rows.
 2. **Second (only if the company/region mapping is defensible):** Census C30 data-center
    construction spend and M3 electrical-equipment/computer orders; EIA-860M planned/operating
    generators and EIA-930 hourly balancing-area grid demand/forecast. Preserve release vintages
