@@ -495,3 +495,23 @@ signing-to-commencement for DLR) and are explicitly not to be pooled into one de
 **Development exposure.** Documents inspected while designing the study are exposure. Not inspecting
 prices does not by itself keep a sealed test sealed, so the development window and what was read inside it
 belong in the record before any return is computed.
+
+---
+
+## 2026-10-03: The QuantGraph commit is blocked by a live session, not by us
+
+**Attempted.** Commit the graph addition (`graph/quant_graph.yaml`, `graph/source_inventory.yaml`) in the
+algoterminal checkout at the captain's instruction.
+**Result.** Refused twice by that repo's own index lock. The lock appears and clears within seconds, so
+another process there is running git concurrently. The lock was **not** removed and the index was **not**
+raced: interfering with a live session's git is worse than a delayed commit.
+**Safety net taken instead.** The validated graph diff is snapshotted to
+`/tmp/algoterminal-ai-infra.patch` (3,512 lines, 140 KB), outside both repos. It is scratch, so treat it as
+temporary.
+**Unlanded-work risk worth naming.** That checkout is on branch `strategy-research` with roughly 120
+untracked files: the association engine, its tests, and dozens of research reports. Nothing there is
+committed, so a `git clean -fd` or a hard reset would destroy days of work. The graph addition itself
+passes its own validator: 16 nodes, 4 sources, 18 representations, 120 canonical pairs, zero comparisons,
+causal ceiling descriptive only.
+**Resolution path.** Either that session commits the graph work itself, or the captain pauses it and this
+home commits in seconds.
