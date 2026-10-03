@@ -92,8 +92,13 @@ test:
 	@python3 tests/test_scan_stats.py
 	@python3 tests/test_scan_report.py
 	@python3 tests/test_scan_fdr.py
+	@python3 tests/test_ideas.py
 	@python3 tests/test_scan_compute.py
 	@python3 tests/test_scan_windows.py
+
+# Regenerate the idea view from the graph.
+ideas:
+	@python3 scripts/render_ideas.py
 
 # Credential scan over every file. This repo is public.
 secrets:
@@ -109,6 +114,8 @@ check: secrets
 	@python3 scripts/link_algoterminal.py
 	@python3 scripts/render_current.py --check
 	@python3 scripts/check_scan.py
+	@python3 scripts/check_ideas.py
+	@python3 scripts/render_ideas.py --check
 
 status:
 	@git status -sb

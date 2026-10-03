@@ -770,7 +770,7 @@ without a test would be the mistake the whole framework exists to prevent.
 
 ## 2026-10-03: The methods registry, sorted honestly, and rate control added to the scan
 
-**The registry.** `docs/ideas/math-ideas.md` records every method we have discussed with one of three
+**The registry.** (Superseded the same day: this list now lives as nodes in `docs/ideas/graph.jsonl`, with the same three statuses as fields. Kept in the record because it was the first sorting.) The registry recorded every method we had discussed with one of three
 statuses: attached, where it names a concrete test or representation; plausible, where the attachment is real
 but gated on an entitlement; and decorative, where there is no honest attachment. Four entries are decorative
 and stay that way so nobody re-litigates them: affine Kac-Moody algebras, the Langlands program, electrical
@@ -790,3 +790,28 @@ two equity baskets against each other, which is asset co-movement. Not one invol
 result is instructive: rate control across pairs does not control correlated tests, so the family correction
 is not optional on top of it, it is the complement. A test asserts the property that matters, that the same
 evidence stops surviving once the searched space grows.
+
+---
+
+## 2026-10-03: The idea graph, kept as a graph rather than a document
+
+**What it is.** `docs/ideas/graph.jsonl` holds sixty-one ideas as nodes and sixty-two relations as edges,
+covering the mathematics, methods and theory we have discussed, including the ones with no use yet. Seven
+relations are declared: combines with, is analogous to, specialises, generalises, requires, supplies a
+method for, and is inspired by. `docs/ideas/README.md` is generated from it, so the graph is the owner and
+the readable page is a view.
+**Fifty-one ideas name something in the study**, through an `attaches_to` field that points at a declared
+scan node, and the validator checks that those nodes exist. Nine are kept without an attachment and each
+carries a stated reason, because a graph of only useful things stops being a graph of ideas. The reasons are
+specific: nothing here is a representation of an affine Kac-Moody algebra, nothing is a modular form, the
+quantum optics physics does not transfer although its counting formalism does, no distribution here is high
+dimensional enough to need tensor compression, and no roughness evidence has been established, which makes
+rough volatility unfalsified decoration rather than a modelling choice.
+**Two rules that make it growable.** A symmetric relation cannot be declared twice in two directions, and an
+idea that does not attach must say why in one line. Orphans are reported rather than refused, because a graph
+grows one idea at a time.
+**Both rules caught something immediately.** The validator found a duplicate symmetric link between jump
+diffusions and Hawkes processes, and a test found that duplicate idea ids were being collapsed by a dict
+before the duplicate check could see them, which had silently disabled that check.
+**The earlier sorting document is superseded**, not deleted from history: its content now lives as the
+attachment and reason fields on the nodes, which is one owner instead of two.

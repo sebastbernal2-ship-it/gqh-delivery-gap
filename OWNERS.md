@@ -25,7 +25,7 @@ One table. A path appears once, with one person.
 | `docs/alignment.md` | sebastbernal2-ship-it | How we think. Changed by proposal plus a decision entry |
 | `docs/algoterminal.md` | sebastbernal2-ship-it | The linkage to the QuantGraph and the association engine |
 | `docs/chains/` | sebastbernal2-ship-it | The log convention and the validator.
-| `docs/ideas/`, `docs/scan/`, `src/scan/`, `scripts/check_scan.py`, `scripts/run_association_scan.py`, `tests/test_scan.py`, `tests/test_scan_stats.py`, `tests/test_scan_report.py` | sebastbernal2-ship-it | The declared node space, the scan, and the rule that multiplicity is counted before measurement. Each log's content belongs to that thesis's owner |
+| `docs/ideas/`, `scripts/check_ideas.py`, `scripts/render_ideas.py`, `tests/test_ideas.py`, `docs/scan/`, `src/scan/`, `scripts/check_scan.py`, `scripts/run_association_scan.py`, `tests/test_scan.py`, `tests/test_scan_stats.py`, `tests/test_scan_report.py` | sebastbernal2-ship-it | The declared node space, the scan, and the rule that multiplicity is counted before measurement. Each log's content belongs to that thesis's owner |
 | `docs/inbox/vishnu-2026-10-03/`, `docs/thinking/vishnu-2026-10-03.md`, `docs/writing/style.md`, `.cursor/rules/gqh-context.mdc` | vshnu1 | Equity-first research handoff, provider audit, data plan, writing conventions |
 | `docs/inbox/aidan-2026-10-03/`, `docs/thinking/aidan-2026-10-03.md` | aidanq06 | Strategy specification, reasoning, implementation contracts, advanced-method research |
 | `hpc/README.md`, `hpc/setup/` | lucyrunner | HiPerGator routing, account access and environment setup |
