@@ -743,3 +743,25 @@ rather than hiding it.
 table. The connection string lives only in the environment or an ignored file, is never printed, never
 logged, never written to a tracked file, and a driver failure is reported by type only, because driver
 messages can quote the string.
+
+---
+
+## 2026-10-03: The compute price node is populated, and it clears its null against nothing
+
+**The connection.** The Tiger CLI is installed, authenticated, pointed at the service holding the archive and
+set to read-only, so the table is reachable without any credential entering a file, a log or this transcript.
+Verified in the database: 1,592,024 rows, 2022-05-31 to 2026-09-30, 62 instance types, 31 source files, and
+one documented gap from March to July 2026 recorded as a gap rather than interpolated.
+**The reduction, declared.** Monthly median of provider spot prices per instance family, rebased across
+families before averaging, because family prices differ by an order of magnitude and movement is the thing
+being read. 566 rows, 49 months, 18 families, of which 22 months fall in the compute era development window
+and 6 in its holdout, which matches the declared windows exactly.
+**The result, and it is null.** Eleven pairs against the compute price, one per other series, all with
+twenty-two monthly observations. The strongest is the scarcity basket at the 88th percentile of its own null
+with a change correlation of minus 0.36 and a level correlation of minus 0.49. Nothing reaches the 95th
+percentile. Fuel prices, copper, uranium, rates, both equity baskets, the promise revisions and firm
+disclosures all sit between the 7th and 76th percentile.
+**Three explanations, none of them chosen.** Either the relation is absent at monthly frequency, or
+twenty-two months is too short to see it, or a provider spot price per instance-hour is too noisy a proxy for
+what compute actually rents for. Naming all three is the honest end of this line of work, and choosing one
+without a test would be the mistake the whole framework exists to prevent.
