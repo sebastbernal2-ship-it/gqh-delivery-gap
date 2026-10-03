@@ -40,16 +40,16 @@ names the three biggest coverage gains with their row counts.
 
 **Question.** For every node we can measure, what does its distribution look like, and how stable is its scale?
 
-**Deliverables.** `scripts/build_distributions.py` producing `results/node-distributions.csv` with one row per
+**Deliverables.** `scripts/leg_b2_build_distributions.py` producing `results/leg-b-node-distributions.csv` with one row per
 node series: length, mean, standard deviation, rolling twelve month standard deviation, the ratio of the standard
 deviation of that rolling value to the overall value (a scale stability measure), skew, kurtosis, minimum, maximum,
-and the fraction of months in the top decile of scale. Plus `docs/plan/leg-b-report.md` naming the most and least
+and the fraction of months in the top decile of scale. Plus `docs/plan/leg-b-report-2.md` naming the most and least
 stable series, and any series whose scale changes by an order of magnitude.
 
 **Acceptance.** The script runs from a clean checkout path, the CSV has at least fifteen rows, and every row states
 its window so nobody mistakes a short series for a stable one.
 
-**Writes only:** `scripts/build_distributions.py`, `results/node-distributions.csv`, `docs/plan/leg-b-report.md`.
+**Writes only:** `scripts/leg_b2_build_distributions.py`, `results/leg-b-node-distributions.csv`, `docs/plan/leg-b-report-2.md`.
 
 ## Leg C: the association engine, directional instead of symmetric
 
@@ -58,32 +58,32 @@ its window so nobody mistakes a short series for a stable one.
 **Why.** The earlier scan measured symmetric co-movement, which is a relation and not an edge. Direction is what a
 position needs: which series moves first, and how much of the other's move follows.
 
-**Deliverables.** `scripts/run_directional_scan.py` producing `results/association-edges.csv` with one row per
+**Deliverables.** `scripts/leg_c2_directional_scan.py` producing `results/leg-c2-association-edges.csv` with one row per
 ordered pair: from node, to node, months aligned, lead correlation at lags zero through three in both directions,
 the better direction, the permuted null's ninety fifth percentile, a q value across the whole grid, the family
-split (within one family or across), and a verdict. Plus `docs/plan/leg-c-report.md` listing survivors in order of
+split (within one family or across), and a verdict. Plus `docs/plan/leg-c-report-2.md` listing survivors in order of
 strength with the two strongest reported for both directions so nobody reads a direction into noise.
 
 **Acceptance.** At least fifty rows, every row carries both directions and a q value, the report states the
 survivor count against the expected count, and the development windows only are used: the holdouts are spent and
 closed, so nothing in this leg may touch them.
 
-**Writes only:** `scripts/run_directional_scan.py`, `results/association-edges.csv`,
-`docs/plan/leg-c-report.md`.
+**Writes only:** `scripts/leg_c2_directional_scan.py`, `results/leg-c2-association-edges.csv`,
+`docs/plan/leg-c-report-2.md`.
 
 ## Leg D: chains, from surviving edge to economic chain
 
 **Question.** For each relation that survives, who pays, what moves, and which instrument carries it?
 
-**Deliverables.** `docs/market/chains.jsonl`, one record per candidate chain with fields: id, the edge it comes
+**Deliverables.** `docs/market/leg-d-chains.jsonl`, one record per candidate chain with fields: id, the edge it comes
 from, the measured nodes involved, the forced payer, the constraint type, the transfer and its unit, the
 instrument and its concentration, the barrier, the falsifier, and the data needed to test it. Plus
-`docs/plan/leg-d-report.md` scoring each chain against the six gates and naming where each fails.
+`docs/plan/leg-d-report-2.md` scoring each chain against the six gates and naming where each fails.
 
 **Acceptance.** Every chain names a payer in one sentence and an instrument that appears in
 `docs/market/map.jsonl`. Chains that cannot name a payer are recorded as failed at gate one rather than dropped.
 
-**Writes only:** `docs/market/chains.jsonl`, `docs/plan/leg-d-report.md`.
+**Writes only:** `docs/market/leg-d-chains.jsonl`, `docs/plan/leg-d-report-2.md`.
 
 ## What the orchestrator does with the results
 
