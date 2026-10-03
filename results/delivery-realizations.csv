@@ -1,0 +1,722 @@
+first_vintage,plant_id,generator_id,entity_name,plant_name,state,technology,capacity_mw,promised_first,realized,late_months,available_from
+2015-11,60104,GEWTG,"Javelina Wind Energy, LLC","Javelina Wind Energy, LLC",TX,Onshore Wind Turbine,249.7,2015-12,2015-12,0,2023-11-30
+2015-11,60121,HCEJI,"HCE Johnston I, LLC","HCE Johnston I, LLC",NC,Solar Photovoltaic,1.9,2015-12,2015-12,0,2023-11-30
+2015-11,6089,2,Montana-Dakota Utilities Co,Lewis & Clark,MT,Natural Gas Internal Combustion Engine,9.3000000000000007,2015-12,2016-04,4,2023-11-30
+2015-11,6089,3,Montana-Dakota Utilities Co,Lewis & Clark,MT,Natural Gas Internal Combustion Engine,9.3000000000000007,2015-12,2016-04,4,2023-11-30
+2015-11,6329,4A,"Alaska Village Elec Coop, Inc",Mountain Village,AK,Petroleum Liquids,0.8,2015-12,2015-12,0,2023-11-30
+2015-11,57401,WIG1,"American Mun Power-Ohio, Inc",Willow Island Hydroelectric Plant,WV,Conventional Hydroelectric,22,2015-12,2016-01,1,2023-11-30
+2015-11,57584,BS1,University of California San Diego,University of California San Diego Hybrid,CA,Batteries,2.5,2015-12,2015-12,0,2023-11-30
+2015-11,57614,GEN1,Waverly Wind Farm LLC,Waverly Wind Farm LLC,KS,Onshore Wind Turbine,199,2015-12,2016-01,1,2023-11-30
+2015-11,58284,0001,Public Service Co of NM,La Luz Energy Center,NM,Natural Gas Fired Combustion Turbine,42.3,2015-12,2015-12,0,2023-11-30
+2015-11,58462,BLK6,"McCoy Solar, LLC",McCoy Solar Energy Project Hybrid,CA,Solar Photovoltaic,26.9,2015-12,2015-12,0,2023-11-30
+2015-11,58469,AP2,Hawaiian Electric Co Inc,HNL Emergency Power Facility,HI,Other Waste Biomass,2.5,2015-12,2017-06,18,2023-11-30
+2015-11,58469,AP3,Hawaiian Electric Co Inc,HNL Emergency Power Facility,HI,Other Waste Biomass,2.5,2015-12,2017-06,18,2023-11-30
+2015-11,58469,AP4,Hawaiian Electric Co Inc,HNL Emergency Power Facility,HI,Other Waste Biomass,2.5,2015-12,2017-06,18,2023-11-30
+2015-11,58599,CVSP1,"Evergreen Wind, LLC",Cedar Valley Solar Plant,UT,Solar Photovoltaic,3,2015-12,2015-12,0,2023-11-30
+2015-11,58600,BSP1,"Evergreen Wind, LLC",Buckhorn Solar Plant,UT,Solar Photovoltaic,3,2015-12,2015-12,0,2023-11-30
+2015-11,58605,PV1,Cypress Creek Renewables,Blueberry One,NC,Solar Photovoltaic,5,2015-12,2016-01,1,2023-11-30
+2015-11,58623,PV1,"Strata Manager, LLC",Holstein Plant,NC,Solar Photovoltaic,20,2015-12,2015-12,0,2023-11-30
+2015-11,58644,BLK2,"Silver State Solar Power South, LLC",Silver State Solar Power South,NV,Solar Photovoltaic,27.9,2015-12,2015-12,0,2023-11-30
+2015-11,58644,BLK3,"Silver State Solar Power South, LLC",Silver State Solar Power South,NV,Solar Photovoltaic,37.200000000000003,2015-12,2015-12,0,2023-11-30
+2015-11,58649,1,"Oppidum Renewables USA, LLC",Montgomery Solar LLC,NC,Solar Photovoltaic,20,2015-12,2015-12,0,2023-11-30
+2015-11,58657,1,Algonquin Power Co,Odell Wind Farm,MN,Onshore Wind Turbine,200,2015-12,2016-07,7,2023-11-30
+2015-11,58660,1,MN8 Energy LLC,Utah Red Hills Renewable Energy Park,UT,Solar Photovoltaic,80,2015-12,2015-12,0,2023-11-30
+2015-11,58666,1,SRIV Partnership LLC,Alexander Wind Farm LLC,KS,Onshore Wind Turbine,50.7,2015-12,2015-12,0,2023-11-30
+2015-11,58673,GATES,"Oppidum Renewables USA, LLC",Gates Solar LLC,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,58730,PV1,Amethyst Solar LLC,Amethyst Solar,NC,Solar Photovoltaic,3,2015-12,2016-04,4,2023-11-30
+2015-11,58731,PV1,Cypress Creek Renewables,Angel Solar,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,58732,PV1,Audrey Solar LLC,Audrey Solar,NC,Solar Photovoltaic,3,2015-12,2016-04,4,2023-11-30
+2015-11,58739,PV1,Milo Solar LLC,Milo Solar,NC,Solar Photovoltaic,3,2015-12,2016-04,4,2023-11-30
+2015-11,58740,PV1,Minnie Solar LLC,Minnie Solar,NC,Solar Photovoltaic,3,2015-12,2016-04,4,2023-11-30
+2015-11,58742,PV1,Owen Solar LLC,Owen Solar,NC,Solar Photovoltaic,5,2015-12,2016-04,4,2023-11-30
+2015-11,58745,PV1,Sophie Solar LLC,Sophie Solar,NC,Solar Photovoltaic,4.5,2015-12,2016-04,4,2023-11-30
+2015-11,58746,PV1,Star Solar LLC,Star Solar,NC,Solar Photovoltaic,5,2015-12,2016-04,4,2023-11-30
+2015-11,58771,GEN1,"EDF Renewable Asset Holdings, Inc.",Roosevelt County,NM,Onshore Wind Turbine,250,2015-12,2015-12,0,2023-11-30
+2015-11,58782,PV1,Cypress Creek Renewables,Sonne One,NC,Solar Photovoltaic,5,2015-12,2016-01,1,2023-11-30
+2015-11,58791,PV1,Cypress Creek Renewables,Kirkwall Holdings,NC,Solar Photovoltaic,5,2015-12,2016-01,1,2023-11-30
+2015-11,58792,PV1,"CD Global Solar Holdings, LLC",Ayrshire,NC,Solar Photovoltaic,19.399999999999999,2015-12,2017-09,21,2023-11-30
+2015-11,58809,LSC1,"SRE Utility Solar 1, LLC",Littlefield Solar Center LLC,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,58837,WT1,Na Pua Makani Power Partners LLC,Na Pua Makani Wind Project,HI,Onshore Wind Turbine,27.6,2015-12,2020-12,60,2023-11-30
+2015-11,58848,1,Duke Energy Progress - (NC),Warsaw Farm,NC,Solar Photovoltaic,65,2015-12,2015-12,0,2023-11-30
+2015-11,58883,HLWF7,MidAmerican Energy Co,Highland Wind Project (IA),IA,Onshore Wind Turbine,4.7,2015-12,2015-12,0,2023-11-30
+2015-11,58965,THNDR,Montana-Dakota Utilities Co,"Thunder Spirit Wind, LLC",ND,Onshore Wind Turbine,107.5,2015-12,2015-12,0,2023-11-30
+2015-11,58998,GWWP,"Enel Green Power NA, Inc.",Goodwell Wind Project LLC,OK,Onshore Wind Turbine,200,2015-12,2015-12,0,2023-11-30
+2015-11,58999,LEWP,"Enel Green Power NA, Inc.",Little Elk Wind Project LLC,OK,Onshore Wind Turbine,74,2015-12,2015-12,0,2023-11-30
+2015-11,59008,PV1,AES Distributed Energy,Woodmere Solar Farm,CA,Solar Photovoltaic,15,2015-12,2015-12,0,2023-11-30
+2015-11,59009,PV1,AES Distributed Energy,Hayworth Solar,CA,Solar Photovoltaic,27,2015-12,2015-12,0,2023-11-30
+2015-11,59017,GEN 1,Cypress Creek Renewables,Carol Jean Solar,NC,Solar Photovoltaic,4,2015-12,2016-12,12,2023-11-30
+2015-11,59034,SHAN1,Shannon Wind LLC,Shannon Wind,TX,Onshore Wind Turbine,204,2015-12,2015-12,0,2023-11-30
+2015-11,59070,WT 1,Jericho Power LLC,Jericho Power,NH,Onshore Wind Turbine,14.3,2015-12,2016-01,1,2023-11-30
+2015-11,59118,CAM1,Cameron Wind 1 LLC,Cameron Wind 1 LLC,TX,Onshore Wind Turbine,165,2015-12,2015-12,0,2023-11-30
+2015-11,59148,GREEN,Cypress Creek Renewables,Green Farm,NC,Solar Photovoltaic,5,2015-12,2016-01,1,2023-11-30
+2015-11,59149,SIMON,Cypress Creek Renewables,Simons Farm,NC,Solar Photovoltaic,5,2015-12,2016-01,1,2023-11-30
+2015-11,59152,THOR1,"Ecoplexus, Inc",Thornton PV1,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,59153,WAT1,"Ecoplexus, Inc",Watson Seed Farm PV1,NC,Solar Photovoltaic,20,2015-12,2015-12,0,2023-11-30
+2015-11,59154,BRAD1,"Ecoplexus, Inc",Bradley PV1,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,59162,MSC 1,"Heelstone Energy Holdings, LLC",Mariposa Solar Center LLC,NC,Solar Photovoltaic,5,2015-12,2016-09,9,2023-11-30
+2015-11,59163,HSC 1,"SRE Utility Solar 1, LLC",Highland Solar Center LLC,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,59173,5MWPV,"Strata Manager, LLC",Bethel Solar,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,59337,HHS1,"SRE Utility Solar 1, LLC",Harrell's Hill Solar Center LLC,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,59374,OMSLR,Old Mill Solar,Old Mill Solar,OR,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,59449,DCSP1,Southern Power Co,Decatur County Solar Project,GA,Solar Photovoltaic,20,2015-12,2015-12,0,2023-11-30
+2015-11,59450,DPSP1,Southern Power Co,"Decatur Parkway Solar Project, LLC",GA,Solar Photovoltaic,80,2015-12,2015-12,0,2023-11-30
+2015-11,59460,KNG1,Southern Power Co,"Kay Wind, LLC",OK,Onshore Wind Turbine,299,2015-12,2015-12,0,2023-11-30
+2015-11,59474,DCPV3,"Apple, Inc",Apple Data Center PV3,NC,Solar Photovoltaic,17.5,2015-12,2015-12,0,2023-11-30
+2015-11,59486,LANIE,Cypress Creek Renewables,Lanier Solar,NC,Solar Photovoltaic,4.9000000000000004,2015-12,2016-09,9,2023-11-30
+2015-11,59488,BEARF,"Bearford Solar II, LLC",Bearford Solar II,NC,Solar Photovoltaic,4.9000000000000004,2015-12,2018-02,26,2023-11-30
+2015-11,59497,PV1,Cypress Creek Renewables,Andrew Solar,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,59498,PV1,Cypress Creek Renewables,Tracy Solar,NC,Solar Photovoltaic,10,2015-12,2015-12,0,2023-11-30
+2015-11,59503,PV1,Cypress Creek Renewables,Jacob Solar,NC,Solar Photovoltaic,5,2015-12,2016-01,1,2023-11-30
+2015-11,59505,PV1,Cypress Creek Renewables,Sun Devil Solar,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,59507,PV1,Cypress Creek Renewables,Kenneth Solar,NC,Solar Photovoltaic,3,2015-12,2016-01,1,2023-11-30
+2015-11,59508,PV1,Cypress Creek Renewables,Chei Solar,NC,Solar Photovoltaic,5,2015-12,2016-01,1,2023-11-30
+2015-11,59509,PV1,Cypress Creek Renewables,Murdock Solar,NC,Solar Photovoltaic,4,2015-12,2016-01,1,2023-11-30
+2015-11,59510,PV1,Cypress Creek Renewables,Husky Solar,NC,Solar Photovoltaic,5,2015-12,2016-12,12,2023-11-30
+2015-11,59511,PV1,Cypress Creek Renewables,Beetle Solar,NC,Solar Photovoltaic,4,2015-12,2016-12,12,2023-11-30
+2015-11,59512,PV1,Cypress Creek Renewables,Happy Solar,NC,Solar Photovoltaic,4,2015-12,2016-01,1,2023-11-30
+2015-11,59519,OLDC,"Ecoplexus, Inc",Old Catawba PV 1,NC,Solar Photovoltaic,3.5,2015-12,2015-12,0,2023-11-30
+2015-11,59521,LTLRV,"Ecoplexus, Inc",Little River PV 1,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,59526,WHIT1,Duke Energy Renewables Services,Whitakers,NC,Solar Photovoltaic,12,2015-12,2015-12,0,2023-11-30
+2015-11,59527,KELF1,Duke Energy Renewables Services,Kelford,NC,Solar Photovoltaic,20,2015-12,2015-12,0,2023-11-30
+2015-11,59528,OASIS,"Solar Oasis, LLC",Solar Oasis LLC,CA,Solar Photovoltaic,20,2015-12,2016-01,1,2023-11-30
+2015-11,59601,L&D,Public Service Elec & Gas Co,L&D Landfill Solar,NJ,Solar Photovoltaic,10,2015-12,2015-12,0,2023-11-30
+2015-11,59607,MWS,Onward Energy,"Maricopa West Solar PV, LLC",CA,Solar Photovoltaic,20,2015-12,2015-12,0,2023-11-30
+2015-11,59622,FGMA,Consolidated Edison Solutions Inc.,Future Generation Wind,MA,Onshore Wind Turbine,8,2015-12,2016-08,8,2023-11-30
+2015-11,59634,SNDST,AES Distributed Energy,Sandstone Solar,AZ,Solar Photovoltaic,45,2015-12,2015-12,0,2023-11-30
+2015-11,59637,ADWF3,MidAmerican Energy Co,Adams Wind,IA,Onshore Wind Turbine,58,2015-12,2015-12,0,2023-11-30
+2015-11,59654,1,"Sendero Wind Energy, LLC",Sendero,TX,Onshore Wind Turbine,78,2015-12,2015-12,0,2023-11-30
+2015-11,59655,CCWF1,Consolidated Edison Development Inc.,Campbell County Wind Farm,SD,Onshore Wind Turbine,97.8,2015-12,2015-12,0,2023-11-30
+2015-11,59663,CSC1,"SRE Utility Solar 1, LLC","Cornwall Solar Center, LLC",NC,Solar Photovoltaic,5,2015-12,2016-10,10,2023-11-30
+2015-11,59670,IS023,"SRE Utility Solar 1, LLC",Innovative Solar 23,NC,Solar Photovoltaic,1.9,2015-12,2015-12,0,2023-11-30
+2015-11,59702,1,Onward Energy,"Pavant Solar, LLC",UT,Solar Photovoltaic,50,2015-12,2015-12,0,2023-11-30
+2015-11,59706,NB005,"SRE Utility Solar 1, LLC",BRE,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,59713,HDSC,"Adapture Renewables, Inc.",Holdrege Solar Center,NE,Solar Photovoltaic,4,2015-12,2016-06,6,2023-11-30
+2015-11,59730,SPV18,AES Distributed Energy,SEPV 18,CA,Solar Photovoltaic,2,2015-12,2016-01,1,2023-11-30
+2015-11,59738,CSB,AES Distributed Energy,Citizen B,CA,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,59747,1,"River Mountains Solar, LLC",River Mountains Solar,NV,Solar Photovoltaic,14.4,2015-12,2016-01,1,2023-11-30
+2015-11,59769,1,Tampa Electric Co,TIA Solar,FL,Solar Photovoltaic,1.6,2015-12,2015-12,0,2023-11-30
+2015-11,59796,FLS1,Cypress Creek Renewables,Kelford,NC,Solar Photovoltaic,5,2015-12,2016-05,5,2023-11-30
+2015-11,59798,W4172,Los Angeles Department of Water & Power,Colon PV,CA,Solar Photovoltaic,1.3,2015-12,2015-12,0,2023-11-30
+2015-11,59817,GEN03,Tooele Army Depot,Tooele Army Depot(CSG),UT,Onshore Wind Turbine,1.7,2015-12,2016-07,7,2023-11-30
+2015-11,59824,5732,"SRE Utility Solar 1, LLC",Sweetgum Solar,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,59828,5375,"SRE Utility Solar 1, LLC",Balsam,NC,Solar Photovoltaic,5,2015-12,2015-12,0,2023-11-30
+2015-11,59837,GEN1,"EDF Renewable Asset Holdings, Inc.",Slate Creek Wind Project LLC,KS,Onshore Wind Turbine,150,2015-12,2015-12,0,2023-11-30
+2015-11,59839,SHRD1,AES Distributed Energy,Spring Hill Road,MA,Solar Photovoltaic,1.9,2015-12,2015-12,0,2023-11-30
+2015-11,59855,DCPV1,Indiana Michigan Power Co,Deer Creek PV,IN,Solar Photovoltaic,2.5,2015-12,2016-01,1,2023-11-30
+2015-11,59874,PV1,Onward Energy,Richland Solar Center,GA,Solar Photovoltaic,20,2015-12,2015-12,0,2023-11-30
+2015-11,59887,GEN,Capital Power Corporation,"Beaufort Solar, LLC",NC,Solar Photovoltaic,15,2015-12,2015-12,0,2023-11-30
+2015-11,59891,1,Southern Power Co,Butler Solar Farm 20,GA,Solar Photovoltaic,22,2015-12,2016-02,2,2023-11-30
+2015-11,59894,1,Southern Power Co,Pawpaw Solar Plant,GA,Solar Photovoltaic,30.5,2015-12,2016-03,3,2023-11-30
+2015-11,59912,FREE,"Heelstone Energy Holdings, LLC",Freemont Solar Center LLC,NC,Solar Photovoltaic,5,2015-12,2016-12,12,2023-11-30
+2015-11,59914,CREST,"SRE Utility Solar 1, LLC",Crestwood Solar Center LLC,NC,Solar Photovoltaic,5,2015-12,2016-04,4,2023-11-30
+2015-11,59928,NB007,Cypress Creek Renewables,"Vance Solar Farm, LLC",NC,Solar Photovoltaic,5,2015-12,2016-01,1,2023-11-30
+2015-11,59929,NB007,"Cline Solar, LLC","Cline Solar Farm, LLC",NC,Solar Photovoltaic,5,2015-12,2017-09,21,2023-11-30
+2015-11,59932,FID3,"SunE Solar XVII Project 3, LLC",Fiddler's Canyon 3,UT,Solar Photovoltaic,3,2015-12,2015-12,0,2023-11-30
+2015-11,59936,NB008,Cypress Creek Renewables,Meadowbrook Solar Farm,NC,Solar Photovoltaic,5,2015-12,2016-11,11,2023-11-30
+2015-11,59937,NB006,Cypress Creek Renewables,"Coats Solar Farm, LLC",NC,Solar Photovoltaic,5,2015-12,2016-01,1,2023-11-30
+2015-11,59944,CONE1,Duke Energy Renewables Services,"Conetoe II Solar, LLC",NC,Solar Photovoltaic,80,2015-12,2015-12,0,2023-11-30
+2015-11,59947,AERO,"SR Camden, LLC",SR Camden,AR,Solar Photovoltaic,12,2015-12,2015-12,0,2023-11-30
+2015-11,59949,BESS1,AES Tait LLC,AES Warrior Run Energy Storage Project,MD,Batteries,11,2015-12,2015-12,0,2023-11-30
+2015-11,59950,YAK,"Oppidum Renewables USA, LLC",Yadkinville Solar,NC,Solar Photovoltaic,3.5,2015-12,2015-12,0,2023-11-30
+2015-11,59958,MIL2,SunE DB24 LLC,Milford 2,UT,Solar Photovoltaic,3,2015-12,2015-12,0,2023-11-30
+2015-11,59965,LTIGO,AES Distributed Energy,Latigo Wind Park,UT,Onshore Wind Turbine,62.1,2015-12,2016-03,3,2023-11-30
+2015-11,59966,PV1,Duke Energy Progress - (NC),Camp Lejeune Solar and Energy Storage,NC,Solar Photovoltaic,12.8,2015-12,2015-12,0,2023-11-30
+2015-11,59981,PV1,"Hoosier Energy R E C, Inc",New Castle Solar RES,IN,Solar Photovoltaic,1.1000000000000001,2015-12,2016-01,1,2023-11-30
+2015-11,59984,PV1,"Hoosier Energy R E C, Inc",Lanesville Solar RES,IN,Solar Photovoltaic,1.1000000000000001,2015-12,2015-12,0,2023-11-30
+2015-11,59999,OUCH1,"Ecoplexus, Inc",Ouchchy PV1,NC,Solar Photovoltaic,3,2015-12,2015-12,0,2023-11-30
+2015-11,60005,1,Florida Power & Light Co,Daytona International Speedway Solar,FL,Solar Photovoltaic,1.6,2015-12,2016-05,5,2023-11-30
+2015-11,60008,SCCO3,"Solar Star Colorado III, LLC",Hooper Solar,CO,Solar Photovoltaic,52,2015-12,2015-12,0,2023-11-30
+2015-11,60015,WNDW1,Findlay Wind Farm,Findlay Wind Farm,OH,Onshore Wind Turbine,3,2015-12,2015-12,0,2023-11-30
+2015-11,60016,B,PUD 1 of Snohomish County,MESA 1,WA,Batteries,1,2015-12,2016-02,2,2023-11-30
+2015-11,60019,1,DTE Electric Company,Greenwood Solar Farm,MI,Solar Photovoltaic,1.4,2015-12,2016-01,1,2023-11-30
+2015-11,60023,FTLUP,"SR Jenkins, LLC",SR Jenkins Ft Lupton,CO,Solar Photovoltaic,13,2015-12,2016-05,5,2023-11-30
+2015-11,60026,PV1,Terraform Arcadia,Little Rock Pham Solar,CA,Solar Photovoltaic,3,2015-12,2015-12,0,2023-11-30
+2015-11,60027,ADERA,AES Distributed Energy,Adera Solar,CA,Solar Photovoltaic,20,2015-12,2015-12,0,2023-11-30
+2015-11,60048,FLS1,Cypress Creek Renewables,"TWE Chocowinity Solar, LLC",NC,Solar Photovoltaic,4.5,2015-12,2015-12,0,2023-11-30
+2015-11,60049,GE,"Golden Hills Wind, LLC",Golden Hills Wind,CA,Onshore Wind Turbine,85.9,2015-12,2015-12,0,2023-11-30
+2015-11,60051,FLS1,Cypress Creek Renewables,"Innovative Solar 18, LLC",NC,Solar Photovoltaic,1.9,2015-12,2015-12,0,2023-11-30
+2015-11,60052,FLS1,Cypress Creek Renewables,"Innovative Solar 26, LLC",NC,Solar Photovoltaic,1.9,2015-12,2015-12,0,2023-11-30
+2015-11,60054,BPPV,United Illuminating Co,UI RCP Bridgeport Seaside,CT,Solar Photovoltaic,2.2000000000000002,2015-12,2016-04,4,2023-11-30
+2015-11,60057,STEEL,Steel Bridge Solar. LLC,"Steel Bridge Solar, LLC",OR,Solar Photovoltaic,2.2999999999999998,2015-12,2016-02,2,2023-11-30
+2015-11,60059,1,Duke Energy Renewables Services,Los Vientos V Wind Power,TX,Onshore Wind Turbine,110,2015-12,2015-12,0,2023-11-30
+2015-11,60062,ASII,"Avalon Solar Partners II, LLC",Avalon Solar II,AZ,Solar Photovoltaic,16,2015-12,2016-03,3,2023-11-30
+2015-11,60065,FEDRD,"Federal Road Solar 1, LLC","Federal Road Solar 1, LLC CSG",MA,Solar Photovoltaic,4.4000000000000004,2015-12,2015-12,0,2023-11-30
+2015-11,60067,SPRMA,"BWC Swan Pond River, LLC",BWC Swan Pond River CSG,MA,Solar Photovoltaic,1.6,2015-12,2015-12,0,2023-11-30
+2015-11,60069,CBLF1,"Cedar Bluff Wind, LLC","Cedar Bluff Wind, LLC",KS,Onshore Wind Turbine,198.6,2015-12,2015-12,0,2023-11-30
+2015-11,60089,ELKTN,"SunE DB27, LLC",Elkton Solar,MD,Solar Photovoltaic,1.6,2015-12,2015-12,0,2023-11-30
+2015-11,60097,PV1,Tesla Inc.,Onondaga County - Metro Water Board,NY,Solar Photovoltaic,1,2015-12,2016-02,2,2023-11-30
+2015-11,60099,PV1,Tesla Inc.,"Hewlett-Packard (HP) - Andover, MA",MA,Solar Photovoltaic,1.7,2015-12,2017-06,18,2023-11-30
+2015-11,404,4,Los Angeles Department of Water & Power,Scattergood,CA,Natural Gas Fired Combined Cycle,216.9,2016-01,2015-10,-3,2023-11-30
+2015-11,404,5,Los Angeles Department of Water & Power,Scattergood,CA,Natural Gas Fired Combined Cycle,118.9,2016-01,2015-11,-2,2023-11-30
+2015-11,404,6,Los Angeles Department of Water & Power,Scattergood,CA,Natural Gas Fired Combustion Turbine,106.9,2016-01,2015-08,-5,2023-11-30
+2015-11,404,7,Los Angeles Department of Water & Power,Scattergood,CA,Natural Gas Fired Combustion Turbine,106.9,2016-01,2015-09,-4,2023-11-30
+2015-11,1328,10,City of Wamego - (KS),Wamego,KS,Natural Gas Internal Combustion Engine,3.2,2016-01,2016-03,2,2023-11-30
+2015-11,6319,5A,"Alaska Village Elec Coop, Inc",Hooper Bay,AK,Petroleum Liquids,0.8,2016-01,2016-06,5,2023-11-30
+2015-11,55006,UNT3,EPP Renewable Energy,Nashua Plant,NH,Landfill Gas,1.6,2016-01,2016-03,2,2023-11-30
+2015-11,56872,1,City of Hamilton - (OH),Meldahl Hydroelectric Project,KY,Conventional Hydroelectric,35,2016-01,2016-02,1,2023-11-30
+2015-11,56872,2,City of Hamilton - (OH),Meldahl Hydroelectric Project,KY,Conventional Hydroelectric,35,2016-01,2016-01,0,2023-11-30
+2015-11,57399,CG3,"American Mun Power-Ohio, Inc",Cannelton Hydroelectric Plant,KY,Conventional Hydroelectric,29.3,2016-01,2016-06,5,2023-11-30
+2015-11,57401,WIG2,"American Mun Power-Ohio, Inc",Willow Island Hydroelectric Plant,WV,Conventional Hydroelectric,22,2016-01,2016-02,1,2023-11-30
+2015-11,58420,GEN1,Hamilton Liberty O&M LLC,Hamilton Liberty,PA,Natural Gas Fired Combined Cycle,435,2016-01,2016-06,5,2023-11-30
+2015-11,58462,BLK7,"McCoy Solar, LLC",McCoy Solar Energy Project Hybrid,CA,Solar Photovoltaic,41.9,2016-01,2016-01,0,2023-11-30
+2015-11,58478,LEPA1,Louisiana Energy & Power Authority,LEPA Unit No. 1,LA,Natural Gas Fired Combined Cycle,57,2016-01,2016-06,5,2023-11-30
+2015-11,58638,1,Anaergia,Orbit Energy Charlotte,NC,Other Waste Biomass,5.2,2016-01,2016-11,10,2023-11-30
+2015-11,58644,BLK4,"Silver State Solar Power South, LLC",Silver State Solar Power South,NV,Solar Photovoltaic,35.700000000000003,2016-01,2016-01,0,2023-11-30
+2015-11,58803,INV1,Cypress Creek Renewables,"Kenansville Solar 2, LLC",NC,Solar Photovoltaic,2,2016-01,2016-03,2,2023-11-30
+2015-11,59035,MKA1,Green Energy Team LLC,"Biomass to Energy Facility, Kauai",HI,Wood/Wood Waste Biomass,9.3000000000000007,2016-01,2016-01,0,2023-11-30
+2015-11,59040,GEN 1,"Eagle Creek Renewable Energy, LLC",Ball Mountain Hydro,VT,Conventional Hydroelectric,0.2,2016-01,2016-04,3,2023-11-30
+2015-11,59040,GEN 2,"Eagle Creek Renewable Energy, LLC",Ball Mountain Hydro,VT,Conventional Hydroelectric,0.2,2016-01,2016-04,3,2023-11-30
+2015-11,59040,GEN 3,"Eagle Creek Renewable Energy, LLC",Ball Mountain Hydro,VT,Conventional Hydroelectric,0.2,2016-01,2016-04,3,2023-11-30
+2015-11,59040,GEN 5,"Eagle Creek Renewable Energy, LLC",Ball Mountain Hydro,VT,Conventional Hydroelectric,0.2,2016-01,2016-04,3,2023-11-30
+2015-11,59040,GEN 6,"Eagle Creek Renewable Energy, LLC",Ball Mountain Hydro,VT,Conventional Hydroelectric,0.2,2016-01,2016-04,3,2023-11-30
+2015-11,59040,GEN 7,"Eagle Creek Renewable Energy, LLC",Ball Mountain Hydro,VT,Conventional Hydroelectric,0.2,2016-01,2016-04,3,2023-11-30
+2015-11,59040,GEN 8,"Eagle Creek Renewable Energy, LLC",Ball Mountain Hydro,VT,Conventional Hydroelectric,0.2,2016-01,2016-04,3,2023-11-30
+2015-11,59040,GEN 9,"Eagle Creek Renewable Energy, LLC",Ball Mountain Hydro,VT,Conventional Hydroelectric,0.2,2016-01,2016-04,3,2023-11-30
+2015-11,59040,GEN10,"Eagle Creek Renewable Energy, LLC",Ball Mountain Hydro,VT,Conventional Hydroelectric,0.2,2016-01,2016-04,3,2023-11-30
+2015-11,59040,GEN11,"Eagle Creek Renewable Energy, LLC",Ball Mountain Hydro,VT,Conventional Hydroelectric,0.2,2016-01,2016-04,3,2023-11-30
+2015-11,59040,GEN12,"Eagle Creek Renewable Energy, LLC",Ball Mountain Hydro,VT,Conventional Hydroelectric,0.2,2016-01,2016-04,3,2023-11-30
+2015-11,59040,GEN4,"Eagle Creek Renewable Energy, LLC",Ball Mountain Hydro,VT,Conventional Hydroelectric,0.2,2016-01,2016-04,3,2023-11-30
+2015-11,59164,NSC 1,Duke Energy Progress - (NC),Elm City Solar Facility,NC,Solar Photovoltaic,40,2016-01,2016-03,2,2023-11-30
+2015-11,59205,OCIA5,Consolidated Edison Development Inc.,OCI Alamo 5 LLC,TX,Solar Photovoltaic,100,2016-01,2015-12,-1,2023-11-30
+2015-11,59547,1,Pattern Operators LP,Fowler Ridge IV Wind Farm LLC,IN,Onshore Wind Turbine,150,2016-01,2016-01,0,2023-11-30
+2015-11,59577,PV1,"Strata Manager, LLC",Misenheimer Farm,NC,Solar Photovoltaic,5,2016-01,2015-12,-1,2023-11-30
+2015-11,59614,MDG1,Old Dominion Electric Coop,Monterey Diesel Generation Facility,VA,Petroleum Liquids,0.6,2016-01,2016-05,4,2023-11-30
+2015-11,59614,MDG10,Old Dominion Electric Coop,Monterey Diesel Generation Facility,VA,Petroleum Liquids,0.6,2016-01,2016-05,4,2023-11-30
+2015-11,59614,MDG2,Old Dominion Electric Coop,Monterey Diesel Generation Facility,VA,Petroleum Liquids,0.6,2016-01,2016-05,4,2023-11-30
+2015-11,59614,MDG3,Old Dominion Electric Coop,Monterey Diesel Generation Facility,VA,Petroleum Liquids,0.6,2016-01,2016-05,4,2023-11-30
+2015-11,59614,MDG4,Old Dominion Electric Coop,Monterey Diesel Generation Facility,VA,Petroleum Liquids,0.6,2016-01,2016-05,4,2023-11-30
+2015-11,59614,MDG5,Old Dominion Electric Coop,Monterey Diesel Generation Facility,VA,Petroleum Liquids,0.6,2016-01,2016-05,4,2023-11-30
+2015-11,59614,MDG6,Old Dominion Electric Coop,Monterey Diesel Generation Facility,VA,Petroleum Liquids,0.6,2016-01,2016-05,4,2023-11-30
+2015-11,59614,MDG7,Old Dominion Electric Coop,Monterey Diesel Generation Facility,VA,Petroleum Liquids,0.6,2016-01,2016-05,4,2023-11-30
+2015-11,59614,MDG8,Old Dominion Electric Coop,Monterey Diesel Generation Facility,VA,Petroleum Liquids,0.6,2016-01,2016-05,4,2023-11-30
+2015-11,59614,MDG9,Old Dominion Electric Coop,Monterey Diesel Generation Facility,VA,Petroleum Liquids,0.6,2016-01,2016-05,4,2023-11-30
+2015-11,59637,ADWF4,MidAmerican Energy Co,Adams Wind,IA,Onshore Wind Turbine,48.3,2016-01,2016-01,0,2023-11-30
+2015-11,59722,SEV1,Duke Energy Renewables Services,Seville 1,CA,Solar Photovoltaic,20,2016-01,2015-12,-1,2023-11-30
+2015-11,59838,GEN1,"EDF Renewable Asset Holdings, Inc.",Milo Wind Project LLC,NM,Onshore Wind Turbine,50,2016-01,2016-01,0,2023-11-30
+2015-11,59900,C3CA,Consolidated Edison Development Inc.,Corcoran Solar 3,CA,Solar Photovoltaic,20,2016-01,2016-02,1,2023-11-30
+2015-11,59904,1,Virginia Electric & Power Co,Western Branch High School,VA,Solar Photovoltaic,1,2016-01,2016-04,3,2023-11-30
+2015-11,59911,1,Virginia Electric & Power Co,Philip Morris,VA,Solar Photovoltaic,2,2016-01,2016-03,2,2023-11-30
+2015-11,59916,12307,SunEdison LLC,SunE- E Philadelphia Ontario,CA,Solar Photovoltaic,1,2016-01,2016-03,2,2023-11-30
+2015-11,59978,ECA22,"Adapture Renewables, Inc.","Adapture CA2, LLC",CA,Solar Photovoltaic,1.5,2016-01,2016-03,2,2023-11-30
+2015-11,60056,SYNPA,"Syncarpha Palmer, LLC","Syncarpha Palmer, LLC",MA,Solar Photovoltaic,4.8,2016-01,2015-12,-1,2023-11-30
+2015-11,60096,PV1,Tesla Inc.,Town of Chestertown- Chestertown WWTP,MD,Solar Photovoltaic,1,2016-01,2015-12,-1,2023-11-30
+2015-11,60109,UDRFC,"UIL Distributed Resources, LLC",UDR Glastonbury Fuel Cell,CT,Other Natural Gas,3.4,2016-01,2016-02,1,2023-11-30
+2015-11,60113,PV1,Tesla Inc.,Jackson Board of Education-Liberty HS,NJ,Solar Photovoltaic,1.2,2016-01,2016-07,6,2023-11-30
+2015-11,60114,PV1,Tesla Inc.,Oneida County- DPW,NY,Solar Photovoltaic,1.5,2016-01,2017-10,21,2023-11-30
+2015-11,60126,H1,"OEE XVII, LLC",Harpster Wind,OH,Onshore Wind Turbine,1.5,2016-01,2016-01,0,2023-11-30
+2015-11,56497,10,Midwest Energy Inc,Goodman Energy Center,KS,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-02,2016-04,2,2023-11-30
+2015-11,56497,11,Midwest Energy Inc,Goodman Energy Center,KS,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-02,2016-04,2,2023-11-30
+2015-11,56497,12,Midwest Energy Inc,Goodman Energy Center,KS,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-02,2016-04,2,2023-11-30
+2015-11,57399,CG1,"American Mun Power-Ohio, Inc",Cannelton Hydroelectric Plant,KY,Conventional Hydroelectric,29.3,2016-02,2016-01,-1,2023-11-30
+2015-11,57399,CG2,"American Mun Power-Ohio, Inc",Cannelton Hydroelectric Plant,KY,Conventional Hydroelectric,29.3,2016-02,2016-03,1,2023-11-30
+2015-11,57491,56819,CSOLAR IV West LLC,Imperial Solar Energy Center West,CA,Solar Photovoltaic,148.69999999999999,2016-02,2016-04,2,2023-11-30
+2015-11,58420,GEN2,Hamilton Liberty O&M LLC,Hamilton Liberty,PA,Natural Gas Fired Combined Cycle,435,2016-02,2016-07,5,2023-11-30
+2015-11,58644,BLK5,"Silver State Solar Power South, LLC",Silver State Solar Power South,NV,Solar Photovoltaic,35,2016-02,2016-04,2,2023-11-30
+2015-11,58902,KNG1,Kingfisher Wind LLC,Kingfisher Wind LLC,OK,Onshore Wind Turbine,298,2016-02,2016-03,1,2023-11-30
+2015-11,59175,5MWPV,Duke Energy Renewables Services,Woodland Solar,NC,Solar Photovoltaic,5,2016-02,2016-04,2,2023-11-30
+2015-11,59177,5MWPV,Duke Energy Renewables Services,Winton Solar,NC,Solar Photovoltaic,5,2016-02,2016-02,0,2023-11-30
+2015-11,59461,GEN01,"Bowerman Power LFG, LLC","Bowerman Power LFG, LLC",CA,Landfill Gas,3.4,2016-02,2016-04,2,2023-11-30
+2015-11,59461,GEN02,"Bowerman Power LFG, LLC","Bowerman Power LFG, LLC",CA,Landfill Gas,3.4,2016-02,2016-04,2,2023-11-30
+2015-11,59461,GEN03,"Bowerman Power LFG, LLC","Bowerman Power LFG, LLC",CA,Landfill Gas,3.4,2016-02,2016-04,2,2023-11-30
+2015-11,59461,GEN04,"Bowerman Power LFG, LLC","Bowerman Power LFG, LLC",CA,Landfill Gas,3.4,2016-02,2016-04,2,2023-11-30
+2015-11,59461,GEN05,"Bowerman Power LFG, LLC","Bowerman Power LFG, LLC",CA,Landfill Gas,3.4,2016-02,2016-04,2,2023-11-30
+2015-11,59461,GEN06,"Bowerman Power LFG, LLC","Bowerman Power LFG, LLC",CA,Landfill Gas,3.4,2016-02,2016-04,2,2023-11-30
+2015-11,59461,GEN07,"Bowerman Power LFG, LLC","Bowerman Power LFG, LLC",CA,Landfill Gas,3.4,2016-02,2016-04,2,2023-11-30
+2015-11,59868,GEN01,"Arevon Energy, Inc.",Kingbird A Solar LLC,CA,Solar Photovoltaic,20,2016-02,2016-04,2,2023-11-30
+2015-11,59954,XXXXX,"Duke Energy Florida, LLC",Osceola Solar Facility,FL,Solar Photovoltaic,3.8,2016-02,2016-03,1,2023-11-30
+2015-11,60013,GRANT,Southern Power Co,"Grant Wind, LLC",OK,Onshore Wind Turbine,151.80000000000001,2016-02,2016-04,2,2023-11-30
+2015-11,60032,RCHTR,"SunE Solar XVI Lessor, LLC",SunE Rochester,CA,Solar Photovoltaic,1,2016-02,2016-08,6,2023-11-30
+2015-11,60053,FLS1,Cypress Creek Renewables,"Innovative Solar 63, LLC",NC,Solar Photovoltaic,4.9000000000000004,2016-02,2016-02,0,2023-11-30
+2015-11,60060,SDIA2,Lindberg Field Solar I LLC,Lindberg FIeld Solar,CA,Solar Photovoltaic,1.8,2016-02,2016-02,0,2023-11-30
+2015-11,60060,SDIAB,Lindberg Field Solar I LLC,Lindberg FIeld Solar,CA,Solar Photovoltaic,0.5,2016-02,2015-12,-2,2023-11-30
+2015-11,60098,PV1,Tesla Inc.,Onondaga County - Oak Orchard WWTP,NY,Solar Photovoltaic,2,2016-02,2017-11,21,2023-11-30
+2015-11,60124,GFNCH,Goldfinch (Lakeland),Goldfinch,FL,Solar Photovoltaic,3,2016-02,2016-12,10,2023-11-30
+2015-11,52148,GEN4,Merck & Co Inc,Elkton,VA,Natural Gas Internal Combustion Engine,0.3,2016-03,2016-03,0,2023-11-30
+2015-11,56872,3,City of Hamilton - (OH),Meldahl Hydroelectric Project,KY,Conventional Hydroelectric,35,2016-03,2016-04,1,2023-11-30
+2015-11,58426,GEN1,"Hamilton Patriot Operating Services, LLC",Hamilton Patriot Generation Plant,PA,Natural Gas Fired Combined Cycle,435,2016-03,2016-07,4,2023-11-30
+2015-11,58462,1,"McCoy Solar, LLC",McCoy Solar Energy Project Hybrid,CA,Solar Photovoltaic,41.9,2016-03,2016-03,0,2023-11-30
+2015-11,58644,BLK6,"Silver State Solar Power South, LLC",Silver State Solar Power South,NV,Solar Photovoltaic,36.6,2016-03,2016-04,1,2023-11-30
+2015-11,58972,FHUA2,Tucson Electric Power Co,Fort Huachuca Solar PV Project,AZ,Solar Photovoltaic,4.0999999999999996,2016-03,2017-01,10,2023-11-30
+2015-11,59599,GEN1,"Arevon Energy, Inc.",Tropico Solar PV Plant,CA,Solar Photovoltaic,14,2016-03,2016-09,6,2023-11-30
+2015-11,59600,GEN1,"Arevon Energy, Inc.",Nicolis Solar PV Plant,CA,Solar Photovoltaic,20,2016-03,2016-09,6,2023-11-30
+2015-11,59641,5MWPV,Duke Energy Renewables Services,Garysburg Solar,NC,Solar Photovoltaic,5,2016-03,2016-03,0,2023-11-30
+2015-11,59642,5MWPV,Duke Energy Renewables Services,Gaston Solar,NC,Solar Photovoltaic,5,2016-03,2016-04,1,2023-11-30
+2015-11,59643,5MWPV,Duke Energy Renewables Services,Seaboard Solar LLC,NC,Solar Photovoltaic,5,2016-03,2016-06,3,2023-11-30
+2015-11,59648,5MWPV,Duke Energy Renewables Services,Tarboro Solar,NC,Solar Photovoltaic,5,2016-03,2016-01,-2,2023-11-30
+2015-11,59705,SSUN2,BQ Energy LLC,Steel Sun,NY,Solar Photovoltaic,2,2016-03,2016-12,9,2023-11-30
+2015-11,59938,UNIT1,"Sky Global Power One Pledgor, LLC",Sky Global Power One,TX,Natural Gas Internal Combustion Engine,8.5,2016-03,2016-05,2,2023-11-30
+2015-11,59938,UNIT2,"Sky Global Power One Pledgor, LLC",Sky Global Power One,TX,Natural Gas Internal Combustion Engine,8.5,2016-03,2016-05,2,2023-11-30
+2015-11,59938,UNIT3,"Sky Global Power One Pledgor, LLC",Sky Global Power One,TX,Natural Gas Internal Combustion Engine,8.5,2016-03,2016-05,2,2023-11-30
+2015-11,59938,UNIT4,"Sky Global Power One Pledgor, LLC",Sky Global Power One,TX,Natural Gas Internal Combustion Engine,8.5,2016-03,2016-05,2,2023-11-30
+2015-11,59938,UNIT5,"Sky Global Power One Pledgor, LLC",Sky Global Power One,TX,Natural Gas Internal Combustion Engine,8.5,2016-03,2016-05,2,2023-11-30
+2015-11,59938,UNIT6,"Sky Global Power One Pledgor, LLC",Sky Global Power One,TX,Natural Gas Internal Combustion Engine,8.5,2016-03,2016-05,2,2023-11-30
+2015-11,60086,PV1,Tesla Inc.,US-TOPCO (Soccer Center),CA,Solar Photovoltaic,3,2016-03,2016-12,9,2023-11-30
+2015-11,6288,2,Golden Valley Elec Assn Inc,Healy,AK,Conventional Steam Coal,62,2016-04,1998-01,-219,2023-11-30
+2015-11,7722,2,Tennessee Valley Authority,Watts Bar Nuclear Plant,TN,Nuclear,1269.9000000000001,2016-04,2016-06,2,2023-11-30
+2015-11,10198,GEN3,Mosaic Phosphates Co.,Mosaic Phosphates Uncle Sam,LA,All Other,15,2016-04,2016-08,4,2023-11-30
+2015-11,57308,1,Los Angeles Department of Water & Power,Maclay Solar Project,CA,Solar Photovoltaic,2,2016-04,2017-04,12,2023-11-30
+2015-11,57943,04,Basin Electric Power Coop,Lonesome Creek Station,ND,Natural Gas Fired Combustion Turbine,60.5,2016-04,2017-05,13,2023-11-30
+2015-11,57943,05,Basin Electric Power Coop,Lonesome Creek Station,ND,Natural Gas Fired Combustion Turbine,60.5,2016-04,2017-05,13,2023-11-30
+2015-11,58644,BLK7,"Silver State Solar Power South, LLC",Silver State Solar Power South,NV,Solar Photovoltaic,35,2016-04,2016-05,1,2023-11-30
+2015-11,59084,RPMA,"BHE Renewables, LLC",Marshall Wind Farm,KS,Onshore Wind Turbine,73.8,2016-04,2016-05,1,2023-11-30
+2015-11,59513,MEAD1,"Fresh Air Energy XVIII, LLC",Meadows PV 1,NC,Solar Photovoltaic,20,2016-04,2016-06,2,2023-11-30
+2015-11,59740,SPVMW,AES Distributed Energy,SEPV Mojave West,CA,Solar Photovoltaic,20,2016-04,2016-06,2,2023-11-30
+2015-11,60006,1,Florida Power & Light Co,FIU Solar,FL,Solar Photovoltaic,1.6,2016-04,2016-05,1,2023-11-30
+2015-11,60025,01,Eight Flags Energy LLC,Eight Flags Energy,FL,Natural Gas Fired Combustion Turbine,21.6,2016-04,2016-07,3,2023-11-30
+2015-11,60039,FTRS,"Frontier Solar, LLC",Frontier Solar LLC,CA,Solar Photovoltaic,20,2016-04,2016-06,2,2023-11-30
+2015-11,60093,BLCK2,"Blythe Solar 110, LLC","Blythe Solar 110, LLC",CA,Solar Photovoltaic,36.299999999999997,2016-04,2016-04,0,2023-11-30
+2015-11,60110,PV1,Tesla Inc.,Town of Needham VNEM CSG,MA,Solar Photovoltaic,3,2016-04,2016-02,-2,2023-11-30
+2015-11,60111,PV1,Tesla Inc.,Williamsburg Solar LLC VNEM CSG,MA,Solar Photovoltaic,2.2000000000000002,2016-04,2016-02,-2,2023-11-30
+2015-11,60112,PV1,Tesla Inc.,Oregon Convention Center,OR,Solar Photovoltaic,1.4,2016-04,2016-07,3,2023-11-30
+2015-11,60115,PV1,Tesla Inc.,Town of Halfmoon,NY,Solar Photovoltaic,1,2016-04,2017-06,14,2023-11-30
+2015-11,60116,PV1,Tesla Inc.,"BJ's Wholesale Club, Inc- Uxbridge",MA,Solar Photovoltaic,1,2016-04,2017-07,15,2023-11-30
+2015-11,60118,1,Consumers Energy Co,Grand Valley Solar Gardens,MI,Solar Photovoltaic,3,2016-04,2016-04,0,2023-11-30
+2015-11,990,BAT1,Indianapolis Power & Light Co,Harding Street,IN,Batteries,20,2016-05,2016-06,1,2023-11-30
+2015-11,58260,CT01,Virginia Electric & Power Co,Brunswick County Power Station,VA,Natural Gas Fired Combined Cycle,297.5,2016-05,2016-04,-1,2023-11-30
+2015-11,58260,CT02,Virginia Electric & Power Co,Brunswick County Power Station,VA,Natural Gas Fired Combined Cycle,297.5,2016-05,2016-04,-1,2023-11-30
+2015-11,58260,CT03,Virginia Electric & Power Co,Brunswick County Power Station,VA,Natural Gas Fired Combined Cycle,297.5,2016-05,2016-04,-1,2023-11-30
+2015-11,58260,ST01,Virginia Electric & Power Co,Brunswick County Power Station,VA,Natural Gas Fired Combined Cycle,579.70000000000005,2016-05,2016-04,-1,2023-11-30
+2015-11,58426,GEN2,"Hamilton Patriot Operating Services, LLC",Hamilton Patriot Generation Plant,PA,Natural Gas Fired Combined Cycle,435,2016-05,2016-07,2,2023-11-30
+2015-11,58462,BLK2,"McCoy Solar, LLC",McCoy Solar Energy Project Hybrid,CA,Solar Photovoltaic,21,2016-05,2016-04,-1,2023-11-30
+2015-11,58503,GEN1,Portland General Electric Co,Carty Generating Station,OR,Natural Gas Fired Combined Cycle,300,2016-05,2016-07,2,2023-11-30
+2015-11,58503,GEN2,Portland General Electric Co,Carty Generating Station,OR,Natural Gas Fired Combined Cycle,200,2016-05,2016-07,2,2023-11-30
+2015-11,58562,GT-3,El Paso Electric Co,Montana Power Station,TX,Natural Gas Fired Combustion Turbine,131.80000000000001,2016-05,2016-05,0,2023-11-30
+2015-11,58655,INV-1,Waihonu North LLC,Waihonu North Solar,HI,Solar Photovoltaic,0.5,2016-05,2016-07,2,2023-11-30
+2015-11,58655,INV-2,Waihonu North LLC,Waihonu North Solar,HI,Solar Photovoltaic,0.5,2016-05,2016-07,2,2023-11-30
+2015-11,58655,INV-3,Waihonu North LLC,Waihonu North Solar,HI,Solar Photovoltaic,0.5,2016-05,2016-07,2,2023-11-30
+2015-11,58655,INV-4,Waihonu North LLC,Waihonu North Solar,HI,Solar Photovoltaic,0.5,2016-05,2016-07,2,2023-11-30
+2015-11,58655,INV-5,Waihonu North LLC,Waihonu North Solar,HI,Solar Photovoltaic,0.5,2016-05,2016-07,2,2023-11-30
+2015-11,58655,INV-6,Waihonu North LLC,Waihonu North Solar,HI,Solar Photovoltaic,0.5,2016-05,2016-07,2,2023-11-30
+2015-11,58655,INV-7,Waihonu North LLC,Waihonu North Solar,HI,Solar Photovoltaic,0.5,2016-05,2016-07,2,2023-11-30
+2015-11,58655,INV-8,Waihonu North LLC,Waihonu North Solar,HI,Solar Photovoltaic,0.5,2016-05,2016-07,2,2023-11-30
+2015-11,58655,INV-9,Waihonu North LLC,Waihonu North Solar,HI,Solar Photovoltaic,0.5,2016-05,2016-07,2,2023-11-30
+2015-11,58655,INV10,Waihonu North LLC,Waihonu North Solar,HI,Solar Photovoltaic,0.5,2016-05,2016-07,2,2023-11-30
+2015-11,58656,INV-1,Waihonu South LLC,Waihonu South Solar,HI,Solar Photovoltaic,0.5,2016-05,2016-07,2,2023-11-30
+2015-11,58656,INV-2,Waihonu South LLC,Waihonu South Solar,HI,Solar Photovoltaic,0.5,2016-05,2016-07,2,2023-11-30
+2015-11,58656,INV-3,Waihonu South LLC,Waihonu South Solar,HI,Solar Photovoltaic,0.5,2016-05,2016-07,2,2023-11-30
+2015-11,58811,GEN1,Beaver Dam Energy LLC,Beaver Dam,PA,Natural Gas Internal Combustion Engine,4.4000000000000004,2016-05,2016-06,1,2023-11-30
+2015-11,58811,GEN2,Beaver Dam Energy LLC,Beaver Dam,PA,Natural Gas Internal Combustion Engine,4.4000000000000004,2016-05,2016-06,1,2023-11-30
+2015-11,58811,GEN3,Beaver Dam Energy LLC,Beaver Dam,PA,Natural Gas Internal Combustion Engine,4.4000000000000004,2016-05,2016-06,1,2023-11-30
+2015-11,58811,GEN4,Beaver Dam Energy LLC,Beaver Dam,PA,Natural Gas Internal Combustion Engine,4.4000000000000004,2016-05,2016-06,1,2023-11-30
+2015-11,58811,GEN5,Beaver Dam Energy LLC,Beaver Dam,PA,Natural Gas Internal Combustion Engine,4.4000000000000004,2016-05,2016-06,1,2023-11-30
+2015-11,58835,ELK2,"Golden Spread Electric Cooperative, Inc",Elk Station,TX,Natural Gas Fired Combustion Turbine,199.8,2016-05,2016-05,0,2023-11-30
+2015-11,58835,ELK3,"Golden Spread Electric Cooperative, Inc",Elk Station,TX,Natural Gas Fired Combustion Turbine,199.8,2016-05,2016-05,0,2023-11-30
+2015-11,59276,LEAVG,AES Distributed Energy,Leavenworth Greenworks LLC,NY,Solar Photovoltaic,9.5,2016-05,2016-06,1,2023-11-30
+2015-11,59321,GEN1,Duke Energy Renewables Services,Los Vientos Windpower IV,TX,Onshore Wind Turbine,200,2016-05,2016-07,2,2023-11-30
+2015-11,59499,PV1,Cypress Creek Renewables,Candace Solar,NC,Solar Photovoltaic,5,2016-05,2016-08,3,2023-11-30
+2015-11,59703,1,Onward Energy,"Cottonwood Solar, LLC Cottonwood Carport",CA,Solar Photovoltaic,1,2016-05,2016-05,0,2023-11-30
+2015-11,59905,1,Virginia Electric & Power Co,Merck,VA,Solar Photovoltaic,2.1,2016-05,2017-06,13,2023-11-30
+2015-11,59926,AI1,Wolverine Power Supply Coop,Alpine Power Plant,MI,Natural Gas Fired Combustion Turbine,226.9,2016-05,2016-06,1,2023-11-30
+2015-11,59926,AI2,Wolverine Power Supply Coop,Alpine Power Plant,MI,Natural Gas Fired Combustion Turbine,226.9,2016-05,2016-07,2,2023-11-30
+2015-11,59983,PV1,"Hoosier Energy R E C, Inc",New Haven Solar RES,IN,Solar Photovoltaic,1.1000000000000001,2016-05,2016-09,4,2023-11-30
+2015-11,60071,XXXXX,"Duke Energy Florida, LLC",Perry Solar Facility,FL,Solar Photovoltaic,5.0999999999999996,2016-05,2016-08,3,2023-11-30
+2015-11,60078,DU1CA,Consolidated Edison Development Inc.,CED Ducor 1,CA,Solar Photovoltaic,20,2016-05,2016-12,7,2023-11-30
+2015-11,60085,PV1,Tesla Inc.,AVS Lancaster 1,CA,Solar Photovoltaic,3.7,2016-05,2016-12,7,2023-11-30
+2015-11,60093,BLCK3,"Blythe Solar 110, LLC","Blythe Solar 110, LLC",CA,Solar Photovoltaic,34.799999999999997,2016-05,2016-04,-1,2023-11-30
+2015-11,422,GT5,City of Pasadena - (CA),Glenarm,CA,Natural Gas Fired Combined Cycle,71,2016-06,2016-12,6,2023-11-30
+2015-11,617,5A,Florida Power & Light Co,Port Everglades,FL,Natural Gas Fired Combined Cycle,296,2016-06,2016-04,-2,2023-11-30
+2015-11,617,5B,Florida Power & Light Co,Port Everglades,FL,Natural Gas Fired Combined Cycle,296,2016-06,2016-04,-2,2023-11-30
+2015-11,617,5C,Florida Power & Light Co,Port Everglades,FL,Natural Gas Fired Combined Cycle,296,2016-06,2016-04,-2,2023-11-30
+2015-11,617,5ST,Florida Power & Light Co,Port Everglades,FL,Natural Gas Fired Combined Cycle,464,2016-06,2016-04,-2,2023-11-30
+2015-11,1239,12-2,Empire District Electric Co,Riverton,KS,Natural Gas Fired Combined Cycle,118.8,2016-06,2016-05,-1,2023-11-30
+2015-11,10864,GEN7,Archer Daniels Midland Co,Archer Daniels Midland Cedar Rapids,IA,Natural Gas Fired Combustion Turbine,38.5,2016-06,2016-09,3,2023-11-30
+2015-11,57881,11,Basin Electric Power Coop,Pioneer Generation Station,ND,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-06,2017-01,7,2023-11-30
+2015-11,57881,12,Basin Electric Power Coop,Pioneer Generation Station,ND,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-06,2017-01,7,2023-11-30
+2015-11,57881,13,Basin Electric Power Coop,Pioneer Generation Station,ND,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-06,2017-01,7,2023-11-30
+2015-11,57881,14,Basin Electric Power Coop,Pioneer Generation Station,ND,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-06,2017-01,7,2023-11-30
+2015-11,57881,15,Basin Electric Power Coop,Pioneer Generation Station,ND,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-06,2017-01,7,2023-11-30
+2015-11,57881,16,Basin Electric Power Coop,Pioneer Generation Station,ND,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-06,2017-01,7,2023-11-30
+2015-11,57881,17,Basin Electric Power Coop,Pioneer Generation Station,ND,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-06,2017-01,7,2023-11-30
+2015-11,57881,18,Basin Electric Power Coop,Pioneer Generation Station,ND,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-06,2017-01,7,2023-11-30
+2015-11,57881,19,Basin Electric Power Coop,Pioneer Generation Station,ND,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-06,2017-01,7,2023-11-30
+2015-11,57881,20,Basin Electric Power Coop,Pioneer Generation Station,ND,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-06,2017-01,7,2023-11-30
+2015-11,57881,21,Basin Electric Power Coop,Pioneer Generation Station,ND,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-06,2017-01,7,2023-11-30
+2015-11,57881,22,Basin Electric Power Coop,Pioneer Generation Station,ND,Natural Gas Internal Combustion Engine,9.3000000000000007,2016-06,2017-01,7,2023-11-30
+2015-11,58462,BLK3,"McCoy Solar, LLC",McCoy Solar Energy Project Hybrid,CA,Solar Photovoltaic,39.6,2016-06,2016-06,0,2023-11-30
+2015-11,58469,AP1,Hawaiian Electric Co Inc,HNL Emergency Power Facility,HI,Other Waste Biomass,2.5,2016-06,2017-06,12,2023-11-30
+2015-11,58644,BLK8,"Silver State Solar Power South, LLC",Silver State Solar Power South,NV,Solar Photovoltaic,26.3,2016-06,2016-06,0,2023-11-30
+2015-11,58829,PV1,"Heelstone Energy Holdings, LLC",Sonne Two,NC,Solar Photovoltaic,5,2016-06,2016-12,6,2023-11-30
+2015-11,59076,WT1,"Chopin Wind, LLC",Chopin Wind LLC,OR,Onshore Wind Turbine,10,2016-06,2016-10,4,2023-11-30
+2015-11,59213,PV1,Dominion Renewable Energy,Clipperton Holdings LLC,NC,Solar Photovoltaic,5,2016-06,2017-11,17,2023-11-30
+2015-11,59217,PV1,"Heelstone Energy Holdings, LLC",Tiburon Holdings,NC,Solar Photovoltaic,5,2016-06,2016-12,6,2023-11-30
+2015-11,59301,WEDC1,"WED Coventry One, LLC",WED Coventry 1,RI,Onshore Wind Turbine,1.5,2016-06,2016-10,4,2023-11-30
+2015-11,59302,COV2,"WED Coventry Two, LLC",WED Coventry 2,RI,Onshore Wind Turbine,1.5,2016-06,2016-08,2,2023-11-30
+2015-11,59302,COV2A,"WED Coventry Two, LLC",WED Coventry 2,RI,Onshore Wind Turbine,1.5,2016-06,2016-08,2,2023-11-30
+2015-11,59302,COV2B,"WED Coventry Two, LLC",WED Coventry 2,RI,Onshore Wind Turbine,1.5,2016-06,2016-08,2,2023-11-30
+2015-11,59305,WEDC3,"WED Coventry Three, LLC",WED Coventry 3,RI,Onshore Wind Turbine,1.5,2016-06,2016-08,2,2023-11-30
+2015-11,59306,WEDC4,"WED Coventry Four, LLC",WED Coventry 4,RI,Onshore Wind Turbine,1.5,2016-06,2016-08,2,2023-11-30
+2015-11,59313,COV5,"WED Coventry Five, LLC",WED Coventry 5,RI,Onshore Wind Turbine,1.5,2016-06,2017-03,9,2023-11-30
+2015-11,59314,COV6,"WED Coventry Six, LLC",WED Coventry 6,RI,Onshore Wind Turbine,1.5,2016-06,2016-08,2,2023-11-30
+2015-11,59314,COV6A,"WED Coventry Six, LLC",WED Coventry 6,RI,Onshore Wind Turbine,1.5,2016-06,2016-08,2,2023-11-30
+2015-11,59314,COV6B,"WED Coventry Six, LLC",WED Coventry 6,RI,Onshore Wind Turbine,1.5,2016-06,2016-08,2,2023-11-30
+2015-11,59391,ENG01,"South Texas Electric Coop, Inc",Red Gate Power Plant,TX,Natural Gas Internal Combustion Engine,18.7,2016-06,2016-12,6,2023-11-30
+2015-11,59391,ENG02,"South Texas Electric Coop, Inc",Red Gate Power Plant,TX,Natural Gas Internal Combustion Engine,18.7,2016-06,2016-12,6,2023-11-30
+2015-11,59391,ENG03,"South Texas Electric Coop, Inc",Red Gate Power Plant,TX,Natural Gas Internal Combustion Engine,18.7,2016-06,2016-12,6,2023-11-30
+2015-11,59391,ENG04,"South Texas Electric Coop, Inc",Red Gate Power Plant,TX,Natural Gas Internal Combustion Engine,18.7,2016-06,2016-12,6,2023-11-30
+2015-11,59391,ENG05,"South Texas Electric Coop, Inc",Red Gate Power Plant,TX,Natural Gas Internal Combustion Engine,18.7,2016-06,2016-12,6,2023-11-30
+2015-11,59391,ENG06,"South Texas Electric Coop, Inc",Red Gate Power Plant,TX,Natural Gas Internal Combustion Engine,18.7,2016-06,2016-12,6,2023-11-30
+2015-11,59391,ENG07,"South Texas Electric Coop, Inc",Red Gate Power Plant,TX,Natural Gas Internal Combustion Engine,18.7,2016-06,2016-12,6,2023-11-30
+2015-11,59391,ENG08,"South Texas Electric Coop, Inc",Red Gate Power Plant,TX,Natural Gas Internal Combustion Engine,18.7,2016-06,2016-12,6,2023-11-30
+2015-11,59391,ENG09,"South Texas Electric Coop, Inc",Red Gate Power Plant,TX,Natural Gas Internal Combustion Engine,18.7,2016-06,2016-12,6,2023-11-30
+2015-11,59391,ENG10,"South Texas Electric Coop, Inc",Red Gate Power Plant,TX,Natural Gas Internal Combustion Engine,18.7,2016-06,2016-12,6,2023-11-30
+2015-11,59391,ENG11,"South Texas Electric Coop, Inc",Red Gate Power Plant,TX,Natural Gas Internal Combustion Engine,18.7,2016-06,2016-12,6,2023-11-30
+2015-11,59391,ENG12,"South Texas Electric Coop, Inc",Red Gate Power Plant,TX,Natural Gas Internal Combustion Engine,18.7,2016-06,2016-12,6,2023-11-30
+2015-11,59518,GRAND,"Ecoplexus, Inc",Grandy PV 1,NC,Solar Photovoltaic,20,2016-06,2020-02,44,2023-11-30
+2015-11,59520,MANN,"Ecoplexus, Inc",Manning PV 1,NC,Solar Photovoltaic,5,2016-06,2018-12,30,2023-11-30
+2015-11,59647,1,Stillwater Utilities Authority,Stillwater Energy Center,OK,Natural Gas Internal Combustion Engine,18.8,2016-06,2016-07,1,2023-11-30
+2015-11,59647,2,Stillwater Utilities Authority,Stillwater Energy Center,OK,Natural Gas Internal Combustion Engine,18.8,2016-06,2016-07,1,2023-11-30
+2015-11,59647,3,Stillwater Utilities Authority,Stillwater Energy Center,OK,Natural Gas Internal Combustion Engine,18.8,2016-06,2016-07,1,2023-11-30
+2015-11,59656,COMCH,Onward Energy,Comanche Solar,CO,Solar Photovoltaic,120,2016-06,2016-09,3,2023-11-30
+2015-11,59666,IS047,US Funding 1,Innovative Solar 47,NC,Solar Photovoltaic,33.799999999999997,2016-06,2017-04,10,2023-11-30
+2015-11,59669,IS054,John Laing US Solar Corp.,Innovative Solar 54,NC,Solar Photovoltaic,50,2016-06,2018-12,30,2023-11-30
+2015-11,59671,IS046,Cypress Creek Renewables,Innovative Solar 46,NC,Solar Photovoltaic,78.5,2016-06,2016-12,6,2023-11-30
+2015-11,59676,IS044,Cypress Creek Renewables,Innovative Solar 55,NC,Solar Photovoltaic,6.5,2016-06,2017-12,18,2023-11-30
+2015-11,59677,IS064,Cypress Creek Renewables,Innovative Solar 64,NC,Solar Photovoltaic,4.9000000000000004,2016-06,2016-01,-5,2023-11-30
+2015-11,59678,IS067,John Laing US Solar Corp.,Innovative Solar 67,NC,Solar Photovoltaic,33.299999999999997,2016-06,2018-12,30,2023-11-30
+2015-11,59723,SEV2,Duke Energy Renewables Services,Seville 2,CA,Solar Photovoltaic,30,2016-06,2015-12,-6,2023-11-30
+2015-11,59739,LWADB,AES Distributed Energy,Lancaster WAD B,CA,Solar Photovoltaic,3,2016-06,2017-04,10,2023-11-30
+2015-11,59795,FLS1,"TWE Ahoskie Solar Project, LLC",Ahoskie,NC,Solar Photovoltaic,5,2016-06,2018-01,19,2023-11-30
+2015-11,59862,1,Georgia Power Co,Fort Benning Solar Facility,GA,Solar Photovoltaic,30,2016-06,2015-12,-6,2023-11-30
+2015-11,59908,2MWPV,AES Distributed Energy,Mount Olive Solar,NC,Solar Photovoltaic,2,2016-06,2016-12,6,2023-11-30
+2015-11,59927,PV1,Citizens Enterprises Corporation,Hunt Road Solar,MA,Solar Photovoltaic,4.5,2016-06,2016-12,6,2023-11-30
+2015-11,59961,WABSB,AES Distributed Energy,Western Antelope Blue Sky B,CA,Solar Photovoltaic,20,2016-06,2016-12,6,2023-11-30
+2015-11,60087,SPII,Onward Energy,South Plains II,TX,Onshore Wind Turbine,300,2016-06,2016-06,0,2023-11-30
+2015-11,60119,GEN1,Northern Water Hydropower Enterprise,Granby Hydro,CO,Conventional Hydroelectric,1.2,2016-06,2016-05,-1,2023-11-30
+2015-11,50393,RO2,Friant Power Authority,Friant Hydro Facility,CA,Conventional Hydroelectric,6.9,2016-07,2017-06,11,2023-11-30
+2015-11,59206,OCIA6,"BHE Renewables, LLC",Alamo 6,TX,Solar Photovoltaic,105,2016-07,2017-03,8,2023-11-30
+2015-11,59315,BEAC1,AES Distributed Energy,Hecate Energy Beacon Solar 1,CA,Solar Photovoltaic,56,2016-07,2017-04,9,2023-11-30
+2015-11,59316,BEAC3,AES Distributed Energy,Hecate Energy Beacon Solar 3,CA,Solar Photovoltaic,56,2016-07,2016-12,5,2023-11-30
+2015-11,59317,BEAC4,AES Distributed Energy,Hecate Energy Beacon Solar 4,CA,Solar Photovoltaic,50,2016-07,2016-12,5,2023-11-30
+2015-11,59386,ENTS1,Clearway Renewable Operation & Maintenance LLC,"Enterprise Solar, LLC",UT,Solar Photovoltaic,80,2016-07,2016-07,0,2023-11-30
+2015-11,59523,FRFSP,"Five Points Solar Park, LLC",Five Points Solar Park,CA,Solar Photovoltaic,60,2016-07,2016-09,2,2023-11-30
+2015-11,59685,01,Virginia Electric & Power Co,Remington Solar Facility,VA,Solar Photovoltaic,20,2016-07,2017-10,15,2023-11-30
+2015-11,59737,ASPRG,AES Distributed Energy,Aspiration G,CA,Solar Photovoltaic,9,2016-07,2017-09,14,2023-11-30
+2015-11,59836,11,Wisconsin Electric Power Co,Twin Falls (WI),WI,Conventional Hydroelectric,4.5999999999999996,2016-07,2016-07,0,2023-11-30
+2015-11,59836,12,Wisconsin Electric Power Co,Twin Falls (WI),WI,Conventional Hydroelectric,4.5999999999999996,2016-07,2016-07,0,2023-11-30
+2015-11,59861,TBPV1,Indiana Michigan Power Co,Twin Branch PV,IN,Solar Photovoltaic,2.6,2016-07,2016-08,1,2023-11-30
+2015-11,59915,ORCA,Consolidated Edison Development Inc.,Oro Loma,CA,Solar Photovoltaic,20,2016-07,2017-01,6,2023-11-30
+2015-11,59964,ELVSC,AES Distributed Energy,Elevation Solar C,CA,Solar Photovoltaic,40,2016-07,2016-12,5,2023-11-30
+2015-11,60076,SYNPL,"Syncarpha Bondsville, LLC",Palmer Landfill,MA,Solar Photovoltaic,4,2016-07,2016-12,5,2023-11-30
+2015-11,60079,DU2CA,Consolidated Edison Development Inc.,CED Ducor 2,CA,Solar Photovoltaic,20,2016-07,2016-12,5,2023-11-30
+2015-11,60080,DU3CA,Consolidated Edison Development Inc.,CED Ducor 3,CA,Solar Photovoltaic,15,2016-07,2016-12,5,2023-11-30
+2015-11,58982,GEN1,"Copper Valley Elec Assn, Inc",Allison Creek Hydro,AK,Conventional Hydroelectric,6.5,2016-08,2016-10,2,2023-11-30
+2015-11,59088,GEN 1,Southern Power Co,Calipatria Solar Farm,CA,Solar Photovoltaic,20,2016-08,2016-02,-6,2023-11-30
+2015-11,59207,OCIA7,Consolidated Edison Development Inc.,OCI Alamo 7 LLC,TX,Solar Photovoltaic,100,2016-08,2016-08,0,2023-11-30
+2015-11,59387,ESCS1,Clearway Renewable Operation & Maintenance LLC,"Escalante Solar I, LLC",UT,Solar Photovoltaic,80,2016-08,2016-08,0,2023-11-30
+2015-11,59388,ESCS2,Clearway Renewable Operation & Maintenance LLC,"Escalante Solar II, LLC",UT,Solar Photovoltaic,80,2016-08,2016-08,0,2023-11-30
+2015-11,59389,ESCS3,Clearway Renewable Operation & Maintenance LLC,"Escalante Solar III, LLC",UT,Solar Photovoltaic,80,2016-08,2016-08,0,2023-11-30
+2015-11,59490,JCW,Jett Creek,Jett Creek Windfarm (Burnt River),OR,Onshore Wind Turbine,10,2016-08,2017-03,7,2023-11-30
+2015-11,59491,BCW,Benson Creek,Benson Creek Windfarm (Burnt River),OR,Onshore Wind Turbine,10,2016-08,2017-03,7,2023-11-30
+2015-11,59492,DCW,Durbin Creek,Durbin Creek Windfarm (Burnt River),OR,Onshore Wind Turbine,10,2016-08,2017-03,7,2023-11-30
+2015-11,59493,PW,Prospector,Prospector Windfarm (Burnt River),OR,Onshore Wind Turbine,10,2016-08,2017-03,7,2023-11-30
+2015-11,59494,WSW,Willow Spring,Willow Spring Windfarm (Burnt River),OR,Onshore Wind Turbine,10,2016-08,2017-03,7,2023-11-30
+2015-11,59524,FRBSP,Consolidated Edison Development Inc.,Blackwell Solar Park,CA,Solar Photovoltaic,20,2016-08,2019-01,29,2023-11-30
+2015-11,59941,ISS,Clearway Renewable Operation & Maintenance LLC,"Iron Springs Solar, LLC",UT,Solar Photovoltaic,80,2016-08,2016-08,0,2023-11-30
+2015-11,59945,GMSW,Clearway Renewable Operation & Maintenance LLC,"Granite Mountain Solar West, LLC",UT,Solar Photovoltaic,50.4,2016-08,2016-09,1,2023-11-30
+2015-11,59946,GMSE,Clearway Renewable Operation & Maintenance LLC,"Granite Mountain Solar East, LLC",UT,Solar Photovoltaic,80,2016-08,2016-09,1,2023-11-30
+2015-11,59976,ASTR1,RE Astoria LLC,RE Astoria,CA,Solar Photovoltaic,100,2016-08,2016-12,4,2023-11-30
+2015-11,59977,ASTR2,RE Astoria 2 LLC,RE Astoria 2,CA,Solar Photovoltaic,75,2016-08,2016-12,4,2023-11-30
+2015-11,60077,AVCA,Consolidated Edison Development Inc.,CED Avenal,CA,Solar Photovoltaic,15.8,2016-08,2017-01,5,2023-11-30
+2015-11,60092,BLCK5,"Blythe Solar II, LLC","Blythe Solar II, LLC",CA,Solar Photovoltaic,33.9,2016-08,2016-08,0,2023-11-30
+2015-11,389,BESS,Imperial Irrigation District,El Centro Hybrid,CA,Batteries,30,2016-09,2016-10,1,2023-11-30
+2015-11,57400,SG1,"American Mun Power-Ohio, Inc",Smithland Hydroelectric Plant,KY,Conventional Hydroelectric,25.3,2016-09,2017-07,10,2023-11-30
+2015-11,57555,CTG1,Pio Pico Energy Center LLC,Pio Pico Energy Center,CA,Natural Gas Fired Combustion Turbine,131.80000000000001,2016-09,2016-11,2,2023-11-30
+2015-11,57555,CTG2,Pio Pico Energy Center LLC,Pio Pico Energy Center,CA,Natural Gas Fired Combustion Turbine,131.80000000000001,2016-09,2016-11,2,2023-11-30
+2015-11,57555,CTG3,Pio Pico Energy Center LLC,Pio Pico Energy Center,CA,Natural Gas Fired Combustion Turbine,131.80000000000001,2016-09,2016-11,2,2023-11-30
+2015-11,57859,1,"Arevon Energy, Inc.",Moapa Southern Paiute,NV,Solar Photovoltaic,250,2016-09,2016-12,3,2023-11-30
+2015-11,58194,WC 4,Penn State University,West Campus Steam Plant,PA,Natural Gas Steam Turbine,2.9,2016-09,2017-02,5,2023-11-30
+2015-11,58194,WC 5,Penn State University,West Campus Steam Plant,PA,Natural Gas Steam Turbine,2.2000000000000002,2016-09,2017-02,5,2023-11-30
+2015-11,58254,CT02R,City of Lowell - (MI),Chatham,MI,Natural Gas Fired Combustion Turbine,3.6,2016-09,2016-12,3,2023-11-30
+2015-11,58646,STL,Southern Power Co,Stateline Solar,CA,Solar Photovoltaic,75.900000000000006,2016-09,2015-12,-9,2023-11-30
+2015-11,59103,1,Dominion Renewable Energy,Fremont Farm LLC,NC,Solar Photovoltaic,5,2016-09,2017-11,14,2023-11-30
+2015-11,59150,PV1,MN8 Energy LLC,RE Mustang LLC,CA,Solar Photovoltaic,100,2016-09,2016-08,-1,2023-11-30
+2015-11,59249,PV1,Duke Energy Renewables Services,Rio Bravo Solar 1 LLC,CA,Solar Photovoltaic,20,2016-09,2016-12,3,2023-11-30
+2015-11,59253,PV1,Duke Energy Renewables Services,Wildwood Solar II,CA,Solar Photovoltaic,15,2016-09,2017-01,4,2023-11-30
+2015-11,59309,BEAC2,"CD Global Solar Holdings, LLC",Beacon Solar Plant Site 2,CA,Solar Photovoltaic,47.3,2016-09,2017-12,15,2023-11-30
+2015-11,59708,5MWPV,Cypress Creek Renewables,Franklinton Solar,NC,Solar Photovoltaic,5,2016-09,2017-03,6,2023-11-30
+2015-11,59712,SRWI,"Acciona Energy USA Global, LLC","San Roman Wind I, LLC",TX,Onshore Wind Turbine,95.3,2016-09,2017-02,5,2023-11-30
+2015-11,59793,15,Alaska Electric Light & Power Co.,Industrial Plant,AK,Petroleum Liquids,41.7,2016-09,2016-11,2,2023-11-30
+2015-11,59825,5MWPV,Cypress Creek Renewables,South Louisburg Solar,NC,Solar Photovoltaic,5,2016-09,2016-09,0,2023-11-30
+2015-11,59840,SB2,"63SU 8me, LLC",Springbok Solar Farm 2,CA,Solar Photovoltaic,155,2016-09,2016-09,0,2023-11-30
+2015-11,59853,WVPV1,Indiana Michigan Power Co,Watervliet PV,MI,Solar Photovoltaic,4.5999999999999996,2016-09,2016-11,2,2023-11-30
+2015-11,59870,GEN01,"Little Bear Solar 1, LLC (Longroad)","Little Bear Solar 1, LLC",CA,Solar Photovoltaic,40,2016-09,2020-12,51,2023-11-30
+2015-11,59877,MB20,"Riverside Fuel Cell, LLC",Riverside RWQCP Fuel Cell,CA,Other Waste Biomass,1.4,2016-09,2016-08,-1,2023-11-30
+2015-11,59917,5MWPV,Cypress Creek Renewables,Pollocksville Solar,NC,Solar Photovoltaic,5,2016-09,2016-12,3,2023-11-30
+2015-11,59921,5MWPV,Lillington Solar LLC,Lillington Solar,NC,Solar Photovoltaic,5,2016-09,2017-10,13,2023-11-30
+2015-11,59939,TQ,Southern Power Co,RE Tranquillity,CA,Solar Photovoltaic,205.3,2016-09,2016-07,-2,2023-11-30
+2015-11,59952,1,"Potrero Hills Energy Producers, LLC",Potrero Hills Energy Producers,CA,Landfill Gas,1.6,2016-09,2016-04,-5,2023-11-30
+2015-11,59952,2,"Potrero Hills Energy Producers, LLC",Potrero Hills Energy Producers,CA,Landfill Gas,1.6,2016-09,2016-04,-5,2023-11-30
+2015-11,59952,3,"Potrero Hills Energy Producers, LLC",Potrero Hills Energy Producers,CA,Landfill Gas,1.6,2016-09,2016-04,-5,2023-11-30
+2015-11,59952,4,"Potrero Hills Energy Producers, LLC",Potrero Hills Energy Producers,CA,Landfill Gas,1.6,2016-09,2016-04,-5,2023-11-30
+2015-11,59952,5,"Potrero Hills Energy Producers, LLC",Potrero Hills Energy Producers,CA,Landfill Gas,1.6,2016-09,2016-04,-5,2023-11-30
+2015-11,59994,ROSEK,Southern Power Co,RE Roserock,TX,Solar Photovoltaic,160,2016-09,2016-11,2,2023-11-30
+2015-11,60000,TRKCK,"Fresh Air Energy XXXV, LLC",Turkey Creek PV1,NC,Solar Photovoltaic,13.5,2016-09,2017-02,5,2023-11-30
+2015-11,60001,VNCRK,"Ecoplexus, Inc",Vaughn Creek PV1,NC,Solar Photovoltaic,20,2016-09,2017-12,15,2023-11-30
+2015-11,60020,PV1,SolRiver Capital LLC,McLean Homestead,NC,Solar Photovoltaic,4.9000000000000004,2016-09,2023-08,83,2023-11-30
+2015-11,60068,GVS2,"Grand View PV Solar Two, LLC",Grand View Solar Two,ID,Solar Photovoltaic,60,2016-09,2016-12,3,2023-11-30
+2015-11,60068,GVS5,"Grand View PV Solar Two, LLC",Grand View Solar Two,ID,Solar Photovoltaic,20,2016-09,2016-12,3,2023-11-30
+2015-11,60081,DU4CA,Consolidated Edison Development Inc.,CED Ducor 4,CA,Solar Photovoltaic,20,2016-09,2016-12,3,2023-11-30
+2015-11,60092,BLCK6,"Blythe Solar II, LLC","Blythe Solar II, LLC",CA,Solar Photovoltaic,32,2016-09,2016-09,0,2023-11-30
+2015-11,60117,1,Consumers Energy Co,Western Michigan Solar Gardens,MI,Solar Photovoltaic,1,2016-09,2016-08,-1,2023-11-30
+2015-11,54789,4TG,Georgia-Pacific Brewton LLC,Georgia-Pacific Brewton Mill,AL,Wood/Wood Waste Biomass,75,2016-10,2017-03,5,2023-11-30
+2015-11,57400,SG2,"American Mun Power-Ohio, Inc",Smithland Hydroelectric Plant,KY,Conventional Hydroelectric,25.3,2016-10,2017-07,9,2023-11-30
+2015-11,58714,GEN1,Oxbow Creek Energy LLC,Oxbow Creek,PA,Natural Gas Internal Combustion Engine,4.4000000000000004,2016-10,2019-12,38,2023-11-30
+2015-11,58714,GEN2,Oxbow Creek Energy LLC,Oxbow Creek,PA,Natural Gas Internal Combustion Engine,4.4000000000000004,2016-10,2019-12,38,2023-11-30
+2015-11,58714,GEN3,Oxbow Creek Energy LLC,Oxbow Creek,PA,Natural Gas Internal Combustion Engine,4.4000000000000004,2016-10,2019-12,38,2023-11-30
+2015-11,58714,GEN4,Oxbow Creek Energy LLC,Oxbow Creek,PA,Natural Gas Internal Combustion Engine,4.4000000000000004,2016-10,2019-12,38,2023-11-30
+2015-11,58714,GEN5,Oxbow Creek Energy LLC,Oxbow Creek,PA,Natural Gas Internal Combustion Engine,4.4000000000000004,2016-10,2019-12,38,2023-11-30
+2015-11,58766,1,Southern Power Co,Wake Wind Energy Center,TX,Onshore Wind Turbine,257.3,2016-10,2016-10,0,2023-11-30
+2015-11,58975,PV1,Southern Power Co,Henrietta Solar Project,CA,Solar Photovoltaic,102,2016-10,2016-08,-2,2023-11-30
+2015-11,59005,MAR1,"BHE Renewables, LLC",Mariah del Norte,TX,Onshore Wind Turbine,230.4,2016-10,2016-11,1,2023-11-30
+2015-11,59053,WT1,Michelangelo Wind 3 LLC,Michelangelo Wind 3 LLC,IA,Onshore Wind Turbine,3,2016-10,2017-02,4,2023-11-30
+2015-11,59223,WT1,Optimum Wind 5 LLC,Optimum Wind 5 LLC,IA,Onshore Wind Turbine,3,2016-10,2017-03,5,2023-11-30
+2015-11,59224,WT1,Optimum Wind 6 LLC,Optimum Wind 6 LLC,IA,Onshore Wind Turbine,3,2016-10,2017-03,5,2023-11-30
+2015-11,59225,WT1,Optimum Wind 7 LLC,Optimum Wind 7 LLC,IA,Onshore Wind Turbine,3,2016-10,2017-03,5,2023-11-30
+2015-11,59226,WT1,Optimum Wind 4 LLC,Optimum Wind 4 LLC,IA,Onshore Wind Turbine,3,2016-10,2017-03,5,2023-11-30
+2015-11,59227,WT1,Optimum Wind 3 LLC,Optimum Wind 3 LLC,IA,Onshore Wind Turbine,3,2016-10,2017-03,5,2023-11-30
+2015-11,59228,WT1,Leonardo Wind 1 LLC,Leonardo Wind 1 LLC,IA,Onshore Wind Turbine,3,2016-10,2016-12,2,2023-11-30
+2015-11,59230,WT1,Venus Wind 3 LLC,Venus Wind 3 LLC,IA,Onshore Wind Turbine,3,2016-10,2017-03,5,2023-11-30
+2015-11,59231,WT1,Michelangelo Wind 1 LLC,Michelangelo Wind 1 LLC,IA,Onshore Wind Turbine,3,2016-10,2017-03,5,2023-11-30
+2015-11,59232,WT1,Michelangelo Wind 4 LLC,Michelangelo Wind 4 LLC,IA,Onshore Wind Turbine,3,2016-10,2016-12,2,2023-11-30
+2015-11,59296,NWOH1,"Northwest Ohio Wind, LLC",Northwest Ohio Wind,OH,Onshore Wind Turbine,105,2016-10,2018-09,23,2023-11-30
+2015-11,59299,RED1,WM Renewable Energy LLC,Waste Mangement Redwood LFGTE,CA,Landfill Gas,2,2016-10,2017-05,7,2023-11-30
+2015-11,59299,RED2,WM Renewable Energy LLC,Waste Mangement Redwood LFGTE,CA,Landfill Gas,2,2016-10,2017-05,7,2023-11-30
+2015-11,59473,AC2PV,"Apple, Inc",Apple Campus 2 PV,CA,Solar Photovoltaic,14.4,2016-10,2017-06,8,2023-11-30
+2015-11,59522,FRGSP,"Giffen Solar Park, LLC",Giffen Solar Park,CA,Solar Photovoltaic,20,2016-10,2017-06,8,2023-11-30
+2015-11,59532,SB1,"62SK 8me, LLC",Springbok Solar Farm 1,CA,Solar Photovoltaic,105,2016-10,2016-07,-3,2023-11-30
+2015-11,59542,IS6,Cypress Creek Renewables,Innovative Solar 6,NC,Solar Photovoltaic,3.6,2016-10,2016-01,-9,2023-11-30
+2015-11,59557,AC2FC,"Apple, Inc",Apple Campus 2 Fuel Cell,CA,Landfill Gas,4,2016-10,2017-06,8,2023-11-30
+2015-11,59852,NSSP1,North Star Solar PV LLC,North Star Solar Project,MN,Solar Photovoltaic,100,2016-10,2016-12,2,2023-11-30
+2015-11,60024,WPO,"Waipio PV, LLC",Waipio Solar,HI,Solar Photovoltaic,45.9,2016-10,2019-09,35,2023-11-30
+2015-11,60030,PECAN,Dominion Renewable Energy,Pecan Solar,NC,Solar Photovoltaic,74.900000000000006,2016-10,2018-12,26,2023-11-30
+2015-11,60044,BKTH1,"Buckthorn Westex, LLC",Buckthorn Westex,TX,Solar Photovoltaic,154,2016-10,2018-05,19,2023-11-30
+2015-11,60125,KAWS,"Kawailoa Solar, LLC",Kawailoa Solar,HI,Solar Photovoltaic,49,2016-10,2019-11,37,2023-11-30
+2015-11,57400,SG3,"American Mun Power-Ohio, Inc",Smithland Hydroelectric Plant,KY,Conventional Hydroelectric,25.3,2016-11,2017-08,9,2023-11-30
+2015-11,58035,BIWF,Deepwater Wind Block Island LLC,Block Island Wind Farm,RI,Offshore Wind Turbine,30,2016-11,2016-12,1,2023-11-30
+2015-11,58662,3501,Valta Energy,Mauka FIT One,HI,Solar Photovoltaic,3.5,2016-11,2020-10,47,2023-11-30
+2015-11,59093,10,City of Holland,Holland Energy Park,MI,Natural Gas Fired Combined Cycle,53.1,2016-11,2017-06,7,2023-11-30
+2015-11,59093,11,City of Holland,Holland Energy Park,MI,Natural Gas Fired Combined Cycle,53.1,2016-11,2017-06,7,2023-11-30
+2015-11,59093,12,City of Holland,Holland Energy Park,MI,Natural Gas Fired Combined Cycle,43.2,2016-11,2017-06,7,2023-11-30
+2015-11,59247,HALE1,Southwestern Public Service Co,Hale Community Wind Farm,TX,Onshore Wind Turbine,478,2016-11,2019-06,31,2023-11-30
+2015-11,59308,BEAC5,"CD Global Solar Holdings, LLC",Beacon Solar Plant Site 5,CA,Solar Photovoltaic,37.799999999999997,2016-11,2017-12,13,2023-11-30
+2015-11,59814,PV01,Consolidated Edison Development Inc.,"Copper Mountain Solar 4, LLC",NV,Solar Photovoltaic,51.8,2016-11,2016-10,-1,2023-11-30
+2015-11,59814,PV02,Consolidated Edison Development Inc.,"Copper Mountain Solar 4, LLC",NV,Solar Photovoltaic,41.8,2016-11,2016-09,-2,2023-11-30
+2015-11,59993,1,Florida Power & Light Co,Babcock Solar Energy Center Hybrid,FL,Solar Photovoltaic,74.5,2016-11,2016-12,1,2023-11-30
+2015-11,60009,IPMF,"Murphy Flat Power, LLC",Murphy Flat Solar,ID,Solar Photovoltaic,20,2016-11,2017-04,5,2023-11-30
+2015-11,60010,IPOR,"Orchard Ranch Solar, LLC",Orchard Ranch Solar,ID,Solar Photovoltaic,20,2016-11,2017-03,4,2023-11-30
+2015-11,60011,IPAF,American Falls Solar LLC,American Falls Solar,ID,Solar Photovoltaic,20,2016-11,2017-03,4,2023-11-30
+2015-11,60012,IPAF2,"American Falls Solar II, LLC",American Falls Solar II,ID,Solar Photovoltaic,20,2016-11,2017-03,4,2023-11-30
+2015-11,60058,RVRBN,"River Bend Solar, LLC","River Bend Solar, LLC",AL,Solar Photovoltaic,75,2016-11,2016-09,-2,2023-11-30
+2015-11,60061,1,Florida Power & Light Co,Citrus Solar Energy Center Hybrid,FL,Solar Photovoltaic,74.5,2016-11,2016-12,1,2023-11-30
+2015-11,60063,LVEOK,"Live Oak Solar, LLC","Live Oak Solar, LLC",GA,Solar Photovoltaic,51,2016-11,2016-12,1,2023-11-30
+2015-11,60082,WHTOK,"White Oak Solar, LLC","White Oak Solar, LLC",GA,Solar Photovoltaic,76.5,2016-11,2016-07,-4,2023-11-30
+2015-11,60088,SNFLR,Onward Energy,Sunflower Wind Project,ND,Onshore Wind Turbine,104,2016-11,2016-12,1,2023-11-30
+2015-11,60092,BLCK7,"Blythe Solar II, LLC","Blythe Solar II, LLC",CA,Solar Photovoltaic,32.1,2016-11,2016-10,-1,2023-11-30
+2015-11,1355,SOLAR,Kentucky Utilities Co,E W Brown,KY,Solar Photovoltaic,13,2016-12,2016-05,-7,2023-11-30
+2015-11,57242,1,Mililani I Solar LLC,Mililani South Solar Farm,HI,Solar Photovoltaic,39,2016-12,2022-07,67,2023-11-30
+2015-11,57340,1,Consolidated Edison Development Inc.,Panoche Valley Solar Farm,CA,Solar Photovoltaic,140,2016-12,2018-01,13,2023-11-30
+2015-11,57531,1,Onward Energy,Bingham Wind,ME,Onshore Wind Turbine,186,2016-12,2016-12,0,2023-11-30
+2015-11,57617,GEN1,Hidalgo Wind Farm LLC,Hidalgo Wind Farm LLC,TX,Onshore Wind Turbine,250,2016-12,2016-12,0,2023-11-30
+2015-11,57913,1,Avangrid Renewables LLC,Tule Wind LLC,CA,Onshore Wind Turbine,143,2016-12,2017-12,12,2023-11-30
+2015-11,58098,1,Avangrid Renewables LLC,El Cabo Wind,NM,Onshore Wind Turbine,298,2016-12,2017-12,12,2023-11-30
+2015-11,58121,GEN3,DTE Electric Company,Echo Wind Park,MI,Onshore Wind Turbine,50,2016-12,2016-12,0,2023-11-30
+2015-11,58281,1,Lanikuhana Solar LLC,Lanikuhana Solar LLC,HI,Solar Photovoltaic,14.7,2016-12,2019-09,33,2023-11-30
+2015-11,58627,WADR,AES Distributed Energy,Western Antelope Dry Ranch,CA,Solar Photovoltaic,10,2016-12,2016-12,0,2023-11-30
+2015-11,58658,1,Northern States Power Co - Minnesota,Courtenay Wind Farm,ND,Onshore Wind Turbine,200,2016-12,2016-12,0,2023-11-30
+2015-11,58659,PK-1,"Altus Power America Management, LLC",Aloha Solar Energy Fund 1 PK1,HI,Solar Photovoltaic,5,2016-12,2017-03,3,2023-11-30
+2015-11,58686,HANC1,Onward Energy,Hancock Wind Plant,ME,Onshore Wind Turbine,51,2016-12,2016-12,0,2023-11-30
+2015-11,58690,APLB1,"Apple Blossom Wind, LLC",Apple Blossom Wind Farm,MI,Onshore Wind Turbine,100,2016-12,2017-11,11,2023-11-30
+2015-11,58691,STFK1,"South Fork Wind, LLC",South Fork Wind Farm,MN,Onshore Wind Turbine,13.8,2016-12,2016-12,0,2023-11-30
+2015-11,58692,1,"Black Oak Wind, LLC",Black Oak Wind Farm,MN,Onshore Wind Turbine,78,2016-12,2016-12,0,2023-11-30
+2015-11,58694,1,"BHE Renewables, LLC",Walnut Ridge Wind Farm,IL,Onshore Wind Turbine,212,2016-12,2018-12,24,2023-11-30
+2015-11,58695,1,"BHE Renewables, LLC",Grande Prairie Wind Farm,NE,Onshore Wind Turbine,400,2016-12,2016-12,0,2023-11-30
+2015-11,58777,1,"RWE Renewables Americas, LLC",Cassadaga Wind Farm,NY,Onshore Wind Turbine,124,2016-12,2021-07,55,2023-11-30
+2015-11,58780,1,"RWE Renewables Americas, LLC",Scioto Ridge Wind Farm,OH,Onshore Wind Turbine,249.8,2016-12,2021-05,53,2023-11-30
+2015-11,58864,1,Cypress Creek Renewables,Sunfish Farm,NC,Solar Photovoltaic,5,2016-12,2015-12,-12,2023-11-30
+2015-11,58876,PV,"Fusion Solar Centre, L.L.C",Fusion Solar Center LLC,CT,Solar Photovoltaic,20,2016-12,2018-03,15,2023-11-30
+2015-11,58924,SUG1,Sugar Creek Wind One LLC,Sugar Creek Wind One LLC,IL,Onshore Wind Turbine,202,2016-12,2020-11,47,2023-11-30
+2015-11,58925,SAN1,"Lincoln Land Wind, LLC",Lincoln Land Wind,IL,Onshore Wind Turbine,302,2016-12,2021-11,59,2023-11-30
+2015-11,58979,CPHGN,"EDF Renewable Asset Holdings, Inc.",Copenhagen Wind Farm,NY,Onshore Wind Turbine,79.900000000000006,2016-12,2018-12,24,2023-11-30
+2015-11,59061,WT1,"RWE Renewables Americas, LLC",Radfords Run Wind Farm,IL,Onshore Wind Turbine,278,2016-12,2017-12,12,2023-11-30
+2015-11,59063,WT1,"RWE Renewables Americas, LLC",Stella Wind Farm,TX,Onshore Wind Turbine,201,2016-12,2018-12,24,2023-11-30
+2015-11,59065,WT1,"Enel Green Power NA, Inc.",Drift Sand Wind Project LLC,OK,Onshore Wind Turbine,108,2016-12,2016-12,0,2023-11-30
+2015-11,59066,MVII,"RWE Renewables Americas, LLC",Bruennings Breeze Wind Farm,TX,Onshore Wind Turbine,228,2016-12,2017-12,12,2023-11-30
+2015-11,59068,GVII,"RWE Renewables Americas, LLC","Colbeck's Corner, LLC",TX,Onshore Wind Turbine,200,2016-12,2016-05,-7,2023-11-30
+2015-11,59193,CHA1,Chapman Ranch Wind LLC,Chapman Ranch Wind I,TX,Onshore Wind Turbine,236,2016-12,2017-10,10,2023-11-30
+2015-11,59197,CTG-1,Veolia Energy,Univ Minnesota CHP Plant,MN,Natural Gas Fired Combustion Turbine,21,2016-12,2017-11,11,2023-11-30
+2015-11,59244,FIBE1,"Lorenzo Wind, LLC",Lorenzo Wind,TX,Onshore Wind Turbine,80,2016-12,2018-12,24,2023-11-30
+2015-11,59245,FLUV1,Fluvanna Wind Energy LLC,Fluvanna,TX,Onshore Wind Turbine,155.4,2016-12,2017-11,11,2023-11-30
+2015-11,59250,PV1,Duke Energy Renewables Services,Rio Bravo Solar II LLC,CA,Solar Photovoltaic,20,2016-12,2016-12,0,2023-11-30
+2015-11,59251,PV1,Duke Energy Renewables Services,Caprock Solar 1 LLC,NM,Solar Photovoltaic,25,2016-12,2016-12,0,2023-11-30
+2015-11,59487,HIGHW,Cypress Creek Renewables,Highwater Solar I,NC,Solar Photovoltaic,4.9000000000000004,2016-12,2015-12,-12,2023-11-30
+2015-11,59514,FLAT1,"Ecoplexus, Inc",Flat Meeks PV 1,NC,Solar Photovoltaic,5,2016-12,2017-10,10,2023-11-30
+2015-11,59515,BENT1,"Ecoplexus, Inc",Benthall Bridge PV 1,NC,Solar Photovoltaic,5,2016-12,2016-12,0,2023-11-30
+2015-11,59516,AMLEG,"Ecoplexus, Inc",American Legion PV 1,NC,Solar Photovoltaic,16,2016-12,2017-12,12,2023-11-30
+2015-11,59517,BAKE1,"Ecoplexus, Inc",Baker PV 1,NC,Solar Photovoltaic,5,2016-12,2016-12,0,2023-11-30
+2015-11,59525,FRWSP,Wright Solar Park LLC,Wright Solar Park,CA,Solar Photovoltaic,200,2016-12,2019-12,36,2023-11-30
+2015-11,59531,BRDN,"41MB 8me, LLC",Borden Solar Farm,CA,Solar Photovoltaic,50,2016-12,2020-06,42,2023-11-30
+2015-11,59569,PV1,SolRiver Capital LLC,Whitetail Solar,SC,Solar Photovoltaic,10,2016-12,2021-12,60,2023-11-30
+2015-11,59570,PV1,"Duke Energy Carolinas, LLC",Mocksville Solar,NC,Solar Photovoltaic,15.4,2016-12,2016-12,0,2023-11-30
+2015-11,59684,LWP01,"Enel Green Power NA, Inc.","Lindahl Wind Project, LLC",ND,Onshore Wind Turbine,150,2016-12,2017-03,3,2023-11-30
+2015-11,59689,GCSC1,"Arevon Energy, Inc.",Gulf Coast Solar Center I,FL,Solar Photovoltaic,30,2016-12,2017-06,6,2023-11-30
+2015-11,59690,GCSC2,"Arevon Energy, Inc.",Gulf Coast Solar Center II,FL,Solar Photovoltaic,40,2016-12,2017-11,11,2023-11-30
+2015-11,59691,GCSC3,"Arevon Energy, Inc.",Gulf Coast Solar Center III,FL,Solar Photovoltaic,50,2016-12,2017-11,11,2023-11-30
+2015-11,59695,MHPV1,Standard Solar,"Mt. Home Solar 1, LLC",ID,Solar Photovoltaic,20,2016-12,2017-03,3,2023-11-30
+2015-11,59709,PV1,Metropolitan Airports Commission,St. Paul Intl Airport Red & Blue Parking,MN,Solar Photovoltaic,2.2999999999999998,2016-12,2015-12,-12,2023-11-30
+2015-11,59757,1,PacifiCorp,Pryor Mountain Wind,MT,Onshore Wind Turbine,239.8,2016-12,2021-04,52,2023-11-30
+2015-11,59778,EDENS,AES Distributed Energy,Eden Solar LLC,NC,Solar Photovoltaic,47.7,2016-12,2015-12,-12,2023-11-30
+2015-11,59826,GEN01,EDP Renewables North America LLC,Sunshine Valley Solar,NV,Solar Photovoltaic,103.5,2016-12,2019-12,36,2023-11-30
+2015-11,59827,GEN01,"EDF Renewable Asset Holdings, Inc.","Playa Solar 1, LLC",NV,Solar Photovoltaic,79,2016-12,2017-10,10,2023-11-30
+2015-11,59829,5515,Current Energy Group,Hickory,NC,Solar Photovoltaic,5,2016-12,2019-12,36,2023-11-30
+2015-11,59851,GBS01,Great Bay Solar I LLC,Great Bay Solar 1,MD,Solar Photovoltaic,75,2016-12,2018-03,15,2023-11-30
+2015-11,59854,OLPV1,Indiana Michigan Power Co,OlivePV,IN,Solar Photovoltaic,5,2016-12,2016-08,-4,2023-11-30
+2015-11,59863,1,Georgia Power Co,Fort Gordon Solar Facility,GA,Solar Photovoltaic,30,2016-12,2016-10,-2,2023-11-30
+2015-11,59864,1,Georgia Power Co,Kings Bay Solar Facility,GA,Solar Photovoltaic,30,2016-12,2016-12,0,2023-11-30
+2015-11,59865,1,Georgia Power Co,Fort Stewart Solar Facility,GA,Solar Photovoltaic,30,2016-12,2016-10,-2,2023-11-30
+2015-11,59875,PV1,Marshall Solar Energy Project,Marshall Solar Energy Project,MN,Solar Photovoltaic,62.3,2016-12,2017-01,1,2023-11-30
+2015-11,59876,1,Georgia Power Co,Marine Corps Logistics Base Solar,GA,Solar Photovoltaic,31,2016-12,2018-02,14,2023-11-30
+2015-11,59878,GEN01,EDP Renewables North America LLC,Windhub Solar A LLC,CA,Solar Photovoltaic,20,2016-12,2019-12,36,2023-11-30
+2015-11,59879,GEN01,"North Rosamond Solar, LLC",North Rosamond Solar LLC,CA,Solar Photovoltaic,151.1,2016-12,2019-06,30,2023-11-30
+2015-11,59880,KIPS1,"DG LF Solar, LLC",Kings Park Solar I,NY,Solar Photovoltaic,2,2016-12,2019-02,26,2023-11-30
+2015-11,59881,KIPS2,"DG LF Solar, LLC",Kings Park Solar II,NY,Solar Photovoltaic,2,2016-12,2019-02,26,2023-11-30
+2015-11,59888,GEN,CP Bloom Wind LLC,Bloom Wind,KS,Onshore Wind Turbine,178.2,2016-12,2017-06,6,2023-11-30
+2015-11,59896,1,Southern Power Co,Butler Solar Project 103,GA,Solar Photovoltaic,104,2016-12,2016-12,0,2023-11-30
+2015-11,59897,1,Southern Power Co,Taylor County Solar,GA,Solar Photovoltaic,148,2016-12,2016-11,-1,2023-11-30
+2015-11,59910,SF,CleanCapital Holdings,"KDC Solar PR1, LLC",NJ,Solar Photovoltaic,17,2016-12,2019-06,30,2023-11-30
+2015-11,59934,SFIV,"Soluga Solar, LLC",Soluga Farms IV,NC,Solar Photovoltaic,3.4,2016-12,2018-09,21,2023-11-30
+2015-11,59951,5FRK,Five Forks Solar,Five Forks Solar,NC,Solar Photovoltaic,20,2016-12,2019-12,36,2023-11-30
+2015-11,59962,NLR,AES Distributed Energy,North Lancaster Ranch,CA,Solar Photovoltaic,20,2016-12,2016-12,0,2023-11-30
+2015-11,59963,CADRC,AES Distributed Energy,Central Antelope Dry Ranch C,CA,Solar Photovoltaic,20,2016-12,2016-05,-7,2023-11-30
+2015-11,59985,PV1,"Hoosier Energy R E C, Inc",Ellettsville Solar RES,IN,Solar Photovoltaic,1.1000000000000001,2016-12,2016-10,-2,2023-11-30
+2015-11,59986,PV1,"Hoosier Energy R E C, Inc",Henryville Solar RES,IN,Solar Photovoltaic,1.1000000000000001,2016-12,2016-09,-3,2023-11-30
+2015-11,59987,PV1,"Hoosier Energy R E C, Inc",Spring Mill Solar RES,IN,Solar Photovoltaic,1.1000000000000001,2016-12,2017-09,9,2023-11-30
+2015-11,59988,PV1,"Hoosier Energy R E C, Inc",Decatur Co. Solar RES (IN),IN,Solar Photovoltaic,1.1000000000000001,2016-12,2017-09,9,2023-11-30
+2015-11,59989,PV1,"Hoosier Energy R E C, Inc",Jackson Co. Solar RES,IN,Solar Photovoltaic,1.1000000000000001,2016-12,2017-09,9,2023-11-30
+2015-11,59990,PV1,"Hoosier Energy R E C, Inc",Johnson Co. Solar RES,IN,Solar Photovoltaic,1.1000000000000001,2016-12,2016-10,-2,2023-11-30
+2015-11,59996,BOYK1,"Ecoplexus, Inc",Boykin PV1,NC,Solar Photovoltaic,16,2016-12,2020-12,48,2023-11-30
+2015-11,59997,HISHO,Pine Gate Renewables,High Shoals PV1,NC,Solar Photovoltaic,16,2016-12,2022-04,64,2023-11-30
+2015-11,60014,1,Florida Power & Light Co,Manatee Solar Energy Center,FL,Solar Photovoltaic,74.5,2016-12,2016-12,0,2023-11-30
+2015-11,60028,PV1,SolRiver Capital LLC,Shorthorn Holdings,SC,Solar Photovoltaic,8.9,2016-12,2023-08,80,2023-11-30
+2015-11,60033,GEN01,"California Flats Solar 130, LLC","CA Flats Solar 130, LLC",CA,Solar Photovoltaic,130,2016-12,2017-11,11,2023-11-30
+2015-11,60045,GEN1,Duke Energy Renewables Services,Shoreham Solar Commons,NY,Solar Photovoltaic,24.9,2016-12,2018-07,19,2023-11-30
+2015-11,60064,WHTPN,"White Pine Solar, LLC","White Pine Solar, LLC",GA,Solar Photovoltaic,101.2,2016-12,2016-07,-5,2023-11-30
+2015-11,7242,2CC,Tampa Electric Co,Polk,FL,Natural Gas Fired Combined Cycle,463,2017-01,2017-01,0,2023-11-30
+2015-11,58645,RCT1,"East Texas Electric Coop, Inc",RC Thomas Hydroelectric Project,TX,Conventional Hydroelectric,8.9,2017-01,2020-07,42,2023-11-30
+2015-11,58645,RCT2,"East Texas Electric Coop, Inc",RC Thomas Hydroelectric Project,TX,Conventional Hydroelectric,8.9,2017-01,2020-07,42,2023-11-30
+2015-11,58645,RCT3,"East Texas Electric Coop, Inc",RC Thomas Hydroelectric Project,TX,Conventional Hydroelectric,8.9,2017-01,2020-07,42,2023-11-30
+2015-11,59565,PV1,"Strata Manager, LLC",Keen Farm,NC,Solar Photovoltaic,5,2017-01,2015-12,-13,2023-11-30
+2015-11,59567,PV1,"Strata Manager, LLC",Bearford Farm Solar Project,NC,Solar Photovoltaic,5,2017-01,2017-03,2,2023-11-30
+2015-11,59575,PV1,"Strata Manager, LLC",Manway Solar Farm,NC,Solar Photovoltaic,5,2017-01,2015-12,-13,2023-11-30
+2015-11,59578,PV1,"Heelstone Energy Holdings, LLC",Monroe Moore Farm,NC,Solar Photovoltaic,5,2017-01,2016-12,-1,2023-11-30
+2015-11,59583,PV1,"Strata Manager, LLC",Tart Farm,NC,Solar Photovoltaic,5,2017-01,2016-06,-7,2023-11-30
+2015-11,59584,PV1,"Wellons Farm, LLC",Wellons Farm,NC,Solar Photovoltaic,5,2017-01,2015-12,-13,2023-11-30
+2015-11,59586,PV1,"Strata Manager, LLC",Woodland Church Farm,NC,Solar Photovoltaic,5,2017-01,2015-12,-13,2023-11-30
+2015-11,59592,PV1,"Heelstone Energy Holdings, LLC",Sedberry Farm,NC,Solar Photovoltaic,5,2017-01,2016-12,-1,2023-11-30
+2015-11,59593,PV1,"Strata Manager, LLC","Spring Valley Farm 2, LLC",NC,Solar Photovoltaic,5,2017-01,2017-04,3,2023-11-30
+2015-11,59726,10,City of Coffeyville - (KS),CML&P Generating Facility No. 2,KS,Natural Gas Internal Combustion Engine,18.7,2017-01,2017-01,0,2023-11-30
+2015-11,59726,8,City of Coffeyville - (KS),CML&P Generating Facility No. 2,KS,Natural Gas Internal Combustion Engine,18.7,2017-01,2017-01,0,2023-11-30
+2015-11,59726,9,City of Coffeyville - (KS),CML&P Generating Facility No. 2,KS,Natural Gas Internal Combustion Engine,18.7,2017-01,2017-01,0,2023-11-30
+2015-11,56846,GTG1,CPV Maryland LLC,CPV St Charles Energy Center,MD,Natural Gas Fired Combined Cycle,223.6,2017-02,2017-02,0,2023-11-30
+2015-11,56846,GTG2,CPV Maryland LLC,CPV St Charles Energy Center,MD,Natural Gas Fired Combined Cycle,223.6,2017-02,2017-02,0,2023-11-30
+2015-11,56846,STGEN,CPV Maryland LLC,CPV St Charles Energy Center,MD,Natural Gas Fired Combined Cycle,328.1,2017-02,2017-02,0,2023-11-30
+2015-11,165,3CT,Grand River Dam Authority,GREC,OK,Natural Gas Fired Combined Cycle,369,2017-04,2017-12,8,2023-11-30
+2015-11,165,3ST,Grand River Dam Authority,GREC,OK,Natural Gas Fired Combined Cycle,231.3,2017-04,2017-12,8,2023-11-30
+2015-11,991,GT1,Indianapolis Power & Light Co,Eagle Valley (IN),IN,Natural Gas Fired Combined Cycle,207,2017-04,2018-04,12,2023-11-30
+2015-11,991,GT2,Indianapolis Power & Light Co,Eagle Valley (IN),IN,Natural Gas Fired Combined Cycle,207,2017-04,2018-04,12,2023-11-30
+2015-11,991,STG1,Indianapolis Power & Light Co,Eagle Valley (IN),IN,Natural Gas Fired Combined Cycle,230,2017-04,2018-04,12,2023-11-30
+2015-11,58236,CTG1,Interstate Power and Light Co,Marshalltown Generating Station,IA,Natural Gas Fired Combined Cycle,222.7,2017-04,2017-04,0,2023-11-30
+2015-11,58236,CTG2,Interstate Power and Light Co,Marshalltown Generating Station,IA,Natural Gas Fired Combined Cycle,222.7,2017-04,2017-04,0,2023-11-30
+2015-11,58236,STG1,Interstate Power and Light Co,Marshalltown Generating Station,IA,Natural Gas Fired Combined Cycle,260.5,2017-04,2017-04,0,2023-11-30
+2015-11,59004,GEN1,Potomac Energy Center LLC,"Potomac Energy Center, LLC",VA,Natural Gas Fired Combined Cycle,237,2017-04,2017-04,0,2023-11-30
+2015-11,59004,GEN3,Potomac Energy Center LLC,"Potomac Energy Center, LLC",VA,Natural Gas Fired Combined Cycle,338,2017-04,2017-04,0,2023-11-30
+2015-11,59665,IS037,Dominion Renewable Energy,Innovative Solar 37 LLC,NC,Solar Photovoltaic,100,2017-04,2017-05,1,2023-11-30
+2015-11,58562,GT-4,El Paso Electric Co,Montana Power Station,TX,Natural Gas Fired Combustion Turbine,131.80000000000001,2017-05,2016-09,-8,2023-11-30
+2015-11,59004,GEN2,Potomac Energy Center LLC,"Potomac Energy Center, LLC",VA,Natural Gas Fired Combined Cycle,237,2017-05,2017-04,-1,2023-11-30
+2015-11,59220,CT1,Old Dominion Electric Coop,Wildcat Point Generation Facility,MD,Natural Gas Fired Combined Cycle,310.3,2017-05,2018-04,11,2023-11-30
+2015-11,59220,CT2,Old Dominion Electric Coop,Wildcat Point Generation Facility,MD,Natural Gas Fired Combined Cycle,310.3,2017-05,2018-04,11,2023-11-30
+2015-11,59220,ST1,Old Dominion Electric Coop,Wildcat Point Generation Facility,MD,Natural Gas Fired Combined Cycle,493,2017-05,2018-04,11,2023-11-30
+2015-11,59591,PV1,"Heelstone Energy Holdings, LLC",Schell Solar Farm,NC,Solar Photovoltaic,5,2017-05,2016-12,-5,2023-11-30
+2015-11,59812,CGT4,"Constellation Power, Inc",Wolf Hollow II,TX,Natural Gas Fired Combined Cycle,360,2017-05,2017-06,1,2023-11-30
+2015-11,59812,CGT5,"Constellation Power, Inc",Wolf Hollow II,TX,Natural Gas Fired Combined Cycle,360,2017-05,2017-06,1,2023-11-30
+2015-11,59812,STG6,"Constellation Power, Inc",Wolf Hollow II,TX,Natural Gas Fired Combined Cycle,511.2,2017-05,2017-06,1,2023-11-30
+2015-11,3888,4A,PUD No 2 of Grant County,Wanapum,WA,Conventional Hydroelectric,122,2017-06,2020-09,39,2023-11-30
+2015-11,55524,CTG5,Calpine Mid-Merit LLC,York Energy Center,PA,Natural Gas Fired Combined Cycle,234.9,2017-06,2019-03,21,2023-11-30
+2015-11,55524,CTG6,Calpine Mid-Merit LLC,York Energy Center,PA,Natural Gas Fired Combined Cycle,234.9,2017-06,2019-03,21,2023-11-30
+2015-11,55524,STG2,Calpine Mid-Merit LLC,York Energy Center,PA,Natural Gas Fired Combined Cycle,419.6,2017-06,2019-03,21,2023-11-30
+2015-11,56998,CT08,Black Hills Service Company LLC,Pueblo Airport Generating Station,CO,Natural Gas Fired Combustion Turbine,40,2017-06,2016-12,-6,2023-11-30
+2015-11,59145,65GTG,Freeport LNG Development L.P,Freeport LP Pretreatment Facility,TX,Natural Gas Fired Combustion Turbine,87,2017-06,2019-09,27,2023-11-30
+2015-11,59764,CTG11,Oregon Clean Energy Center,Oregon Clean Energy Center,OH,Natural Gas Fired Combined Cycle,328,2017-06,2017-07,1,2023-11-30
+2015-11,59764,CTG12,Oregon Clean Energy Center,Oregon Clean Energy Center,OH,Natural Gas Fired Combined Cycle,328,2017-06,2017-07,1,2023-11-30
+2015-11,59764,STG10,Oregon Clean Energy Center,Oregon Clean Energy Center,OH,Natural Gas Fired Combined Cycle,404,2017-06,2017-07,1,2023-11-30
+2015-11,59629,GEN1,Jericho Rise Wind Farm LLC,Jericho Rise Wind Farm LLC,NY,Onshore Wind Turbine,77.7,2017-07,2016-12,-7,2023-11-30
+2015-11,57659,PSF,Duke Energy Renewables Services,East Blackland Solar Project 1,TX,Solar Photovoltaic,144,2017-08,2021-07,47,2023-11-30
+2015-11,59693,OSW1,Virginia Electric & Power Co,Coastal Virginia Offshore Wind (CVOW) Pilot Project,VA,Offshore Wind Turbine,12,2017-09,2021-01,40,2023-11-30
+2015-11,58951,DRLS,CVI CleanCapital Solar 5 LLC,Delilah Road Landfill,NJ,Solar Photovoltaic,8.5,2017-10,2016-10,-12,2023-11-30
+2015-11,116,GT3,Arizona Public Service Co,Ocotillo,AZ,Natural Gas Fired Combustion Turbine,140,2017-11,2019-04,17,2023-11-30
+2015-11,58620,1,Canton Mountain Wind LLC,Canton Mountain Wind,ME,Onshore Wind Turbine,22.8,2017-11,2017-11,0,2023-11-30
+2015-11,116,GT4,Arizona Public Service Co,Ocotillo,AZ,Natural Gas Fired Combustion Turbine,140,2017-12,2019-04,16,2023-11-30
+2015-11,57116,GEN 1,Quilt Block Wind Farm LLC,Quilt Block Wind Farm LLC,WI,Onshore Wind Turbine,98,2017-12,2017-09,-3,2023-11-30
+2015-11,57628,GEN1,Meadow Lake Wind Farm V LLC,Meadow Lake Wind Farm V LLC,IN,Onshore Wind Turbine,100,2017-12,2017-07,-5,2023-11-30
+2015-11,59037,GEN 1,"Haida Energy, Inc.",Hiilangaay Hydro,AK,Conventional Hydroelectric,5,2017-12,2021-01,37,2023-11-30
+2015-11,59773,CGT1,Carroll County Energy LLC,Carroll County Energy,OH,Natural Gas Fired Combined Cycle,235.5,2017-12,2017-12,0,2023-11-30
+2015-11,59773,CGT2,Carroll County Energy LLC,Carroll County Energy,OH,Natural Gas Fired Combined Cycle,235.5,2017-12,2017-12,0,2023-11-30
+2015-11,59773,SGT1,Carroll County Energy LLC,Carroll County Energy,OH,Natural Gas Fired Combined Cycle,361.3,2017-12,2017-12,0,2023-11-30
+2015-11,59902,GEN,Cardinal Point LLC,Cardinal Point Wind,IL,Onshore Wind Turbine,150,2017-12,2020-03,27,2023-11-30
+2015-11,59903,GEN,Meadowlark Wind I LLC,New Frontier Wind,ND,Onshore Wind Turbine,100,2017-12,2018-12,12,2023-11-30
+2015-11,59940,TQ8,Consolidated Edison Development Inc.,"Great Valley Solar Portfolio Holdings, LLC",CA,Solar Photovoltaic,102.5,2017-12,2018-04,4,2023-11-30
+2015-11,59953,AWND1,Antrim Wind Energy LLC,Antrim Wind,NH,Onshore Wind Turbine,28.8,2017-12,2019-12,24,2023-11-30
+2015-11,59968,1,Avangrid Renewables LLC,"Desert Wind Farm, LLC",NC,Onshore Wind Turbine,208,2017-12,2016-12,-12,2023-11-30
+2015-11,59972,BRKAT,"Bearkat Wind Energy 1, LLC",Bearkat,TX,Onshore Wind Turbine,196.7,2017-12,2018-02,2,2023-11-30
+2015-11,435,H3,Sacramento Municipal Util Dist,White Rock/Slab Creek,CA,Conventional Hydroelectric,2.7,2018-01,2020-12,35,2023-11-30
+2015-11,2953,GT1,Oklahoma Gas & Electric Co,Mustang,OK,Natural Gas Fired Combustion Turbine,66,2018-01,2017-09,-4,2023-11-30
+2015-11,2953,GT2,Oklahoma Gas & Electric Co,Mustang,OK,Natural Gas Fired Combustion Turbine,66,2018-01,2017-10,-3,2023-11-30
+2015-11,2953,GT3,Oklahoma Gas & Electric Co,Mustang,OK,Natural Gas Fired Combustion Turbine,66,2018-01,2017-10,-3,2023-11-30
+2015-11,2953,GT4,Oklahoma Gas & Electric Co,Mustang,OK,Natural Gas Fired Combustion Turbine,66,2018-01,2017-11,-2,2023-11-30
+2015-11,2953,GT5,Oklahoma Gas & Electric Co,Mustang,OK,Natural Gas Fired Combustion Turbine,66,2018-01,2017-12,-1,2023-11-30
+2015-11,2953,GT6,Oklahoma Gas & Electric Co,Mustang,OK,Natural Gas Fired Combustion Turbine,66,2018-01,2017-12,-1,2023-11-30
+2015-11,2953,GT7,Oklahoma Gas & Electric Co,Mustang,OK,Natural Gas Fired Combustion Turbine,66,2018-01,2017-12,-1,2023-11-30
+2015-11,56940,CTG2,"CPV Valley, LLC",CPV Valley Energy Center,NY,Natural Gas Fired Combined Cycle,235,2018-01,2018-05,4,2023-11-30
+2015-11,56940,STG,"CPV Valley, LLC",CPV Valley Energy Center,NY,Natural Gas Fired Combined Cycle,300,2018-01,2018-05,4,2023-11-30
+2015-11,59325,KMEC1,"Carolina Power Partners, LLC",Kings Mountain Energy Center,NC,Natural Gas Fired Combined Cycle,310.2,2018-01,2018-08,7,2023-11-30
+2015-11,59325,KMEC2,"Carolina Power Partners, LLC",Kings Mountain Energy Center,NC,Natural Gas Fired Combined Cycle,233.7,2018-01,2018-08,7,2023-11-30
+2015-11,116,GT5,Arizona Public Service Co,Ocotillo,AZ,Natural Gas Fired Combustion Turbine,140,2018-02,2019-05,15,2023-11-30
+2015-11,116,GT6,Arizona Public Service Co,Ocotillo,AZ,Natural Gas Fired Combustion Turbine,140,2018-03,2019-04,13,2023-11-30
+2015-11,1904,6-1,Northern States Power Co - Minnesota,Black Dog,MN,Natural Gas Fired Combustion Turbine,238,2018-03,2018-04,1,2023-11-30
+2015-11,116,GT7,Arizona Public Service Co,Ocotillo,AZ,Natural Gas Fired Combustion Turbine,140,2018-04,2019-04,12,2023-11-30
+2015-11,58434,1,Western Minnesota Mun Pwr Agny,Red Rock Hydro Plant,IA,Conventional Hydroelectric,27.6,2018-04,2021-06,38,2023-11-30
+2015-11,58434,2,Western Minnesota Mun Pwr Agny,Red Rock Hydro Plant,IA,Conventional Hydroelectric,27.6,2018-04,2021-05,37,2023-11-30
+2015-11,56047,CTG1,"CPV Towantic, LLC",CPV Towantic Energy Center,CT,Natural Gas Fired Combined Cycle,280.5,2018-05,2018-05,0,2023-11-30
+2015-11,56047,CTG2,"CPV Towantic, LLC",CPV Towantic Energy Center,CT,Natural Gas Fired Combined Cycle,280.5,2018-05,2018-05,0,2023-11-30
+2015-11,56047,STG,"CPV Towantic, LLC",CPV Towantic Energy Center,CT,Natural Gas Fired Combined Cycle,280.5,2018-05,2018-05,0,2023-11-30
+2015-11,59906,GEN1,Moxie Freedom LLC,Moxie Freedom Generation Plant,PA,Natural Gas Fired Combined Cycle,529,2018-05,2018-08,3,2023-11-30
+2015-11,59906,GEN2,Moxie Freedom LLC,Moxie Freedom Generation Plant,PA,Natural Gas Fired Combined Cycle,529,2018-05,2018-09,4,2023-11-30
+2015-11,3888,6A,PUD No 2 of Grant County,Wanapum,WA,Conventional Hydroelectric,122,2018-06,2016-07,-23,2023-11-30
+2015-11,55517,CTG6,Wallingford Energy LLC,Wallingford Energy,CT,Natural Gas Fired Combustion Turbine,50,2018-06,2018-05,-1,2023-11-30
+2015-11,55517,CTG7,Wallingford Energy LLC,Wallingford Energy,CT,Natural Gas Fired Combustion Turbine,50,2018-06,2018-05,-1,2023-11-30
+2015-11,56104,CTG1,"MEC Holdings, LLC",Mankato Energy Center,MN,Natural Gas Fired Combined Cycle,188.7,2018-06,2019-06,12,2023-11-30
+2015-11,59326,MEC1,"Ohio Power Partners, LLC",Middletown Energy Center,OH,Natural Gas Fired Combined Cycle,310.2,2018-06,2018-05,-1,2023-11-30
+2015-11,59326,MEC2,"Ohio Power Partners, LLC",Middletown Energy Center,OH,Natural Gas Fired Combined Cycle,233.7,2018-06,2018-05,-1,2023-11-30
+2015-11,59882,4,"Constellation Power, Inc",Exelon West Medway II LLC,MA,Natural Gas Fired Combustion Turbine,131.80000000000001,2018-06,2019-03,9,2023-11-30
+2015-11,59882,5,"Constellation Power, Inc",Exelon West Medway II LLC,MA,Natural Gas Fired Combustion Turbine,131.80000000000001,2018-06,2019-05,11,2023-11-30
+2015-11,58933,GTG1,Shell Chemical Appalachia LLC,Shell Chemical Appalachia LLC,PA,Natural Gas Fired Combined Cycle,48.4,2018-07,2021-07,36,2023-11-30
+2015-11,58933,GTG2,Shell Chemical Appalachia LLC,Shell Chemical Appalachia LLC,PA,Natural Gas Fired Combined Cycle,48.4,2018-07,2021-07,36,2023-11-30
+2015-11,58933,GTG3,Shell Chemical Appalachia LLC,Shell Chemical Appalachia LLC,PA,Natural Gas Fired Combined Cycle,48.4,2018-07,2021-07,36,2023-11-30
+2015-11,58933,STG1,Shell Chemical Appalachia LLC,Shell Chemical Appalachia LLC,PA,Natural Gas Fired Combined Cycle,82.3,2018-07,2021-10,39,2023-11-30
+2015-11,58933,STG2,Shell Chemical Appalachia LLC,Shell Chemical Appalachia LLC,PA,Natural Gas Fired Combined Cycle,82.3,2018-07,2021-10,39,2023-11-30
+2015-11,60034,GEN01,"Arevon Energy, Inc.","CA Flats Solar 150, LLC",CA,Solar Photovoltaic,150,2018-07,2019-02,7,2023-11-30
+2015-11,59002,CEC 6,NRG California Peaker Operations LLC,Carlsbad Energy Center,CA,Natural Gas Fired Combustion Turbine,131.80000000000001,2018-11,2018-12,1,2023-11-30
+2015-11,59002,CEC 7,NRG California Peaker Operations LLC,Carlsbad Energy Center,CA,Natural Gas Fired Combustion Turbine,131.80000000000001,2018-11,2018-12,1,2023-11-30
+2015-11,59002,CEC 8,NRG California Peaker Operations LLC,Carlsbad Energy Center,CA,Natural Gas Fired Combustion Turbine,131.80000000000001,2018-11,2018-12,1,2023-11-30
+2015-11,59002,CEC 9,NRG California Peaker Operations LLC,Carlsbad Energy Center,CA,Natural Gas Fired Combustion Turbine,131.80000000000001,2018-11,2018-12,1,2023-11-30
+2015-11,59002,CEC10,NRG California Peaker Operations LLC,Carlsbad Energy Center,CA,Natural Gas Fired Combustion Turbine,131.80000000000001,2018-11,2018-12,1,2023-11-30
+2015-11,50711,GEN5,University of Alaska,University of Alaska Fairbanks,AK,Conventional Steam Coal,17,2018-12,2020-02,14,2023-11-30
+2015-11,59913,CT01,Virginia Electric & Power Co,Greensville County Power Station,VA,Natural Gas Fired Combined Cycle,369.8,2018-12,2018-12,0,2023-11-30
+2015-11,59913,CT02,Virginia Electric & Power Co,Greensville County Power Station,VA,Natural Gas Fired Combined Cycle,369.8,2018-12,2018-12,0,2023-11-30
+2015-11,59913,CT03,Virginia Electric & Power Co,Greensville County Power Station,VA,Natural Gas Fired Combined Cycle,369.8,2018-12,2018-12,0,2023-11-30
+2015-11,59913,ST01,Virginia Electric & Power Co,Greensville County Power Station,VA,Natural Gas Fired Combined Cycle,663.9,2018-12,2018-12,0,2023-11-30
+2015-11,57185,U001,Cricket Valley Energy Center LLC,Cricket Valley Energy,NY,Natural Gas Fired Combined Cycle,174.2,2019-03,2020-04,13,2023-11-30
+2015-11,57185,U002,Cricket Valley Energy Center LLC,Cricket Valley Energy,NY,Natural Gas Fired Combined Cycle,174.2,2019-03,2020-04,13,2023-11-30
+2015-11,57185,U003,Cricket Valley Energy Center LLC,Cricket Valley Energy,NY,Natural Gas Fired Combined Cycle,174.2,2019-03,2020-04,13,2023-11-30
+2015-11,649,3,Georgia Power Co,Vogtle,GA,Nuclear,1114,2019-06,2023-07,49,2023-11-30
+2015-11,3888,3A,PUD No 2 of Grant County,Wanapum,WA,Conventional Hydroelectric,122,2019-06,2017-08,-22,2023-11-30
+2015-11,3888,8A,PUD No 2 of Grant County,Wanapum,WA,Conventional Hydroelectric,122,2019-06,2018-11,-7,2023-11-30

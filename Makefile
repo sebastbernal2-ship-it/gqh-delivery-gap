@@ -85,6 +85,7 @@ test:
 	@python3 tests/test_link_algoterminal.py
 	@python3 tests/test_edgar.py
 	@python3 tests/test_xbrl.py
+	@python3 tests/test_eia.py
 
 # Credential scan over every file. This repo is public.
 secrets:
