@@ -3,6 +3,25 @@
 Verified 2026-10-03 by running each route, not by reading about it. The point of writing it down is that the
 answer differs by layer, and the difference decides who has to do the work.
 
+## The shared store, table by table
+
+The store holds thirteen tables of its own beyond the Timescale internals. The ones that matter:
+
+| Table | Rows | What it is |
+|---|---|---|
+| `public.gqh_source_records` | 151,198 | the general landing table, 21 sources, still filling |
+| `public.gqh_eia860m_state_vintage` | **87,303** | a pre-aggregated state level vintage table with `available_at` dates, so it is point in time and ready to use. This was missing from my earlier inventory and it is directly useful to the delivery mechanism |
+| `public.gqh_ingestion_manifests` | 90 | source provenance: url, licence, row count, retrieval time |
+| `public.aws_gpu_spot_prices` | 1,592,024 | the compute price archive, with a gaps register beside it |
+| `public.depth_events` | **0** | the order book event schema, provisioned and empty: symbol, segment, update ids, bids, asks, source path |
+| `public.trade_events` | **0** | the trade event schema, provisioned and empty: price, quantity, buyer is maker, source hash |
+| `public.observations` | **0** | the generic capture table: time, type, source, symbol, json payload |
+| `public.source_manifests` | **0** | provenance for captures |
+
+**The event tables are provisioned and waiting.** The order book, trade and generic observation schemas
+exist for the q style capture to fill, and all three are empty. That is an architectural fact worth knowing: the
+destination is ready, the capture is not.
+
 ## Reachable from this environment, right now
 
 **The shared landing table, read only.** `public.gqh_source_records` through the pipeline command line client,
