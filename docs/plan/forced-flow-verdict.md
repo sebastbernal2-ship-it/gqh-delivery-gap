@@ -45,3 +45,16 @@ test by asset is not available in it. That is a coverage fact, not a modelling c
    concentrated name set, or counterparty documents.
 3. **The verdict itself as a result**: a forced flow with a direct instrument, a leading state variable, and no
    cost-surviving expression is a finding about this market at this size, and it is reportable.
+
+
+## The forward record, restarted
+
+The tape is the only instrument that adds independent events. It is running again at a fifteen second cadence
+across the four markets, and the rule it tests was declared before it started: a move of three standard
+deviations together with a one percent fall in open interest marks the trigger, and the measurement is the
+conditional path afterwards, net of four and a half basis points a side, against capacity measured from the book.
+
+Why it matters more than another backtest: the panel's flag fires a handful of times a year, so the conditional
+statistic rests on a single event cluster. The tape accumulates a forward record that does not depend on the panel
+author's judgement, and it measures the state directly through open interest, funding and the book rather than
+through a proxy built after the fact.
