@@ -1,0 +1,17 @@
+# Engineering experiment receipts
+
+These generated reports describe development/smoke runs, not promoted trading results or the
+competition note. They contain input/code/model hashes and all declared variants, without raw
+market data or checkpoints. Numbers cited in a submission still belong under root `results/`.
+
+`btc_book_smoke_20261003.json` is copied without editing from `information_views.py` output.
+Its `git_revision` is the base checkout at execution; `code_sha256` pins the actual working Python
+sources (including uncommitted prototype files). Later documentation/test changes do not rewrite
+that execution record. Reproduce with the corresponding source version, pinned query/export,
+Python and PyTorch versions. Training wall times and ZIP/checkpoint serialization details can vary
+across environments; compare normalized forecasts and metrics, not elapsed seconds.
+
+See [protocol, findings and commands](../INFORMATION_VIEWS.md) and
+[warehouse access audit](../SNOWFLAKE_AUDIT.md). Local raw exports, label audit, checkpoints and
+per-case forecasts remain outside Git. Verify their hashes against this receipt when transferring
+them to HiPerGator.

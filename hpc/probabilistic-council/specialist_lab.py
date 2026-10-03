@@ -126,18 +126,19 @@ class Standardizer:
         return tuple((x - m) / s for x, m, s in zip(row.features, self.mean, self.scale))
 
 
-def choice(row: EventRow, view: tuple[int, ...], scaler: Standardizer) -> ChoiceExample:
+def choice(row: EventRow, view: tuple[int, ...], scaler: Standardizer,
+           feature_names=FEATURES, outcomes=OUTCOMES) -> ChoiceExample:
     values = scaler.transform(row)
-    text = "; ".join(f"{FEATURES[i]}={values[i]:+.3f}" for i in view)
+    text = "; ".join(f"{feature_names[i]}={values[i]:+.3f}" for i in view)
     if len(text.encode("utf-8")) > CONFIG["context_tokens"]:
         raise ValueError("feature text exceeds context budget")
-    return ChoiceExample(text, OUTCOMES, row.label)
+    return ChoiceExample(text, outcomes, row.label)
 
 
-def train_choice(rows, view, scaler, epochs, seed):
+def train_choice(rows, view, scaler, epochs, seed, *, feature_names=FEATURES, outcomes=OUTCOMES):
     torch.manual_seed(seed)
     model, collator = make_system(CONFIG, torch.device("cpu"))
-    examples = [choice(row, view, scaler) for row in rows]
+    examples = [choice(row, view, scaler, feature_names, outcomes) for row in rows]
     optimizer = torch.optim.AdamW(model.parameters(), lr=0.002, weight_decay=1e-4)
     steps = 0
     model.train()
@@ -155,10 +156,10 @@ def train_choice(rows, view, scaler, epochs, seed):
 
 
 @torch.no_grad()
-def predict_choice(model, collator, rows, view, scaler):
+def predict_choice(model, collator, rows, view, scaler, *, feature_names=FEATURES, outcomes=OUTCOMES):
     result = []
     for offset in range(0, len(rows), 64):
-        batch = collator([choice(row, view, scaler) for row in rows[offset:offset + 64]])
+        batch = collator([choice(row, view, scaler, feature_names, outcomes) for row in rows[offset:offset + 64]])
         # The probability contract is tighter than float32 summation error.
         result.extend(tuple(p) for p in model(batch).double().softmax(-1).tolist())
     return result
