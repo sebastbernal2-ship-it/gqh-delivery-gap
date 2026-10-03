@@ -1,4 +1,4 @@
-.PHONY: sync save bootstrap doctor current hooks hooks-global remember share absorb test secrets check status
+.PHONY: sync save bootstrap doctor current claims overlaps worktree hooks hooks-global remember share absorb test secrets check status
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -23,6 +23,19 @@ current:
 # Health check for the memory system. Read only, safe to run any time.
 doctor:
 	@bash scripts/doctor.sh
+
+# Who is working on what, and where will that collide. Fetches first.
+claims:
+	@python3 scripts/claims.py
+
+# Only the collisions, which is the part that costs hours.
+overlaps:
+	@python3 scripts/claims.py --overlaps
+
+# Give a workstream its own checkout on its own branch. Usage: make worktree NAME=<name>
+worktree:
+	@test -n "$(NAME)" || (echo 'usage: make worktree NAME=<short-name>' && exit 1)
+	@bash scripts/new-worktree.sh "$(NAME)"
 
 # Wire the memory wrapper for the harnesses that only touch committed files. Safe.
 hooks:
@@ -50,6 +63,7 @@ test:
 	@python3 tests/test_memory_absorb.py
 	@python3 tests/test_thesis_index.py
 	@python3 tests/test_structure.py
+	@python3 tests/test_claims.py
 
 # Credential scan over every file. This repo is public.
 secrets:
