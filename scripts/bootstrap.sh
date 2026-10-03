@@ -28,6 +28,9 @@ python -m pip install --quiet --upgrade pip
 python -m pip install --quiet -e .
 echo "environment ready: $(python -V)"
 
+# Wire the agent harness wrappers for this machine (idempotent).
+bash scripts/install-hooks.sh
+
 # Mechanical capture: every commit refreshes and stages the shared memory.
 git config core.hooksPath .githooks
 chmod +x .githooks/* scripts/*.sh 2>/dev/null || true

@@ -1,4 +1,4 @@
-.PHONY: sync save bootstrap remember share absorb autoshare schedule unschedule memory test secrets all check status
+.PHONY: sync save bootstrap hooks remember share absorb autoshare schedule unschedule memory test secrets all check status
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -15,6 +15,10 @@ save:
 # First time on a new device.
 bootstrap:
 	bash scripts/bootstrap.sh
+
+# Wire the memory wrapper for whichever harnesses this machine has. Run once per machine.
+hooks:
+	@bash scripts/install-hooks.sh
 
 # Write a memory that the team will see. Usage: make remember M="what you learned"
 remember:

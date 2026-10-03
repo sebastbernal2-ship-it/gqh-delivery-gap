@@ -1,0 +1,28 @@
+# Cursor: read AGENTS.md first
+
+AGENTS.md is the single owner of the working rules for this repo. Read it at the start of every
+session, before writing anything.
+
+Short version:
+
+1. Run `make sync` before you start. It pulls the team's work and loads their shared memory.
+2. Read `memory/SHARED.md`, then `docs/00-brief.md`, `docs/01-idea.md`, `docs/02-system.md`,
+   `docs/03-decisions.md`.
+3. Work only in the paths your workstream owns: `OWNERS.md`.
+4. Every number the note quotes comes from `results/`. Regenerate, never hand-edit.
+5. Write the hypothesis and the falsifier before looking at results. Never open the
+   out-of-sample window except on the run that reports it.
+6. Never commit credentials, absolute local paths, or anything under `data/`.
+
+Capture is mechanical: `.githooks/pre-commit` refreshes the shared memory on every commit, and
+`hippo hook install cursor` wires the Cursor wrapper on your machine. See `docs/04-memory.md`.
+
+<!-- hippo:start -->
+# Project Memory (Hippo)
+# Before each task, load context:
+#   hippo context --auto --budget 1500
+# After errors:
+#   hippo remember "<error description>" --error
+# After completing:
+#   hippo outcome --good
+<!-- hippo:end -->
