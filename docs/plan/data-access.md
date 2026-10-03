@@ -21,6 +21,27 @@ documents; EIA vintages and hourly grid files; weather and drought; daily bars; 
 exchange published volatility history back to 1990; Sentinel-2 imagery through our own reader; the free mirrors
 of the perpetual archive; and the venue's forward API through the running collector.
 
+## Credentials, verified 2026-10-03
+
+The Citadel component directory holds one environment file, mode 600, with two names: `FMP_API_KEY` and
+`FRED_API_KEY`. Neither is exported into this workspace's shell, and the attended tooling for environment
+migration reports that it cannot complete here. The file itself is readable, so the scripts can source it
+directly, and it must never be committed: the repository is public and `make secrets` scans for exactly this.
+
+Both keys were tested by using them.
+
+| Key | Works | Does not work on this plan |
+|---|---|---|
+| `FRED_API_KEY` | full series history: 16,893 observations for the ten year yield, 945 for unemployment | nothing observed |
+| `FMP_API_KEY` | company profiles, end of day price history, earnings and estimates, symbol search, an index list of 428 indices | **index constituents, ETF holdings, and institutional ownership are all restricted** on this subscription |
+
+The restricted endpoints are the interesting ones, and EDGAR provides the authoritative free equivalent: a
+tracking fund's own holdings filing is the primary source for what it must hold, and holdings are filed quarterly.
+So the index and mandate class needs no vendor at all.
+
+Still absent, and still the two things that block the layers listed below: a key for live massive pulls, and any
+Snowflake credential. **No cloud key is needed**: the perpetual archive has free mirrors.
+
 ## Not reachable from this environment
 
 | Layer | What is missing | What it means | The one line fix |
