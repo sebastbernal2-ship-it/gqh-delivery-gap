@@ -32,8 +32,8 @@ One table. A path appears once, with one person.
 | `hpc/probabilistic-council/` | lucyrunner | Synthetic calibrated council and bounded classical/quantum distribution benchmarks |
 | `src/aws_compute/` | vshnu1 | Exact-price AWS GPU archive normalization and TigerData ingestion |
 | `src/snowflake/` | vshnu1 | Snowflake research schemas and point-in-time feature-panel bootstrap |
-| `src/central_ingest/` | vshnu1 | Idempotent shared Snowflake and TigerData source loading |
-| `src/edgar/`, `src/eia/`, `src/event/`, `src/join/`, `docs/entity-crosswalk.csv`, `scripts/build_filings_register.py`, `scripts/build_delivery_panel.py`, `scripts/run_revision_event_study.py`, `scripts/build_exposure_panel.py`, `scripts/build_obligation_panel.py`, `tests/test_edgar.py`, `tests/test_xbrl.py`, `tests/test_eia.py`, `tests/test_event.py`, `results/` | sebastbernal2-ship-it | SEC filings as timestamped observations: the register that closes the missing first-public timestamp |
+| `src/edgar/`, `src/eia/`, `src/event/`, `src/join/`, `docs/entity-crosswalk.csv`, `scripts/build_filings_register.py`, `scripts/build_delivery_panel.py`, `scripts/run_revision_event_study.py`, `scripts/build_exposure_panel.py`, `scripts/build_obligation_panel.py`, `scripts/build_capacity_event_ledger.py`, `scripts/build_physical_ledger.py`, `scripts/check_strategy_ledger.py`, `scripts/run_capacity_strategy.py`, `scripts/run_group_event_study.py`, `tests/test_edgar.py`, `tests/test_xbrl.py`, `tests/test_eia.py`, `tests/test_event.py`, `results/` | sebastbernal2-ship-it | SEC filings as timestamped observations: the register that closes the missing first-public timestamp |
+| `src/strategy/` | sebastbernal2-ship-it | Input contracts for expectations, issuer exposure, tradeability, and physical confirmation |
 
 ## Unclaimed
 

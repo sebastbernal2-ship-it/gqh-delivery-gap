@@ -859,3 +859,27 @@ month-sized re-dating.
 noise, which is one plausible reason the firm-level tests found so little. Any future signal should be defined
 on revisions of six months or more, and that is a change of definition made on mechanism evidence rather than
 on a result.
+
+---
+
+## 2026-10-03: The imagery direction has a probe, and the probe says which feature to chase
+
+**What was built.** A windowed reader for cloud optimised GeoTIFFs with no GeoTIFF library: it parses the
+directory, fetches only the tiles covering a window by HTTP range request, undoes the TIFF predictor, and
+returns pixels. That is what makes public ten metre imagery usable for a site at all, since a scene is a
+hundred megabytes and a site is a few hundred pixels of it.
+**The probe.** Eight labelled sites from the vintage panel, each with a promised month, a realised month and
+coordinates: five late, three early. For each date the site patch and a background patch in the same scene are
+measured, and the reported quantity is the site's change minus the background's change, which cancels the
+scene wide part.
+**What it found.** Brightness change was noise, a median of minus 0.7 across the eight. **Texture change
+correlated +0.72 with months of slip**, with late deliveries gaining more structure than early ones, and the
+bright fraction behaved similarly at +0.58.
+**Why that is not a result.** Eight sites, five of one kind and three of the other, and four features tried.
+At that sample a correlation of 0.72 is a reason to run the next probe, not a finding. The honest next step is
+recorded on the direction: pre-register the texture feature, and run thirty to fifty labelled sites before
+anything is claimed about imagery as a measure of delay.
+**Three bugs the tests caught in this build**, none of them subtle in hindsight: a support check assumed a
+sequence where a single value was possible, the texture indicator dropped its last comparison so a two pixel
+row returned nothing, and the date window used thirty day steps, which drifted by a day and was replaced with
+calendar arithmetic.

@@ -1,8 +1,5 @@
 # Snowflake research path
 
-**Current load receipt:** [central-ingest-handoff.md](central-ingest-handoff.md). The onboarding
-status below is the pre-ingestion plan; it is superseded for which tables are already populated.
-
 Owner: Vishnu. Status: adopted infrastructure boundary and first AWS archive load verified
 2026-10-03. This is a research/data design, not a trading thesis.
 
