@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import subprocess
 from pathlib import Path
 
@@ -29,6 +30,18 @@ CASES = (
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def probability_error(reference: list[float], actual: list[float]) -> float:
+    """Reject incomplete/invalid distributions before calculating numerical parity."""
+    if not reference or len(actual) != len(reference):
+        raise ValueError("C++ probability count differs from the reference")
+    for vector in (reference, actual):
+        if any(not math.isfinite(value) or not 0 <= value <= 1 for value in vector):
+            raise ValueError("parity requires finite probabilities in [0, 1]")
+        if not math.isclose(math.fsum(vector), 1.0, rel_tol=0, abs_tol=2e-5):
+            raise ValueError("parity requires normalized probability vectors")
+    return max(abs(left - right) for left, right in zip(reference, actual))
 
 
 def main() -> None:
@@ -56,7 +69,7 @@ def main() -> None:
         actual = json.loads(subprocess.run(command, check=True, capture_output=True, text=True).stdout)
         if actual["outcome_space"] != list(options):
             raise SystemExit("C++ option order differs from the request")
-        error = max(abs(left - right) for left, right in zip(reference, actual["probabilities"]))
+        error = probability_error(reference, actual["probabilities"])
         maximum_error = max(maximum_error, error)
 
     tolerance = 2e-5

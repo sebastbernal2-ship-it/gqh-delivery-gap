@@ -24,3 +24,13 @@ published training method is not claimed to reproduce RLCD.
 The stack decision, Vultr integration plan, and deployment gates are in
 [`../STACK.md`](../STACK.md). Upstream source/license metadata must be preserved in derivative
 distributions. Pretrained checkpoints and datasets have independent terms; none are bundled here.
+
+## Local correctness changes
+
+`trainable_state()` detaches, moves to CPU and **clones** each trainable tensor. The clone owns
+its storage: later optimizer steps cannot overwrite an earlier best-validation snapshot on CPU.
+Frozen encoder parameters remain excluded, preserving the upstream checkpoint format.
+The regression suite exercises actual training with a controlled worsening validation sequence
+and verifies the reloaded checkpoint matches the earlier winning epoch exactly.
+
+See [the component validation record](../VALIDATION.md) for tests and limitations.

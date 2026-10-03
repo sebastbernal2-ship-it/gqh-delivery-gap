@@ -24,7 +24,6 @@ MANIFEST="$INPUT_REAL.manifest.json"
 [[ -f "$MANIFEST" ]] || { echo "export manifest is missing beside TSV" >&2; exit 2; }
 [[ ! -e "$OUTPUT" ]] || { echo "destination already exists; choose a new version directory" >&2; exit 2; }
 [[ ! -e "$RECEIPT" ]] || { echo "receipt already exists; choose a new version directory" >&2; exit 2; }
-mkdir "$OUTPUT"
 
 EXPECTED_ROWS="$(python3 - "$INPUT_REAL" "$MANIFEST" <<'PY'
 import hashlib, json, sys
@@ -48,15 +47,17 @@ print(count)
 PY
 )"
 [[ "$EXPECTED_ROWS" =~ ^[1-9][0-9]*$ ]] || { echo "manifest row count is invalid" >&2; exit 2; }
+# Claim a fresh version only after input validation; preserve partial loader output on failure.
+mkdir "$OUTPUT"
 "$Q_BIN" -q "$ROOT/q/build_bars_hdb.q" -input "$INPUT_REAL" -out "$OUTPUT" -expected "$EXPECTED_ROWS"
 
 python3 - "$MANIFEST" "$RECEIPT" "$OUTPUT" "$REPO_ROOT" <<'PY'
 import json, os, subprocess, sys
-manifest_path, receipt_path, output = sys.argv[1:]
+manifest_path, receipt_path, output, repo_root = sys.argv[1:]
 with open(manifest_path, encoding="utf-8") as f:
     receipt = json.load(f)
 try:
-    commit = subprocess.check_output(["git", "-C", sys.argv[4], "rev-parse", "HEAD"], text=True).strip()
+    commit = subprocess.check_output(["git", "-C", repo_root, "rev-parse", "HEAD"], text=True).strip()
 except Exception:
     commit = "unknown"
 receipt.update({"hdb_path": output, "git_commit": commit,
