@@ -1060,3 +1060,7 @@ stand in for the repository. Explicit configuration keeps code location separate
 coverage and remaining real-q/cluster gates live in `hpc/kdb-timeseries/VALIDATION.md` and its
 README. Existing callers must export the new variable before submission. This is an operational
 correctness repair authorized by the user; it changes no strategy or out-of-sample decisions.
+
+## 2026-10-03: PR readiness repairs restore the repository gates
+
+**Decision**: on the user's instruction to resolve the PR blockers, retain both authors' changes and add corrective commits without force-pushing their branches. The structure gate explicitly recognizes `.github/` (repository workflows) and `.vscode/` (editor configuration); the existing delivery factor and hazard components receive their required READMEs. Stale parallel-leg references point to the committed second-round implementations. Nested component tests are treated like root test fixtures, and generated results are exempted only through explicit declarations in `results/README.md`; an undeclared output or a missing source still fails the path gate.
