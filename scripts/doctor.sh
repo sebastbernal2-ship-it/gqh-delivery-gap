@@ -83,6 +83,11 @@ done
 echo
 
 echo "3. capture and shared memory"
+if git config user.email >/dev/null 2>&1; then
+  note "git identity: $(git config user.email)"
+else
+  bad "git has no user.email here, so commits will fail. Set it: git config --global user.email you@example.com"
+fi
 if [ "$(git config core.hooksPath)" = ".githooks" ]; then
   note "commit hook enabled (good)"
 else
