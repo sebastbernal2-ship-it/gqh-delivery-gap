@@ -1,4 +1,4 @@
-.PHONY: sync save bootstrap doctor current claims overlaps worktree hooks hooks-global remember share absorb test secrets check status
+.PHONY: sync save bootstrap doctor current claims overlaps worktree owners hooks hooks-global remember share absorb test secrets check status
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -23,6 +23,10 @@ current:
 # Health check for the memory system. Read only, safe to run any time.
 doctor:
 	@bash scripts/doctor.sh
+
+# Ownership: one roster, one claim table, every claimed path real.
+owners:
+	@python3 scripts/check_owners.py
 
 # Who is working on what, and where will that collide. Fetches first.
 claims:
@@ -65,6 +69,7 @@ test:
 	@python3 tests/test_structure.py
 	@python3 tests/test_claims.py
 	@python3 tests/test_paths.py
+	@python3 tests/test_owners.py
 
 # Credential scan over every file. This repo is public.
 secrets:
@@ -75,6 +80,7 @@ check: secrets
 	@python3 scripts/check_theses.py
 	@python3 scripts/check_structure.py
 	@python3 scripts/check_paths.py
+	@python3 scripts/check_owners.py
 	@python3 scripts/render_current.py --check
 
 status:
