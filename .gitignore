@@ -20,3 +20,7 @@ __pycache__/
 *.zip
 .hippo/
 .pi/
+
+# Local memory exports stay private: this repo is public
+memory/*.json
+memory/*.md
