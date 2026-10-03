@@ -702,3 +702,22 @@ instead of a hand-picked path.
 canonical map, so the filter it claimed to test never ran, and an expectation of two cross-family survivors
 came from a reading of the table rather than from the arithmetic. Both were fixed by computing the answer
 instead of assuming it.
+
+---
+
+## 2026-10-03: The study window is re-declared to the compute era, decided before any compute measurement
+
+**The decision, taken before looking at a single compute-price association.** The AWS GPU spot archive that
+Vishnu ingested covers 2022-05-31 onwards and is the only real scarcity price available to this study. Under
+the previous window it fell almost entirely inside the held-out period, which would have made it unusable
+for discovery without breaking our own out-of-sample rule.
+**The new declaration.** History runs from **2022-06 to 2024-09**. The sealed window is the most recent fifth
+of that history, which is **2024-04 to 2024-09**, leaving **2022-06 to 2024-03** for development.
+**What this costs, stated plainly.** The holdout shrinks from twenty-four months to six. Every earlier test
+was run on windows that now count as exploratory rather than as reported results, so the four tests are
+re-run inside the declared window for the note. Exploration that already happened is not un-happened, and it
+is labelled as exploration.
+**Why the trade is worth it.** A six-month holdout is still a real holdout, while a node the whole
+AI-infrastructure story depends on becomes measurable instead of merely declared.
+**Order of operations this fixes.** The window is fixed first, then the compute series is measured. Deciding
+it after seeing an association would have been post-hoc, and that is exactly the failure the rubric caps.
