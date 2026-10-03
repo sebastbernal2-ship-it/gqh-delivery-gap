@@ -35,6 +35,7 @@ memory:
 
 test:
 	@python3 tests/test_memory_filter.py
+	@python3 tests/test_memory_absorb.py
 
 # Public repo gate. Run before a push.
 secrets:

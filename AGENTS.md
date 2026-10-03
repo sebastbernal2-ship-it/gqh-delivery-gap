@@ -10,7 +10,8 @@ There is no P&L leaderboard. Judges score reasoning and rerun the code.
 
 ## Start of every session
 
-1. `make sync`. This pulls the team's work and loads their shared memory into the local store.
+1. `make sync`. This pulls the team's work and loads their shared memory into your local store,
+   so ordinary recall finds what the team already knows.
 2. Read `memory/SHARED.md`. It is the team's memory, filtered and redacted for this public repo.
 3. Read, in order: `docs/00-brief.md`, `docs/01-idea.md`, `docs/02-system.md`,
    `docs/03-decisions.md`. Then `OWNERS.md` for who owns which path.

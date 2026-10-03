@@ -15,14 +15,10 @@ if ! command -v hippo >/dev/null; then
   exit 0
 fi
 
-if hippo import --file memory/shared.json >/dev/null 2>&1; then
-  echo "absorbed $(python3 -c 'import json;print(len(json.load(open("memory/shared.json"))))') shared memories into the local store"
-else
-  echo "hippo import --file failed, trying markdown"
-  if hippo import --markdown memory/SHARED.md >/dev/null 2>&1; then
-    echo "absorbed shared memory from memory/SHARED.md"
-  else
-    echo "WARNING: could not absorb shared memory. Read memory/SHARED.md by hand."
-    exit 0
-  fi
+# A fresh clone has no store yet. Create one so this works on the first run.
+if [ ! -d "$ROOT/.hippo" ]; then
+  echo "no local store yet, initializing .hippo"
+  hippo init --no-hooks --no-schedule >/dev/null 2>&1 || true
 fi
+
+python3 scripts/memory_absorb.py
