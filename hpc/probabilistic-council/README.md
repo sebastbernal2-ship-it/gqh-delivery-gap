@@ -11,6 +11,18 @@ partition, and compares equal-pool and gated-pool probabilities on a final synth
 reports log loss, Brier score, and ECE. Every
 forecast is a complete `[P(no), P(yes)]` distribution.
 
+The reusable runtime is in [`council/`](council/README.md). `modular_pilot.py` composes that API
+over the same fixture with separate fit, specialist-calibration, gate-fit, pool-calibration, and
+evaluation partitions. It benchmarks equal pooling against context-gated linear and logarithmic
+opinion pools, and reports proper scores, top-label calibration error, active-specialist weights,
+entropy, and between-model disagreement. To run it locally:
+
+```sh
+python3 modular_pilot.py --seed 20261003 --rows 12000
+```
+
+On HiPerGator, submit `run-modular.slurm` from the writable approach copy.
+
 `qcbm_pilot.py` is a bounded quantum research fixture. It trains a three-qubit parameterized
 Born machine in an exact statevector simulator against a synthetic correlated distribution, then
 compares the fitted distribution with independent-Bernoulli and smoothed full-categorical classical
