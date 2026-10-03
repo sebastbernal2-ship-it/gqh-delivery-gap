@@ -1,0 +1,16 @@
+[
+  {
+    "id": "mem_410987ff992c",
+    "content": "Repo created and pushed 2026-10-03: https://github.com/sebastbernal2-ship-it/gqh-delivery-gap (public, main). It is the single source of truth for the GQH 2026 systematic trading entry: docs/00-brief.md owns the track facts, docs/01-idea.md the delivery-gap strategy, docs/02-system.md the execution plan, docs/03-decisions.md the append-only decision ledger, docs/04-memory.md the memory and sync protocol, docs/reviews/ the team critiques, results/README.md the frozen artifact envelope (e1.json, e2.json, e3.json, e4.json, costs.json), OWNERS.md the one-writer-per-path map. Workflow: make sync before starting, make save M=\"...\" to commit and push, make check to validate result envelopes, make memory to export the local store (gitignored because the repo is public), make bootstrap on a new device. Local agent memory stays private; the repo docs are the shared memory. Local checkout: <repo> (own git repo, parent ignores projects/).",
+    "tags": [
+      "gqh",
+      "quanthacks",
+      "repo",
+      "gator-quant-hacks"
+    ],
+    "created": "2026-10-03T04:19:01.960Z",
+    "layer": "episodic",
+    "confidence": "verified",
+    "pinned": false
+  }
+]
