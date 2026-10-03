@@ -64,6 +64,7 @@ test:
 	@python3 tests/test_thesis_index.py
 	@python3 tests/test_structure.py
 	@python3 tests/test_claims.py
+	@python3 tests/test_paths.py
 
 # Credential scan over every file. This repo is public.
 secrets:

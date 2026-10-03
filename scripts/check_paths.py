@@ -21,8 +21,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SCAN_SUFFIXES = {".md", ".sh", ".py", ".jsonl", ".toml"}
 SCAN_NAMES = {"Makefile", ".cursorrules"}
-ROOTS = ("docs/", "scripts/", "tests/", "src/", "hpc/", "results/", "memory/", "data/")
-TOKEN = re.compile(r"\b((?:docs|scripts|tests|src|hpc|results|memory|data)/[A-Za-z0-9._/-]+)")
+# Only these extensions count as a file reference. Anything else is prose that happens to
+# contain a slash, such as "data/result contracts".
+FILE_SUFFIXES = (".md", ".py", ".sh", ".json", ".jsonl", ".toml", ".cfg", ".txt", ".csv",
+                 ".yml", ".yaml", ".ipynb", ".sql", ".q")
+# A match must start at a real boundary, so the path part of a URL is not a reference.
+TOKEN = re.compile(r"(?<![A-Za-z0-9/:@_.-])"
+                   r"((?:docs|scripts|tests|src|hpc|results|memory|data)/[A-Za-z0-9._/-]+)")
 SKIP_CHARS = set("<>*{}[]$|")
 # Fixtures name paths on purpose. History snapshots and the memory mirror are records of what
 # was true then, and renames are expected to leave them untouched.
@@ -35,12 +40,17 @@ def clean(token: str) -> str:
 
 
 def references(text: str) -> list[str]:
+    """Every repo path this text refers to as a file, or as a directory with a trailing slash."""
     out = []
     for raw in TOKEN.findall(text):
         token = clean(raw)
         if any(ch in token for ch in SKIP_CHARS):
             continue
-        out.append(token)
+        if token.endswith("/"):
+            out.append(token)
+            continue
+        if token.endswith(FILE_SUFFIXES):
+            out.append(token)
     return out
 
 
