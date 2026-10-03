@@ -135,10 +135,28 @@ def main(argv: list[str]) -> int:
     if isinstance(entries, dict):
         entries = entries.get("memories", [])
     shared = filter_entries(entries, store_scoped=store_scoped)
+
+    # Merge with what is already in the file: the shared memory is a union across
+    # devices, so a device never removes an entry it simply cannot see.
+    existing_path = Path(out_dir) / "shared.json"
+    if existing_path.exists():
+        try:
+            existing = json.loads(existing_path.read_text())
+        except json.JSONDecodeError:
+            existing = []
+        by_content = {}
+        for item in list(shared) + list(existing):
+            if not isinstance(item, dict):
+                continue
+            key = " ".join(str(item.get("content", "")).split())
+            if key and key not in by_content:
+                by_content[key] = item
+        shared = sorted(by_content.values(), key=lambda item: str(item.get("id", "")))
+
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "shared.json").write_text(json.dumps(shared, indent=2) + "\n")
     (out_dir / "SHARED.md").write_text(render_markdown(shared))
-    print(f"{len(entries)} local entries -> {len(shared)} shared")
+    print(f"{len(entries)} local entries -> {len(shared)} shared (union with the committed file)")
     return 0
 
 
