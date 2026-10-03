@@ -597,3 +597,105 @@ Worked shape for our own case:
 - **Compute index**: a state variable feeding the core signal, plus a monitor. Not a leg.
 - **Compute futures**: nothing to trade until a contract lists. When it does, it is a new study with its
   own specification.
+
+---
+
+## 18. The chain: features, edges, and where another market plugs in
+
+The wrong question is "does strategy X, built on market A, work on market B". The right object is the
+**chain** that strategy X embodies, because a chain is made of relations, and relations have
+participants, measurements and assumptions that another market can serve.
+
+Section 3 already asks for the arrow chain and a tag per arrow. This section promotes that chain to a
+first-class object with two registers, and defines every way an outside market can plug into it.
+
+### 18.1 The chain
+
+- **Nodes** are measurable quantities: a promised schedule, a delivered capacity, a realized scarcity
+  price, a funding rate, a borrow cost, a firm's revenue timing. Every node carries units, a source,
+  and a **knowable-at time**.
+- **Edges** are relations between nodes. Every edge carries: its claim; its direction and sign; its
+  **status** (see 18.2); the **conditions** under which it holds, meaning the regime or state; the
+  evidence; and its failure mode.
+- **A thesis is a path through the chain** from an observable node to a node with tradable
+  consequences. Not a strategy name. Not a ticker.
+
+A relation that holds only under stated conditions is still usable. A relation whose conditions are
+unstated is not a chain, it is a hope.
+
+### 18.2 The assumption register
+
+Every edge is either evidenced, or it is an assumption, and assumptions are managed rather than
+hidden. Four statuses:
+
+| Status | Meaning | What it licenses |
+|---|---|---|
+| **Measured** | A point-in-time measurement of the relation exists | Full exposure |
+| **Proxied** | Another market supplies a measurable stand-in | Exposure capped by hedge or sizing, and the proxy's own error reported |
+| **Testable** | No measurement yet, but a design exists and is scheduled | Reduced exposure until tested, and the test is named with a date |
+| **Irreducible** | No measurement is available in our window | **Bounded exposure.** The bound comes from how wrong the assumption could be, not from conviction |
+
+The register is a table, one row per edge: edge, status, evidence or proxy, the exposure it licenses,
+and the test that would upgrade its status. Assumptions stop being invisible and become budgeted.
+
+### 18.3 Eight ways a market plugs into the chain
+
+A market is not a place to run a strategy. It is a supplier of nodes, instruments and state readings.
+
+| # | Mode | What the market supplies | Evidence it needs | Carries P&L? |
+|---|---|---|---|---|
+| 1 | **Node supply** | A feature that fills a node previously assumed or proxied | Point-in-time validity, units, coverage, and that it is knowable before we act | No, but it upgrades the rationale |
+| 2 | **Assumption closure** | Evidence that an edge's premise is true (or false) | A test of that specific premise, with its own falsifier | No |
+| 3 | **Edge identification** | A population or venue where the relation is cleaner to isolate | A design and an estimand, per section 13 stage 4 | No |
+| 4 | **State reading** | A faster or cleaner read of a conditioning state: crowding, liquidity, narrative intensity | Out-of-sample predictive value **by time** for the state, not for returns | No, unless it gates size |
+| 5 | **Expression** | An instrument that trades the same edge | The admission gate in 17.5, plus its own capacity curve | Yes, own artifact |
+| 6 | **Hedge or relative value** | The same edge from the other side, or the basis between the two | Joint and tail structure of the hedge, basis risk, cost, and a report that intended exposure is **unchanged** | Yes, as a hedge leg |
+| 7 | **Risk overlay** | Dynamic de-risking driven by mode 4 | Trigger rules, costs, and evidence it reduces joint-tail loss **net of cost** | Yes, as an overlay |
+| 8 | **Derivative profit** | Instruments derived from a node or edge | Node and edge mapping, intended exposure in the budget, and its own study | Yes, only after the gate |
+
+Modes 1 to 4 **strengthen the chain** and can be used before the core is finished, without touching
+the core's evidence. Modes 5 to 8 **carry P&L**, so they need the full gate.
+
+### 18.4 Worked shape for our own case
+
+| Chain element | Source | Mode |
+|---|---|---|
+| Node: promised delivery schedule | Filings and filings-derived revisions, market A | Core |
+| Node: realized usability of that capacity | Operational and physical evidence, market A | Core |
+| Node: realized scarcity price of compute | Compute index, market B | 1, node supply. Closes the assumption that scarcity is observable rather than asserted |
+| Node: crowding and narrative leverage | Perp funding and open interest, market C | 4, state reading. A live read on crowding, and a candidate overlay |
+| Edge: schedule revision → firm's revenue timing → price | Market A, with an identification design | Core |
+| Edge: who pays when a schedule slips | Equities: hedgers and drawdown-sensitive holders. Perps: leveraged longs paying funding | 3, edge identification. The perp venue isolates the payer more cleanly than equity microstructure does |
+| Instrument: express the edge | Equity pair, plus a perp leg where shorting is cheap and 24/7 | 5 and 6 |
+| Instrument: overlay | Perp funding as a crowding gate on core size | 7, pending evidence that the state predicts worse outcomes |
+| Instrument: derived profit | A compute future, **if and when one lists** | 8, as a new study |
+
+Read that table as the answer to "how do we involve the unique markets": the perpetual enters at three
+nodes and one instrument role, and the compute index enters as a node and a monitor, without either one
+being asked to reproduce the equity study.
+
+### 18.5 Rules that keep the chain honest
+
+1. **No node, no position.** Every position names the node or edge it serves. A position that serves
+   none is a defect, not diversification.
+2. **A feature borrowed from another market obeys the same availability rule** as any other input: it
+   must be knowable before we act, and its knowable-at time is recorded.
+3. **Irreducible assumptions bound exposure.** The bound comes from how wrong the assumption could be,
+   not from how good the story sounds.
+4. **A hedge reduces unintended exposure. It does not reduce variance at the cost of changing the
+   intended exposure.** If the intended exposure moves, it is a new position with its own record.
+5. **Overlays must earn their cost.** An overlay that helps in-sample, costs money, and reduces the
+   joint tail by less than it costs is a loss dressed as risk management.
+6. **Satellites never pool.** A venue's P&L is reported in its own artifact, per section 17.6.
+7. **The register is living.** Edges move between statuses as evidence arrives, and a downgrade is as
+   reportable as an upgrade.
+8. **Breadth cannot be manufactured by adding nodes.** More nodes with the same underlying shock is one
+   bet. Effective breadth is measured after clustering, per section 16.2.
+
+### 18.6 What this replaces
+
+It replaces "port the strategy" with **"extend the chain"**. It lets a new market contribute at the
+assumption level rather than at the strategy level, which is where its information actually sits. And it
+makes the honest shape of our own work visible: a small number of measured edges, a larger number of
+proxied and testable ones, and an explicit short list of irreducible ones whose exposure is capped
+rather than pretended away.

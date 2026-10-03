@@ -373,3 +373,30 @@ history, time-varying liquidity, treating an index as an instrument, and pooling
 produce a fake result, so each gets an explicit control.
 **Sequencing.** Satellites come after the core passes its own gates. Inclusion has a real cost in
 sample, venue risk and rubric clarity, and that trade-off is written down rather than wished away.
+
+---
+
+## 2026-10-03: The chain replaces the strategy as the portable object
+
+**Decision.** `docs/alignment.md` section 18 makes the chain of relations first-class: nodes are
+measurable quantities with knowable-at times, edges are relations with status, conditions, evidence and a
+failure mode, and a thesis is a path through the chain. Every edge sits in an **assumption register** with
+a status (measured, proxied, testable, irreducible) and the exposure it licenses. A new market plugs in at
+a node or an edge, never as a strategy recipient.
+**Why.** "Port strategy X from market A to market B" asks the wrong question. A strategy is not
+portable; a relation is. A market that supplies a feature occupying a node in the chain contributes at
+the assumption level, which is where its information actually lives.
+**Eight integration modes.** Node supply, assumption closure, edge identification, state reading,
+expression, hedge or relative value, risk overlay, derivative profit. Modes 1 to 4 strengthen the chain
+without touching the core's evidence and can be used before the core is finished. Modes 5 to 8 carry
+P&L and need the full admission gate.
+**Rules.** No node, no position. A borrowed feature obeys the same availability rule as any other input.
+Irreducible assumptions bound exposure instead of disappearing. A hedge reduces unintended exposure and
+must not change intended exposure. Overlays must beat their own cost. Satellites never pool. The register
+is living, and a downgrade is as reportable as an upgrade. Breadth cannot be manufactured by adding
+nodes that share one shock.
+**Consequence for our own case.** The compute index enters as a node supply and a monitor, which closes
+the assumption that scarcity is observable. The perpetual enters at three nodes and one instrument role:
+crowding state, edge identification of who pays, and a 24/7 expression and hedge leg. Neither is asked to
+reproduce the equity study.
+**Replaces.** "Extend the chain" replaces "port the strategy".
