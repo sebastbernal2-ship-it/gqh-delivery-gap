@@ -35,6 +35,7 @@ BUILDABLE = {
     "price:equity:buildout",
     "price:equity:scarcity",
     "water:drought:severity",
+    "price:compute:rental",
 }
 
 # One or more series per node. A node with several series contributes each of them to the scan.
@@ -49,6 +50,7 @@ SERIES = {
     "price:equity:buildout": ["buildout_basket"],
     "price:equity:scarcity": ["scarcity_basket"],
     "water:drought:severity": ["drought_severity"],
+    "price:compute:rental": ["compute_price_index"],
 }
 
 TICKERS = {
@@ -227,6 +229,13 @@ def build(node_ids: list[str], expectations: Path, events: Path) -> tuple[dict[s
             series.update(firm_series(events))
         elif node_id == "water:drought:severity":
             series["drought_severity"] = drought_series(["48"], "2016-01-01", "2024-09-30")
+        elif node_id == "price:compute:rental":
+            from scan.compute import series as compute_series
+            data, status = compute_series()
+            if data:
+                series["compute_price_index"] = data
+            else:
+                missing[node_id] = f"the export produced no series: {status}"
         else:
             for label in SERIES.get(node_id, []):
                 spec = TICKERS.get(label)

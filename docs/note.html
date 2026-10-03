@@ -4,16 +4,17 @@
 <meta charset="utf-8">
 <title>Promised Delivery and the Price of Slippage</title>
 <style>
-  @page { size: letter; margin: 15mm 16mm; }
-  body { font: 10.2pt/1.42 Georgia, "Times New Roman", serif; color: #111; margin: 0; }
+  @page { size: letter; margin: 13mm 14mm; }
+  body { font: 9.9pt/1.34 Georgia, "Times New Roman", serif; color: #111; margin: 0; }
   h1 { font-size: 16pt; margin: 0 0 2mm 0; line-height: 1.2; }
-  h2 { font-size: 11.6pt; margin: 4.6mm 0 1.4mm 0; border-bottom: 0.4pt solid #bbb; padding-bottom: 0.6mm; }
+  h2 { font-size: 11.2pt; margin: 3.4mm 0 1.1mm 0; border-bottom: 0.4pt solid #bbb; padding-bottom: 0.6mm; }
   h3 { font-size: 10.4pt; margin: 3mm 0 1mm 0; }
-  p { margin: 0 0 1.6mm 0; text-align: justify; }
-  table { border-collapse: collapse; width: 100%; font-size: 9.1pt; margin: 1.4mm 0 2mm 0; }
+  p { margin: 0 0 1.3mm 0; text-align: justify; }
+  table { border-collapse: collapse; width: 100%; font-size: 8.7pt; margin: 1.4mm 0 2mm 0; }
   th, td { border-bottom: 0.4pt solid #ddd; padding: 0.7mm 1.4mm; text-align: left; }
   th { background: #f2f2f2; font-weight: 600; }
   td.n, th.n { text-align: right; }
+  li { margin-bottom: 0.4mm; }
   .meta { font-size: 9.2pt; color: #444; margin-bottom: 3mm; }
   .box { border: 0.5pt solid #999; background: #fafafa; padding: 2mm 2.6mm; margin: 2mm 0; }
   code, pre { font-family: "DejaVu Sans Mono", monospace; font-size: 8.4pt; }
@@ -33,11 +34,10 @@ Team: sebastbernal2-ship-it, aidanq06, vshnu1, lucyrunner.
 </div>
 
 <h2>1. The claim, and who is on the other side</h2>
-<p>Long-lived infrastructure is sold before it is built, so a schedule is a published promise. When that
-promise moves, the cash flow attached to it moves: a delayed substation defers a utility's rate base, a
-slipped turbine delivery defers a developer's revenue, and a postponed lease commencement defers a data
-centre landlord's rent. The party who holds the schedule risk pays the party who is paid on delivery. That
-transfer, not a forecast of demand, is what this study measures.</p>
+<p>Long-lived infrastructure is sold before it is built, so a schedule is a published promise. When it
+moves, the cash flow moves: a delayed substation defers a utility's rate base, a slipped turbine defers a
+developer's revenue, a postponed commencement defers rent. The party holding schedule risk pays the party
+paid on delivery, and that transfer is what this study measures.</p>
 <p>The reason it is not simply priced away is structural rather than clever. The revision hides in a
 monthly inventory of planned generators and in filing notes; the median revision is <strong>exactly twelve
 months</strong>, which reads as routine roll-forward rather than as news; the same obligation must be joined
@@ -76,8 +76,8 @@ joins to an acceptance timestamp.</p>
 <tr><td>ETN remaining performance obligations</td><td class="n">15 facts</td><td class="n">median 33 days</td></tr>
 <tr><td>PWR unapproved change orders</td><td class="n">26 facts</td><td class="n">median 94 days</td></tr>
 </table>
-<p>Remaining obligations fall as work is delivered, so a fall is not a delay. It is a revision to the
-disclosed book, which is why the panel also records the change against the firm's own typical change.</p>
+<p>Remaining obligations fall as work is delivered, so a fall is a revision to the disclosed book and not a
+delay, which is why each change is also measured against the firm's own typical change.</p>
 
 <h2>4. Three tests, and the honest answer each gave</h2>
 <h3>Test one: the disclosing firm's own price</h3>
@@ -126,10 +126,10 @@ rather than at a plateau.</p>
 
 
 <h2>5. The scan: coverage first, then associations</h2>
-<p>Before measuring anything, the node space is declared: <strong>21 nodes, 210 pairs, of which 91 are
-measurable and 119 are blocked with a written reason.</strong> A node needs a representation with a clock
-and an availability rule, or it must say why it has none. The blocked record is a result in itself, and it
-is the honest map of what this data cannot answer:</p>
+<p>Before measuring anything, the node space is declared: <strong>22 nodes, 231 pairs, of which 116 are
+measurable and 115 are blocked with a written reason.</strong> A node needs a representation with a clock
+and an availability rule, or it must explain its absence. The blocked record is the honest map of what this
+data cannot answer:</p>
 <table>
 <tr><th>Missing family</th><th>Why it cannot be measured here</th></tr>
 <tr><td>Compute rental price</td><td>only current values are public; the history is a paid tier, and the two open datasets that looked promising are empty shells</td></tr>
@@ -138,22 +138,24 @@ is the honest map of what this data cannot answer:</p>
 <tr><td>Positioning and crowding</td><td>the only non-crypto perpetual markets reach back thirteen months</td></tr>
 <tr><td>Option implied moves</td><td>no entitlement for historical chains</td></tr>
 </table>
-<p>Fifty-one series-level pairs were measured. <strong>Twelve beat their own generated null, against 2.6
-expected by chance.</strong> Two corrections then applied, because a scan reports multiplicity as
-discovery if you let it:</p>
+<p>In the mechanism window the scan measured <strong>51 series-level pairs</strong>, each against its own
+generated null: a block shuffle that keeps short-run autocorrelation, and a twelve-month shift that keeps
+seasonality. Every survivor inside one family is asset co-movement rather than a relation, so the count that
+matters is the cross-family one, and there it found <strong>none against 0.9 expected</strong>. The two
+corrections below are what make that statement possible:</p>
 <ul>
 <li><strong>One series per node.</strong> Three representations of the promise node are highly correlated,
-so that node could vote three times in one direction. Keeping one representation leaves <strong>three
-cross-family survivors against 0.9 expected by chance</strong>.</li>
+so that node could vote three times in one direction. Keeping one representation leaves <strong>zero
+cross-family survivors</strong> in this window.</li>
 <li><strong>Specificity.</strong> A relation that appears in unrelated industries is a common factor, not
 the mechanism. The only mechanism-relevant survivor, firm disclosure revisions against gas prices, was
 recomputed per industry group: <strong>+0.31 in the data-centre group, and &minus;0.06 in the contractor
 and equipment groups.</strong> It belongs to the comparison group, not to the mechanism. The other two
 survivors are the known relations of utilities against rates and copper against rates.</li>
 </ul>
-<p>The scan therefore finds real structure in asset co-movement and in known macro links, and <strong>no
-survivor that belongs to this mechanism.</strong> That is the fourth test and the fourth negative, and it
-is the first one that searched the space instead of a hand-picked path.</p>
+<p>The scan finds real structure in asset co-movement and in known macro links, and <strong>no survivor that
+belongs to this mechanism.</strong> That is the fourth negative, and the first that searched the space
+rather than one hand-picked path.</p>
 
 <p><strong>Two studies, two windows, one firewall.</strong> The mechanism and strategy study keeps its
 history from July 2015 and its twenty-four month holdout from October 2022. The compute era study has its
@@ -163,14 +165,21 @@ rejected, because with a twelve month lookback on twenty-two months of history t
 observations, which is not a tested strategy but an untestable one. The rule between them is a firewall:
 <strong>nothing found in the compute era may change the strategy's design</strong>, because the two windows
 overlap and a discovery in one would otherwise spend the other's held-out data.</p>
-<p>Inside the compute-era window the same scan measured fifty-one pairs. Six beat their own null against
-2.6 expected; after the canonical and family corrections, <strong>three cross-family survivors remain
-against 0.9 expected</strong>. Two are the known relations of power equities and copper against rates. The
-third links firm disclosure revisions to the promised pipeline, which is the mechanism itself, and it is
-the only survivor worth a mechanism conversation. It is not evidence: twenty-two months, one surviving
-relation, and its seasonal control only partly explains it. The compute price series, the node this window
-exists for, is acquired and verifiable but not yet readable by this study, and that is stated rather than
-papered over.</p>
+<p>Inside the compute-era window the same scan measured <strong>62 series-level pairs</strong>. Six beat
+their own null against 3.1 expected; after the canonical and family corrections, <strong>three cross-family
+survivors remain against 1.1 expected</strong>. Two are the known relations of power equities and copper
+against rates. The third links firm disclosure revisions to the promised pipeline, which is the mechanism
+itself, and it is the only survivor worth a mechanism conversation. It is not evidence: twenty-two months,
+one surviving relation, and its seasonal control only partly explains it. <strong>The compute price series, the node this window exists
+for, is now in the study</strong>: a monthly median of provider spot prices per instance family, rebased
+across families, twenty-two development months, read straight from the archive rather than from a summary.
+Measured against eleven partners it clears its own null on none of them. Its strongest association is the
+scarcity basket at the 88th percentile, with a change correlation of &minus;0.36 and a level correlation of
+&minus;0.49; fuel, copper, uranium, rates, both equity baskets, the promise revisions and firm disclosures
+all sit between the 7th and 76th percentile. Either the relation is absent at monthly frequency, or
+twenty-two months is too short, or a provider spot price is too noisy a proxy for what compute actually
+rents for. Naming all three is the honest end of this line, and choosing one without a test would be the
+mistake this framework exists to prevent.</p>
 <h2>6. Risk management</h2>
 <ul>
 <li><strong>Position limits, declared in advance and enforced in the chain log:</strong> 2 percent of NAV per
