@@ -25,11 +25,12 @@ accounts, from 2025-07-29 to 2026-08-18.
 Accounts at leverage ten or more hold 77.78% of gross exposure. Account-days within 0.03 of the
 threshold hold 98.60%.
 
-## The unit, stated honestly
+## The flag, and what it is not
 
-The column's exact scale is not yet confirmed against a known liquidation, so the buckets above are in the
-column's own units. The first step of the test confirms the unit by finding an account whose `liq_next` reaches
-zero and checking what price move produced it. Until then, read the table as a shape, not as percentages.
+The flag is the panel author's judgement, not the venue's own rule, and a flagged account is not a liquidation.
+So this is a lead: the share of gross exposure that someone closer to the data considers exposed. The venue's own
+rule still comes from the margin requirement, and the test below uses the flag as a candidate state variable and
+the price path as the outcome, which keeps the two separate.
 
 ## The declared measurement that follows
 
@@ -39,6 +40,9 @@ zero and checking what price move produced it. Until then, read the table as a s
 4. **Economics**: net of 4.5 basis points per side, against the measured capacity of 3.3m per side in BTC
    within ten basis points.
 5. **Null**: the same statistic after randomly placed moves of the same size, and after the same time of day.
+
+The series is written to `results/fuel-daily.csv`, one row per day: total gross, accounts,
+flagged accounts, flagged gross, and the flagged share.
 
 Declared before running. One statistic: mean post trigger return net of costs. If it fails, the ladder of
 failures is complete and the answer for this class is no at this size.
