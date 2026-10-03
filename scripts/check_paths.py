@@ -35,6 +35,30 @@ SKIP_PREFIXES = ("tests/", "memory/", "docs/history/")
 SKIP_NAMES = ("TEMPLATE",)
 
 
+FOREIGN_TAG = "foreign-repo="
+
+
+def strip_foreign_fences(text: str) -> str:
+    """Drop fenced blocks whose info string marks them as another checkout's commands.
+
+    A prompt written for the algoterminal session names that repo's scripts, which do not exist
+    here and should not. Only tagged fences are skipped, so an ordinary block is still checked.
+    """
+    out, skipping = [], False
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            if skipping:
+                skipping = False
+                continue
+            if FOREIGN_TAG in stripped:
+                skipping = True
+                continue
+        if not skipping:
+            out.append(line)
+    return "\n".join(out)
+
+
 def clean(token: str) -> str:
     return token.rstrip(".,;:)\"'`")
 
@@ -83,7 +107,7 @@ def main() -> int:
             continue
         if path.suffix in SCAN_SUFFIXES or path.name in SCAN_NAMES:
             try:
-                files[name] = path.read_text(errors="ignore")
+                files[name] = strip_foreign_fences(path.read_text(errors="ignore"))
             except OSError:
                 continue
     problems = missing(tracked, files)
