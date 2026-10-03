@@ -90,3 +90,21 @@ instrument and its concentration, the barrier, the falsifier, and the data neede
 Merge the four legs, then run the six gate process over the chains that pass gate one, with the measured
 distributions from Leg B and the directional edges from Leg C as the evidence, and the graph inventory from Leg A
 as the coverage check. Nothing from a leg is accepted on the leg's own say so: numbers are re-run at merge time.
+
+## The constraint that makes parallel legs fail, and the corrected pattern
+
+A subagent started in this home is a **separate session**, and this home allows one live session at a time
+through `state/.lock`. When four legs started together, the first held the lock and the rest read the lock,
+went read-only by their own guard, and refused to write anything. One leg reported it plainly: another live
+session holds the lock, so nothing was written.
+
+**So a leg may not write into the locked home or the checkout.** The corrected pattern is:
+
+1. Each leg works in its own scratch directory, for example `/tmp/leg-a/`, and writes its deliverables there.
+2. The leg reports the scratch paths and the numbers it verified.
+3. The orchestrating session, which holds the lock, copies each verified result into the repository, re-runs
+   the leg's verifier itself, and commits.
+
+That keeps the one-writer-per-path rule intact, because only the orchestrator writes inside the checkout.
+When a leg genuinely needs the checkout, the alternative is a worktree with its own home so its lock is its
+own, which is what `subagent_spawn_worktree` exists for.
