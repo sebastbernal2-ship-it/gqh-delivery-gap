@@ -64,3 +64,6 @@ results/bar-cache/
 
 # Reduced per-vintage aggregates: regenerable, so not committed.
 results/vintage-aggregates/
+
+# Local drought cache: fetched, never committed.
+results/usdm-cache/
