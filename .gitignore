@@ -52,3 +52,6 @@ memory/*.md
 # Scratch directories for testing the new-device path
 _devtest/
 _clonetest/
+
+# Local EDGAR cache: a local convenience, never committed.
+results/edgar-cache/

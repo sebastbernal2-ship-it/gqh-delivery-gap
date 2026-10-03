@@ -515,3 +515,20 @@ passes its own validator: 16 nodes, 4 sources, 18 representations, 120 canonical
 causal ceiling descriptive only.
 **Resolution path.** Either that session commits the graph work itself, or the captain pauses it and this
 home commits in seconds.
+
+---
+
+## 2026-10-03: The filings register closes the timestamp gap, and the SEC refuses a URL in an agent string
+
+**Result.** 776 filings for PWR, ETN, EME and DLR since 2015: **656 in the development window, all 656
+with EDGAR's own acceptance timestamp**, and 515 candidate disclosure surfaces. The sealed window holds
+120 rows and stays unsummarised until the sealed test.
+**Finding worth keeping.** The SEC refuses an agent string containing a URL. A URL-only agent earned an
+HTML 403 that is indistinguishable from throttling, as did an `@users.noreply.github.com` address, while
+a plain project-plus-contact form was accepted. This is the probable cause of the failed direct retrieval
+recorded in the earlier audit, and it is now a fast, explicit failure with the fix in the message.
+**Refused vs throttled are different.** A 403 with an HTML body is a refused agent and must not be
+retried; a 403 with a JSON body is a throttle and is retried with backoff. The client tells them apart.
+**Not a delay label.** Filings enumerate disclosure. A backlog increase is not a missed deadline, so rows
+carry item numbers and document links, never a delay flag. Press-release precedence is unresolved on every
+row and labelled as such.
