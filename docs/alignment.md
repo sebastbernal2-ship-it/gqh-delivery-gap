@@ -170,19 +170,18 @@ the remaining competition time supports the full architecture, which no handoff 
 
 ---
 
-## 12. Cross-check against the training material we were pointed at
+## 12. Cross-check: their method against ours, row by row
 
-Sources: `algogatorstraining.com/qr-home.html` (the Investment Proposal framework and the
-three-phase curriculum), captured 2026-10-02 while the site was reachable; and the public
-`algogators.com` pages on training and research workflow, summarised 2026-10-03. Both domains timed
-out on re-check, so treat this section as a reading of those sources rather than a live citation.
-Note one discrepancy to resolve: the training site describes a ten-week, three-phase curriculum,
-while the society's public page describes an eleven-week analyst curriculum. Probably the same
-programme at different times; do not quote either as current without checking.
+Sources: `algogatorstraining.com/qr-home.html` (the Investment Proposal framework and the three-phase
+curriculum), captured 2026-10-02 while the site was reachable, plus the public `algogators.com` pages
+on training and research workflow, summarised 2026-10-03. Both domains timed out on re-check, so this
+is a reading of that material, not a live citation. One discrepancy to resolve before quoting either:
+the training site describes a ten-week three-phase curriculum, the society's page an eleven-week one.
+
+**"Silent" in the table below means the published material does not address it, not that their
+practice ignores it.** Their internal standard is very likely stricter than their public summary.
 
 ### Their method, as they state it
-
-The Investment Proposal has four sections, and the whole job is to fill them honestly.
 
 | Section | Their requirement |
 |---|---|
@@ -191,62 +190,107 @@ The Investment Proposal has four sections, and the whole job is to fill them hon
 | 3 Methodology | 3a signal rules. 3b model assumptions, each one tested and documented |
 | 4 Results | Sharpe, annual return, win rate, profit factor, equity curve, drawdown analysis |
 
-Their research pipeline is **Hypothesis → Data → Methodology → Backtest → Writeup**, versioned, with
-cautious optimisation and risk controls, deploying only what survives. The curriculum puts
-"what defines a research edge" first, then tooling, then execution.
+Pipeline: **Hypothesis → Data → Methodology → Backtest → Writeup**, versioned, optimise cautiously,
+add risk controls, deploy only what survives, monitor live. Curriculum: foundations ("what defines a
+research edge", contract mechanics, FX/commodities, fixed income and equity factors), then tooling and
+hypothesis writing, then execution: data, signal construction, model assumptions, results.
 
-### Where we already agree
+### The comparison
 
-Hypothesis before everything; the mechanism named; data settled before any backtest; assumptions
-written down; results separated and versioned. Four of their requirements are already hard rules
-here, and three of ours are simply their rules carried further: the confidence ladder turns
-"data must exist" into a chain from entitlement to tradeable-after-costs; the counterparty step turns
-"why does the inefficiency exist" into a named payer; and the falsifier turns "assumptions are
-tested" into a pre-registered claim that can die.
+Legend: **match** = equivalent; **ours is stricter** = same idea, carried further; **ours only** =
+absent from their published material; **theirs only** = we adopted it; **tension** = a real conflict.
 
-### What we should adopt from them
+**Framing**
 
-1. **A fixed shape for a research record.** They have one artifact everyone fills, with numbered
-   subsections. We have an inbox, a ledger, and no required shape for the record itself. Adopted:
-   thesis records now use their four sections as required headings, plus our additions.
-2. **A named data gate.** Their 2b is a person approving the data before anything downstream runs.
-   We have mechanical checks but no named human gate. Adopted: an active thesis names who approved
-   the data, and the ledger gate enforces the heading.
-3. **Their metric list, reported alongside ours.** Sharpe, annual return, win rate, profit factor,
-   equity curve, drawdown. We are stricter about how they are produced (net of costs, in-sample and
-   out-of-sample separately, deflated for the number of variants) but we should still print their
-   list, because it is what a reader expects to see. Report them; never target win rate or profit
-   factor, both of which are trivially gamed.
-4. **"Optimise cautiously" as an explicit step.** We treat tuning as near-forbidden. Their framing is
-   compatible and clearer: optimise only inside development folds, with the variant count recorded,
-   then freeze.
-5. **A deployment stage.** We have no live stage and the track has no P&L leaderboard, so ours maps
-   to execution feasibility and capacity rather than monitoring.
+| Dimension | Theirs | Ours | Verdict |
+|---|---|---|---|
+| What starts the work | A market hypothesis and a research opportunity | A revision against an earlier public expectation with a nameable cash-flow channel | Theirs is broader as an entry point; ours is the filter it must pass |
+| Mechanism named | Yes: why does the inefficiency exist | Yes, plus the simplest rival explanation | Ours is stricter |
+| Who pays, who is on the other side | Implied, not required | Required and named | Ours only |
+| Simplest rival explanation | Silent | Required | Ours only |
+| Tag every reasoning arrow observed, inferred, untested | Silent | Required | Ours only |
 
-### What we keep, and should defend as our difference
+**Data**
 
-The confidence ladder; the named counterparty; revisions against an earlier public expectation;
-availability times and the labels-are-not-features rule; a falsifier written before returns;
-independent shocks rather than calendar length; costs, borrow and joint tails as part of the
-mechanism; capacity as a scored criterion; and tools that must earn their place with a removable
-benchmark.
+| Dimension | Theirs | Ours | Verdict |
+|---|---|---|---|
+| Data settled before any backtest | Explicit gate (2b) | Same rule, enforced through the confidence ladder | Match |
+| Who approves the data | A quality gate | A named approver on an active thesis | Theirs, named |
+| Availability: when was it knowable | Silent | Hard rule: availability binds, no forward fill, no same-bar fill | Ours only |
+| A realized outcome is a label, never an input | Silent | Hard rule | Ours only |
+| Entitlement versus coverage | Silent | An explicit rung: capable, entitled, downloaded, point-in-time | Ours only |
+| Corporate actions, identifier mapping, delistings | Under "sourcing and cleaning" | Explicit requirements | Ours is stricter |
 
-### The criticism their method makes of ours
+**Methodology**
 
-Their framework is short, and it is designed to *produce a result*. Ours is long, and it is designed
-to *prevent being fooled*. Both are needed, but ours can win the argument and lose the weekend: a
-beautifully governed repo with no measurement is a failure, and no amount of process fixes that.
+| Dimension | Theirs | Ours | Verdict |
+|---|---|---|---|
+| Signal rules | IP 3a | Same, plus units, eligibility and abstention | Match |
+| Assumptions tested and documented | IP 3b, explicit | Same, plus scales, rounding, overflow and null semantics | Ours is stricter |
+| A baseline to beat | Silent | Required before looking at returns | Ours only |
+| A falsifier pre-registered | Silent | Required | Ours only (the brief rewards it) |
+| One primary horizon chosen before testing | Silent | Required | Ours only (Aidan's update agrees) |
 
-The correction this implies, adopted here: **one event family, one horizon, one pilot, one result
-artifact.** Process exists to make that result trustworthy, not to be the result. If a choice must be
-made between another governance improvement and the first honest number, take the number.
+**Evidence**
 
-### The merged shape
+| Dimension | Theirs | Ours | Verdict |
+|---|---|---|---|
+| Backtest protocol | Backtest historically | Sealed test opened once by a named owner, reported whatever it says | Ours is stricter (the brief mandates a split) |
+| Optimisation | "Optimise cautiously" | Only inside development folds, variant count recorded, never on the sealed test | Ours operationalises theirs |
+| Multiple testing | Silent | Deflated for the number of variants, and the count is reported | Ours only (the brief cites Deflated Sharpe) |
+| Metrics reported | Sharpe, annual return, win rate, profit factor, equity curve, drawdown | Their list, plus net-of-cost, in-sample and out-of-sample separately, turnover, capacity | Ours adopts theirs and adds |
+| Negative results | Silent | Kept in the record, and they change the research | Ours only |
+| Adequacy | Silent | Independent shocks, not calendar length; report event and issuer counts | Ours only |
 
-Their skeleton, our gates inside it:
+**Risk and capacity**
 
-- A thesis record is an Investment Proposal. Four required sections: Hypothesis, Data, Methodology,
-  Results. Ours adds Falsifiers, Costs and capacity, and Limitations.
-- The ledger line stays what it is: id, title, status, owner, date, note, falsifiers, evidence.
-- The data gate is a named person in the record, and a heading the gate checks for.
-- Results print their metric list, produced our way.
+| Dimension | Theirs | Ours | Verdict |
+|---|---|---|---|
+| Risk controls | "Add risk controls" | Factor exposure, joint tails, borrow, financing, liquidity, and abstention as an output | Ours is stricter |
+| Costs | Silent in the Results section | Every number net, bps justified, doubling test | Ours only |
+| Capacity and market impact | Silent | Participation, impact, and the capital at which the edge dies | Ours only (the brief scores it) |
+
+**Tools and infrastructure**
+
+| Dimension | Theirs | Ours | Verdict |
+|---|---|---|---|
+| Why a tool is used | Silent | Named task, simple comparator, measured benefit, full cost, and removable | Ours only |
+| Advanced methods, including quantum | Not addressed | No method is mandatory; quantum has no standing role; GPU simulation is classical computation | Ours only |
+| Language and storage | Teaches programming, does not prescribe | Follows the task; existing Python stays; one low-level engine only for a measured bottleneck | Ours, and theirs is silent |
+
+**Process and collaboration**
+
+| Dimension | Theirs | Ours | Verdict |
+|---|---|---|---|
+| Record structure | The Investment Proposal, four sections, versioned research | The same four sections, now required of an active thesis, plus the ledger and decision log | Theirs, adopted |
+| Who writes what | Mentorship model | One writer per path, claims in OWNERS, a named integrator | Ours only |
+| Review | Weekly work, senior-member mentorship | Adversarial reviewer traces claims to sources; mechanical gates on every push | Ours is stricter and mechanical |
+| Knowledge persistence | Versioned research | Append-only ledger, generated views, shared memory across four devices | Ours only |
+| Time to first result | The framework exists to produce one | At risk of over-engineering it | **Tension.** Theirs wins, and we adopted the rule below |
+
+### Verdict summary
+
+Their published material is a **producer's** framework: short, ordered, and built to get an honest
+result out of the door. Ours is a **skeptic's** framework: it adds availability discipline,
+pre-registered falsifiers, multiple-testing correction, cost and capacity modelling, tool
+justification, and governance. Every one of those additions is a way of not fooling ourselves, and
+none of them produces a number.
+
+Three things were genuinely theirs and are now ours: the **record shape**, the **named data gate**
+and the **result orientation**. Everything else in the table is either a match, or us carrying their
+idea further.
+
+### The correction their method implies for us
+
+A governed repo with no measurement is a failure, and no amount of process fixes that. Adopted as a
+standing rule:
+
+> **One event family, one horizon, one pilot, one result artifact. Process exists to make that result
+> trustworthy, not to be the result. If a choice arises between another governance improvement and
+> the first honest number, take the number.**
+
+### The merged shape we work to
+
+Their skeleton, our gates inside it: a thesis record is an Investment Proposal with four required
+sections, plus Falsifiers, Costs and capacity, and Limitations; the ledger line stays as it is; the
+data gate is a named person; results print their metric list, produced our way.
