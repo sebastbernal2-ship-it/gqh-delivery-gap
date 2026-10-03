@@ -38,3 +38,5 @@ The notes describe historical beliefs at capture time; future changes should add
 ## Latest discussion update
 
 [Update 02](update-02.md) records the later intraday preference, data requirements before vendors, reported pilot/access progress, timestamp uncertainty and gradual-sizing proposal. Read it before treating the earlier ten-session candidate as the current horizon.
+
+[Filings feasibility audit](filings-audit/README.md) records the five-year source pilot, numerical observations, matched-project examples and unresolved coverage/timestamp limits. It is research evidence, not a completed event panel or strategy backtest.
