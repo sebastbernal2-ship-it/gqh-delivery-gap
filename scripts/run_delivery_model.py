@@ -25,6 +25,7 @@ onwards tests.
 
 Usage:
     python scripts/run_delivery_model.py
+    python scripts/run_delivery_model.py --outcome event_large --factor-set bottleneck
 """
 from __future__ import annotations
 
@@ -83,7 +84,7 @@ def median_by_technology(rows: list[dict], factor: str) -> dict[str, float]:
 
 
 def build(rows: list[dict], technologies: list[str], month_effects: bool = False,
-          interaction_group: tuple[str, ...] | None = None):
+          interaction_group: tuple[str, ...] | None = None, objective: str = "event"):
     """Controls, then factors with imputation flags. Returns names, matrix, outcome and months."""
     imputation = {factor: median_by_technology(rows, factor) for factor in FACTORS}
     names = ["log_capacity", "age_months", "start_year"] + [f"tech_{t[:14]}" for t in technologies]
@@ -115,7 +116,7 @@ def build(rows: list[dict], technologies: list[str], month_effects: bool = False
             inside = 1.0 if row["technology"] in interaction_group else 0.0
             feature += [feature[3 + len(technologies) + FACTORS.index(f)] * inside for f in FACTORS]
         matrix.append(feature)
-        outcome.append(float(row["event"]))
+        outcome.append(float(row[objective]))
         months.append(row["month"])
     return names, np.array(matrix, dtype=float), np.array(outcome, dtype=float), months
 
@@ -147,10 +148,11 @@ def placebo_block(x, months, start: int, end: int, seed: int = 11):
 
 
 def fit_group(rows: list[dict], technologies: list[str], start: int, end: int, trials: int,
-              group: tuple[str, ...] | None = None, month_effects: bool = False):
+              group: tuple[str, ...] | None = None, month_effects: bool = False,
+              objective: str = "event"):
     """Fit one subset and return its odds ratios by name, for the specificity comparison."""
     names, x, y, months = build(rows, technologies, month_effects=month_effects,
-                                interaction_group=group)
+                                interaction_group=group, objective=objective)
     train = np.array([m < SPLIT for m in months])
     x_train, x_test = standardise(x[train], x[~train], start, end)
     weights, _ = fit(x_train, y[train])
@@ -162,6 +164,8 @@ def fit_group(rows: list[dict], technologies: list[str], start: int, end: int, t
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--panel", default="results/delivery-model-panel.csv")
+    parser.add_argument("--outcome", choices=("event", "event_large", "event_withdraw"), default="event",
+                        help="which outcome column to model; declared in docs/plan/object-redefinition.md")
     parser.add_argument("--factor-set", choices=("environment", "bottleneck"), default="environment")
     parser.add_argument("--month-effects", action="store_true",
                         help="absorb the calendar so market wide factors are identified by differential exposure")
@@ -184,10 +188,11 @@ def main(argv: list[str] | None = None) -> int:
         counts[row["technology"]] += 1
     technologies = [t for t, _ in sorted(counts.items(), key=lambda kv: -kv[1])[:8]]
     names, x, y, months = build(rows, technologies, month_effects=args.month_effects,
-                                interaction_group=group)
+                                interaction_group=group, objective=args.outcome)
     controls_end = 3 + len(technologies)
     factor_end = controls_end + len(FACTORS)
-    print(f"features: {len(names)} | month effects: {args.month_effects} | interaction group: {group}")
+    print(f"objective: {args.outcome} | features: {len(names)} | month effects: {args.month_effects} "
+          f"| interaction group: {group}")
 
     train = np.array([m < SPLIT for m in months])
     print(f"rows: {len(rows)}  train: {int(train.sum())}  test: {int((~train).sum())}")
@@ -256,7 +261,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"{label:22s} {len(subset):>7d} too few rows")
             continue
         by_name, _, _, _, _ = fit_group(subset, technologies, controls_end, factor_end, 12, group,
-                                        args.month_effects)
+                                        args.month_effects, objective=args.outcome)
         first = by_name.get(focus[0], {})
         second = by_name.get(focus[1], {})
         print(f"{label:20s} {len(subset):>7d} {first.get('odds_ratio', float('nan')):>12.3f} "
