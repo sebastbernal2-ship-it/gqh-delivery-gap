@@ -865,38 +865,26 @@ on a result.
 ## 2026-10-03: The imagery direction has a probe, and the probe says which feature to chase
 
 **What was built.** A windowed reader for cloud optimised GeoTIFFs with no GeoTIFF library: it parses the
-directory, fetches only the tiles covering a window by HTTP range request, undoes the predictor and returns
-pixels, which is what makes public ten metre imagery usable for a single site.
-**The probe.** Eight labelled sites from the vintage panel, five late and three early, each measured against a
-background patch in the same scene so the scene wide part cancels. Brightness change was noise at a median of
-minus 0.7. **Texture change correlated +0.72 with months of slip**, and the bright fraction behaved similarly
-at +0.58.
-**Why that is not a result.** Eight sites and four features: at that sample a correlation is a reason to run
-the next probe, not a finding, so the direction record now says to pre-register texture and run thirty to
-fifty sites.
-**A process failure in the same hour, recorded because it matters more than the probe.** A commit built by
-adding a path list onto origin main while the checkout sat on another branch carried that branch state with
-it, adding twenty six files that were not part of the change and deleting four files belonging to another
-member. The next commit returns the tree to the last good state plus this change set only. No history was
-rewritten, and both the sweep and its repair stay visible in the log.
+directory, fetches only the tiles covering a window by HTTP range request, undoes the TIFF predictor, and
+returns pixels. That is what makes public ten metre imagery usable for a site at all, since a scene is a
+hundred megabytes and a site is a few hundred pixels of it.
+**The probe.** Eight labelled sites from the vintage panel, each with a promised month, a realised month and
+coordinates: five late, three early. For each date the site patch and a background patch in the same scene are
+measured, and the reported quantity is the site's change minus the background's change, which cancels the
+scene wide part.
+**What it found.** Brightness change was noise, a median of minus 0.7 across the eight. **Texture change
+correlated +0.72 with months of slip**, with late deliveries gaining more structure than early ones, and the
+bright fraction behaved similarly at +0.58.
+**Why that is not a result.** Eight sites, five of one kind and three of the other, and four features tried.
+At that sample a correlation of 0.72 is a reason to run the next probe, not a finding. The honest next step is
+recorded on the direction: pre-register the texture feature, and run thirty to fifty labelled sites before
+anything is claimed about imagery as a measure of delay.
+**Three bugs the tests caught in this build**, none of them subtle in hindsight: a support check assumed a
+sequence where a single value was possible, the texture indicator dropped its last comparison so a two pixel
+row returned nothing, and the date window used thirty day steps, which drifted by a day and was replaced with
+calendar arithmetic.
 
 ---
-
-## 2026-10-03: The edge search process is written down, with its gates and its failures
-
-**Why.** The first searches here measured co-movement between series and treated it as a search for an edge.
-That is a census, not a decision, and no edge can be read from it. `docs/plan/edge-search.md` fixes the method
-before the next search rather than after it: declare the decision and the null first, require every node to
-name a decision it would change, write the transfer before measuring, design for power with a cross section
-over time series, use a null that shares the state being conditioned on, identify or admit you cannot, measure
-magnitude against costs and capacity, check the plateau, then seal, and only then build the strategy.
-**The deviations it records.** Eight of them, each specific: co-movement mistaken for edge, no
-cross-sectional test ever run, signals not de-noised before testing, power never computed in advance, an
-unconditional null that left sector and seasonal moves inside it, nodes entering without a decision attached,
-the strategy built before an edge existed, and identification attempted as one late check instead of a stage.
-**The next test, in order.** De-noised firm level revision surprise, a firm by month panel sorted into
-quintiles within industry, a null that permutes the signal within industry and month, rate control across a
-grid declared in advance, and specificity between the firms the mechanism implicates and those it does not.
 
 ## 2026-10-03: Stage A. The water does not move the fish
 
@@ -940,3 +928,26 @@ a revision of six months or more, or as cancellation, since the median revision 
 and widen the factor set to what is reachable, queue pressure measured better, offtake and contract events from
 the 8-K disclosures, and firm level execution. If neither moves the object, the mechanism is real and its
 drivers are not in public data at this resolution, which is worth knowing before anything is built on top.
+
+---
+
+## 2026-10-03: Drought was the wrong factor, and the reason is that it has no payer
+
+**What happened.** The fish and water framing was read literally, so Stage A tested drought and precipitation
+because they are easy to fetch. They pass no relevance test: nobody identifiable loses money when a state is
+dry in a way that our instruments could capture, and the consequence is diffuse. Availability was treated as a
+reason to choose, which is the exact trap the method document warns about.
+**The gate that now exists.** A factor must name its payer, the price or margin that moves, why it is not
+already priced, the instrument that would express it, and whether a small book can matter. Drought is dropped,
+and fuel and rates are demoted to controls.
+**The shortlist that passes.** Interconnection queue position, equipment lead times, compute rental scarcity,
+contract events between these firms from the 8-K disclosures, hyperscaler capex commitments, and perpetual
+funding cascades. Four of the six are reachable today. Queue position, which is the real gate on whether a site
+gets power, is not: the national lab site refuses, the operator tables are scripted, and the DOE catalog has no
+usable file from this host.
+**What survives from Stage A.** The machinery, not the answer: the project month panel, the lagged factor
+construction, the missingness flags, the Newton fitted hazard, the time split, the placebo and the specificity
+test. Swapping the factor set is an afternoon, and the negative result stands as a record that an irrelevant
+question was answered properly rather than a wrong conclusion about the mechanism.
+**The honest order now.** Write the payer first for whichever factor we take, then measure, then look for the
+market consequence. Not the reverse.

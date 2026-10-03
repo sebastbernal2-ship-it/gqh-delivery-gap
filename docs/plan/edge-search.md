@@ -100,6 +100,36 @@ One holdout, opened once, by a named person, reported as it is. Nothing about th
 Expression, sizing, hedges, portfolio construction and risk limits. The strategy is the last stage, because
 it is the cheapest one once an edge exists, and the most misleading one when it does not.
 
+
+## Stage 0b: the relevance gate, applied to factors
+
+A factor earns study only if all five hold. Availability is not one of them, and reachable data is not a reason
+to choose a factor. This gate exists because the first Stage A build used drought and precipitation, which are
+easy to fetch and have no payer.
+
+1. **Payer**: name the party that loses or gains money when this factor moves, in one sentence.
+2. **Consequence**: name the price, spread, rent or margin that changes.
+3. **Reason it is not already priced**: unstructured, slow, fragmented, or requiring a join nobody does.
+4. **Instrument**: the thing we could hold that would express it.
+5. **Capacity shape**: whether a small book can matter, or whether the instrument is too deep for us to be
+   anything but noise.
+
+A factor that fails any of the five is dropped, and the drop is recorded, so the search cannot quietly fill with
+factors that merely have an API.
+
+### Where our own list falls
+
+| Factor | Payer | Consequence | Why not priced | Instrument | Verdict |
+|---|---|---|---|---|---|
+| Interconnection queue position | whoever needs power at a site, and cannot substitute | who energizes and when, and local scarcity | requires joining queue, project and site data | equities, offtake, the capacity itself | **keep, blocked on data** |
+| Equipment lead times, transformers and turbines | developers who need equipment on schedule | supplier pricing power and project slips | fragmented across private suppliers and trade sources | listed suppliers, the delays themselves | **keep** |
+| Compute rental scarcity | whoever rents compute when capacity is tight | rental price and its volatility | fragmented venue, obscure archive | compute owners and their suppliers | **keep, we hold the archive** |
+| Contract events between these firms, from 8-Ks | the party that just locked in an obligation | who owes what, and who bears the slip | requires linking counterparties across filings, which nobody does at scale | equities and credit | **keep, data loaded** |
+| Hyperscaler capex commitments | suppliers waiting on orders | order flow and lead times | buried in notes, not headlines | suppliers | **keep** |
+| Perpetual funding and cascades | leveraged longs who must be closed | forced flow and short horizon volatility | requires microstructure inference, not reporting | the venue itself | **keep, tape running** |
+| Drought and precipitation | nobody identifiable | diffuse | not applicable | not applicable | **dropped** |
+| Fuel and rates | too many, too diffuse | already priced everywhere | not applicable | not applicable | **dropped as factors, kept as controls** |
+
 ---
 
 # Where this process went wrong in this repo
@@ -122,6 +152,8 @@ Recorded so the next session does not repeat it.
 7. **The strategy was built before an edge was found.** The capacity pair was a test of the machinery and was
    described as if it were a test of a hypothesis.
 8. **Identification was attempted as one specificity check, late.** It should be a stage, not a patch.
+9. **A factor was chosen because it was fetchable.** Stage A used drought and precipitation, which have no
+   payer and no market consequence. The relevance gate above exists because of it.
 
 ---
 
