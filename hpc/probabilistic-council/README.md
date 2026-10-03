@@ -21,6 +21,11 @@ entropy, and between-model disagreement. To run it locally:
 python3 modular_pilot.py --seed 20261003 --rows 12000
 ```
 
+A dependency-free C++17 council implementation now lives in [`cpp/`](cpp/README.md), with the same
+forecast contract, separate chronological calibration/gating/pool-calibration partitions, both
+opinion pools, and bounded parallel specialist inference. Its synthetic Slurm build/run entry point
+is `run-cpp.slurm`.
+
 On HiPerGator, submit `run-modular.slurm` from the writable approach copy.
 
 `qcbm_pilot.py` is a bounded quantum research fixture. It trains a three-qubit parameterized
