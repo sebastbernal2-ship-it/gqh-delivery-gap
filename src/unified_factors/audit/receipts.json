@@ -1,0 +1,43 @@
+{
+  "database": "VECTOR_RESEARCH",
+  "audit_date": "2026-10-03",
+  "scope": "read-only aggregates; no raw market or filing payloads",
+  "runs": [
+    {
+      "query": "inventory.sql",
+      "workflow_run_id": 37152146254,
+      "result_sha256": "7abceba2572ab4c4ff60f4f96fff7da1b6f53bc5414dde138ff8017e3d23bc49",
+      "query_sha256": "8fb824c933dc94dabd67fe72f6613db156bce35a91863a5f4637e0eae2ca8624"
+    },
+    {
+      "query": "batches.sql",
+      "workflow_run_id": 37152316556,
+      "result_sha256": "65594b0837f467bf0a0f875d8fc2dd7ef6a379815223dbbbdb97dc57f08e0525",
+      "query_sha256": "7cfcea85b9eb0ff4b3a8e57b2a60eb51d36966030de0c60fba1575ab9307b8ba"
+    },
+    {
+      "query": "detail.sql",
+      "workflow_run_id": 37152237221,
+      "result_sha256": "5c6a4f55a54ef727ebd98dd778b581b3362ccfd346e74a0ef0e72df4fe85a888",
+      "query_sha256": "11de475803dee1c3a4641f0b770cde8c5f1077b4a92266c02a3a97e1dd5b2d3a"
+    },
+    {
+      "query": "acquisition.sql",
+      "workflow_run_id": 37152359527,
+      "result_sha256": "55511be1a14c845f31a0e617e71110d39e3e4808259858e5fb4108fb3609088b",
+      "query_sha256": "41f3ceb21434b22f5381df2122c4168f43ab25db6710efbaeca2f80f1098c02f"
+    },
+    {
+      "query": "market.sql",
+      "workflow_run_id": 37152420883,
+      "result_sha256": "a767ab70627c3c152e9026f71edf725e2800a61c7f381feb6e2ab573d6bc3ea7",
+      "query_sha256": "c0f7e6108d4f7b8a821af51a741c7be3f4d0dd3c4ed63f6bc59b94e317c40b38"
+    },
+    {
+      "query": "coverage.sql",
+      "workflow_run_id": 37152549832,
+      "result_sha256": "fe146d6da933188d9b2a02819df4402243236cfcc861f1626339f738fc7e3d98",
+      "query_sha256": "9afdc461ac91c32c45956c7013a8279fceebab4bcb3a811a8916eeb4dee2632c"
+    }
+  ]
+}
