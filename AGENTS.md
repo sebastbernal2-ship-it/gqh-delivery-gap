@@ -77,6 +77,4 @@ When ending a session, capture a brief summary:
 ```bash
 hippo capture --stdin <<< '<decisions, errors, lessons — 2-5 bullets>'
 ```
-
-For full integration, copy the hippo-memory Pi extension to `~/.pi/agent/extensions/hippo-memory/`.
 <!-- hippo:end -->
