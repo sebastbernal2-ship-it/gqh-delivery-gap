@@ -9,6 +9,7 @@ dependencies = [
   "scipy",
   "pyarrow",
   "matplotlib",
+  "openpyxl",
 ]
 
 [tool.setuptools]

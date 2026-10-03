@@ -47,6 +47,8 @@ memory:
 test:
 	@python3 tests/test_memory_filter.py
 	@python3 tests/test_memory_absorb.py
+	@python3 tests/test_delivery_metrics.py
+	@python3 tests/test_delivery_cohort.py
 
 # Public repo gate. Run before a push.
 secrets:
@@ -55,7 +57,7 @@ secrets:
 # Regenerate every number the note quotes.
 all:
 	@test -f src/pipeline.py || (echo "src/pipeline.py does not exist yet. See docs/02-system.md." && exit 1)
-	python -m src.pipeline
+	.venv/bin/python src/pipeline.py
 
 # Cheap gate before a commit that touches results.
 check: secrets

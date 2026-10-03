@@ -11,6 +11,8 @@ REQUIRED = [
     "in_sample", "out_of_sample", "costs_bps", "variants_tried",
     "metrics", "controls", "falsifiers_triggered", "notes",
 ]
+STATE_REQUIRED = ["kind", "engine", "generated_at", "git_commit", "measure",
+                  "coverage", "observations", "notes"]
 SHA = re.compile(r"^[0-9a-f]{40}$")
 
 
@@ -24,6 +26,16 @@ def check(path: Path) -> list[str]:
         return [f"{path.name}: top level must be an object"]
 
     name = path.name
+    if data.get("kind") == "state":
+        for key in STATE_REQUIRED:
+            if key not in data:
+                errors.append(f"{name}: state file is missing key '{key}'")
+        if not SHA.match(str(data.get("git_commit", ""))):
+            errors.append(f"{name}: git_commit must be a 40 character sha")
+        if not isinstance(data.get("observations"), list):
+            errors.append(f"{name}: observations must be a list")
+        return errors
+
     for key in REQUIRED:
         if key not in data:
             errors.append(f"{name}: missing key '{key}'")
