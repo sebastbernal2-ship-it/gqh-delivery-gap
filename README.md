@@ -140,3 +140,7 @@ them. One command opens it, once, and reports whatever it says:
 python scripts/run_capacity_strategy.py --open-sealed
 ```
 
+## Where to read next
+
+If you are picking this up cold, read `docs/plan/continuity.md` first. It says where everything is,
+what is settled, what is open, and how to work in this checkout without repeating known mistakes.
