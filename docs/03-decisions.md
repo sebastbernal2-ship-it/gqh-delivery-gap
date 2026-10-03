@@ -73,3 +73,37 @@ outside the repo.
 **Evidence.** An untagged memory written at 04:32 travelled into commit `1f68040` through a plain
 `git commit` with no memory command run by hand. The hook exits 0 when hippo is absent or when
 there is nothing to share, so it can never block a teammate.
+
+---
+
+## 2026-10-03: The delivery-gap state variable is a windowed, fixed-lag measurement
+
+**Decision.** For each cohort (a monthly EIA-860M vintage), measure only units whose promised
+arrival falls inside `[cohort, cohort + 12 months]`, and compare against the earliest vintage at
+least `horizon + 6 months` later. Report W1, W2, median and p90 delay in months, MW weighted, plus
+the cancellation mass per balancing authority.
+**Context.** Two bugs were found by sanity checks and fixed. First, including far-future projects
+understated the delay and inflated the cancellation share to 32 percent. Second, measuring every
+cohort against one latest vintage mixed a measured delay with right-censored observations and made
+cohorts incomparable. With the window and a fixed 6 month lag, three comparable cohorts give W1 of
+3.11, 2.70 and 2.74 months, with a median of 1 to 2 months and a cancellation share of 2.4 to 4.4
+percent. A technology sanity check now passes: with the window applied, natural gas combined cycle
+shows no cancellations, which is what the mechanism predicts and what the un-windowed version got
+wrong at 52 percent.
+**Alternatives.** Using every planned unit regardless of date was rejected. Measuring all cohorts
+against a single realization vintage was rejected as not comparable.
+**Availability note.** EIA's September 2026 vintage returns HTTP 503, so August 2026 is the latest
+usable realization vintage, and the most recent measurable cohort is therefore 2025-01 at a 6 month
+lag.
+
+---
+
+## 2026-10-03: `results/` carries two kinds of file
+
+**Decision.** Add `kind` to the results contract. `kind: "state"` files are inputs such as
+`e0_state.json` and are checked for `engine`, `generated_at`, `git_commit`, `measure`, `coverage`,
+`observations`, `notes`. Strategy files keep the existing full envelope.
+**Context.** The state variable is an input to the strategy and cannot report a Sharpe ratio. Without
+a second kind, `make check` would either reject it or stop checking anything.
+**Alternatives.** Putting the state variable under `data/` was rejected because `data/` is
+gitignored and the note must quote a committed number.

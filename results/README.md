@@ -8,11 +8,21 @@ The assembler will refuse to quote a number that is not here, and `make check` v
 
 | File | Writer | Engine |
 |---|---|---|
+| `e0_state.json` | W0 | The delivery-gap state variable (kind `state`) |
 | `e1.json` | W1 | Event vol on rule-dated disclosure |
 | `e2.json` | W2 | Coupling residual |
 | `e3.json` | W3 | Carry, liquidation provision, execution |
 | `e4.json` | W4 | Quantum and compute scaling |
 | `costs.json` | W3 | The cost model every engine charges |
+
+## Two kinds of file
+
+`kind` decides which checks apply.
+
+- `kind: "strategy"` (the default, used by e1 to e4) needs the full envelope below.
+- `kind: "state"` is an input, not a trading result. It needs `engine`, `generated_at`,
+  `git_commit`, `measure`, `coverage`, `observations`, `notes`. A state file never reports a
+  Sharpe ratio, because it is not a strategy.
 
 ## Envelope, frozen
 
