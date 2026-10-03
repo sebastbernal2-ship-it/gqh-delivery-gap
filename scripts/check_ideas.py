@@ -28,6 +28,8 @@ GRAPH = ROOT / "docs" / "ideas" / "graph.jsonl"
 NODES = ROOT / "docs" / "scan" / "nodes.jsonl"
 
 FAMILIES = ("math", "method", "theory", "system", "measure")
+DIRECTION_STATUSES = ("declared", "data-blocked", "collecting", "running", "built", "falsified")
+DIRECTION_FIELDS = ("name", "statement", "rationale", "capacity", "falsifier", "status", "next")
 STATUSES = ("attached", "plausible", "unattached")
 SYMMETRIC = ("combines_with", "analogous_to")
 DIRECTED = ("specializes", "generalizes", "requires", "supplies_method_for", "inspired_by")
@@ -78,6 +80,25 @@ def problems(rows: list[dict], node_ids: set[str] | None = None) -> list[str]:
         if idea.get("status") == "attached" and idea.get("attaches_to") and not idea.get("statement"):
             found.append(f"{idea_id}: claims attachment without a statement")
 
+    # Directions are the programs: an idea is a tool, a direction has a rationale, a falsifier and a data
+    # requirement. They must reference ideas that exist and nodes that exist, so nothing floats free.
+    for row in rows:
+        if row.get("kind") != "direction":
+            continue
+        direction = row.get("id", "")
+        for field in DIRECTION_FIELDS:
+            if not row.get(field):
+                found.append(f"direction {direction}: missing {field}")
+        if row.get("status") not in DIRECTION_STATUSES:
+            found.append(f"direction {direction}: status '{row.get('status')}' is not one of "
+                         f"{DIRECTION_STATUSES}")
+        for idea_id in row.get("uses", []):
+            if idea_id not in ideas:
+                found.append(f"direction {direction}: uses '{idea_id}', which is not a declared idea")
+        for node_id in row.get("measures", []):
+            if node_id not in node_ids:
+                found.append(f"direction {direction}: measures '{node_id}', which is not a declared node")
+
     seen_links: set[tuple] = set()
     for row in rows:
         if row.get("kind") != "link":
@@ -105,6 +126,8 @@ def problems(rows: list[dict], node_ids: set[str] | None = None) -> list[str]:
 def orphans(rows: list[dict]) -> list[str]:
     linked = set()
     for row in rows:
+        if row.get("kind") == "direction":
+            linked.update(row.get("uses", []))
         if row.get("kind") == "link":
             linked.add(row.get("from"))
             linked.add(row.get("to"))
@@ -114,6 +137,7 @@ def orphans(rows: list[dict]) -> list[str]:
 def summarise(rows: list[dict]) -> str:
     ideas = [row for row in rows if row.get("kind") == "idea"]
     links = [row for row in rows if row.get("kind") == "link"]
+    directions = [row for row in rows if row.get("kind") == "direction"]
     attached = [i for i in ideas if i.get("attaches_to")]
     lines = [f"ideas: {len(ideas)}   links: {len(links)}",
              f"ideas that name something in the study: {len(attached)}",
@@ -125,6 +149,9 @@ def summarise(rows: list[dict]) -> str:
     lines.append("families: " + ", ".join(f"{k} {v}" for k, v in sorted(by_family.items())))
     stray = orphans(rows)
     lines.append(f"ideas with no link yet: {len(stray)}" + (f" ({', '.join(stray[:6])})" if stray else ""))
+    lines.append(f"directions: {len(directions)}")
+    for direction in directions:
+        lines.append(f"  {direction.get('status', '?'):13s} {direction.get('id', '?')}")
     return "\n".join(lines)
 
 

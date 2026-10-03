@@ -6,6 +6,75 @@ honest label on whether each one touches anything we measure. The graph is
 
 **61 ideas, 62 links.** 51 name something in the study. 9 are kept without an attachment, each with a stated reason, because a graph of only useful things is not a graph of ideas.
 
+## Directions: where an edge could actually live
+
+An idea is a tool. A direction is a program, so each one carries who pays, why it persists, what it would run on, and what would kill it.
+
+### Cascades as threshold processes
+
+Model forced liquidation as many accounts accumulating loss until a margin threshold fires, and test the clustering and avalanche structure that follows.
+
+- **status**: declared
+- **rationale**: The flow is price insensitive by rule rather than by opinion, and the venue publishes the book. Speed is needed to be present, and the edge is the conditional distribution of what happens after the threshold, which is a modelling problem rather than a speed problem.
+- **needs**: a high frequency forward tape of book, funding and open interest, collectable now through the public API; the historical book archive, which needs the correct path or credentials
+- **capacity**: bounded by book depth, so a small book can matter and a large one cannot scale into it
+- **falsifier**: after costs, post trigger reversion is absent once the trigger is conditioned on, or cascade paths are fully anticipated
+- **next**: start forward collection and pre-register the trigger rule
+- **uses**: `lif-model`, `hawkes`, `point-processes`, `jump-diffusion`, `extreme-value-theory`
+- **measures**: `perp:funding-rate`
+
+### Distributional mispricing as a transport distance
+
+Measure the distance between our conditional distribution and the market implied one, and treat that distance as the mispricing signal.
+
+- **status**: data-blocked
+- **rationale**: A price is a point, an option surface is a distribution, and the difference between our distribution and the market's is measurable with monotone transport rather than with a point forecast. This is where the transport and fast calibration work attaches.
+- **needs**: historical option chains, which need an entitlement we do not hold
+- **capacity**: option liquidity concentrates in large names, so capacity would be large and the edge would need to be correspondingly strong
+- **falsifier**: transport distance between model and market has no relation to subsequent outcomes once the market's own dynamics are controlled for
+- **next**: decide on an entitlement; nothing else here can start
+- **uses**: `optimal-transport`, `knothe-rosenblatt`, `martingale-optimal-transport`, `stochastic-local-vol`, `pomdp`, `hjb`
+- **measures**: `options:implied-move`, `compute:rental`
+
+### Physical construction progress from satellite imagery
+
+Measure whether a project is actually being built from imagery, which is an independent read on delivery that depends on nobody's disclosure.
+
+- **status**: declared
+- **rationale**: The attribution ceiling is 6.2 percent because exposure lives in documents nobody publishes. A physical measure sidesteps the disclosure question entirely: a site either has foundations, steel and switchgear or it does not.
+- **needs**: public satellite imagery, Sentinel and Landsat, free and global; a labelled sample of known delivery outcomes to calibrate the vision model
+- **capacity**: site specific and labour heavy, so a small book is a natural fit and a large one cannot be built from it
+- **falsifier**: imagery derived progress adds nothing over the published schedule, or it cannot be scored reliably against known outcomes
+- **next**: pick twenty sites with known outcomes and see whether the measure separates them
+- **uses**: `vlm`, `contrastive-learning`, `tda`, `neural-operator`
+- **measures**: `power:planned-capacity-revision`, `power:realized-delivery`
+
+### Promise survival as a hazard rate
+
+Replace the modal twelve month slip with a survival curve: how long a published promise lives before it is revised, by technology, region and vintage.
+
+- **status**: declared
+- **rationale**: A hazard rate is a strictly better object than a mean, and it is measurable on data we already hold. It also states the mechanism in the form a model can consume.
+- **needs**: the existing monthly vintages, already downloaded
+- **capacity**: not a trade by itself: it sharpens the mechanism section and the state variable
+- **falsifier**: survival times are memoryless within technology and region, so there is no schedule structure worth modelling
+- **next**: build the per generator promise series across vintages and estimate the hazard
+- **uses**: `persistence-theory`, `point-processes`, `extreme-value-theory`, `active-learning`
+- **measures**: `power:planned-capacity-revision`, `power:cancellation`
+
+### Protocol formalisation with checked invariants
+
+Write the execution and risk protocol as a specification whose invariants are checked, covering exposure limits and holdout discipline.
+
+- **status**: declared
+- **rationale**: The invariants that matter are not about alpha. They are that the exposure bound is never exceeded, the holdout is never touched before the sealed test, and a signal is never acted on twice. Those are the failures that would invalidate the whole record.
+- **needs**: the engine interface, which is being built separately
+- **capacity**: not a trade: it protects every other direction from a silent violation
+- **falsifier**: a specification that never catches a real violation is overhead, so it must be tested by injecting one
+- **next**: specify the holdout guard and prove it rejects a seeded violation
+- **uses**: `tla-plus`, `decision-theory`, `dec-pomdp`
+- **measures**: `obligation:remaining-performance`, `treasury:ten-year`
+
 ## Mathematics
 
 ### Affine Kac-Moody algebras

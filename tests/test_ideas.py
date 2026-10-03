@@ -79,13 +79,39 @@ check("a symmetric link is shown from both sides",
       view.count("combines with"), 2)
 check("the view counts what is kept without an attachment", "kept without an attachment" in view, True)
 
+def direction(direction_id: str, **extra) -> dict:
+    base = {"kind": "direction", "id": direction_id, "name": "D", "statement": "s", "rationale": "r",
+            "capacity": "c", "falsifier": "f", "status": "declared", "next": "n",
+            "uses": ["optimal-transport"], "measures": ["real:node:here"], "needs": ["x"]}
+    base.update(extra)
+    return base
+
+
+nodes = {"real:node:here"}
+check("a well formed direction passes", problems(GOOD + [direction("a-direction")], nodes), [])
+check("a direction missing its falsifier is caught",
+      any("missing falsifier" in p for p in problems(GOOD + [direction("a-direction", falsifier="")], nodes)),
+      True)
+check("a direction with an unknown status is caught",
+      any("is not one of" in p
+          for p in problems(GOOD + [direction("a-direction", status="vibes")], nodes)), True)
+check("a direction using an undeclared idea is caught",
+      any("not a declared idea" in p
+          for p in problems(GOOD + [direction("a-direction", uses=["ghost-idea"])], nodes)), True)
+check("a direction measuring an undeclared node is caught",
+      any("not a declared node" in p
+          for p in problems(GOOD + [direction("a-direction", measures=["ghost:node:here"])], nodes)), True)
+check("a direction counts as a link for orphan purposes",
+      orphans(GOOD + [direction("a-direction")]), [])
+
 real = load()
 check("the real graph loads", len(real) > 50, True)
 check("the real graph is clean", problems(real), [])
+check("the real graph declares directions", len([r for r in real if r.get("kind") == "direction"]) >= 5, True)
 check("the real view matches the real graph", render(real), (ROOT / "docs" / "ideas" / "README.md").read_text())
 
 if failures:
     print("\n".join(f"  FAIL {f}" for f in failures))
-    print(f"\n{21 - len(failures)}/21 passed")
+    print(f"\n{27 - len(failures)}/27 passed")
     raise SystemExit(1)
-print("\n21/21 passed")
+print("\n27/27 passed")
