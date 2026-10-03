@@ -40,6 +40,30 @@ documents; EIA vintages and hourly grid files; weather and drought; daily bars; 
 exchange published volatility history back to 1990; Sentinel-2 imagery through our own reader; the free mirrors
 of the perpetual archive; and the venue's forward API through the running collector.
 
+## Credentials live in GitHub, so Actions is the only thing that can use them
+
+The repository holds nine Actions secrets, all written tonight: the Massive key and its licence gate, five
+Snowflake values, and the TigerData url and password. They are **write only**: GitHub lets you set and list a
+secret, never read one. So the correct way to use them is a workflow, and until tonight no workflow existed, which
+made every credential inert.
+
+`.github/workflows/ingest.yml` now dispatches the shared loader by source id, with an optional date window, ticker
+list, target store and dry run flag. It installs the loader's declared dependencies, lists the sources, and runs
+one. Secrets arrive as environment variables and Actions masks them in the log.
+
+Both were proved by running them:
+
+| Run | Result |
+|---|---|
+| dry run, four tickers | `validated massive_8k: rows=34 ... no database writes` |
+| real run, the whole buildout chain | **`massive_8k` grew from 201 rows to 2,530**, a second batch, loaded at 20:05 |
+
+So the contract forced class is no longer blocked by coverage. The ticker set can be any listed name, which is
+what the class needed all along.
+
+**The lesson about access.** A key in a secret store with nothing calling it is not access. The workflow is the
+access.
+
 ## Credentials, verified 2026-10-03
 
 The Citadel component directory holds one environment file, mode 600, with two names: `FMP_API_KEY` and

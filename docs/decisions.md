@@ -1032,3 +1032,16 @@ an egress bill to reach data published for free is exactly the availability driv
 
 **Consequence**: the forced flow candidate can be tested on history with a plain download today, and kdb+/q or
 Snowflake can read parquet without an AWS identity anywhere in the path.
+
+## 2026-10-03: The credentials are GitHub secrets, so the loader runs in a workflow
+
+**Decision**: use the repository's Actions secrets rather than asking for files. GitHub secrets are write only, so
+nothing in this workspace can read them; the only thing that can use them is a workflow. `.github/workflows/ingest.yml`
+dispatches the shared loader with its declared dependencies and the nine secrets as environment variables.
+
+**Proof**: a dry run validated a four ticker 8-K batch with no writes, and a real run over the whole buildout chain
+landed a second batch, taking `massive_8k` from 201 rows to 2,530 in the shared store. The coverage limit on the
+contract forced class is gone.
+
+**Consequence**: any source can now be loaded by adding a source to the loader and dispatching it. The remaining
+work is code, not credentials.
