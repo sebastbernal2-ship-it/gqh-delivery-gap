@@ -988,3 +988,17 @@ cross-family against 1.1.
 percent net, is a subset of 33 months that was already visible in development. It needs a fresh holdout this
 project cannot grant, so it stays a hypothesis with no evidence. Both holdouts are spent and closed permanently,
 and the record is `docs/plan/sealed-test-record.md`.
+
+## 2026-10-03: The compute relative value candidate closes on the instrument, from the issuers' own filings
+
+**Decision**: decide the compute candidate's instrument gate from reported segment revenue rather than from
+assumption. Sixteen declared issuers, latest annual report each, revenue facts read together with their
+dimensional members out of the XBRL instance documents.
+
+**Result**: no issuer isolates a compute rental family. Where a rental line exists it is a blend, and most issuers
+report a single operating segment or break down by geography and product rather than by what they rent. The whole
+business hosts are exposed to total compute demand, not to the dispersion between families.
+
+**Consequence**: gate four fails on evidence, so the candidate closes. The dispersion finding stands as a truth
+about the market and has no equity instrument. It reopens only if the rental market itself becomes holdable,
+which needs an executed rental series or a physical counterparty.

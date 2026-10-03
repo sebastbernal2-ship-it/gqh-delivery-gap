@@ -136,6 +136,25 @@ declared in `docs/plan/object-redefinition.md`.
 data, not market aggregates. Also, an exit is more predictable than a revision, so the exit is the better object
 if a model of this family is ever rebuilt.
 
+## T15. Compute family dispersion has no listed instrument
+
+**Statement**: the ten independent compute rental families that were measured have no listed issuer whose reported
+revenue isolates one family. Every candidate issuer reports by business line, geography or product type, or
+reports a single operating segment. Where a compute rental line is disclosed, it is a blend across families.
+**Evidence**: `results/compute-issuer-segments.csv`, from the latest annual report of each of sixteen declared
+issuers, parsed from their own XBRL instance documents (`scripts/probe_compute_issuers.py`).
+**Scope**: listed issuers in the rental, hosting, server, data centre and electrical supply chain, annual reports
+filed to early 2026.
+**Consequence**: relative value across compute families is real and has no instrument through equity. The closest
+listed vehicles are whole business hosts, where the exposure is total compute demand rather than the dispersion
+between families. The candidate therefore closes on evidence unless the rental market itself can be held.
+**Named vehicles, for the record**: CoreWeave, whole business, 1.9bn revenue. Hut 8, roughly half its 162m from
+high performance computing and colocation. Core Scientific, a disclosed rental line near five percent. IREN,
+ninety eight percent mining and two percent compute. Digital Realty, ninety nine percent rental, but that is real
+estate across many tenants. Server and infrastructure suppliers are diversified, Dell at 114bn, HPE at 30bn, with
+HPE's server segment at 53 percent and one rental like line at 18 percent.
+
+
 ---
 
 # What these truths are pointing at
