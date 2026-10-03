@@ -10,9 +10,9 @@ hpc/<approach>/          job scripts, environment spec, and a README saying what
 hpc/<approach>/README.md what it runs, what it needs, what it produced
 ```
 
-The first probabilistic-council pilot is in [`probabilistic-council/`](probabilistic-council/README.md).
-It is CPU-only and synthetic; it validates the distribution and job interfaces, not the trading
-idea or any model's predictive value.
+The probabilistic-council experiments are in [`probabilistic-council/`](probabilistic-council/README.md).
+They are CPU-only and synthetic; they validate distribution and job interfaces, not a trading idea
+or any model's predictive value.
 
 ## Rules
 

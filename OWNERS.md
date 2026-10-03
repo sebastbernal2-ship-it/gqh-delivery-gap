@@ -28,6 +28,7 @@ One table. A path appears once, with one person.
 | `docs/inbox/vishnu-2026-10-03/`, `docs/thinking/vishnu-2026-10-03.md`, `docs/writing/style.md`, `.cursor/rules/gqh-context.mdc` | vshnu1 | Equity-first research handoff, provider audit, data plan, writing conventions |
 | `docs/inbox/aidan-2026-10-03/`, `docs/thinking/aidan-2026-10-03.md` | aidanq06 | Strategy specification, reasoning, implementation contracts, advanced-method research |
 | `hpc/README.md`, `hpc/setup/` | lucyrunner | HiPerGator routing, account access and environment setup |
+| `hpc/probabilistic-council/` | lucyrunner | Synthetic calibrated council and bounded classical/quantum distribution benchmarks |
 | `src/edgar/`, `src/eia/`, `src/event/`, `src/join/`, `docs/entity-crosswalk.csv`, `scripts/build_filings_register.py`, `scripts/build_delivery_panel.py`, `scripts/run_revision_event_study.py`, `scripts/build_exposure_panel.py`, `scripts/build_rpo_universe.py`, `scripts/build_rpo_events.py`, `scripts/run_group_event_study.py`, `scripts/build_obligation_panel.py`, `tests/test_edgar.py`, `tests/test_xbrl.py`, `tests/test_eia.py`, `tests/test_event.py`, `tests/test_universe.py`, `results/` | sebastbernal2-ship-it | SEC filings as timestamped observations: the register that closes the missing first-public timestamp |
 
 ## Unclaimed

@@ -49,3 +49,22 @@ This pilot validates code paths and a basic artifact shape only. It does not tra
 validate RLCD reproduction, use market observations, establish calibration on real data, define a
 financial target/horizon, establish quantum advantage, or qualify for a trading decision. Future
 components need their own owner and versioned contract before they are added.
+
+## Quantum distribution experiment (`qcbm_pilot.py`)
+
+The input is a seeded synthetic joint categorical distribution over three binary variables. The
+target generator, training sample count, optimization budget, and tail event are explicit in the
+script. A QCBM adapter returns all eight probabilities in lexicographic bit-state order `000` to
+`111`; the vector must be finite, nonnegative, and sum to one. Classical comparators use the same
+training samples. Model distributions are scored against the exactly known synthetic target; no
+held-out sample is used for fitting or model selection. The script also draws an independent
+synthetic test sample for finite-sample estimates of log loss, multiclass Brier score, and tail-mass
+error; this fixture split is not the competition's sealed OOS period.
+
+The report includes oracle KL(target || model), total variation, and tail error, alongside test-sample
+log loss, multiclass Brier score, and tail error; it also includes parameter count, simulator
+evaluations, and wall time. The quantum-inspired model
+is a parameterized circuit evaluated by an exact statevector simulator, but all computation
+is classical and noiseless. The bounded experiment has no QPU execution, finite-shot uncertainty,
+error mitigation, broad architecture search, or finance interpretation. It is a software path and
+measurement contract for a later simulator/QPU adapter, not evidence for using QCBM in the council.
