@@ -12,7 +12,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
-from check_paths import references, strip_foreign_fences  # noqa: E402
+from check_paths import missing, references, strip_foreign_fences  # noqa: E402
 
 
 def main() -> int:
@@ -53,7 +53,15 @@ def main() -> int:
           references(strip_foreign_fences("```sh\npython scripts/nope.py\n```")),
           ["scripts/nope.py"])
 
-    print(f"\n{8 - len(failures)}/8 passed")
+    tracked = ["results/README.md", "scripts/consumer.py"]
+    contract = "generated-path: results/example.csv"
+    check("declared output can be absent before generation",
+          missing(tracked, {"results/README.md": contract, "scripts/consumer.py": "results/example.csv"}), [])
+    check("undeclared output typos still fail",
+          len(missing(tracked, {"results/README.md": contract, "scripts/consumer.py": "results/exmaple.csv"})), 1)
+    check("output declarations cannot hide missing source files",
+          len(missing(tracked, {"results/README.md": "generated-path: scripts/missing.py"})), 1)
+    print(f"\n{11 - len(failures)}/11 passed")
     return 1 if failures else 0
 
 

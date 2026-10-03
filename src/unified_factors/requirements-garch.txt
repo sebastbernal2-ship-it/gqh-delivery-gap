@@ -1,0 +1,5 @@
+# Optional component dependencies; use an isolated environment.
+arch==7.2.0
+numpy>=1.26,<3
+# arch 7.2 uses the pre-pandas-3 deprecate_kwarg signature.
+pandas>=2.2,<3
