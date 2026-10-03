@@ -16,7 +16,7 @@ including a null. Nothing else in the study may be changed afterwards.
 | History | 2015-07 to 2024-09 |
 | Development, already used | 2015-07 to 2022-09 |
 | Holdout, unopened | 2022-10 to 2024-09 |
-| Opens with | `python scripts/run_capacity_strategy.py --open-sealed` |
+| Opens with | `python scripts/run_capacity_strategy.py --open-sealed` (the strategy), or `python scripts/run_association_scan.py --window mechanism-and-strategy --open-sealed` (the scan) |
 | What it reports | monthly returns of the market neutral pair under both cost assumptions, the equity curve, drawdown, turnover and the hit rate |
 
 ## Study two: the compute era
@@ -26,7 +26,7 @@ including a null. Nothing else in the study may be changed afterwards.
 | History | 2022-06 to 2024-09 |
 | Development, already used | 2022-06 to 2024-03 |
 | Holdout, unopened | 2024-04 to 2024-09 |
-| Opens with | `python scripts/run_capacity_strategy.py --open-sealed` for the strategy window, and the scan's `--window compute-era --open-sealed` when that flag is added |
+| Opens with | `python scripts/run_capacity_strategy.py --open-sealed`, and `python scripts/run_association_scan.py --window compute-era --open-sealed` for the scan |
 | What it reports | the same measurements, inside the compute era window |
 
 ## What opening cannot do
