@@ -76,6 +76,13 @@ by code and not by good intentions.
 If an entry you wanted to share gets dropped, do not loosen the filter. Write the fact into `docs/`,
 at its owner, where a person can review it in a diff.
 
+### Why not `hippo import --file`
+
+Because it does not do what the name suggests. Import parses the JSON as plain text and writes one
+memory per line, so the store fills with fragments such as a bare `"id": ...` string. Absorb
+therefore compares normalized content against the local export and calls `hippo remember` once per
+missing entry. It is idempotent. `tests/test_memory_absorb.py` covers the diff logic.
+
 ### One time seed
 
 `bash scripts/memory-seed-shared.sh` rebuilds the shared files from every memory in the project
