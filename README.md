@@ -43,6 +43,18 @@ Full statement in `docs/01-idea.md`. Execution plan in `docs/02-system.md`.
 
 ## How we work
 
+Memory capture is mechanical. You do not have to remember a command.
+
+- An agent session in this repo runs `hippo context --auto` at the start and captures a summary
+  at the end. The instructions are committed in `AGENTS.md`.
+- `.githooks/pre-commit` refreshes the shared memory on every commit and stages it, so your
+  commits carry what you learned. `make bootstrap` enables it once per clone.
+- If the memory store lives inside the repo, everything in it is project scope, so nothing needs
+  a tag. Redaction and the credential scan still apply.
+- `make schedule` adds an unattended share every 15 minutes if you want the belt and braces.
+
+The rest:
+
 1. `make sync` before you start. It pulls the team's work and loads their shared memory.
 2. Work only in the paths your workstream owns. See `OWNERS.md`. One writer per path.
 3. Commit small and push often. One logical change per commit.

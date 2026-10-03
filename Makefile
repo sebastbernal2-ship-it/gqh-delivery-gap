@@ -1,4 +1,4 @@
-.PHONY: sync save bootstrap remember share absorb memory test secrets all check status
+.PHONY: sync save bootstrap remember share absorb autoshare schedule unschedule memory test secrets all check status
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -28,6 +28,17 @@ share:
 # Load the team's shared memory into this device's local store.
 absorb:
 	@bash scripts/memory-absorb.sh
+
+# Unattended: share, commit only the memory files, push. Safe on a timer.
+autoshare:
+	@bash scripts/autoshare.sh
+
+# Opt in: run autoshare every 15 minutes on this machine.
+schedule:
+	@bash scripts/schedule.sh install
+
+unschedule:
+	@bash scripts/schedule.sh uninstall
 
 # Private device-to-device export. Gitignored.
 memory:
