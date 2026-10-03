@@ -5,8 +5,10 @@ A chain invites scope creep and quiet overfitting. This is the mechanism that st
 the dangerous moves fail the gate instead of depending on anyone's discipline.
 
 Rules:
-  scope      at most MAX_EDGES active, at most MAX_UNMEASURED without measurement,
-             and at most one P&L carrying role in the pilot
+  scope      at most MAX_EDGES edges in the pilot, at most MAX_UNMEASURED of them without a
+             measurement, and at most one P&L carrying role in the pilot. An edge marked
+             "pilot": false is declared and parked: it is recorded, it keeps its load bearing
+             test, and it does not consume pilot budget
   load       every edge states what changes when it is false; "nothing" means delete the edge
   evidence   a status may only become "measured" with an evidence path that exists
   freeze     once a sealed_opened event exists, no edge is added, no status upgraded,
@@ -26,6 +28,19 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CHAINS = ROOT / "docs" / "chains"
 
+# Meaning, taken from the QuantGraph edge semantics: structural, derivation, evidence and
+# hypothesis types. What an edge means is separate from how well we know it.
+SEMANTIC_TYPES = {
+    "has_field", "exposes", "contains", "observes", "located_at", "located_in", "about",
+    "implements", "produces",
+    "derived_from", "feeds", "measured_by", "measures",
+    "supports", "contradicts", "tests", "tested_by",
+    "candidate_for", "affects", "influences", "drives", "causes", "gates", "conditions",
+    "indicates", "operates", "exposed_to", "changes",
+}
+_LAYERS = {"source", "dataset", "raw", "feature", "entity", "event", "mechanism", "assumption",
+           "outcome", "claim", "strategy", "rule", "evidence", "experiment", "implementation",
+           "concept", "asset", "factor", "contract"}
 MAX_EDGES = 8
 MAX_UNMEASURED = 3
 MAX_PNL_ROLES = 1
@@ -38,8 +53,24 @@ UNMEASURED = {"proxied", "testable"}
 TRIVIAL = {"", "nothing", "none", "n/a", "na", "-"}
 
 EDGE_EVENTS = {"edge_added", "edge_removed", "status_changed", "bound_changed"}
+DECLARATION_EVENTS = {"node_proposed", "node_resolved", "source_proposed", "source_resolved"}
+
+
+def _sources_of(event: dict) -> list[str]:
+    """An edge may draw on one source or several."""
+    raw = event.get("representation_source")
+    if raw is None:
+        return []
+    if isinstance(raw, (list, tuple)):
+        return [str(item) for item in raw if item]
+    return [str(raw)]
 REQUIRED = {
-    "edge_added": ["edge", "status", "conditions", "if_false", "exposure_bound", "mode"],
+    "node_proposed": ["node", "layer", "proposed_type", "reason"],
+    "node_resolved": ["node", "reason"],
+    "source_proposed": ["source", "reason"],
+    "source_resolved": ["source", "reason"],
+    "edge_added": ["edge", "from_node", "to_node", "edge_type", "status", "conditions",
+                   "if_false", "exposure_bound", "mode"],
     "edge_removed": ["edge", "reason"],
     "status_changed": ["edge", "from", "to"],
     "bound_changed": ["edge", "from", "to", "reason"],
@@ -58,6 +89,10 @@ def problems(events: list[dict], existing: list[str], max_edges: int = MAX_EDGES
     out: list[str] = []
     known = set(existing)
     state: dict[str, dict] = {}
+    declared_nodes: set[str] = set()
+    declared_sources: set[str] = set()
+    used_nodes: set[str] = set()
+    used_sources: set[str] = set()
     sealed = False
 
     for i, event in enumerate(events, 1):
@@ -77,6 +112,30 @@ def problems(events: list[dict], existing: list[str], max_edges: int = MAX_EDGES
                 out.append(f"{label} ({kind}): missing '{field}'")
 
         phase_sealed = _phase_rank(str(event.get("phase", ""))) == 1
+
+        if kind == "node_proposed":
+            node = str(event.get("node"))
+            layer = str(event.get("layer"))
+            if layer not in _LAYERS:
+                out.append(f"{label}: layer '{layer}' is not one of {sorted(_LAYERS)}")
+            if node in declared_nodes:
+                out.append(f"{label}: node '{node}' is declared twice")
+            declared_nodes.add(node)
+            continue
+
+        if kind == "node_resolved":
+            node = str(event.get("node"))
+            if node in declared_nodes:
+                out.append(f"{label}: node '{node}' is declared twice")
+            declared_nodes.add(node)
+            continue
+
+        if kind in ("source_proposed", "source_resolved"):
+            source = str(event.get("source"))
+            if source in declared_sources:
+                out.append(f"{label}: source '{source}' is declared twice")
+            declared_sources.add(source)
+            continue
 
         if kind == "decision":
             # Chain level, not edge level: it records a choice, and the count feeds the
@@ -107,10 +166,19 @@ def problems(events: list[dict], existing: list[str], max_edges: int = MAX_EDGES
             evidence = event.get("evidence")
             if evidence and evidence not in known:
                 out.append(f"{label}: evidence '{evidence}' does not exist")
+            edge_type = str(event.get("edge_type"))
+            if edge_type not in SEMANTIC_TYPES:
+                out.append(f"{label}: edge_type '{edge_type}' is not a known semantic type")
+            for referenced in ("from_node", "to_node"):
+                if event.get(referenced):
+                    used_nodes.add(str(event[referenced]))
+            for source in _sources_of(event):
+                used_sources.add(source)
             if edge in state:
                 out.append(f"{label}: edge '{edge}' already exists. Use status_changed or bound_changed")
             state[edge] = {"status": status, "mode": str(event.get("mode")),
-                           "bound": str(event.get("exposure_bound"))}
+                           "bound": str(event.get("exposure_bound")),
+                           "pilot": bool(event.get("pilot", True))}
             continue
 
         edge = str(event.get("edge"))
@@ -146,7 +214,25 @@ def problems(events: list[dict], existing: list[str], max_edges: int = MAX_EDGES
             state[edge]["bound"] = new
             continue
 
-    active = state
+    # Every declared node and source must serve at least one edge, or it is decoration.
+    for node in sorted(declared_nodes - used_nodes):
+        out.append(f"decoration: node '{node}' is declared but no edge uses it. Delete it, or use it")
+    for source in sorted(declared_sources - used_sources):
+        out.append(f"decoration: source '{source}' is declared but no edge needs it")
+    # An edge may only reference a node this log declares, whether resolved or proposed.
+    for i, event in enumerate(events, 1):
+        if not isinstance(event, dict) or event.get("event") != "edge_added":
+            continue
+        for field in ("from_node", "to_node"):
+            node = event.get(field)
+            if node and str(node) not in declared_nodes:
+                out.append(f"line {i}: edge node '{node}' is not declared in this log. "
+                           f"Declare it as node_resolved or node_proposed")
+
+    active = {edge: info for edge, info in state.items() if info.get("pilot", True)}
+    parked = len(state) - len(active)
+    if parked:
+        pass  # parked edges are recorded and are not part of the pilot budget
     if len(active) > max_edges:
         out.append(f"scope: {len(active)} active edges exceeds the pilot cap of {max_edges}. "
                    f"Shorten the chain or park edges in a new chain id")

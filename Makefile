@@ -1,4 +1,4 @@
-.PHONY: sync save bootstrap doctor current claims overlaps worktree owners chain hooks hooks-global remember share absorb test secrets check status
+.PHONY: sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test secrets check status
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -27,11 +27,17 @@ doctor:
 # Chain logs: scope caps, load bearing edges, evidence, and the freeze.
 chain:
 	@python3 scripts/check_chain.py
+	@python3 scripts/link_algoterminal.py
+
+# Resolve our nodes, representations and sources against the algoterminal stack.
+graph:
+	@python3 scripts/link_algoterminal.py
 
 # Ownership: one roster, one claim table, every claimed path real.
 owners:
 	@python3 scripts/check_owners.py
 	@python3 scripts/check_chain.py
+	@python3 scripts/link_algoterminal.py
 
 # Who is working on what, and where will that collide. Fetches first.
 claims:
@@ -76,6 +82,7 @@ test:
 	@python3 tests/test_paths.py
 	@python3 tests/test_owners.py
 	@python3 tests/test_chain.py
+	@python3 tests/test_link_algoterminal.py
 
 # Credential scan over every file. This repo is public.
 secrets:
@@ -88,6 +95,7 @@ check: secrets
 	@python3 scripts/check_paths.py
 	@python3 scripts/check_owners.py
 	@python3 scripts/check_chain.py
+	@python3 scripts/link_algoterminal.py
 	@python3 scripts/render_current.py --check
 
 status:
