@@ -421,3 +421,28 @@ not an option.
 **Honest limit.** The machinery cannot judge whether an edge is true. It guarantees that a false,
 untested, decorative, or post-hoc-changed edge is visibly so.
 **Evidence.** Sixteen tests cover the validator, including each sealed-window rule and each cap.
+
+---
+
+## 2026-10-03: The research object is the graph, and the counter-rule was wrong as stated
+
+**Decision.** Adopt the model built in `algoterminal-data`: a typed graph of nodes, representations,
+case-local roles, semantic edges with an epistemic status and an origin, all-pairs coverage with blocked
+records, multiplicity counted before ranking, deterministic evidence IDs, and four separate statuses
+(association, causal, evidence, promotion). `docs/alignment.md` section 20 owns the mapping. The chain
+becomes a **path** through that graph.
+**Correction one.** The counter-rule said "one event family". That was wrong. It confused the unit of
+scope with the unit of research, and it contradicts breadth, which is where a quant strategy's edge
+lives. Corrected to: **one chain, one sealed test per claim.** A chain may span as many event families,
+representations, horizons and venues as the mechanism supports.
+**Correction two.** The habits in section 19 were trade-centred: "the shortest chain that produces a
+P&L". A method that optimises for P&L only looks where P&L already appears. Replaced with
+research-centred habits: shortest defensible decomposition, preserve the unmeasurable, count before
+ranking, declare the ceiling, keep the statuses separate, never manufacture evidence for a supported
+result, and let P&L enter only at the tradability gate.
+**Why this is not academic.** Our own case shows the difference: a compute index is a **representation**
+of a node, not a node; a node's job as input or outcome is **per case**, not fixed; and a relation we
+cannot compare yet is a record to revisit rather than an edge to delete.
+**Open decision, captain's call.** Reuse `algoterminal-data`'s QuantGraph and association engine as the
+substrate for this study, or mirror the vocabulary here and keep the tooling separate. The vocabulary is
+adopted either way, so the decision can wait without rework.

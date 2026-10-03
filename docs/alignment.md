@@ -468,10 +468,14 @@ Speed is an edge channel only where the half-life is short enough for our pipeli
 
 ### 16.7 What this changes about the pilot
 
-The counter-rule still holds: **one event family, one horizon, one pilot, one result artifact.**
-This section does not add scope to the pilot. It adds **measurements** to it: the edge channel claim,
-IC, decay, effective breadth, regime splits, the capacity curve, and the measured latency chain. Those
-numbers are what make generalisation a decision rather than a hope.
+Scope discipline attaches to the **claim**, not to the event family. The corrected counter-rule:
+**one chain, one sealed test per claim.** A chain may span as many event families, names, horizons and
+venues as the mechanism supports, because that is where breadth comes from. What stays singular is the
+sealed test and the artifact it produces.
+
+This section adds **measurements** to a pilot rather than scope: the edge channel claim, IC, decay,
+effective breadth, regime splits, the capacity curve, and the measured latency chain. Those numbers are
+what make generalisation a decision rather than a hope.
 
 A case study answers "is this real?". A system answers "how much can we make, at what risk, at what
 size, for how long, and why us?". The rubric rewards the second, and the second is what we are
@@ -638,6 +642,13 @@ hidden. Four statuses:
 The register is a table, one row per edge: edge, status, evidence or proxy, the exposure it licenses,
 and the test that would upgrade its status. Assumptions stop being invisible and become budgeted.
 
+Our four statuses are **exposure-oriented** and map onto the graph's epistemic statuses, so one
+vocabulary can describe both: `irreducible` ↔ constrained, `testable` ↔ hypothesized or proposed,
+`proxied` ↔ partial, `measured` ↔ observed or supported. What a relation **means** is a separate field
+(`affects`, `drives`, `gates`, `conditions`, `measures`), as is its origin: schema, domain knowledge,
+model definition, empirical test, or research proposal. Meaning, confidence, causal status and
+promotion status are four fields, never one number.
+
 ### 18.3 Eight ways a market plugs into the chain
 
 A market is not a place to run a strategy. It is a supplier of nodes, instruments and state readings.
@@ -732,3 +743,86 @@ What the machinery cannot do is judge whether an edge is *true*. It can only gua
 which is false, untested, decorative, or changed after the fact is visibly so. That is the honest limit
 of the mechanism, and it is still the difference between a study that can be audited and one that only
 looks complete.
+
+---
+
+## 20. The research object is the graph, not the trade
+
+Section 19's habits were written to protect a trade. That was the wrong centre of gravity, and it made
+the method small: a method that optimises for P&L will only ever look where P&L already appears. The
+object is the **relation structure of the world** — what moves with what, under which conditions, and
+which of those relations the market has not priced. Expression is a downstream step with its own gate.
+
+This section adopts the model already built in `algoterminal-data`: the typed QuantGraph and the
+role-polymorphic all-pairs association layer. Our chain is a **path** through that graph; the graph is
+the larger object.
+
+### 20.1 What that model gets right, and what we adopt
+
+| Idea | What it means | What it replaces here |
+|---|---|---|
+| **Node identity is not a role** | A node is a research object. Whether it acts as input, outcome, control, conditioning variable, shared-driver candidate, mediator, confounder candidate, benchmark or measurement proxy is decided **per case** | Our chain assigned each node a permanent job |
+| **Representations** | One node has many usable views: raw, derived, proxy, outcome, event, panel, aggregate — each with its own unit, clock, vintage, release time, usable time and decision cutoff | We treated a node as one series. A compute index, a listed future and a rental rate are three representations, not one |
+| **Meaning is separate from confidence** | An edge's semantic type (`affects`, `drives`, `gates`, `conditions`, `measures`…) is independent of its epistemic status (structural, observed, derived, hypothesized, proposed, partial, supported, rejected, constrained) and its origin (schema, domain knowledge, model definition, empirical test, research proposal) | We merged what a relation means with how well we know it |
+| **Relation lenses** | The question being asked is separate from the graph's edge meaning | We had no such distinction |
+| **Four separate statuses** | Association strength, causal status, evidence status and opportunity status are four fields, never one | We collapsed them |
+| **All-pairs coverage** | Every node pair gets a coverage record. A pair may be blocked, unsupported or not run, and it is **recorded** rather than dropped | We deleted edges that could not be measured |
+| **Multiplicity before ranking** | Multiple comparisons are counted before results are ranked or promoted | We deflated after the fact |
+| **Deterministic evidence IDs** | Evidence hashes are stable under row reordering and include the canonical specification, the observations consumed and the method version | We had no such rule |
+| **Descriptive and mechanism-aware by default** | The default path is description and mechanism investigation, **not strategy searching**. Promotion is separate, and no association result changes an opportunity status by itself | Ours was strategy-first |
+| **Causal ceiling declared in advance** | A design declares its ceiling, such as `descriptive_only`, and causal language above that ceiling is rejected | We had no ceiling concept |
+| **Separate gates** | Predictive validation does not require causal support; causal identification is its own gated package; tradability is assessed separately from executable evidence and conservative costs | We treated one chain as one argument |
+| **Blockers are preserved** | Missing availability, an unresolved archive issue or an absent design stays visible | We would have worked around it |
+
+### 20.2 The corrected habits
+
+The old ones protected a trade. These protect the research.
+
+1. **Prefer the shortest defensible decomposition, not the shortest path to a P&L.** If an edge can be
+   removed without changing what we learn, remove it. If removing it only changes the *trade*, it stays.
+2. **Preserve the unmeasurable.** A pair we cannot compare is a record with a reason, never a deletion.
+   What is blocked today is what we test when data arrives.
+3. **Count before you rank.** The number of comparisons is fixed before results are ordered, and it is
+   reported.
+4. **Declare the ceiling.** Before running anything, say whether the result can be descriptive, predictive
+   or causal, and refuse language above it.
+5. **Keep the four statuses separate**, in the record and in the prose.
+6. **Do not manufacture evidence to obtain a supported result.** A blocked case is a finding.
+7. **P&L enters at the tradability gate, not before.** Tradability is assessed from executable evidence
+   and conservative costs, after the mechanism work, and it can kill an association that is real but
+   untradeable. That is a valid outcome, not a failure.
+
+### 20.3 What this does to the pipeline
+
+Stages 3 and 4 change character:
+
+- **Stage 3 Structure** becomes an **association pass over the graph**: enumerate the pairs that matter
+  for the mechanism, declare representations and roles per case, measure with named methods, count
+  comparisons before ranking, and record blocked and unsupported pairs as structured issues.
+- **Stage 4 Identification** keeps its job but with the ceiling discipline: a declared estimand, a
+  declared design, a declared ceiling, and causal language only up to it.
+- **Stage 6 Test** keeps the sealed test for the claim, and now includes the frozen predictive
+  validation that does **not** require causal support — predictive value and causal identification are
+  different gates, and a claim can pass one without the other.
+- **Tradability** is its own gate, after expression is even considered: executable evidence, costs,
+  capacity, and borrow.
+
+### 20.4 What stays ours
+
+The graph is not a strategy. Three things in this repo are still ours and still needed:
+
+1. **The chain as a path.** A path through the graph is what a thesis claims. Paths are how we go from a
+   large relation structure to something falsifiable.
+2. **The register and the log.** Exposure bounds per edge, scope caps, load-bearing tests, and the freeze
+   after the sealed window opens. These keep a path honest even after the graph has grown.
+3. **The venue roles.** Confirmation, expression, hedge, overlay, monitor — where a market plugs into a
+   path, per section 18.
+
+### 20.5 Open decision for the captain
+
+Whether to **reuse** `algoterminal-data`'s QuantGraph and association engine as the substrate for this
+study, or to **mirror** its vocabulary in this repo and keep the tooling separate. Reuse brings 1,894
+nodes, 5,625 typed edges, twenty registered methods, all-pairs coverage, causal envelopes and the
+opportunity registry — and it makes our artifacts portable between the two. Mirroring keeps this repo
+self-contained and small. Either way, the vocabulary above is adopted, so the decision can be made later
+without rework.
