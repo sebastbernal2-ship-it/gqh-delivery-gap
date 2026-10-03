@@ -241,7 +241,7 @@ def main() -> None:
         "first_fused_distribution": [round(1.0 - gated_pool[0], 8), round(gated_pool[0], 8)],
         "limitations": [
             "synthetic data only; no market data or financial target",
-            "no Laya weights or neural training",
+            "no JevLike checkpoint or neural training in this synthetic council fixture",
             "evaluation partition is not the competition sealed OOS period",
             "linear opinion pool is a baseline and does not reconstruct general joint dependence",
         ],

@@ -20,10 +20,9 @@ Contract: `council-distribution-0.2.0`. Python standard library only; compatible
   weights, and returns the final distribution, entropy, disagreement proxy, and input uncertainty.
   `predict_parallel()` runs specialist callables in a bounded thread pool before fusion; it makes no
   latency guarantee and propagates a specialist failure with its identity.
-- `laya_adapter.py` wraps an initialized Laya `Router` as a categorical specialist using Laya's
-  `choice` probabilities. It imports no optional Laya dependency, downloads no checkpoint, and
-  requires explicit model/checkpoint and data version strings from the caller. It normalizes only
-  small probability-sum drift from rounded serialized values, rejecting larger mismatches.
+- `jevlike_adapter.py` wraps an initialized JevLike scorer as a categorical specialist, preserving
+  caller-supplied option order and requiring explicit model/data version strings. The separate C++
+  `JevLikeTinyScorer` supports the exported tiny byte encoder.
 
 ## Minimal use
 
@@ -52,5 +51,6 @@ Temperature scaling, inverse-Brier reliability weights, and opinion pools are tr
 The disagreement value is a between-model diagnostic, not a complete Bayesian epistemic posterior;
 entropy is the final distribution's predictive entropy. All-abstain behavior deliberately raises
 instead of inventing a fallback. There is no data loader, persisted model registry, online update
-path, execution policy, or quantum runtime in this package yet. The Laya adapter is an inference
-seam only; it does not fine-tune Laya or calibrate its raw output.
+path, execution policy, or quantum runtime in this package yet. The JevLike adapter is an inference
+seam only; it does not fine-tune JevLike or calibrate its raw output. See the parent `STACK.md` for
+the implementation plan and current limitations.

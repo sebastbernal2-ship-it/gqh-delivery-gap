@@ -1,94 +1,52 @@
-# Probabilistic council pilot
+# JevLike probabilistic council
 
-Owner: `lucyrunner`. This is the first engineering slice for the Jev-style council proposal.
+This is the active HiPerGator implementation of our JevLike project. The product target is an
+open-source, Jev-inspired one-pass choice model: given a context and a variable set of text
+options, it scores all options and returns a probability distribution. We vendor the MIT-licensed
+core from [vinnylarouge/jevlike](https://github.com/vinnylarouge/jevlike); source and attribution
+are recorded in [`jevlike/README.md`](jevlike/README.md).
 
-## What it runs
+JevLike is an independent alternative. It is not TypeSafe Jev and we do not claim to reproduce its
+closed architecture or training method. Its upstream implementation trains in Python/PyTorch.
+The initial native C++ path supports the tiny byte encoder; a frozen Hugging Face encoder is not
+exportable through that path. See [`STACK.md`](STACK.md) for the subsystem-by-subsystem language
+choice, HPG/Vultr roles, and build gates.
 
-`pilot.py` generates a known synthetic binary forecasting problem, fits two small specialist
-logistic models on different regimes, calibrates each on a separate partition, learns simple
-regime-dependent reliability weights on another partition, calibrates each fused pool on its own
-partition, and compares equal-pool and gated-pool probabilities on a final synthetic partition. It
-reports log loss, Brier score, and ECE. Every
-forecast is a complete `[P(no), P(yes)]` distribution.
+## Current implementation
 
-The reusable runtime is in [`council/`](council/README.md). `modular_pilot.py` composes that API
-over the same fixture with separate fit, specialist-calibration, gate-fit, pool-calibration, and
-evaluation partitions. It benchmarks equal pooling against context-gated linear and logarithmic
-opinion pools, and reports proper scores, top-label calibration error, active-specialist weights,
-entropy, and between-model disagreement. To run it locally:
+- `jevlike/`: vendored model, trainer, evaluation and prediction utilities, plus a checked binary
+  export and Python-to-C++ probability parity runner.
+- `council/jevlike_adapter.py`: adapts a loaded JevLike model to the council's categorical
+  specialist contract.
+- `cpp/`: C++ council and a native JevLike tiny-model scorer that emits the same calibrated-ready
+  probability interface.
+- `run-jevlike.slurm`: HPG synthetic train → evaluate → export → C++ compile → parity workflow.
+- `run-cpp.slurm`: compile and run the C++ council smoke workload.
+- `INTERFACE.md`: probability, identity, calibration and fusion contracts.
 
-```sh
-python3 modular_pilot.py --seed 20261003 --rows 12000
-```
+The Slurm workflow uses synthetic choices to validate plumbing and numerical agreement. It is not
+evidence of decision quality, finance performance, calibration, or usefulness on a target task.
+No real dataset or learned production checkpoint is included. HPG job history and setup guidance
+are recorded in [`../../README.md`](../README.md); historical Laya handoffs elsewhere in the repo
+are not the current implementation direction.
 
-A dependency-free C++17 council implementation now lives in [`cpp/`](cpp/README.md), with the same
-forecast contract, separate chronological calibration/gating/pool-calibration partitions, both
-opinion pools, and bounded parallel specialist inference. Its synthetic Slurm build/run entry point
-is `run-cpp.slurm`.
+## Run on HiPerGator
 
-On HiPerGator, submit `run-modular.slurm` from the writable approach copy.
+From a login node, submit `run-jevlike.slurm` from this directory with `sbatch`. The job builds
+inside its temporary scratch directory and writes Slurm output/error files in the submission
+directory. It needs the HPG PyTorch module, Python, a C++17 compiler and CMake/compiler toolchain
+available on the compute node. See the script before adapting resource requests to a real training
+run.
 
-`qcbm_pilot.py` is a bounded quantum research fixture. It trains a three-qubit parameterized
-Born machine in an exact statevector simulator against a synthetic correlated distribution, then
-compares the fitted distribution with independent-Bernoulli and smoothed full-categorical classical
-baselines. It reports exact target-distribution KL/total-variation/tail diagnostics plus proper
-log-loss and multiclass Brier scores on an independent synthetic test sample. It also reports circuit
-evaluations and runtime. The exact simulator has no shot noise or hardware noise and is classical
-computation; this experiment cannot establish quantum advantage. `run-qcbm.slurm` submits it as a
-small CPU job.
+The export includes a SHA-256 manifest. A deployment/serving layer must verify the artifact hashes
+before loading; the current C++ loader validates the binary structure and numeric values but does
+not itself validate the JSON manifest.
 
-## Laya integration boundary
+## Boundaries
 
-Upstream inspection on 2026-10-03 confirms Apache-2.0 licensing in both the Laya source repository
-and its Hugging Face model card. Laya exposes typed categorical decisions and RLCD training, so it
-is a candidate text specialist; it does not natively provide general joint financial distributions.
-Its own model card warns that its base checkpoints can be near chance on typed decisions and that
-raw probabilities need domain calibration. Treat it as a base for specialization and evaluate every
-checkpoint on our own data before council admission.
-
-The documented package requires Python 3.10 or newer, while the previously used HiPerGator default
-Python was 3.9.25. Before any Laya install or weight download, select and record a supported Python
-module/environment, inspect the checkpoint and dataset provenance, and keep downloaded weights and
-caches outside Git. This pilot has not installed Laya, downloaded weights, or reproduced RLCD.
-See the [upstream code](https://github.com/NandhaKishorM/laya) and
-[model card](https://huggingface.co/convaiinnovations/laya).
-
-`run.slurm` requests a single CPU task and invokes the same script. No model weights, private data,
-GPU, quantum package, network access, or account-specific path is needed. See [INTERFACE.md](INTERFACE.md)
-for the versioned contract and [the architecture proposal](../../docs/inbox/jev-council-architecture-2026-10-03.md)
-for the wider research direction.
-
-## Local run
-
-```sh
-python3 pilot.py --seed 20261003 --rows 12000
-```
-
-## HiPerGator run
-
-Copy this directory to a writable Blue or scratch location, change into that copy, and submit:
-
-```sh
-sbatch run.slurm
-```
-
-For the quantum-distribution fixture, submit `sbatch run-qcbm.slurm` from the same writable
-working directory.
-
-The job's stdout/stderr is written by Slurm in the submission directory. Do not submit from the Git
-checkout or put generated logs, datasets, or checkpoints in this repository. This pilot does not
-access the network or Blue storage from inside a job.
-
-## HiPerGator run record
-
-Verified 2026-10-03: Slurm job `44542543` completed in one second with exit code `0` and empty
-stderr. It ran the deterministic synthetic fixture and wrote its JSON metrics to the remote Slurm
-stdout file in the account home directory. The output was inspected and contains no market data or
-model weights; it is an engineering smoke result, not a trading result.
-
-## Promotion gate
-
-Before real inputs or Laya weights are added, define and own a concrete forecast target, verify
-weight/data licenses, specify point-in-time partitions and calibration data, and version the
-specialist input/output contract. A competition OOS window remains closed until its named owner
-opens it under `docs/brief.md`.
+The current system is a buildable prototype, not the full research program. It does not yet include
+real domain data, multi-specialist training, out-of-sample benchmark acceptance, production
+calibration, low-latency service measurements, QPU execution, or a Vultr deployment. Quantum
+methods remain experimental candidates evaluated against equal-budget classical baselines. Vultr
+is scoped as a possible serving/deployment and external-load-test layer for HPG-trained artifacts;
+it is not placed in the latency-sensitive request path until measurements support that choice.
