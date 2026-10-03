@@ -42,6 +42,11 @@ chain, not a strategy name.
 evidence or proxy, the exposure it licenses, and the test that would upgrade it. Irreducible assumptions
 bound exposure rather than disappearing. See `docs/alignment.md` section 18.2.
 
+**The chain log.** `docs/chains/<id>.jsonl`, append-only, validated by `make check`. Caps: 8 active
+edges, 3 without a measurement, 1 P&L-carrying role. Every edge states what changes when it is false. No
+upgrades or raised bounds after the sealed window opens. Every choice is a `decision` event, and the count
+feeds the multiple-testing deflation. See `docs/chains/README.md`.
+
 ## Methodology
 
 Signal rules and timing. **Conditioning**: all-weather, state-gated, or state-scaled, decided up front.
