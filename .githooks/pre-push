@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Warn about parallel-work collisions before the push lands. Never blocks: a warning that
+# stops work at 3am is worse than the collision it prevents.
+set -uo pipefail
+
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
+cd "$ROOT" || exit 0
+[ -f scripts/claims.py ] || exit 0
+
+OUT="$(timeout 25 python3 scripts/claims.py --overlaps 2>/dev/null || true)"
+if printf '%s' "$OUT" | grep -q "COLLISIONS"; then
+  echo
+  echo "--- parallel work warning ---"
+  printf '%s\n' "$OUT" | sed 's/^/  /'
+  echo "  not blocking the push. See docs/workflow.md"
+  echo "----------------------------"
+  echo
+fi
+exit 0
