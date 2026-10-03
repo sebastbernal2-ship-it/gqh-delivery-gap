@@ -83,6 +83,7 @@ test:
 	@python3 tests/test_owners.py
 	@python3 tests/test_chain.py
 	@python3 tests/test_link_algoterminal.py
+	@python3 tests/test_edgar.py
 
 # Credential scan over every file. This repo is public.
 secrets:
