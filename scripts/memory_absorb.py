@@ -50,6 +50,25 @@ def ensure_store() -> None:
                        capture_output=True, text=True)
 
 
+def union_entries(shared, existing):
+    """Union of the incoming entries and the entries already in the shared file.
+
+    A device only knows its own memories. Without a union, a device whose store cannot
+    see another device's entry would delete it from the shared file on its next share.
+    """
+    out = []
+    seen = set()
+    for item in list(shared) + list(existing):
+        if not isinstance(item, dict):
+            continue
+        key = normalize(item.get("content", ""))
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        out.append(item)
+    return sorted(out, key=lambda item: str(item.get("id", "")))
+
+
 def export_local() -> list:
     result = subprocess.run(["hippo", "export"], capture_output=True, text=True)
     if result.returncode != 0 or not result.stdout.strip():

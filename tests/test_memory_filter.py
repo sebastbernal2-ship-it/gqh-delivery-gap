@@ -11,7 +11,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
-from memory_filter import filter_entries, redact  # noqa: E402
+from memory_filter import filter_entries, redact, REPO_ROOT  # noqa: E402
 
 SHARE = "gqh"
 
@@ -82,11 +82,19 @@ def _():
     assert dropped == [], dropped
 
 
-@case("home paths are rewritten")
+@case("repo paths collapse to <repo>, wherever the checkout lives")
 def _():
-    out = redact("data lives in /home/sebas/kun-agent-workspace/projects/quanthacks/data")
-    assert "/home/sebas" not in out, out
+    # Built from the actual repo root, so this passes on any clone and on any machine.
+    out = redact(f"data lives in {REPO_ROOT}/data")
+    assert "/home/" not in out and "/Users/" not in out, out
     assert "<repo>/data" in out, out
+
+
+@case("any other home path collapses to <home>")
+def _():
+    out = redact("other projects live in /home/someone/else/projects/thing")
+    assert "/home/someone" not in out, out
+    assert "<home>" in out, out
 
 
 @case("windows paths are rewritten")
