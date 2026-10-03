@@ -699,3 +699,36 @@ assumption level rather than at the strategy level, which is where its informati
 makes the honest shape of our own work visible: a small number of measured edges, a larger number of
 proxied and testable ones, and an explicit short list of irreducible ones whose exposure is capped
 rather than pretended away.
+
+---
+
+## 19. How the caveat is covered: the mechanisms, not the discipline
+
+Section 18.6 admits the risk: many edges invite scope creep and quiet overfitting. Admitting it is not
+covering it. These are the mechanisms, and each one fails the gate rather than relying on anyone's
+restraint. The full rule set lives in `docs/chains/README.md`, and `scripts/check_chain.py` enforces it.
+
+| Failure mode | What it looks like | The mechanism that stops it |
+|---|---|---|
+| **Scope creep** | The pilot grows edges, nodes and venues until nothing is testable in the time available | Hard caps in the log: at most **8 active edges**, at most **3 without a measurement**, at most **1 P&L-carrying role**. Exceeding a cap is an error, and the fix is to shorten the chain, not to raise the cap |
+| **Decorative edges** | An edge is listed because it sounds impressive but nothing depends on it | Every edge must state `if_false`: what changes about the position when it is false. "Nothing" fails the gate, and the fix is to delete the edge |
+| **Quiet upgrading** | An assumption quietly becomes "measured" with no evidence behind it | A status may only become `measured` with an **evidence path that exists in the repo**. Checked |
+| **Post-hoc fitting** | The chain is adjusted after seeing results and the record is tidied | The log records the **phase** on every event. Once `sealed_opened` appears: no new edges, no upgrades, no raised exposure bounds. Each of those is an error |
+| **Raised exposure after the fact** | A bound is loosened because the result looked good | Raising a bound after the seal fails the gate. Lowering is allowed. The escape hatch is a **new chain id**, which is a new study with its own record |
+| **Untracked degrees of freedom** | Thresholds, horizons, universes and exclusions chosen along the way, never counted | Every choice is a `decision` event with a value and a reason. The count comes out of the log and **feeds the multiple-testing deflation** instead of being remembered |
+| **Hidden failure** | A proxied edge is downgraded after it fails, and the note says nothing | Downgrades are events like any other, and a downgrade is as reportable as an upgrade |
+| **Breadth inflation** | Ten correlated edges counted as ten independent bets | Effective breadth is measured after clustering, per section 16.2, and reported next to the raw count |
+
+Three further habits, which are judgment rather than machinery:
+
+1. **Prefer the shortest chain that produces a P&L.** If an edge can be removed and the trade survives,
+   it was never part of the thesis.
+2. **Name the untested edges in the note.** They become the honest limitations and the next study, not
+   silent assumptions.
+3. **The escape hatch is a new chain, not a longer one.** A pilot holds one path. Additional edges go
+   into a separate chain id with its own record, its own caps and its own evidence.
+
+What the machinery cannot do is judge whether an edge is *true*. It can only guarantee that an edge
+which is false, untested, decorative, or changed after the fact is visibly so. That is the honest limit
+of the mechanism, and it is still the difference between a study that can be audited and one that only
+looks complete.

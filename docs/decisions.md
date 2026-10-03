@@ -400,3 +400,24 @@ the assumption that scarcity is observable. The perpetual enters at three nodes 
 crowding state, edge identification of who pays, and a 24/7 expression and hedge leg. Neither is asked to
 reproduce the equity study.
 **Replaces.** "Extend the chain" replaces "port the strategy".
+
+---
+
+## 2026-10-03: The chain caveat is covered by a log and a gate, not by discipline
+
+**Decision.** Chain logs (`docs/chains/<id>.jsonl`) are append-only, and `scripts/check_chain.py`, run
+by `make check`, enforces the rules. `docs/alignment.md` section 19 maps each failure mode to its
+mechanism.
+**The caveat.** A chain with many edges invites scope creep and quiet overfitting. Writing that down is
+not covering it.
+**Mechanisms.** Caps on active edges (8), unmeasured edges (3) and P&L-carrying roles (1). Every edge
+must state what changes when it is false, so decorative edges are rejected. A `measured` status needs an
+evidence path that exists. Every event records its phase, and after `sealed_opened` no edge may be
+added, no status upgraded and no exposure bound raised. Every choice is a `decision` event with a reason,
+so the degree-of-freedom count comes from the log and feeds the multiple-testing deflation. Downgrades
+are recorded like upgrades.
+**Escape hatch.** A new chain id, which is a new study with its own caps and evidence. Raising a cap is
+not an option.
+**Honest limit.** The machinery cannot judge whether an edge is true. It guarantees that a false,
+untested, decorative, or post-hoc-changed edge is visibly so.
+**Evidence.** Sixteen tests cover the validator, including each sealed-window rule and each cap.

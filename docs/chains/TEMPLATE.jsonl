@@ -1,0 +1,4 @@
+{"ts": "2026-10-03T10:00:00Z", "chain": "t-example", "event": "edge_added", "phase": "development", "edge": "e-revision-to-revenue", "status": "testable", "conditions": "holds while capex commitments are multi-year", "if_false": "the revision stops predicting revenue timing, so we do not trade it", "exposure_bound": "2% NAV", "mode": "core", "evidence": null}
+{"ts": "2026-10-03T10:05:00Z", "chain": "t-example", "event": "decision", "phase": "development", "choice": "primary horizon", "value": "10 sessions", "reason": "initial candidate from the discussion, to be tested"}
+{"ts": "2026-10-03T10:10:00Z", "chain": "t-example", "event": "status_changed", "phase": "development", "edge": "e-revision-to-revenue", "from": "testable", "to": "proxied", "evidence": "results/example.json"}
+{"ts": "2026-10-03T23:00:00Z", "chain": "t-example", "event": "sealed_opened", "phase": "sealed", "revision": "0000000", "run_plan": "docs/chains/TEMPLATE.jsonl"}
