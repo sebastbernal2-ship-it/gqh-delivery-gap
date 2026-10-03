@@ -14,3 +14,18 @@ companies, not issuers: Power Company of Wyoming LLC, Georgia Power Co, Invenerg
 rather than more data. A mapping from project company to owner with a cited source is what turns
 274,176 MW of measured slippage into a testable exposure, and that is document work over filings and
 interconnection filings rather than a data purchase.
+
+
+## Why zero is correct, and what the 6.2 percent actually is
+
+Zero is by construction, not a defect. The panel fills its ticker column **only** from the verified crosswalk,
+which holds exactly one row, Quanta Services mapped to PWR with cited evidence. Quanta is a contractor rather than
+a generator owner, so it holds no capacity in the planned sheet and contributes no megawatts.
+
+**The 6.2 percent figure elsewhere is the matcher's proposal rate, not an evidenced rate.** The candidate matcher
+proposes names for about a thousand entities, and it has produced false attributions before, which is why the
+panel refuses it. So the honest pair of numbers is: the matcher proposes a mapping for roughly six percent of
+slipped capacity, and the evidence supports one entity.
+
+That gap is the attribution ceiling in its exact form. It is not that the mapping is hard to compute, it is that
+almost none of it has been checked against a source.
