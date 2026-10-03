@@ -108,3 +108,26 @@ session holds the lock, so nothing was written.
 That keeps the one-writer-per-path rule intact, because only the orchestrator writes inside the checkout.
 When a leg genuinely needs the checkout, the alternative is a worktree with its own home so its lock is its
 own, which is what `subagent_spawn_worktree` exists for.
+
+## What actually blocks a second session, from the harness source
+
+`bin/fm-lock.sh` refuses when another live process holds `state/.lock`, and `bin/fm-session-start.sh` reacts by
+setting its own read-only mode and running the guard with `FM_GUARD_READ_ONLY=1`. So the block is not a property of
+the repository path: a second session in the same home is put into read-only mode by its own startup, and it then
+declines to write at all.
+
+Three consequences, in order of cost:
+
+1. **The reliable way to get several writers is one home per writer.** A child with its own `FM_HOME` acquires its
+   own lock, is not read-only, and can write its own scratch directory. `subagent_spawn_worktree` is the supported
+   form of this, since it hands the child a managed worktree and its own lifecycle record.
+2. **A child without its own home should be treated as a read-only analyst.** It can read everything and report
+   findings and tables, and the orchestrator, which holds the lock, writes the files. That is slower to set up but
+   it cannot fail for a lock reason.
+3. **A scratch directory outside the home is not proven to work**, because the read-only mode is imposed by the
+   child's own startup rather than by the path it writes. Treat it as unverified until a probe child writes a file
+   and reports success.
+
+The unsettled question, stated rather than guessed: whether several children each with their own home can write at
+the same time in this harness. The decisive test is two probe children with separate homes, each writing one file
+and reporting. Until that test runs, the safe pattern is one writer per home, or children as analysts.
