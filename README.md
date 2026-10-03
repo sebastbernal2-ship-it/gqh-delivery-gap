@@ -31,6 +31,8 @@ Full statement in `docs/01-idea.md`. Execution plan in `docs/02-system.md`.
 | `docs/02-system.md` | W1 | Engines, workstreams, timeline, cuts |
 | `docs/03-decisions.md` | append only | Every settled decision, newest at the bottom |
 | `docs/04-memory.md` | W0 | How shared memory and sync work |
+| `memory/SHARED.md` | generated | The team's memory, readable |
+| `AGENTS.md` | W5 | Session start rules for any agent |
 | `docs/reviews/` | everyone | Critiques of the idea and the plan |
 | `docs/note/` | assembler | The 5 page note source |
 | `data/` | W0 | Fetched data. Not committed. See `data/README.md` |
@@ -41,12 +43,13 @@ Full statement in `docs/01-idea.md`. Execution plan in `docs/02-system.md`.
 
 ## How we work
 
-1. `make sync` before you start. Always.
+1. `make sync` before you start. It pulls the team's work and loads their shared memory.
 2. Work only in the paths your workstream owns. See `OWNERS.md`. One writer per path.
 3. Commit small and push often. One logical change per commit.
 4. If it is not in this repo, it is not shared. Local memory and chat are caches.
 5. Every number in the note comes from a file in `results/`.
 6. Never open the out-of-sample window except on the one run that reports it.
+7. Before you stop, run `make share` if you learned something durable. See `docs/04-memory.md`.
 
 ### Branches
 
@@ -55,6 +58,8 @@ so `main` stays runnable and the repro check keeps working.
 
 Use a branch only for something that would break `make check` or `make all` on `main`, and merge
 it the same night. A branch that lives longer than a night is a branch that loses to the deadline.
+
+Any agent that opens this repo reads `AGENTS.md` first. It holds the session start rules.
 
 ## New device, first time here
 

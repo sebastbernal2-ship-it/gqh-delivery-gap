@@ -1,8 +1,9 @@
-.PHONY: sync save bootstrap memory all check status
+.PHONY: sync save bootstrap remember share absorb memory test secrets all check status
 
-# Pull the team's work before you do anything.
+# Pull the team's work and load their shared memory. Run this first, every session.
 sync:
 	git pull --rebase --autostash
+	@bash scripts/memory-absorb.sh
 
 # Commit and push one logical change. Usage: make save M="what changed"
 save:
@@ -15,9 +16,29 @@ save:
 bootstrap:
 	bash scripts/bootstrap.sh
 
-# Export this device's local memory so the team converges.
+# Write a memory that the team will see. Usage: make remember M="what you learned"
+remember:
+	@test -n "$(M)" || (echo 'usage: make remember M="what you learned"' && exit 1)
+	hippo remember "$(M)" --tag gqh
+
+# Share this device's memory with the team, filtered for the public repo.
+share:
+	@bash scripts/memory-share.sh
+
+# Load the team's shared memory into this device's local store.
+absorb:
+	@bash scripts/memory-absorb.sh
+
+# Private device-to-device export. Gitignored.
 memory:
 	bash scripts/memory-export.sh
+
+test:
+	@python3 tests/test_memory_filter.py
+
+# Public repo gate. Run before a push.
+secrets:
+	@python3 scripts/scan_secrets.py
 
 # Regenerate every number the note quotes.
 all:
@@ -25,7 +46,7 @@ all:
 	python -m src.pipeline
 
 # Cheap gate before a commit that touches results.
-check:
+check: secrets
 	@python scripts/check_results.py
 
 status:

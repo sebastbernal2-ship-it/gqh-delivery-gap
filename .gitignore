@@ -21,6 +21,8 @@ __pycache__/
 .hippo/
 .pi/
 
-# Local memory exports stay private: this repo is public
+# Memory: the team's shared files are committed, private device exports are not.
 memory/*.json
+!memory/shared.json
 memory/*.md
+!memory/SHARED.md
