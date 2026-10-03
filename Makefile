@@ -93,8 +93,14 @@ test:
 	@python3 tests/test_scan_report.py
 	@python3 tests/test_scan_fdr.py
 	@python3 tests/test_ideas.py
+	@python3 tests/test_live.py
+	@python3 tests/test_variant_ledger.py
 	@python3 tests/test_scan_compute.py
 	@python3 tests/test_scan_windows.py
+
+# Count every variant tried, from the artifacts that recorded them.
+variants:
+	@python3 scripts/build_variant_ledger.py
 
 # Regenerate the idea view from the graph.
 ideas:

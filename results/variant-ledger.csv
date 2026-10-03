@@ -1,0 +1,10 @@
+family,role,what_was_tried,cells,expected_by_chance,survivors,status,artifact,reproduce
+"scan, mechanism window",search,"every declared pair, each against its own generated null",28,0.9,0,null,scan-pairs-mechanism.csv,python scripts/run_association_scan.py --out results/scan-pairs-mechanism.csv
+"scan, compute era",search,the same scan inside the compute era window,36,1.05,3,"cross-family survivors, candidates only",scan-pairs-compute-era.csv,python scripts/run_association_scan.py --out results/scan-pairs-compute-era.csv
+compute price against everything else,search,"11 pairs, one per other series, at monthly frequency",11,0.55,0,"null, and underpowered by the window length",scan-pairs-compute-era.csv,python scripts/run_association_scan.py --window compute-era
+"firm disclosures, 382 companies",search,"four industry groups, two directions, five horizons",50,2.5,2,"cells above two sigma, see the family correction",group-event-study.csv,python scripts/run_group_event_study.py
+the same study on shuffled dates,control,the placebo for the line above,50,2.5,7,"cells above two sigma, see the family correction",group-event-placebo.csv,python scripts/run_group_event_study.py --placebo
+"firm-level revision study, two companies",search,"84 timestamped revisions, both directions across 5 horizons",10,0.5,1,null on the predicted direction,revision-events.csv,python scripts/run_revision_event_study.py
+aggregate capacity revision strategy,search,"3 signal definitions, three selectivity cuts, one robustness pair",7,,0,no cell positive after costs at the doubled rate,capacity-strategy.csv,python scripts/run_capacity_strategy.py
+"delivery revisions, project level",measurement,"nine annual vintages, every generator",7945,,,"measurement, no null test",delivery-revisions.csv,python scripts/build_delivery_panel.py --years 2015-2023
+promise survival,measurement,"first revision timing, with and without month-sized nudges",6407,,,"measurement, no null test",promise-survival.csv,python scripts/build_promise_survival.py
