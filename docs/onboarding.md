@@ -59,7 +59,18 @@ Capture is automatic. You do not need to remember a memory command:
 - `.githooks/pre-commit` refreshes and stages the shared memory on every commit.
 - `make share` refreshes it now; `make save M="..."` commits and pushes.
 
-## 6. Check the plumbing
+## 6. Before you edit anything
+
+```
+make sync        # pull, and load the team's memory
+make claims      # who else is in flight, and on which files
+```
+
+If a pushed branch already touches the file you are about to edit, stop and read
+`docs/workflow.md`. That file is short and it is the difference between parallel work and four
+people rewriting each other. If you need your own checkout: `make worktree NAME=<your-name>`.
+
+## 7. Check the plumbing
 
 ```
 make doctor
@@ -73,7 +84,7 @@ If your machine has several projects, keep each one's memory in its own store. A
 lives at its repo root. Writing memories from a parent directory puts them somewhere other
 projects read, which is how one project's notes show up in another project's session.
 
-## 7. Where to ask
+## 8. Where to ask
 
 Draft first, formalise later. `docs/inbox/` takes anything with no rules. When a claim is real
 enough to trade on, it becomes `docs/theses/<id>.md` plus one line in the ledger, and `make current`

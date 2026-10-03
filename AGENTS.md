@@ -36,6 +36,7 @@ One owner per fact. Never copy a fact into a second file, link to the owner inst
 | A critique of the idea or the plan | `docs/reviews/` |
 | Numbers the note quotes | `results/*.json` |
 | How memory is shared | `docs/memory.md` |
+| How four people work at once without colliding | `docs/workflow.md` |
 
 ## Rules that decide the score
 
@@ -43,7 +44,10 @@ One owner per fact. Never copy a fact into a second file, link to the owner inst
 2. The out-of-sample window is opened once, by its owner, and reported whether good or bad.
 3. Write the hypothesis and the falsifier before you look at results.
 4. Report every number net of costs, and show what happens when costs double.
-5. Stay inside the paths your workstream owns.
+5. Stay inside the paths your workstream owns, and check `make overlaps` before you edit. If
+   another pushed branch touches your file, stop and report it instead of editing.
+6. One writer per file. If a task needs two people in one file, split the file instead.
+7. Rebase before you commit, not after: `git fetch && git rebase origin/main`.
 
 ## End of session
 

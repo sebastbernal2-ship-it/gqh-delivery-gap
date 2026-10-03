@@ -122,3 +122,26 @@ entries, and every directory under `src/` and `hpc/` must carry a README. Four t
 **Alternatives.** Letting the layout emerge was rejected: with four people and a shifting idea, an
 emergent layout becomes a mess faster than it becomes a convention. A single schema file describing
 every future directory was rejected as speculative.
+
+---
+
+## 2026-10-03: Parallel work is solved by decomposition first, branches second
+
+**Decision.** One writer per file. Components are split by concern with an `INTERFACE.md` as the
+seam. Branches are for risky or overlapping work, pushed immediately, rebased often, merged the same
+day. An interface change is a decision, because it is the only change that breaks work in flight.
+**Context.** Three people editing one file is the concrete case: a strategy implementation, a
+low-latency port of it, and cluster integration. Under any branch model that produces a conflict,
+because git merges lines rather than intentions.
+**Why this shape.** Decomposition removes the conflict instead of scheduling it. With disjoint paths,
+four agents run at once and every change lands. The shared artifact is the interface, which changes
+rarely and on purpose.
+**Tooling.** `make claims` and `make overlaps` read the pushed branches and report collisions and
+drift before merge time, using branches rather than a claim file, because a claim file goes stale and
+branches do not. `make worktree NAME=...` gives a workstream its own checkout so two agents never
+share a directory. `.githooks/pre-push` warns about collisions and never blocks a push.
+**Verified.** Two branch push to the same file was detected by `make overlaps` and warned about by the
+pre-push hook, without blocking. Seven tests cover the report logic (tests/test_claims.py).
+**Alternatives.** Requiring pull requests for every change was rejected: it adds a merge step per
+change and the deadline is measured in hours. One long-lived branch per person was rejected: it
+delays every conflict to the worst possible moment.

@@ -136,6 +136,20 @@ else
 fi
 echo
 
+echo "5. parallel work"
+BRANCH="$(git branch --show-current)"
+note "on branch: ${BRANCH:-detached HEAD}"
+if [ -n "$BRANCH" ] && [ "$BRANCH" != "main" ]; then
+  BEHIND="$(git rev-list --count "${BRANCH}..origin/main" 2>/dev/null || echo 0)"
+  if [ "${BEHIND:-0}" -gt 0 ]; then
+    bad "$BEHIND commits behind main. Rebase before you commit: git fetch && git rebase origin/main"
+  else
+    note "up to date with main"
+  fi
+fi
+note "collisions and drift across all pushed branches: make claims"
+echo
+
 if [ "$problems" -gt 0 ]; then
   echo "first run on a new machine: make bootstrap fixes all of the above"
   echo
