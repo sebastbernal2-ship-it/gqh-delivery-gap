@@ -32,7 +32,7 @@ def record(**over):
         "date": "2026-10-03",
         "note": "docs/theses/t-delivery-gap.md",
         "falsifiers": ["regional transport cost does not predict the relative return"],
-        "evidence": ["results/e0_state.json"],
+        "evidence": ["results/example.json"],
     }
     base.update(over)
     return base
