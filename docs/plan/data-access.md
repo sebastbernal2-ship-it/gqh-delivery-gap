@@ -40,6 +40,39 @@ documents; EIA vintages and hourly grid files; weather and drought; daily bars; 
 exchange published volatility history back to 1990; Sentinel-2 imagery through our own reader; the free mirrors
 of the perpetual archive; and the venue's forward API through the running collector.
 
+## How a secret gets used without being read
+
+The runner holds the credential and hands back **the result**, never the key. That is the whole pattern, and it
+works for every layer:
+
+| Workflow | What it does | Proof |
+|---|---|---|
+| `ingest.yml` | runs the shared loader against TigerData, Snowflake or both, by source id, with an optional window and ticker list | `massive_8k` went from 201 rows to 2,530 |
+| `snowflake-query.yml` | runs one read-only statement with the warehouse credential and returns the result as a CSV artifact | `SHOW TABLES IN SCHEMA VECTOR_RESEARCH.RAW` returned 15 tables, downloaded here |
+
+Both refuse anything that is not a query where a query is expected, print column names and row counts only, and
+let Actions mask the values in the log.
+
+### What the warehouse holds, read through the workflow
+
+`VECTOR_RESEARCH.RAW`, 15 tables:
+
+| `AWS_GPU_SPOT_PRICES` | 1592024 |
+| `AWS_GPU_SPOT_SOURCE_GAPS` | 1 |
+| `CENSUS_C30_AI_INFRA_NSA` | 152 |
+| `EIA860M_2024_12_PROPOSED` | 3404 |
+| `EIA860M_FILE_MANIFESTS` | 128 |
+| `EIA860M_GENERATOR_VINTAGES` | 3387221 |
+| `EQUITY_BARS` | 0 |
+| `FILINGS_8K` | 0 |
+| `INGESTION_MANIFESTS` | 6 |
+| `RESEARCH_ACQUISITION_ROWS` | 433781 |
+| `RESEARCH_ACQUISITION_RUNS` | 8 |
+| `SEC_FILINGS_REGISTER` | 776 |
+| `SEC_FILING_DOCUMENTS` | 11892 |
+| `SEC_FILING_PACKAGE_MANIFESTS` | 340 |
+| `SOURCE_RECORDS` | 151198 |
+
 ## Credentials live in GitHub, so Actions is the only thing that can use them
 
 The repository holds nine Actions secrets, all written tonight: the Massive key and its licence gate, five
