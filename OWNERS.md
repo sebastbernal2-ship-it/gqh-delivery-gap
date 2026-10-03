@@ -56,3 +56,4 @@ Empty until someone claims it. Do not build in an unclaimed path.
 4. **Keep this file one table.** Do not append a second section with its own table. Add a row.
 5. `make check` validates this file: one row per path, no duplicate claims, every person in the
    roster, and every claimed path that is not a future placeholder must exist.
+| `src/imagery/`, `scripts/imagery_probe.py`, `scripts/build_site_labels.py`, `tests/test_imagery.py` | sebastbernal2-ship-it | Physical progress from public imagery, and the windowed reader that makes it possible |
