@@ -18,6 +18,8 @@ Contract: `council-distribution-0.2.0`. Python standard library only; compatible
 - `council.py` fits specialist calibration, the context gate, and final pool calibration from three
   separately supplied partitions. `predict()` handles an abstaining subset by renormalizing active
   weights, and returns the final distribution, entropy, disagreement proxy, and input uncertainty.
+  `predict_parallel()` runs specialist callables in a bounded thread pool before fusion; it makes no
+  latency guarantee and propagates a specialist failure with its identity.
 - `laya_adapter.py` wraps an initialized Laya `Router` as a categorical specialist using Laya's
   `choice` probabilities. It imports no optional Laya dependency, downloads no checkpoint, and
   requires explicit model/checkpoint and data version strings from the caller. It normalizes only
