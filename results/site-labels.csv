@@ -1,0 +1,9 @@
+plant_id,generator_id,plant_name,entity_name,technology,state,capacity_mw,latitude,longitude,promised,realized,slip_months,promise_vintage,realized_vintage
+63209,AVTOR,Aviator Wind,"Aviator Wind, LLC",Onshore Wind Turbine,TX,525.0,31.79261,-100.6973,2020-08,2021-06,10,2019-11,2022-09
+62853,MVRCK,Maverick Creek Wind,Algonquin Power Co,Onshore Wind Turbine,TX,524.4,31.262546,-99.84396,2020-12,2022-03,15,2019-11,2022-09
+62516,1,TB Flats,PacifiCorp,Onshore Wind Turbine,WY,503.2,42.177245,-106.2341,2020-11,2021-10,11,2019-11,2022-09
+60927,1C,Lake Charles Power,Entergy Louisiana LLC,Natural Gas Fired Combined Cycle,LA,500.0,30.272631,-93.29906,2020-06,2020-03,-3,2019-11,2022-09
+60925,1C,Montgomery County,Entergy Texas Inc.,Natural Gas Fired Combined Cycle,TX,500.0,30.44083,-95.5275,2021-06,2021-01,-5,2019-11,2022-09
+62952,CRW01,Cheyenne Ridge Wind Farm,Public Service Co of Colorado,Onshore Wind Turbine,CO,498.4,39.016944,-102.2113,2020-12,2020-08,-4,2019-11,2022-09
+61028,STG1,Hickory Run Energy Station,"Hickory Run Energy, LLC",Natural Gas Fired Combined Cycle,PA,450.0,40.994444,-80.43,2020-02,2020-05,3,2019-11,2022-09
+62562,HILO,"High Lonesome Wind Power, LLC","High Lonesome Wind Power, LLC",Onshore Wind Turbine,TX,449.5,31.171652,-101.8811,2019-12,2021-07,19,2019-11,2022-09
