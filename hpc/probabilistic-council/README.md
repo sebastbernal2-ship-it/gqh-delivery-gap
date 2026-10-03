@@ -69,9 +69,12 @@ not itself validate the JSON manifest.
 
 ## Boundaries
 
-The current system is a buildable prototype, not the full research program. It does not yet include
-real domain data, multi-specialist training, out-of-sample benchmark acceptance, production
-calibration, low-latency service measurements, QPU execution, or a Vultr deployment. Quantum
+The current system is a buildable prototype, not the full research program. The
+[seven-view development experiment](INFORMATION_VIEWS.md) trains tiny specialists on a bounded
+public book sample. The [synchronized tape audit](SYNCHRONIZED_TAPE.md) adds causal book/trade
+features and tests, while rejecting its short candidate for training. Neither provides
+out-of-sample benchmark acceptance, production calibration, low-latency service measurements,
+QPU execution, or a Vultr deployment. Quantum
 methods remain experimental candidates evaluated against equal-budget classical baselines. Vultr
 is scoped as a possible serving/deployment and external-load-test layer for HPG-trained artifacts;
 it is not placed in the latency-sensitive request path until measurements support that choice.
