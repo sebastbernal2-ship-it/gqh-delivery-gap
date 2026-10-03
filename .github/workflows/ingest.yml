@@ -1,0 +1,79 @@
+name: ingest
+
+# Runs the shared source loader with the repository's own credentials, so a secret has a user.
+# Manual dispatch only: nothing here runs on a schedule, and nothing here writes to the public repo.
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: "source id from sync.py --list, for example massive_8k"
+        required: true
+        default: massive_8k
+      from_date:
+        description: "start date, YYYY-MM-DD, for the sources that take a window"
+        required: false
+        default: ""
+      to_date:
+        description: "end date, YYYY-MM-DD"
+        required: false
+        default: ""
+      tickers:
+        description: "comma separated tickers for the massive sources, for example PWR,ETN,EME,DLR"
+        required: false
+        default: ""
+      target:
+        description: "which store receives the rows"
+        required: true
+        default: tigerdata
+        type: choice
+        options: [tigerdata, snowflake, both]
+      dry_run:
+        description: "parse, validate and hash without writing"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      TIGERDATA_URL: ${{ secrets.TIGERDATA_URL }}
+      TIGERDATA_PASSWORD: ${{ secrets.TIGERDATA_PASSWORD }}
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+      SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+      MASSIVE_API_KEY: ${{ secrets.MASSIVE_API_KEY }}
+      GQH_MASSIVE_TEAM_STRATEGY_LICENSE: ${{ secrets.GQH_MASSIVE_TEAM_STRATEGY_LICENSE }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install the loader's dependencies
+        run: python -m pip install --quiet 'psycopg[binary]' snowflake-connector-python openpyxl certifi requests
+
+      - name: List the sources the loader knows
+        run: python src/central_ingest/sync.py --list
+
+      - name: Run the loader
+        # The loader reports row counts and batch hashes. It never prints credentials, and Actions masks them
+        # in the log regardless.
+        run: |
+          ARGS=(--source "${{ inputs.source }}" --target "${{ inputs.target }}")
+          if [ -n "${{ inputs.from_date }}" ]; then ARGS+=(--from "${{ inputs.from_date }}"); fi
+          if [ -n "${{ inputs.to_date }}" ]; then ARGS+=(--to "${{ inputs.to_date }}"); fi
+          if [ -n "${{ inputs.tickers }}" ]; then
+            IFS=',' read -ra NAMES <<< "${{ inputs.tickers }}"
+            for name in "${NAMES[@]}"; do ARGS+=(--ticker "$name"); done
+          fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS+=(--dry-run); fi
+          echo "running: sync.py ${ARGS[*]}"
+          python src/central_ingest/sync.py "${ARGS[@]}"
