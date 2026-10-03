@@ -198,3 +198,39 @@ entry, and stale entries are fixed at the source.
 **Reason.** The team needs the corrections and intuition behind the design, not just a final slogan. Separate physical forecasts, financial signals, risk, execution and independent cluster workloads through explicit contracts before parallel implementation.
 
 **Boundary.** This adopts the documentation placement, not the proposed trading rule, runtime languages, OOS dates or every advanced method. No active thesis is promoted and the archive stays parked. The generated current-position file is unchanged.
+
+---
+
+## 2026-10-03: Correction: no Ornn compute futures are listed
+
+**Decision.** Record that the compute-price curve is not yet tradeable, and treat the earlier claim
+in this repo as wrong.
+**Evidence.** ICE Futures U.S. notice, 29 September 2026: the OCPI H100 (HPR) and OCPI B200 (BKL)
+contracts are announced as planned, "no listing date or timeline has been set at this time", and
+listing waits on a CFTC request-for-comment period. The data available meanwhile is explicitly
+**hypothetical** daily settlement, published to let participants build systems.
+**What this corrects.** An earlier statement, in the shell author's idea document and in chat, said
+ICE had listed an OCPI H100 future and that the complex therefore had a listed forward curve. That
+was wrong. Aidan's advanced-method research caught it. The corrected position: OCPI is a published
+benchmark index of executed rentals, which is usable as a state variable; there is no listed curve
+to trade or to read expectations from.
+**Why it matters.** A strategy step that assumed a tradeable forward curve does not exist yet, and
+any hedging argument that depends on it is unsupported. The parked attempt sits on
+`archive/w0-delivery-gap` and is not rewritten; this entry supersedes the claim for anyone reading
+main.
+
+---
+
+## 2026-10-03: One ownership table, and a check to keep it that way
+
+**Decision.** `OWNERS.md` holds one roster and one claim table. Ownership rows are added to it, never
+appended as a second section with its own table. `scripts/check_owners.py`, run by `make check`,
+enforces it.
+**Context.** Three teammates pushed within twenty minutes and `OWNERS.md` grew three separate
+ownership blocks, one stale summary paragraph describing only the first push, and two names for one
+person (`zifeiliu` in a document, `lucyrunner` in the roster). Nobody did anything wrong; the file had
+no shape that resisted growth.
+**Alternatives.** Leaving it to review was rejected: this file is read by every agent that opens the
+repo, so drift here propagates into editing decisions.
+**Open.** Whether `zifeiliu` and `lucyrunner` are the same person on the HiPerGator allocation needs
+confirmation from the captain, not a guess by an agent.

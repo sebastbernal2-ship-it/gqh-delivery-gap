@@ -19,9 +19,9 @@ Do not load memory/shared.json with hippo import --file: it parses the JSON as p
 
 Repo: https://github.com/sebastbernal2-ship-it/gqh-delivery-gap (public, main). Layout: docs/ (brief.md frozen track rules, CURRENT.md generated from docs/theses/index.jsonl, theses/, decisions.md append-only, workflow.md parallel-work rules, memory.md, onboarding.md, alignment.md, thinking/, writing/, inbox/, history/), src/<component>/ with its own README, hpc/<approach>/ with its own README, results/, memory/shared.json. Commands: make sync, save M=, current, check, test, doctor, claims, overlaps, worktree NAME=, share, absorb, remember M=. Rules: one writer per file, decompose by concern with INTERFACE.md as the seam, branch when paths overlap, push branches immediately, rebase before committing, merge same day. The parked delivery-gap attempt lives on branch archive/w0-delivery-gap including its own out-of-sample split; nothing on main asserts it. Vishnu's equity-first research handoff is in docs/inbox/vishnu-2026-10-03/.
 
-## mem_a8ab2ddf3a13
+## mem_a5ed984c45ac
 
 - tags: gqh, quanthacks
-- created: 2026-10-03T06:01:47.914Z
+- created: 2026-10-03T06:04:18.850Z
 
 Repo: https://github.com/sebastbernal2-ship-it/gqh-delivery-gap (public, main). Structure: docs/ holds the written layer (brief.md frozen track rules, CURRENT.md generated from docs/theses/index.jsonl, theses/ one record per claim, decisions.md append-only, workflow.md the parallel-work rules, memory.md the memory protocol, onboarding.md, alignment.md, thinking/, writing/, inbox/, history/). src/<component>/ for code with its own README. hpc/<approach>/ for HiPerGator jobs, one directory per approach. results/ for numbers the note quotes. Commands: make sync, make save M=..., make current, make check (secrets, ledger, structure, paths, view freshness), make test, make doctor, make claims, make overlaps, make worktree NAME=..., make share, make absorb, make remember M=... . Parallel work: one writer per file, decompose by concern with INTERFACE.md as the seam; branches pushed immediately, rebased often, merged the same day; archive/w0-delivery-gap holds the parked delivery-gap attempt.
