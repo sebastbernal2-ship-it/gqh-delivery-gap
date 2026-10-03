@@ -1,0 +1,86 @@
+name: snowflake-query
+
+# Uses the repository's Snowflake credential without anyone reading it. The credential stays on the runner;
+# what comes back is the result set, as a CSV artifact. Read only: statements that are not a query are refused.
+on:
+  workflow_dispatch:
+    inputs:
+      sql:
+        description: "one read-only statement, for example SHOW TABLES IN SCHEMA VECTOR_RESEARCH.RAW"
+        required: true
+      out_name:
+        description: "artifact name"
+        required: true
+        default: snowflake-result
+      limit_rows:
+        description: "maximum rows to return"
+        required: true
+        default: "5000"
+
+permissions:
+  contents: read
+
+jobs:
+  query:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+      SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+      SQL_TEXT: ${{ inputs.sql }}
+      LIMIT_ROWS: ${{ inputs.limit_rows }}
+      OUT_NAME: ${{ inputs.out_name }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the client
+        run: python -m pip install --quiet snowflake-connector-python
+      - name: Run the query and write the result
+        # The statement is checked before it runs, and only a query is accepted. Nothing prints credentials:
+        # the connector is given a password, the log only receives column names and row counts.
+        run: |
+          python - <<'PY'
+          import csv, os, re, textwrap
+
+          sql = textwrap.dedent(os.environ["SQL_TEXT"]).strip().rstrip(";")
+          if not re.match(r"^(select|with|show|describe|desc)\b", sql, re.I):
+              raise SystemExit("refused: only a read-only statement is accepted")
+          if re.search(r";\s*\S", sql):
+              raise SystemExit("refused: one statement only")
+
+          import snowflake.connector
+          connection = snowflake.connector.connect(
+              account=os.environ["SNOWFLAKE_ACCOUNT"],
+              user=os.environ["SNOWFLAKE_USER"],
+              password=os.environ["SNOWFLAKE_PASSWORD"],
+              warehouse=os.environ["SNOWFLAKE_WAREHOUSE"],
+              role=os.environ.get("SNOWFLAKE_ROLE") or None,
+          )
+          limit = int(os.environ["LIMIT_ROWS"])
+          try:
+              cursor = connection.cursor()
+              cursor.execute(sql)
+              columns = [column[0] for column in cursor.description or []]
+              rows = cursor.fetchmany(limit)
+              print(f"columns: {columns}")
+              print(f"rows returned: {len(rows)} (limit {limit})")
+              with open("snowflake-result.csv", "w", newline="") as handle:
+                  writer = csv.writer(handle)
+                  if columns:
+                      writer.writerow(columns)
+                  writer.writerows(rows)
+          finally:
+              connection.close()
+          PY
+      - name: Show the result size
+        run: wc -l snowflake-result.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.out_name }}
+          path: snowflake-result.csv
+          if-no-files-found: error
