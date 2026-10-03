@@ -23,7 +23,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 import requests  # noqa: E402
 
-from live.hyperliquid import MARKETS, book_row, context_rows, now_iso  # noqa: E402
+from live.hyperliquid import MARKETS, book_row, context_rows, now_iso, safe  # noqa: E402
 
 TAPE_DIR = ROOT / "data" / "tape"
 
@@ -49,9 +49,10 @@ def main(argv: list[str] | None = None) -> int:
         while time.time() < deadline:
             started = time.time()
             rows = []
-            contexts = {row["coin"]: row for row in context_rows(session)}
+            # A dropped connection, a slow response or a malformed body must cost one sample, not the run.
+            contexts = {row["coin"]: row for row in (safe(context_rows, session) or [])}
             for coin in markets:
-                book = book_row(session, coin)
+                book = safe(book_row, session, coin)
                 if book is None:
                     failures += 1
                     continue

@@ -14,6 +14,14 @@ MARKETS = ("BTC", "ETH", "GAS", "SPX")
 TIMEOUT = 20
 
 
+def safe(call, *args, **kwargs):
+    """A collection run must survive a dropped connection: one timeout is not the end of a tape."""
+    try:
+        return call(*args, **kwargs)
+    except Exception:
+        return None
+
+
 def book_row(session, coin: str) -> dict | None:
     """One snapshot: best bid and ask, mid, depth within ten basis points, and the imbalance."""
     payload = {"type": "l2Book", "coin": coin}
