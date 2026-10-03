@@ -54,10 +54,9 @@ Capture is automatic:  agent hook (AGENTS.md) + pre-commit hook
 Before you start:      make sync
 Work in your paths:    see OWNERS.md
 Commit a unit of work: make save M="what changed"
-Check results shape:   make check
-Export local memory:   make memory
+Check the gates:       make check
+See who is in flight:  make claims
 Stop for the night:    make sync
-Optional unattended:   make schedule
 
 Two rules that decide the score:
   1. If it is not in this repo, it is not shared.
