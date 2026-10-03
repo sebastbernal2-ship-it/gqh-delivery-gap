@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Mechanical capture: refresh the team's shared memory as part of every commit, and
+# stage it so it travels with the commit. Never blocks a commit.
+set -uo pipefail
+
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
+cd "$ROOT" || exit 0
+[ -f scripts/memory-share.sh ] || exit 0
+
+if command -v hippo >/dev/null 2>&1; then
+  bash scripts/memory-share.sh >/dev/null 2>&1 || echo "hippo: share skipped (not fatal)"
+fi
+
+git add memory/shared.json memory/SHARED.md 2>/dev/null || true
+exit 0

@@ -1,25 +1,36 @@
 [
   {
-    "id": "mem_29bb6710d4c1",
-    "content": "Repo: https://github.com/sebastbernal2-ship-it/gqh-delivery-gap (public, main). Single source of truth for the GQH 2026 systematic trading entry. Owners: docs/00-brief.md holds the track facts and rubric; docs/01-idea.md the delivery-gap strategy; docs/02-system.md the execution plan; docs/03-decisions.md the append-only decision ledger; docs/04-memory.md the memory protocol; docs/reviews/ the team critiques; results/README.md the frozen artifact envelope (e1.json, e2.json, e3.json, e4.json, costs.json); OWNERS.md the one-writer-per-path map. Session start: make sync, which pulls and absorbs the team's shared memory, then read docs/00 through 03. Write a shareable memory with: make remember M=... (tags it gqh). Share it with: make share, which filters and writes memory/SHARED.md and memory/shared.json. Gates: make test, make secrets, make check.",
-    "tags": [
-      "quanthacks",
-      "gqh"
-    ],
-    "created": "2026-10-03T04:25:03.829Z",
-    "layer": "episodic",
-    "confidence": "verified",
-    "pinned": false
-  },
-  {
-    "id": "mem_e0f0824946bb",
+    "id": "mem_6f0771d95a33",
     "content": "Do not load memory/shared.json with hippo import --file: it parses the JSON as plain text and writes one memory per line, flooding the store with fragment entries such as a bare key string. Use scripts/memory_absorb.py, which compares normalized content against the local export and calls hippo remember once per missing entry. It is idempotent.",
     "tags": [
       "quanthacks",
       "gqh",
       "error"
     ],
-    "created": "2026-10-03T04:25:03.978Z",
+    "created": "2026-10-03T04:26:25.606Z",
+    "layer": "episodic",
+    "confidence": "verified",
+    "pinned": false
+  },
+  {
+    "id": "mem_903c48a44036",
+    "content": "Out-of-sample window for this entry: with an EIA-860M history start of 2022-01-03 the mandated rule (most recent 20 percent, or 2 years, whichever is shorter) gives about 2025-10-20 to 2026-10-02 out of sample, and 2022-01-03 to 2025-10-19 in sample.",
+    "tags": [
+      "gqh"
+    ],
+    "created": "2026-10-03T04:28:54.051Z",
+    "layer": "episodic",
+    "confidence": "verified",
+    "pinned": false
+  },
+  {
+    "id": "mem_a97bb8d9325c",
+    "content": "Repo: https://github.com/sebastbernal2-ship-it/gqh-delivery-gap (public, main). Single source of truth for the GQH 2026 systematic trading entry. Owners: docs/00-brief.md holds the track facts and rubric; docs/01-idea.md the delivery-gap strategy; docs/02-system.md the execution plan; docs/03-decisions.md the append-only decision ledger; docs/04-memory.md the memory protocol; docs/reviews/ the team critiques; results/README.md the frozen artifact envelope (e1.json, e2.json, e3.json, e4.json, costs.json); OWNERS.md the one-writer-per-path map. Session start: make sync, which pulls and absorbs the team's shared memory, then read docs/00 through 03. Write a shareable memory with: make remember M=... (tags it gqh). Share it with: make share, which filters and writes memory/SHARED.md and memory/shared.json. Gates: make test, make secrets, make check.",
+    "tags": [
+      "quanthacks",
+      "gqh"
+    ],
+    "created": "2026-10-03T04:26:25.321Z",
     "layer": "episodic",
     "confidence": "verified",
     "pinned": false

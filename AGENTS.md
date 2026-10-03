@@ -53,3 +53,29 @@ make save M="what changed"
 ```
 
 Never commit credentials, absolute local paths, or anything under `data/`.
+
+<!-- hippo:start -->
+## Project Memory (Hippo)
+
+At the start of every task, run:
+```bash
+hippo context --auto --budget 1500
+```
+Read the output before writing any code.
+
+On errors or unexpected behaviour:
+```bash
+hippo remember "<description of what went wrong>" --error
+```
+
+On task completion:
+```bash
+hippo outcome --good
+```
+
+When Hippo's Codex wrapper is installed, session-end capture runs automatically.
+If the wrapper is not installed, capture a brief summary manually:
+```bash
+hippo capture --stdin <<< '<decisions, errors, lessons — 2-5 bullets>'
+```
+<!-- hippo:end -->

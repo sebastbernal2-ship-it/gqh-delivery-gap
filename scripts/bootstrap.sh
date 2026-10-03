@@ -28,6 +28,10 @@ python -m pip install --quiet --upgrade pip
 python -m pip install --quiet -e .
 echo "environment ready: $(python -V)"
 
+# Mechanical capture: every commit refreshes and stages the shared memory.
+git config core.hooksPath .githooks
+chmod +x .githooks/* scripts/*.sh 2>/dev/null || true
+
 # Load the team's shared memory so recall works from the first session.
 if [ -s memory/shared.json ]; then
   bash scripts/memory-absorb.sh

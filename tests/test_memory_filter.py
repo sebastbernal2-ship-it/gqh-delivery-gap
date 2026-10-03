@@ -102,6 +102,25 @@ def _():
     assert out[0]["tags"] == [SHARE], out[0]["tags"]
 
 
+@case("store scoped mode shares untagged entries")
+def _():
+    # When the store lives inside the repo, every entry in it is project scope by
+    # construction, so capture does not need a human to tag anything.
+    out = filter_entries([entry("untagged but in the project store", tags=[])],
+                         SHARE, store_scoped=True)
+    assert len(out) == 1, out
+    assert out[0]["tags"] == [SHARE], out[0]["tags"]
+
+
+@case("store scoped mode still drops secrets and still redacts")
+def _():
+    out = filter_entries([entry("token: " + "a1b2c3d4e5f6g7h8", tags=[])],
+                         SHARE, store_scoped=True)
+    assert out == [], out
+    ok = filter_entries([entry("see /home/someone/thing", tags=[])], SHARE, store_scoped=True)
+    assert "/home/someone" not in ok[0]["content"], ok
+
+
 @case("output is stable and sorted by id")
 def _():
     items = [entry("b", id="mem_2"), entry("a", id="mem_1")]
