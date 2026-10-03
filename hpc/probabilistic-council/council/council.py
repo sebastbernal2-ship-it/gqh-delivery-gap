@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import math
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Dict, Mapping, Optional, Sequence, Tuple
+from typing import Callable, Dict, Mapping, Optional, Sequence, Tuple
 
 from .calibration import TemperatureCalibrator, fit_temperature
 from .distributions import SpecialistForecast, assert_compatible
@@ -263,6 +264,34 @@ class CouncilModel:
             weights, entropy, disagreement(raw, weights, pooled), weighted_epistemic,
             self.fusion_method, active[0].dimensions, active[0].outcome_states,
         )
+
+    def predict_parallel(self, forecast_tasks: Mapping[str, Callable[[], SpecialistForecast]],
+                         max_workers: Optional[int] = None) -> CouncilPrediction:
+        """Run independent specialist calls concurrently, then fuse their distributions."""
+        if not forecast_tasks:
+            raise ValueError("parallel prediction needs at least one specialist task")
+        unknown = set(forecast_tasks) - set(self.specialists)
+        if unknown:
+            raise ValueError("parallel task names are not fitted specialists: "
+                             + ", ".join(sorted(unknown)))
+        workers = min(8, len(forecast_tasks)) if max_workers is None else max_workers
+        if workers < 1:
+            raise ValueError("max_workers must be positive")
+        with ThreadPoolExecutor(max_workers=workers) as executor:
+            futures = {name: executor.submit(task)
+                       for name, task in forecast_tasks.items()}
+            forecasts = []
+            for name, future in futures.items():
+                try:
+                    forecast = future.result()
+                except Exception as error:
+                    for pending in futures.values():
+                        pending.cancel()
+                    raise RuntimeError("specialist inference failed: " + name) from error
+                if forecast.specialist_id != name:
+                    raise ValueError("parallel task key must match forecast specialist_id")
+                forecasts.append(forecast)
+        return self.predict(forecasts)
 
     def marginal(self, dimension: str) -> Dict[str, float]:
         """Marginalize the final joint distribution by a declared state dimension."""
