@@ -14,8 +14,14 @@ note, or shows lookahead or out-of-sample tuning. The frozen brief facts are in
 
 ## Where we are
 
-Nothing is settled. The direction moved on 2026-10-03 and the earlier attempt is parked on the
-`archive/w0-delivery-gap` branch, so this branch holds no claim about what we are building.
+No trading thesis is promoted yet. The earlier attempt is parked on the
+`archive/w0-delivery-gap` branch, not implemented on this branch.
+
+Vishnu's conversation handoff is in
+[`docs/inbox/vishnu-2026-10-03/README.md`](docs/inbox/vishnu-2026-10-03/README.md).
+It captures the equity-first research direction, reasoning revisions, instrument-specific data
+requirements, technical boundaries, and next feasibility gates. It is context and proposals,
+not evidence of alpha or a settled universe. Read it before resuming research from this chat.
 
 `docs/CURRENT.md` is the live position. It is generated from `docs/theses/index.jsonl`, which is
 empty until someone records a thesis. Drop rough work in `docs/inbox/`.
