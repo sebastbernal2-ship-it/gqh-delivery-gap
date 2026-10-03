@@ -1,4 +1,4 @@
-.PHONY: sync save bootstrap doctor current hooks hooks-global remember share absorb autoshare schedule unschedule memory test secrets all check status
+.PHONY: sync save bootstrap doctor current hooks hooks-global remember share absorb autoshare schedule unschedule memory test secrets check status
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -63,18 +63,11 @@ memory:
 test:
 	@python3 tests/test_memory_filter.py
 	@python3 tests/test_memory_absorb.py
-	@python3 tests/test_delivery_metrics.py
-	@python3 tests/test_delivery_cohort.py
 	@python3 tests/test_thesis_index.py
 
 # Public repo gate. Run before a push.
 secrets:
 	@python3 scripts/scan_secrets.py
-
-# Regenerate every number the note quotes.
-all:
-	@test -f src/pipeline.py || (echo "src/pipeline.py does not exist yet. See docs/02-system.md." && exit 1)
-	.venv/bin/python src/pipeline.py
 
 # Cheap gate before a commit that touches results.
 check: secrets

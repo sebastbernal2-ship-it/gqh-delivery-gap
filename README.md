@@ -12,17 +12,13 @@ they rerun the code. Criterion 5 is capped at 4 if the code does not run, does n
 note, or shows lookahead or out-of-sample tuning. The frozen brief facts are in
 `docs/00-brief.md`.
 
-## The idea, in three sentences
+## Where we are
 
-The AI capex complex is priced on announced capacity. Capacity is only deliverable once it
-is energized, and power is the binding constraint, so the announced schedule slips in a way
-that is published every month and read by almost nobody. We measure the slip as a transport
-cost between promised and realized delivery dates, and we trade the spread between the
-names that can deliver and the names priced as if they already had.
+Nothing is settled. The direction moved on 2026-10-03 and the earlier attempt is parked on the
+`archive/w0-delivery-gap` branch, so this branch holds no claim about what we are building.
 
-That thesis is parked while the team's direction settles. The live position is always in
-`docs/CURRENT.md`, which is generated from `docs/theses/index.jsonl`. Nothing in this repo is
-frozen except `docs/00-brief.md` (the track's own rules) and the measurement contract.
+`docs/CURRENT.md` is the live position. It is generated from `docs/theses/index.jsonl`, which is
+empty until someone records a thesis. Drop rough work in `docs/inbox/`.
 
 ## Layout
 
@@ -72,8 +68,8 @@ The rest:
 Default: commit straight to `main` inside the paths you own. Four people, one writer per path,
 so `main` stays runnable and the repro check keeps working.
 
-Use a branch only for something that would break `make check` or `make all` on `main`, and merge
-it the same night. A branch that lives longer than a night is a branch that loses to the deadline.
+Use a branch for an attempt that is not yet a claim, the way `archive/w0-delivery-gap` is. An
+attempt lives on its own branch so `main` never looks more settled than it is.
 
 Any agent that opens this repo reads `AGENTS.md` first. It holds the session start rules.
 
