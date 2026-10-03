@@ -1,0 +1,21 @@
+{
+  "selection_rule": "First lexicographic nonpartitioned l4_l2book and l4_trades file at pinned revision, selected on names and sizes before outcomes; clock overlap remains unverified.",
+  "files": [
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "path": "data/l4_l2book/l4_l2book_1765199828.parquet",
+      "size": 49262665,
+      "sha256": "b263e5548bf5218ebc6717006b96a9637e53e9386ca3628ac7fd9e596793f531",
+      "kind": "books"
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "path": "data/l4_trades/l4_trades_1765199829.parquet",
+      "size": 1616725,
+      "sha256": "74e006611b358974ec8491d6729d512a016afc64698e3d0c6b3b2181c750e256",
+      "kind": "trades"
+    }
+  ]
+}
