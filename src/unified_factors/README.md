@@ -161,3 +161,5 @@ Reference: [arch GARCH and forecasting documentation](https://arch.readthedocs.i
 
 See [the Snowflake audit](audit/README.md) for live coverage, availability and reconciliation checks,
 read-only SQL and workflow receipts. Raw ingestion is not yet a validated factor input panel.
+
+The daily equity/factor input stage and its current access gate are documented in [panel preparation](panel/README.md).
