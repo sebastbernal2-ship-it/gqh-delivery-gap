@@ -815,3 +815,22 @@ diffusions and Hawkes processes, and a test found that duplicate idea ids were b
 before the duplicate check could see them, which had silently disabled that check.
 **The earlier sorting document is superseded**, not deleted from history: its content now lives as the
 attachment and reason fields on the nodes, which is one owner instead of two.
+
+---
+
+## 2026-10-03: The five directions are records now, not prose in a chat
+
+**What was missing.** The five derived directions lived in a message. An idea is a tool, but a direction is a
+program: it needs who pays, why the incentive persists, what it would run on, what would kill it, and what the
+next concrete step is. Without those fields it cannot be picked up by anyone else, and it decays into a
+sentence.
+**What they are now.** Five direction records in the same graph file, validated like everything else.
+Physical construction progress from satellite imagery, which attacks the 6.2 percent attribution ceiling from
+the physical side. Cascades as threshold processes, the formal content behind the low latency direction.
+Promise survival as a hazard rate, which turns the strongest result from a mean into a curve. Distributional
+mispricing as a transport distance, gated on an options entitlement. And protocol formalisation, whose
+invariants are exposure limits and holdout discipline rather than alpha.
+**What the validator enforces on them.** Every direction must name its rationale, capacity, falsifier, status
+and next step, must use only declared ideas, and must measure only declared nodes. So a direction cannot
+reference a tool we do not have or a measurement we cannot make. Three declared, one blocked on data, and the
+renderer prints them above the idea list because they are what happens next.

@@ -21,6 +21,7 @@ VIEW = ROOT / "docs" / "ideas" / "README.md"
 
 FAMILY_TITLES = {"math": "Mathematics", "method": "Methods", "theory": "Theory",
                  "system": "Systems", "measure": "Measures"}
+DIRECTION_FIELDS = ("rationale", "capacity", "falsifier", "next")
 RELATION_PHRASES = {"combines_with": "combines with", "analogous_to": "is analogous to",
                     "specializes": "specialises", "generalizes": "generalises",
                     "requires": "requires", "supplies_method_for": "supplies a method for",
@@ -56,6 +57,28 @@ def render(rows: list[dict]) -> str:
            f"{sum(1 for i in ideas.values() if i.get('reason'))} are kept without an attachment, each with a "
            "stated reason, because a graph of only useful things is not a graph of ideas.",
            ""]
+    directions = [row for row in rows if row.get("kind") == "direction"]
+    if directions:
+        out.append("## Directions: where an edge could actually live")
+        out.append("")
+        out.append("An idea is a tool. A direction is a program, so each one carries who pays, why it "
+                   "persists, what it would run on, and what would kill it.")
+        out.append("")
+        for direction in sorted(directions, key=lambda d: d["name"]):
+            out.append(f"### {direction['name']}")
+            out.append("")
+            out.append(f"{direction['statement']}.")
+            out.append("")
+            out.append(f"- **status**: {direction['status']}")
+            out.append(f"- **rationale**: {direction['rationale']}")
+            if direction.get("needs"):
+                out.append(f"- **needs**: {'; '.join(direction['needs'])}")
+            out.append(f"- **capacity**: {direction['capacity']}")
+            out.append(f"- **falsifier**: {direction['falsifier']}")
+            out.append(f"- **next**: {direction['next']}")
+            out.append(f"- **uses**: {', '.join(f'`{u}`' for u in direction.get('uses', []))}")
+            out.append(f"- **measures**: {', '.join(f'`{m.split(chr(58), 1)[1]}`' for m in direction.get('measures', []))}")
+            out.append("")
     by_family: dict[str, list[dict]] = {}
     for idea in ideas.values():
         by_family.setdefault(idea.get("family", "?"), []).append(idea)
