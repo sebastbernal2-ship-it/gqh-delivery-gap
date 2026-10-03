@@ -9,6 +9,7 @@
 
 set -euo pipefail
 module load pytorch
+export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-2}"
 
 RUN_DIR="${TMPDIR:-/tmp}/jevlike-${SLURM_JOB_ID}"
 mkdir -p "$RUN_DIR"
@@ -26,5 +27,5 @@ python jevlike/export_tiny_cpp.py "$RUN_DIR/tiny.pt" \
 g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -pthread \
     -I cpp/include cpp/src/council.cpp cpp/src/jevlike_tiny.cpp \
     cpp/examples/jevlike_predict.cpp -o "$RUN_DIR/jevlike-predict-cpp"
-python jevlike/verify_cpp_parity.py --checkpoint "$RUN_DIR/tiny.pt" \
+python -m jevlike.verify_cpp_parity --checkpoint "$RUN_DIR/tiny.pt" \
     --weights "$RUN_DIR/tiny.jvlk" --cpp-binary "$RUN_DIR/jevlike-predict-cpp"

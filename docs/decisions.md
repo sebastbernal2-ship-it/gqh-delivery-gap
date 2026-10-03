@@ -1045,3 +1045,18 @@ contract forced class is gone.
 
 **Consequence**: any source can now be loaded by adding a source to the loader and dispatching it. The remaining
 work is code, not credentials.
+
+## 2026-10-03: kdb batch jobs receive an explicit shared repository root
+
+**Decision**: both kdb Slurm wrappers require exported `GQH_REPO_ROOT`, an absolute shared
+checkout path containing `hpc/kdb-timeseries`. Missing, relative and wrong-component paths fail
+before the workload. `Q_BIN`, `HPG_BLUE_DIR` and the build input/output contracts are unchanged.
+
+**Reason**: Slurm executes a spooled script, so its file location cannot locate repository
+siblings. The documented submission directory contains logs, so `SLURM_SUBMIT_DIR` also cannot
+stand in for the repository. Explicit configuration keeps code location separate from logs.
+
+**Validation and migration**: updated submission commands, root-cause research, regression
+coverage and remaining real-q/cluster gates live in `hpc/kdb-timeseries/VALIDATION.md` and its
+README. Existing callers must export the new variable before submission. This is an operational
+correctness repair authorized by the user; it changes no strategy or out-of-sample decisions.
