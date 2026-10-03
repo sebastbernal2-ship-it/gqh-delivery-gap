@@ -10,17 +10,20 @@ approach-specific environments in their own `hpc/<approach>/` directories.
 - **Blue storage: assigned, not independently checked here.** The owner reports a project Blue
   directory. Its account-specific path is deliberately not recorded in this public repository;
   keep it in local shell configuration as `HPG_BLUE_DIR`.
-- **Mac-to-HiPerGator key login: not verified.** A key generated on HiPerGator and `ssh-copy-id`
-  run from there do not install the Mac's public key on the account. Current `ssh hpg` login still
-  asks for password and Duo.
+- **Mac-to-HiPerGator key login: verified 2026-10-03.** The dedicated Mac public key was installed
+  with `ssh-copy-id`. Key authentication succeeded; interactive SSH then required Duo. The private
+  key is encrypted and must be loaded into the SSH agent before the client can sign with it.
 - **HTTP API: no general key identified.** SSH access and the AI Gateway key are different
   credentials. Identify the specific service and endpoint before looking for an API credential.
 
-These are reported setup facts, not evidence that data has been downloaded or that a compute job
-has run. Do not put passwords, Duo codes, private keys, API keys, or account-specific storage paths
+These setup facts do not establish that external data has been downloaded. The synthetic CPU pilot
+has run on HiPerGator; see [its approach README](../probabilistic-council/README.md) for the job
+record. Do not put passwords, Duo codes, private keys, API keys, or account-specific storage paths
 in the repository.
 
-## Next: verify Mac-side SSH key setup
+## Mac-side SSH key setup
+
+The owner's current Mac key setup is verified. For a future Mac or key rotation, use the steps below.
 
 Run these commands on the Mac, not in an SSH session:
 
@@ -35,7 +38,7 @@ If both the private key and `.pub` file exist, install the public key on the HiP
 ssh-copy-id -i ~/.ssh/id_ed25519_hpg.pub "${HPG_USERNAME}@hpg.rc.ufl.edu"
 ```
 
-Then test `ssh hpg`. Record whether password/Duo is still required. If the dedicated Mac key pair
+Then test `ssh hpg`; Duo remains required after key authentication. If the dedicated Mac key pair
 does not exist, create it on the Mac before copying its public key; do not overwrite an existing
 key. Never copy or commit the private key. If only one of the two files exists, inspect the local
 SSH setup before generating or replacing anything.
@@ -52,7 +55,5 @@ Gateway credentials as interchangeable with an HTTP API key.
 
 ## Evidence boundary
 
-This page records the owner's reported state and the next verification steps. It does not claim
-that Mac key authentication, Blue storage access from a job, an HTTP API, or a HiPerGator workload
-has been tested. When those checks are done, update this page with the command or test outcome and
-any non-sensitive limitation; keep credentials and data out of Git.
+This page records the owner's verified SSH setup and the remaining storage/API checks. Blue storage
+access from a job and HTTP API access remain unverified; keep credentials and data out of Git.
