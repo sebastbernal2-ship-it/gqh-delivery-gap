@@ -34,9 +34,13 @@ and names share shocks, and the resulting **effective breadth**. What is stable 
 
 Then: **every assumption used downstream cites a measurement here.**
 
-**The chain.** Nodes (measurable quantities with units, source and knowable-at time) and edges
-(relations with sign, status, conditions, evidence, failure mode). A thesis is a path through this
-chain, not a strategy name.
+**The graph and the chain.** The relation structure this thesis rests on: nodes (research objects),
+their **representations** (one node may have several views with different units, clocks and vintages),
+**case-local roles** (input, outcome, control, conditioning variable, shared-driver candidate, mediator,
+confounder candidate, benchmark, measurement proxy), and edges with a semantic type, an epistemic status,
+an origin, conditions, and a failure mode. A thesis is a **path** through that structure, not a strategy
+name. Every pair of interest gets a coverage record: a pair we cannot compare is recorded as blocked or
+unsupported, never dropped. Multiple comparisons are counted before anything is ranked.
 
 **The assumption register.** One row per edge: status (measured, proxied, testable, irreducible), the
 evidence or proxy, the exposure it licenses, and the test that would upgrade it. Irreducible assumptions
@@ -62,6 +66,10 @@ value, overlay, derivative profit) and the evidence for it. Every position names
 serves.
 
 ## Results
+
+**Separate the four statuses:** association strength, causal status, evidence status, promotion status.
+Declare the causal ceiling in advance (`descriptive_only`, `predictive`, or `causal`) and keep language
+within it. Predictive validation does not require causal support. Tradability is a later, separate gate.
 
 Their metric list, produced our way: reported in-sample and out-of-sample separately, every number net
 of costs, deflated for the number of variants.
