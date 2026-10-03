@@ -284,3 +284,30 @@ and prevents being fooled. Ours can win the argument and lose the weekend. Adopt
 event family, one horizon, one pilot, one result artifact, and if a choice arises between another
 governance improvement and the first honest number, take the number.
 **Enforcement.** Four new tests on the ledger check (15 total in that suite).
+
+---
+
+## 2026-10-03: Insert the two missing stages, and make the rubric structural
+
+**Decision.** The development pipeline is eight stages, not four. Stage 3 **Structure** and stage 4
+**Identification** sit between Data and Methodology, and stage 7 **Decomposition** follows the first
+test. `docs/alignment.md` sections 13 to 15 own them, with the exposure budget as a named artifact.
+**The gap this closes.** Both the training material's four sections and our earlier method jumped from
+Data to Methodology. Nothing measured the world's joint structure, so assumptions were asserted rather
+than derived, and nothing checked afterwards whether the strategy was holding only the exposure it
+intended. The captain's reading of the framework was right, and it was our gap too.
+**What stage 3 produces.** Marginal distributions with tails and censoring; dependence beyond
+correlation; association screens with multiple-testing control; shared-shock clusters; sub-period
+stability; and an explicit split between what is identified and what is merely associated. Its gate:
+**every assumption downstream cites a measurement here.**
+**What stage 4 produces.** For each load-bearing arrow, an identification design and an estimand. Its
+gate: no trade-driving arrow may remain merely inferred.
+**What stage 7 produces.** Factor and regime attribution of returns and risk, realised exposure versus
+the budget, the residual share, fragility by regime, and the hedge map. Unintended exposure is hedged,
+sized down, or dropped. Its output loops back to stage 3.
+**Rubric enforcement.** An active thesis record must carry one section per criterion — Hypothesis,
+Data, Structure, Methodology, Results, Novelty, Risk, Liquidity — and `make check` fails if any is
+missing. The rubric is now a structural requirement, not an aspiration.
+**Honest limit, recorded.** A method can guarantee the evidence is produced and auditable. It cannot
+guarantee the numbers are good. Criterion 02 is the second limit: the template forces a novelty claim
+and the anti-imitation check, but cannot manufacture a real novelty.

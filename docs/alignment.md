@@ -294,3 +294,76 @@ standing rule:
 Their skeleton, our gates inside it: a thesis record is an Investment Proposal with four required
 sections, plus Falsifiers, Costs and capacity, and Limitations; the ledger line stays as it is; the
 data gate is a named person; results print their metric list, produced our way.
+
+---
+
+## 13. The development pipeline: eight stages, not four
+
+The training material's four steps (Hypothesis → Data → Methodology → Backtest) are missing the middle
+and missing the aftermath. Two stages sit between Data and Methodology, because that is where the
+assumptions come from. One stage follows the first test, because that is where unintended risk is
+found. Stages 3, 4 and 7 are the ones nobody in the published framework owns.
+
+| # | Stage | Purpose | Artifact | Gate: cannot proceed without | Rubric |
+|---|---|---|---|---|---|
+| 1 | Question | What economic thing are we claiming | One paragraph, the mechanism, the counterparty, the simplest rival, the falsifier | All five present and specific | 01 |
+| 2 | Data | Get the world in, with provenance | Data manifest: source, availability time, entitlement, coverage, rejections | A **named approver**; every field's knowable-at time documented | 01, 05 |
+| 3 | **Structure** | **Measure the world's joint structure before building on it** | Marginal distributions with tails and censoring; dependence beyond correlation (tail dependence, concordance, copulas where they earn it); association screens with multiple-testing control; shared-shock clusters; stability of each relation across sub-periods; and a list separating *identified* from merely *associated* | **Every assumption used downstream cites a measurement here.** No free-floating assumptions | 01, 02, 05 |
+| 4 | **Identification** | Which relations are causal, and how we know | For each load-bearing arrow: the design (timing, comparison group, instrument, placebo, falsification test), the estimand, and the result | No arrow that drives a trade may remain "inferred". It is evidenced, or the trade is labelled speculative and sized as such | 01, 05 |
+| 5 | Design | Turn the mechanism into rules | Signal rules, timing, portfolio construction, execution and cost model, exposure budget | A baseline to beat, a cost model, a variant plan, one primary horizon, a sealed-test plan | 01, 04, 05 |
+| 6 | Test | Produce the honest number | Results artifact, in-sample and out-of-sample separate, net of costs | Sealed test opened once, by a named owner, reported whatever it says | 05 |
+| 7 | **Decomposition** | Break the strategy back down and remove what we did not intend | Factor and regime attribution of returns *and* risk; exposure budget versus realised; residual and idiosyncratic share; fragility by regime; the hedge map | Unintended exposure is hedged, sized down, or dropped, and the assumptions it contradicts are re-derived | 03, 04, 01 |
+| 8 | Writeup | Make it legible and auditable | The note, plus the record, mapped to the five criteria | Every number traces to a result artifact, and a judge can rerun it | all |
+
+Stage 7 loops back to Stage 3. A decomposition that contradicts an assumption sends us back to the
+measurement, not to the prose.
+
+## 14. Only intentional exposure
+
+A strategy should hold the exposure it is paid to hold and nothing else. Idiosyncratic risk is
+uncompensated: carrying it adds volatility and no expected return, so it is a cost, not a strategy.
+
+**The exposure budget** is a named artifact and the thing that makes this checkable.
+
+- **Intended**: which systematic exposures we are paid to hold, why the mechanism pays for them, and
+  the tolerance around each.
+- **Neutralised**: exposures we do not intend to hold (market, sector, rates, FX, commodity, crowding),
+  and how each is neutralised: hedge, size, or drop the name.
+- **Forbidden**: anything we cannot name. An unnamed exposure is a defect, not a residual.
+- **Realised**: post-trade attribution of returns *and* risk against the budget, with the unexplained
+  share reported. If the strategy's returns load on something outside the budget, we own that
+  decision explicitly or remove it.
+
+Rules:
+
+1. Every source of P&L is either the mechanism, a hedge of an unintended exposure, or a defect.
+2. Report the factor-attribution residual and say whether it is intended.
+3. Decompose by regime, with regime definitions fitted on past information only. State where the
+   strategy is fragile rather than averaging it away.
+4. Long/short and beta-neutral books can lose on both legs. Joint tails, borrow, financing and basis
+   risk are theirs to report, not to assume away.
+5. Diversification is not a substitute for removing unwanted exposure. It reduces idiosyncratic
+   variance; it does not make an unintended bet intended.
+
+## 15. The rubric map: what earns 10/10, and where the method closes it
+
+The rubric is the acceptance test for this document. If a criterion would not score full marks with a
+team that followed the method perfectly, the method is deficient. This table is the audit.
+
+| Criterion | What a 10 requires | What we had | The gap | Closed by |
+|---|---|---|---|---|
+| **01 Economic foundation** | Exceptional understanding, with **well-evidenced** reasoning | Mechanism, counterparty, rival explanation, arrow tagging | We could only tag arrows observed / inferred / untested. Nothing converted inferred into evidenced | Stages 3 and 4: assumption provenance, then an identification design per arrow. Enforced: every assumption cites a measurement, and no trade-driving arrow may stay inferential |
+| **02 Innovation** | Highly innovative, original, distinct from conventional strategies | Nothing. The method never asked what is novel | No novelty claim, and no defence against "this is a known anomaly in disguise" | A Novelty section that names the closest known strategy or published factor, states the mechanical difference, and shows the innovation lives in the mechanism or the measurement rather than the model. Ties to the brief's red flag about re-labelled momentum or value |
+| **03 Risk management** | Highly detailed, effective, **multiple contingencies**, thorough understanding | Risk categories: factor exposure, joint tails, borrow, financing, liquidity, abstention | We listed risks. We had no response to any of them | A contingency register: each risk gets a trigger, a response (hedge, size down, exit, abstain, pause), and an owner. Plus regime-conditional fragility from Stage 7 |
+| **04 Liquidity & capital** | Excellent, thorough, practical application | Costs in bps, doubling test, participation, impact, capacity in dollars | No capital schedule, no build and exit plan, no borrow or financing specifics, no days-to-liquidate | A liquidity and capital table: size against ADV, days to build and to exit, borrow availability and cost, financing, the capacity at which the edge dies, and the capital we would actually run |
+| **05 Performance & analytical evidence** | Exceptional rigour, thorough and convincing | Net of costs, in-sample and out-of-sample separate, deflated for variant count, negative results kept | No robustness suite: no parameter plateau, no subsample or regime stability, no placebo or alternative specification, no uncertainty on the estimate | Stage 6 robustness suite: plateau sweep, regime and subsample stability, placebo control, alternative specification, and bootstrapped intervals. Plus reproducibility: a judge reruns and matches |
+
+**Enforcement.** An active thesis record must carry a section for each criterion — Hypothesis, Data,
+Structure, Methodology, Results, Novelty, Risk, Liquidity — and `make check` fails if any is missing.
+The rubric becomes a structural requirement rather than an aspiration.
+
+**The honest limit.** A method can guarantee that the evidence is produced, complete and auditable. It
+cannot guarantee that the numbers are good, and no method can. Criterion 02 is the other limit: a
+template cannot manufacture a real novelty claim, it can only force us to state one and test it. What
+the method can promise is that if a claim scores badly, we will know exactly which measurement is
+missing rather than discovering it in judging.
