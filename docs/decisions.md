@@ -765,3 +765,28 @@ disclosures all sit between the 7th and 76th percentile.
 twenty-two months is too short to see it, or a provider spot price per instance-hour is too noisy a proxy for
 what compute actually rents for. Naming all three is the honest end of this line of work, and choosing one
 without a test would be the mistake the whole framework exists to prevent.
+
+---
+
+## 2026-10-03: The methods registry, sorted honestly, and rate control added to the scan
+
+**The registry.** `docs/ideas/math-ideas.md` records every method we have discussed with one of three
+statuses: attached, where it names a concrete test or representation; plausible, where the attachment is real
+but gated on an entitlement; and decorative, where there is no honest attachment. Four entries are decorative
+and stay that way so nobody re-litigates them: affine Kac-Moody algebras, the Langlands program, electrical
+impedance tomography, and quantum optics as physics. The last one transfers only as formalism, and that
+formalism is already available as classical jump and point process models.
+**New directions that came out of the sorting.** Physical construction progress from satellite imagery, as an
+independent measure of delay that does not rely on anyone's disclosure. Cascades as threshold processes,
+because a liquidation is an account accumulating loss until a margin threshold is crossed, which is a
+leaky integrate and fire structure with testable clustering and refractory behaviour. Promise survival
+analysis, turning the modal twelve month slip into a hazard rate. Distributional mispricing measured as a
+transport distance between our posterior and the market implied distribution, which is where the transport
+and calibration work genuinely attaches. And protocol formalisation, where the invariants worth checking are
+exposure limits and holdout discipline rather than alpha.
+**Rate control added.** The scan now reports survivors under a false discovery rate as well as a threshold
+count. On the current scan, rate control at ten percent admits six pairs, all of them uranium, copper and the
+two equity baskets against each other, which is asset co-movement. Not one involves a mechanism node. That
+result is instructive: rate control across pairs does not control correlated tests, so the family correction
+is not optional on top of it, it is the complement. A test asserts the property that matters, that the same
+evidence stops surviving once the searched space grows.
