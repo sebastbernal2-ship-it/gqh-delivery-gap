@@ -1,5 +1,17 @@
 [
   {
+    "id": "mem_4b69f5be4bfe",
+    "content": "Quanthacks now links read-only to algoterminal-data: docs/algoterminal.md owns the contract, make graph resolves it, and make check runs it when the sibling checkout exists (ALGOTERMINAL_DIR, default ~/algoterminal-data) and skips otherwise. The link checks that node_resolved nodes exist in graph/quant_graph.yaml, node_proposed nodes do not, source_resolved sources exist in graph/source_inventory.yaml, source_proposed do not, every edge endpoint is declared, and every declaration is used. Audit finding: against 7517 graph node ids our node space is absent (no datacenter, compute, GPU, interconnection, transformer, turbine, cooling, backlog, guidance or 8-K nodes; the 63 feature nodes are weather, tanker and refinery observation). Reuse for data: source:sec (EDGAR), source:eia-930, source:fred, source:market (yfinance/stooq), source:landsat, source:nasa-firms, source:copernicus. Must add: source:eia-860m, source:databento-options, source:ornn-ocpi, source:hyperliquid-archive. First chain declared at docs/chains/t-capacity-revision.jsonl.",
+    "tags": [
+      "gqh",
+      "quanthacks"
+    ],
+    "created": "2026-10-03T07:08:45.682Z",
+    "layer": "episodic",
+    "confidence": "verified",
+    "pinned": false
+  },
+  {
     "id": "mem_6f0771d95a33",
     "content": "Do not load memory/shared.json with hippo import --file: it parses the JSON as plain text and writes one memory per line, flooding the store with fragment entries such as a bare key string. Use scripts/memory_absorb.py, which compares normalized content against the local export and calls hippo remember once per missing entry. It is idempotent.",
     "tags": [

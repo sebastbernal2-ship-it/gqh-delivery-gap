@@ -23,6 +23,8 @@ One table. A path appears once, with one person.
 | `scripts/`, `tests/`, `Makefile`, `.githooks/`, `docs/workflow.md`, `docs/memory.md`, `docs/onboarding.md`, `docs/decisions.md` | sebastbernal2-ship-it | The collaboration shell: sync, memory bridge, gates |
 | `docs/brief.md` | nobody | The track's own rules. Frozen, so it needs no owner |
 | `docs/alignment.md` | sebastbernal2-ship-it | How we think. Changed by proposal plus a decision entry |
+| `docs/algoterminal.md` | sebastbernal2-ship-it | The linkage to the QuantGraph and the association engine |
+| `docs/chains/` | sebastbernal2-ship-it | The log convention and the validator. Each log's content belongs to that thesis's owner |
 | `docs/inbox/vishnu-2026-10-03/`, `docs/thinking/vishnu-2026-10-03.md`, `docs/writing/style.md`, `.cursor/rules/gqh-context.mdc` | vshnu1 | Equity-first research handoff, provider audit, data plan, writing conventions |
 | `docs/inbox/aidan-2026-10-03/`, `docs/thinking/aidan-2026-10-03.md` | aidanq06 | Strategy specification, reasoning, implementation contracts, advanced-method research |
 | `hpc/README.md`, `hpc/setup/` | lucyrunner | HiPerGator routing, account access and environment setup |

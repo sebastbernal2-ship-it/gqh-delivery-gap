@@ -446,3 +446,28 @@ cannot compare yet is a record to revisit rather than an edge to delete.
 **Open decision, captain's call.** Reuse `algoterminal-data`'s QuantGraph and association engine as the
 substrate for this study, or mirror the vocabulary here and keep the tooling separate. The vocabulary is
 adopted either way, so the decision can wait without rework.
+
+---
+
+## 2026-10-03: Link to the algoterminal stack, and author our own node space
+
+**Decision.** This study links read-only to `algoterminal-data` for the QuantGraph schema, the
+association engine, its validators and its public-source connectors. `docs/algoterminal.md` owns the
+contract, `make graph` resolves it, and `make check` runs the resolution when the sibling checkout is
+present and skips with a note when it is not.
+**The audit.** Against 7,517 node ids: our node space is essentially absent. No datacenter, compute, GPU,
+interconnection, transformer, turbine, cooling, backlog, guidance or 8-K nodes exist. The 63 feature
+nodes are weather, tanker and refinery observation; the asset and entity layers are dominated by a
+5,933-line EPA refinery catalog. The linkage therefore supplies the machine, not the content.
+**Consequence.** Our nodes are authored here as declarations: `node_resolved` when the graph has them,
+`node_proposed` with a layer, a type and a reason when it does not. Every edge endpoint must be
+declared, and every declaration must be used, so a gap is a record and decoration fails the gate.
+**Data.** Reuse SEC EDGAR for filings, EIA-930 for regional electricity, FRED for macro, yfinance and
+stooq for daily bars, and Landsat, FIRMS and Copernicus for site evidence. Add EIA-860M for generator
+schedule vintages, an options or intraday source, the compute price index, and a perpetual archive.
+**First chain declared.** `docs/chains/t-capacity-revision.jsonl`: six proposed nodes, one existing
+source and four new ones, three pilot edges, one P&L-carrying role, and three parked edges that are
+recorded rather than deleted.
+**Open question.** Running their engine over our nodes requires the nodes to exist where it can read
+them: declare them in their graph through their conventions, which edits a repository that is not ours,
+or vendor the schema here. The vocabulary is identical either way, so today's logs work under both.
