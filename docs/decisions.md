@@ -599,3 +599,29 @@ was comparable, which crashed after the data had already been written.
 measurable, frequently revised quantity, and the revision is large and slow, not noise. It does not yet
 connect a revision to a firm's cash or to a price, and nothing here is a trade. The next step is the join
 to firms, which needs the entity-to-project link rather than a sector aggregate.
+
+---
+
+## 2026-10-03: The project-to-equity join does not hold, and the firm-level channel is not yet supported
+
+**Finding that changes the strategy's shape.** Slipped capacity totals 274,176 MW across 1,070 entities
+in the nine-vintage panel. Only **6.2 percent** of that capacity sits in an entity whose name carries a
+large listed owner, and **80 percent** sits in project or holding companies. The top entities by slipped
+MW are Power Company of Wyoming, Georgia Power, Invenergy Services, Solar Proponent, Tri Global Energy,
+Guernsey Power Station, RWE Renewables Americas: mostly private developers and single-project LLCs.
+**Therefore a project-level signal cannot be attributed to a listed equity with evidence**, and the
+cross-sectional version of this strategy is not viable from this data. Attribution is now gated behind
+`docs/entity-crosswalk.csv`, where a row counts only with evidence. The candidate matcher proposes and
+nothing more, because on this data it attributed capacity to a preferred share series and to a mortgage
+insurer.
+**The firm-level channel, measured.** Eighty-four timestamped revisions across PWR and ETN, with the
+signal lagged to the session after availability and adjusted against a sector benchmark:
+negative surprises show no consistent move at any horizon (25 events, every |t| below 1.3), while positive
+surprises drift +1.0 percent at ten sessions and +3.8 percent at twenty (t=3.17).
+**Why that is not yet a result.** Seventy of those eighty-four events are PWR, and they fall in 41 distinct
+weeks across nine years, so the sample is one firm's multi-year run as much as it is an event effect. The
+rubric's own instruction is to check the simple explanation first, and the simple explanation here is
+drift. The direction our mechanism predicts, a negative surprise, shows nothing.
+**Next, if this channel is pursued.** Widen the universe by a mechanical industry rule rather than by hand,
+so the sample is not one contractor's history, and report each industry group separately instead of pooling
+into the best cell.
