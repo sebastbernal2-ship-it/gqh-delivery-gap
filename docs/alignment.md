@@ -306,13 +306,13 @@ found. Stages 3, 4 and 7 are the ones nobody in the published framework owns.
 
 | # | Stage | Purpose | Artifact | Gate: cannot proceed without | Rubric |
 |---|---|---|---|---|---|
-| 1 | Question | What economic thing are we claiming | One paragraph, the mechanism, the counterparty, the simplest rival, the falsifier | All five present and specific | 01 |
+| 1 | Question | What economic thing are we claiming, **and why us** | One paragraph; the mechanism, counterparty, simplest rival, falsifier; **plus the edge channel, expected breadth, expected regime dependence, capacity sketch and latency budget** | All present. Section 16 items are sketched here, not deferred | 01, 02, 04 |
 | 2 | Data | Get the world in, with provenance | Data manifest: source, availability time, entitlement, coverage, rejections | A **named approver**; every field's knowable-at time documented | 01, 05 |
-| 3 | **Structure** | **Measure the world's joint structure before building on it** | Marginal distributions with tails and censoring; dependence beyond correlation (tail dependence, concordance, copulas where they earn it); association screens with multiple-testing control; shared-shock clusters; stability of each relation across sub-periods; and a list separating *identified* from merely *associated* | **Every assumption used downstream cites a measurement here.** No free-floating assumptions | 01, 02, 05 |
+| 3 | **Structure** | **Measure the world's joint structure before building on it** | Marginal distributions with tails and censoring; dependence beyond correlation (tail dependence, concordance, copulas where they earn it); association screens with multiple-testing control; shared-shock clusters and their effective breadth; stability across sub-periods; **regime states defined on past-only data**; **cross-sectional variation** across names and events; **liquidity and capacity structure** (ADV, spread, borrow, financing); and a list separating *identified* from merely *associated* | **Every assumption used downstream cites a measurement here.** No free-floating assumptions | 01, 02, 03, 04, 05 |
 | 4 | **Identification** | Which relations are causal, and how we know | For each load-bearing arrow: the design (timing, comparison group, instrument, placebo, falsification test), the estimand, and the result | No arrow that drives a trade may remain "inferred". It is evidenced, or the trade is labelled speculative and sized as such | 01, 05 |
-| 5 | Design | Turn the mechanism into rules | Signal rules, timing, portfolio construction, execution and cost model, exposure budget | A baseline to beat, a cost model, a variant plan, one primary horizon, a sealed-test plan | 01, 04, 05 |
-| 6 | Test | Produce the honest number | Results artifact, in-sample and out-of-sample separate, net of costs | Sealed test opened once, by a named owner, reported whatever it says | 05 |
-| 7 | **Decomposition** | Break the strategy back down and remove what we did not intend | Factor and regime attribution of returns *and* risk; exposure budget versus realised; residual and idiosyncratic share; fragility by regime; the hedge map | Unintended exposure is hedged, sized down, or dropped, and the assumptions it contradicts are re-derived | 03, 04, 01 |
+| 5 | Design | Turn the mechanism into rules **and a portfolio** | Signal rules, timing, conditioning (all-weather, state-gated or state-scaled), **portfolio construction with correlation-aware risk budgeting and caps**, execution and cost model, exposure budget, **the latency budget against the information half-life** | A baseline to beat, a cost model, a variant plan, one primary horizon, a sealed-test plan, an exposure budget, and a latency budget | 01, 03, 04, 05 |
+| 6 | Test | Produce the honest number **and the breadth numbers** | Results artifact, in-sample and out-of-sample separate, net of costs; **IC, decay curve, effective breadth, regime-conditional performance, capacity curve, measured latency chain** | Sealed test opened once, by a named owner, reported whatever it says | 04, 05 |
+| 7 | **Decomposition** | Break the strategy back down and remove what we did not intend | Factor and regime attribution of returns *and* risk; realised versus budgeted exposure; residual and idiosyncratic share; fragility by regime; the hedge map; **attribution of the edge to one of the four channels from section 16.1** | Unintended exposure is hedged, sized down, or dropped; the assumptions it contradicts are re-derived; **the edge channel claim is confirmed or withdrawn** | 01, 02, 03, 04 |
 | 8 | Writeup | Make it legible and auditable | The note, plus the record, mapped to the five criteria | Every number traces to a result artifact, and a judge can rerun it | all |
 
 Stage 7 loops back to Stage 3. A decomposition that contradicts an assumption sends us back to the
@@ -353,10 +353,10 @@ team that followed the method perfectly, the method is deficient. This table is 
 | Criterion | What a 10 requires | What we had | The gap | Closed by |
 |---|---|---|---|---|
 | **01 Economic foundation** | Exceptional understanding, with **well-evidenced** reasoning | Mechanism, counterparty, rival explanation, arrow tagging | We could only tag arrows observed / inferred / untested. Nothing converted inferred into evidenced | Stages 3 and 4: assumption provenance, then an identification design per arrow. Enforced: every assumption cites a measurement, and no trade-driving arrow may stay inferential |
-| **02 Innovation** | Highly innovative, original, distinct from conventional strategies | Nothing. The method never asked what is novel | No novelty claim, and no defence against "this is a known anomaly in disguise" | A Novelty section that names the closest known strategy or published factor, states the mechanical difference, and shows the innovation lives in the mechanism or the measurement rather than the model. Ties to the brief's red flag about re-labelled momentum or value |
-| **03 Risk management** | Highly detailed, effective, **multiple contingencies**, thorough understanding | Risk categories: factor exposure, joint tails, borrow, financing, liquidity, abstention | We listed risks. We had no response to any of them | A contingency register: each risk gets a trigger, a response (hedge, size down, exit, abstain, pause), and an owner. Plus regime-conditional fragility from Stage 7 |
-| **04 Liquidity & capital** | Excellent, thorough, practical application | Costs in bps, doubling test, participation, impact, capacity in dollars | No capital schedule, no build and exit plan, no borrow or financing specifics, no days-to-liquidate | A liquidity and capital table: size against ADV, days to build and to exit, borrow availability and cost, financing, the capacity at which the edge dies, and the capital we would actually run |
-| **05 Performance & analytical evidence** | Exceptional rigour, thorough and convincing | Net of costs, in-sample and out-of-sample separate, deflated for variant count, negative results kept | No robustness suite: no parameter plateau, no subsample or regime stability, no placebo or alternative specification, no uncertainty on the estimate | Stage 6 robustness suite: plateau sweep, regime and subsample stability, placebo control, alternative specification, and bootstrapped intervals. Plus reproducibility: a judge reruns and matches |
+| **02 Innovation** | Highly innovative, original, distinct from conventional strategies | Nothing. The method never asked what is novel | No novelty claim, no defence against "this is a known anomaly in disguise", and no answer to "why us" | A Novelty section that names the closest known strategy or published factor, states the mechanical difference, locates the innovation in the mechanism or the measurement rather than the model, and **names the edge channel from section 16.1 with evidence**. A strategy with no edge channel has no innovation to defend |
+| **03 Risk management** | Highly detailed, effective, **multiple contingencies**, thorough understanding | Risk categories: factor exposure, joint tails, borrow, financing, liquidity, abstention | We listed risks, had no response to any of them, and were **single-name in thinking**: no portfolio-level risk at all | A contingency register (trigger, response, owner) plus **portfolio-level risk**: correlation-aware risk budgeting, per-name and per-cluster caps, effective-breadth reporting, state-conditional fragility, drawdown and de-risking triggers |
+| **04 Liquidity & capital** | Excellent, thorough, practical application | Costs in bps, doubling test, participation, impact, capacity in dollars | No capital schedule, no build and exit plan, no borrow or financing specifics, no days-to-liquidate, and **capacity did not constrain the choice of expression** | A liquidity and capital table with those fields, **plus the capacity curve as a design input**: if capacity is below intended capital, the expression changes, not the aspiration. Liquidity and capacity structure are measured in Stage 3, not reported at the end |
+| **05 Performance & analytical evidence** | Exceptional rigour, thorough and convincing | Net of costs, in-sample and out-of-sample separate, deflated for variant count, negative results kept | No robustness suite, and **no breadth evidence**: one case cannot show a distribution of outcomes | Stage 6 robustness suite (plateau, subsample and regime stability, placebo, alternative specification, bootstrapped intervals) **plus the breadth set: IC, decay curve, effective breadth after correlation, hit rate, effect-size spread, worst decile, and a capacity curve**. Plus reproducibility: a judge reruns and matches |
 
 **Enforcement.** An active thesis record must carry a section for each criterion — Hypothesis, Data,
 Structure, Methodology, Results, Novelty, Risk, Liquidity — and `make check` fails if any is missing.
@@ -367,3 +367,112 @@ cannot guarantee that the numbers are good, and no method can. Criterion 02 is t
 template cannot manufacture a real novelty claim, it can only force us to state one and test it. What
 the method can promise is that if a claim scores badly, we will know exactly which measurement is
 missing rather than discovering it in judging.
+
+---
+
+## 16. From a case to a system: what makes this a quant strategy
+
+Everything up to here can be satisfied by a single well-researched event. A quant strategy is a
+different object: a repeatable relationship traded across a cross-section, under explicit conditioning,
+inside risk and capital limits, fast enough to matter. The gaps that separate the two are named here.
+
+### 16.1 Why us: the four edge channels
+
+A mechanism explains why the mispricing exists. It does not explain why **we** capture it. Name at
+least one channel and bring evidence for it before building:
+
+| Channel | The claim | Evidence it needs |
+|---|---|---|
+| **Data** | We hold or can compute something others do not, or not yet | Coverage, cost, rights, and that it is not already in the price at our decision time |
+| **Inference speed** | We convert public information into a position faster | The measured pipeline latency against the signal's information half-life |
+| **Processing** | We turn messy or wide data into a usable signal others cannot | Extraction accuracy, provenance, and a demonstrated signal that a simple parse cannot produce |
+| **Portfolio craft** | We hold the same signal better: only intended exposure, sized properly, cheaper | Exposure budget, attribution residual, realised cost versus modelled |
+
+If we can name none, we do not have an edge and the honest move is to say so rather than proceed.
+"AI is growing" and "power is scarce" are not channels.
+
+### 16.2 Breadth: the arithmetic that decides whether this is a strategy
+
+Information ratio scales with the square root of breadth. With IC the correlation between forecast and
+outcome, and BR the number of **independent** bets:
+
+> IR ≈ IC × √BR
+
+Consequences we must design around, not discover later:
+
+- A single event family with thirty shocks a year needs an enormous IC to produce a respectable IR.
+- Breadth comes from more event types, more names, more horizons, more instruments. Each addition
+  must preserve the mechanism, not dilute it.
+- **Correlation haircuts breadth.** Fifty names responding to one shock are one bet. Report effective
+  breadth after clustering, alongside the raw count, or the IR is a fiction.
+- Report the decay curve: how the signal's information decays with time, because decay sets the
+  horizon and the latency budget.
+- Report the distribution of outcomes, not the average alone: hit rate, effect-size spread, and the
+  worst-decile behaviour.
+
+The pilot may stay one case, but it must **measure** these quantities so the generalisation step is
+grounded in numbers rather than hope.
+
+### 16.3 Conditioning: regimes as design, not decoration
+
+Regimes are not labels on a histogram. They are the states in which the mechanism pays differently.
+
+- Define states from **past-only** information, with thresholds fitted inside each training window.
+- Report the signal's performance, exposure and cost **conditional** on state.
+- Decide up front: trade all-weather, trade only in specified states, or scale size with a stated
+  state probability. Each is a different strategy with different evidence requirements.
+- Name the **failure regime** we expect, and what we do when it arrives.
+- An average across regimes that hides a collapse in one of them is not evidence.
+
+### 16.4 Portfolio construction is where the risk lives
+
+A signal is not a strategy. The step from forecasts to positions is where most of the risk is created
+or removed:
+
+- Weights from forecast and uncertainty, not from conviction. Size with a risk model, not a feeling.
+- **Correlation-aware risk budgeting** across names, clusters and shared shocks, with per-name, per-
+  cluster and per-factor caps.
+- The **exposure budget** from section 14 binds here: neutralise what we did not intend, and refuse
+  what we cannot name.
+- Turnover and cost-aware construction: a signal whose edge is smaller than its round-trip cost is not
+  a signal.
+- Drawdown and de-risking rules with triggers, not intentions, plus the contingency register from
+  section 15.
+- A portfolio of correlated signal names is **one** position. Size it accordingly.
+
+### 16.5 Capacity is a design constraint, not a report
+
+Capacity decides which expression of the mechanism we are allowed to trade.
+
+- Compute the capacity curve: participation against average daily volume, the square-root impact
+  model, and the capital at which net edge reaches zero.
+- If capacity is below the capital we intend to run, change the expression: a different instrument, a
+  wider basket, a longer horizon, or a smaller book. Do not keep the aspiration and hope.
+- Report days to build and days to exit, borrow availability and cost, and financing, because these
+  decide whether the position is real.
+- Liquidity and capital also constrain the preliminary rationale: a mechanism that only exists in names
+  we cannot trade at size is not our strategy.
+
+### 16.6 The latency budget, stated honestly
+
+Speed is an edge channel only where the half-life is short enough for our pipeline to matter.
+
+- Measure the chain: **public availability → receipt → parse or extract → signal → order**.
+- Compare it to the signal's information half-life. If the half-life is days, latency is irrelevant and
+  microsecond work is decoration. If the half-life is minutes, the pipeline **is** the edge and must be
+  measured as such.
+- State which regime we are in. For filings and operational data the half-life is usually hours to
+  days, so the honest claim is same-session inference, not colocation.
+- Microstructure work (L2, L4, queue position, funding carry) is a **separate study** with its own
+  mechanism, data and evidence. It is not a latency upgrade to this one.
+
+### 16.7 What this changes about the pilot
+
+The counter-rule still holds: **one event family, one horizon, one pilot, one result artifact.**
+This section does not add scope to the pilot. It adds **measurements** to it: the edge channel claim,
+IC, decay, effective breadth, regime splits, the capacity curve, and the measured latency chain. Those
+numbers are what make generalisation a decision rather than a hope.
+
+A case study answers "is this real?". A system answers "how much can we make, at what risk, at what
+size, for how long, and why us?". The rubric rewards the second, and the second is what we are
+building.

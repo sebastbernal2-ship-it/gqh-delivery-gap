@@ -311,3 +311,37 @@ missing. The rubric is now a structural requirement, not an aspiration.
 **Honest limit, recorded.** A method can guarantee the evidence is produced and auditable. It cannot
 guarantee the numbers are good. Criterion 02 is the second limit: the template forces a novelty claim
 and the anti-imitation check, but cannot manufacture a real novelty.
+
+---
+
+## 2026-10-03: The system view enters the rationale, not the aftermath
+
+**Decision.** `docs/alignment.md` section 16 ("From a case to a system") is added, and stages 1, 3, 5,
+6 and 7 now require the system measurements. Risk, regimes, liquidity and capacity are considered in the
+preliminary rationale rather than reported afterwards.
+**The gap.** Our method could be satisfied by one well-researched event. That is a case study, not a
+quant strategy. It never asked why we get paid, ignored breadth, treated risk as categories instead of
+portfolio-level controls, treated capacity as a report rather than a constraint on which expression we
+trade, and had no latency budget.
+**Four edge channels, now required with evidence.** Data, inference speed, processing, portfolio craft.
+If none can be named, the honest position is that we have no edge and we say so. This is the question
+the rubric's Innovation criterion is really asking, and it is the anti-blackbox anchor.
+**Breadth arithmetic.** IR ≈ IC × √BR, with effective breadth after clustering. A single event family
+with thirty shocks a year needs an enormous IC to matter, so breadth is a design lever, not a hope.
+**Regimes are design.** States defined on past-only data; performance, exposure and cost reported
+conditionally; the trade rule (all-weather, state-gated, state-scaled) chosen up front; a named failure
+regime.
+**Portfolio construction is where risk is made.** Weights from forecast and uncertainty, correlation-
+aware risk budgeting, per-name and per-cluster caps, the exposure budget binding, turnover and
+cost-aware. A portfolio of correlated signal names is one bet.
+**Capacity constrains the expression.** If capacity is below intended capital, change the instrument,
+basket, horizon or book size rather than keeping the aspiration.
+**Latency stated honestly.** Measure public availability → receipt → parse → signal → order against the
+signal's information half-life. For filings and operational data the half-life is hours to days, so the
+claim is same-session inference, not colocation. Microstructure work stays a separate study with its own
+mechanism and evidence.
+**Reconciliation.** The counter-rule (one event family, one horizon, one pilot, one artifact) still
+governs pilot scope. Section 16 adds measurements to the pilot, not scope: the edge-channel claim, IC,
+decay, effective breadth, regime splits, the capacity curve and the measured latency chain.
+**Enforcement.** The eight required record sections are unchanged, but their content requirements are
+deepened, and `docs/theses/TEMPLATE.md` carries the new requirements.
