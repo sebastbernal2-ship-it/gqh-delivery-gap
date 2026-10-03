@@ -11,6 +11,11 @@ It consolidates the current state, prior revisions, verified data receipts, arch
 and an ordered continuation plan. It is a dated snapshot, not a live cloud check; re-verify jobs,
 quotas, and warehouse receipts before acting. It intentionally contains no credentials.
 
+**Have Hippo available and want to synchronize the learned context?** Follow the
+[Hippo memory synchronization task](hippo-memory-sync.md). It tells the contributor which repo
+records to reconcile, what belongs in concise shared recall, and how to generate and publish the
+filtered unified memory without editing generated files by hand.
+
 For the **current cloud data and Massive connectivity**, start with
 [central ingestion handoff](central-ingest-handoff.md). The list below captures the earlier
 research conversation; older load-status statements there are not the latest operational receipt.
