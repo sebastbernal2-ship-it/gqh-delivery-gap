@@ -6,6 +6,11 @@ thesis, live implementation or measured alpha is asserted here.
 
 ## Read this in ten minutes
 
+**Taking over from another computer?** Start with the [ultimate continuation handoff](ultimate-handoff.md).
+It consolidates the current state, prior revisions, verified data receipts, architecture, blockers,
+and an ordered continuation plan. It is a dated snapshot, not a live cloud check; re-verify jobs,
+quotas, and warehouse receipts before acting. It intentionally contains no credentials.
+
 For the **current cloud data and Massive connectivity**, start with
 [central ingestion handoff](central-ingest-handoff.md). The list below captures the earlier
 research conversation; older load-status statements there are not the latest operational receipt.

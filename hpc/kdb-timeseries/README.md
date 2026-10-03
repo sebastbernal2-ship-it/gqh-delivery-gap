@@ -26,7 +26,7 @@ archive or backup.
 identified in the handoff (`bec91f7c380937d3d647ade8214968c13abd4bde032c9a7cf7741f0ee58306cd`).
 The unadjusted batch must be selected by its own verified batch SHA-256; do not union batches or
 canaries. Export is explicit by `source_id` plus `batch_sha256` and normalizes prices to integer
-micro-dollars, volume to integer shares, and event date to UTC session date. This avoids treating
+units of `1e-8 USD`, volume to integer shares, and event date to UTC session date. This avoids treating
 binary floating-point display as exact decimal arithmetic. Source row hashes are retained.
 
 Prices are stored as signed 64-bit integer units of `1e-8 USD` (exactly representable values only),
@@ -109,7 +109,7 @@ shared-filesystem based; no unauthenticated q TCP service is opened by this prot
 
 - Primary row identity: `(date, sym, source_id, batch_sha256)`; revisions remain separate.
 - Session date is derived from the source UTC bar timestamp, not local machine timezone.
-- Prices are signed 64-bit integer micro-dollars; volume is signed 64-bit integer shares.
+- Prices are signed 64-bit integer units of `1e-8 USD`; volume is signed 64-bit integer shares.
 - A source batch is never mixed with a canary or a different retrieval vintage.
 - Compare count by date/symbol, date range, duplicate key count, nulls, source row hashes and
   canonical output SHA-256 before publication.

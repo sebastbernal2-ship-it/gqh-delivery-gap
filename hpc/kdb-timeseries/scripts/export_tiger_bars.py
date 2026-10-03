@@ -39,7 +39,7 @@ def read_env_file(path: Path) -> None:
             os.environ.setdefault(key.strip(), value.strip())
 
 
-def to_micro(value: Any, field: str) -> int:
+def to_scaled_e8usd(value: Any, field: str) -> int:
     try:
         scaled = Decimal(str(value)) * PRICE_SCALE
     except (InvalidOperation, ValueError, TypeError) as exc:
@@ -81,7 +81,8 @@ def normalize_record(record: dict[str, Any]) -> dict[str, Any]:
     if not SYMBOL_RE.fullmatch(ticker):
         raise ValueError("ticker is missing or malformed")
     dt = session_date(payload.get("bar_time_utc", ""))
-    prices = {name: to_micro(payload.get(name), name) for name in ("open", "high", "low", "close")}
+    prices = {name: to_scaled_e8usd(payload.get(name), name)
+              for name in ("open", "high", "low", "close")}
     if prices["high"] < max(prices.values()) or prices["low"] > min(prices.values()):
         raise ValueError("OHLC invariant failed")
     volume = payload.get("volume")
