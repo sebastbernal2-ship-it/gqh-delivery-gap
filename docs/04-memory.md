@@ -80,10 +80,19 @@ at its owner, where a person can review it in a diff.
 
 Nothing here depends on a person remembering a command.
 
-1. **The agent.** `hippo hook install pi` (and `codex`, `claude-code`, `cursor`, `opencode`,
-   `openclaw`, whichever you use) writes capture instructions into `AGENTS.md`, `CLAUDE.md`, or
-   `.cursorrules`, so the session runs `hippo context --auto` at the start and captures a short
-   summary at the end. Those files are committed, so every clone carries the instructions.
+1. **The agent.** `make hooks` (once per machine) wires the wrapper for whichever harnesses you
+   have. Two halves, and the split matters:
+
+   | Harness | Committed instruction file | Per-machine wrapper |
+   |---|---|---|
+   | pi, codex, opencode, openclaw | `AGENTS.md` | settings or plugin in your home directory |
+   | Claude Code | `CLAUDE.md` | `~/.claude/settings.json` entry |
+   | Cursor | `.cursorrules` | rule file, no wrapper needed |
+
+   The instruction files are committed, so a teammate who clones and reads their harness file has
+   the protocol even before they run `make hooks`. The wrapper is what makes capture automatic on
+   that machine. A teammate without hippo installed still gets `memory/SHARED.md` and `docs/`,
+   because those are plain files in the clone.
 2. **The commit.** `.githooks/pre-commit` runs the share step on every commit and stages
    `memory/`. Enable it once per clone with `make bootstrap`, or by hand:
    `git config core.hooksPath .githooks`. It never blocks a commit.
