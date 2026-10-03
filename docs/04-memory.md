@@ -100,10 +100,6 @@ Nothing here depends on a person remembering a command.
    construction, so an untagged memory is shared without anyone tagging anything. If the store
    lives outside the repo, the default is deny and only project-tagged entries are shared.
 
-4. **Unattended, optional.** `make schedule` installs a timer on this machine that runs
-   `scripts/autoshare.sh` every 15 minutes. That script commits and pushes only
-   `memory/shared.json` and `memory/SHARED.md`, so it can never sweep up work in progress.
-
 Redaction and the credential rules apply in both modes.
 
 ### Why not `hippo import --file`
@@ -138,12 +134,8 @@ costs more than any scoring criterion.
 
 So the shared memory is the docs, and the local store is private:
 
-```
-make memory     # writes memory/<device>.json, which is gitignored
-```
-
-Use that export to move recall between your own devices, never as the team's channel. If a
-fact matters to the team, it goes in `docs/`, at its owner, in a commit.
+If a fact matters to the team, it goes in `docs/`, at its owner, in a commit. The local store is
+for your own recall during a session, and `make share` publishes the part that belongs to the team.
 
 ## Why this beats separate memory stores
 

@@ -23,13 +23,14 @@ deadline is a bigger risk than early visibility.
 
 ## 2026-10-03: Memory capture is mechanical, not a habit
 
-**Decision.** Three automatic layers, no remembered commands.
+**Decision.** Two automatic layers, no remembered commands.
 1. Agent hook: `hippo hook install pi` and `codex` write capture instructions into the committed
    `AGENTS.md`, so a session injects context at the start and captures a summary at the end.
 2. Commit hook: `.githooks/pre-commit` refreshes the shared memory on every commit and stages
    `memory/`, enabled per clone by `make bootstrap` or `git config core.hooksPath .githooks`.
-3. Opt-in timer: `make schedule` runs `scripts/autoshare.sh` every 15 minutes, which commits and
-   pushes only the memory files, never work in progress.
+The unattended timer (`make schedule`, committing only the memory files on a 15 minute cron) was
+built and then removed as unnecessary surface: the commit hook already runs on every commit.
+Restore it from `archive/w0-delivery-gap` if a session ever produces memories without a commit.
 
 **Context.** The captain rejected relying on anyone remembering `make remember`. Capture had to
 happen without a human step.
