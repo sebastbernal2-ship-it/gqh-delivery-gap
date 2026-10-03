@@ -33,6 +33,8 @@ SKIP_CHARS = set("<>*{}[]$|")
 # was true then, and renames are expected to leave them untouched.
 SKIP_PREFIXES = ("tests/", "memory/", "docs/history/")
 SKIP_NAMES = ("TEMPLATE",)
+# Explicit output contracts may precede generation; only result artifacts qualify.
+GENERATED_PATH = re.compile(r"^generated-path: (results/[A-Za-z0-9._/-]+)$", re.MULTILINE)
 
 
 FOREIGN_TAG = "foreign-repo="
@@ -80,6 +82,7 @@ def references(text: str) -> list[str]:
 
 def missing(tracked: list[str], files: dict[str, str]) -> list[str]:
     known = set(tracked)
+    declared_outputs = set(GENERATED_PATH.findall(files.get("results/README.md", "")))
     known_dirs = {"/".join(path.split("/")[:i]) for path in tracked
                   for i in range(1, path.count("/") + 1)}
     known_dirs |= {"/".join(path.split("/")[:i]) + "/" for path in tracked
@@ -87,7 +90,7 @@ def missing(tracked: list[str], files: dict[str, str]) -> list[str]:
     problems = []
     for name, text in sorted(files.items()):
         for token in references(text):
-            if token in known or token in known_dirs:
+            if token in known or token in known_dirs or token in declared_outputs:
                 continue
             parent = "/".join(token.split("/")[:-1])
             if parent and parent not in known_dirs and parent + "/" not in known_dirs:
@@ -103,7 +106,7 @@ def main() -> int:
     files = {}
     for name in tracked:
         path = ROOT / name
-        if name.startswith(SKIP_PREFIXES) or any(tag in path.name for tag in SKIP_NAMES):
+        if name.startswith(SKIP_PREFIXES) or "/tests/" in name or any(tag in path.name for tag in SKIP_NAMES):
             continue
         if path.suffix in SCAN_SUFFIXES or path.name in SCAN_NAMES:
             try:
