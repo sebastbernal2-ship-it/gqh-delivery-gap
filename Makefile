@@ -170,3 +170,11 @@ status:
 market:
 	@python3 scripts/render_market_map.py
 	@python3 scripts/check_market_map.py
+
+# Optional local HPC regression suite. Requires PyTorch and g++ for native parity.
+# Example: make test-hpc HPC_PYTHON=/path/to/venv/bin/python
+.PHONY: test-hpc
+HPC_PYTHON ?= python3
+test-hpc:
+	@$(HPC_PYTHON) -m unittest discover -s hpc/kdb-timeseries/tests -v
+	@$(HPC_PYTHON) -m unittest discover -s hpc/probabilistic-council/tests -v

@@ -38,6 +38,28 @@ directory. It needs the HPG PyTorch module, Python, a C++17 compiler and CMake/c
 available on the compute node. See the script before adapting resource requests to a real training
 run.
 
+The job caps OpenMP threads at `SLURM_CPUS_PER_TASK`. Its checkpoints, native executable and
+exports are temporary smoke artifacts; successful job cleanup removes them. Preserve artifacts
+to an approved durable location explicitly when adapting this to a real training run.
+
+## Local regression suite
+
+From the repository root, with PyTorch installed and a C++17 `g++` available:
+
+```sh
+make test-hpc HPC_PYTHON=python3
+```
+
+This also runs the kdb exporter/wrapper tests. The JevLike integration test executes the actual
+Slurm script from a copied spool location, with only the environment-module command stubbed.
+Training, evaluation, export, compilation and parity verification are real local operations.
+It clears `PYTHONPATH` so package-import errors cannot be hidden by the caller environment.
+Submit the actual JevLike cluster job from this component directory as described above; the
+test deliberately reproduces that working-directory contract. Without `g++`, native integration
+is reported as skipped, which does not meet the full acceptance gate.
+
+See [VALIDATION.md](VALIDATION.md) for the audit, research sources and remaining cluster gate.
+
 The export includes a SHA-256 manifest. A deployment/serving layer must verify the artifact hashes
 before loading; the current C++ loader validates the binary structure and numeric values but does
 not itself validate the JSON manifest.
