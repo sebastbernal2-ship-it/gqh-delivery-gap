@@ -20,6 +20,7 @@ One table. A path appears once, with one person.
 
 | Path | Person | What it is |
 |---|---|---|
+| `src/unified_factors/` | aidanq06 | Unified exposure research, standard baselines, overlap diagnostics and reconciled risk attribution |
 | `scripts/`, `tests/`, `Makefile`, `.githooks/`, `docs/workflow.md`, `docs/memory.md`, `docs/onboarding.md`, `docs/decisions.md` | sebastbernal2-ship-it | The collaboration shell: sync, memory bridge, gates |
 | `docs/brief.md` | nobody | The track's own rules. Frozen, so it needs no owner |
 | `docs/alignment.md` | sebastbernal2-ship-it | How we think. Changed by proposal plus a decision entry |

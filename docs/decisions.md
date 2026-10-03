@@ -1060,3 +1060,11 @@ stand in for the repository. Explicit configuration keeps code location separate
 coverage and remaining real-q/cluster gates live in `hpc/kdb-timeseries/VALIDATION.md` and its
 README. Existing callers must export the new variable before submission. This is an operational
 correctness repair authorized by the user; it changes no strategy or out-of-sample decisions.
+
+## 2026-10-03: PR readiness repairs restore the repository gates
+
+**Decision**: on the user's instruction to resolve the PR blockers, retain both authors' changes and add corrective commits without force-pushing their branches. The structure gate explicitly recognizes `.github/` (repository workflows) and `.vscode/` (editor configuration); the existing delivery factor and hazard components receive their required READMEs. Stale parallel-leg references point to the committed second-round implementations. Nested component tests are treated like root test fixtures, and generated results are exempted only through explicit declarations in `results/README.md`; an undeclared output or a missing source still fails the path gate.
+
+## 2026-10-03: The regime overlay rejects stale history and reports undefined metrics
+
+**Regime input contract**: reject a latest pre-entry SPY close older than seven calendar days, and reject gaps over seven calendar days within retained history, before writing outputs. Seven days is a conservative data-coverage guard that allows weekends and ordinary holidays; it is not an exchange-calendar completeness check or a tuned strategy parameter. A missing pre-entry volatility observation fails, while a fresh observation with insufficient threshold history remains warmup. Empty subsets have blank performance metrics, and Sharpe is blank for fewer than two observations or zero dispersion. The development fence and exposure rule are unchanged. Synthetic regression tests cover these repairs without opening outcome data.
