@@ -1,17 +1,44 @@
 # Shared data ingestion handoff (2026-10-03)
 
-This is the current receipt for the team's shared raw data. Economic uses and limitations are
-in [source-audit.md](source-audit.md); operator commands and query examples are in
-`src/central_ingest/README.md`. The raw landing tables are Snowflake
+**Read this first for current load status.** Earlier status paragraphs in
+[source-audit.md](source-audit.md) and [snowflake-path.md](snowflake-path.md) predate the
+2026-10-03 central load and may say a source is still local or unretained. They remain useful
+for economic uses and design cautions, but this receipt supersedes their *load-status* claims.
+Operator commands and query examples live in `src/central_ingest/README.md`.
+
+The raw landing tables are Snowflake
 `VECTOR_RESEARCH.RAW.SOURCE_RECORDS` and TigerData `public.gqh_source_records`.
 Each row carries source ID/URL, JSON payload, batch and row SHA-256, source time text, and a
 separate availability field when the source actually provides one. Query by both `source_id`
 and `batch_sha256`: upstream revisions are separate batches, not silently overwritten.
 
+## What was built and what each system does
+
+`src/central_ingest/sync.py` is a **manual, repeatable fan-out loader**. For Massive it calls
+the API directly via its own `massive.py` client: adjusted daily OHLCV uses the aggregates
+endpoint; AI-tagged 8-K disclosures use `/stocks/filings/8-K/vX/disclosures` with the plural
+`tickers` filter and pagination. It validates nonempty rows and required fields, serializes each
+record canonically, computes row and batch SHA-256 hashes, then writes that *same batch* into
+both databases. Snowflake uses staging plus `MERGE`; TigerData uses `INSERT ... ON CONFLICT`.
+Both sides check row count and the complete ordered row-hash sequence before reporting success.
+Rerunning an unchanged batch is idempotent. Changed upstream snapshots coexist by batch hash.
+
+The public sources use predownloaded, gitignored local CSV/Excel/ZIP inputs; their cloud copies
+are shared, but source download and refresh are **not yet automated**. No raw staging file or
+credential was committed. Snowflake is the historical/provenance and future feature-panel layer;
+TigerData is the shared time-series/replay layer. Snowflake is not on the order-execution path.
+This is not a live replication connection between the two systems: a loader run sends one
+validated batch independently to each destination, with `--target` available for catch-up.
+
 ## Verified cloud loads
 
 Each completed target load checked its count and ordered row hashes against the input batch.
 Massive was fetched directly from its API; other staging files came from the public source.
+Sixteen source IDs were loaded (137,439 rows in the full listed batches) into *each* system.
+TigerData and Snowflake inventory queries returned identical per-source counts. In addition,
+TigerData and Snowflake each hold a separate 20-row PWR Massive canary batch, so a raw
+`massive_bars` count across all batches is 13,535, not 13,515. Select the full-basket batch hash
+below for analysis; never sum revisions/canaries into one panel.
 
 | Source ID | Rows | Verified target(s) | Scope |
 |---|---:|---|---|
@@ -39,6 +66,14 @@ Full `massive_bars` batch SHA-256:
 The loader prints other batch hashes. An earlier 20-row PWR Massive canary remains as a distinct
 batch; do not combine it with the full basket in a backtest.
 
+**Massive access result:** the supplied competition key successfully returned daily bars for
+five tickers and 8-K tags for four, and both datasets were stored/reconciled in both systems.
+The operator asserted sponsor permission for team-shared strategy use via the loader's private
+license gate. The underlying written grant was not attached to this public repo or independently
+reviewed here; confirm its scope before publishing or redistributing vendor data. Teammates
+query the shared tables, not the API key. The key and database passwords appeared in chat and
+should be rotated and reinstalled privately after the handoff.
+
 The prior AWS GPU Spot archive remains in Snowflake
 `VECTOR_RESEARCH.RAW.AWS_GPU_SPOT_PRICES` and TigerData
 `public.aws_gpu_spot_prices` (1,592,024 rows each), separate from `SOURCE_RECORDS`.
@@ -46,6 +81,19 @@ Its citation and source gap are in [Snowflake path](snowflake-path.md).
 TigerData database size after these loads was 731,944,639 bytes; the console previously showed
 a 750 MiB free-service storage allowance. The team's credit does not itself verify that this
 service has been upgraded. Check its actual plan/limit before another large TigerData load.
+
+## Teammate access and immediate next action
+
+1. Pull commit `91ed86f` or later on `main`; read `src/central_ingest/README.md` for the
+   exact environment variables, loader commands, table names, and SQL examples.
+2. Use your **own** Snowflake/TigerData login with query grants. Verify access by querying the
+   `massive_bars` full-basket hash above in each database. A GitHub invite alone does not grant
+   database access; pending Snowflake invitations must be accepted, and TigerData access/grants
+   must be provisioned separately. Do not copy the operator's `.env` or paste passwords in chat.
+3. Start a typed, timestamp-safe panel from the raw batches: join SEC acceptance/availability
+   to Massive 8-K enrichment by accession, keep source vintage/hash, define company/plant
+   exposures before using EIA, and run an equity-only baseline before adding compute context.
+   This ingestion commit did **not** build features, a backtest, a scheduler, or an OOS result.
 
 ## Provenance of new workbooks
 

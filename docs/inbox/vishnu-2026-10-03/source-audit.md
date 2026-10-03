@@ -2,6 +2,10 @@
 
 Owner: Vishnu. Status at 2026-10-03. No keys or participant accounts were tested by this capture.
 
+**Historical audit snapshot:** for the later verified Massive API and Snowflake/TigerData loads,
+use [central-ingest-handoff.md](central-ingest-handoff.md). Statements below saying a stream was
+not yet loaded describe this earlier audit, not current warehouse state.
+
 ## Evidence vocabulary
 
 - User-reported: the participant reports access; not an entitlement/download test.

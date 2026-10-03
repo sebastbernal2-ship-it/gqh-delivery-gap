@@ -6,6 +6,10 @@ thesis, live implementation or measured alpha is asserted here.
 
 ## Read this in ten minutes
 
+For the **current cloud data and Massive connectivity**, start with
+[central ingestion handoff](central-ingest-handoff.md). The list below captures the earlier
+research conversation; older load-status statements there are not the latest operational receipt.
+
 1. [Thinking history](../../thinking/vishnu-2026-10-03.md): how the idea changed and why.
 2. [Research alignment proposal](alignment-proposal.md): intuition, economic mechanism and evidence gates.
 3. [Instrument and data plan](data-plan.md): what each candidate needs, and what depth buys us.
@@ -14,6 +18,8 @@ thesis, live implementation or measured alpha is asserted here.
 6. [Next steps](next-steps.md): the small base case and the gate before scaling.
 7. [Writing style](../../writing/style.md): how to express uncertainty and results.
 8. [Snowflake path](snowflake-path.md): the adopted research/data boundary and first integration slice.
+9. [Central ingestion handoff](central-ingest-handoff.md): verified shared tables, Massive API,
+   source counts, operator workflow, and remaining gaps.
 
 Each topic has one owner document. Link instead of copying it into another summary. The source
 audit owns provider/access details; the data plan owns what to collect; the technical proposal
