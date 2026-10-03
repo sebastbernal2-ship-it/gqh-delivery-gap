@@ -35,6 +35,8 @@ constexpr const char* kDevelopmentStart = "2015-07";
 constexpr const char* kDevelopmentLastVintage = "2022-09";
 constexpr const char* kDevelopmentLastOutcome = "2022-09-30";
 constexpr std::size_t kVolWindow = 20;
+// Conservative coverage gate, not an exchange-calendar completeness guarantee.
+constexpr int kMaximumBarAgeDays = 7;
 constexpr std::size_t kThresholdLookback = 252;
 constexpr std::size_t kMinimumThresholdObservations = 126;
 constexpr double kHighVolQuantile = 0.80;
@@ -116,11 +118,36 @@ std::int64_t integer(const std::string& text, const std::string& label) {
     return static_cast<std::int64_t>(value);
 }
 
+bool leap_year(int year) {
+    return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
+}
+
 std::string iso_date(std::string value) {
     std::replace(value.begin(), value.end(), '.', '-');
     if (value.size() != 10 || value[4] != '-' || value[7] != '-')
         throw std::runtime_error("expected YYYY-MM-DD date, got: " + value);
+    for (std::size_t i = 0; i < value.size(); ++i)
+        if (i != 4 && i != 7 && !std::isdigit(static_cast<unsigned char>(value[i])))
+            throw std::runtime_error("expected YYYY-MM-DD date, got: " + value);
+    const int year = std::stoi(value.substr(0, 4));
+    const int month = std::stoi(value.substr(5, 2));
+    const int day = std::stoi(value.substr(8, 2));
+    const std::array<int, 12> lengths{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (year < 1 || month < 1 || month > 12 || day < 1 ||
+        day > lengths[month - 1] + (month == 2 && leap_year(year) ? 1 : 0))
+        throw std::runtime_error("invalid calendar date: " + value);
     return value;
+}
+
+int calendar_day(const std::string& value) {
+    const std::string date = iso_date(value);
+    const int year = std::stoi(date.substr(0, 4));
+    const int month = std::stoi(date.substr(5, 2));
+    const int prior_year = year - 1;
+    int days = 365 * prior_year + prior_year / 4 - prior_year / 100 + prior_year / 400;
+    const std::array<int, 12> lengths{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    for (int m = 1; m < month; ++m) days += lengths[m - 1];
+    return days + std::stoi(date.substr(8, 2)) + (month > 2 && leap_year(year) ? 1 : 0);
 }
 
 std::string csv_escape(const std::string& value) {
@@ -249,8 +276,11 @@ struct VolPoint { std::string date; double annualized = 0.0; };
 
 std::vector<VolPoint> realized_volatility(const std::vector<SpyBar>& bars) {
     std::vector<double> log_returns(bars.size(), 0.0);
-    for (std::size_t i = 1; i < bars.size(); ++i)
+    for (std::size_t i = 1; i < bars.size(); ++i) {
+        if (calendar_day(bars[i].date) - calendar_day(bars[i - 1].date) > kMaximumBarAgeDays)
+            throw std::runtime_error("SPY history gap exceeds seven calendar days before " + bars[i].date);
         log_returns[i] = std::log(bars[i].close / bars[i - 1].close);
+    }
     std::vector<VolPoint> result;
     for (std::size_t i = kVolWindow; i < bars.size(); ++i) {
         const auto first = log_returns.begin() + static_cast<std::ptrdiff_t>(i - kVolWindow + 1);
@@ -278,8 +308,12 @@ void classify_periods(std::vector<TradePeriod>& trades, const std::vector<VolPoi
                                           [](const VolPoint& point, const std::string& date) {
                                               return point.date < date;
                                           });
-        if (bar == vols.begin()) continue;
+        if (bar == vols.begin())
+            throw std::runtime_error("no pre-entry SPY volatility history for " + trade.entry);
         const auto asof = std::prev(bar);  // State uses only a close strictly before entry.
+        if (calendar_day(trade.entry) - calendar_day(asof->date) > kMaximumBarAgeDays)
+            throw std::runtime_error("stale SPY history for entry " + trade.entry +
+                                     ": latest pre-entry close is " + asof->date);
         trade.spy_asof = asof->date;
         trade.spy_vol = asof->annualized;
         const auto index = static_cast<std::size_t>(std::distance(vols.begin(), asof));
@@ -305,13 +339,13 @@ struct Metrics {
     std::size_t n = 0;
     std::size_t classified = 0;
     std::size_t high = 0;
-    double average_exposure = 0.0;
-    double mean_monthly = 0.0;
-    double annualized = 0.0;
-    double sharpe = 0.0;
-    double max_drawdown = 0.0;
-    double turnover_factor = 0.0;
-    double compounded = 1.0;
+    std::optional<double> average_exposure;
+    std::optional<double> mean_monthly;
+    std::optional<double> annualized;
+    std::optional<double> sharpe;
+    std::optional<double> max_drawdown;
+    std::optional<double> turnover_factor;
+    std::optional<double> compounded;
 };
 
 struct OutputPeriod {
@@ -342,24 +376,26 @@ Metrics metrics(const std::vector<double>& returns, const std::vector<OutputPeri
                           static_cast<double>(returns.size());
     double variance = 0.0;
     if (returns.size() > 1) {
-        for (double value : returns) variance += (value - result.mean_monthly) * (value - result.mean_monthly);
+        for (double value : returns) variance += (value - *result.mean_monthly) * (value - *result.mean_monthly);
         variance /= static_cast<double>(returns.size() - 1);
     }
     const double sd = std::sqrt(variance);
-    result.sharpe = sd > 0.0 ? result.mean_monthly / sd * std::sqrt(12.0) : 0.0;
+    if (sd > 0.0) result.sharpe = *result.mean_monthly / sd * std::sqrt(12.0);
     result.compounded = std::accumulate(returns.begin(), returns.end(), 1.0,
         [](double wealth, double value) { return wealth * (1.0 + value); });
-    if (result.compounded > 0.0)
-        result.annualized = std::pow(result.compounded, 12.0 / static_cast<double>(returns.size())) - 1.0;
+    if (*result.compounded > 0.0)
+        result.annualized = std::pow(*result.compounded, 12.0 / static_cast<double>(returns.size())) - 1.0;
     result.max_drawdown = max_drawdown(returns);
+    result.average_exposure = 0.0;
+    result.turnover_factor = 0.0;
     for (const auto& period : periods) {
         if (period.trade.regime != "warmup") ++result.classified;
         if (period.trade.regime == "high_vol") ++result.high;
-        result.average_exposure += controlled ? period.trade.multiplier : 1.0;
-        result.turnover_factor += controlled ? period.controlled_turnover : period.base_turnover;
+        *result.average_exposure += controlled ? period.trade.multiplier : 1.0;
+        *result.turnover_factor += controlled ? period.controlled_turnover : period.base_turnover;
     }
-    result.average_exposure /= static_cast<double>(periods.size());
-    result.turnover_factor /= static_cast<double>(periods.size());
+    *result.average_exposure /= static_cast<double>(periods.size());
+    *result.turnover_factor /= static_cast<double>(periods.size());
     return result;
 }
 
@@ -451,9 +487,9 @@ void write_outputs(const std::string& periods_path, const std::string& summary_p
                     const Metrics m = metrics(returns, subset, controlled);
                     summary << csv_escape(signal) << ',' << (controlled ? "high_vol_half_exposure" : "unfiltered")
                             << ',' << condition << ',' << (cost_case == 0 ? 10 : 20) << ',' << m.n << ','
-                            << m.classified << ',' << m.high << ',' << m.average_exposure << ',' << m.mean_monthly
-                            << ',' << m.annualized << ',' << m.sharpe << ',' << m.max_drawdown << ','
-                            << m.turnover_factor << ',' << m.compounded << ',' << batch_hash << '\n';
+                            << m.classified << ',' << m.high << ',' << format_optional(m.average_exposure) << ',' << format_optional(m.mean_monthly)
+                            << ',' << format_optional(m.annualized) << ',' << format_optional(m.sharpe) << ',' << format_optional(m.max_drawdown) << ','
+                            << format_optional(m.turnover_factor) << ',' << format_optional(m.compounded) << ',' << batch_hash << '\n';
                 }
             }
         }
@@ -481,7 +517,9 @@ Args parse_args(int argc, char** argv) {
                          "Development only: vintage 2015-07 through 2022-09, with outcomes ending by "
                          "2022-09-30. Uses SPY 20-session realized volatility and its past-only "
                          "80th-percentile threshold over up to 252 prior observations; halves exposure "
-                         "in high-volatility states.\n";
+                         "in high-volatility states. Rejects pre-entry closes older than seven calendar days "
+                         "and gaps exceeding seven calendar days in retained SPY history. Undefined "
+                         "summary metrics are blank CSV fields.\n";
             std::exit(0);
         }
         if (i + 1 >= argc) throw std::runtime_error("missing value after " + key);
