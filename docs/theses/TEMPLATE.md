@@ -34,6 +34,14 @@ and names share shocks, and the resulting **effective breadth**. What is stable 
 
 Then: **every assumption used downstream cites a measurement here.**
 
+**The chain.** Nodes (measurable quantities with units, source and knowable-at time) and edges
+(relations with sign, status, conditions, evidence, failure mode). A thesis is a path through this
+chain, not a strategy name.
+
+**The assumption register.** One row per edge: status (measured, proxied, testable, irreducible), the
+evidence or proxy, the exposure it licenses, and the test that would upgrade it. Irreducible assumptions
+bound exposure rather than disappearing. See `docs/alignment.md` section 18.2.
+
 ## Methodology
 
 Signal rules and timing. **Conditioning**: all-weather, state-gated, or state-scaled, decided up front.
@@ -43,9 +51,10 @@ beaten. The one primary horizon. The variant plan, the sealed-test plan, and the
 against the signal's information half-life.
 
 **Venues.** The mechanism contract mapped per venue: state variables, decision rule, availability
-requirement, exposure budget, cost interface. For any venue that is not the core, its role
-(confirmation, expression or hedge vehicle, execution laboratory, or monitor) and the evidence for it.
-See `docs/alignment.md` section 17.
+requirement, exposure budget, cost interface. For every venue, its **integration mode** from section
+18.3 (node supply, assumption closure, edge identification, state reading, expression, hedge or relative
+value, overlay, derivative profit) and the evidence for it. Every position names the node or edge it
+serves.
 
 ## Results
 
@@ -98,8 +107,9 @@ If we can name none, say so rather than proceeding.
 
 Intended exposures, and why the mechanism pays for them. Neutralised exposures and how. Realised
 attribution against the budget, with the unexplained share stated. Regime breakdown. The hedge map.
-**Edge-channel confirmation**: after seeing the numbers, which channel actually produced the return,
-and whether the original claim survives.
+**Edge-channel confirmation**: after seeing the numbers, which channel actually produced the return, and
+whether the original claim survives. **Edge attribution**: which chain edges carried the P&L, which
+register rows were downgraded, and which nodes turned out to be proxying something else.
 
 ## Limitations
 
