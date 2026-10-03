@@ -70,7 +70,7 @@ writes to that path.
   it cannot go stale, because nobody maintains it by hand.
 - `docs/inbox/` takes anything: drafts, half ideas, critiques, dumps. No template, no rules.
 - `docs/history/` keeps superseded snapshots as evidence of what the team rejected.
-- `docs/00-brief.md` is the only frozen document, because it is the track's own rules rather than
+- `docs/brief.md` is the only frozen document, because it is the track's own rules rather than
   our thinking.
 
 **Context.** The captain's direction moved completely within a day, which would have left a
@@ -88,3 +88,37 @@ one file are the main source of conflicts.
 `make doctor` reports the active count and flags `CURRENT.md` older than the ledger.
 **Snapshot.** The 2026-10-02 idea and system documents moved to `docs/history/` with a superseded
 banner. Nothing was deleted.
+
+---
+
+## 2026-10-03: The layout is a fixed set of slots, and `make check` keeps it that way
+
+**Decision.** Every category of work has one named home, and the root stays a short list.
+
+| Category | Home |
+|---|---|
+| The track's rules | `docs/brief.md`, the only frozen file |
+| The live position | `docs/CURRENT.md`, generated from the ledger |
+| Claims | `docs/theses/<id>.md` plus one line in `docs/theses/index.jsonl` |
+| Settled calls | `docs/decisions.md`, append only |
+| Drafts and dumps | `docs/inbox/`, no rules |
+| Process, back and forth, revised thinking | `docs/thinking/`, one file per person per day |
+| How we think | `docs/alignment.md` |
+| The note and the writing | `docs/writing/`, one file per section |
+| Code | `src/<component>/` with its own README |
+| HiPerGator approaches | `hpc/<approach>/` with its own README, outputs not committed |
+| Numbers the note quotes | `results/` |
+
+**Context.** Four people are about to push process logs, revised thinking, strategy code, data
+processing, two approaches to HiPerGator, and writing, all at once. Without fixed slots that lands
+in the root and becomes unnavigable, and the cost of fixing it later is renames across everyone's
+branches.
+**Why this shape.** Each slot answers "where does this go" without a conversation, and each
+important one has a single writer, so parallelism does not create conflicts. `docs/thinking/` and
+`docs/inbox/` deliberately have almost no rules, because a landing zone with rules is a landing
+zone people avoid.
+**Enforcement.** `scripts/check_structure.py`, run by `make check`: the root accepts only known
+entries, and every directory under `src/` and `hpc/` must carry a README. Four tests cover it.
+**Alternatives.** Letting the layout emerge was rejected: with four people and a shifting idea, an
+emergent layout becomes a mess faster than it becomes a convention. A single schema file describing
+every future directory was rejected as speculative.

@@ -49,6 +49,7 @@ test:
 	@python3 tests/test_memory_filter.py
 	@python3 tests/test_memory_absorb.py
 	@python3 tests/test_thesis_index.py
+	@python3 tests/test_structure.py
 
 # Credential scan over every file. This repo is public.
 secrets:
@@ -57,6 +58,7 @@ secrets:
 # Public repo gate: no credentials, and the ledger is valid.
 check: secrets
 	@python3 scripts/check_theses.py
+	@python3 scripts/check_structure.py
 
 status:
 	@git status -sb

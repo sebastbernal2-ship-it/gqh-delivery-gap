@@ -14,10 +14,10 @@ There is no P&L leaderboard. Judges score reasoning and rerun the code.
    so ordinary recall finds what the team already knows.
 2. Read `memory/SHARED.md`. It is the team's memory, filtered and redacted for this public repo.
 3. Read, in order: `docs/CURRENT.md` (the live position, regenerated from the ledger),
-   `docs/00-brief.md` (the fixed track rules), `docs/03-decisions.md` (settled calls), then
+   `docs/brief.md` (the fixed track rules), `docs/decisions.md` (settled calls), then
    `OWNERS.md` for who owns which path. Add `docs/theses/` for the record behind each live claim.
 
-Do not re-derive what is already settled. `docs/03-decisions.md` is the record.
+Do not re-derive what is already settled. `docs/decisions.md` is the record.
 
 ## Where a fact goes
 
@@ -25,17 +25,17 @@ One owner per fact. Never copy a fact into a second file, link to the owner inst
 
 | Fact | Owner |
 |---|---|
-| Track rules, rubric, deadline, out-of-sample rule | `docs/00-brief.md` |
+| Track rules, rubric, deadline, out-of-sample rule | `docs/brief.md` |
 | The live position, always regenerated | `docs/CURRENT.md` |
 | Each thesis, one file per claim | `docs/theses/` |
 | Unfinished drafts, anything not yet a claim | `docs/inbox/` |
 | Superseded snapshots | `docs/history/` |
-| Anything settled | `docs/03-decisions.md` |
+| Anything settled | `docs/decisions.md` |
 | Who owns what path | `OWNERS.md` |
 | The shape of a result file | `results/README.md` |
 | A critique of the idea or the plan | `docs/reviews/` |
 | Numbers the note quotes | `results/*.json` |
-| How memory is shared | `docs/04-memory.md` |
+| How memory is shared | `docs/memory.md` |
 
 ## Rules that decide the score
 

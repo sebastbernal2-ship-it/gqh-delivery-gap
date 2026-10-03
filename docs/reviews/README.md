@@ -6,7 +6,7 @@ not an afterthought.
 Two kinds of file:
 
 - `YYYY-MM-DD-<topic>.md` for a written critique. Copy `TEMPLATE.md` and fill it in.
-- A line in `docs/03-decisions.md` once the critique settles into a decision.
+- A line in `docs/decisions.md` once the critique settles into a decision.
 
 ## Why this matters for the score
 

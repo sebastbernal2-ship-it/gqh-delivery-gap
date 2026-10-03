@@ -2,7 +2,7 @@
 
 - **Reviewer.** <name>
 - **Date.** <YYYY-MM-DD>
-- **Target.** `docs/01-idea.md` / `docs/02-system.md` / a specific engine
+- **Target.** `docs/CURRENT.md`, a thesis in `docs/theses/`, or a component in `src/`
 - **Verdict.** holds / holds with changes / fails
 
 ## What is wrong
@@ -28,4 +28,4 @@ The run or check that settles this, and what result would falsify the replacemen
 
 ## Status
 
-open / accepted into docs/03-decisions.md / rejected, with the reason
+open / accepted into docs/decisions.md / rejected, with the reason

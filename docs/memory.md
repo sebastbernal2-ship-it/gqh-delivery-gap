@@ -11,10 +11,10 @@ One owner per fact. Never copy a fact into a second file. Link to the owner inst
 
 | Fact | Owner |
 |---|---|
-| Track rules, deadline, rubric, out-of-sample rule | `docs/00-brief.md` |
-| The strategy and its mechanism | `docs/01-idea.md` |
+| Track rules, deadline, rubric, out-of-sample rule | `docs/brief.md` |
 | Each thesis, one file per claim | `docs/theses/` |
-| Anything settled | `docs/03-decisions.md` |
+| Each thesis, one file per claim | `docs/theses/` |
+| Anything settled | `docs/decisions.md` |
 | Who owns what path | `OWNERS.md` |
 | The shape of a result file | `results/README.md` |
 | A critique of the idea or the plan | `docs/reviews/` |

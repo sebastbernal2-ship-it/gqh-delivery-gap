@@ -7,7 +7,7 @@ The parts that decide whether this repo works for four people:
 
 1. `make sync` before you start. It pulls the team's work and loads their shared memory.
 2. `memory/SHARED.md` is the team's memory. Read it.
-3. Then read `docs/00-brief.md`, `docs/01-idea.md`, `docs/02-system.md`, `docs/03-decisions.md`.
+3. Then read `docs/CURRENT.md`, `docs/brief.md`, `docs/decisions.md`, `OWNERS.md`.
 4. Stay inside the paths your workstream owns. See `OWNERS.md`.
 5. Every number the note quotes comes from `results/`. Regenerate, never hand-edit.
 6. The out-of-sample window is opened once, by its owner, and reported as it lands.
@@ -15,7 +15,7 @@ The parts that decide whether this repo works for four people:
 
 Capture is mechanical in this repo. `hippo hook install claude-code` wires the per-machine
 wrapper for this harness, and `.githooks/pre-commit` refreshes and stages the shared memory on
-every commit. See `docs/04-memory.md`.
+every commit. See `docs/memory.md`.
 
 <!-- hippo:start -->
 ## Project Memory (Hippo)
