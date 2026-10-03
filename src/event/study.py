@@ -68,13 +68,6 @@ def surprise(value: float, history: list[float]) -> float | None:
     return value - statistics.median(history)
 
 
-def revision_surprise(current_value: float | None, prior_expectation: float | None) -> float | None:
-    """The primary signal: current public value minus the earlier public expectation."""
-    if current_value is None or prior_expectation is None:
-        return None
-    return float(current_value) - float(prior_expectation)
-
-
 def summarise(rows: list[dict], horizons: list[int]) -> str:
     lines = []
     lines.append(f"events: {len(rows)}")

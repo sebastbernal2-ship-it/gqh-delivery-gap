@@ -12,9 +12,7 @@ filing's own acceptance time. That is why this channel exists: the project-level
    the first session strictly after it. Same-bar fills are refused by construction, not by convention.
 2. **Abnormal, not raw.** Market and sector movement is the first alternative explanation, so raw and
    benchmark-adjusted returns are reported side by side.
-3. **Expectation first.** `revision_surprise` is current public value minus the earlier public expectation.
-   A typical historical change is not a market expectation.
-4. **A plateau, not a peak.** Horizons of 1, 2, 5, 10 and 20 sessions are all reported, and nothing here
+3. **A plateau, not a peak.** Horizons of 1, 2, 5, 10 and 20 sessions are all reported, and nothing here
    elects a winner. The primary horizon must be declared before the sealed test, and picking the best cell
    afterwards would be tuning on the development window.
 

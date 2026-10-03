@@ -60,10 +60,9 @@ content is authored here as `node_proposed` declarations, which is exactly what 
 
 The local cross-layer contract is `docs/scan/quantgraph.jsonl`. It declares identity, sources, raw fields,
 features, mechanisms, controls, outcomes, evidence, experiments, strategies, rules and implementations.
-It now contains 418 nodes and 1,056 edges, including 325 proposed registry nodes kept inactive until
-their representations are verified. `scripts/check_quantgraph_manifest.py` validates it before data
-arrives. It is a local mirror, not a write-through to the sibling repository. `make graph` remains
-read-only and resolves the chain log against the sibling graph.
+`scripts/check_quantgraph_manifest.py` validates it before data arrives. It is a local mirror, not a
+write-through to the sibling repository. `make graph` remains read-only and resolves the chain log against
+the sibling graph.
 
 ## Data we reuse, and data we must add
 

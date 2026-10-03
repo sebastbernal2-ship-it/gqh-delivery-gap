@@ -1,18 +1,5 @@
 [
   {
-    "id": "mem_45814d4b52fa",
-    "content": "current public value minus prior expectation when available and mark missing baselines",
-    "tags": [
-      "gqh",
-      "preference",
-      "captured"
-    ],
-    "created": "2026-10-03T15:23:54.999Z",
-    "layer": "episodic",
-    "confidence": "observed",
-    "pinned": false
-  },
-  {
     "id": "mem_4b69f5be4bfe",
     "content": "Quanthacks now links read-only to algoterminal-data: docs/algoterminal.md owns the contract, make graph resolves it, and make check runs it when the sibling checkout exists (ALGOTERMINAL_DIR, default ~/algoterminal-data) and skips otherwise. The link checks that node_resolved nodes exist in graph/quant_graph.yaml, node_proposed nodes do not, source_resolved sources exist in graph/source_inventory.yaml, source_proposed do not, every edge endpoint is declared, and every declaration is used. Audit finding: against 7517 graph node ids our node space is absent (no datacenter, compute, GPU, interconnection, transformer, turbine, cooling, backlog, guidance or 8-K nodes; the 63 feature nodes are weather, tanker and refinery observation). Reuse for data: source:sec (EDGAR), source:eia-930, source:fred, source:market (yfinance/stooq), source:landsat, source:nasa-firms, source:copernicus. Must add: source:eia-860m, source:databento-options, source:ornn-ocpi, source:hyperliquid-archive. First chain declared at docs/chains/t-capacity-revision.jsonl.",
     "tags": [
