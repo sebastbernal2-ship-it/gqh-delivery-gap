@@ -1,0 +1,26 @@
+{
+  "retrieved_at": "2026-10-03T21:01:43.008738+00:00",
+  "historical_availability_verified": false,
+  "files": {
+    "ff3": {
+      "file": "F-F_Research_Data_Factors_daily_CSV.zip",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_daily_CSV.zip",
+      "sha256": "2f29e22546069914890a712680a6f81f3680ebc3543b52864484d209ca13a7db"
+    },
+    "ff5": {
+      "file": "F-F_Research_Data_5_Factors_2x3_daily_CSV.zip",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_5_Factors_2x3_daily_CSV.zip",
+      "sha256": "7881223b51929ee0d6d23b8a28524aaec478a2c3d4eeca47224955cc845c5186"
+    },
+    "momentum": {
+      "file": "F-F_Momentum_Factor_daily_CSV.zip",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Momentum_Factor_daily_CSV.zip",
+      "sha256": "ecf82b116e6ec56d2b79a2f27bd1d1598c217b5c6c25caa55b945bdd8a2c0b78"
+    },
+    "industry12": {
+      "file": "12_Industry_Portfolios_daily_CSV.zip",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/12_Industry_Portfolios_daily_CSV.zip",
+      "sha256": "cde9864260d22e42fdbd29a8a1272b8a0ab67aaf4d8cc6fd7898e11c448f06b1"
+    }
+  }
+}
