@@ -124,6 +124,18 @@ compute spot archive.
 **Consequence**: put the fast engine where the data is fast, and the slow analytical engine where the data is
 slow. One engine for everything will be pointed at the wrong clock half the time.
 
+## T14. The tail and the exits are structured, and the structure is intrinsic to the project
+
+**Statement**: with technology, size, age and start year alone, the chance of a large revision is discriminated
+at 0.6345 and the chance of a suspected exit at 0.6624, against 0.6213 for a first revision of any size. So the
+tail and the exits carry real structure, and the object everyone models, the first revision, carries the least.
+**Evidence**: `results/delivery-model-object-{move,large,withdraw}.md`, panel `results/delivery-panel-objects.csv`,
+declared in `docs/plan/object-redefinition.md`.
+**Scope**: 27,708 project months, 2,190 revisions, 576 large, 639 suspected exits, mechanism window.
+**Consequence**: the structure is project intrinsic, so a forecast of the tail needs project, host and contract
+data, not market aggregates. Also, an exit is more predictable than a revision, so the exit is the better object
+if a model of this family is ever rebuilt.
+
 ---
 
 # What these truths are pointing at

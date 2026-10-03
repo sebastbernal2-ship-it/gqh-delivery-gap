@@ -43,7 +43,11 @@ BOTTLENECK_FACTORS = ["dc_construction_musd", "power_construction_musd", "equipm
                       "gscpi", "delivery_times", "promise_horizon_months", "pipeline_momentum"]
 FACTORS = ENVIRONMENT_FACTORS
 FIELDS = ["month", "state", "technology", "capacity", "log_capacity", "age_months", "start_year",
-          "event"] + FACTORS
+          "event", "event_large", "event_withdraw", "slip_months"] + FACTORS
+
+# The tail definition, declared in docs/plan/object-redefinition.md: a revision of six months or more is the
+# part of the outcome that carries information, because 36 percent of first revisions are one month nudges.
+LARGE_SLIP_MONTHS = 6
 
 
 def month_index(stamp: str) -> int:
@@ -79,15 +83,18 @@ def mean_of(values: list) -> float | None:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", default="results/delivery-model-panel.csv")
+    parser.add_argument("--outcomes", action="store_true",
+                        help="add the large revision and suspected withdrawal columns")
     parser.add_argument("--end", default="2022-09")
     parser.add_argument("--factor-set", choices=("environment", "bottleneck"), default="environment")
     args = parser.parse_args(argv)
     factors = BOTTLENECK_FACTORS if args.factor_set == "bottleneck" else ENVIRONMENT_FACTORS
     fields = ["month", "state", "technology", "capacity", "log_capacity", "age_months", "start_year",
-              "event"] + factors
+              "event", "event_large", "event_withdraw", "slip_months"] + factors
 
     observed = load_generators()
-    print(f"generators in the cache: {len(observed)}")
+    vintage_stamps = sorted(path.stem for path in CACHE.glob("*.jsonl"))
+    print(f"generators in the cache: {len(observed)}, vintages: {len(vintage_stamps)}")
 
     codes = state_codes()
     states = sorted({sightings[0][3] for sightings in observed.values() if sightings[0][3]})
@@ -114,6 +121,8 @@ def main(argv: list[str] | None = None) -> int:
 
     rows: list[dict] = []
     events = 0
+    large_events = 0
+    withdraw_events = 0
     technologies: dict[str, int] = defaultdict(int)
     for sightings in observed.values():
         readable = [(stamp, promise) for stamp, promise, *_ in sightings if len(promise) == 7]
@@ -127,7 +136,18 @@ def main(argv: list[str] | None = None) -> int:
             capacity = 0.0
         technologies[technology] += 1
         event_month = next((stamp for stamp, promise in readable[1:] if promise != baseline), None)
-        final_month = event_month or sightings[-1][0]
+        moved_to = next((promise for stamp, promise in readable[1:] if promise != baseline), None)
+        slip = (month_index(moved_to) - month_index(baseline)) if moved_to else None
+        # Suspected withdrawal: the generator stops appearing while its promise was still in the future, and it
+        # is absent again in the next available vintage. An early completion also removes a unit from the
+        # planned sheet, so the share is reported rather than assumed away.
+        withdraw_month = None
+        last_stamp, last_promise = readable[-1]
+        if event_month is None and month_index(last_promise) > month_index(last_stamp):
+            later = [stamp for stamp in vintage_stamps if stamp > last_stamp]
+            if len(later) >= 2:
+                withdraw_month = later[0]
+        final_month = event_month or withdraw_month or sightings[-1][0]
         if final_month > args.end:
             final_month = args.end
         month = first_stamp
@@ -140,6 +160,10 @@ def main(argv: list[str] | None = None) -> int:
                 "age_months": month_index(month) - month_index(first_stamp),
                 "start_year": int(first_stamp[:4]),
                 "event": 1 if month == event_month else 0,
+                "event_large": 1 if (event_month and month == event_month
+                                     and slip is not None and slip >= LARGE_SLIP_MONTHS) else 0,
+                "event_withdraw": 1 if month == withdraw_month else 0,
+                "slip_months": slip if month == event_month else "",
                 "precip_anomaly": weather_known_at(month, precip.get(state, {})),
                 "drought_severity": drought.get(state, {}).get(previous),
                 "gas_level": market_known_at(month, market.get("gas", {})),
@@ -165,6 +189,8 @@ def main(argv: list[str] | None = None) -> int:
                 record["pipeline_momentum"] = congestion_row.get("pipeline_momentum")
             rows.append(record)
             events += record["event"]
+            large_events += record["event_large"]
+            withdraw_events += record["event_withdraw"]
             month = shift_month(month, 1)
 
     out = ROOT / args.out
@@ -176,6 +202,8 @@ def main(argv: list[str] | None = None) -> int:
 
     print(f"wrote {args.out}: {len(rows)} project months, {events} revision months "
           f"({events / len(rows):.1%})")
+    print(f"  large revisions (six months or more): {large_events} ({large_events / len(rows):.2%})")
+    print(f"  suspected withdrawals: {withdraw_events} ({withdraw_events / len(rows):.2%})")
     print("factor coverage:")
     for factor in factors:
         present = sum(1 for row in rows if row[factor] is not None and row[factor] == row[factor])

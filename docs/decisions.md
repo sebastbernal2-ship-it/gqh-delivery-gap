@@ -952,39 +952,21 @@ question was answered properly rather than a wrong conclusion about the mechanis
 **The honest order now.** Write the payer first for whichever factor we take, then measure, then look for the
 market consequence. Not the reverse.
 
----
+## 2026-10-03: The delivery object is redefined and the direction closes on public aggregates
 
-## 2026-10-03: Stage A2 and A3. The relevant factors do not move delivery either
+**Decision**: test three outcomes on the same panel (any revision, a revision of six months or more, and a
+suspected exit), pre-registered in `docs/plan/object-redefinition.md`, and treat the result as closing the
+delivery direction on public aggregate data if the factors fail all three.
 
-**What changed from Stage A.** The factor set was replaced with the ones that pass the relevance gate, all of
-them read from the shared tables the team loaded: data centre, power and electrical equipment construction
-spending, the New York Fed supply chain pressure index, and the Philadelphia Fed delivery times index, plus the
-inventory congestion proxies. Every one names a payer. Two months of publication lag is declared for all of
-them.
+**Context**: truth T2 said the first revision of any size is dominated by one month nudges, so the object
+everyone was modelling was mostly noise by our own measurement. The panel and factors already existed, so the
+redefinition cost one afternoon.
 
-**A2, levels with a time split.** Controls alone discriminate at 0.6254 out of sample; controls plus the
-bottleneck factors at 0.5681, with the placebo at 0.5528. The factors make it worse, and the test likelihood
-degrades by half, which is overfitting rather than signal.
+**Result**: the object change worked and the factors did not. Controls alone discriminate the tail at 0.6345 and
+exits at 0.6624 against 0.6213 for nudges, so the tail and the exits are genuinely more structured. But on the
+tail the placebo reaches 0.6437 against the factor model's 0.6407, and on exits the factors collapse to 0.5659
+against controls at 0.6624. The largest coefficient is the missingness flag for a factor covering 44 percent of
+rows, so coverage is doing part of the work.
 
-**A3, differential exposure.** Market wide monthly factors are identical for every project in a month, so a time
-trend absorbs them and a time split cannot validate them. Adding month effects moves the identification to
-differential exposure: do longer waits hurt equipment heavy technologies more than equipment light ones. The
-answer is a trained-model no. Delivery times interacted with the equipment heavy group: 0.956 [0.937, 0.986].
-Pipeline momentum interacted: 0.898 [0.866, 0.916], which is the wrong sign against the declared prediction.
-Every other interaction is within a rounding error of one. Out of sample the factor model still loses to
-controls, 0.5560 against 0.6082, with 118 features against about 1,300 training events.
-
-**The one mechanism consistent hint, recorded as a hint.** Supply chain pressure has an odds ratio of 1.269 in
-equipment heavy technologies against 1.186 in equipment light ones. The direction matches the mechanism, the
-difference is small, and the model does not generalise, so it is a hint for a bigger sample and not a finding.
-
-**What this establishes.** The delivery object, whether a promised project moves, is close to unpredictable from
-market wide factors once technology, size, age and the calendar are accounted for. Three factor sets have now
-failed on it: environmental, bottleneck and exposure interactive. The most likely reason is that the object is
-too coarse and too noisy: a third of first revisions are one month nudges, and the drivers that matter are
-project specific, contract specific and queue specific, none of which this data contains.
-
-**Consequence for the plan.** Stop pushing factors into the delivery hazard. Either the object changes to the
-tail, cancellation and revisions of six months or more, or the study moves to the value object, the compute
-rental price, and to the payer named events in the 8-K disclosures, which are the two places where a
-counterparty is visible.
+**Consequence**: the structure is project intrinsic. Market wide aggregates are not the driver. The delivery
+direction needs the interconnection queue, the host and the contract, so it rests on the queue data request.
