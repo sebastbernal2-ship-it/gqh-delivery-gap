@@ -10,6 +10,9 @@ Read [SYSTEM_AUDIT.md](SYSTEM_AUDIT.md) for findings, history, sources and unres
 issues; [INTERFACE.md](INTERFACE.md) for exact contracts; [VALIDATION.md](VALIDATION.md) for verification
 and remaining work. Those are the continuation record, not a new trading thesis.
 
+For the next acquisition and teammate handoff, read [DATA_ACQUISITION.md](DATA_ACQUISITION.md):
+Massive client gaps, dataset priorities, private local setup, and the proposed Snowflake release gates.
+
 ## Run without accounts or dependencies
 
 Python 3.11+ standard library is sufficient for local reconciliation, features and tests:
