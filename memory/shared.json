@@ -1,17 +1,5 @@
 [
   {
-    "id": "mem_40924e2186f7",
-    "content": "Repo layout as of 2026-10-03, after the direction moved and the repo was stripped back. docs/ holds the written layer: brief.md (frozen track rules), CURRENT.md (generated from docs/theses/index.jsonl, the live position), theses/ (one record per claim plus the append-only ledger), decisions.md (settled calls), inbox/ (drafts awaiting promotion), thinking/ (raw process: back-and-forth, revisions, dated, per person), writing/ (the note and its style), alignment.md (how we think: intuition, vision, what counts as evidence), memory.md and onboarding.md (the shell). src/ holds code once there is a claim to test, one directory per component with its own README. hpc/ holds HiPerGator job scripts, one directory per approach; outputs stay out of the repo. results/ holds the numbers the note quotes. The parked delivery-gap attempt lives on branch archive/w0-delivery-gap, not on main.",
-    "tags": [
-      "gqh",
-      "quanthacks"
-    ],
-    "created": "2026-10-03T05:42:10.456Z",
-    "layer": "episodic",
-    "confidence": "verified",
-    "pinned": false
-  },
-  {
     "id": "mem_6f0771d95a33",
     "content": "Do not load memory/shared.json with hippo import --file: it parses the JSON as plain text and writes one memory per line, flooding the store with fragment entries such as a bare key string. Use scripts/memory_absorb.py, which compares normalized content against the local export and calls hippo remember once per missing entry. It is idempotent.",
     "tags": [
@@ -25,12 +13,13 @@
     "pinned": false
   },
   {
-    "id": "mem_903c48a44036",
-    "content": "Out-of-sample window for this entry: with an EIA-860M history start of 2022-01-03 the mandated rule (most recent 20 percent, or 2 years, whichever is shorter) gives about 2025-10-20 to 2026-10-02 out of sample, and 2022-01-03 to 2025-10-19 in sample.",
+    "id": "mem_7339acc3460a",
+    "content": "Repo: https://github.com/sebastbernal2-ship-it/gqh-delivery-gap (public, main). Layout: docs/ (brief.md frozen track rules, CURRENT.md generated from docs/theses/index.jsonl, theses/, decisions.md append-only, workflow.md parallel-work rules, memory.md, onboarding.md, alignment.md, thinking/, writing/, inbox/, history/), src/<component>/ with its own README, hpc/<approach>/ with its own README, results/, memory/shared.json. Commands: make sync, save M=, current, check, test, doctor, claims, overlaps, worktree NAME=, share, absorb, remember M=. Rules: one writer per file, decompose by concern with INTERFACE.md as the seam, branch when paths overlap, push branches immediately, rebase before committing, merge same day. The parked delivery-gap attempt lives on branch archive/w0-delivery-gap including its own out-of-sample split; nothing on main asserts it. Vishnu's equity-first research handoff is in docs/inbox/vishnu-2026-10-03/.",
     "tags": [
-      "gqh"
+      "gqh",
+      "quanthacks"
     ],
-    "created": "2026-10-03T04:28:54.051Z",
+    "created": "2026-10-03T06:03:10.652Z",
     "layer": "episodic",
     "confidence": "verified",
     "pinned": false

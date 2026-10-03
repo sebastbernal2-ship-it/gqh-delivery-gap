@@ -163,3 +163,28 @@ access from tested downloads. Earlier missing assistant responses are not fabric
 **Scope.** This is a documentation/coordination decision, not approval of a universe, signal,
 OOS split or trading leg. Alignment content remains a proposal for its shared owner. Frozen brief,
 generated CURRENT and the empty thesis ledger are unchanged. No credentials or raw data are added.
+
+---
+
+## 2026-10-03: Integration of the first teammate push, and what the audit changed
+
+**Decision.** Vishnu's handoff landed on `main` while this branch was mid-edit. Integrated by rebase,
+not by merge.
+**Conflict.** Both branches created `docs/writing/style.md` independently. Resolved by keeping both
+halves in one file: how we write about evidence (his, kept as written, and he owns the file) and how
+the prose reads. A file cannot have two owners, so the file now names one.
+**Audit findings, fixed.** Running the whole path on a fresh clone found six defects: `make check`
+failed on a clean clone because an egg-info directory appeared in the filesystem scan, so the
+structure check now reads git; `doctor` compared file times, which a clone resets, so it now compares
+generated content and the renderer is deterministic; `bootstrap` printed two commands that no longer
+exist; `.cursorrules` pointed at two documents deleted in the trim; the credential gate flagged a
+variable named `TOKEN` assigned a regex, which would have blocked future pushes; and `pyproject.toml`
+carried dependencies for code that no longer exists.
+**New gate.** `scripts/check_paths.py` verifies that every path a tracked document references exists.
+It found the stale `.cursorrules` references. Its precision matters: it ignores the path part of a URL
+and prose that merely looks path-shaped, because a gate that cries wolf gets switched off.
+**New area.** `.cursor/` is allowed as a harness configuration area, like `.githooks/`.
+**Memory honesty.** Vishnu flagged that shared memory described the archived attempt; that was
+correct. Entries asserting the parked attempt's out-of-sample split were removed, and `docs/memory.md`
+now states the rule: an entry records what was known when it was written, the branch wins over the
+entry, and stale entries are fixed at the source.

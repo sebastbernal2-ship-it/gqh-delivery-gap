@@ -169,6 +169,17 @@ Two consequences, both now handled:
    `make hooks` only touches committed instruction files. `make hooks-global` is the explicit
    opt-in for the wrappers that edit your home directory, and it says so before it runs.
 
+## A memory is a record, not a claim about the current branch
+
+Shared memory includes entries written before a direction changed, so it can describe code,
+results, or an out-of-sample split that no longer exists on this branch. That is not a bug: it is
+what a record of the past looks like.
+
+When an entry and the branch disagree, the branch wins, and the entry gets fixed at its source:
+rename or delete the thing, then `make remember` the corrected fact and `make share`. Never edit
+`memory/shared.json` by hand to make history look tidier, and never treat an old entry as evidence
+that code exists, that access is verified, or that a measurement is current.
+
 ## The one rule that keeps stores from mixing
 
 A memory belongs to the store at the **repo root**, and hippo resolves the store from the
