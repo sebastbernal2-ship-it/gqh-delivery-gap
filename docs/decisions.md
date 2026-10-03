@@ -970,3 +970,21 @@ rows, so coverage is doing part of the work.
 
 **Consequence**: the structure is project intrinsic. Market wide aggregates are not the driver. The delivery
 direction needs the interconnection queue, the host and the contract, so it rests on the queue data request.
+
+## 2026-10-03: Both sealed holdouts are opened once, properly, and all three tests are null
+
+**Decision**: open study one's 24 month holdout and study two's six month holdout once each, on the captain's
+authorization, and report whatever they say. The scan's window module already supported opening a holdout and the
+scan never exposed the switch, so the switch was added as the protocol promised, changing no threshold, horizon,
+pair or statistic.
+
+**Result**: three nulls. The capacity strategy's best signal earns +0.16 percent a month net at ten basis points
+and loses money at twenty, Sharpe 0.10, drawdown 38 percent, and its balanced signal is negative. The mechanism
+scan finds 12 nominal survivors against 3.1 expected but only 2 across families against 1.1 expected, and every
+survivor is a pair whose legs share constituents. The compute era scan finds 7 nominal against 3.1 and 2
+cross-family against 1.1.
+
+**Consequence**: the one cell that looks alive, the largest third of revisions in the strategy holdout at +0.85
+percent net, is a subset of 33 months that was already visible in development. It needs a fresh holdout this
+project cannot grant, so it stays a hypothesis with no evidence. Both holdouts are spent and closed permanently,
+and the record is `docs/plan/sealed-test-record.md`.
