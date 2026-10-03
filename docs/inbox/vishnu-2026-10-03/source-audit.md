@@ -168,3 +168,79 @@ options/event package.
 5. Add weather, water, queue and patents only when a predeclared feature or confounder needs them. Keep each feature’s source, vintage, units, publication time, ingestion time and quality flags intact in Snowflake/TigerData.
 
 This is a source inventory, not a strategy result. Count independent project shocks and exposure-linked issuers after constructing point-in-time panels; a long source history does not create independent AI-era delivery events.
+
+## AWS Spot archive loaded to the research stores — 2026-10-03
+
+**Source citation:** Eric Pauley (2026), *AWS Spot Price History* (2026-09 version), Zenodo
+[record 23082767](https://doi.org/10.5281/zenodo.23082767), CC BY 4.0. The Zenodo API metadata
+identifies the creator, version, open access, license and monthly file hashes. The archive
+describes data equivalent to AWS EC2 `DescribeSpotPriceHistory`, with global AZ identifiers
+replacing account-specific AZ names. It updates monthly and source event times can include the
+last preceding price needed at a month boundary; preserve the provider's timestamp semantics.
+
+**Downloaded/local:** 31 decompressed CSV files in ignored `data/aws-compute/csv/`; 1,592,024
+observations total; 62 instance types; 2022-05-31 18:50:49 UTC through 2026-09-30 23:00:00 UTC.
+The 2024-01 `.v2.csv` file was excluded from the load because it duplicates that month and carries
+local ingestion metadata. March–June 2026 is absent. The archive supports spot-price study of
+GPU/cloud instance types; it does not directly report GPU utilization, instance availability,
+allocation fulfillment, on-demand prices, total compute supply, or named-company data-center
+capacity.
+
+**TigerData:** `public.aws_gpu_spot_prices`, verified with a read-only SQL query at 1,592,024 rows,
+31 source files, the min/max dates above, and 0 observations in the missing Mar–Jun interval.
+**Snowflake:** browser load completed successfully to
+`VECTOR_RESEARCH.RAW.AWS_GPU_SPOT_PRICES`; UI reported 1,592,024 rows inserted. Post-load QA
+returned 1,592,024 rows, 31 source files, UTC text timestamps `2022-05-31 18:50:49.000 Z` to
+`2026-09-30 23:00:00.000 Z`, zero null ingestion times and zero observations in the Mar–Jun source
+gap. This validates the imported timestamp representation, not historical provider availability
+or the archive's economic completeness.
+
+**Citation format for a slide/report:** `Pauley, E. (2026). AWS Spot Price History, version
+2026-09 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.23082767 (CC BY 4.0).` Cite these as
+EC2 Spot prices, not as a complete compute-market price index. For derived figures preserve DOI,
+version, access date, file-level source MD5s, transformation code and the missingness statement.
+
+## Ornn benchmark repo — official repository reviewed 2026-10-03
+
+[`Ornn-AI/ornn-benchmarking`](https://github.com/Ornn-AI/ornn-benchmarking) describes an
+MIT-licensed standardized GPU benchmark CLI. Its README says it runs 30+ compute, memory and
+interconnect benchmarks and emits Ornn-I/Ornn-T composites; the CLI guide documents machine-
+readable JSON reports, system/GPU inventory, per-section statuses/metrics and opt-in API upload.
+The documented scores combine memory bandwidth with FP8 inference performance (Ornn-I), and BF16
+training performance with all-reduce bandwidth (Ornn-T).
+
+**Possible use:** run on a controlled HiperGator or Vultr environment; pin repository commit,
+benchmark version, CUDA/driver/toolchain, GPU model/count and run conditions; archive JSON with
+our own source/version/collection metadata. If an AWS instance SKU can be reliably mapped to the
+same GPU configuration, divide observed Spot USD/hour by a measured Ornn score to compare *current
+measured performance per dollar*. Treat the score as a resource-cost normalization feature, not
+a market-price observation or outcome label. A current benchmark cannot reconstruct historical
+SKU performance after hardware changes, prove a cloud instance was available, or create a longer
+backtest.
+
+**Caveat:** reports may include GPU UUIDs and machine/software inventory. Store them internally;
+do not use the CLI's `--upload` without team approval. No package was installed and no benchmark
+was run during this audit; HiperGator access to the required NVIDIA tooling still needs testing.
+
+## Onboarding order for the research stores
+
+The archive above is the only non-market dataset currently loaded into both Snowflake and
+TigerData. These loads were independent imports of the same local snapshot; there is no automated
+bridge yet. The reviewed URLs below are a *source shortlist*, not download evidence. Onboard in
+this order and keep only the high-cadence/as-of features needed by q in TigerData; Snowflake is
+the canonical batch research and provenance layer.
+
+| Order | Dataset to validate/load next | Canonical home | TigerData use | Gate before calling it usable |
+|---|---|---|---|---|
+| 1 | SEC EDGAR filings and numeric event ledger for PWR/ETN/EME/DLR | Snowflake RAW: accessioned source metadata/text; NORMALIZED: reviewed numeric fields, revisions, available-at rule | Compact event rows/features only, if q needs event-window as-of joins | Reconcile original accession/exhibit, filing timestamps, revisions and conservative public-availability lag; manually spot-check extracted values. Massive event tags remain separate enrichment. |
+| 1 | Adjusted daily OHLCV and corporate actions for the same four names plus SPY | Snowflake normalized bars/panel | Selected bars in TigerData for q replay/as-of joins | Authenticated test confirms ticker/date coverage, adjustments, pagination, license and no silent truncation. No provider bars have yet been loaded. |
+| 2 | Census C30 data-center construction and M3 manufacturing orders | Snowflake vintage-preserving macro/industry tables | Only if an as-of context series is needed by q; typically no need to duplicate national monthly data | Capture original release/vintage, series definition breaks/revisions and release time; document that aggregates are proxies, not company-level delivery data. |
+| 2 | EIA-860M generation schedule and EIA-930 hourly grid operations | Snowflake versioned releases/observations | EIA-930 regional time series if q uses it; EIA-860M only compact revised state transitions | Validate vintage/revision behavior, BA/region mapping, publication lag and geography-to-company exposure. |
+| 3 | ALFRED/FRED macro, EIA-923, EPA CAMPD, Census trade, grid queues, permits/hearings, water/weather, patents, satellite | Snowflake only after a named hypothesis/confounder requires it | Only if cadence and signal horizon warrant an operational mirror | Demonstrate incremental value and adequate usable history; otherwise remain a documented un-ingested source. |
+
+For each ingestion, first fetch a small, declared sample and persist its source URL/file vintage,
+request time, schema, units, checksum, row count, date span, missingness, license and timestamp
+semantics. Compare the immutable local export with Snowflake and any TigerData operational copy.
+Only then expand historical coverage. Use an idempotent manifest-keyed batch export/import for
+the bridge; no secrets or live Snowflake dependency in q/strategy code. Thus: next is source
+validation and a narrow filing+price panel, not bulk-loading every source in this inventory.
