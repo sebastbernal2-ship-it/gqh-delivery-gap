@@ -91,6 +91,7 @@ test:
 	@python3 tests/test_scan.py
 	@python3 tests/test_scan_stats.py
 	@python3 tests/test_scan_report.py
+	@python3 tests/test_scan_compute.py
 
 # Credential scan over every file. This repo is public.
 secrets:
