@@ -1,1 +1,2 @@
 entity_name,ticker,cik,segment,direction,weight,economic_channel,evidence,status,identity_vintage,source_receipt
+"QUANTA SERVICES, INC.",PWR,1050915,corporate,neutral,1.0,revenue timing from remaining performance obligations,SEC ticker map and company facts; results/obligation-panel.csv,verified,2018-03-31,https://data.sec.gov/api/xbrl/companyfacts/CIK0001050915.json

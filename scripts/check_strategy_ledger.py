@@ -10,23 +10,22 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from strategy.ledger import validate_rows  # noqa: E402
+from strategy.sources import read_typed_csv  # noqa: E402
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
-    for kind in ("events", "exposures", "physical", "trades"):
+    for kind in ("events", "primary_events", "exposures", "physical", "trades"):
         parser.add_argument(f"--{kind}", type=Path)
     parser.add_argument("--crosswalk", type=Path)
     parser.add_argument("--require-verified", action="store_true")
     args = parser.parse_args(argv)
-    files = [(kind, getattr(args, kind)) for kind in ("events", "exposures", "physical", "trades")
+    files = [(kind, getattr(args, kind)) for kind in ("events", "primary_events", "exposures", "physical", "trades")
              if getattr(args, kind) is not None]
     if not files and args.crosswalk is None:
         parser.error("provide at least one typed strategy CSV or --crosswalk")
     for kind, path in files:
-        with path.open(newline="") as handle:
-            count = validate_rows(list(csv.DictReader(handle)), kind)
+        count = len(read_typed_csv(path, kind))
         print(f"{kind}: {count} rows valid")
     if args.crosswalk is not None:
         with args.crosswalk.open(newline="") as handle:

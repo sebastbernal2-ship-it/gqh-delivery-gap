@@ -111,13 +111,27 @@ Closed in this phase:
 - `scripts/check_strategy_ledger.py` validates typed provenance packages and crosswalk gates.
 - Capacity strategy output now stores net 10-basis-point and net 20-basis-point results.
 - Legacy RPO proxy surprises are retained as `legacy_surprise` and cannot drive the study.
+- The direct PWR crosswalk and 97-row exposure ledger are verified for issuer-owned RPO observations.
+- The market-control panel has 86 lagged PWR rows.
+- The tradeability panel has 86 explicit no-trade rows because borrow, spread, and liquidity evidence is absent.
+- The imagery probe has eight validated scene pairs.
+
+Closed mechanical work:
+
+- `src/strategy/sources.py` defines typed source schemas and local CSV adapters.
+- `src/strategy/leakage.py` rejects future labels, late controls, and sealed rows.
+- `scripts/run_market_control_stress.py` reports market and sector controls, doubled costs, capacity, and no-trade reasons.
+- `scripts/review_crosswalk.py` writes the crosswalk review report without promoting mappings.
+- `src/imagery/validation.py` validates labels, scenes, and probe rows before measurement. The current probe has eight validated scene pairs.
+- The selected PDF renderer order is `chrome-headless-shell`, `chromium`, `google-chrome`, `.venv-pdf/bin/weasyprint`, `weasyprint`, then `wkhtmltopdf`; WeasyPrint is installed in the ignored local PDF environment.
 
 Blocked by missing verified inputs:
 
-- `docs/entity-crosswalk.csv` has zero verified mappings.
+- `docs/entity-crosswalk.csv` now has one verified direct-issuer mapping for PWR. Project and supplier mappings remain absent.
 - Historical guidance, analyst consensus, and market-implied expectation vintages are not present.
-- The market control, borrow, impact, and point-in-time liquidity panels are not present.
-- The imagery probe has no measured scene pairs.
-- The existing PDF still needs regeneration after the protocol-compliant results exist.
+- The lagged PWR market-control panel now exists. Borrow, impact, execution, and point-in-time liquidity panels are still absent.
+- The imagery probe now has eight validated scene pairs. It remains descriptive until its classifier value is tested.
+- The existing PDF still needs protocol-compliant results before it can become the final note.
+- Promotion remains closed. `make gate-status` reports no primary PWR expectation vintages and no tradeable execution rows.
 
 The next execution command after compaction is: `Proceed to close all gaps`.

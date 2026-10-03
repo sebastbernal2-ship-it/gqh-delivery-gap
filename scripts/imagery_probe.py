@@ -27,6 +27,7 @@ from imagery.cog import RangeReader, Tiff  # noqa: E402
 from imagery.progress import (  # noqa: E402
     bright_fraction, brightness, difference_in_differences, patch_centre, summarise, texture,
 )
+from imagery.validation import validate_label, validate_probe_row  # noqa: E402
 from imagery.stac import choose, scene_date, search, visual_url  # noqa: E402
 
 FIELDS = ["plant_id", "plant_name", "state", "capacity_mw", "slip_months", "promised", "realized",
@@ -89,6 +90,11 @@ def main(argv: list[str] | None = None) -> int:
 
     rows = []
     for site in labels:
+        try:
+            validate_label(site)
+        except ValueError as exc:
+            print(f"{site.get('plant_id', '?')}: invalid label ({exc})")
+            continue
         lat, lon = float(site["latitude"]), float(site["longitude"])
         print(f"{site['plant_name'][:34]}  promised {site['promised']} realized {site['realized']} "
               f"({int(site['slip_months']):+d} months)")
@@ -113,6 +119,11 @@ def main(argv: list[str] | None = None) -> int:
                "texture_change": round(after["texture"] - before["texture"], 2),
                "promise_bright_fraction": round(before["bright_fraction"], 3),
                "realized_bright_fraction": round(after["bright_fraction"], 3)}
+        try:
+            validate_probe_row(row)
+        except ValueError as exc:
+            print(f"    invalid probe row: {exc}")
+            continue
         rows.append(row)
         print(f"    {before['date']} -> {after['date']}  brightness "
               f"{before['brightness']:.1f} -> {after['brightness']:.1f}  "
