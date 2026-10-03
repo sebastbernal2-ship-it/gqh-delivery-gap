@@ -879,3 +879,21 @@ adding a path list onto origin main while the checkout sat on another branch car
 it, adding twenty six files that were not part of the change and deleting four files belonging to another
 member. The next commit returns the tree to the last good state plus this change set only. No history was
 rewritten, and both the sweep and its repair stay visible in the log.
+
+---
+
+## 2026-10-03: The edge search process is written down, with its gates and its failures
+
+**Why.** The first searches here measured co-movement between series and treated it as a search for an edge.
+That is a census, not a decision, and no edge can be read from it. `docs/plan/edge-search.md` fixes the method
+before the next search rather than after it: declare the decision and the null first, require every node to
+name a decision it would change, write the transfer before measuring, design for power with a cross section
+over time series, use a null that shares the state being conditioned on, identify or admit you cannot, measure
+magnitude against costs and capacity, check the plateau, then seal, and only then build the strategy.
+**The deviations it records.** Eight of them, each specific: co-movement mistaken for edge, no
+cross-sectional test ever run, signals not de-noised before testing, power never computed in advance, an
+unconditional null that left sector and seasonal moves inside it, nodes entering without a decision attached,
+the strategy built before an edge existed, and identification attempted as one late check instead of a stage.
+**The next test, in order.** De-noised firm level revision surprise, a firm by month panel sorted into
+quintiles within industry, a null that permutes the signal within industry and month, rate control across a
+grid declared in advance, and specificity between the firms the mechanism implicates and those it does not.

@@ -57,3 +57,4 @@ Empty until someone claims it. Do not build in an unclaimed path.
 4. **Keep this file one table.** Do not append a second section with its own table. Add a row.
 5. `make check` validates this file: one row per path, no duplicate claims, every person in the
    roster, and every claimed path that is not a future placeholder must exist.
+| `docs/plan/edge-search.md` | sebastbernal2-ship-it | The method from nodes to an edge, its gates, and the recorded deviations |
