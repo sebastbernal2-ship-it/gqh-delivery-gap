@@ -105,6 +105,37 @@ else
 fi
 echo
 
+echo "4. the live position"
+if [ -f docs/theses/index.jsonl ]; then
+  active="$(python3 - <<'PYEOF'
+import json
+from pathlib import Path
+rows = []
+for line in Path("docs/theses/index.jsonl").read_text().splitlines():
+    line = line.strip()
+    if not line or line.startswith("#"):
+        continue
+    try:
+        rows.append(json.loads(line))
+    except json.JSONDecodeError:
+        pass
+print(len([r for r in rows if r.get("status") == "active"]))
+PYEOF
+)"
+  note "active theses in the ledger: $active"
+  if [ "$active" -eq 0 ]; then
+    note "no active thesis recorded. The team is between positions (allowed, but say so out loud)."
+  fi
+  if [ docs/CURRENT.md -ot docs/theses/index.jsonl ]; then
+    bad "docs/CURRENT.md is older than the ledger. Run: make current"
+  else
+    note "docs/CURRENT.md is current with the ledger"
+  fi
+else
+  bad "docs/theses/index.jsonl is missing: there is no ledger to record the position in"
+fi
+echo
+
 if [ "$problems" -gt 0 ]; then
   echo "first run on a new machine: make bootstrap fixes all of the above"
   echo

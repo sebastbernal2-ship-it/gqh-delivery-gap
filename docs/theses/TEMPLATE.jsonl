@@ -1,0 +1,1 @@
+{"id": "t-short-slug", "title": "One sentence claim", "status": "active", "owner": "github-handle", "date": "2026-10-03", "note": "docs/theses/t-short-slug.md", "falsifiers": ["the observation that would kill this"], "evidence": ["results/whatever.json"], "supersedes": ["t-the-one-it-replaces"]}

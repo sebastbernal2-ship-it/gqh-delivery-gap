@@ -13,8 +13,9 @@ There is no P&L leaderboard. Judges score reasoning and rerun the code.
 1. `make sync`. This pulls the team's work and loads their shared memory into your local store,
    so ordinary recall finds what the team already knows.
 2. Read `memory/SHARED.md`. It is the team's memory, filtered and redacted for this public repo.
-3. Read, in order: `docs/00-brief.md`, `docs/01-idea.md`, `docs/02-system.md`,
-   `docs/03-decisions.md`. Then `OWNERS.md` for who owns which path.
+3. Read, in order: `docs/CURRENT.md` (the live position, regenerated from the ledger),
+   `docs/00-brief.md` (the fixed track rules), `docs/03-decisions.md` (settled calls), then
+   `OWNERS.md` for who owns which path. Add `docs/theses/` for the record behind each live claim.
 
 Do not re-derive what is already settled. `docs/03-decisions.md` is the record.
 
@@ -25,8 +26,10 @@ One owner per fact. Never copy a fact into a second file, link to the owner inst
 | Fact | Owner |
 |---|---|
 | Track rules, rubric, deadline, out-of-sample rule | `docs/00-brief.md` |
-| The strategy and its mechanism | `docs/01-idea.md` |
-| Engines, workstreams, timeline, cuts | `docs/02-system.md` |
+| The live position, always regenerated | `docs/CURRENT.md` |
+| Each thesis, one file per claim | `docs/theses/` |
+| Unfinished drafts, anything not yet a claim | `docs/inbox/` |
+| Superseded snapshots | `docs/history/` |
 | Anything settled | `docs/03-decisions.md` |
 | Who owns what path | `OWNERS.md` |
 | The shape of a result file | `results/README.md` |

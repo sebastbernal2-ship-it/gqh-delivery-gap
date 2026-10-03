@@ -1,4 +1,4 @@
-.PHONY: sync save bootstrap doctor hooks hooks-global remember share absorb autoshare schedule unschedule memory test secrets all check status
+.PHONY: sync save bootstrap doctor current hooks hooks-global remember share absorb autoshare schedule unschedule memory test secrets all check status
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -15,6 +15,10 @@ save:
 # First time on a new device.
 bootstrap:
 	bash scripts/bootstrap.sh
+
+# Regenerate docs/CURRENT.md from the thesis ledger. Run after appending a record.
+current:
+	@python3 scripts/render_current.py
 
 # Health check for the memory system. Read only, safe to run any time.
 doctor:
@@ -61,6 +65,7 @@ test:
 	@python3 tests/test_memory_absorb.py
 	@python3 tests/test_delivery_metrics.py
 	@python3 tests/test_delivery_cohort.py
+	@python3 tests/test_thesis_index.py
 
 # Public repo gate. Run before a push.
 secrets:
@@ -73,6 +78,7 @@ all:
 
 # Cheap gate before a commit that touches results.
 check: secrets
+	@python3 scripts/check_theses.py
 	@python scripts/check_results.py
 
 status:

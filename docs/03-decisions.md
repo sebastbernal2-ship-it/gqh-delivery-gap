@@ -122,3 +122,35 @@ hours.
 account was rejected because it breaks authorship and creates merge races.
 **Open.** Workstream ownership in `OWNERS.md` is still unassigned. Until a row has a name, nobody
 writes to that path.
+
+---
+
+## 2026-10-03: The knowledge layer is a ledger with generated views, not a set of documents
+
+**Decision.** The idea lives in records, not in documents that must be kept current.
+
+- `docs/theses/index.jsonl` is an append-only ledger, one line per thesis: id, title, status,
+  owner, date, note, falsifiers, evidence, supersedes.
+- `docs/theses/<id>.md` is the record itself, one file per thesis, one writer per file.
+- `docs/CURRENT.md` is **generated** from the ledger by `make current`. It is the live position and
+  it cannot go stale, because nobody maintains it by hand.
+- `docs/inbox/` takes anything: drafts, half ideas, critiques, dumps. No template, no rules.
+- `docs/history/` keeps superseded snapshots as evidence of what the team rejected.
+- `docs/00-brief.md` is the only frozen document, because it is the track's own rules rather than
+  our thinking.
+
+**Context.** The captain's direction moved completely within a day, which would have left a
+conventional set of documents stale and misleading. A structure that must be kept current by
+discipline will not survive a shifting idea with four people working at once.
+**Why this shape.** Appending a line to a JSONL file is conflict free, so two people can move the
+idea at the same time without editing one shared document. Records are never overwritten, only
+superseded, which preserves the rejected reasoning that the note is scored on. Adding a thesis
+costs one file and one line, so the structure scales with the idea rather than constraining it.
+**Alternatives.** A single idea document kept current by discipline was rejected: it is exactly the
+bible this replaced. A wiki-style index with many writers was rejected because concurrent edits to
+one file are the main source of conflicts.
+**Enforcement.** `make check` validates the ledger: required fields, unique ids, resolvable
+`supersedes`, a falsifier and an owner on every active thesis, and an existing note file.
+`make doctor` reports the active count and flags `CURRENT.md` older than the ledger.
+**Snapshot.** The 2026-10-02 idea and system documents moved to `docs/history/` with a superseded
+banner. Nothing was deleted.

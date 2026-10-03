@@ -30,8 +30,12 @@ open your harness file and read it yourself, then tell me, because that is a bug
 make sync        # pulls the team's work and loads their shared memory
 ```
 
-Then read, in order: `memory/SHARED.md`, `docs/00-brief.md`, `docs/01-idea.md`,
-`docs/02-system.md`, `docs/03-decisions.md`, `OWNERS.md`.
+Then read, in order: `memory/SHARED.md`, `docs/CURRENT.md`, `docs/00-brief.md`,
+`docs/03-decisions.md`, `OWNERS.md`.
+
+The idea is expected to move, often. `docs/CURRENT.md` is regenerated from the thesis ledger, so
+it is always the live position and it is never out of date. Do not rewrite a snapshot in
+`docs/history/`: write a new thesis and supersede it.
 
 ## 4. Work
 
@@ -63,5 +67,7 @@ projects read, which is how one project's notes show up in another project's ses
 
 ## 6. Where to ask
 
-Write your question in the repo, do not keep it in chat: `docs/reviews/TEMPLATE.md` for a critique
-of the idea or the plan, and `docs/03-decisions.md` for anything settled.
+Draft first, formalise later. `docs/inbox/` takes anything with no rules. When a claim is real
+enough to trade on, it becomes `docs/theses/<id>.md` plus one line in the ledger, and `make current`
+publishes it to everyone. `docs/reviews/TEMPLATE.md` is for a critique, `docs/03-decisions.md` for
+anything settled.
