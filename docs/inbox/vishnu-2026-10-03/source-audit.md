@@ -1,13 +1,15 @@
 # Source and capability audit
 
-Owner: Vishnu. Status at 2026-10-03. No keys or participant accounts were tested by this capture.
+Owner: Vishnu. Status at 2026-10-03. Later checks below include participant-authorized read-only
+Massive probes and public-source downloads; no credential values are recorded in this file.
 
 ## Evidence vocabulary
 
 - User-reported: the participant reports access; not an entitlement/download test.
 - Documentation-verified: official page describes capability; still test account, symbol and date.
 - Listing-verified: public file listing observed; binary contents have not been downloaded.
-- Download-verified: reserve this label for saved files and checked manifests. None claimed here.
+- Download-verified: saved files were parsed and checked; see the source-specific manifest and
+  loading status below. It does not imply a point-in-time strategy panel or a shared-data license.
 - Archived result: belongs to the earlier branch, not reproduced on current main.
 
 ## User-reported inventory
@@ -27,12 +29,46 @@ selection was not browser-verified. Do not infer a fixed per-stock price or buy 
 
 ## Practical free shortlist
 
-### Equity-provider result — Alpaca leads on access, Tiingo Starter is disqualified for shared storage
+### Equity-provider result — Massive is the tested first choice; Alpaca is a fallback, Tiingo Starter is disqualified for shared storage
+
+**Massive access was tested 2026-10-03 using the participant's local API key; the key is not
+recorded here.** A read-only full-range request for each of PWR, ETN, EME, DLR and SPY
+(`1/day`, adjusted, 2016-01-01 through 2026-10-02) returned 2,703 bars from 2016-01-04 through
+2026-10-02, in one page per ticker. Each series was chronological, had no OHLCV consistency
+failures, and had a maximum four-calendar-day observation gap. Massive's 8-K disclosure endpoint
+also returned successfully for the four companies over 2022-01-01 onward: PWR 67 rows
+(2022-01-28–2026-09-15), ETN 53 (2022-02-28–2026-06-11), EME 16 (2022-06-03–2026-07-31), and
+DLR 65 (2022-01-03–2026-08-19). A small dividends endpoint request succeeded. The response data
+were inspected in memory only; nothing was retained or loaded.
+
+This proves current key acceptance and those endpoint/date-window requests, **not** an unlimited
+data license, permission to mirror to Snowflake/TigerData, historic point-in-time tags, depth, or
+all fields needed by the research. The 8-K response uses filing dates and Massive classification;
+use SEC accession/acceptance metadata for canonical provenance and timing. Massive currently
+describes stock bars, trades and NBBO quotes from 2003 for listed U.S. stocks, but our key's
+verified window here is 2016 onward and the project only requires daily bars initially.
+
+**Use Massive instead of Alpaca for the initial equity-bar source, conditional on written
+permission for the intended team/shared-database and strategy use.** A paginated retrieval entry
+point is now in `scripts/pull_massive_daily_bars.py` for adjusted daily OHLCV and the 8-K disclosure
+event labels (including accession and supporting excerpt). Usage and its permission gate are
+documented in `snowflake-path.md`. It has not been run and has no Snowflake/TigerData sink yet.
+Massive's published Market
+Data Terms describe personal/non-commercial use, restrict mirroring/uploading to another server,
+and restrict non-display strategy/derived use absent a license or applicable separate agreement.
+An employee's unlimited-request statement establishes throughput, not these rights. The key was
+pasted into chat and should be rotated; the replacement belongs only in a private local secret
+store. Until permission is confirmed, do not write Massive bars or proprietary tags into either
+shared database. We can continue with public SEC records and public-domain/official statistical
+series in the meantime.
+
+Sources: [Massive stock-history coverage](https://massive.com/knowledge-base/article/how-much-historical-stock-data-does-massive-have),
+[stock plans](https://massive.com/pricing?product=stocks), [8-K disclosure endpoint](https://massive.com/docs/rest/stocks/filings/8-k-disclosures),
+[Market Data Terms](https://massive.com/legal/market-data-terms-of-service).
 
 **Alpaca Basic account and API were tested 2026-10-03.** The signed-in account showed Market Data
-status `Basic` (paper-trading account). A credential pair was entered by the user into the private,
-mode-0600 local file `~/.config/gqh/alpaca.env`; do not record its contents, commit it, or paste it
-into chat. Read-only historical requests used `feed=sip`, `timeframe=1Day`, `adjustment=all`,
+mode-0600 local config file; do not record its contents, commit it, or paste it into chat. Read-only
+historical requests used `feed=sip`, `timeframe=1Day`, `adjustment=all`,
 `start=2016-01-01`, and `end=2026-10-02T23:59:00Z`. The first attempt ending on the current date
 was rejected as recent SIP; ending on the last completed session succeeded. Each of PWR, ETN, EME,
 DLR and SPY returned 2,703 rows from 2016-01-04 through 2026-10-02 in three pages; no duplicate
@@ -40,7 +76,7 @@ dates, nonascending timestamps, invalid OHLCV values, or OHLC consistency failur
 The maximum gap between returned dates was four calendar days. The responses were inspected in
 memory only and were **not** retained or loaded into Snowflake/TigerData.
 
-**Alpaca Basic is the viable data-access candidate, pending group-use permission.** Current official docs describe the free Basic
+**Alpaca Basic is a viable fallback for data access, pending group-use permission.** Current official docs describe the free Basic
 plan as historical equity data since 2016, 200 historical API calls/minute, and live IEX. The FAQ
 says historical SIP requests are available without the paid plan when the requested end is at least
 15 minutes old; SIP is the consolidated multi-exchange feed, unlike IEX-only data. Bars support
@@ -52,7 +88,8 @@ The API requires key+secret headers. Alpaca's basic market-data terms are framed
 individuals and prohibit reproducing/distributing market data without written consent, so first
 confirm that sharing a research copy among this hackathon team and persisting it in shared DBs is
 allowed. Until Alpaca confirms team use/retention in writing or a suitable license is obtained, no
-shared warehouse load. The historical coverage test is verified; a team-usable data license is not.
+shared warehouse load. Massive now supersedes Alpaca as the first-choice provider; Alpaca does not
+need to be retained as a fallback if Massive access and team-storage permission are confirmed.
 
 Sources: [Basic plan](https://docs.alpaca.markets/us/v1.1/docs/about-market-data-api),
 [historical SIP delay rule](https://docs.alpaca.markets/us/docs/market-data-faq),

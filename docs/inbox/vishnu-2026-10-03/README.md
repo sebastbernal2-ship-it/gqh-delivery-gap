@@ -33,7 +33,8 @@ needing precise execution does not make the signal HFT.
 
 ## What this push does not do
 
-- It does not implement connectors, backtests, fine-tuning or cluster jobs.
+- It does not implement backtests, fine-tuning or cluster jobs. A gated Massive daily-bars
+  retrieval script was added after this capture; see [Snowflake path](snowflake-path.md).
 - It does not verify any participant credential, paid dataset entitlement or available credit.
 - It does not open OOS data or assert the strategy works.
 - It does not reactivate `archive/w0-delivery-gap` or modify the frozen track brief.
