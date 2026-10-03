@@ -234,3 +234,26 @@ no shape that resisted growth.
 repo, so drift here propagates into editing decisions.
 **Open.** Whether `zifeiliu` and `lucyrunner` are the same person on the HiPerGator allocation needs
 confirmation from the captain, not a guess by an agent.
+
+---
+
+## 2026-10-03: The unitary alignment document, synthesised from three handoffs
+
+**Decision.** `docs/alignment.md` is rewritten as the single statement of how this team thinks,
+synthesised from all three handoffs plus what building the shell taught us. Vishnu's proposal, Aidan's
+reasoning and Lucy's access discipline are absorbed into one voice rather than left as three
+competing alignment documents.
+**Owner.** The shell author, changed by proposal plus an entry here. Vishnu's proposal correctly
+declined to overwrite the shared file unilaterally, so this is the review it asked for.
+**What the synthesis adds beyond any single handoff.** A single sentence vision (we trade the gap
+between a promise and a delivery, measured as a revision against an earlier public expectation) with
+everything else declared subordinate to it; the confidence ladder stated as a sequence that must not
+be skipped; revisions-versus-labels and availability stated as hard rules; and a section that records
+where the three handoffs genuinely disagree.
+**Divergences recorded, not resolved.** Component taxonomy, pilot instrument, measurement object
+(critical path versus backlog timing), horizon, and the typed-extractor identity. Each is listed in
+`docs/alignment.md` with both positions. Resolving them is a captain decision, not an agent's.
+**Correction carried in.** Vishnu was right that no compute future is listed; Aidan was right that
+Jev and Laya are identified. Both are in the record.
+**Alternatives.** Keeping three alignment documents was rejected: three statements of method is how a
+team ends up with none. Averaging the differences away was rejected for the same reason.

@@ -35,5 +35,17 @@
     "layer": "episodic",
     "confidence": "verified",
     "pinned": false
+  },
+  {
+    "id": "mem_b1452b4bc50b",
+    "content": "docs/alignment.md is now the unitary vision and method, synthesised 2026-10-03 from all three handoffs. The vision in one sentence: we trade the gap between a promise and a delivery, measured as a revision against an earlier public expectation, and every tool is subordinate to that. Method: seven steps (mechanism plus simplest rival, counterparty, earlier expectation, measurable quantity and units, evidence audit, falsifier and baseline and costs before returns, complexity only with development evidence); tag every arrow of the reasoning chain observed, inferred or untested. Confidence is local to a claim and follows a ladder that must not be skipped: documentation says capable, entitlement, downloaded, valid point-in-time panel, correct label, calibrated forecast, correct joint tails, trades after costs. Realized outcomes are labels never inputs; availability times bind; identity survives aggregation. Adequacy is independent shocks, not calendar length. No advanced method is mandatory, quantum has no standing role, and infrastructure is never an argument. Recorded divergences between the handoffs: component taxonomy, pilot instrument (PWR base case versus NVDA/GOOGL pilots), measurement object (Aidan's critical path versus Vishnu's backlog guidance revisions, which are complementary), horizon (ten sessions unvalidated), and Jev/Laya identity (Aidan correct).",
+    "tags": [
+      "gqh",
+      "quanthacks"
+    ],
+    "created": "2026-10-03T06:19:56.695Z",
+    "layer": "episodic",
+    "confidence": "verified",
+    "pinned": false
   }
 ]
