@@ -58,3 +58,4 @@ Empty until someone claims it. Do not build in an unclaimed path.
 5. `make check` validates this file: one row per path, no duplicate claims, every person in the
    roster, and every claimed path that is not a future placeholder must exist.
 | `docs/plan/edge-search.md` | sebastbernal2-ship-it | The method from nodes to an edge, its gates, and the recorded deviations |
+| `src/factors/`, `src/models/`, `scripts/build_delivery_model_panel.py`, `scripts/run_delivery_model.py`, `tests/test_hazard.py`, `tests/test_factors.py`, `docs/plan/edge-search.md` | sebastbernal2-ship-it | The factors that decide delivery, and the hazard model that asks whether they move it |

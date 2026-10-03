@@ -897,3 +897,46 @@ the strategy built before an edge existed, and identification attempted as one l
 **The next test, in order.** De-noised firm level revision surprise, a firm by month panel sorted into
 quintiles within industry, a null that permutes the signal within industry and month, rate control across a
 grid declared in advance, and specificity between the firms the mechanism implicates and those it does not.
+
+## 2026-10-03: Stage A. The water does not move the fish
+
+**What was asked.** Not prices. Whether the factors that decide building, weather, water, fuel, rates, lead
+times and congestion, change the chance that a promised project moves. This is the first link in the chain,
+and it is upstream of anything market related.
+
+**What was built.** A project month panel: 27,069 rows, 2,190 of them revision months, one row per generator
+month at risk across the development vintages. Every factor is lagged to what was knowable, weather through the
+project state with a declared publication lag, the rest at t-1. Missing factor values are median imputed within
+technology and every imputed factor carries a missing flag, so imputation can never be read as signal. The
+model is a discrete time logistic hazard, fitted by Newton steps, trained through 2019 and tested from 2020.
+
+**The result, and it is a clean negative.**
+
+| Model | train AUC | test AUC |
+|---|---|---|
+| controls only | 0.6493 | **0.6290** |
+| controls plus factors | 0.6646 | **0.6223** |
+| placebo factors | 0.6424 | 0.6083 |
+
+Adding the factors makes out of sample discrimination **worse** than project controls alone. The coefficients
+agree: drought 0.93 [0.88, 0.96], pipeline momentum 0.92 [0.87, 0.96], precipitation 0.98 [0.94, 1.01],
+lead time growth 0.95 [0.90, 1.01]. Two of my declared signs were wrong in direction, and the specificity test
+that the mechanism predicted does not appear: drought odds 0.964 in water dependent technologies against 0.955
+in construction heavy ones, and precipitation 0.868 against 1.011.
+
+**The warning inside the result.** The largest coefficients in the model are the *missingness* flags, not the
+factors. Which projects have weather or lead time data is itself related to whether their promise moves, so the
+small factor effects that clear one are confounded with coverage and should not be read as mechanism.
+
+**What this means for the vision, stated plainly.** The first link does not hold in this data. The environmental
+factors we could reach do not explain revisions to promises, so there is nothing for the second link to
+condition on, and Stage B should not be run on these factors. If the chain has a real first link, the factors
+are the ones we could not reach, interconnection queue position and permitting first among them, or the object
+is too coarse: the outcome here is the *first* revision, and thirty six percent of first revisions are one month
+nudges, so the tail, large revisions and cancellations, may be where any signal lives.
+
+**What follows, honestly priced.** Two follow-ups, each pre-registered before it runs: redefine the outcome as
+a revision of six months or more, or as cancellation, since the median revision carries almost no information;
+and widen the factor set to what is reachable, queue pressure measured better, offtake and contract events from
+the 8-K disclosures, and firm level execution. If neither moves the object, the mechanism is real and its
+drivers are not in public data at this resolution, which is worth knowing before anything is built on top.
