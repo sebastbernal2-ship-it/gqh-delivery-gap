@@ -29,18 +29,31 @@ is not a style problem, it is a scoring cap.
 So durable knowledge lives in files, in git, with one writer each. Any device that pulls has the same
 memory as every other device.
 
-## Local memory as a cache
+## Local memory stays on the device
 
-Hippo and similar local stores are still useful for recall during a session. Keep using them. Just
-treat them as a cache, and export the shared part:
+Hippo and similar local stores are useful for recall during a session. Keep using them.
+
+They do **not** get committed here. This repo is public, and a local store can hold absolute
+paths, error notes, and references to credentials. Shipping that is a leak, and a leaked key
+costs more than any scoring criterion.
+
+So the shared memory is the docs, and the local store is private:
 
 ```
-make memory
+make memory     # writes memory/<device>.json, which is gitignored
 ```
 
-This writes `memory/<device>.json` from the local store and leaves it for you to commit. A teammate
-on another device can then import it if they want it locally. The export is a convenience, not the
-source of truth.
+Use that export to move recall between your own devices, never as the team's channel. If a
+fact matters to the team, it goes in `docs/`, at its owner, in a commit.
+
+## Why this beats separate memory stores
+
+Four people with four local memory stores drift. Each one remembers a slightly different
+version of the mechanism, the universe, and the cost model. Because the note must match the
+code exactly, drift is not a style problem, it is a scoring cap.
+
+So durable knowledge lives in files, in git, with one writer each. Any device that pulls has
+the same memory as every other device.
 
 ## Sync protocol
 
