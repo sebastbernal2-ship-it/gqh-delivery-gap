@@ -1,5 +1,9 @@
 # Massive → Snowflake: acquisition and teammate readiness
 
+**Access update:** the subsequent [authenticated inventory](LIVE_INVENTORY_2026-10-03.md) verifies
+connections and existing warehouse contents. It supersedes the original access uncertainty below;
+the acquisition defects and proposed release gates remain unresolved.
+
 Assessment: 2026-10-03, against the event-readiness continuation and main through `58adc72`.
 Owner: aidanq06. The refresh from `8359a29` did not change `src/central_ingest/`.
 The user selected this computer as the ingestion host, with private configuration. Its location
