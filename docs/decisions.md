@@ -471,3 +471,27 @@ recorded rather than deleted.
 **Open question.** Running their engine over our nodes requires the nodes to exist where it can read
 them: declare them in their graph through their conventions, which edits a repository that is not ours,
 or vendor the schema here. The vocabulary is identical either way, so today's logs work under both.
+
+---
+
+## 2026-10-03: The QuantGraph work landed, and our declarations now resolve
+
+**What changed.** The algoterminal session authored the AI-infrastructure node space: 6 of our 7 chain
+nodes, all 4 requested sources, the 10 wider nodes, 18 representations and 16 domain edges. Every
+addition carries `epistemic_status: unverified`, `origin: research_proposal`, an availability and
+point-in-time status, and a `status_blocker` saying exactly what is missing. Graph nodes went from 7,517
+to 7,561 and inventory ids from 46 to 61.
+**What we changed.** Our chain flipped 6 nodes and 4 sources from `proposed` to `resolved`. The link now
+reports 6 resolved nodes, 1 proposed, 6 resolved sources, 0 new. `outcome:firm:abnormal-return` remains
+proposed: the amendment was written after that session had started.
+**Risk recorded.** Their additions are **uncommitted** in that working tree. Our check resolves against
+the filesystem, so an uncommitted reset there would break our `node_resolved` declarations. The fix is a
+commit on their side, not a change here.
+**What is now the binding constraint.** Not nodes and not sources: **timestamps and a matched panel**.
+The filings audit finds 15 annual-filing observations across PWR, ETN and DLR for fiscal 2020 to 2024,
+and records zero fully verified, first-public-timestamped, cash-flow-mapped surprises. Fields per firm are
+mapped (backlog and remaining performance obligations for PWR, firm-order backlog for ETN,
+signing-to-commencement for DLR) and are explicitly not to be pooled into one delay score.
+**Development exposure.** Documents inspected while designing the study are exposure. Not inspecting
+prices does not by itself keep a sealed test sealed, so the development window and what was read inside it
+belong in the record before any return is computed.
