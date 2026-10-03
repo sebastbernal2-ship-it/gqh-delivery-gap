@@ -24,13 +24,12 @@ One table. A path appears once, with one person.
 | `docs/brief.md` | nobody | The track's own rules. Frozen, so it needs no owner |
 | `docs/alignment.md` | sebastbernal2-ship-it | How we think. Changed by proposal plus a decision entry |
 | `docs/algoterminal.md` | sebastbernal2-ship-it | The linkage to the QuantGraph and the association engine |
-| `docs/chains/` | sebastbernal2-ship-it | The log convention and the validator. Each log's content belongs to that thesis's owner |
+| `docs/chains/` | sebastbernal2-ship-it | The log convention and the validator.
+| `docs/scan/`, `src/scan/`, `scripts/check_scan.py`, `scripts/run_association_scan.py`, `tests/test_scan.py`, `tests/test_scan_stats.py`, `tests/test_scan_report.py` | sebastbernal2-ship-it | The declared node space, the scan, and the rule that multiplicity is counted before measurement. Each log's content belongs to that thesis's owner |
 | `docs/inbox/vishnu-2026-10-03/`, `docs/thinking/vishnu-2026-10-03.md`, `docs/writing/style.md`, `.cursor/rules/gqh-context.mdc` | vshnu1 | Equity-first research handoff, provider audit, data plan, writing conventions |
 | `docs/inbox/aidan-2026-10-03/`, `docs/thinking/aidan-2026-10-03.md` | aidanq06 | Strategy specification, reasoning, implementation contracts, advanced-method research |
 | `hpc/README.md`, `hpc/setup/` | lucyrunner | HiPerGator routing, account access and environment setup |
-| `hpc/probabilistic-council/` | lucyrunner | Synthetic calibrated council and bounded classical/quantum distribution benchmarks |
-| `src/aws_compute/` | vshnu1 | Exact-price AWS GPU archive normalization and TigerData ingestion |
-| `src/edgar/`, `src/eia/`, `src/event/`, `src/join/`, `docs/entity-crosswalk.csv`, `scripts/build_filings_register.py`, `scripts/build_delivery_panel.py`, `scripts/run_revision_event_study.py`, `scripts/build_exposure_panel.py`, `scripts/build_obligation_panel.py`, `tests/test_edgar.py`, `tests/test_xbrl.py`, `tests/test_eia.py`, `tests/test_event.py`, `results/` | sebastbernal2-ship-it | SEC filings as timestamped observations: the register that closes the missing first-public timestamp |
+| `src/edgar/`, `src/eia/`, `src/event/`, `src/join/`, `docs/entity-crosswalk.csv`, `scripts/build_filings_register.py`, `scripts/build_delivery_panel.py`, `scripts/run_revision_event_study.py`, `scripts/build_exposure_panel.py`, `scripts/build_rpo_universe.py`, `scripts/build_rpo_events.py`, `scripts/run_group_event_study.py`, `scripts/build_obligation_panel.py`, `tests/test_edgar.py`, `tests/test_xbrl.py`, `tests/test_eia.py`, `tests/test_event.py`, `tests/test_universe.py`, `results/` | sebastbernal2-ship-it | SEC filings as timestamped observations: the register that closes the missing first-public timestamp |
 
 ## Unclaimed
 

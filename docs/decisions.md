@@ -678,24 +678,27 @@ and reports whatever it says.
 
 ---
 
-## 2026-10-03: Snowflake is the historical research layer, not the execution path
+## 2026-10-03: The node space is declared, and the scan finds no survivor that belongs to the mechanism
 
-**Decision.** Adopt Snowflake as the shared historical integration and reproducible feature-panel
-layer. Keep TigerData as the operational/time-series store and keep q/kdb+, C++ and OCaml on the
-execution-sensitive path. Snowflake must not be queried per tick or per order.
-
-**Context.** The team has a verified AWS GPU Spot archive in TigerData, Massive 8-K access, equity
-market data and a need to join them without look-ahead. Snowflake can centralize raw/normalized/
-feature/research layers and give teammates the same point-in-time panel. It is not a reason to
-replace a low-latency time-series engine or a typed arithmetic engine.
-
-**First slice.** Load a small AWS compute sample, declared equity basket and filing metadata. Build
-features for compute price changes, observation age, regional dispersion, filing availability and
-market controls. Export the point-in-time panel to Parquet/q and run the chronological backtest
-without requiring Snowflake at execution time.
-
-**Boundaries.** Raw source files remain immutable and versioned. Every feature carries event,
-availability and ingestion timestamps. Realized outcomes are labels only. Snowpark ML, Cortex,
-Feature Store, Laya and GPU training are optional follow-ons gated by a simple baseline and
-point-in-time validation. No Snowflake account, edition, credits or credentials are asserted by
-this decision.
+**The node space, declared before measurement.** 21 nodes, 210 pairs, 91 measurable, 119 blocked with a
+written reason. A node needs a representation with a clock and an availability rule or it must explain its
+absence. The blocked record names what this data cannot answer: compute rental price (the promising open
+datasets are empty shells, and history is a paid tier), spot power (the market operator did not answer from
+this host), interconnection queues, non-crypto perpetual positioning (thirteen months of history), and
+option implied moves (no entitlement).
+**The scan.** 51 series-level pairs, each measured against its own generated null: a block shuffle that
+keeps short-run autocorrelation and a twelve-month shift that keeps seasonality. Twelve pairs beat their
+own null against 2.6 expected by chance.
+**Two corrections, both needed.** One canonical series per node, because three representations of the
+promise node are correlated and that node could vote three times, leaves three cross-family survivors
+against 0.9 expected. And a specificity test: the only mechanism-relevant survivor, firm disclosure
+revisions against gas prices, measures +0.31 inside the data-centre group and -0.06 inside the contractor
+and equipment groups, so it belongs to the comparison group and not to the mechanism. The other two
+survivors are utilities against rates and copper against rates, which are known relations.
+**Conclusion.** The scan finds structure in asset co-movement and in known macro links, and no survivor that
+belongs to this mechanism. That is the fourth negative, and the first that searched the declared space
+instead of a hand-picked path.
+**Two mistakes caught inside this turn, both mine.** A fixture used node ids that did not match the
+canonical map, so the filter it claimed to test never ran, and an expectation of two cross-family survivors
+came from a reading of the table rather than from the arithmetic. Both were fixed by computing the answer
+instead of assuming it.
