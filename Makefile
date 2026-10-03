@@ -1,4 +1,4 @@
-.PHONY: sync save bootstrap hooks remember share absorb autoshare schedule unschedule memory test secrets all check status
+.PHONY: sync save bootstrap doctor hooks hooks-global remember share absorb autoshare schedule unschedule memory test secrets all check status
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -16,9 +16,17 @@ save:
 bootstrap:
 	bash scripts/bootstrap.sh
 
-# Wire the memory wrapper for whichever harnesses this machine has. Run once per machine.
+# Health check for the memory system. Read only, safe to run any time.
+doctor:
+	@bash scripts/doctor.sh
+
+# Wire the memory wrapper for the harnesses that only touch committed files. Safe.
 hooks:
-	@bash scripts/install-hooks.sh
+	@bash scripts/install-hooks.sh repo
+
+# Also wire the harnesses that edit your home directory. Affects every project here.
+hooks-global:
+	@bash scripts/install-hooks.sh --global
 
 # Write a memory that the team will see. Usage: make remember M="what you learned"
 remember:

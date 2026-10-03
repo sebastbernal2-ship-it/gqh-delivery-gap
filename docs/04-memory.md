@@ -154,6 +154,29 @@ code exactly, drift is not a style problem, it is a scoring cap.
 So durable knowledge lives in files, in git, with one writer each. Any device that pulls has
 the same memory as every other device.
 
+## Why one project's memories can show up in another project's session
+
+This happened, and it is worth naming so it does not happen again.
+
+Hippo can install machine-wide hooks. The Claude Code setup on the captain's machine runs, on
+every prompt in every project:
+
+```
+hippo context --pinned-only --include-recent 5
+```
+
+That injects the most recently written memories **from the store resolved at that session's
+working directory**. So any project memory written into a shared parent store surfaces in whatever
+session resolves that same store, including sessions for other projects entirely.
+
+Two consequences, both now handled:
+
+1. Project memories must live in a store at the repo root, never in a shared parent store.
+   `make doctor` checks this and reports `scope: this repo only` when it is right.
+2. Installing machine-wide wrappers is not part of the normal setup here.
+   `make hooks` only touches committed instruction files. `make hooks-global` is the explicit
+   opt-in for the wrappers that edit your home directory, and it says so before it runs.
+
 ## The one rule that keeps stores from mixing
 
 A memory belongs to the store at the **repo root**, and hippo resolves the store from the
