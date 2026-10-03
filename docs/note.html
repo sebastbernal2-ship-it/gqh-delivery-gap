@@ -124,7 +124,37 @@ largest third of revisions gives +0.56 percent a month net, against &minus;0.15 
 but that is monotone in selectivity with 25 observations and a Sharpe of 0.28, which points at selection
 rather than at a plateau.</p>
 
-<h2>5. Risk management</h2>
+
+<h2>5. The scan: coverage first, then associations</h2>
+<p>Before measuring anything, the node space is declared: <strong>21 nodes, 210 pairs, of which 91 are
+measurable and 119 are blocked with a written reason.</strong> A node needs a representation with a clock
+and an availability rule, or it must say why it has none. The blocked record is a result in itself, and it
+is the honest map of what this data cannot answer:</p>
+<table>
+<tr><th>Missing family</th><th>Why it cannot be measured here</th></tr>
+<tr><td>Compute rental price</td><td>only current values are public; the history is a paid tier, and the two open datasets that looked promising are empty shells</td></tr>
+<tr><td>Spot power price</td><td>the market operator did not respond from this host</td></tr>
+<tr><td>Interconnection queues</td><td>no queue source reached</td></tr>
+<tr><td>Positioning and crowding</td><td>the only non-crypto perpetual markets reach back thirteen months</td></tr>
+<tr><td>Option implied moves</td><td>no entitlement for historical chains</td></tr>
+</table>
+<p>Fifty-one series-level pairs were measured. <strong>Twelve beat their own generated null, against 2.6
+expected by chance.</strong> Two corrections then applied, because a scan reports multiplicity as
+discovery if you let it:</p>
+<ul>
+<li><strong>One series per node.</strong> Three representations of the promise node are highly correlated,
+so that node could vote three times in one direction. Keeping one representation leaves <strong>three
+cross-family survivors against 0.9 expected by chance</strong>.</li>
+<li><strong>Specificity.</strong> A relation that appears in unrelated industries is a common factor, not
+the mechanism. The only mechanism-relevant survivor, firm disclosure revisions against gas prices, was
+recomputed per industry group: <strong>+0.31 in the data-centre group, and &minus;0.06 in the contractor
+and equipment groups.</strong> It belongs to the comparison group, not to the mechanism. The other two
+survivors are the known relations of utilities against rates and copper against rates.</li>
+</ul>
+<p>The scan therefore finds real structure in asset co-movement and in known macro links, and <strong>no
+survivor that belongs to this mechanism.</strong> That is the fourth test and the fourth negative, and it
+is the first one that searched the space instead of a hand-picked path.</p>
+<h2>6. Risk management</h2>
 <ul>
 <li><strong>Position limits, declared in advance and enforced in the chain log:</strong> 2 percent of NAV per
 core edge, 1 percent for the expression, and a cap of three unmeasured pilot edges at a time.</li>
@@ -142,7 +172,7 @@ firm's own reported obligations, or if the price move is explained by market and
 benchmarking, the study reports a negative rather than a weaker version of the same claim.</li>
 </ul>
 
-<h2>6. Liquidity and capital</h2>
+<h2>7. Liquidity and capital</h2>
 <p>Both legs are large-capitalisation US listings with deep daylight liquidity: contractors and electrical
 equipment on one side (PWR, EME, MTZ, DY, ETN, J, HUBB, ROK), merchant generation and utilities on the other
 (NRG, VST, D, SO, NEE, EXC). Monthly rebalancing with a position change in roughly one month in seven gives
@@ -152,10 +182,10 @@ report the same run at double that. The binding constraint on capacity is not li
 an edge: a pair trading for years at a 0.04 Sharpe cannot carry meaningful capital, and the honest statement
 is that capacity is moot until an association survives its own placebo.</p>
 
-<h2>7. Evidence discipline</h2>
+<h2>8. Evidence discipline</h2>
 <ul>
-<li><strong>Variants tried, stated:</strong> 50 group cells (four groups, two directions, five horizons), six
-strategy cells (three signal definitions, and the robustness pair), and three selectivity thresholds. All are
+<li><strong>Variants tried, stated:</strong> 50 group cells, six strategy cells, three selectivity
+thresholds, and 51 scan pairs with two post-measurement corrections and one specificity test. All are
 reported, including the ones that fail.</li>
 <li><strong>Every signal lagged:</strong> a filing is usable at its acceptance timestamp plus a declared
 processing lag; a monthly inventory is usable at the end of its own month. Fills are the close of the first
@@ -169,10 +199,11 @@ note uses them. One command opens it, once, and reports whatever it says:
 source receipt on every row.</li>
 </ul>
 
-<h2>8. What this study concludes, and what it does not</h2>
+<h2>9. What this study concludes, and what it does not</h2>
 <p>The phenomenon is real, large and measurable: promises move, they move in whole-year steps, and two thirds
-of promised generators arrive late. Three increasingly broad tests then fail to turn that into a return
-signal, and a placebo shows the failures are not an artefact of the pipeline. The most useful sentence this
+of promised generators arrive late. Four increasingly broad tests then fail to turn that into a return
+signal, the last of them searching the declared node space rather than one hand-picked path, and a placebo
+shows the failures are not an artefact of the pipeline. The most useful sentence this
 study can offer a reader is therefore a measurement rather than a strategy: <strong>the slippage in this
 buildout is too slow and too routine to trade against the firms that disclose it, but it is large enough to
 change what should be built and where.</strong></p>

@@ -88,6 +88,9 @@ test:
 	@python3 tests/test_eia.py
 	@python3 tests/test_event.py
 	@python3 tests/test_universe.py
+	@python3 tests/test_scan.py
+	@python3 tests/test_scan_stats.py
+	@python3 tests/test_scan_report.py
 
 # Credential scan over every file. This repo is public.
 secrets:
@@ -102,6 +105,7 @@ check: secrets
 	@python3 scripts/check_chain.py
 	@python3 scripts/link_algoterminal.py
 	@python3 scripts/render_current.py --check
+	@python3 scripts/check_scan.py
 
 status:
 	@git status -sb
