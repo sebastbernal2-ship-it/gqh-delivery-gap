@@ -154,6 +154,24 @@ code exactly, drift is not a style problem, it is a scoring cap.
 So durable knowledge lives in files, in git, with one writer each. Any device that pulls has
 the same memory as every other device.
 
+## The one rule that keeps stores from mixing
+
+A memory belongs to the store at the **repo root**, and hippo resolves the store from the
+directory you are in. Write project memories from inside the repo, never from a parent
+directory, or they land in the parent store and a session in a different project will recall
+them.
+
+That error did happen once and was cleaned up on 2026-10-03: two quanthacks memories written
+before this repo had its own store landed in the workspace store, where any other project's
+session could recall them. They were removed. The check is cheap:
+
+```
+cd <repo> && hippo status        # should show only this project's memories
+```
+
+`make share` prints the store it resolved and the mode it used, so a wrong store is visible in
+the output rather than silent.
+
 ## Sync protocol
 
 1. `make sync` before you start. Pull before you type. Shared memory arrives with it.
