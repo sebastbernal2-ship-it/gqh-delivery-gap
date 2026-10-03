@@ -1,0 +1,222 @@
+{
+  "files": [
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "books",
+      "path": "data/l4_l2book/l4_l2book_1765199828.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-08",
+      "sha256": "b263e5548bf5218ebc6717006b96a9637e53e9386ca3628ac7fd9e596793f531",
+      "size": 49262665
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "books",
+      "path": "data/l4_l2book/l4_l2book_1765202863.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-08",
+      "sha256": "1c782b8455d0356949280625319e9f78aa7d8189ebc2f813c040555ee936646b",
+      "size": 51341889
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "trades",
+      "path": "data/l4_trades/l4_trades_1765199829.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-08",
+      "sha256": "74e006611b358974ec8491d6729d512a016afc64698e3d0c6b3b2181c750e256",
+      "size": 1616725
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "trades",
+      "path": "data/l4_trades/l4_trades_1765202864.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-08",
+      "sha256": "d3d71e9b1c4ff6ee25a624ce3b47ba8afdec337c2e070e8ea11db39e81e0ff0f",
+      "size": 669796
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "books",
+      "path": "data/l4_l2book/l4_l2book_1765238485.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-09",
+      "sha256": "2fcde7b0777451157bfc71e774e117ec8e333a0b1d06ae957d92ca854f26b1dd",
+      "size": 51258750
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "books",
+      "path": "data/l4_l2book/l4_l2book_1765238789.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-09",
+      "sha256": "0d9bc46889b7fd657572e55cdd435fef2336854b48a034b888ff3a67987de8a4",
+      "size": 51930361
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "trades",
+      "path": "data/l4_trades/l4_trades_1765238486.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-09",
+      "sha256": "103f688819042c1a3b8ef536fa01fae71f9768aab3c050025201cae9d90c9db3",
+      "size": 592507
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "trades",
+      "path": "data/l4_trades/l4_trades_1765238790.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-09",
+      "sha256": "53629401809b6206b4e28b317d6b4c981c092a621017aac6c9205f78cfecca12",
+      "size": 621387
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "books",
+      "path": "data/l4_l2book/l4_l2book_1765325014.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-10",
+      "sha256": "d1ac81a439fb9a2d772a3793ff01c2f996c444a4ac00ec1f5a7ebbf533f810c6",
+      "size": 51762471
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "books",
+      "path": "data/l4_l2book/l4_l2book_1765325319.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-10",
+      "sha256": "7c3fa09e147c39e82aa8c9df6da170d8ff99dc14cef0d6226f849911348a34db",
+      "size": 51907498
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "trades",
+      "path": "data/l4_trades/l4_trades_1765325015.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-10",
+      "sha256": "ebb269aa434f93bc106428fffa5aa295cbb7f458108f7d7e120e5f658fa8ed5b",
+      "size": 949311
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "trades",
+      "path": "data/l4_trades/l4_trades_1765325320.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-10",
+      "sha256": "390a683026964618fbb57b6be929b60c30769c9fd8c22a042296f008d1f48d10",
+      "size": 659730
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "books",
+      "path": "data/l4_l2book/l4_l2book_1766263240.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-20",
+      "sha256": "0efebda70568e76f7ad87470f2b1e05f521b09b8e329d6307d2105d9cbf6ec99",
+      "size": 50413572
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "books",
+      "path": "data/l4_l2book/l4_l2book_1766263557.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-20",
+      "sha256": "eba39df88d76251281c6afd0a189517a851a9d81d90118e7d1eab4c1e60f9c68",
+      "size": 54838047
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "trades",
+      "path": "data/l4_trades/l4_trades_1766263246.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-20",
+      "sha256": "d84c1483a80711e3abfbd01ec3384bf423042a57585aedef79be45e0ac26a7f3",
+      "size": 1168143
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "trades",
+      "path": "data/l4_trades/l4_trades_1766263561.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-20",
+      "sha256": "ae6e59fbe99ddb6aac396221fce48a6c877998847d9ea1213bfe0198019e5b0b",
+      "size": 339242
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "books",
+      "path": "data/l4_l2book/l4_l2book_1766275235.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-21",
+      "sha256": "a434d379478017c23104128adf1934962389a5b3c4886eeb2b64f1685b0faeb0",
+      "size": 52557990
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "books",
+      "path": "data/l4_l2book/l4_l2book_1766275608.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-21",
+      "sha256": "dd179b224195fb6487a7c6169cc7e95e1702596a3fb09852ec6e0e9d1355044c",
+      "size": 52814711
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "trades",
+      "path": "data/l4_trades/l4_trades_1766275236.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-21",
+      "sha256": "ffc0826b44a802e2c31791fe095ab299d50fe3e4e9bdd820021868bcdc8142a3",
+      "size": 554760
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "trades",
+      "path": "data/l4_trades/l4_trades_1766275622.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-21",
+      "sha256": "d87fa9b5f8cf5ae931efedcc4895107dc12ea4df7b798d45514dbb9b70751d69",
+      "size": 590563
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "books",
+      "path": "data/l4_l2book/l4_l2book_1766589586.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-24",
+      "sha256": "73e31eb669960b24187d6923d32a60ffd5caf76ffc084e49de84549228edbd3d",
+      "size": 50525612
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "books",
+      "path": "data/l4_l2book/l4_l2book_1766589891.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-24",
+      "sha256": "98ed53ae2d7393042771881863d1b9f3ae941ac079116bc036e66448b3df22a0",
+      "size": 52317113
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "trades",
+      "path": "data/l4_trades/l4_trades_1766589587.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-24",
+      "sha256": "b605be57521f80a3b14b01ee4cb7dd2908195c5a0fc57b2ba3c755522b57b805",
+      "size": 1398195
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "trades",
+      "path": "data/l4_trades/l4_trades_1766589892.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-24",
+      "sha256": "818c6c3d37c6d977fab71b968ffe90bd8af59195cd900460f643fd865824003e",
+      "size": 881934
+    }
+  ],
+  "scope": "development_only",
+  "selection_rule": "First two nonpartitioned files per family, ordered by numeric filename timestamp, on each of the first six shared UTC filename dates at the pinned revision. Selected on metadata before outcomes; total cap 750MB. Prior five-minute candidate retained as previously inspected development data. Family filename offsets do not establish synchronization; actual coverage is audited after acquisition."
+}
