@@ -1,0 +1,8 @@
+name,odds_ratio,odds_low,odds_high,spans_one,note
+dc_construction_musd_x_group,0.9985,0.9974,0.9997,False,
+power_construction_musd_x_group,1.0001,1.0,1.0001,False,
+equipment_construction_musd_x_group,1.0005,0.9995,1.0016,True,
+gscpi_x_group,0.8843,0.7856,1.0834,True,
+delivery_times_x_group,0.9563,0.9374,0.9865,False,
+promise_horizon_months_x_group,1.0082,0.9948,1.0216,True,
+pipeline_momentum_x_group,0.8985,0.8664,0.9163,False,
