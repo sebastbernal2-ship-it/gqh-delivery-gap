@@ -68,3 +68,5 @@ results/vintage-aggregates/
 
 # Local drought cache: fetched, never committed.
 results/usdm-cache/
+
+.venv-pdf/
