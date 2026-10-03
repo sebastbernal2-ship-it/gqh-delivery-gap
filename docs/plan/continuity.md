@@ -121,3 +121,70 @@ Declare before measuring. Relevance gate before factors. Six gates before strate
 rate control across the whole declared grid, specificity against a group the mechanism does not implicate, and a
 placebo. Count multiplicity before ranking. Keep holdouts closed by construction. Report a failed gate as a
 truth about the world or about our coverage, never as a verdict on the work.
+
+
+---
+
+# Session record, 2026-10-03 evening
+
+## What landed, in order
+
+| Commit | What it is |
+|---|---|
+| `2ad608f5b` | leg A: every declared node mapped to a real table, 27 rows, ten nodes with no backing data |
+| `772616a71` | leg B: the distribution of every node and of its own scale, 15 series |
+| `1d7dc93b8` | leg C: the association engine as directional lead lag, 56 ordered pairs |
+| `c47e8a68e` | leg D: eight economic chains scored against the six gates |
+| `88c4799cc`, `d3cb1f0da` | the fuel series from the per account panel, with the flag correction |
+| `e3b3b0817` | fuel joined to price: predicts the size of the next move, not its direction |
+| `5beb68c78` | **the forced liquidation verdict**: four gates pass, gate five fails |
+| `9cdf8f05d` | the forward tape restarted, rule declared before it runs |
+| `d0584858c`, `c4bc6fe04` | the concentration check, and why zero is the correct answer |
+| `3fce59a63`, `bb454f55f`, `a70582442` | the crosswalk procedure, a verified row, and the source correction |
+
+## The three results that matter
+
+**The association route is closed, three designs deep.** Symmetric scan, the same scan with the holdout opened, and
+a directional engine with permutation nulls and Benjamini-Hochberg across the grid. Every survivor at lag zero and
+inside one family. **No cross-family relation, no lead.**
+
+**The forced liquidation chain passes four gates and fails the fifth on measured economics.** Fuel leads, capacity
+is measured at 3.3m per side in BTC within ten basis points, and forward returns net of nine basis points run
+minus 0.44 percent at one hour to minus 8.42 at forty eight. Fall through, not reversion. The binding limit is
+event count: one spike in eleven months.
+
+**The attribution ceiling is a source mismatch, not a modelling gap.** Of the twelve largest slipped entities, the
+SEC name search finds one registrant. The rest are project vehicles and private developers that file nothing, so
+the ownership layer must come from FERC eLibrary and the inventory's own owner fields. Procedure and receipts are
+in `docs/plan/crosswalk-procedure.md`.
+
+## Live right now
+
+**The forward tape**: ten hours from around 21:35, fifteen second cadence, four markets. The declared rule: a
+three standard deviation move with a one percent fall in open interest marks the trigger, and the conditional path
+afterwards is measured net of 4.5 basis points a side against capacity from the book. It is the only instrument
+that adds independent events instead of re-reading the same one.
+
+## Data now reachable that was not this morning
+
+The shared store holds 21 sources and 153,527 rows and still filling, plus the compute archive at 1.59 million.
+Snowflake holds the richer layer, read through `snowflake-query.yml`: generator vintages at **3,387,221** rows,
+filing documents at 12,903, research acquisition rows at 433,781. The perpetual archive is mirrored free, with
+`data/hyperliquid/CPANEL.parquet` cached: 513,119 account-days of leverage, exposure and distance to threshold.
+
+## Next actions, in order
+
+1. **The FERC ownership layer** for the delivery tail and the contract forced chains. Name, link, evidence,
+   receipt, with FERC dockets as the source.
+2. **The index and mandate measurement**, still never run, and the last item that needs only public data and code.
+3. **The forward tape**, watched rather than modelled, until enough independent events exist to measure.
+4. **Run `make check` and `make test` on the merged state**, since the legs added files and only their own
+   verifiers were run.
+
+## Working rules that were learned the hard way today
+
+- One child at a time writes; simultaneous children collide on the home lock. Read-only children are fine in
+  parallel.
+- A work record holds its write scope, so a relaunch needs a fresh record with distinct paths.
+- A commit is built on `origin/main` with an explicit file list, never on the current branch's state.
+- A performance table is never the headline. Mechanism, then identification, then costs, then numbers.
