@@ -23,7 +23,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from edgar.filings import build_rows, sealed_start  # noqa: E402
 
-FIELDS = ["ticker", "cik", "form", "filed_date", "acceptance_utc", "acceptance_et",
+FIELDS = ["ticker", "cik", "accession", "form", "filed_date", "acceptance_utc", "acceptance_et",
           "earliest_availability_utc", "processing_lag_minutes", "timestamp_status", "period",
           "items", "candidate_surface", "surface_reason", "in_sealed_window",
           "press_release_unchecked", "document_url", "source_receipt"]

@@ -195,6 +195,7 @@ def record(cik: int, ticker: str, entry: dict, lag_minutes: int,
     return {
         "ticker": ticker,
         "cik": cik,
+        "accession": entry.get("accessionNumber") or "",
         "form": form,
         "filed_date": filed.isoformat() if filed else "",
         "acceptance_utc": accepted.isoformat() if accepted else "",
