@@ -1,5 +1,10 @@
 # Massive → Snowflake: acquisition and teammate readiness
 
+**Subsequent acquisition:** [the dataset handoff](DATASET_HANDOFF.md) records the additive options,
+disclosure, queue, Ornn and public Hyperliquid mirror releases, with pinned Snowflake run IDs.
+It supersedes this assessment's access uncertainty for those explicit partitions. The existing
+central loader and historical feature-promotion gaps described below remain separate concerns.
+
 **Access update:** the subsequent [authenticated inventory](LIVE_INVENTORY_2026-10-03.md) verifies
 connections and existing warehouse contents. It supersedes the original access uncertainty below;
 the acquisition defects and proposed release gates remain unresolved.
