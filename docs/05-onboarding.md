@@ -49,7 +49,6 @@ Capture is automatic. You do not need to remember a memory command:
 - `make remember M="what you learned"` if you want to write one down deliberately.
 - `.githooks/pre-commit` refreshes and stages the shared memory on every commit.
 - `make share` refreshes it now; `make save M="..."` commits and pushes.
-- `make schedule` adds an unattended share every 15 minutes, if you want belt and braces.
 
 ## 5. Check the plumbing
 

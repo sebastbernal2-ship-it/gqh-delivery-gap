@@ -34,11 +34,8 @@ empty until someone records a thesis. Drop rough work in `docs/inbox/`.
 | `memory/SHARED.md` | generated | The team's memory, readable |
 | `AGENTS.md` | W5 | Session start rules for any agent |
 | `docs/reviews/` | everyone | Critiques of the idea and the plan |
-| `docs/note/` | assembler | The 5 page note source |
 | `data/` | W0 | Fetched data. Not committed. See `data/README.md` |
-| `src/` | per module README | Engine code |
-| `notebooks/` | per engine | Exploration and figures |
-| `quantum/` | W4 | QUBO and sampling experiments |
+| `src/` | the person who starts it | Code, once there is a claim to test |
 | `results/` | one writer per file | Every number the note quotes. Schema in `results/README.md` |
 
 ## How we work
@@ -51,7 +48,6 @@ Memory capture is mechanical. You do not have to remember a command.
   commits carry what you learned. `make bootstrap` enables it once per clone.
 - If the memory store lives inside the repo, everything in it is project scope, so nothing needs
   a tag. Redaction and the credential scan still apply.
-- `make schedule` adds an unattended share every 15 minutes if you want the belt and braces.
 
 The rest:
 

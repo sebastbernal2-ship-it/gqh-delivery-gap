@@ -1,4 +1,4 @@
-.PHONY: sync save bootstrap doctor current hooks hooks-global remember share absorb autoshare schedule unschedule memory test secrets check status
+.PHONY: sync save bootstrap doctor current hooks hooks-global remember share absorb test secrets check status
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -45,36 +45,18 @@ share:
 absorb:
 	@bash scripts/memory-absorb.sh
 
-# Unattended: share, commit only the memory files, push. Safe on a timer.
-autoshare:
-	@bash scripts/autoshare.sh
-
-# Opt in: run autoshare every 15 minutes on this machine.
-schedule:
-	@bash scripts/schedule.sh install
-
-unschedule:
-	@bash scripts/schedule.sh uninstall
-
-# Private device-to-device export. Gitignored.
-memory:
-	bash scripts/memory-export.sh
-
 test:
 	@python3 tests/test_memory_filter.py
 	@python3 tests/test_memory_absorb.py
 	@python3 tests/test_thesis_index.py
 
-# Public repo gate. Run before a push.
+# Credential scan over every file. This repo is public.
 secrets:
 	@python3 scripts/scan_secrets.py
 
-# Cheap gate before a commit that touches results.
+# Public repo gate: no credentials, and the ledger is valid.
 check: secrets
 	@python3 scripts/check_theses.py
-	@python scripts/check_results.py
 
 status:
 	@git status -sb
-	@echo "--- results ---"
-	@ls -1 results/*.json 2>/dev/null || echo "(no result files yet)"
