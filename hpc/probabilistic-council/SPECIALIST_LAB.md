@@ -123,3 +123,9 @@ must not select the model: an uninformative prevalence forecast can look well ca
 Validation: all ten new lab tests and all twenty-three prior HPC tests pass. Credential scan and
 diff checks pass. No remote allocation, market holdout, real dataset or pretrained download was
 used. Existing repository layout failures recorded in `VALIDATION.md` are unaffected.
+
+## Follow-up
+
+The seven-view, external-panel extension and first bounded public-book smoke test are documented
+in [INFORMATION_VIEWS.md](INFORMATION_VIEWS.md). The warehouse findings and remaining synchronized-data
+gap are in [SNOWFLAKE_AUDIT.md](SNOWFLAKE_AUDIT.md). This original synthetic protocol is unchanged.
