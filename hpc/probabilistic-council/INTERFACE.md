@@ -68,3 +68,22 @@ is a parameterized circuit evaluated by an exact statevector simulator, but all 
 is classical and noiseless. The bounded experiment has no QPU execution, finite-shot uncertainty,
 error mitigation, broad architecture search, or finance interpretation. It is a software path and
 measurement contract for a later simulator/QPU adapter, not evidence for using QCBM in the council.
+
+## Modular inference engine (`council/`)
+
+Runtime contract `council-distribution-0.2.0`. See [`council/README.md`](council/README.md)
+for API details. The engine validates specialist class order, full probability mass, version and
+time metadata; fits specialist temperatures, context reliability weights, and pool calibration from
+three separate data partitions; supports linear and logarithmic pooling; and returns the fused
+distribution with abstention and uncertainty diagnostics. `LayaChoiceSpecialist` adapts Laya's
+typed `choice` probability map when the optional Laya package and weights are installed. The
+engine remains independent of Laya and quantum packages.
+
+Run the deterministic integrated fixture with:
+
+```sh
+python3 modular_pilot.py --seed 20261003 --rows 12000
+```
+
+It writes JSON to stdout and uses synthetic data only. It is an engineering benchmark, not a
+financial forecast or the competition's sealed evaluation.
