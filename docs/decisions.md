@@ -257,3 +257,30 @@ where the three handoffs genuinely disagree.
 Jev and Laya are identified. Both are in the record.
 **Alternatives.** Keeping three alignment documents was rejected: three statements of method is how a
 team ends up with none. Averaging the differences away was rejected for the same reason.
+
+---
+
+## 2026-10-03: Adopt the training material's Investment Proposal shape, keep our gates inside it
+
+**Decision.** A thesis record is an Investment Proposal with four required sections: Hypothesis,
+Data, Methodology, Results. Ours adds Falsifiers, Costs and capacity, and Limitations. A record
+template lives at `docs/theses/TEMPLATE.md`, and `make check` fails an **active** thesis whose record
+is missing a section. Non-active records are exempt.
+**Source.** `algogatorstraining.com/qr-home.html`, captured 2026-10-02 while the site was reachable:
+the four-section Investment Proposal, the 2b data approval gate, and the performance metric list.
+Both training domains timed out on re-check, so the comparison in `docs/alignment.md` is a reading of
+that capture plus the public `algogators.com` summaries, not a live citation. Their ten-week
+three-phase curriculum and the society's eleven-week curriculum disagree; neither is quoted here as
+current without a check.
+**What we adopt.** Their record shape; a **named data gate approver** on an active thesis; their
+metric list reported alongside ours; "optimise cautiously" as an explicit step inside development
+folds with the variant count recorded; and a deployment stage, which maps to execution feasibility
+and capacity because this track has no live P&L.
+**What we keep.** The confidence ladder, the named counterparty, revisions against an earlier public
+expectation, availability times, labels-are-not-features, pre-registered falsifiers, independent
+shocks, costs and joint tails as part of the mechanism, and tools that must earn their place.
+**What their method criticises in ours.** Their framework is short and produces a result; ours is long
+and prevents being fooled. Ours can win the argument and lose the weekend. Adopted counter-rule: one
+event family, one horizon, one pilot, one result artifact, and if a choice arises between another
+governance improvement and the first honest number, take the number.
+**Enforcement.** Four new tests on the ledger check (15 total in that suite).

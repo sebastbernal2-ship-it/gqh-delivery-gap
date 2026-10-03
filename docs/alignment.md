@@ -167,3 +167,86 @@ Whether delivery revisions predict residual returns net of costs. Which universe
 history. Whether demand and margins explain the whole effect. Event independence. Historical
 expectation quality. Borrow feasibility. Whether any advanced model adds information. And whether
 the remaining competition time supports the full architecture, which no handoff claims it does.
+
+---
+
+## 12. Cross-check against the training material we were pointed at
+
+Sources: `algogatorstraining.com/qr-home.html` (the Investment Proposal framework and the
+three-phase curriculum), captured 2026-10-02 while the site was reachable; and the public
+`algogators.com` pages on training and research workflow, summarised 2026-10-03. Both domains timed
+out on re-check, so treat this section as a reading of those sources rather than a live citation.
+Note one discrepancy to resolve: the training site describes a ten-week, three-phase curriculum,
+while the society's public page describes an eleven-week analyst curriculum. Probably the same
+programme at different times; do not quote either as current without checking.
+
+### Their method, as they state it
+
+The Investment Proposal has four sections, and the whole job is to fill them honestly.
+
+| Section | Their requirement |
+|---|---|
+| 1 Hypothesis | The economic mechanism. Why does the inefficiency exist? What will the signal predict? |
+| 2 Data | 2a sourcing and cleaning. 2b a quality approval gate. **Data must exist before backtest** |
+| 3 Methodology | 3a signal rules. 3b model assumptions, each one tested and documented |
+| 4 Results | Sharpe, annual return, win rate, profit factor, equity curve, drawdown analysis |
+
+Their research pipeline is **Hypothesis → Data → Methodology → Backtest → Writeup**, versioned, with
+cautious optimisation and risk controls, deploying only what survives. The curriculum puts
+"what defines a research edge" first, then tooling, then execution.
+
+### Where we already agree
+
+Hypothesis before everything; the mechanism named; data settled before any backtest; assumptions
+written down; results separated and versioned. Four of their requirements are already hard rules
+here, and three of ours are simply their rules carried further: the confidence ladder turns
+"data must exist" into a chain from entitlement to tradeable-after-costs; the counterparty step turns
+"why does the inefficiency exist" into a named payer; and the falsifier turns "assumptions are
+tested" into a pre-registered claim that can die.
+
+### What we should adopt from them
+
+1. **A fixed shape for a research record.** They have one artifact everyone fills, with numbered
+   subsections. We have an inbox, a ledger, and no required shape for the record itself. Adopted:
+   thesis records now use their four sections as required headings, plus our additions.
+2. **A named data gate.** Their 2b is a person approving the data before anything downstream runs.
+   We have mechanical checks but no named human gate. Adopted: an active thesis names who approved
+   the data, and the ledger gate enforces the heading.
+3. **Their metric list, reported alongside ours.** Sharpe, annual return, win rate, profit factor,
+   equity curve, drawdown. We are stricter about how they are produced (net of costs, in-sample and
+   out-of-sample separately, deflated for the number of variants) but we should still print their
+   list, because it is what a reader expects to see. Report them; never target win rate or profit
+   factor, both of which are trivially gamed.
+4. **"Optimise cautiously" as an explicit step.** We treat tuning as near-forbidden. Their framing is
+   compatible and clearer: optimise only inside development folds, with the variant count recorded,
+   then freeze.
+5. **A deployment stage.** We have no live stage and the track has no P&L leaderboard, so ours maps
+   to execution feasibility and capacity rather than monitoring.
+
+### What we keep, and should defend as our difference
+
+The confidence ladder; the named counterparty; revisions against an earlier public expectation;
+availability times and the labels-are-not-features rule; a falsifier written before returns;
+independent shocks rather than calendar length; costs, borrow and joint tails as part of the
+mechanism; capacity as a scored criterion; and tools that must earn their place with a removable
+benchmark.
+
+### The criticism their method makes of ours
+
+Their framework is short, and it is designed to *produce a result*. Ours is long, and it is designed
+to *prevent being fooled*. Both are needed, but ours can win the argument and lose the weekend: a
+beautifully governed repo with no measurement is a failure, and no amount of process fixes that.
+
+The correction this implies, adopted here: **one event family, one horizon, one pilot, one result
+artifact.** Process exists to make that result trustworthy, not to be the result. If a choice must be
+made between another governance improvement and the first honest number, take the number.
+
+### The merged shape
+
+Their skeleton, our gates inside it:
+
+- A thesis record is an Investment Proposal. Four required sections: Hypothesis, Data, Methodology,
+  Results. Ours adds Falsifiers, Costs and capacity, and Limitations.
+- The ledger line stays what it is: id, title, status, owner, date, note, falsifiers, evidence.
+- The data gate is a named person in the record, and a heading the gate checks for.
+- Results print their metric list, produced our way.
