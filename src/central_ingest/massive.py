@@ -40,8 +40,8 @@ def request_json(url: str, api_key: str, attempts: int = 5) -> dict:
     raise RuntimeError("Massive retries exhausted")
 
 
-def get_bars(ticker: str, start: str, end: str, api_key: str) -> list[dict]:
-    url = f"https://api.massive.com/v2/aggs/ticker/{ticker}/range/1/day/{start}/{end}?adjusted=true&sort=asc&limit=50000"
+def get_bars(ticker: str, start: str, end: str, api_key: str, adjusted: bool = True) -> list[dict]:
+    url = f"https://api.massive.com/v2/aggs/ticker/{ticker}/range/1/day/{start}/{end}?adjusted={str(adjusted).lower()}&sort=asc&limit=50000"
     bars: list[dict] = []
     while url:
         page = request_json(url, api_key)
@@ -63,3 +63,34 @@ def get_bars(ticker: str, start: str, end: str, api_key: str) -> list[dict]:
     if stamps != sorted(stamps) or len(stamps) != len(set(stamps)):
         raise ValueError(f"Non-chronological or duplicate daily bars for {ticker}")
     return bars
+
+
+def get_corporate_actions(action: str, ticker: str, start: str, end: str, api_key: str) -> list[dict]:
+    if action not in {"splits", "dividends"}:
+        raise ValueError("unsupported Massive corporate action")
+    date_field = "execution_date" if action == "splits" else "ex_dividend_date"
+    url = (f"https://api.massive.com/stocks/v1/{action}?ticker={ticker}"
+           f"&{date_field}.gte={start}&{date_field}.lte={end}&limit=5000&sort={date_field}.asc")
+    rows: list[dict] = []
+    while url:
+        page = request_json(url, api_key)
+        for result in page.get("results", []):
+            rows.append(result)
+        url = page.get("next_url")
+    return rows
+
+
+def get_ticker_events(ticker: str, api_key: str) -> list[dict]:
+    page = request_json(f"https://api.massive.com/vX/reference/tickers/{ticker}/events", api_key)
+    result = page.get("results") or {}
+    events = result.get("events") or []
+    return [{"ticker": ticker, "issuer_name": result.get("name"), **event} for event in events]
+
+
+def get_ticker_details(ticker: str, as_of_date: str, api_key: str) -> dict:
+    page = request_json(f"https://api.massive.com/v3/reference/tickers/{ticker}?date={as_of_date}", api_key)
+    row = page.get("results")
+    if not row:
+        raise ValueError(f"Massive ticker details missing for {ticker} as of {as_of_date}")
+    return {"requested_ticker": ticker, "as_of_date": as_of_date,
+            "retrieved_at_utc": datetime.now(timezone.utc).isoformat(), **row}

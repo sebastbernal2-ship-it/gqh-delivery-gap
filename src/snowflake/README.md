@@ -30,4 +30,22 @@ that caveat is resolved. TigerData already has the same table from a separate lo
 scheduled/automated bridge today. Current verification and the phased data-onboarding plan are
 recorded in the shared Snowflake path handoff.
 
+## Equity event feature contract
+
+`bootstrap.sql` now defines an additive contract for three layers:
+
+- `NORMALIZED.OPERATIONAL_FACTS`: accession-linked, reviewed company facts with distinct
+  publication/acceptance/availability clocks, original source span/hash, explicit units, and
+  point-in-time expectation/exposure fields.
+- `FEATURES.EQUITY_EVENT_FEATURES`: past-only decision-time features and source batch hashes.
+- `FEATURES.EQUITY_EVENT_LABELS`: forward return/cost outcomes keyed by event and horizon. Labels
+  must never be joined into the strategy input view.
+
+The earlier generic `FEATURES.POINT_IN_TIME_PANEL` is retained for compatibility; it is not the
+new event-study schema. These DDLs have **not** been applied to Snowflake, and the new tables are
+not populated. Wait for reviewed event facts, pinned benchmark bars, and a loader with
+reconciliation tests before creating/populating them. Current coverage and hard readiness gates
+are in the [feature contract](../inbox/vishnu-2026-10-03/strategy-feature-contract.md). The
+existence of DDL does not mean populated or validated features.
+
 No Snowflake credentials belong in this repository.

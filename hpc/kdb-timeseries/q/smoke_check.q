@@ -1,0 +1,14 @@
+opts:.Q.opt .z.x;
+if[not `db in key opts; 2 "missing -db"; exit 2];
+if[not `expected in key opts; 2 "missing -expected"; exit 2];
+root:first opts`db;
+expected:"J"$first opts`expected;
+db:hsym `$root;
+if[0=count key db; 2 "HDB directory is empty"; exit 3];
+system "l ",root;
+if[not `bars in key `.; 2 "bars table did not load from HDB"; exit 3];
+if[expected<>count bars; 2 "synthetic smoke row count mismatch"; exit 4];
+if[any type each (bars`open_px_e8usd;bars`close_px_e8usd;bars`volume)<>7; 2 "scaled numeric columns are not q long"; exit 4];
+if[2<>count distinct bars`date; 2 "date partition count mismatch"; exit 4];
+2 "HDB_SMOKE_OK rows=",string count bars," dates=",string count distinct bars`date;
+exit 0;
