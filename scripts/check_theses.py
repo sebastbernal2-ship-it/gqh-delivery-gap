@@ -16,9 +16,24 @@ ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "docs" / "theses" / "index.jsonl"
 REQUIRED = ["id", "title", "status", "owner", "date", "note"]
 STATUSES = {"active", "parked", "superseded", "retired"}
+# An active thesis is an Investment Proposal, in the shape the training material uses.
+SECTIONS = ["Hypothesis", "Data", "Methodology", "Results"]
 
 
-def validate_records(records, notes_exist: bool = True, root: Path | None = None) -> list[str]:
+def missing_sections(note_text: str) -> list[str]:
+    """Required section headings absent from a thesis record."""
+    headings = [line.lstrip("#").strip().lower() for line in note_text.splitlines()
+                if line.strip().startswith("#")]
+    out = []
+    for section in SECTIONS:
+        target = section.lower()
+        if not any(target in heading for heading in headings):
+            out.append(section)
+    return out
+
+
+def validate_records(records, notes_exist: bool = True, root: Path | None = None,
+                     note_texts: dict | None = None) -> list[str]:
     """Return a list of problems. Empty means valid."""
     root = root or ROOT
     errors: list[str] = []
@@ -54,13 +69,26 @@ def validate_records(records, notes_exist: bool = True, root: Path | None = None
             if parent not in ids:
                 errors.append(f"{label}: supersedes unknown id '{parent}'")
 
-    if notes_exist:
-        for rec in records:
-            if not isinstance(rec, dict):
-                continue
-            note = rec.get("note")
-            if note and not (root / note).exists():
-                errors.append(f"{rec.get('id')}: note file '{note}' does not exist")
+    texts = dict(note_texts or {})
+    for rec in records:
+        if not isinstance(rec, dict):
+            continue
+        note = rec.get("note")
+        if not note:
+            continue
+        if notes_exist and not (root / note).exists():
+            errors.append(f"{rec.get('id')}: note file '{note}' does not exist")
+        if rec.get("status") != "active":
+            continue
+        text = texts.get(note)
+        if text is None and (root / note).exists():
+            text = (root / note).read_text(errors="ignore")
+        if text is None:
+            continue
+        absent = missing_sections(text)
+        if absent:
+            errors.append(f"{rec.get('id')}: active thesis record is missing section(s) "
+                          f"{', '.join(absent)}. See docs/theses/TEMPLATE.md")
     return errors
 
 

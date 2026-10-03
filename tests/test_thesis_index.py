@@ -20,7 +20,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
-from check_theses import validate_records  # noqa: E402
+from check_theses import missing_sections, validate_records  # noqa: E402
 
 
 def record(**over):
@@ -71,7 +71,31 @@ def main() -> int:
           validate_records([record(note="docs/theses/does-not-exist.md")], notes_exist=True),
           expect_empty=False)
 
-    print(f"\n{10 - len(failures)}/10 passed")
+    # An active thesis record follows the Investment Proposal shape, so a reader and a judge
+    # both know where to look. Non-active records are exempt.
+    def check_eq(name, got, want):
+        if got != want:
+            failures.append(name)
+            print(f"FAIL {name}: got {got!r} want {want!r}")
+        else:
+            print(f"ok   {name}")
+
+    check_eq("a complete record has no missing sections",
+             missing_sections("## Hypothesis\nx\n## Data\ny\n## Methodology\nz\n## Results\nw"), [])
+    check_eq("a missing section is named",
+             missing_sections("## Hypothesis\nx\n## Data\ny"), ["Methodology", "Results"])
+    check_eq("headings are matched case insensitively and with numbering",
+             missing_sections("## 1. hypothesis\n## 2. DATA\n## 3. Methodology\n## 4. Results"), [])
+    check("an active thesis with a note missing sections fails the ledger",
+          validate_records([record()], notes_exist=False,
+                           note_texts={"docs/theses/t-delivery-gap.md": "## Hypothesis\nonly"}),
+          expect_empty=False)
+    check("a non-active thesis is exempt from the sections",
+          validate_records([record(status="parked", falsifiers=[])], notes_exist=False,
+                           note_texts={"docs/theses/t-delivery-gap.md": "## Hypothesis\nonly"}),
+          )
+
+    print(f"\n{15 - len(failures)}/15 passed")
     return 1 if failures else 0
 
 
