@@ -40,6 +40,16 @@ def missing_entries(shared, local):
     return out
 
 
+def ensure_store() -> None:
+    """Create a local store on a fresh device, so the first run needs no extra step."""
+    probe = subprocess.run(["hippo", "export"], capture_output=True, text=True)
+    if probe.returncode == 0:
+        return
+    if "No hippo store" in (probe.stderr or probe.stdout or ""):
+        subprocess.run(["hippo", "init", "--no-hooks", "--no-schedule"],
+                       capture_output=True, text=True)
+
+
 def export_local() -> list:
     result = subprocess.run(["hippo", "export"], capture_output=True, text=True)
     if result.returncode != 0 or not result.stdout.strip():
@@ -56,6 +66,7 @@ def main() -> int:
         print("no memory/shared.json. Nothing to absorb.")
         return 0
     shared = json.loads(SHARED.read_text())
+    ensure_store()
     local = export_local()
     todo = missing_entries(shared, local)
     if not todo:
