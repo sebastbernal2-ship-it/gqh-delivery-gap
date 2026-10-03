@@ -97,8 +97,14 @@ test:
 	@python3 tests/test_live.py
 	@python3 tests/test_variant_ledger.py
 	@python3 tests/test_imagery.py
+	@python3 tests/test_hazard.py
+	@python3 tests/test_factors.py
 	@python3 tests/test_scan_compute.py
 	@python3 tests/test_scan_windows.py
+
+# Fit the delivery model: what moves a promise, controls first then factors.
+delivery-model:
+	@python3 scripts/run_delivery_model.py
 
 # Count every variant tried, from the artifacts that recorded them.
 variants:
