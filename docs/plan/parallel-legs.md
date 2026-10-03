@@ -131,3 +131,22 @@ Three consequences, in order of cost:
 The unsettled question, stated rather than guessed: whether several children each with their own home can write at
 the same time in this harness. The decisive test is two probe children with separate homes, each writing one file
 and reporting. Until that test runs, the safe pattern is one writer per home, or children as analysts.
+
+## The reframing that removes the block: collecting is not mutating fleet state
+
+The read-only banner concerns **fleet state**. It stops a session from spawning, steering, merging, draining the
+wake queue, or repairing supervision. It does not describe the work these legs do. A leg reads the store, calls
+a workflow, computes, and produces a table. That is data collection and analysis, not fleet mutation.
+
+So a leg does not need write access to the repository at all. The pattern is:
+
+1. **The leg reads and computes.** Reading TigerData, dispatching the Snowflake query workflow and downloading its
+   artifact, and running local analysis are all allowed in a session that is read-only for fleet purposes.
+2. **The leg returns its result through its completion message.** A table of survivor counts, an edge list, a
+   ranking, a chain scored gate by gate: all of that fits in a report.
+3. **The orchestrator persists it.** The session that holds the lock writes the artefact into the repository, runs
+   the leg's verifier itself, and commits.
+
+That is also cleaner than scratch files, because nothing needs to be copied and the reported numbers are the
+numbers the orchestrator checks. The only thing a leg must not do is touch fleet state, and none of these legs
+does.
