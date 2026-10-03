@@ -42,6 +42,11 @@ per-name and per-cluster caps, turnover and cost-aware. Execution and cost model
 beaten. The one primary horizon. The variant plan, the sealed-test plan, and the **latency budget**
 against the signal's information half-life.
 
+**Venues.** The mechanism contract mapped per venue: state variables, decision rule, availability
+requirement, exposure budget, cost interface. For any venue that is not the core, its role
+(confirmation, expression or hedge vehicle, execution laboratory, or monitor) and the evidence for it.
+See `docs/alignment.md` section 17.
+
 ## Results
 
 Their metric list, produced our way: reported in-sample and out-of-sample separately, every number net
@@ -58,6 +63,10 @@ of costs, deflated for the number of variants.
 **Breadth.** IC, decay curve, effective breadth after correlation, hit-rate distribution, effect-size
 spread, worst decile, and the capacity curve. A single case cannot show a distribution, so these
 measurements are what make generalisation a decision rather than a hope.
+
+**Satellites.** Any venue other than the core is reported in its own artifact, with its own capacity
+curve, and never pooled into this study's headline numbers. Paired-shock evidence from a short-history
+venue carries sign and mechanism, not statistical weight.
 
 ## Robustness
 

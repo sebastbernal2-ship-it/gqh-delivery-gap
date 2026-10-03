@@ -345,3 +345,31 @@ governs pilot scope. Section 16 adds measurements to the pilot, not scope: the e
 decay, effective breadth, regime splits, the capacity curve and the measured latency chain.
 **Enforcement.** The eight required record sections are unchanged, but their content requirements are
 deepened, and `docs/theses/TEMPLATE.md` carries the new requirements.
+
+---
+
+## 2026-10-03: Newer markets enter by paired shocks and by role, never by pooled history
+
+**Decision.** `docs/alignment.md` section 17 defines how perpetuals, compute markets and other
+short-history venues take part.
+**The problem, stated.** A decade-plus filings core and a two-year perpetual cannot be one study.
+Validation does not transfer across venues. A four-step or eight-stage pipeline that ignores this
+either excludes the interesting markets or fakes their history.
+**The move.** The unit of observation becomes the **shock**, not the calendar. Each independent shock
+in the core is also measured in the new venue where both exist. The shock count is inherited from the
+long market, the event is held fixed, cross-venue agreement is evidence the mechanism is real, and the
+cross-venue difference is information about each venue's participants. Limits stated: the overlap subset
+carries sign and mechanism evidence, not statistical weight.
+**Four roles.** Confirmation, expression or hedge vehicle, execution laboratory, monitor. Only the
+expression role enters performance, with its own capacity curve and attribution. A compute index is a
+state variable, not a leg; a compute future that does not list cannot be traded, and if it lists it is a
+new study.
+**Admission gate.** Eight checks, including a point-in-time universe with delistings, venue-specific
+cost and liquidation modelling, a stated number of overlapping shocks, its own falsifier, and its own
+result artifact.
+**Backtest integrity.** Ten named hazards with controls: clocks and calendars, no official close,
+funding in P&L, venue risk, survivorship and endogenous listings, timestamp semantics, one-regime
+history, time-varying liquidity, treating an index as an instrument, and pooling. Each is a way to
+produce a fake result, so each gets an explicit control.
+**Sequencing.** Satellites come after the core passes its own gates. Inclusion has a real cost in
+sample, venue risk and rubric clarity, and that trade-off is written down rather than wished away.

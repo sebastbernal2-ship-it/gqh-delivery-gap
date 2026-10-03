@@ -476,3 +476,124 @@ numbers are what make generalisation a decision rather than a hope.
 A case study answers "is this real?". A system answers "how much can we make, at what risk, at what
 size, for how long, and why us?". The rubric rewards the second, and the second is what we are
 building.
+
+---
+
+## 17. Newer and niche markets: perps, compute, and anything else with a short life
+
+The problem is stated precisely: a decade of filings history and a perpetual future that has existed
+for two years cannot support the same study. But that is a fact about *venues*, not about the
+mechanism, and the mechanism is what we claim.
+
+### 17.1 Why validation does not transfer
+
+A claim in a new venue needs three things to overlap, and for most new markets they do not:
+
+| Requirement | Long-history equity core | Perpetual futures | Compute index |
+|---|---|---|---|
+| Mechanism existed | Yes, for the whole window | Only since listing | Only since the index began |
+| Data with knowable-at times | Yes, with effort | Yes, from the venue's own archive | Vendor dependent; index is recent; licensed futures are **unlisted** |
+| Tradable at our size | Usually | Yes, with venue risk | No listed contract to trade |
+
+A short history is not a smaller version of a long one. It is a **different study**, and the correct
+response is to design it as one rather than to stretch the long sample until it covers.
+
+### 17.2 What transfers is the contract, not the history
+
+Define the mechanism once, venue-agnostically, and let each venue implement it:
+
+- the economic state variables, and how each is measured;
+- the decision rule and its sign;
+- the availability requirement: what must be public, and how long before we act;
+- the exposure budget: what we intend to hold, and what must be neutralised;
+- the cost and impact interface, which the venue supplies.
+
+Transfer is then a **testable claim**: the same rule, the same sign, in a venue with its own costs and
+its own participants. Not "we assume it works everywhere".
+
+### 17.3 The paired-shock design: how a two-year venue earns a place in a ten-year study
+
+The unit of observation becomes the **shock**, not the calendar. For every event in the long-history
+core, ask whether the same shock is observable in the new venue. Where both exist, we get a paired
+observation: the core market's response and the new venue's response to the *same* event.
+
+This is the key move, and it buys three things that a short backtest cannot:
+
+1. **The shock count comes from the long market.** A venue that has existed for two years inherits
+   every independent shock that both markets witnessed. We are not asking the venue to supply history;
+   we are asking it to supply a second measurement.
+2. **The event is held fixed.** Comparing two venues' responses to one shock controls for the shock
+   itself. The cross-venue *agreement* is evidence the mechanism is real rather than an artefact of one
+   market's microstructure.
+3. **The cross-venue *difference* is information.** Different participant populations on the same
+   shock (institutional equity holders versus leveraged retail in a perpetual) is exactly the "who is on
+   the other side" question, asked separately per venue. A venue that reacts differently is telling us
+   about its own participants, and that can be the edge.
+
+Honest limits, stated up front: the overlap subset is small, so it carries **sign and mechanism**
+evidence, not statistical weight. Magnitude claims from the new venue are labelled low-power. The long
+market carries the sample; the new venue confirms or contradicts.
+
+### 17.4 Four roles a new market can play
+
+| Role | What it needs | May it enter performance? |
+|---|---|---|
+| **Confirmation** | Paired shocks, the same rule | Reported separately, never pooled |
+| **Expression or hedge vehicle** | Liquidity, borrow or shortability, cost model, venue risk | Yes, with its own capacity curve and attribution |
+| **Execution laboratory** | Venue data at depth | No, it is engineering evidence |
+| **Monitor** | A published series | No, it is an input, never a leg |
+
+A monitor is still useful. A funding rate or a compute index can be a state variable that feeds the
+core signal, or a live read on crowding, without ever being traded.
+
+### 17.5 Satellite admission gate
+
+A new venue may become a leg only when all of these hold. Fail one, and it stays a monitor or an
+execution laboratory:
+
+1. The mechanism applies to that venue, and we say why institutionally.
+2. The information arrives at a knowable time, and the venue trades when we need to act.
+3. A point-in-time universe exists, including delistings and contract expiries.
+4. Costs, funding, borrow, impact and liquidation are modelled **from that venue's own data**.
+5. Its life overlaps at least a stated number of independent shocks with the core.
+6. It has its own falsifier, with a pre-registered direction.
+7. It has its own capacity curve.
+8. It writes its own result artifact.
+
+### 17.6 Backtest integrity across venues: the hazards and their controls
+
+This is where naive multi-venue work breaks. Each row is a way to produce a fake result.
+
+| Hazard | Why it corrupts | Control |
+|---|---|---|
+| Different clocks and calendars | 24/7 perps, 6.5-hour equities, a 16:00 ET index window. Aligning by date silently moves the fill | Canonical event time = first public availability, in UTC. Per-venue response windows in that venue's own bars |
+| No official close | Perps have mark prices and hourly funding, not a closing auction | Define marks explicitly (mid or last trade), fund on the contract's actual schedule, and never assume we trade at a mark |
+| Carry and funding in P&L | In a perpetual a directional view contains a funding term that can dominate | Model funding separately from the directional component and report both. This is a decomposition requirement, not a footnote |
+| Venue risk | Single venue, no consolidated tape, outages, liquidation cascades, oracle manipulation, auto-deleveraging | Model impact from the venue's own book, cap participation, treat downtime and cascade as loss scenarios with stated recovery |
+| Survivorship and endogenous listings | Contracts delist; new listings appear when interest peaks | Point-in-time universe, delisted contracts included, never selected by today's availability |
+| Timestamp semantics | Exchange time, receive time and public availability are different facts; some volumes are self-reported | Carry all three, cross-check against a second source, treat the distinction as a first-class field |
+| One-regime history | A two-year venue may have lived entirely inside one narrative, so every result is conditional by construction | State it, forbid extrapolation to unseen states, and use the core market's state definitions to classify the window as an argument rather than evidence |
+| Time-varying liquidity | Perp depth collapses on weekends and holidays | Time-of-day aware cost model, not a single average spread |
+| Index as instrument | A benchmark index is not a listed, tradable contract | Use as a state variable. If a contract lists, that is a **new study** with its own specification, not a retrofit |
+| Pooling | A satellite's returns folded into the core's headline inflate it | One equity curve per study. A satellite never boosts the core's reported Sharpe |
+
+### 17.7 Sequencing, and the honest cost
+
+Satellites are allowed **after** the core passes its own gates. Before that, a new venue is a
+distraction with a real cost: a shorter sample, more venue risk, more modelling, and a rubric score
+that gets muddier rather than sharper.
+
+The trade-off is explicit. Including a niche market can raise distinctiveness and can supply a hedge
+or a monitor. It can also dilute the evidence and add failure modes. So the order is: prove the
+mechanism in the market with the longest overlap, then add venues that strengthen the claim or remove
+an exposure, one at a time, each with its own record and its own capacity curve.
+
+Worked shape for our own case:
+
+- **Core**: physical capacity and delivery revisions, equities, the longest overlap, the sample that
+  carries statistical weight.
+- **Perpetuals**: paired confirmation on shocks since listing, a 24/7 expression vehicle where shorting
+  is easy, and funding as a live monitor of crowding.
+- **Compute index**: a state variable feeding the core signal, plus a monitor. Not a leg.
+- **Compute futures**: nothing to trade until a contract lists. When it does, it is a new study with its
+  own specification.
