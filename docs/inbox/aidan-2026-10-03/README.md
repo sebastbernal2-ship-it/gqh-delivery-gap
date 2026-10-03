@@ -34,3 +34,7 @@ The source transcripts include casual unrelated conversation, account discussion
 speculation. This is a faithful research synthesis, not a verbatim transcript. No credentials,
 private personal exchanges, local machine paths or unsupported fund-position claims are published.
 The notes describe historical beliefs at capture time; future changes should add dated corrections.
+
+## Latest discussion update
+
+[Update 02](update-02.md) records the later intraday preference, data requirements before vendors, reported pilot/access progress, timestamp uncertainty and gradual-sizing proposal. Read it before treating the earlier ten-session candidate as the current horizon.

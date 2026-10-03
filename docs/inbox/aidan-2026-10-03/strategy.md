@@ -64,3 +64,7 @@ Validation protocol is governed by docs/brief.md. Keep final chronological OOS u
 chronological development folds, remove label overlap across boundaries, and group common shocks.
 The regime study reports conditional performance; random balanced regime samples are not a substitute
 for deployment testing. Fit regime definitions and thresholds within each historical training window.
+
+## Later discussion, 2026-10-03
+
+The expanded transcript favors intraday holding over very short execution horizons. This is a change from the earlier ten-session candidate above, not yet a frozen parameter. See [Update 02](update-02.md) for the sizing proposal and decisions still required. The economic mechanism remains under test.
