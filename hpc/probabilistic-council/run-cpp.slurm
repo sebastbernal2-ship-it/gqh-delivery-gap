@@ -9,6 +9,7 @@
 
 set -euo pipefail
 g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -pthread \
-    -I cpp/include cpp/src/council.cpp cpp/examples/synthetic_pilot.cpp \
+    -I cpp/include cpp/src/council.cpp cpp/src/jevlike_tiny.cpp \
+    cpp/examples/synthetic_pilot.cpp \
     -o council-cpp-pilot
 ./council-cpp-pilot

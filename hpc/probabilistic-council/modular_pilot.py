@@ -170,7 +170,7 @@ def main() -> None:
             "distribution": [round(value, 8) for value in ablation_prediction.probabilities],
         },
         "limitations": [
-            "synthetic fixture only; no market observations, Laya weights, or financial target",
+            "synthetic fixture only; no market observations, JevLike weights, or financial target",
             "categorical distributions; joint outcomes require a declared finite joint state space",
             "temperature calibration and Brier reliability weights are baselines, not production defaults",
             "linear and logarithmic opinion pools are alternatives; neither assumes independent votes",
