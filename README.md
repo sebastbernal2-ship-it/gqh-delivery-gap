@@ -48,6 +48,14 @@ Full statement in `docs/01-idea.md`. Execution plan in `docs/02-system.md`.
 5. Every number in the note comes from a file in `results/`.
 6. Never open the out-of-sample window except on the one run that reports it.
 
+### Branches
+
+Default: commit straight to `main` inside the paths you own. Four people, one writer per path,
+so `main` stays runnable and the repro check keeps working.
+
+Use a branch only for something that would break `make check` or `make all` on `main`, and merge
+it the same night. A branch that lives longer than a night is a branch that loses to the deadline.
+
 ## New device, first time here
 
 ```
