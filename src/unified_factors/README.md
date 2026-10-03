@@ -156,3 +156,8 @@ cost-aware sizing remain later comparisons. The existing synthetic fixture has c
 it is an engineering/control case where GARCH need not outperform simpler estimates.
 
 Reference: [arch GARCH and forecasting documentation](https://arch.readthedocs.io/en/latest/univariate/forecasting.html).
+
+## Verified warehouse inventory
+
+See [the Snowflake audit](audit/README.md) for live coverage, availability and reconciliation checks,
+read-only SQL and workflow receipts. Raw ingestion is not yet a validated factor input panel.
