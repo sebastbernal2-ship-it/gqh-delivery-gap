@@ -30,65 +30,77 @@ The scan's window module already supported opening its holdout, and the scan nev
 protocol file said the flag would be added when the test ran. It is added now, and it changes no threshold, no
 horizon, no pair and no statistic: it only lets the declared months into the measurement.
 
-## Results
+## Results, reported in the order the method requires
 
-Filled in below, then committed with the raw output alongside.
+### 1. Study one, the aggregate capacity strategy
 
-### 1. Study one, the aggregate capacity strategy, 24 month holdout
+**Mechanism statement.** The candidate says that a published promise for new capacity is revised, that the
+revision changes when revenue arrives for the firm that made the promise, and that the firm's price should move
+when the revision becomes public. Its counterparty claim is that the firm's own investors underreact to a
+revision published in a monthly inventory.
 
-`python scripts/run_capacity_strategy.py --open-sealed`, raw output in `results/sealed-strategy.txt`.
+**Identification statement.** What the holdout can support: the revision series is a valid point in time panel
+built from monthly vintages, its label is the promise moving, and both were fixed before this test. What it
+cannot support: any claim about who was forced to trade. No constrained counterparty is measured in this design.
+The transfer is assumed, not observed, so the test can only falsify a return claim, never confirm a mechanism.
 
-| signal | n | gross | net 10bp | net 20bp | annualised | Sharpe | max drawdown | hit rate |
-|---|---|---|---|---|---|---|---|---|
-| next_year | 98 | +0.38% | +0.16% | -0.05% | +2.0% | 0.10 | -37.8% | 51% |
-| current_and_next | 98 | -0.06% | -0.29% | -0.52% | -3.4% | -0.17 | -48.2% | 45% |
-| three_year | 98 | +0.12% | -0.10% | -0.33% | -1.2% | -0.06 | -42.9% | 47% |
+**Falsifier, baseline and costs, stated before the returns.** The falsifier is no net return after costs in an
+unopened window. The baseline is the same signal in development, which was null. Costs are charged on both legs
+at ten and at twenty basis points per leg, with turnover measured from position flips.
 
-The pre-declared threshold plateau, on the balanced signal: trading only the largest third of revisions gives
-gross +1.11%, net +0.85% at ten basis points and +0.58% at twenty, with a Sharpe of 0.43 over 33 months.
+**The numbers, as the tradability gate.** Returns table, last on purpose:
 
-**Verdict: null, as declared.** The best full-history signal earns +0.16% a month net at the low cost assumption
-and loses money at the high one, with a Sharpe of 0.10 and a 38% drawdown. The one cell that looks alive is a
-subset of 33 months chosen by revision magnitude, it was visible in development before the holdout was opened,
-and a subset cell cannot be promoted on 33 observations. It would need a fresh holdout, which this study cannot
-provide. It is recorded as a hypothesis with no evidence behind it, nothing more.
+| signal | n | gross | net 10bp | net 20bp | annualised | max drawdown | hit rate |
+|---|---|---|---|---|---|---|---|
+| next_year | 98 | +0.38% | +0.16% | -0.05% | +2.0% | -37.8% | 51% |
+| current_and_next | 98 | -0.06% | -0.29% | -0.52% | -3.4% | -48.2% | 45% |
+| three_year | 98 | +0.12% | -0.10% | -0.33% | -1.2% | -42.9% | 47% |
 
-### 2. Study one, the association scan, same holdout
+**Verdict at the tradability gate: failed.** The best signal clears single digit costs by sixteen basis points a
+month and fails at double that cost, with a thirty eight percent drawdown. The one subset that clears both cost
+assumptions, the largest third of revisions, is thirty three months chosen by magnitude and was already visible
+in development, so it needs a fresh holdout this study cannot give it. It stays a hypothesis with no evidence.
 
-Raw output `results/scan-mechanism-sealed.txt`, against the development only run in `results/scan-mechanism-dev.txt`.
+### 2. Study one, the association scan
+
+**Mechanism statement.** The scan claims nothing about a counterparty. It measures whether two series move
+together more than a generated null, which is a relation and not an edge, and it is reported only because the
+protocol declared it.
+
+**Identification statement.** A survivor is a candidate for a mechanism conversation. The line that matters is
+the cross family count, because two legs inside one family share constituents and are one risk viewed twice.
+
+**Falsifier, baseline and costs.** Falsifier: no cross family survivor beyond the expected count. Baseline: the
+same scan in development only.
 
 | run | pairs | nominal survivors | expected by chance | within one family | across families |
 |---|---|---|---|---|---|
-| development only | 51 | 8 | 2.6 | 4 (expected 0.5) | **0 (expected 0.9)** |
-| holdout opened | 62 | 12 | 3.1 | 6 (expected 0.8) | **2 (expected 1.1)** |
+| development only | 51 | 8 | 2.6 | 4 (expected 0.5) | 0 (expected 0.9) |
+| holdout opened | 62 | 12 | 3.1 | 6 (expected 0.8) | 2 (expected 1.1) |
 
-**Verdict: null on the line that matters.** The headline count rises with the opened months, but the
-cross-family count is 2 against 1.1 expected, and every survivor in the list is a commodity or basket pair whose
-legs share constituents: buildout against scarcity, copper against uranium, gas against the promise level. Those
-are two views of one risk, which the scan's own family split already separates out.
+**Verdict: no cross family association beyond the null.** The headline count rises with the opened months and
+every survivor is a commodity or basket pair whose legs share constituents.
 
-### 3. Study two, the compute era, six month holdout
+### 3. Study two, the compute era
 
-Raw output `results/scan-compute-sealed.txt`, against `results/scan-compute-dev.txt`.
+**Mechanism statement.** Same as above, a relation rather than an edge, measured separately because the compute
+archive defines its own history.
+
+**Falsifier, baseline and costs.** Falsifier: no cross family survivor beyond the expected count. Baseline: the
+same scan in that study's development window.
 
 | run | pairs | nominal survivors | expected by chance | within one family | across families |
 |---|---|---|---|---|---|
-| development only | 62 | 6 | 3.1 | 1 (expected 0.8) | **3 (expected 1.1)** |
-| holdout opened | 62 | 7 | 3.1 | 3 (expected 0.8) | **2 (expected 1.1)** |
+| development only | 62 | 6 | 3.1 | 1 (expected 0.8) | 3 (expected 1.1) |
+| holdout opened | 62 | 7 | 3.1 | 3 (expected 0.8) | 2 (expected 1.1) |
 
-**Verdict: null.** The compute era development run's three cross-family survivors do not survive the holdout as
-a group: two remain, against 1.1 expected, and the within-family count rises instead.
+**Verdict: no cross family association beyond the null.** The three development survivors do not hold up.
 
-## What the sealed test establishes
+## What the sealed test establishes, in mechanism terms
 
-Three declared tests, opened once, with the designs frozen and the expectation stated before they ran. All three
-are null. The strategy does not clear costs in its own holdout, and neither study produces cross-family
-association beyond what the null produces.
-
-The honest consequence is also the useful one: the mechanism and its measurement stand, the tradable link does
-not exist in this data, and the one cell that looks alive is a subset that would need a holdout this project
-cannot grant it. Both holdouts are now spent and are closed permanently. Nothing here can be re-run for a second
-look, and nothing was tuned after the fact.
+Both holdouts are now spent. Three declared tests are null. The mechanism and its measurement stand. The tradable
+link does not exist in this data, and the missing piece is the counterparty: no design tested here measured a
+forced payer, so nothing here could have found the edge even if one exists.
 
 ## Record
 
@@ -98,5 +110,5 @@ look, and nothing was tuned after the fact.
 | authorization | 2026-10-03 |
 | tests run | three, as declared above |
 | holdouts spent | study one 2022-10 to 2024-09, study two 2024-04 to 2024-09 |
-| result | null in all three |
+| result | null in all three, reported with the mechanism first and the returns last |
 | further openings | none permitted |
