@@ -91,6 +91,10 @@ Nothing here depends on a person remembering a command.
    construction, so an untagged memory is shared without anyone tagging anything. If the store
    lives outside the repo, the default is deny and only project-tagged entries are shared.
 
+4. **Unattended, optional.** `make schedule` installs a timer on this machine that runs
+   `scripts/autoshare.sh` every 15 minutes. That script commits and pushes only
+   `memory/shared.json` and `memory/SHARED.md`, so it can never sweep up work in progress.
+
 Redaction and the credential rules apply in both modes.
 
 ### Why not `hippo import --file`
@@ -143,7 +147,7 @@ the same memory as every other device.
 
 ## Sync protocol
 
-1. `make sync` before you start. Pull before you type.
+1. `make sync` before you start. Pull before you type. Shared memory arrives with it.
 2. Stay inside the paths you own. `OWNERS.md` is the authority.
 3. `make save M="what changed"` when a unit of work is done. One logical change per commit.
 4. If you changed a `results/` file, run `make check` first.

@@ -57,7 +57,7 @@ Never commit credentials, absolute local paths, or anything under `data/`.
 <!-- hippo:start -->
 ## Project Memory (Hippo)
 
-At the start of every task, run:
+At the start of every session, run:
 ```bash
 hippo context --auto --budget 1500
 ```
@@ -73,9 +73,10 @@ On task completion:
 hippo outcome --good
 ```
 
-When Hippo's Codex wrapper is installed, session-end capture runs automatically.
-If the wrapper is not installed, capture a brief summary manually:
+When ending a session, capture a brief summary:
 ```bash
 hippo capture --stdin <<< '<decisions, errors, lessons — 2-5 bullets>'
 ```
+
+For full integration, copy the hippo-memory Pi extension to `~/.pi/agent/extensions/hippo-memory/`.
 <!-- hippo:end -->
