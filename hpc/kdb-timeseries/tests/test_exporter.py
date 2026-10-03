@@ -40,7 +40,7 @@ class ExporterTests(unittest.TestCase):
 
     def test_rejects_float_that_cannot_be_represented_at_scale(self):
         with self.assertRaisesRegex(ValueError, "represented exactly"):
-            exporter.to_micro("0.000000001", "price")
+            exporter.to_scaled_e8usd("0.000000001", "price")
 
     def test_rejects_bad_ohlc(self):
         rec = self._record(payload_json={"ticker": "PWR", "bar_time_utc": "2026-01-02T00:00:00Z",
