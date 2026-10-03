@@ -27,32 +27,45 @@ selection was not browser-verified. Do not infer a fixed per-stock price or buy 
 
 ## Practical free shortlist
 
-### Alpaca Basic — documentation-verified
+### Equity-provider result — Alpaca leads on access, Tiingo Starter is disqualified for shared storage
 
-Official plan advertises stock historical data since 2016 and 200 historical calls/minute.
-The FAQ explicitly allows historical SIP queries without subscription when `end` is at least
-15 minutes old. Set `feed=sip`; default/live free IEX is a different coverage set. This supports
-historical bars, trades and top-of-book quotes, not full depth or order identities.
+**No authenticated API sample has been fetched yet.** We checked process-environment *names only*;
+no Tiingo or Alpaca credentials are present in this shell, and the open browser has neither provider
+session. Thus ticker coverage/date ranges remain untested; do not call either source downloaded or
+load provider data into Snowflake/TigerData yet.
 
-Next check: participant paper/data credentials, PWR/SPY old daily bars and a small 2018 quote/trade
-window; inspect entitlement responses, returned dates and all pagination. Do not promise all
-inactive/OTC symbols. An older feed overview has ambiguous free-feed wording; the explicit FAQ
-is the basis here, and an authenticated test is still necessary.
+**Alpaca Basic is the next account-level probe.** Current official docs describe the free Basic
+plan as historical equity data since 2016, 200 historical API calls/minute, and live IEX. The FAQ
+says historical SIP requests are available without the paid plan when the requested end is at least
+15 minutes old; SIP is the consolidated multi-exchange feed, unlike IEX-only data. Bars support
+adjustment modes and paginated results, where `limit` is total points and every `next_page_token`
+must be followed. A probe should set `feed=sip`, `timeframe=1Day`, and fetch per-symbol 2016-start,
+2018, 2020, and latest windows for PWR/ETN/EME/DLR/SPY; compare against `feed=iex` only as a
+coverage diagnostic. Capture bars count, first/last date, duplicates, gaps, and adjustment fields.
+The API requires key+secret headers. Alpaca's basic market-data terms are framed for nonprofessional
+individuals and prohibit reproducing/distributing market data without written consent, so first
+confirm that sharing a research copy among this hackathon team and persisting it in shared DBs is
+allowed. Until that is confirmed, no shared warehouse load.
 
-Sources: [plan](https://docs.alpaca.markets/us/docs/about-market-data-api),
-[SIP FAQ](https://docs.alpaca.markets/us/docs/market-data-faq),
-[quotes/pagination](https://docs.alpaca.markets/us/reference/stockquotes-1).
+Sources: [Basic plan](https://docs.alpaca.markets/us/v1.1/docs/about-market-data-api),
+[historical SIP delay rule](https://docs.alpaca.markets/us/docs/market-data-faq),
+[bars and pagination](https://docs.alpaca.markets/us/v1.1/reference/stockbars),
+[customer agreement](https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf).
 
-### Tiingo EOD — documentation-verified
+**Tiingo Starter has attractive EOD coverage but is not suitable for our team database under the
+published terms.** Tiingo advertises 30+ years of EOD history (ticker-specific metadata gives the
+actual start/end), 500 unique symbols/month, 50 requests/hour, 1,000/day and 1 GB/month; endpoint
+fields include raw and adjusted OHLCV plus split/dividend adjustments. But the current Terms say
+Starter/trial users may not write, save, archive, back up or otherwise retain Tiingo data in
+persistent/durable storage, and all API data is for internal consumption; use on behalf of an
+organization requires a business account. This conflicts with the intended durable Snowflake /
+TigerData team copy. Do not choose the free Starter tier for the project unless Tiingo gives written
+permission or a suitable commercial license is obtained. Its data may be examined only transiently
+under the Starter terms, which would not solve our reproducible/shared backtest need.
 
-Dataset advertises history reaching 1962 for some securities; actual dates vary by ticker.
-Free plan: 50 requests/hour, 1,000/day, 1 GB/month. Raw/adjusted OHLCV, dividends and splits
-are suitable for a small daily equity panel. Query metadata for each security. This is not
-intraday depth or a guaranteed survivorship-free universe. Individual internal-use licensing
-requires review before team distribution or public raw-data display.
-
-Sources: [product/limits](https://www.tiingo.com/products/end-of-day-stock-price-data),
-[metadata/fields](https://www.tiingo.com/documentation/end-of-day).
+Sources: [pricing and limits](https://app.tiingo.com/pricing/),
+[EOD fields and metadata](https://www.tiingo.com/documentation/end-of-day),
+[Terms of Use, especially Sections 4 and 7](https://app.tiingo.com/tos/).
 
 ### SEC EDGAR — documentation-verified; example text inspected
 
