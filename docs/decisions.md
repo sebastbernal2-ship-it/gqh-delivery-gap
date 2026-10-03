@@ -552,3 +552,26 @@ bars by ticker rather than graph assets.
 **Housekeeping.** The unzipped spreadsheet at the graph repo root is gone. That checkout is again carrying
 uncommitted graph work (now committed as `b9e25f6`) and roughly 180 untracked entries, so the unlanded-work
 risk stands until its owner commits the engine and the research reports.
+
+---
+
+## 2026-10-03: The first real measurement: reported work, and the lag to make it public
+
+**What was built.** A fact panel over SEC XBRL company facts, joined to the acceptance timestamp of the
+filing that reported each number. That join is the whole trick: every XBRL fact names its accession, so a
+number can be tied to the moment it became public without parsing prose.
+**Numbers, development window only.** PWR remaining performance obligations: 45 facts, 2018 to 2024,
+25 period-over-period changes, 10 of them falls, median lag **56 days** from period end to public. ETN
+remaining obligations: 15 facts, 14 changes, 1 fall, median lag **33 days**. PWR unapproved change orders:
+26 facts, 2013 to 2017, 14 changes, 7 falls, median lag **94 days**. Sixteen facts fall inside the sealed
+window and are excluded from the summary; 28 more are excluded for having no filing row in the register.
+**Caveat that keeps this honest.** Remaining performance obligations fall as work is performed, so a fall
+is **not** a delay. It is a revision to the disclosed book, and it names no project. The delay-adjacent
+field is unapproved change orders, which is the closest structured proxy for disputed or slipped scope,
+and PWR stops tagging it after 2017.
+**Why this still matters.** The lag is the strategy's whole premise, and it is now measured rather than
+asserted: a period-end balance becomes public between one and three months later, depending on the field.
+That is the window in which a revision can be read before it is broadly reflected.
+**Bug worth remembering.** Reading the register back from CSV turned `"False"` into a truthy string, so the
+sealed window was briefly summarised as development. A test now pins that behaviour, because a sealed leak
+is silent and fatal to the submission.
