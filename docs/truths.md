@@ -395,6 +395,24 @@ percent at sixty, with tercile spreads negative in 56, 67 and 56 percent.
 **Consequence**: the charge is a candidate, not an edge. Further cuts of this panel are not evidence; the
 next real test is a disjoint sample with a capacity and cost check.
 
+## T32. The intensity charge carries a modest, cost surviving strategy with real but small capacity
+
+**Statement**: the declared specification (twenty day horizon, terciles, equal weight, group neutral, ten
+million dollar volume floor, filing clock, base costs) returns 13.1 percent annualised net against 15.9
+gross across 231 cohorts from 2017-08-04 to 2026-10-02, with annual volatility 34.3 percent, Sharpe 0.381,
+profit factor 1.111 and a maximum drawdown of -65.8 percent. Early (through 2024) it is 8.4 percent at
+Sharpe 0.28; late (2025 onward) 32.7 percent at 0.676. Doubled costs leave 10.2 percent at Sharpe 0.299.
+Capacity at one percent participation of the binding name is 3.87 million dollars median and 1.31 million
+at the tenth percentile; at five percent, 19.4 million. A trailing volatility overlay cut the Sharpe to
+0.174 and is recorded as rejected.
+**Evidence**: `results/intensity-strategy.json`; `scripts/run_intensity_strategy.py`;
+`docs/theses/t-intensity-charge.md`; `docs/chains/t-intensity-charge.jsonl`.
+**Scope**: 58 names, development only, both sealed windows spent, one price source, borrow cost unmeasured;
+the fragility result (T31) remains the main threat.
+**Consequence**: the strategy is the first chain in this repository with a measured P&L role, and its
+binding limits are risk (drawdown) and capacity, not the signal. The next declared iterations are a
+cluster capped risk overlay, a disjoint name test, and borrow data.
+
 ---
 
 # What these truths are pointing at

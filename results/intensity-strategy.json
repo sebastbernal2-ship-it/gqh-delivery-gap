@@ -1,0 +1,66 @@
+{
+ "status": "development only; both sealed windows spent; protocol docs/theses/t-intensity-charge.md",
+ "min_adv": 10000000.0,
+ "base": {
+  "config": {
+   "horizon": 20,
+   "quantile": "third",
+   "weight": "equal",
+   "neutral": "group",
+   "cost_mult": 2.0,
+   "target_vol": null
+  },
+  "cohorts": 231,
+  "names_median": 14,
+  "metrics": {
+   "days": 2308,
+   "total_return": 0.4951,
+   "annual_return": 0.1024,
+   "annual_vol": 0.3428,
+   "sharpe": 0.299,
+   "gross_annual_return": 0.1589,
+   "hit_rate": 0.334,
+   "profit_factor": 1.086,
+   "max_drawdown": -0.6689
+  },
+  "early": {
+   "days": 1865,
+   "total_return": 0.0897,
+   "annual_return": 0.057,
+   "annual_vol": 0.2996,
+   "sharpe": 0.19,
+   "gross_annual_return": 0.1111,
+   "hit_rate": 0.318,
+   "profit_factor": 1.056,
+   "max_drawdown": -0.6183
+  },
+  "late": {
+   "days": 443,
+   "total_return": 0.372,
+   "annual_return": 0.2939,
+   "annual_vol": 0.484,
+   "sharpe": 0.607,
+   "gross_annual_return": 0.3602,
+   "hit_rate": 0.4,
+   "profit_factor": 1.15,
+   "max_drawdown": -0.4033
+  },
+  "window": {
+   "from": "2017-08-04",
+   "to": "2026-10-02"
+  },
+  "capacity_1pct_median": 3870636.0,
+  "capacity_5pct_median": 19353181.0,
+  "capacity_1pct_p10": 1313652.0,
+  "entry_cost_bps_median": 11.15,
+  "sample_cohort": {
+   "date": "2017-08-04",
+   "names": 4,
+   "longs": 2,
+   "shorts": 2,
+   "entry_cost_bps": 10.0,
+   "capacity_1pct": 3351985.7600000002,
+   "capacity_5pct": 16759928.8
+  }
+ }
+}

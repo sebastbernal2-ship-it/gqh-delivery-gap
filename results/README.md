@@ -145,3 +145,7 @@ generated-path: results/intensity-robustness-study.json
 Produced by `scripts/fetch_universe_volume.py`:
 
 generated-path: results/universe-adv-monthly.csv
+
+Produced by `scripts/run_intensity_strategy.py`:
+
+generated-path: results/intensity-strategy.json
