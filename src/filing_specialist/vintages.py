@@ -102,6 +102,7 @@ def build_vintages(rows: list[dict], minimum_history: int = MINIMUM_HISTORY) -> 
         record.update({
             "ticker": observation.ticker,
             "quarter": observation.quarter,
+            "availability": observation.availability.isoformat(),
             "expectation_kind": expectation["kind"],
             "expectation_status": expectation["status"],
             "history_count": expectation["count"],

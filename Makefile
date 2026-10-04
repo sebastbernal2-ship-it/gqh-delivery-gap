@@ -125,6 +125,7 @@ test:
 	@python3 tests/test_filing_text.py
 	@python3 tests/test_filing_options.py
 	@python3 tests/test_rpo_vintages.py
+	@python3 tests/test_rpo_specialist.py
 
 # Fit the delivery model: what moves a promise, controls first then factors.
 delivery-model:

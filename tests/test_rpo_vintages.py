@@ -82,6 +82,16 @@ def test_rows_are_skipped_with_a_reason_and_never_faked():
     assert drops == {"no_ticker": 1, "no_change": 1, "no_availability": 1}
 
 
+def test_the_output_carries_the_decision_clock():
+    rows = [row("T", "2022-03-31", 10.0, "2022-05-01T00:00:00+00:00"),
+            row("T", "2023-03-31", 20.0, "2023-05-01T00:00:00+00:00")]
+    vintages, _ = build_vintages(rows)
+    for item in vintages:
+        assert item["availability"], "the availability column must never be empty"
+    assert vintages[0]["availability"] == "2022-05-01T00:00:00+00:00"
+    assert vintages[1]["availability"] == "2023-05-01T00:00:00+00:00"
+
+
 def test_relative_surprise_is_null_without_a_previous_value():
     rows = [row("T", "2022-03-31", 10.0, "2022-05-01T00:00:00+00:00"),
             row("T", "2023-03-31", 20.0, "2023-05-01T00:00:00+00:00", previous=0.0)]

@@ -503,3 +503,21 @@ dislocation net of costs at zero latency advantage, which is the clause every ed
 
 No edge is established tonight. What is established is where the edge has to be, and that is worth
 more than a story about the last five years going up.
+
+## T36. The RPO expectation gap is partly predictable from an issuer's own history
+
+**Statement**: with point-in-time vintages for 2,803 measured RPO disclosures across 236 issuers, a
+multinomial logistic regression on 17 features that are strictly earlier than the decision beats the
+training prevalence on the later rows of a chronological split: log loss 1.473 against 1.609, Brier
+0.751 against 0.800, and accuracy 0.293 against 0.197 over 833 test rows from 2023-10-25 onward. The
+signal is weak in absolute terms, about 29 percent accuracy over five balanced classes, so this is a
+measured partial forecast and not a strong one. The declared falsifier was "the fitted model does not
+beat the training prevalence on the later rows"; it did beat it. This forecasts the expectation gap,
+not a return, and no cost or trading claim follows.
+**Evidence**: `results/rpo-specialist-scores.json`; `results/rpo-vintages.csv`;
+`scripts/run_rpo_specialist.py`; `docs/plan/rpo-specialist.md`.
+**Scope**: 236 issuers, 2,782 usable rows, end-of-day availability clocks for most disclosures,
+current-ticker identity, development only, both sealed windows spent.
+**Consequence**: the expectation channel has a point-in-time, large-sample foundation. The next steps
+are the filing-joined version for the four candidate firms, the text specialist on the same rows, and
+carrying the forecast into the council as one specialist rather than a standalone claim.

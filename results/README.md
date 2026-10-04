@@ -213,3 +213,7 @@ generated-path: results/filing-text-scores-frozen.json
 Produced by `scripts/build_rpo_vintages.py`:
 
 generated-path: results/rpo-vintages.csv
+
+Produced by `scripts/run_rpo_specialist.py`:
+
+generated-path: results/rpo-specialist-scores.json
