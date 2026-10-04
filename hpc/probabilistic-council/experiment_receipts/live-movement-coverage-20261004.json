@@ -1,0 +1,26 @@
+{
+  "adapter_sha256": "4aafa2767c035b7ede9ae9da55d9e54d5ae8e5aed208058940e5bc3083163b7d",
+  "blockers": [
+    "specialist_calibration: no eligible cases",
+    "gate_fit: no eligible cases",
+    "pool_calibration: no eligible cases",
+    "evaluation: no eligible cases"
+  ],
+  "cache_created": false,
+  "cases": 2,
+  "coverage": [
+    {
+      "books": 330,
+      "cases": 2,
+      "exclusions": {},
+      "role": "training",
+      "segment_id": "9033935651ece6fb7d36b8e5abe0ed15d185cd5e0626a31123ceffb5883da5bb:1",
+      "session": "2026-10-04",
+      "trades": 145
+    }
+  ],
+  "eligible_for_performance_claim": false,
+  "plan_sha256": "f3e949bba1d424b9c3cb2beb3dcfb5e7e4dd6cf9d5b986f60f2a4a8490ac3481",
+  "schema_version": "execution-live-risk-coverage-v1",
+  "scope": "development_only"
+}

@@ -1,0 +1,696 @@
+{
+  "artifacts": {
+    "masked_pretrained.pt": "9e575f330a0fc4771e590100a287de0014735b20faeb4ed3c4d8a15a6e5320b6",
+    "masked_pretrained_evaluation.npy": "27543b5278e304b4f5b462cc71b41ce4b47f79553d4819918ec45abf34be29b1",
+    "scratch.pt": "d179cb048f4521a82bbb6b99a130af8579173c206baf1186297cd01b49eae673",
+    "scratch_evaluation.npy": "80cfbb956a2a7b27a539455f6e9e3619894de26298fd53ad2bcfcd4fe813b0ef"
+  },
+  "calibration": {
+    "masked_pretrained": [
+      {
+        "log_loss_after": 1.2775152778468506,
+        "log_loss_before": 1.416608212242393,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.4182664749694494,
+        "log_loss_before": 1.4731235413386827,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.3171183887762308,
+        "log_loss_before": 1.4373639164297687,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.5252211710842374,
+        "log_loss_before": 1.5526002845847071,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.5594911921259544,
+        "log_loss_before": 1.5594911868041115,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 1.0
+      },
+      {
+        "log_loss_after": 1.2827071312137144,
+        "log_loss_before": 1.416167359226966,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.5533113353867425,
+        "log_loss_before": 1.556859287106896,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.8
+      },
+      {
+        "log_loss_after": 1.4797320687752606,
+        "log_loss_before": 1.5329178130775023,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.6373108151076603,
+        "log_loss_before": 1.707847354682258,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 3.0
+      },
+      {
+        "log_loss_after": 1.1603873092284345,
+        "log_loss_before": 1.3501466682657408,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.1417822514973397,
+        "log_loss_before": 1.3371940432459737,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.6466435314954666,
+        "log_loss_before": 1.7270130434552178,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 3.0
+      }
+    ],
+    "scratch": [
+      {
+        "log_loss_after": 1.2488627676516357,
+        "log_loss_before": 1.4006376586103728,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.3889620814933903,
+        "log_loss_before": 1.4577207805717325,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.3426650306339418,
+        "log_loss_before": 1.4518494646286346,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.5050038068951552,
+        "log_loss_before": 1.5424842471551894,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.5623283864704045,
+        "log_loss_before": 1.5623284141439906,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 1.0
+      },
+      {
+        "log_loss_after": 1.197937739111167,
+        "log_loss_before": 1.3709769533748595,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.5409475359418858,
+        "log_loss_before": 1.548065844219359,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.65
+      },
+      {
+        "log_loss_after": 1.4954767516823242,
+        "log_loss_before": 1.541094919418122,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.6375291585251535,
+        "log_loss_before": 1.7076104592729813,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 3.0
+      },
+      {
+        "log_loss_after": 1.1504696059760573,
+        "log_loss_before": 1.345587174599515,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.1418963825180042,
+        "log_loss_before": 1.339936583480844,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 0.5
+      },
+      {
+        "log_loss_after": 1.6444732337184116,
+        "log_loss_before": 1.7205787936351256,
+        "method": "grid_minimum_multiclass_log_loss",
+        "sample_count": 7,
+        "temperature": 3.0
+      }
+    ]
+  },
+  "code_sha256": {
+    "execution_dataset.py": "4e2934c05e397edfe9265ec3d72255c9a9f3128078b8cfb930af9f6f88152e60",
+    "execution_model.py": "f6202858181ec7afe1674c0637f6f296d0ca5df2044057a45e92fc75b6655700",
+    "execution_train.py": "f64f1a1b90ef56b77d21fca73d8ce73ad211015e507aa2182dca6cc4a6d094de"
+  },
+  "dataset_manifest": {
+    "adapter_sha256": "4e2934c05e397edfe9265ec3d72255c9a9f3128078b8cfb930af9f6f88152e60",
+    "adverse_edges_bps": [
+      0.5,
+      1.0,
+      2.0,
+      5.0
+    ],
+    "array_sha256": {
+      "clocks.npy": "0ea87e2b5cdd58f2f77f6e5888f171a0c689393d2bf1ae2536b7ca46a34e83a2",
+      "features.npy": "ee61fbba4a282488c105cc8351e2cdbcc3e4fd9be1b58eb8fda403cb60cacde1",
+      "roles.npy": "9f4b9e11a8cb8951b2463f02e80bc951bf2a36b0a2aecdf9a30180f3abe40ac1",
+      "targets.npy": "6bdae89f7f89eb0abf8de12fbf6420f92107bac35645bd5a95ee01ad048cc424"
+    },
+    "availability_basis": "retrospective_assumption",
+    "causal_adapter_sha256": "cfbbc1f1501f6edce8ac0d34bada2f5c2c381e18402d56600ef7cf222eb04b67",
+    "feature_order": [
+      "bid_offset_bps_1",
+      "bid_depth_fraction_1",
+      "ask_offset_bps_1",
+      "ask_depth_fraction_1",
+      "bid_offset_bps_2",
+      "bid_depth_fraction_2",
+      "ask_offset_bps_2",
+      "ask_depth_fraction_2",
+      "bid_offset_bps_3",
+      "bid_depth_fraction_3",
+      "ask_offset_bps_3",
+      "ask_depth_fraction_3",
+      "bid_offset_bps_4",
+      "bid_depth_fraction_4",
+      "ask_offset_bps_4",
+      "ask_depth_fraction_4",
+      "bid_offset_bps_5",
+      "bid_depth_fraction_5",
+      "ask_offset_bps_5",
+      "ask_depth_fraction_5",
+      "spread_bps",
+      "flow_5s",
+      "log_volume_5s",
+      "book_age_s"
+    ],
+    "horizons": [
+      5,
+      15,
+      60
+    ],
+    "label_audit_sha256": "2de141f770f7883482ef8b112d8a536be3f97326609e413370b8e9bc6ce4b111",
+    "limitations": [
+      "previously inspected development acquisition, not competition holdout",
+      "recorded availability proxy and trade completeness unverified",
+      "observed snapshot excursions only; no own impact, fills, costs or joint path claim"
+    ],
+    "merge_adapter_sha256": "a4f1b06fe284e4fa828c8dd7a094335cedeb4f141652ad81c4b2d9dd26da9d0f",
+    "panel_rows": 41,
+    "partitions": [
+      "training",
+      "specialist_calibration",
+      "gate_fit",
+      "pool_calibration",
+      "evaluation"
+    ],
+    "plan_sha256": "a1cd72fbec459a0365050b2c3614d5daa526b3249a07adf4b0e536b7a7299fcd",
+    "scope": "development_only",
+    "sequence_steps": 16,
+    "session_coverage": {
+      "2025-12-08": {
+        "cases": 6,
+        "exclusions": {
+          "stale book": 44
+        }
+      },
+      "2025-12-09": {
+        "cases": 7,
+        "exclusions": {
+          "stale book": 1
+        }
+      },
+      "2025-12-10": {
+        "cases": 7,
+        "exclusions": {
+          "stale book": 1
+        }
+      },
+      "2025-12-20": {
+        "cases": 6,
+        "exclusions": {
+          "stale book": 2
+        }
+      },
+      "2025-12-21": {
+        "cases": 7,
+        "exclusions": {
+          "stale book": 1
+        }
+      },
+      "2025-12-24": {
+        "cases": 8,
+        "exclusions": {}
+      }
+    },
+    "sessions": [
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-10",
+      "2025-12-10",
+      "2025-12-10",
+      "2025-12-10",
+      "2025-12-10",
+      "2025-12-10",
+      "2025-12-10",
+      "2025-12-20",
+      "2025-12-20",
+      "2025-12-20",
+      "2025-12-20",
+      "2025-12-20",
+      "2025-12-20",
+      "2025-12-21",
+      "2025-12-21",
+      "2025-12-21",
+      "2025-12-21",
+      "2025-12-21",
+      "2025-12-21",
+      "2025-12-21",
+      "2025-12-24",
+      "2025-12-24",
+      "2025-12-24",
+      "2025-12-24",
+      "2025-12-24",
+      "2025-12-24",
+      "2025-12-24",
+      "2025-12-24"
+    ],
+    "sides": [
+      "buy",
+      "sell"
+    ],
+    "sources": [
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1765199828.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-08",
+        "sha256": "b263e5548bf5218ebc6717006b96a9637e53e9386ca3628ac7fd9e596793f531",
+        "size": 49262665
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1765202863.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-08",
+        "sha256": "1c782b8455d0356949280625319e9f78aa7d8189ebc2f813c040555ee936646b",
+        "size": 51341889
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1765199829.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-08",
+        "sha256": "74e006611b358974ec8491d6729d512a016afc64698e3d0c6b3b2181c750e256",
+        "size": 1616725
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1765202864.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-08",
+        "sha256": "d3d71e9b1c4ff6ee25a624ce3b47ba8afdec337c2e070e8ea11db39e81e0ff0f",
+        "size": 669796
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1765238485.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-09",
+        "sha256": "2fcde7b0777451157bfc71e774e117ec8e333a0b1d06ae957d92ca854f26b1dd",
+        "size": 51258750
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1765238789.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-09",
+        "sha256": "0d9bc46889b7fd657572e55cdd435fef2336854b48a034b888ff3a67987de8a4",
+        "size": 51930361
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1765238486.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-09",
+        "sha256": "103f688819042c1a3b8ef536fa01fae71f9768aab3c050025201cae9d90c9db3",
+        "size": 592507
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1765238790.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-09",
+        "sha256": "53629401809b6206b4e28b317d6b4c981c092a621017aac6c9205f78cfecca12",
+        "size": 621387
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1765325014.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-10",
+        "sha256": "d1ac81a439fb9a2d772a3793ff01c2f996c444a4ac00ec1f5a7ebbf533f810c6",
+        "size": 51762471
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1765325319.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-10",
+        "sha256": "7c3fa09e147c39e82aa8c9df6da170d8ff99dc14cef0d6226f849911348a34db",
+        "size": 51907498
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1765325015.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-10",
+        "sha256": "ebb269aa434f93bc106428fffa5aa295cbb7f458108f7d7e120e5f658fa8ed5b",
+        "size": 949311
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1765325320.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-10",
+        "sha256": "390a683026964618fbb57b6be929b60c30769c9fd8c22a042296f008d1f48d10",
+        "size": 659730
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1766263240.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-20",
+        "sha256": "0efebda70568e76f7ad87470f2b1e05f521b09b8e329d6307d2105d9cbf6ec99",
+        "size": 50413572
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1766263557.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-20",
+        "sha256": "eba39df88d76251281c6afd0a189517a851a9d81d90118e7d1eab4c1e60f9c68",
+        "size": 54838047
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1766263246.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-20",
+        "sha256": "d84c1483a80711e3abfbd01ec3384bf423042a57585aedef79be45e0ac26a7f3",
+        "size": 1168143
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1766263561.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-20",
+        "sha256": "ae6e59fbe99ddb6aac396221fce48a6c877998847d9ea1213bfe0198019e5b0b",
+        "size": 339242
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1766275235.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-21",
+        "sha256": "a434d379478017c23104128adf1934962389a5b3c4886eeb2b64f1685b0faeb0",
+        "size": 52557990
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1766275608.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-21",
+        "sha256": "dd179b224195fb6487a7c6169cc7e95e1702596a3fb09852ec6e0e9d1355044c",
+        "size": 52814711
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1766275236.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-21",
+        "sha256": "ffc0826b44a802e2c31791fe095ab299d50fe3e4e9bdd820021868bcdc8142a3",
+        "size": 554760
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1766275622.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-21",
+        "sha256": "d87fa9b5f8cf5ae931efedcc4895107dc12ea4df7b798d45514dbb9b70751d69",
+        "size": 590563
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1766589586.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-24",
+        "sha256": "73e31eb669960b24187d6923d32a60ffd5caf76ffc084e49de84549228edbd3d",
+        "size": 50525612
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1766589891.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-24",
+        "sha256": "98ed53ae2d7393042771881863d1b9f3ae941ac079116bc036e66448b3df22a0",
+        "size": 52317113
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1766589587.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-24",
+        "sha256": "b605be57521f80a3b14b01ee4cb7dd2908195c5a0fc57b2ba3c755522b57b805",
+        "size": 1398195
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1766589892.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-24",
+        "sha256": "818c6c3d37c6d977fab71b968ffe90bd8af59195cd900460f643fd865824003e",
+        "size": 881934
+      }
+    ],
+    "target_id": "btc-observed-proxy-terminal-excursion-v1",
+    "tasks": [
+      "terminal",
+      "adverse"
+    ],
+    "terminal_edges_bps": [
+      -2.0,
+      -0.5,
+      0.5,
+      2.0
+    ]
+  },
+  "dataset_manifest_sha256": "ab12db1ee17eec7634a7745f768d2f83855b70a89956af4e30fb952dc3672eaa",
+  "device": "cpu",
+  "environment": {
+    "numpy": "2.5.3",
+    "python": "3.12.0",
+    "torch": "2.14.1"
+  },
+  "epochs": 3,
+  "evaluation_metrics": {
+    "gate_selected": {
+      "mean_query_brier": 0.8125729095448696,
+      "mean_query_log_loss": 1.6419250216726216
+    },
+    "masked_pretrained": {
+      "mean_query_brier": 0.8122423866893026,
+      "mean_query_log_loss": 1.6395505856113666
+    },
+    "scratch": {
+      "mean_query_brier": 0.8125729095448696,
+      "mean_query_log_loss": 1.6419250216726216
+    },
+    "training_prevalence": {
+      "mean_query_brier": 0.7984825102880659,
+      "mean_query_log_loss": 1.5904058686326057
+    }
+  },
+  "gate_metrics": {
+    "masked_pretrained": {
+      "mean_query_brier": 0.7380450808713195,
+      "mean_query_log_loss": 1.4644621515905263
+    },
+    "scratch": {
+      "mean_query_brier": 0.726869085135617,
+      "mean_query_log_loss": 1.4351396238184297
+    }
+  },
+  "gate_selected": "scratch",
+  "git_revision": "63074e73383b002254a5743a6ce3d185143c8a03",
+  "limitations": [
+    "small reused development sample; query labels are correlated within parent cases",
+    "marginal probabilities, no joint path or enforced cross-horizon consistency",
+    "scratch versus masked reconstruction; unequal total compute disclosed",
+    "no live HiPerGator, latency, execution costs, fill, impact or quantum claim"
+  ],
+  "losses": {
+    "masked_pretrained": {
+      "pretraining_losses": [
+        0.9805116057395935,
+        0.8387718200683594,
+        0.9012474417686462
+      ],
+      "supervised_losses": [
+        1.6170285940170288,
+        1.566422462463379,
+        1.517399549484253
+      ]
+    },
+    "scratch": {
+      "pretraining_losses": [],
+      "supervised_losses": [
+        1.613148808479309,
+        1.5625890493392944,
+        1.513639211654663
+      ]
+    }
+  },
+  "normalizer": {
+    "mean": [
+      -0.06909700948745012,
+      0.23739679301643854,
+      0.06909700948745012,
+      0.40694592324304213,
+      -0.17939994856715202,
+      0.028235160829136855,
+      0.18202544555354577,
+      0.06813839608463687,
+      -0.29128878463346225,
+      0.024162959078428078,
+      0.30126196719132936,
+      0.05032250029001462,
+      -0.402111600081508,
+      0.02976784383051049,
+      0.413659908164006,
+      0.05392386718399896,
+      -0.5129448396082108,
+      0.034920093034926936,
+      0.5281812711977042,
+      0.06618646440503977,
+      0.13819401897490025,
+      0.0790780608390028,
+      0.26397340273954867,
+      0.6258742320709504
+    ],
+    "scale": [
+      0.0959987155261486,
+      0.2793595718000538,
+      0.0959987155261486,
+      0.3211223508198623,
+      0.0961892393635214,
+      0.07450879209706011,
+      0.09780318097026423,
+      0.10446151071472168,
+      0.09763419811991665,
+      0.05899365429151735,
+      0.10684833665895588,
+      0.07341598857278712,
+      0.09857751990802428,
+      0.05346413918233801,
+      0.11208975479307365,
+      0.06798432820133882,
+      0.09956668934852027,
+      0.05732016234020862,
+      0.11703846487668192,
+      0.0834568028754991,
+      0.1919974310522972,
+      0.7979826411451736,
+      0.5198700228330251,
+      0.1763873741643081
+    ]
+  },
+  "pretraining_epochs": 3,
+  "role_cases": {
+    "0": 13,
+    "1": 7,
+    "2": 6,
+    "3": 7,
+    "4": 8
+  },
+  "seed": 20261003,
+  "status": "development_engineering_only",
+  "unused_role": "pool_calibration"
+}
