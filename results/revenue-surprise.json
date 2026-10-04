@@ -1,0 +1,610 @@
+{
+ "schema": "driver-surprise-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/driver-surprise.md",
+ "vintages": "results/revenue-vintages-pit.csv",
+ "panel": {
+  "rows": 1706,
+  "train_rows": 1197,
+  "test_rows": 509,
+  "issuers": 55,
+  "drops": {
+   "not_measured": 518
+  },
+  "return_coverage": {
+   "rows": 509,
+   "rows_with_the_longest_horizon": 506,
+   "share": 0.9941
+  }
+ },
+ "classes": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "scores": {
+  "prevalence": {
+   "rows": 509,
+   "log_loss": 1.5867718623757792,
+   "brier": 0.7907985387256611,
+   "accuracy": 0.2868369351669941,
+   "class_support": {
+    "0": 72,
+    "1": 64,
+    "2": 96,
+    "3": 146,
+    "4": 131
+   }
+  },
+  "softmax": {
+   "rows": 509,
+   "log_loss": 1.5667154103674032,
+   "brier": 0.7576305909838416,
+   "accuracy": 0.3320235756385069,
+   "class_support": {
+    "0": 72,
+    "1": 64,
+    "2": 96,
+    "3": 146,
+    "4": 131
+   }
+  },
+  "rows": 509
+ },
+ "variants": {
+  "raw": {
+   "1": {
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 10,
+      "mean": 0.005511377726783007
+     },
+     {
+      "group": 1,
+      "n": 67,
+      "mean": -0.0009334461860670683
+     },
+     {
+      "group": 2,
+      "n": 37,
+      "mean": 0.0010413552528270272
+     },
+     {
+      "group": 3,
+      "n": 264,
+      "mean": 0.002115768827978943
+     },
+     {
+      "group": 4,
+      "n": 131,
+      "mean": 0.007902125654396158
+     }
+    ],
+    "information_coefficient": 0.010391782630899224,
+    "long_short": [
+     {
+      "horizon": 1,
+      "n_long": 131,
+      "n_short": 10,
+      "mean_long": 0.007902125654396158,
+      "mean_short": 0.005511377726783007,
+      "spread": 0.0023907479276131516,
+      "cost_bps": 0.0,
+      "net": 0.0023907479276131516
+     },
+     {
+      "horizon": 1,
+      "n_long": 131,
+      "n_short": 10,
+      "mean_long": 0.007902125654396158,
+      "mean_short": 0.005511377726783007,
+      "spread": 0.0023907479276131516,
+      "cost_bps": 20.0,
+      "net": 0.00039074792761315154
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.00039074792761315154,
+     "lower": -0.02151564571656643,
+     "upper": 0.019539972887827696,
+     "issuers": 26,
+     "share_positive": 0.5435435435435435,
+     "resamples": 1000
+    }
+   },
+   "5": {
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 10,
+      "mean": -0.0025927866675635068
+     },
+     {
+      "group": 1,
+      "n": 67,
+      "mean": -0.0014149477867845062
+     },
+     {
+      "group": 2,
+      "n": 37,
+      "mean": 0.012961509789450666
+     },
+     {
+      "group": 3,
+      "n": 264,
+      "mean": 0.00955503251934054
+     },
+     {
+      "group": 4,
+      "n": 131,
+      "mean": 0.01212137198408918
+     }
+    ],
+    "information_coefficient": 0.05119275819749684,
+    "long_short": [
+     {
+      "horizon": 5,
+      "n_long": 131,
+      "n_short": 10,
+      "mean_long": 0.01212137198408918,
+      "mean_short": -0.0025927866675635068,
+      "spread": 0.014714158651652688,
+      "cost_bps": 0.0,
+      "net": 0.014714158651652688
+     },
+     {
+      "horizon": 5,
+      "n_long": 131,
+      "n_short": 10,
+      "mean_long": 0.01212137198408918,
+      "mean_short": -0.0025927866675635068,
+      "spread": 0.014714158651652688,
+      "cost_bps": 20.0,
+      "net": 0.012714158651652688
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.012714158651652688,
+     "lower": -0.029455506309047794,
+     "upper": 0.052918668174743326,
+     "issuers": 26,
+     "share_positive": 0.7617617617617618,
+     "resamples": 1000
+    }
+   },
+   "20": {
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 10,
+      "mean": -0.03687924882167495
+     },
+     {
+      "group": 1,
+      "n": 67,
+      "mean": 0.025520063365414552
+     },
+     {
+      "group": 2,
+      "n": 36,
+      "mean": 0.010314649713924892
+     },
+     {
+      "group": 3,
+      "n": 263,
+      "mean": 0.015498061829692057
+     },
+     {
+      "group": 4,
+      "n": 130,
+      "mean": 0.05663640456710703
+     }
+    ],
+    "information_coefficient": 0.02361223384383937,
+    "long_short": [
+     {
+      "horizon": 20,
+      "n_long": 130,
+      "n_short": 10,
+      "mean_long": 0.05663640456710703,
+      "mean_short": -0.03687924882167495,
+      "spread": 0.09351565338878198,
+      "cost_bps": 0.0,
+      "net": 0.09351565338878198
+     },
+     {
+      "horizon": 20,
+      "n_long": 130,
+      "n_short": 10,
+      "mean_long": 0.05663640456710703,
+      "mean_short": -0.03687924882167495,
+      "spread": 0.09351565338878198,
+      "cost_bps": 20.0,
+      "net": 0.09151565338878198
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.09151565338878198,
+     "lower": 0.03193102029659946,
+     "upper": 0.182106201718421,
+     "issuers": 26,
+     "share_positive": 0.996996996996997,
+     "resamples": 1000
+    }
+   }
+  },
+  "month_neutral": {
+   "1": {
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 10,
+      "mean": 0.0015245163826996986
+     },
+     {
+      "group": 1,
+      "n": 67,
+      "mean": -0.004634195214777506
+     },
+     {
+      "group": 2,
+      "n": 37,
+      "mean": -0.0025152833425560704
+     },
+     {
+      "group": 3,
+      "n": 264,
+      "mean": -0.0008830973116012267
+     },
+     {
+      "group": 4,
+      "n": 131,
+      "mean": 0.004743886179392322
+     }
+    ],
+    "information_coefficient": 0.0651041888828634,
+    "long_short": [
+     {
+      "horizon": 1,
+      "n_long": 131,
+      "n_short": 10,
+      "mean_long": 0.004743886179392322,
+      "mean_short": 0.0015245163826996986,
+      "spread": 0.003219369796692624,
+      "cost_bps": 0.0,
+      "net": 0.003219369796692624
+     },
+     {
+      "horizon": 1,
+      "n_long": 131,
+      "n_short": 10,
+      "mean_long": 0.004743886179392322,
+      "mean_short": 0.0015245163826996986,
+      "spread": 0.003219369796692624,
+      "cost_bps": 20.0,
+      "net": 0.0012193697966926239
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.0012193697966926239,
+     "lower": -0.022033121501408112,
+     "upper": 0.018439667662782752,
+     "issuers": 26,
+     "share_positive": 0.5695695695695696,
+     "resamples": 1000
+    }
+   },
+   "5": {
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 10,
+      "mean": -0.014376307590657353
+     },
+     {
+      "group": 1,
+      "n": 67,
+      "mean": -0.01050469471314334
+     },
+     {
+      "group": 2,
+      "n": 37,
+      "mean": 0.0002053723058779194
+     },
+     {
+      "group": 3,
+      "n": 264,
+      "mean": 0.001405895329119174
+     },
+     {
+      "group": 4,
+      "n": 131,
+      "mean": 0.003578797553299484
+     }
+    ],
+    "information_coefficient": 0.0835913397915662,
+    "long_short": [
+     {
+      "horizon": 5,
+      "n_long": 131,
+      "n_short": 10,
+      "mean_long": 0.003578797553299484,
+      "mean_short": -0.014376307590657353,
+      "spread": 0.017955105143956835,
+      "cost_bps": 0.0,
+      "net": 0.017955105143956835
+     },
+     {
+      "horizon": 5,
+      "n_long": 131,
+      "n_short": 10,
+      "mean_long": 0.003578797553299484,
+      "mean_short": -0.014376307590657353,
+      "spread": 0.017955105143956835,
+      "cost_bps": 20.0,
+      "net": 0.015955105143956837
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.015955105143956837,
+     "lower": -0.027920223349317645,
+     "upper": 0.05119513103454227,
+     "issuers": 26,
+     "share_positive": 0.7907907907907908,
+     "resamples": 1000
+    }
+   },
+   "20": {
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 10,
+      "mean": -0.08742813628986247
+     },
+     {
+      "group": 1,
+      "n": 67,
+      "mean": -0.003927448014594583
+     },
+     {
+      "group": 2,
+      "n": 36,
+      "mean": -0.03442248449202651
+     },
+     {
+      "group": 3,
+      "n": 263,
+      "mean": -0.003867882138002326
+     },
+     {
+      "group": 4,
+      "n": 130,
+      "mean": 0.026106790952954068
+     }
+    ],
+    "information_coefficient": 0.076270402458398,
+    "long_short": [
+     {
+      "horizon": 20,
+      "n_long": 130,
+      "n_short": 10,
+      "mean_long": 0.026106790952954068,
+      "mean_short": -0.08742813628986247,
+      "spread": 0.11353492724281654,
+      "cost_bps": 0.0,
+      "net": 0.11353492724281654
+     },
+     {
+      "horizon": 20,
+      "n_long": 130,
+      "n_short": 10,
+      "mean_long": 0.026106790952954068,
+      "mean_short": -0.08742813628986247,
+      "spread": 0.11353492724281654,
+      "cost_bps": 20.0,
+      "net": 0.11153492724281654
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.11153492724281654,
+     "lower": 0.06593003178545223,
+     "upper": 0.17058892755004817,
+     "issuers": 26,
+     "share_positive": 1.0,
+     "resamples": 1000
+    }
+   }
+  },
+  "month_group_neutral": {
+   "1": {
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 10,
+      "mean": 0.0024216998304297686
+     },
+     {
+      "group": 1,
+      "n": 67,
+      "mean": -0.004427257169055162
+     },
+     {
+      "group": 2,
+      "n": 37,
+      "mean": -0.0006648349453791776
+     },
+     {
+      "group": 3,
+      "n": 264,
+      "mean": 0.00023913080232248693
+     },
+     {
+      "group": 4,
+      "n": 131,
+      "mean": 0.0017853251388419177
+     }
+    ],
+    "information_coefficient": 0.025257267947378877,
+    "long_short": [
+     {
+      "horizon": 1,
+      "n_long": 131,
+      "n_short": 10,
+      "mean_long": 0.0017853251388419177,
+      "mean_short": 0.0024216998304297686,
+      "spread": -0.0006363746915878509,
+      "cost_bps": 0.0,
+      "net": -0.0006363746915878509
+     },
+     {
+      "horizon": 1,
+      "n_long": 131,
+      "n_short": 10,
+      "mean_long": 0.0017853251388419177,
+      "mean_short": 0.0024216998304297686,
+      "spread": -0.0006363746915878509,
+      "cost_bps": 20.0,
+      "net": -0.0026363746915878507
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": -0.0026363746915878507,
+     "lower": -0.025069975718595733,
+     "upper": 0.012760283328479841,
+     "issuers": 26,
+     "share_positive": 0.38238238238238237,
+     "resamples": 1000
+    }
+   },
+   "5": {
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 10,
+      "mean": 0.003075263412954571
+     },
+     {
+      "group": 1,
+      "n": 67,
+      "mean": -0.009142797270768574
+     },
+     {
+      "group": 2,
+      "n": 37,
+      "mean": 0.005390373702832299
+     },
+     {
+      "group": 3,
+      "n": 264,
+      "mean": 0.0005505494159879655
+     },
+     {
+      "group": 4,
+      "n": 131,
+      "mean": 0.0018093580930254266
+     }
+    ],
+    "information_coefficient": 0.0584389792404746,
+    "long_short": [
+     {
+      "horizon": 5,
+      "n_long": 131,
+      "n_short": 10,
+      "mean_long": 0.0018093580930254266,
+      "mean_short": 0.003075263412954571,
+      "spread": -0.0012659053199291445,
+      "cost_bps": 0.0,
+      "net": -0.0012659053199291445
+     },
+     {
+      "horizon": 5,
+      "n_long": 131,
+      "n_short": 10,
+      "mean_long": 0.0018093580930254266,
+      "mean_short": 0.003075263412954571,
+      "spread": -0.0012659053199291445,
+      "cost_bps": 20.0,
+      "net": -0.0032659053199291443
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": -0.0032659053199291443,
+     "lower": -0.05038271315636556,
+     "upper": 0.021265594170407603,
+     "issuers": 26,
+     "share_positive": 0.45245245245245247,
+     "resamples": 1000
+    }
+   },
+   "20": {
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 10,
+      "mean": -0.036854346660326984
+     },
+     {
+      "group": 1,
+      "n": 67,
+      "mean": -0.001818674231288619
+     },
+     {
+      "group": 2,
+      "n": 36,
+      "mean": 0.0012216624038233653
+     },
+     {
+      "group": 3,
+      "n": 263,
+      "mean": -0.003574368729375737
+     },
+     {
+      "group": 4,
+      "n": 130,
+      "mean": 0.010665182841444494
+     }
+    ],
+    "information_coefficient": 0.040044172494940904,
+    "long_short": [
+     {
+      "horizon": 20,
+      "n_long": 130,
+      "n_short": 10,
+      "mean_long": 0.010665182841444494,
+      "mean_short": -0.036854346660326984,
+      "spread": 0.047519529501771476,
+      "cost_bps": 0.0,
+      "net": 0.047519529501771476
+     },
+     {
+      "horizon": 20,
+      "n_long": 130,
+      "n_short": 10,
+      "mean_long": 0.010665182841444494,
+      "mean_short": -0.036854346660326984,
+      "spread": 0.047519529501771476,
+      "cost_bps": 20.0,
+      "net": 0.045519529501771475
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.045519529501771475,
+     "lower": 0.011280919568108711,
+     "upper": 0.09278203340185723,
+     "issuers": 26,
+     "share_positive": 0.996996996996997,
+     "resamples": 1000
+    }
+   }
+  }
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only; the sealed windows are spent",
+  "one price source; no borrow, no capacity model",
+  "quarterly windows overlap; the traded bins hold few independent issuers"
+ ]
+}

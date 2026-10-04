@@ -615,3 +615,38 @@ beat metadata on the revision panel: the value of text is panel-dependent.
 frozen encoder, development only, both sealed windows spent.
 **Consequence**: further text work should target the panel where text carried information, the
 revision panel, or a larger label set. On this panel metadata is enough.
+
+## T42. The intensity strategy's published edge does not survive the corrected disclosure clock
+
+**Statement**: the published panels date every quarter by the latest filing that reported it, a
+ten-K comparative, with a median availability lag of 401 days. Rebuilt with the earliest filing, the
+median lag is 34 days for capex and 36 for revenue, same rows and same tickers. Re-running the
+declared base configuration changes +2.94 percent net, Sharpe 0.347 and drawdown -22.9 percent into
+-4.89 percent net, Sharpe -0.630 and drawdown -48.0 percent; doubled costs go from +1.44 to -6.24
+percent. The RPO and obligation panels are unaffected, medians 38 and 55 days.
+**Evidence**: `results/intensity-clock-test.json`; `scripts/run_intensity_pit_clock_test.py`;
+`scripts/build_complex_panels_pit.py`; `results/complex-capex-quarterly-pit.csv`;
+`results/complex-revenue-quarterly-pit.csv`.
+**Scope**: development only, both sealed windows spent, one price source. The original panels were
+not modified; they belong to the intensity workstream.
+**Consequence**: the note's intensity numbers stand as measured on the earlier clock, and this
+discrepancy must be reported to that owner before the strategy is used again. Any further work on
+the intensity signal must use the earliest-filed clock.
+
+## T43. The strategy's own drivers carry a correctly clocked expectation gap, and its two halves point opposite ways
+
+**Statement**: on the corrected clocks, the revenue surprise forecast covers 509 out-of-sample rows
+over 55 issuers and beats prevalence on log loss, 1.5667 against 1.5868. Long-short by predicted bin
+at twenty sessions: raw +9.35 percent with interval +3.19 to +18.21, month neutral +11.35 with
+interval +6.59 to +17.06, and month and group neutral +4.75 with interval +1.13 to +9.28, so the
+revenue surprise survives both neutralisations. The capex surprise goes the other way: month and
+group neutral -4.87 percent, interval -10.51 to -1.34, which is the sign the intensity expression
+already trades.
+**Evidence**: `results/revenue-surprise.json`; `results/capex-surprise.json`;
+`results/revenue-vintages-pit.csv`; `results/capex-vintages-pit.csv`;
+`scripts/run_driver_surprise.py`; `docs/plan/driver-surprise.md`.
+**Scope**: development only, 55 issuers, quarterly windows that overlap, one price source, flat
+twenty basis point costs, no borrow and no capacity model.
+**Consequence**: the expectation gap now covers the strategy's own universe, both halves carry the
+economic sign the thesis expects, and gating the intensity cohorts by these signals is the next
+test.

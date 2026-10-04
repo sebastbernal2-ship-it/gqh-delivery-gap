@@ -234,6 +234,25 @@ Produced by `scripts/run_surprise_alpha.py`:
 
 generated-path: results/surprise-alpha.json
 
+Produced by `scripts/build_complex_panels_pit.py` (corrected disclosure clocks):
+
+generated-path: results/complex-capex-quarterly-pit.csv
+generated-path: results/complex-revenue-quarterly-pit.csv
+
+Produced by `scripts/build_driver_vintages.py` (corrected clocks):
+
+generated-path: results/capex-vintages-pit.csv
+generated-path: results/revenue-vintages-pit.csv
+
+Produced by `scripts/run_intensity_pit_clock_test.py`:
+
+generated-path: results/intensity-clock-test.json
+
+Produced by `scripts/run_driver_surprise.py`:
+
+generated-path: results/revenue-surprise.json
+generated-path: results/capex-surprise.json
+
 Produced by `scripts/build_rpo_vintages.py`:
 
 generated-path: results/rpo-vintages.csv

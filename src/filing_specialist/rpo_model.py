@@ -101,6 +101,7 @@ def prepare_rows(vintages: list[dict]) -> tuple[list[dict], dict]:
             span = record.get("history_span_days") or ""
             row = {
                 "ticker": ticker,
+                "group_name": (record.get("group") or "").strip(),
                 "period_end": record.get("period_end", ""),
                 "label_available": disclosure.available.isoformat(),
                 "label_relative_surprise": disclosure.relative,

@@ -50,7 +50,9 @@ def observation_from_row(row: dict) -> tuple[Observation | None, str | None]:
         return None, "no_availability"
     try:
         change = float(row["change"])
-        previous_value = float(row["previous_value"]) if (row.get("previous_value") or "").strip() else None
+        raw_previous = row.get("previous_value")
+        previous_value = (float(str(raw_previous).strip())
+                          if raw_previous not in (None, "") and str(raw_previous).strip() else None)
         period_end = row["period_end"]
         if len(period_end) < 7:
             raise ValueError
