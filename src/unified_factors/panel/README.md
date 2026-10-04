@@ -55,9 +55,21 @@ That query has not been run. The audit used only aggregate Snowflake queries. Be
 panel, the user must either specifically approve raw data egress to the project's Actions artifact and confirm
 that sponsor/vendor permission covers storing/downloading those records there, or provide an approved local
 read-only Snowflake connection whose owner can export the same pinned development rows to a private local
-file. Do not put the export or French archives in Git; data files remain ignored. If an export is approved,
-set the existing workflow's `limit_rows` input to 20,000 (its default is only 5,000) and inspect the returned
-row count before using the artifact; otherwise the workflow silently truncates at its configured cap.
+file. The local exporter uses only this checked-in pinned query, writes outside the repository with mode
+0600, refuses to overwrite, and errors if the result exceeds its row cap. Do not put the export or French
+archives in Git. It accepts standard `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, and `SNOWFLAKE_WAREHOUSE`
+settings with password, key-pair, OAuth token, or authenticator-based local credentials. Configure these
+through your private local secret store or shell, not in chat or a tracked file.
+
+```sh
+python -m pip install -r src/unified_factors/panel/requirements-local.txt
+PYTHONPATH=src python -m unified_factors.panel.export_local \
+  --output /private/tmp/development-export.csv
+```
+
+The export limit defaults to 20,000 rows and is fetched with a one-row overflow check, so an oversized
+result is never silently truncated. Do not use the Actions artifact workflow for raw records unless that
+route and its vendor terms are explicitly approved.
 
 Once the authorized CSV is at `development-export.csv` and official French archives are in
 `/tmp/french-daily-20261003`:
