@@ -1,0 +1,181 @@
+{
+ "schema": "calibration-report-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/open-work.md",
+ "model": {
+  "panel": "/home/sebas/kun-agent-workspace/projects/quanthacks/results/revenue-vintages-pit.csv",
+  "rows": 1144,
+  "classes": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "distinct_confidences": 909
+ },
+ "reliability": [
+  {
+   "lower": 0.2,
+   "upper": 0.3,
+   "n": 474,
+   "mean_confidence": 0.2676191110846998,
+   "accuracy": 0.3080168776371308,
+   "gap": 0.04039776655243099
+  },
+  {
+   "lower": 0.3,
+   "upper": 0.4,
+   "n": 440,
+   "mean_confidence": 0.3394650803030947,
+   "accuracy": 0.275,
+   "gap": -0.06446508030309467
+  },
+  {
+   "lower": 0.4,
+   "upper": 0.5,
+   "n": 118,
+   "mean_confidence": 0.4374372740111405,
+   "accuracy": 0.3559322033898305,
+   "gap": -0.08150507062131002
+  },
+  {
+   "lower": 0.5,
+   "upper": 0.6,
+   "n": 49,
+   "mean_confidence": 0.5471419968927312,
+   "accuracy": 0.3469387755102041,
+   "gap": -0.20020322138252716
+  },
+  {
+   "lower": 0.6,
+   "upper": 0.7,
+   "n": 23,
+   "mean_confidence": 0.649208007864881,
+   "accuracy": 0.5652173913043478,
+   "gap": -0.0839906165605332
+  },
+  {
+   "lower": 0.7,
+   "upper": 0.8,
+   "n": 12,
+   "mean_confidence": 0.7375426607142868,
+   "accuracy": 0.4166666666666667,
+   "gap": -0.3208759940476201
+  },
+  {
+   "lower": 0.8,
+   "upper": 0.9,
+   "n": 6,
+   "mean_confidence": 0.8548931503501006,
+   "accuracy": 0.6666666666666666,
+   "gap": -0.18822648368343398
+  },
+  {
+   "lower": 0.9,
+   "upper": 1.0,
+   "n": 22,
+   "mean_confidence": 0.96738084799335,
+   "accuracy": 0.7727272727272727,
+   "gap": -0.1946535752660773
+  }
+ ],
+ "expected_calibration_error": 0.06829962109063843,
+ "maximum_calibration_error": 0.3208759940476201,
+ "expected_calibration_error_interval": {
+  "point": 0.06829962109063843,
+  "lower": 0.043961716940437545,
+  "upper": 0.0971281984962052,
+  "resamples": 1000,
+  "rows": 1144
+ },
+ "extreme_bins": {
+  "lowest": {
+   "class": 0,
+   "rows": 1144,
+   "mean_predicted": 0.13459185219825967,
+   "realised": 0.14423076923076922,
+   "gap": 0.009638917032509547
+  },
+  "highest": {
+   "class": 4,
+   "rows": 1144,
+   "mean_predicted": 0.2314197622005007,
+   "realised": 0.24825174825174826,
+   "gap": 0.016831986051247555
+  }
+ },
+ "sharpness": 0.35387909426222536,
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only; the revenue panel is the surviving sleeve's model",
+  "pooled across rolling origins, so blocks are not independent",
+  "bins are coarse with five classes and a few hundred rows per block"
+ ],
+ "tails": {
+  "revenue": {
+   "days": 1869,
+   "mean": 0.001097087401514594,
+   "vol": 0.023032582470218464,
+   "var_5pct": -0.03090355566110814,
+   "cvar_5pct": -0.05153072601153526,
+   "var_1pct": -0.05834105622531847,
+   "cvar_1pct": -0.0953098694048262,
+   "worst_day": -0.27734376372037717,
+   "worst_window": {
+    "length": 20,
+    "return": -0.31240370167031417,
+    "start": 1481
+   },
+   "skew": -0.8417412307675599
+  },
+  "intensity_gated": {
+   "days": 1946,
+   "mean": 0.0002575689357062436,
+   "vol": 0.004923988902380598,
+   "var_5pct": -0.007025781137243836,
+   "cvar_5pct": -0.011146314040975444,
+   "var_1pct": -0.01338634274001419,
+   "cvar_1pct": -0.018822939389175928,
+   "worst_day": -0.03508799175176372,
+   "worst_window": {
+    "length": 20,
+    "return": -0.07478366731291897,
+    "start": 1549
+   },
+   "skew": 0.9287025437762688
+  },
+  "combined_inverse_vol": {
+   "days": 1862,
+   "mean": 0.00048320446718266483,
+   "vol": 0.006870519988919606,
+   "var_5pct": -0.008997272609894625,
+   "cvar_5pct": -0.01490960303995319,
+   "var_1pct": -0.017729226474282277,
+   "cvar_1pct": -0.027055652883638495,
+   "worst_day": -0.05741815729141649,
+   "worst_window": {
+    "length": 20,
+    "return": -0.08370175877400743,
+    "start": 1468
+   },
+   "skew": 0.32935271578908076
+  },
+  "combined_vol_target": {
+   "days": 1862,
+   "mean": 0.00047410105778621645,
+   "vol": 0.006840581035240279,
+   "var_5pct": -0.009898945591500558,
+   "cvar_5pct": -0.01500193909994582,
+   "var_1pct": -0.01760539281426414,
+   "cvar_1pct": -0.02497897606826582,
+   "worst_day": -0.04703252796691437,
+   "worst_window": {
+    "length": 20,
+    "return": -0.08663980667490734,
+    "start": 754
+   },
+   "skew": -0.013574194859968677
+  }
+ }
+}

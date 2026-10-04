@@ -1,0 +1,38 @@
+{"artifact": "T42", "axis": "clock", "declared_before": true, "id": "V001", "question": "complex panels latest-filed vs earliest-filed", "status": "rejected", "variant": "latest-filed"}
+{"artifact": "T42", "axis": "clock", "declared_before": true, "id": "V002", "question": "complex panels latest-filed vs earliest-filed", "status": "adopted", "variant": "earliest-filed"}
+{"artifact": "finding", "axis": "clock", "declared_before": false, "id": "V003", "question": "duration frames vs companyconcept", "status": "rejected", "variant": "frames"}
+{"artifact": "T43, T46", "axis": "clock", "declared_before": true, "id": "V004", "question": "duration frames vs companyconcept", "status": "adopted", "variant": "companyconcept earliest"}
+{"artifact": "T44", "axis": "gate", "declared_before": true, "id": "V005", "question": "intensity confirmation", "status": "baseline", "variant": "none"}
+{"artifact": "T44", "axis": "gate", "declared_before": true, "id": "V006", "question": "intensity confirmation", "status": "adopted", "variant": "revenue confirm"}
+{"artifact": "T44", "axis": "gate", "declared_before": true, "id": "V007", "question": "intensity confirmation", "status": "rejected", "variant": "revenue and capex confirm"}
+{"artifact": "T44 onwards", "axis": "costs", "declared_before": true, "id": "V008", "question": "round-trip cost tier", "status": "reported", "variant": "20 bps base"}
+{"artifact": "T44 onwards", "axis": "costs", "declared_before": true, "id": "V009", "question": "round-trip cost tier", "status": "reported", "variant": "40 bps doubled"}
+{"artifact": "T47, T48, T51", "axis": "volatility", "declared_before": true, "id": "V010", "question": "portfolio volatility target", "status": "reported", "variant": "none"}
+{"artifact": "T47, T48, T51", "axis": "volatility", "declared_before": true, "id": "V011", "question": "portfolio volatility target", "status": "reported", "variant": "10 percent"}
+{"artifact": "T43", "axis": "universe", "declared_before": true, "id": "V012", "question": "driver breadth", "status": "adopted", "variant": "complex only"}
+{"artifact": "T46", "axis": "universe", "declared_before": true, "id": "V013", "note": "information generalises at breadth, pricing does not", "question": "driver breadth", "status": "rejected", "variant": "broad 291-301 issuers"}
+{"artifact": "T36, T46", "axis": "concept", "declared_before": true, "id": "V014", "question": "expectation gap target", "status": "weak", "variant": "RPO balance"}
+{"artifact": "T43, T51", "axis": "concept", "declared_before": true, "id": "V015", "question": "expectation gap target", "status": "adopted", "variant": "revenue flow"}
+{"artifact": "T51", "axis": "concept", "declared_before": true, "id": "V016", "question": "expectation gap target", "status": "retired", "variant": "capex flow as sleeve"}
+{"artifact": "T36-T48", "axis": "split", "declared_before": true, "id": "V017", "question": "evaluation split", "status": "superseded", "variant": "single 70/30"}
+{"artifact": "T39, T53", "axis": "split", "declared_before": true, "id": "V018", "note": "original status: used for fusion", "question": "evaluation split", "status": "adopted", "variant": "council five partitions"}
+{"artifact": "T51", "axis": "split", "declared_before": true, "id": "V019", "question": "evaluation split", "status": "adopted", "variant": "rolling origin annual refit"}
+{"artifact": "T39, T53", "axis": "fusion", "declared_before": true, "id": "V020", "question": "combination method", "status": "rejected", "variant": "naive concatenation"}
+{"artifact": "T39, T53", "axis": "fusion", "declared_before": true, "id": "V021", "question": "combination method", "status": "adopted", "variant": "linear opinion pool"}
+{"artifact": "-", "axis": "fusion", "declared_before": false, "id": "V022", "question": "combination method", "status": "untried", "variant": "logarithmic pool"}
+{"artifact": "T48, T51", "axis": "weights", "declared_before": true, "id": "V023", "question": "sleeve weighting", "status": "reported", "variant": "equal gross"}
+{"artifact": "T48, T51", "axis": "weights", "declared_before": true, "id": "V024", "question": "sleeve weighting", "status": "adopted", "variant": "inverse volatility trailing 60"}
+{"artifact": "-", "axis": "weights", "declared_before": false, "id": "V025", "question": "sleeve weighting", "status": "untried", "variant": "equal risk or hierarchical parity"}
+{"artifact": "T43-T48", "axis": "returns", "declared_before": true, "id": "V026", "question": "cross-sectional neutralisation", "status": "reported", "variant": "raw"}
+{"artifact": "T43-T48", "axis": "returns", "declared_before": true, "id": "V027", "question": "cross-sectional neutralisation", "status": "reported", "variant": "month neutral"}
+{"artifact": "T43, T48", "axis": "returns", "declared_before": true, "id": "V028", "question": "cross-sectional neutralisation", "status": "adopted", "variant": "month and group neutral"}
+{"artifact": "decision layer", "axis": "decision", "declared_before": true, "id": "V029", "question": "decision payoff", "status": "reported", "variant": "symmetric plus or minus one"}
+{"artifact": "decision layer", "axis": "decision", "declared_before": true, "id": "V030", "question": "decision payoff", "status": "adopted", "variant": "ordinal exact zero far"}
+{"artifact": "decision layer", "axis": "decision", "declared_before": true, "id": "V031", "question": "confidence gate grid", "status": "reported", "variant": "0.20 to 0.90 in 0.05 steps"}
+{"artifact": "T38", "axis": "text", "declared_before": true, "id": "V032", "question": "document representation", "status": "rejected", "variant": "scratch scorer"}
+{"artifact": "T38", "axis": "text", "declared_before": true, "id": "V033", "question": "document representation", "status": "adopted", "variant": "frozen MiniLM plus PCA"}
+{"artifact": "-", "axis": "text", "declared_before": false, "id": "V034", "question": "document representation", "status": "untried", "variant": "fine-tuned encoder"}
+{"artifact": "coupling tests", "axis": "coupling", "declared_before": true, "id": "V035", "note": "original status: no-op without constraints", "question": "reference coupling", "status": "reported", "variant": "product"}
+{"artifact": "coupling tests", "axis": "coupling", "declared_before": true, "id": "V036", "question": "reference coupling", "status": "adopted", "variant": "martingale constrained"}
+{"artifact": "quantum receipt", "axis": "quantum", "declared_before": true, "id": "V037", "question": "generator", "status": "prototype", "variant": "QCBM numpy simulator"}
+{"artifact": "-", "axis": "quantum", "declared_before": false, "id": "V038", "question": "generator", "status": "unverified", "variant": "QCBM GPU or IBM device"}
