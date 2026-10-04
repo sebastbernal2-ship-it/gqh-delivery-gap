@@ -222,6 +222,18 @@ Produced by `scripts/build_rpo_vintages.py`:
 
 generated-path: results/rpo-vintages.csv
 
+Produced by `scripts/build_rpo_vintages.py --panel results/obligation-panel.csv`:
+
+generated-path: results/obligation-vintages.csv
+
+Produced by `scripts/build_filing_obligation_panel.py`:
+
+generated-path: results/filing-obligation-decisions.csv
+
+Produced by `scripts/run_filing_obligation_panel.py`:
+
+generated-path: results/filing-obligation-scores.json
+
 Produced by `scripts/run_rpo_specialist.py`:
 
 generated-path: results/rpo-specialist-scores.json

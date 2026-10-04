@@ -17,7 +17,7 @@ from dataclasses import dataclass
 from .panel import parse_clock
 
 COLUMNS = (
-    "ticker", "cik", "name", "sic", "group", "period_end", "quarter", "availability",
+    "ticker", "cik", "name", "concept", "sic", "group", "period_end", "quarter", "availability",
     "availability_resolution", "value", "previous_value", "change", "expectation_kind",
     "expectation_status", "history_count", "history_span_days", "expected_change_pit",
     "surprise_pit", "relative_surprise_pit", "in_sealed_window", "accession", "source_receipt",
@@ -28,6 +28,7 @@ MINIMUM_HISTORY = 2
 @dataclass(frozen=True)
 class Observation:
     ticker: str
+    concept: str
     quarter: str
     availability: datetime.datetime
     change: float
@@ -55,7 +56,8 @@ def observation_from_row(row: dict) -> tuple[Observation | None, str | None]:
             raise ValueError
     except (KeyError, TypeError, ValueError):
         return None, "no_change"
-    return Observation(ticker, quarter_of(period_end), availability, change, previous_value), None
+    return Observation(ticker, (row.get("concept") or "").strip(), quarter_of(period_end),
+                       availability, change, previous_value), None
 
 
 def expectation_for(observation: Observation, history: list[Observation],
@@ -63,6 +65,7 @@ def expectation_for(observation: Observation, history: list[Observation],
     """The declared point-in-time expectation from strictly earlier same-quarter observations."""
     usable = sorted((item for item in history
                      if item.ticker == observation.ticker and item.quarter == observation.quarter
+                     and item.concept == observation.concept
                      and item.availability < observation.availability),
                     key=lambda item: item.availability)
     if len(usable) >= minimum_history:

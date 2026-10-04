@@ -1,0 +1,110 @@
+{
+ "schema": "filing-obligation-comparison-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/filing-obligation-panel.md",
+ "features": [
+  "prior_count",
+  "last_change_rel",
+  "trailing_mean_change_rel",
+  "days_since_last_obligation",
+  "missing_last_obligation",
+  "form_is_8k",
+  "has_item_101",
+  "has_item_202",
+  "has_item_701",
+  "concept_is_rpo"
+ ],
+ "deciding_filing": {
+  "rows": 87,
+  "distinct_labels": 50,
+  "split": {
+   "train_rows": 61,
+   "test_rows": 26,
+   "train_through": "2023-10-31T16:46:56+00:00",
+   "test_from": "2023-11-02T14:18:08+00:00",
+   "classes": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  "prevalence": {
+   "rows": 26,
+   "log_loss": 1.5583786681482796,
+   "brier": 0.7628381719290811,
+   "accuracy": 0.5769230769230769,
+   "class_support": {
+    "0": 0,
+    "1": 1,
+    "2": 15,
+    "3": 7,
+    "4": 3
+   }
+  },
+  "softmax": {
+   "rows": 26,
+   "log_loss": 1.2379057551935637,
+   "brier": 0.649791769329915,
+   "accuracy": 0.5384615384615384,
+   "class_support": {
+    "0": 0,
+    "1": 1,
+    "2": 15,
+    "3": 7,
+    "4": 3
+   }
+  }
+ },
+ "every_filing": {
+  "rows": 8185,
+  "distinct_labels": 50,
+  "split": {
+   "train_rows": 5771,
+   "test_rows": 2414,
+   "train_through": "2024-08-01T14:10:33+00:00",
+   "test_from": "2024-10-31T14:44:28+00:00",
+   "classes": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  "prevalence": {
+   "rows": 2414,
+   "log_loss": 1.284103586923115,
+   "brier": 0.6547391615981696,
+   "accuracy": 0.5604805302402651,
+   "class_support": {
+    "0": 0,
+    "1": 0,
+    "2": 1353,
+    "3": 744,
+    "4": 317
+   }
+  },
+  "softmax": {
+   "rows": 2414,
+   "log_loss": 1.1957927437206277,
+   "brier": 0.6290921351707687,
+   "accuracy": 0.5588235294117647,
+   "class_support": {
+    "0": 0,
+    "1": 0,
+    "2": 1353,
+    "3": 744,
+    "4": 317
+   }
+  }
+ },
+ "limitations": [
+  "PWR and ETN only; EME and DLR file no measured obligation facts",
+  "the deciding view has 87 rows over about 50 distinct disclosure periods",
+  "the every-filing view reuses each label many times, so its rows are not independent",
+  "no document text in this comparison, no returns, no costs"
+ ],
+ "ready_for_performance_claim": false
+}

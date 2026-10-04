@@ -92,6 +92,22 @@ def test_the_output_carries_the_decision_clock():
     assert vintages[1]["availability"] == "2023-05-01T00:00:00+00:00"
 
 
+def test_different_concepts_do_not_share_history():
+    rows = [
+        {"ticker": "T", "concept": "A", "period_end": "2022-03-31", "change": "100",
+         "previous_value": "1000", "earliest_availability_utc": "2022-05-01T00:00:00+00:00"},
+        {"ticker": "T", "concept": "B", "period_end": "2023-03-31", "change": "5",
+         "previous_value": "1000", "earliest_availability_utc": "2023-05-01T00:00:00+00:00"},
+        {"ticker": "T", "concept": "B", "period_end": "2024-03-31", "change": "7",
+         "previous_value": "1000", "earliest_availability_utc": "2024-05-01T00:00:00+00:00"},
+    ]
+    vintages, _ = build_vintages(rows)
+    by_key = {(item["concept"], item["period_end"]): item for item in vintages}
+    assert by_key[("B", "2023-03-31")]["expectation_status"] == "missing"
+    assert by_key[("B", "2024-03-31")]["expectation_kind"] == "prior same-quarter"
+    assert float(by_key[("B", "2024-03-31")]["expected_change_pit"]) == 5.0
+
+
 def test_relative_surprise_is_null_without_a_previous_value():
     rows = [row("T", "2022-03-31", 10.0, "2022-05-01T00:00:00+00:00"),
             row("T", "2023-03-31", 20.0, "2023-05-01T00:00:00+00:00", previous=0.0)]

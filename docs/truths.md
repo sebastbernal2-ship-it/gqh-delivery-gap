@@ -580,3 +580,21 @@ trained on 34 rows, development only, both sealed windows spent.
 **Consequence**: the council layer earns its place on measurable evidence for the first time, but
 the sample is far too thin to promote. The next step is the same experiment on a larger label set
 and then on the risk track's dates, where the partitions can be properly sized.
+
+## T40. Filing metadata beats prevalence on point-in-time obligation labels for the four firms
+
+**Statement**: on the 87 deciding filings that precede a measured obligation vintage for PWR and
+ETN, about 50 distinct disclosure periods, a softmax on ten filing and prior-obligation features
+beats the training prevalence on the later rows of a chronological split: log loss 1.238 against
+1.558, while accuracy is slightly lower, 0.538 against 0.577. The every-filing view, 8,185 rows
+that reuse each label many times, shows 1.196 against 1.284 and is a robustness row only. The
+declared falsifier was that the fitted model does not beat prevalence; it beats it on log loss in
+both views, and the deciding view counts because its rows map to distinct disclosure periods.
+**Evidence**: `results/filing-obligation-scores.json`; `results/filing-obligation-decisions.csv`;
+`results/obligation-vintages.csv`; `scripts/run_filing_obligation_panel.py`;
+`docs/plan/filing-obligation-panel.md`.
+**Scope**: PWR and ETN only, 87 deciding rows over about 50 periods, metadata only, no document
+text, development only, both sealed windows spent.
+**Consequence**: the four-firm label set is now point-in-time and covers more disclosure periods
+than the 81-label revision panel, and the metadata model predicts it better than prevalence. The
+next step is the text comparison on the same rows using the cached 8-K corpus.

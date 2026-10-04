@@ -49,7 +49,7 @@ def main() -> int:
         "relative_surprises": len(relative),
         "sealed_flagged": sum(1 for record in vintages if str(record.get("in_sealed_window")) == "True"),
         "minimum_history": args.minimum_history,
-        "output": str(args.output.relative_to(ROOT)),
+        "output": str(args.output),
     }
     print(json.dumps(summary, indent=1))
     return 0
