@@ -1,27 +1,27 @@
 {
- "nodes": 169468,
- "connections": 1176458,
+ "nodes": 169985,
+ "connections": 1179790,
  "by_status": {
-  "declared": 1147700,
-  "inferred": 26078,
+  "declared": 1150982,
+  "inferred": 26126,
   "proposed": 2058,
-  "curated": 600,
+  "curated": 602,
   "blocked": 22
  },
  "by_type": {
-  "sibling_subnode": 480840,
-  "part_of": 169392,
-  "splits_into": 168742,
-  "refined_by": 164400,
-  "refines": 164394,
-  "co_layer_peer": 18119,
+  "sibling_subnode": 482070,
+  "part_of": 169908,
+  "splits_into": 169258,
+  "refined_by": 164910,
+  "refines": 164904,
+  "co_layer_peer": 18141,
   "ties_by_source": 3848,
   "shares_semantics": 1616,
   "ties_by_observable": 1007,
   "candidate_for": 914,
-  "same_dig_context": 822,
-  "conditions": 696,
-  "ties_by_player": 666,
+  "same_dig_context": 842,
+  "conditions": 698,
+  "ties_by_player": 672,
   "contains": 162,
   "chain_precedes": 136,
   "chain_follows": 136,
@@ -37,28 +37,24 @@
  },
  "degrees": {
   "min": 4,
-  "median": 5.0,
+  "median": 5,
   "max": 150,
   "mean": 6.9
  },
- "nodes_with_50_plus": 722,
+ "nodes_with_50_plus": 724,
  "nodes_with_50_plus_share": 0.0043,
- "core_nodes": 724,
+ "core_nodes": 725,
  "core_degrees": {
   "min": 49,
-  "median": 74.0,
+  "median": 74,
   "max": 150
  },
- "core_with_50_plus": 722,
- "core_with_50_plus_share": 0.9972,
- "skeleton_nodes": 168744,
+ "core_with_50_plus": 724,
+ "core_with_50_plus_share": 0.9986,
+ "skeleton_nodes": 169260,
  "under_connected_core": [
   {
    "id": "concept:thesis:delivery-gap",
-   "degree": 49
-  },
-  {
-   "id": "strategy:monitor:scarcity-state",
    "degree": 49
   }
  ],

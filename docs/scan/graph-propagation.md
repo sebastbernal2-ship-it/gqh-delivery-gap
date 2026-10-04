@@ -5,18 +5,18 @@ decomposed. Nothing here grades a path as dead.
 
 ## The graph, expanded
 
-- Nodes: **169,468**
-- Typed connections: **1,176,458**
+- Nodes: **169,985**
+- Typed connections: **1,179,790**
 - Distributions written down: **86** samples
-- Propagation paths: **644** from 172 seeds
-- Hidden objects: **47** (nodes 1, edges 22, gaps 3, assumptions 21)
+- Propagation paths: **656** from 173 seeds
+- Hidden objects: **46** (nodes 1, edges 22, gaps 2, assumptions 21)
 
 ## Delineation
 
-- Layers: `raw` 94,396, `mechanism` 44,991, `feature` 26,973, `asset` 1,024, `entity` 438, `dataset` 210, `event` 173, `outcome` 160
-- Connection status: `declared` 1,147,700, `inferred` 26,078, `proposed` 2,058, `curated` 600, `blocked` 22
+- Layers: `raw` 94,717, `mechanism` 45,148, `feature` 27,010, `asset` 1,024, `entity` 439, `dataset` 210, `event` 173, `outcome` 160
+- Connection status: `declared` 1,150,982, `inferred` 26,126, `proposed` 2,058, `curated` 602, `blocked` 22
 - Every connection carries a condition and a falsifier: 99.99% and 99.99%
-- Components: 1, largest 169,468, unreachable from anchors 0
+- Components: 1, largest 169,985, unreachable from anchors 0
 
 ## Distributions, centre, spread, tails
 
