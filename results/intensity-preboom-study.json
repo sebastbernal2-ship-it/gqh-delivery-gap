@@ -1,0 +1,96 @@
+{
+ "status": "development only; protocol docs/plan/intensity-timesplit-study.md",
+ "observations": 640,
+ "windows": {
+  "preboom": {
+   "horizons": {
+    "5": {
+     "n": 142,
+     "names": 24,
+     "quarters": 12,
+     "mean_within_quarter_rho": -0.0775,
+     "two_sided_permutation_p": 0.5351,
+     "tercile_spread": -0.0213
+    },
+    "20": {
+     "n": 142,
+     "names": 24,
+     "quarters": 12,
+     "mean_within_quarter_rho": -0.1095,
+     "two_sided_permutation_p": 0.3739,
+     "tercile_spread": -0.0385
+    },
+    "60": {
+     "n": 142,
+     "names": 24,
+     "quarters": 12,
+     "mean_within_quarter_rho": -0.0457,
+     "two_sided_permutation_p": 0.7375,
+     "tercile_spread": -0.0193
+    }
+   },
+   "late_segments": {},
+   "names": 24
+  },
+  "buildout": {
+   "horizons": {
+    "5": {
+     "n": 87,
+     "names": 25,
+     "quarters": 9,
+     "mean_within_quarter_rho": -0.1639,
+     "two_sided_permutation_p": 0.2344,
+     "tercile_spread": -0.0245
+    },
+    "20": {
+     "n": 87,
+     "names": 25,
+     "quarters": 9,
+     "mean_within_quarter_rho": -0.2631,
+     "two_sided_permutation_p": 0.054,
+     "tercile_spread": -0.0803
+    },
+    "60": {
+     "n": 87,
+     "names": 25,
+     "quarters": 9,
+     "mean_within_quarter_rho": -0.1462,
+     "two_sided_permutation_p": 0.3035,
+     "tercile_spread": -0.1025
+    }
+   },
+   "late_segments": {},
+   "names": 25
+  },
+  "late": {
+   "horizons": {
+    "5": {
+     "n": 105,
+     "names": 32,
+     "quarters": 5,
+     "mean_within_quarter_rho": -0.2613,
+     "two_sided_permutation_p": 0.0432,
+     "tercile_spread": -0.0315
+    },
+    "20": {
+     "n": 101,
+     "names": 32,
+     "quarters": 5,
+     "mean_within_quarter_rho": -0.0923,
+     "two_sided_permutation_p": 0.4807,
+     "tercile_spread": -0.0231
+    },
+    "60": {
+     "n": 97,
+     "names": 32,
+     "quarters": 4,
+     "mean_within_quarter_rho": 0.1354,
+     "two_sided_permutation_p": 0.3039,
+     "tercile_spread": 0.1237
+    }
+   },
+   "late_segments": {},
+   "names": 32
+  }
+ }
+}

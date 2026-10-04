@@ -369,6 +369,20 @@ source; compared against asset growth only, other known factors untested; develo
 candidate. The next evidence is the pre-boom window and a capacity screen with volume, before anything is
 called an edge.
 
+## T30. The intensity charge is sign consistent across three regimes and fragile in each
+
+**Statement**: the mean within-quarter correlation between intensity change and forward group excess
+return is negative at five and twenty days in all three windows: pre-boom (2018 to 2021, 142 observations,
+24 names) -0.077 (p 0.54) and -0.110 (p 0.37); buildout (2022 to 2024, 87 observations) -0.164 (p 0.23)
+and -0.263 (p 0.054); late (2025 onward, 105 observations) -0.261 (p 0.043) and -0.092 (p 0.48). Tercile
+spreads are negative in every window at both horizons, largest in the buildout window (-8.0 and -10.2
+percentage points). Sixty day readings are mixed, with the late window turning positive (+12.4 points).
+**Evidence**: `results/intensity-preboom-study.json`; `scripts/build_intensity_preboom_study.py`.
+**Scope**: the same panel cut by filing date across three regimes, one price source, overlapping windows,
+no volume; development only.
+**Consequence**: the direction of the charge is not a property of this buildout, but its significance is
+fragile and its capacity is unknown. The next objects are volume and costs, not more cuts.
+
 ---
 
 # What these truths are pointing at

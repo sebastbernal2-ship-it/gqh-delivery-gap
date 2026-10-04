@@ -5,18 +5,18 @@ decomposed. Nothing here grades a path as dead.
 
 ## The graph, expanded
 
-- Nodes: **169,985**
-- Typed connections: **1,179,818**
+- Nodes: **170,502**
+- Typed connections: **1,183,166**
 - Distributions written down: **86** samples
-- Propagation paths: **656** from 173 seeds
+- Propagation paths: **668** from 174 seeds
 - Hidden objects: **39** (nodes 1, edges 15, gaps 2, assumptions 21)
 
 ## Delineation
 
-- Layers: `raw` 94,717, `mechanism` 45,148, `feature` 27,010, `asset` 1,024, `entity` 439, `dataset` 210, `event` 173, `outcome` 160
-- Connection status: `declared` 1,150,982, `inferred` 26,126, `proposed` 2,058, `curated` 630, `blocked` 22
+- Layers: `raw` 95,038, `mechanism` 45,305, `feature` 27,047, `asset` 1,024, `entity` 440, `dataset` 210, `event` 173, `outcome` 160
+- Connection status: `declared` 1,154,264, `inferred` 26,188, `proposed` 2,058, `curated` 634, `blocked` 22
 - Every connection carries a condition and a falsifier: 99.99% and 99.99%
-- Components: 1, largest 169,985, unreachable from anchors 0
+- Components: 1, largest 170,502, unreachable from anchors 0
 
 ## Distributions, centre, spread, tails
 
@@ -114,10 +114,10 @@ Top samples by tail ratio (p90 over median):
 | `outcome:portfolio:net-pnl` | `outcome:portfolio:net-pnl` -> `asset:options:defined-risk-spread` | 1 | E4 | needs data | The cross-layer relation is supported by point-in-time evidence |
 | `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `dig:compute:provider-revenue-line` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | Investment outruns revenue before it either lifts revenue or compresses margin. |
 | `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `dig:compute:depreciation-policy` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | High intensity becomes depreciation and interest inside reported earnings. |
+| `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `dig:compute:intensity-charge` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | A capex intensity surprise relative to revenue is charged in the equity over weeks. |
 | `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `sub:sub:dig:compute:capex-intensity:inputs:composition` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | The refinement chain from this node is valid. |
 | `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `sub:sub:dig:compute:capex-intensity:inputs:inputs` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | The refinement chain from this node is valid. |
 | `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `sub:sub:dig:compute:capex-intensity:inputs:constraints` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | The refinement chain from this node is valid. |
-| `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `sub:sub:dig:compute:capex-intensity:inputs:observables` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | The refinement chain from this node is valid. |
 
 ## Reproduce
 

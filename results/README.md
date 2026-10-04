@@ -133,3 +133,7 @@ generated-path: results/intensity-vs-assetgrowth-study.json
 Produced by `scripts/fetch_complex_assets.py`:
 
 generated-path: results/complex-assets-quarterly.csv
+
+Produced by `scripts/build_intensity_preboom_study.py`:
+
+generated-path: results/intensity-preboom-study.json
