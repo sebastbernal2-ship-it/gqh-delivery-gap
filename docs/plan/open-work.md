@@ -129,10 +129,11 @@ unattended (daily forward snapshot, daily option capture, daily tape block until
 
 What remains, in order:
 
-1. **Sizing and selection decoupling**, the declared follow-up to T58: raw extreme bins select the
-   trade, the standardized surprise sizes it. This is where the measured driver gain of the z-variant
-   can still be harvested, because the sleeve keeps its 635 extreme events while gaining the better
-   ranking inside them. The pure z-variant is rejected and assets and margins stay declined.
+1. **Sizing and selection decoupling, measured (T59).** The rule lifted the revenue sleeve to +37.56
+   percent at Sharpe 0.942 and the composite to 1.525, but the drawdown worsened to -14.6 percent and the
+   composite difference spans zero over ninety months. It is now a declared candidate for the forward
+   window rather than a new headline; the raw-conviction sleeve stays primary until the window separates
+   them. Assets and margins stay declined, and the pure z-variant stays rejected.
 2. **Reconcile the promotion gate with the expectation vintages.** Another session's
    `scripts/report_promotion_gate.py` still reports "expectation vintages missing" while the repository
    holds over eleven thousand measured, clock-verified vintages (T45 to T46). That edit is theirs and

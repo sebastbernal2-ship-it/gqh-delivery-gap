@@ -401,3 +401,11 @@ generated-path: results/margins-surprise-z.json
 Produced by `scripts/run_walk_forward.py --revenue results/revenue-z-on-pit.csv`:
 
 generated-path: results/walk-forward-z.json
+
+Produced by `scripts/run_walk_forward.py` with no size panel (baseline arm of the T59 comparison):
+
+generated-path: results/walk-forward-baseline.json
+
+Produced by `scripts/run_walk_forward.py --size-panel results/revenue-z-on-pit.csv`:
+
+generated-path: results/walk-forward-decoupled.json

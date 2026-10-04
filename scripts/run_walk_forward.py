@@ -64,8 +64,33 @@ def fit_at(rows: list[dict], origin: str, tickers: set[str] | None = None) -> di
             "probabilities": predict_softmax(parameters, apply_scaler(later_matrix, stats))}
 
 
+
+
+def scaled_conviction(conviction: float, z: float | None, reference: float = 2.0) -> float:
+    """The declared T58 decoupling: the raw model selects and signs the trade, the standardized
+    surprise caps its size. Without a z the conviction is unchanged, so the default path is identical.
+    """
+    if z is None:
+        return conviction
+    return conviction * min(1.0, abs(z) / reference)
+
+
+def load_size_lookup(panel: Path) -> dict:
+    """Standardized surprises keyed by (ticker, decision date) for the decoupled sizing variant."""
+    lookup = {}
+    for row in csv.DictReader(panel.open()):
+        raw = row.get("relative_surprise_z")
+        if raw in (None, ""):
+            continue
+        ticker = (row.get("ticker") or "").strip()
+        available = str(row.get("availability") or "")[:10]
+        if ticker and available:
+            lookup[(ticker, available)] = float(raw)
+    return lookup
+
+
 def sleeve_walk_forward(panel: Path, direction: float, tickers: set[str] | None = None,
-                        origins: tuple[str, ...] = ORIGINS
+                        origins: tuple[str, ...] = ORIGINS, size_lookup: dict | None = None
                         ) -> tuple[list[dict], list[dict], dict]:
     """One continuous event list and a per-block contribution table for one sleeve."""
     rows, _ = prepare_rows(list(csv.DictReader(panel.open())))
@@ -81,6 +106,9 @@ def sleeve_walk_forward(panel: Path, direction: float, tickers: set[str] | None 
                 continue
             expected = sum(k * float(p) for k, p in zip(fitted["classes"], values))
             conviction = direction * (expected - 2.0) / 2.0
+            if size_lookup is not None:
+                conviction = scaled_conviction(conviction,
+                                               size_lookup.get((str(row["ticker"]), decision)))
             if abs(conviction) < 1e-9:
                 continue
             events.append({"ticker": str(row["ticker"]), "decision": decision,
@@ -136,6 +164,8 @@ def main() -> int:
     parser.add_argument("--capex", type=Path, default=ROOT / "results" / "capex-vintages-pit.csv")
     parser.add_argument("--cache", type=Path, default=ROOT / "results" / "bar-cache")
     parser.add_argument("--output", type=Path, default=ROOT / "results" / "walk-forward.json")
+    parser.add_argument("--size-panel", type=Path, default=None,
+                        help="standardized surprises for the decoupled sizing variant (declared in T58)")
     args = parser.parse_args()
 
     report = {"schema": "walk-forward-v1", "scope": "development_only",
@@ -150,8 +180,11 @@ def main() -> int:
                   "flat costs on the driver sleeves, volume buckets on the intensity sleeve",
               ]}
     series = {}
+    size_lookup = load_size_lookup(args.size_panel) if args.size_panel else None
+    report["size_panel"] = str(args.size_panel) if args.size_panel else None
     for name, panel, direction in (("revenue", args.revenue, 1.0), ("capex", args.capex, -1.0)):
-        events, contributions, digests = sleeve_walk_forward(panel, direction)
+        events, contributions, digests = sleeve_walk_forward(
+            panel, direction, size_lookup=size_lookup if name == "revenue" else None)
         daily, info = sleeve_daily(events, args.cache, COSTS["base"])
         series[name] = daily
         report["sleeves"][name] = {
@@ -170,6 +203,7 @@ def main() -> int:
     inverse = inverse_vol_weights(values)
     for label, weights in (("equal_gross", equal), ("inverse_vol", inverse)):
         combined = weighted_daily(dates, values, weights)
+        report.setdefault("portfolio_daily", {})[label] = combined
         report.setdefault("portfolios", {})[label] = {
             "metrics": portfolio_metrics(combined),
             "metrics_vol_target": portfolio_metrics(apply_vol_target(combined, 0.10)),
@@ -185,6 +219,7 @@ def main() -> int:
     two_values = [values[names.index(name)] for name in two_names]
     two_inverse = inverse_vol_weights(two_values)
     two_combined = weighted_daily(dates, two_values, two_inverse)
+    report.setdefault("portfolio_daily", {})["without_capex_inverse_vol"] = two_combined
     report["without_capex"] = {
         "inverse_vol": {"metrics": portfolio_metrics(two_combined),
                         "metrics_vol_target": portfolio_metrics(apply_vol_target(two_combined, 0.10)),
@@ -195,8 +230,10 @@ def main() -> int:
     report["yearly_contributions"] = {}
     for name in ("revenue", "capex"):
         rows, _ = prepare_rows(list(csv.DictReader((args.revenue if name == "revenue" else args.capex).open())))
-        events, _, _ = sleeve_walk_forward(args.revenue if name == "revenue" else args.capex,
-                                           1.0 if name == "revenue" else -1.0)
+        events, _, _ = sleeve_walk_forward(
+            args.revenue if name == "revenue" else args.capex,
+            1.0 if name == "revenue" else -1.0,
+            size_lookup=size_lookup if name == "revenue" else None)
         daily, _ = sleeve_daily(events, args.cache, COSTS["base"])
         by_year: dict[str, list[float]] = {}
         for row in daily:

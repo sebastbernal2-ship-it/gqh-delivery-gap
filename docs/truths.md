@@ -985,3 +985,26 @@ difference is the target definition alone. The driver gain is measured on the sa
 input for **sizing and selection decoupling**, a declared untried variant in which raw extremes select
 the trade and the standardized value sizes it. A concept-agnostic target alone does not rescue assets
 or margins, so their decline stands.
+
+## T59. Decoupled sizing lifts the revenue sleeve and its Sharpe, worsens the drawdown, and does not separate from zero at the composite
+
+**Statement**: the declared T58 follow-up keeps the raw model's selection and sign and caps each
+position's size by the standardized surprise, `min(1, |z| / 2)`. On the same walk-forward window the
+revenue sleeve moves from **+27.65 percent at Sharpe 0.756** to **+37.56 percent at Sharpe 0.942**, its
+2020 loss improves from -23.6 percent under the pure z-variant to -5.8 percent, and 2021 turns positive
+at +2.2 percent, but one year of eight is now negative where the raw sleeve is positive in all eight.
+The two-sleeve composite without capex moves from +17.35 percent at Sharpe 1.493 with a -12.3 percent
+drawdown to +17.90 percent at **1.525** with a **-14.6** percent drawdown, and volatility-targeted from
+1.376 at -10.2 to 1.408 at -12.3. The month-blocked difference of the composite's daily series has a
+point of +0.68 percent with interval -2.62 to +3.83 and 66.4 percent of ninety months positive, so it
+**spans zero**: the Sharpe gain is not separable from noise at the portfolio level, while the
+drawdown cost is measured directly.
+**Evidence**: `results/walk-forward-decoupled.json`; `results/walk-forward-baseline.json`;
+`scripts/run_walk_forward.py --size-panel`; `scripts/run_walk_forward.py` `scaled_conviction` and
+`load_size_lookup`.
+**Scope**: development only; both arms share rows, prices, costs, origins and the intensity sleeve, so
+the difference is the sizing rule alone. The interval is blocked by month, ninety blocks.
+**Consequence**: the raw-conviction sleeve stays the headline and the decoupled rule is a declared
+candidate that the forward window must separate. It is the first variant in this series that improves
+the sleeve's Sharpe without improving its drawdown, so the next honest test of it is the forward
+window's own falsifiers, not another development pass.

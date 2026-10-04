@@ -46,3 +46,4 @@
 {"artifact": "T55", "axis": "universe", "declared_before": true, "id": "V046", "question": "long-history design", "status": "untried", "variant": "point-in-time rule-based universe"}
 {"artifact": "T58", "axis": "labels", "declared_before": true, "id": "V047", "question": "surprise binning", "status": "rejected", "variant": "z-scored change against trailing volatility, pure replacement"}
 {"artifact": "T58", "axis": "sizing", "declared_before": true, "id": "V048", "question": "position sizing", "status": "untried", "variant": "raw extremes select, standardized surprise sizes"}
+{"artifact": "T59", "axis": "sizing", "declared_before": true, "id": "V049", "note": "measured as a development candidate in T59; awaits the forward window", "question": "position sizing", "status": "untried", "variant": "raw selection and sign, standardized surprise caps size at z=2"}
