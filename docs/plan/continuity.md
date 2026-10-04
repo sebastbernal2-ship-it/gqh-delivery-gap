@@ -285,6 +285,55 @@ The council's blocks had all been filing-family data, two views of one document 
   layer. The option-implied bundle, which the ledger names as the risk-neutral anchor, is not in
   the council yet.
 
+## Late record, 2026-10-04: the clock discovery, the stages, and the forward window
+
+Read `docs/plan/open-work.md` beside this: it owns the gap list. This owns what happened.
+
+### The discovery that mattered
+
+`scripts/fetch_complex_fundamentals.py` kept the **latest** filing per quarter, a ten-K comparative, so
+every intensity signal carried a 401-day clock. The corrected rebuild
+(`scripts/build_complex_panels_pit.py`) takes the earliest filing, 34 days, and the published edge
+becomes a loss: +2.94 percent at Sharpe 0.347 turns into -4.89 percent at Sharpe -0.630 (T42). The RPO
+and obligation panels were verified clean at 38 and 55 days, so the expectation-gap studies stand.
+
+### The stages, in order
+
+1. Stage 1: the revenue-surprise gate rescues the corrected intensity expression out of sample,
+   -9.49 to +10.48 percent net, drawdown -38 to -16.3 percent, interval +7.75 to +35.30 (T44).
+2. Stage 2: breadth from cached XBRL frames, 11,031 events across 1,168 issuers at a 39-day clock
+   (T45).
+3. Stage 2b: price coverage 26 to 84 percent, driver breadth from companyconcept, and the answer that
+   breadth creates information and not alpha outside the complex (T46). Duration frames cannot carry a
+   clock; the price sanity rule caught 204 split-contaminated series.
+4. Stage 3: the two-sleeve complex composite buys risk, not return, at much larger capacity (T47).
+5. Three sleeves: Sharpe 1.365 unvolumetargeted, 1.549 volatility-targeted with a -9.0 percent
+   drawdown, the charge expression as the anchor (T48).
+6. In-sample arm: the composite is -13.86 percent in sample, and T49 exists so nobody quotes T47 or
+   T48 without it.
+7. Stage 4: the forward window is declared and armed, snapshots append-only with parameter digests
+   (T50).
+
+### Live state at handoff
+
+- The BTC capture runs to about 14:12 UTC; it supplies one of the five dates the risk cache needs.
+- `make check` is red from another session's untracked draft; `make test` is green with the forward
+  window, three-sleeve, portfolio statistics, price sanity, broad panel, driver vintage, gate,
+  coupling, market state, decision layer, registry and live-plan contracts.
+- The Makefile still holds that session's uncommitted hunk; never discard it.
+- Superseded untracked byproducts from the early build were deleted.
+
+### Traps learned here
+
+1. `set -e` with a failing command in a pipeline aborts the rest of the script silently; several
+   writes were lost that way and had to be redone. Check the writes landed.
+2. The write guard queues or blocks on another session's lease; narrow the write paths and retry.
+3. The control work record can be abandoned mid-session; a new one had to be bootstrapped.
+4. Two library readers only ever saw strings from disk and broke the first time the forward snapshot
+   handed them numbers in memory.
+5. A raw-close download turns a split into a ninety percent drop; the price sanity rule is not
+   optional.
+
 ## Traps this session, worth not repeating
 
 - The Pi task-control guard needs `CONTROL_WORK_ID` on mutating bash, and when several work records
