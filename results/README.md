@@ -230,6 +230,10 @@ Produced by `scripts/run_rpo_market_council.py`:
 
 generated-path: results/rpo-market-council.json
 
+Produced by `scripts/run_surprise_alpha.py`:
+
+generated-path: results/surprise-alpha.json
+
 Produced by `scripts/build_rpo_vintages.py`:
 
 generated-path: results/rpo-vintages.csv

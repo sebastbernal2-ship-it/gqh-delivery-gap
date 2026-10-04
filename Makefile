@@ -134,6 +134,7 @@ test:
 	@python3 tests/test_council_diagnostics.py
 	@python3 tests/test_specialist_registry.py
 	@python3 tests/test_coupling.py
+	@python3 tests/test_event_returns.py
 	@python3 tests/test_build_hyperliquid_fixture.py
 	@python3 tests/test_split_hyperliquid_engine_fixture.py
 	@python3 tests/test_compute_lead_dependence_audit.py
