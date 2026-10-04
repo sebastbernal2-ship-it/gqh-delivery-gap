@@ -257,6 +257,10 @@ Produced by `scripts/run_intensity_gate_test.py`:
 
 generated-path: results/intensity-gate-test.json
 
+Produced by `scripts/run_sleeve_portfolio.py`:
+
+generated-path: results/sleeve-portfolio.json
+
 Produced by `scripts/build_rpo_universe_panel.py` (broad cached frames, acceptance clocks):
 
 generated-path: results/rpo-universe-vintages.csv

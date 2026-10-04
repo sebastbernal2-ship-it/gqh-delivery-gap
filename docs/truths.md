@@ -713,3 +713,27 @@ borrow cost, no capacity model. The complex subsets inside the broad panels are 
 **Consequence**: breadth creates information, not alpha. The Sharpe target cannot be reached by
 widening the universe; it needs depth inside the complex, more sleeves inside it, and execution cost
 work. A market-wide disclosure-drift claim is not supported and will not be made.
+
+## T47. The two-sleeve complex composite buys risk, not return, and its capacity is far larger than the intensity expression
+
+**Statement**: inside the complex, out of sample, the revenue sleeve returns +35.94 percent a year at
+51.1 percent volatility, Sharpe 0.704 and a -65.1 percent drawdown over 797 sessions and 506 events.
+The capex sleeve, which is long low capex surprises and short high, returns +1.01 percent at 49.4
+percent volatility, Sharpe 0.021 and a -61.3 percent drawdown over 836 sessions and 237 events. The
+equal-gross composite returns +27.53 percent at 29.4 percent volatility, **Sharpe 0.938** and a
+**-20.2 percent drawdown**; volatility-targeted to ten percent it returns +11.28 percent at 16.1
+percent volatility, Sharpe 0.699 and a -15.6 percent drawdown. The composite-minus-revenue interval
+is -14.95 percent, -66.64 to +35.99, so no return improvement is claimed: the composite's gain is a
+40 percent volatility reduction and a two-thirds drawdown reduction at a better Sharpe. Capacity at
+one percent participation is a median of 56.2 million dollars for the revenue sleeve and 42.4 million
+for capex, with tenth percentiles of 6.8 and 5.3 million, over 54 and 55 tickers.
+**Evidence**: `results/sleeve-portfolio.json`; `scripts/run_sleeve_portfolio.py`;
+`src/filing_specialist/portfolio_stats.py`.
+**Scope**: development only, both sealed windows spent, complex names only, flat twenty and forty
+basis point round-trip costs, capacity from 60-session median dollar volume, models frozen from the
+first seventy percent of each panel, overlapping events, 633 overlapping sessions.
+**Consequence**: the drawdown requirement of the target is met by the composite and the volatility
+target while Sharpe 2 is not, at 0.94. The next increment is a third sleeve, the gated intensity
+expression of T44 at Sharpe 0.971 and -16.3 percent on the same window, plus more names and concepts
+inside the complex. The sleeves' capacity is twenty to forty times the intensity expression's, so the
+binding constraint on the combined strategy is the charge signal, not the expectation gap.

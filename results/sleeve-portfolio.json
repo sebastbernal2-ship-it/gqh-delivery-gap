@@ -1,0 +1,174 @@
+{
+ "schema": "sleeve-portfolio-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/alpha-build.md",
+ "horizon_sessions": 20,
+ "target_vol": 0.1,
+ "sleeves": {
+  "revenue_base": {
+   "events": {
+    "events_used": 506,
+    "sessions": 798
+   },
+   "cost_bps": 20.0,
+   "metrics": {
+    "days": 797,
+    "annual_return": 0.35943131818006274,
+    "annual_vol": 0.5107900615697142,
+    "sharpe": 0.7036771958238394,
+    "total_return": 1.0179532579825081,
+    "max_drawdown": -0.6506970314170826,
+    "hit_rate": 0.5156838143036386
+   },
+   "capacity": {
+    "covered_tickers": 54,
+    "events_with_adv": 500,
+    "capacity_1pct_median": 56222269.44509856,
+    "capacity_1pct_p10": 6824717.841540888
+   }
+  },
+  "revenue_doubled": {
+   "events": {
+    "events_used": 506,
+    "sessions": 798
+   },
+   "cost_bps": 40.0,
+   "metrics": {
+    "days": 797,
+    "annual_return": 0.33010323780998263,
+    "annual_vol": 0.5108850550533232,
+    "sharpe": 0.6461399380248625,
+    "total_return": 0.8383092207574068,
+    "max_drawdown": -0.6562323162395287,
+    "hit_rate": 0.5094102885821832
+   },
+   "capacity": {
+    "covered_tickers": 54,
+    "events_with_adv": 500,
+    "capacity_1pct_median": 56222269.44509856,
+    "capacity_1pct_p10": 6824717.841540888
+   }
+  },
+  "capex_base": {
+   "events": {
+    "events_used": 237,
+    "sessions": 837
+   },
+   "cost_bps": 20.0,
+   "metrics": {
+    "days": 836,
+    "annual_return": 0.010142751513105222,
+    "annual_vol": 0.49409071722261994,
+    "sharpe": 0.020528115909806202,
+    "total_return": -0.31474044600256335,
+    "max_drawdown": -0.613054769091468,
+    "hit_rate": 0.4916267942583732
+   },
+   "capacity": {
+    "covered_tickers": 55,
+    "events_with_adv": 239,
+    "capacity_1pct_median": 42396335.62251075,
+    "capacity_1pct_p10": 5310288.58008188
+   }
+  },
+  "capex_doubled": {
+   "events": {
+    "events_used": 237,
+    "sessions": 837
+   },
+   "cost_bps": 40.0,
+   "metrics": {
+    "days": 836,
+    "annual_return": -0.018016394159487678,
+    "annual_vol": 0.4949116721925212,
+    "sharpe": -0.0364032516745317,
+    "total_return": -0.3770090076239888,
+    "max_drawdown": -0.6205796384458603,
+    "hit_rate": 0.4916267942583732
+   },
+   "capacity": {
+    "covered_tickers": 55,
+    "events_with_adv": 239,
+    "capacity_1pct_median": 42396335.62251075,
+    "capacity_1pct_p10": 5310288.58008188
+   }
+  }
+ },
+ "composite": {
+  "base": {
+   "metrics": {
+    "days": 633,
+    "annual_return": 0.2753003094055491,
+    "annual_vol": 0.2936214408530411,
+    "sharpe": 0.9376028828335402,
+    "total_return": 0.7925133448350041,
+    "max_drawdown": -0.20209924592970274,
+    "hit_rate": 0.4881516587677725
+   },
+   "metrics_vol_target": {
+    "days": 633,
+    "annual_return": 0.11276962439870943,
+    "annual_vol": 0.16124528052212989,
+    "sharpe": 0.6993669770274767,
+    "total_return": 0.2851316971421829,
+    "max_drawdown": -0.15553194649828572,
+    "hit_rate": 0.4881516587677725
+   },
+   "days": 633
+  },
+  "doubled": {
+   "metrics": {
+    "days": 633,
+    "annual_return": 0.24707106456766176,
+    "annual_vol": 0.2939543236659402,
+    "sharpe": 0.8405083534285478,
+    "total_return": 0.6694084976048036,
+    "max_drawdown": -0.20598497540799698,
+    "hit_rate": 0.4834123222748815
+   },
+   "metrics_vol_target": {
+    "days": 633,
+    "annual_return": 0.0992576547163692,
+    "annual_vol": 0.16117339283106838,
+    "sharpe": 0.6158439241916606,
+    "total_return": 0.24228639447451594,
+    "max_drawdown": -0.15700982878671887,
+    "hit_rate": 0.4834123222748815
+   },
+   "days": 633
+  }
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only; both sealed windows are spent",
+  "complex names only, 55 issuers, few hundred events",
+  "flat round-trip costs, capacity from 60-session median dollar volume",
+  "the models are frozen from the first seventy percent of each panel"
+ ],
+ "intervals": {
+  "composite_minus_revenue_base": {
+   "point": -0.14946141264287896,
+   "lower": -0.6664235257856133,
+   "upper": 0.3598577003853844,
+   "months": 37,
+   "share_positive": 0.259,
+   "resamples": 1000
+  },
+  "composite_minus_capex_base": {
+   "point": 0.19027794362866812,
+   "lower": -0.2733552120354608,
+   "upper": 0.664687222040779,
+   "months": 37,
+   "share_positive": 0.799,
+   "resamples": 1000
+  },
+  "composite_minus_best_sleeve": {
+   "point": -0.14946141264287896,
+   "lower": -0.6664235257856133,
+   "upper": 0.3598577003853844,
+   "months": 37,
+   "share_positive": 0.259,
+   "resamples": 1000
+  }
+ }
+}
