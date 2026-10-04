@@ -421,3 +421,7 @@ generated-path: results/council-sleeve-sign.json
 Produced by `scripts/run_council_sleeve.py --sizing split`:
 
 generated-path: results/council-sleeve-split.json
+
+Produced by `scripts/run_state_transfer_test.py`:
+
+generated-path: results/state-transfer.json

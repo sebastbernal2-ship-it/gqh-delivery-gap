@@ -1,0 +1,382 @@
+{
+ "schema": "state-transfer-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/open-work.md",
+ "design": {
+  "concepts": [
+   "revenue",
+   "assets",
+   "operating_income",
+   "capex"
+  ],
+  "state_features_per_concept": [
+   "last_surprise",
+   "mean_surprise_3",
+   "last_change",
+   "days_since",
+   "prior_count"
+  ],
+  "hidden": 24,
+  "steps": 900,
+  "rate": 0.15,
+  "l2": 0.001,
+  "matrix": {
+   "A1": "linear, revenue labels only",
+   "A2": "linear trunk, all concepts jointly",
+   "A3": "one hidden layer, revenue labels only",
+   "A4": "one hidden layer, all concepts jointly"
+  }
+ },
+ "summary": {
+  "A1_linear_single": {
+   "log_loss": 1.599471032851087,
+   "log_loss_by_fold": [
+    1.6378893141344093,
+    1.7097497200019351,
+    1.6415928122703032,
+    1.4882191790681218,
+    1.6119465378841593,
+    1.5892381895217242,
+    1.5012547806752772,
+    1.6158777292527657
+   ],
+   "accuracy": 0.29218064328235893,
+   "rows": 1144
+  },
+  "A2_linear_multi": {
+   "log_loss": 1.5724325701752024,
+   "log_loss_by_fold": [
+    1.6310548900763748,
+    1.6467491266912222,
+    1.5985246605883985,
+    1.510637550601883,
+    1.6107096879056504,
+    1.5577517366089595,
+    1.4954692052980056,
+    1.5285637036311253
+   ],
+   "accuracy": 0.2912174478405305,
+   "rows": 1144
+  },
+  "A3_hidden_single": {
+   "log_loss": 1.5911479528939014,
+   "log_loss_by_fold": [
+    1.649740230783612,
+    1.7323808505418976,
+    1.6421050860116864,
+    1.4750115491532017,
+    1.5984912935645146,
+    1.5769903254514663,
+    1.4894814781354895,
+    1.5649828095093428
+   ],
+   "accuracy": 0.2907608080595496,
+   "rows": 1144
+  },
+  "A4_hidden_multi": {
+   "log_loss": 1.5658533883997277,
+   "log_loss_by_fold": [
+    1.6356399194549567,
+    1.6275337065537911,
+    1.5978499843103005,
+    1.5060162184472956,
+    1.5944783786461425,
+    1.556005614765575,
+    1.492762286413011,
+    1.5165409986067484
+   ],
+   "accuracy": 0.3007540520684681,
+   "rows": 1144
+  }
+ },
+ "folds": [
+  {
+   "block": "2019-01-01",
+   "train": {
+    "revenue": 562,
+    "assets": 1280,
+    "operating_income": 1106,
+    "capex": 362
+   },
+   "test": 116,
+   "A1_linear_single": {
+    "rows": 116,
+    "log_loss": 1.6378893141344093,
+    "accuracy": 0.21551724137931033
+   },
+   "A2_linear_multi": {
+    "rows": 116,
+    "log_loss": 1.6310548900763748,
+    "accuracy": 0.21551724137931033
+   },
+   "A3_hidden_single": {
+    "rows": 116,
+    "log_loss": 1.649740230783612,
+    "accuracy": 0.19827586206896552
+   },
+   "A4_hidden_multi": {
+    "rows": 116,
+    "log_loss": 1.6356399194549567,
+    "accuracy": 0.23275862068965517
+   }
+  },
+  {
+   "block": "2020-01-01",
+   "train": {
+    "revenue": 678,
+    "assets": 1469,
+    "operating_income": 1266,
+    "capex": 415
+   },
+   "test": 159,
+   "A1_linear_single": {
+    "rows": 159,
+    "log_loss": 1.7097497200019351,
+    "accuracy": 0.25157232704402516
+   },
+   "A2_linear_multi": {
+    "rows": 159,
+    "log_loss": 1.6467491266912222,
+    "accuracy": 0.2641509433962264
+   },
+   "A3_hidden_single": {
+    "rows": 159,
+    "log_loss": 1.7323808505418976,
+    "accuracy": 0.25157232704402516
+   },
+   "A4_hidden_multi": {
+    "rows": 159,
+    "log_loss": 1.6275337065537911,
+    "accuracy": 0.2830188679245283
+   }
+  },
+  {
+   "block": "2021-01-01",
+   "train": {
+    "revenue": 837,
+    "assets": 1664,
+    "operating_income": 1428,
+    "capex": 466
+   },
+   "test": 152,
+   "A1_linear_single": {
+    "rows": 152,
+    "log_loss": 1.6415928122703032,
+    "accuracy": 0.17105263157894737
+   },
+   "A2_linear_multi": {
+    "rows": 152,
+    "log_loss": 1.5985246605883985,
+    "accuracy": 0.17105263157894737
+   },
+   "A3_hidden_single": {
+    "rows": 152,
+    "log_loss": 1.6421050860116864,
+    "accuracy": 0.18421052631578946
+   },
+   "A4_hidden_multi": {
+    "rows": 152,
+    "log_loss": 1.5978499843103005,
+    "accuracy": 0.17105263157894737
+   }
+  },
+  {
+   "block": "2022-01-01",
+   "train": {
+    "revenue": 989,
+    "assets": 1857,
+    "operating_income": 1571,
+    "capex": 518
+   },
+   "test": 143,
+   "A1_linear_single": {
+    "rows": 143,
+    "log_loss": 1.4882191790681218,
+    "accuracy": 0.34965034965034963
+   },
+   "A2_linear_multi": {
+    "rows": 143,
+    "log_loss": 1.510637550601883,
+    "accuracy": 0.35664335664335667
+   },
+   "A3_hidden_single": {
+    "rows": 143,
+    "log_loss": 1.4750115491532017,
+    "accuracy": 0.3356643356643357
+   },
+   "A4_hidden_multi": {
+    "rows": 143,
+    "log_loss": 1.5060162184472956,
+    "accuracy": 0.3706293706293706
+   }
+  },
+  {
+   "block": "2023-01-01",
+   "train": {
+    "revenue": 1132,
+    "assets": 2076,
+    "operating_income": 1703,
+    "capex": 571
+   },
+   "test": 150,
+   "A1_linear_single": {
+    "rows": 150,
+    "log_loss": 1.6119465378841593,
+    "accuracy": 0.32666666666666666
+   },
+   "A2_linear_multi": {
+    "rows": 150,
+    "log_loss": 1.6107096879056504,
+    "accuracy": 0.32666666666666666
+   },
+   "A3_hidden_single": {
+    "rows": 150,
+    "log_loss": 1.5984912935645146,
+    "accuracy": 0.34
+   },
+   "A4_hidden_multi": {
+    "rows": 150,
+    "log_loss": 1.5944783786461425,
+    "accuracy": 0.3333333333333333
+   }
+  },
+  {
+   "block": "2024-01-01",
+   "train": {
+    "revenue": 1282,
+    "assets": 2294,
+    "operating_income": 1851,
+    "capex": 626
+   },
+   "test": 151,
+   "A1_linear_single": {
+    "rows": 151,
+    "log_loss": 1.5892381895217242,
+    "accuracy": 0.304635761589404
+   },
+   "A2_linear_multi": {
+    "rows": 151,
+    "log_loss": 1.5577517366089595,
+    "accuracy": 0.26490066225165565
+   },
+   "A3_hidden_single": {
+    "rows": 151,
+    "log_loss": 1.5769903254514663,
+    "accuracy": 0.2980132450331126
+   },
+   "A4_hidden_multi": {
+    "rows": 151,
+    "log_loss": 1.556005614765575,
+    "accuracy": 0.2847682119205298
+   }
+  },
+  {
+   "block": "2025-01-01",
+   "train": {
+    "revenue": 1433,
+    "assets": 2512,
+    "operating_income": 2012,
+    "capex": 681
+   },
+   "test": 165,
+   "A1_linear_single": {
+    "rows": 165,
+    "log_loss": 1.5012547806752772,
+    "accuracy": 0.37575757575757573
+   },
+   "A2_linear_multi": {
+    "rows": 165,
+    "log_loss": 1.4954692052980056,
+    "accuracy": 0.3696969696969697
+   },
+   "A3_hidden_single": {
+    "rows": 165,
+    "log_loss": 1.4894814781354895,
+    "accuracy": 0.37575757575757573
+   },
+   "A4_hidden_multi": {
+    "rows": 165,
+    "log_loss": 1.492762286413011,
+    "accuracy": 0.3878787878787879
+   }
+  },
+  {
+   "block": "2026-01-01",
+   "train": {
+    "revenue": 1598,
+    "assets": 2753,
+    "operating_income": 2169,
+    "capex": 743
+   },
+   "test": 108,
+   "A1_linear_single": {
+    "rows": 108,
+    "log_loss": 1.6158777292527657,
+    "accuracy": 0.3425925925925926
+   },
+   "A2_linear_multi": {
+    "rows": 108,
+    "log_loss": 1.5285637036311253,
+    "accuracy": 0.3611111111111111
+   },
+   "A3_hidden_single": {
+    "rows": 108,
+    "log_loss": 1.5649828095093428,
+    "accuracy": 0.3425925925925926
+   },
+   "A4_hidden_multi": {
+    "rows": 108,
+    "log_loss": 1.5165409986067484,
+    "accuracy": 0.3425925925925926
+   }
+  }
+ ],
+ "controlled_effects": {
+  "transfer_linear": -0.02703846267588461,
+  "capacity": -0.00832307995718562,
+  "transfer_with_capacity": -0.025294564494173777,
+  "both": -0.033617644451359396
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only",
+  "one hidden layer at 24 units on a few thousand rows",
+  "the state uses only own-history features, so no new information enters; the question is whether shared training organises what is already there"
+ ],
+ "sleeve_comparison": {
+  "transfer": {
+   "events": 1144,
+   "sessions": 1870,
+   "metrics": {
+    "days": 1869,
+    "annual_return": 0.06899784367187586,
+    "annual_vol": 0.3543724938261973,
+    "sharpe": 0.19470428679974242,
+    "total_return": 0.03975046491064882,
+    "max_drawdown": -0.6111333983446919,
+    "hit_rate": 0.5029427501337613
+   }
+  },
+  "baseline": {
+   "events": 1144,
+   "sessions": 1870,
+   "metrics": {
+    "days": 1869,
+    "annual_return": 0.2764660251816777,
+    "annual_vol": 0.36563091160670286,
+    "sharpe": 0.7561341681062872,
+    "total_return": 3.685380489665415,
+    "max_drawdown": -0.581087100164883,
+    "hit_rate": 0.5296950240770465
+   }
+  },
+  "interval": {
+   "point": -0.22531345704260583,
+   "lower": -0.4158700291305055,
+   "upper": -0.038807053691177484,
+   "months": 93,
+   "share_positive": 0.013,
+   "resamples": 1000
+  }
+ }
+}

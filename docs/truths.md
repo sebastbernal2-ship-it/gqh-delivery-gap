@@ -1058,3 +1058,30 @@ fusion does not produce the directional exposure the sleeve needs, and the measu
 three ways. The council keeps its role in the decision layer and in the calibration of size, where it
 is scored rather than traded. Development levers on this line are now exhausted, and what remains is
 the forward window, the risk-track execution work on its five dates, and the vision gaps.
+
+## T62. Cross-concept sharing improves the model and not the trades, and the direct data under this complex is free and open
+
+**Statement**: four concepts hold 7,779 measured expectations (revenue 1,706, assets 3,009,
+operating income 2,267, capex 797). Training one shared trunk with a separate linear decoder per
+concept, with each decoder seeing only its own labelled rows, was tested against three controls on the
+same folds and the same point-in-time issuer state. Revenue-head results, mean across eight annual
+folds: linear single-task **1.5995** log loss at 0.292 accuracy, linear multitask **1.5724**, one hidden
+layer single-task **1.5911**, and the shared encoder with per-concept decoders **1.5659 at 0.3008**. The
+transfer effect (-0.0270) is **larger than the capacity effect** (-0.0083), so the gain comes from
+borrowing labels across concepts rather than from depth. The traded result moves the other way: the
+transfer arm's sleeve returns **+6.90 percent at Sharpe 0.195 with a -61.1 percent drawdown** against
+the baseline sleeve's +27.65 at 0.756 with -58.1, with the daily difference positive in only **1.3
+percent** of months. Better distributions again do not become better positions.
+**Evidence**: `results/state-transfer.json`; `scripts/run_state_transfer_test.py`;
+`tests/test_state_transfer.py`; the folds and arms are stored per origin in the artifact.
+**Scope**: development only; one hidden layer of 24 units, full-batch training of 900 steps, one fold
+structure, and the state features are a different construction from the baseline sleeve's own features,
+so the sleeve comparison is not a strict feature-controlled experiment.
+**Consequence**: architecture is not the binding constraint. The quarterly SEC panel holds about
+1,706 revenue rows, so depth has almost nothing to fit, and the score gains that sharing does produce
+do not reach the sleeve. The direct physical data under this complex is where both volume and causality
+live, and the probes say the highest-value family is free and open today: **EIA-930 hourly balancing
+authority load and generation is a 200 without a key**, FRED's CSV endpoint answers 200 without a key,
+FINRA answers 200 under the existing free credential, while PJM (401), the EIA keyed API (403), the
+LBNL queue file (403), Cloudflare Radar (400) and NOAA CDO (400) need a key or a different endpoint.
+The next specialists therefore read grid load, fuel mix and rates, not more filings.

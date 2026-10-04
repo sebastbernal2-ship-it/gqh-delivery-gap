@@ -49,3 +49,6 @@
 {"artifact": "T59", "axis": "sizing", "declared_before": true, "id": "V049", "note": "measured as a development candidate in T59; awaits the forward window", "question": "position sizing", "status": "untried", "variant": "raw selection and sign, standardized surprise caps size at z=2"}
 {"artifact": "T60", "axis": "fusion", "declared_before": true, "id": "V050", "question": "specialist combination", "status": "rejected", "variant": "simplex-weighted linear pool of three blocks as positions"}
 {"artifact": "T61", "axis": "fusion", "declared_before": true, "id": "V051", "note": "measured: composite Sharpe 1.100 against the baseline 1.493, positive in 11 percent of months", "question": "specialist combination", "status": "rejected", "variant": "specialist sets direction, council sets size"}
+{"artifact": "T62", "axis": "architecture", "declared_before": true, "id": "V052", "question": "model capacity", "status": "rejected", "variant": "one hidden layer, single concept"}
+{"artifact": "T62", "axis": "architecture", "declared_before": true, "id": "V053", "question": "model capacity", "status": "reported", "variant": "shared trunk with per-concept decoders"}
+{"artifact": "T62", "axis": "data", "declared_before": true, "id": "V054", "question": "specialist families", "status": "untried", "variant": "EIA-930 grid load and generation, FRED, FINRA"}

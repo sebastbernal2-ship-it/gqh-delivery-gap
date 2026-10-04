@@ -147,6 +147,14 @@ What remains, in order:
 4. **The risk track**, once the tape has five whole dates: the declared council comparison and the
    coupling layer over its twelve marginals.
 5. **The forward window**, running; it closes at 250 scored events or twelve months.
+5b. **Non-SEC specialists, the declared next build.** The complex is a power and compute complex, and
+   the physical data under it is free and open today: EIA-930 hourly balancing-authority load and
+   generation (200 without a key), FRED CSVs (200), FINRA aggregates under the existing credential (200).
+   Keyed or blocked for now: PJM, the EIA JSON API, the LBNL queue file, Cloudflare Radar, NOAA CDO.
+   The first two specialists are grid load growth by region and the generation mix, and they bring what
+   the filings panel cannot: daily or hourly observations, tens of thousands of rows, and a causal link
+   to the names the sleeve already trades. Test each with the council's three numbers and the sleeve
+   comparison, and let the sequence models run where the sample actually supports depth.
 6. **The vision gaps** unchanged: the bundle ladder as a routine, fine-tune rounds with drift monitors
    and rollback, the full policy layer, a model registry, quantum only against an equal-budget
    classical win, and scenario and tail diagnostics beyond what T54 covers.
