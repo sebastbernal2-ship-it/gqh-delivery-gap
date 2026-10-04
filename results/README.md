@@ -189,3 +189,11 @@ generated-path: results/hyperliquid-forced-flow-candidates.jsonl
 Produced by `scripts/evaluate_ws_capture_conjunction.py`:
 
 generated-path: results/hyperliquid-ws-conjunction.json
+
+Produced by `scripts/build_filing_specialist_panel.py`:
+
+generated-path: results/filing-specialist-events.csv
+
+Produced by `scripts/run_filing_specialist.py`:
+
+generated-path: results/filing-specialist-scores.json

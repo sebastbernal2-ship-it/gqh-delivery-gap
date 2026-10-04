@@ -121,6 +121,7 @@ test:
 	@python3 tests/test_index_mandate.py
 	@python3 tests/test_ownership_layer.py
 	@python3 tests/test_intensity_accounting.py
+	@python3 tests/test_filing_specialist.py
 
 # Fit the delivery model: what moves a promise, controls first then factors.
 delivery-model:
