@@ -13,6 +13,14 @@ bash deploy/setup.sh
 
 `docs/engine-io-contract.md` owns the input and output format: canonical JSONL in, one report out, with samples in `examples/io-contract/`.
 
+For source-neutral accounting, `Instrument_spec`, `Asset_account`, `Asset_replay`, and `Asset_loop`
+provide a tested opt-in library path for a single cash equity, listed future, perpetual, or long
+cash-settled option. It consumes the canonical event contract, executes visible-depth IOC/FOK
+taker orders, and posts fees, settlement, funding, and expiry to a fixed-point account. It is not
+yet wired to the legacy CLI/report and does not certify passive fills, multi-symbol portfolios,
+physical option exercise, short stock, or venue liquidation rules. The exact scope and remaining
+gates are in `docs/adr/ADR-008-instrument-accounting.md`.
+
 ## Deploy on a machine
 
 `deploy/README.md` is the runbook. On a fresh Ubuntu host with sudo:

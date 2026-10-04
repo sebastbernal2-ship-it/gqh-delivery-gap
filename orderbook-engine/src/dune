@@ -1,7 +1,7 @@
 (library
  (name market_simulator)
  (public_name market_simulator)
- (modules side order_id price size timestamp market_types serror bitemporal order_book market_data sonarx hf_l2 exec_units exec_event depth_chain l2_book exec_account exec_fills exec_loop exec_strategy naive_backtest regime binance_l2 binance_trades binance_units binance_maker_model binance_account binance_backtest binance_derivatives l2_metrics l2_execution l2_backtest backtest_metrics event_replay nyse_binary nyse_capture sonarx_replay event_loop websocket_server metrics list_utils)
+ (modules side order_id price size timestamp market_types serror bitemporal order_book market_data sonarx hf_l2 exec_units exec_event instrument_spec asset_account asset_replay asset_loop depth_chain l2_book exec_account exec_fills exec_loop exec_strategy naive_backtest regime binance_l2 binance_trades binance_units binance_maker_model binance_account binance_backtest binance_derivatives l2_metrics l2_execution l2_backtest backtest_metrics event_replay nyse_binary nyse_capture sonarx_replay event_loop websocket_server metrics list_utils)
  (libraries incr lwt lwt.unix csv fmt logs ptime.clock websocket sexplib0 base yojson)
  (preprocess (pps ppx_deriving.show ppx_deriving.eq ppx_deriving.ord))
 )
