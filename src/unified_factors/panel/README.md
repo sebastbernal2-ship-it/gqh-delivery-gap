@@ -93,6 +93,45 @@ excess-return variation in the four operating-company names and about 99.6% for 
 changed operating-company R-squared by less than 0.2 percentage points. These descriptive fits are not alpha,
 forecast, hedge, or out-of-sample evidence. Unexplained residual variation is not thereby proven diversifiable.
 
+### Broad industry-block sensitivity
+
+To test whether residual co-movement might partly reflect omitted industry movement, the separate
+`unified_factors.industry_audit` compares FF5 with FF5 plus all 12 daily French industry portfolio returns
+on the exact same 2,201 development rows. This is a broad control-block experiment, not an issuer-matched
+sector model: no company was assigned a portfolio by SIC, and the controls are not execution instruments.
+The command and report schema are documented in the factor-model README; the JSON result remains private
+under `/private/tmp/factor-panel-industry-audit.json`.
+
+| Asset | FF5 R² | FF5 + industry-block R² | Change |
+|---|---:|---:|---:|
+| PWR | 0.4605 | 0.5307 | +7.02 pp |
+| ETN | 0.5935 | 0.6923 | +9.88 pp |
+| EME | 0.4898 | 0.5206 | +3.09 pp |
+| DLR | 0.2732 | 0.3917 | +11.86 pp |
+| SPY | 0.9956 | 0.9960 | +0.05 pp |
+
+The 12-control block adds in-sample fit for the four operating names, most for DLR and least for EME. For
+SPY its incremental contribution is negligible. The factors overlap materially: the largest absolute
+pairwise correlation in the 17-column standardized factor design is 0.949, and its condition number is
+79.4. Coefficients should not be read as cleanly separable economic causes. After adding the block, the
+PWR/ETN, PWR/EME, and ETN/EME residual correlations fall from 0.302/0.260/0.220 to 0.175/0.206/0.136,
+while the first residual-covariance eigenvalue share only falls from 37.3% to 35.8%. The block absorbs some
+measured common movement but leaves substantial unnamed common residual risk.
+
+This does **not** identify which industry or physical channel caused the movement; the 12-industry factors
+are broad portfolios, not asset-specific exposures. All figures are in-sample, use revised retrospective
+histories whose point-in-time publication status is unverified, and add 12 regressors. There are no p-values,
+forecast claims, P&L, hedge claims, or holdout results. Do not select or promote this augmented model based
+on these numbers. The next factor-design step is to construct point-in-time asset-to-industry assignments
+and keep these separate from asset-specific economic exposures such as project, contract, backlog, energy,
+and financing channels. If no defensible historical mapping or dated exposure exists, leave the component
+unidentified instead of using statistical fit to name it.
+
+For a correctly dated sector comparison, the French construction assigns stocks by four-digit SIC at each
+June-end: Compustat SIC for fiscal year t-1 where available, with CRSP's June SIC as fallback
+([official industry specification](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/changes_ind.html)).
+This reinforces why a current SIC value or current ETF classification cannot simply be carried backward.
+
 Once the authorized CSV is at `development-export.csv` and official French archives are in
 `/tmp/french-daily-20261003`:
 
