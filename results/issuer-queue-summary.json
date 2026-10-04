@@ -1,0 +1,73 @@
+{
+ "queue_rows": 36441,
+ "named_rows": 30299,
+ "names_seen": 3774,
+ "matched_names": 78,
+ "unmatched_names": 3598,
+ "matched_mw": 1119019.6,
+ "matched_mw_share": 0.1788,
+ "issuers": 57,
+ "top_issuers": [
+  {
+   "ticker": "TVE",
+   "queue_mw": 255060.0,
+   "at_risk_share": 0.623
+  },
+  {
+   "ticker": "SO",
+   "queue_mw": 252645.3,
+   "at_risk_share": 0.561
+  },
+  {
+   "ticker": "D",
+   "queue_mw": 124195.2,
+   "at_risk_share": 0.558
+  },
+  {
+   "ticker": "EAI",
+   "queue_mw": 64654.4,
+   "at_risk_share": 0.558
+  },
+  {
+   "ticker": "OGE",
+   "queue_mw": 63292.9,
+   "at_risk_share": 0.617
+  },
+  {
+   "ticker": "AILIH",
+   "queue_mw": 60089.8,
+   "at_risk_share": 0.567
+  },
+  {
+   "ticker": "PPL",
+   "queue_mw": 49468.7,
+   "at_risk_share": 0.579
+  },
+  {
+   "ticker": "ELC",
+   "queue_mw": 37867.3,
+   "at_risk_share": 0.554
+  },
+  {
+   "ticker": "NWE",
+   "queue_mw": 35887.6,
+   "at_risk_share": 0.611
+  },
+  {
+   "ticker": "PNMXO",
+   "queue_mw": 31544.6,
+   "at_risk_share": 0.549
+  },
+  {
+   "ticker": "EMP",
+   "queue_mw": 28782.2,
+   "at_risk_share": 0.563
+  },
+  {
+   "ticker": "POR",
+   "queue_mw": 26594.9,
+   "at_risk_share": 0.542
+  }
+ ],
+ "base_withdrawal_share": 0.5741
+}
