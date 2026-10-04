@@ -64,6 +64,15 @@
    "tier": "full"
   },
   {
+   "artifact": "results/fred-rates-test.json",
+   "claim": "rates information, the timing rule and the event-level incremental test",
+   "command": "python3 scripts/run_fred_rates_test.py --output {output}",
+   "exact": true,
+   "name": "fred rates test",
+   "sha256": "d8499442cf8df450e1d92a3e4aa94fbc449b60545814256fbe1e9f1a5dd66563",
+   "tier": "full"
+  },
+  {
    "artifact": "results/walk-forward-baseline.json",
    "claim": "the rolling-origin record and the two-sleeve composite",
    "command": "python3 scripts/run_walk_forward.py --output {output}",

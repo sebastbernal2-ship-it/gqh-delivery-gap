@@ -85,3 +85,4 @@ results/forward/raw/
 results/forward/*-quarterly.csv
 results/eia-raw/
 results/eia-*.csv
+results/fred-raw/

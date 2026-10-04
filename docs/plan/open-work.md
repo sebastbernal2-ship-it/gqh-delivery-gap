@@ -192,6 +192,13 @@ What remains, in order:
    The frozen configuration therefore stands as the system, joint testing is closed as a lever, and every
    sleeve result is now reported against constant long exposure as the floor.
 
+5f. **Rates are informative and not tradable here (T69).** The strongest aggregate information
+   measured outside the disclosure model, term-spread z at +0.267 against forward basket returns, and
+   every use loses: timing the basket gives up 10 points against simply holding it, the sleeve's regime
+   split is flat, and adding rates at the events degrades the model. Three conditioning families are now
+   closed as measured, phases, grid load and rates. Remaining untried: FINRA positioning, and the
+   multi-date execution evidence the timer is still collecting.
+
 6. **The vision gaps** unchanged: the bundle ladder as a routine, fine-tune rounds with drift monitors
    and rollback, the full policy layer, a model registry, quantum only against an equal-budget
    classical win, and scenario and tail diagnostics beyond what T54 covers.

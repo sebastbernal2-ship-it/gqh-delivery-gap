@@ -1,0 +1,224 @@
+{
+ "schema": "fred-rates-test-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/open-work.md",
+ "basket_tickers": 61,
+ "information": {
+  "DFII10.level_z": {
+   "samples": 390,
+   "ic": -0.1149806780705077
+  },
+  "DFII10.change_20": {
+   "samples": 390,
+   "ic": -0.030626509960364878
+  },
+  "DFII10.change_60": {
+   "samples": 390,
+   "ic": -0.1632239528202026
+  },
+  "T10Y2Y.level_z": {
+   "samples": 390,
+   "ic": 0.26659023196936
+  },
+  "T10Y2Y.change_20": {
+   "samples": 390,
+   "ic": 0.12772743663413555
+  },
+  "T10Y2Y.change_60": {
+   "samples": 390,
+   "ic": 0.2616632790282847
+  },
+  "BAA10Y.level_z": {
+   "samples": 390,
+   "ic": 0.21098434369922014
+  },
+  "BAA10Y.change_20": {
+   "samples": 390,
+   "ic": 0.033949446893647706
+  },
+  "BAA10Y.change_60": {
+   "samples": 390,
+   "ic": 0.17085339659847049
+  },
+  "DHHNGSP.level_z": {
+   "samples": 390,
+   "ic": -0.15576484344457833
+  },
+  "DHHNGSP.change_20": {
+   "samples": 390,
+   "ic": -0.20683805638736305
+  },
+  "DHHNGSP.change_60": {
+   "samples": 390,
+   "ic": -0.20033480218096814
+  },
+  "VIXCLS.level_z": {
+   "samples": 390,
+   "ic": 0.10079295519567971
+  },
+  "VIXCLS.change_20": {
+   "samples": 390,
+   "ic": -0.02953754310830951
+  },
+  "VIXCLS.change_60": {
+   "samples": 390,
+   "ic": 0.10791483482165207
+  }
+ },
+ "best_feature": "T10Y2Y.level_z",
+ "timing": {
+  "feature": "T10Y2Y.level_z",
+  "optimised": {
+   "days": 1192,
+   "metrics": {
+    "days": 1192,
+    "annual_return": 0.24166396888076802,
+    "annual_vol": 0.2095250537465362,
+    "sharpe": 1.1533893658994616,
+    "total_return": 1.8262135614651611,
+    "max_drawdown": -0.25213274257972074,
+    "hit_rate": 0.5503355704697986
+   }
+  },
+  "always_long": {
+   "days": 1192,
+   "metrics": {
+    "days": 1192,
+    "annual_return": 0.34623731816420095,
+    "annual_vol": 0.27151095907317563,
+    "sharpe": 1.2752240990422992,
+    "total_return": 3.315964087244179,
+    "max_drawdown": -0.27939074725993684,
+    "hit_rate": 0.5503355704697986
+   }
+  },
+  "interval": {
+   "point": -0.10655039024449225,
+   "lower": -0.19935955413904255,
+   "upper": -0.028093134894412723,
+   "months": 58,
+   "share_positive": 0.007,
+   "resamples": 1000
+  }
+ },
+ "conditioning": {
+  "regimes": {
+   "high": {
+    "days": 771,
+    "metrics": {
+     "days": 771,
+     "annual_return": 0.2974956508902229,
+     "annual_vol": 0.42528409437163933,
+     "sharpe": 0.6995221660706007,
+     "total_return": 0.8633015933664079,
+     "max_drawdown": -0.5803556312100875,
+     "hit_rate": 0.5421530479896238
+    }
+   },
+   "mid": {
+    "days": 588,
+    "metrics": {
+     "days": 588,
+     "annual_return": 0.32352953435129084,
+     "annual_vol": 0.3167374142122356,
+     "sharpe": 1.0214440095621418,
+     "total_return": 0.8938162107944918,
+     "max_drawdown": -0.21294466310750448,
+     "hit_rate": 0.5102040816326531
+    }
+   },
+   "low": {
+    "days": 510,
+    "metrics": {
+     "days": 510,
+     "annual_return": 0.19041272162673478,
+     "annual_vol": 0.31746470144872013,
+     "sharpe": 0.5997917902614193,
+     "total_return": 0.32777314244981604,
+     "max_drawdown": -0.3310920432334512,
+     "hit_rate": 0.5333333333333333
+    }
+   }
+  },
+  "constant_long": {
+   "metrics": {
+    "days": 1869,
+    "annual_return": 0.28142388805412205,
+    "annual_vol": 0.384863068141517,
+    "sharpe": 0.7312312127352277,
+    "total_return": 3.6132271893967998,
+    "max_drawdown": -0.5776319179843713,
+    "hit_rate": 0.5254146602461209
+   }
+  }
+ },
+ "incremental_at_events": {
+  "DFII10.level_z": {
+   "folds": 8,
+   "log_loss_baseline": 1.6110856544739085,
+   "log_loss_with_rates": 1.6155702943791241,
+   "improved_folds": 2
+  },
+  "DFII10.change_60": {
+   "folds": 8,
+   "log_loss_baseline": 1.6110856544739085,
+   "log_loss_with_rates": 1.616745617818808,
+   "improved_folds": 2
+  },
+  "T10Y2Y.level_z": {
+   "folds": 8,
+   "log_loss_baseline": 1.6110856544739085,
+   "log_loss_with_rates": 1.6168096071480331,
+   "improved_folds": 2
+  },
+  "T10Y2Y.change_60": {
+   "folds": 8,
+   "log_loss_baseline": 1.6110856544739085,
+   "log_loss_with_rates": 1.6154642301619422,
+   "improved_folds": 3
+  },
+  "BAA10Y.level_z": {
+   "folds": 8,
+   "log_loss_baseline": 1.6110856544739085,
+   "log_loss_with_rates": 1.6130064295551554,
+   "improved_folds": 3
+  },
+  "BAA10Y.change_60": {
+   "folds": 8,
+   "log_loss_baseline": 1.6110856544739085,
+   "log_loss_with_rates": 1.6148399971262153,
+   "improved_folds": 3
+  },
+  "DHHNGSP.level_z": {
+   "folds": 8,
+   "log_loss_baseline": 1.6110856544739085,
+   "log_loss_with_rates": 1.6121494028425492,
+   "improved_folds": 5
+  },
+  "DHHNGSP.change_60": {
+   "folds": 8,
+   "log_loss_baseline": 1.6110856544739085,
+   "log_loss_with_rates": 1.6208463076425885,
+   "improved_folds": 0
+  },
+  "VIXCLS.level_z": {
+   "folds": 8,
+   "log_loss_baseline": 1.6110856544739085,
+   "log_loss_with_rates": 1.620079828574461,
+   "improved_folds": 2
+  },
+  "VIXCLS.change_60": {
+   "folds": 8,
+   "log_loss_baseline": 1.6110856544739085,
+   "log_loss_with_rates": 1.616618298981297,
+   "improved_folds": 4
+  }
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only",
+  "one-observation publication lag is an approximation of the real vintage clock",
+  "the credit spread series is short on the free endpoint",
+  "the timing rule uses three regimes and four options"
+ ]
+}

@@ -457,3 +457,15 @@ generated-path: results/distillation-test.json
 Produced by `scripts/run_system_optimizer.py`:
 
 generated-path: results/system-optimizer.json
+
+Produced by `scripts/build_fred_panel.py` (raw FRED CSVs stay in the ignored `results/fred-raw/`):
+
+generated-path: results/fred-panel.csv.gz
+
+Produced by `scripts/build_fred_panel.py`:
+
+generated-path: results/fred-panel-coverage.json
+
+Produced by `scripts/run_fred_rates_test.py`:
+
+generated-path: results/fred-rates-test.json

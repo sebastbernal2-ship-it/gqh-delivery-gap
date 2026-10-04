@@ -1233,3 +1233,33 @@ evaluation years appear in earlier one-arm tests; costs are the flat base tier i
 arms separately, and no further development run should chase system-level parameter tuning. The systems
 view did change two things permanently: constant long exposure is now the floor every sleeve test is
 reported against, and the forward window inherits the frozen configuration as the system to be tested.
+
+## T69. Rates carry the largest aggregate information we have measured outside the disclosure model, and every use of it still loses
+
+**Statement**: eleven open FRED series were assembled into a daily panel with a declared one-observation
+publication lag (16,553 days, 1962 to 2026, 200 KB). Three tests on the equal-weight complex basket and
+on the surviving sleeves. **Aggregate information is real and unlike anything the physical families
+showed**: rank correlation against the basket's forward twenty-session return is **+0.2666** for the
+ten-year minus two-year spread z-score, +0.2617 for its sixty-day change, +0.2110 for the Baa spread
+z-score, -0.2068 for the gas price's twenty-day change and +0.1709 for the Baa sixty-day change, all on
+390 weekly samples, against roughly 0.02 in magnitude for every grid-load measure. **Timing fails**:
+a regime rule chosen on everything before each year and applied to that year returns +24.17 percent at
+Sharpe 1.153, against **+34.62 percent at Sharpe 1.275 for simply holding the basket**, a difference of
+-0.1066 with interval -0.1994 to -0.0281 that is positive in only 0.7 percent of forty-two months. The
+sleeve's own split by regime shows no exploitable pattern: Sharpe 0.700 in the high state, 1.021 in the
+neutral one where most days sit, and 0.600 in the low state, while constant long exposure returns +28.14
+percent at 0.731. **Incremental value at the disclosure events is also negative**: adding any rates block
+to the specialist's own features makes out-of-sample log loss worse, 1.6111 to 1.6121 for the best case,
+with five of eight folds improved and three or fewer for every other series.
+**Evidence**: `results/fred-panel.csv.gz`; `results/fred-panel-coverage.json`;
+`results/fred-rates-test.json`; `scripts/build_fred_panel.py`; `scripts/run_fred_rates_test.py`;
+`tests/test_fred_rates.py`.
+**Scope**: development only; the one-observation lag approximates the real vintage clock; the free
+endpoint serves the high-yield spread with a short rolling window, so the panel replaces it with the Baa
+spread for history; the timing rule has three regimes and four declared options.
+**Consequence**: rates are the strongest common-factor family we have measured and still not tradable
+against this expression, because the information co-moves with the complex's own trend rather than
+timing it, and because de-risking a rising basket costs more than the signal earns. The honest reading
+matches T67 and T68: the system's edge is the gate and the charge sleeve, and no conditioning variable
+tested, phases, load or rates, has improved it. Rates remain available for a future macro expression
+with its own objective, not for this one.
