@@ -1,5 +1,6 @@
 """Frozen nine-variant movement-risk engineering comparison, with update-count control."""
 import argparse
+import importlib
 import json
 from pathlib import Path
 import platform
@@ -16,6 +17,12 @@ from synchronized_tape import digest
 
 SEED = 20261004
 VARIANTS = {'scratch3': (0, 3), 'scratch6': (0, 6), 'masked3_supervised3': (3, 3)}
+
+
+def source_files():
+    names = ('execution_risk_train', 'execution_risk_model', 'execution_model',
+             'execution_risk_dataset', 'execution_action_model')
+    return [Path(__file__)] + [Path(importlib.import_module(n).__file__) for n in names]
 
 
 def normalize(raw, labels, roles):
@@ -114,10 +121,7 @@ def run(dataset, output, device='cpu', allow_reused_development_smoke=False):
               'seed': SEED, 'comparison_count': 10, 'variants': VARIANTS,
               'view_channels': {k: list(v) for k, v in VIEWS.items()},
               'dataset_manifest_sha256': digest(Path(dataset) / 'manifest.json'),
-              'code_sha256': {p.name: digest(p) for p in [Path(__file__)] +
-                             [Path(__file__).with_name(n) for n in ('execution_risk_train.py',
-                              'execution_risk_model.py', 'execution_model.py', 'execution_risk_dataset.py',
-                              'execution_action_model.py')]},
+              'code_sha256': {p.name: digest(p) for p in source_files()},
               'role_sessions': role_sessions, 'role_cases': {n: int(sum(roles == i)) for i, n in enumerate(spec['partitions'])},
               'scarce_roles': scarce, 'masked_training_roles': [0],
               'normalizer': {'mean': mean.tolist(), 'scale': scale.tolist(), 'target_scale': target_scale},

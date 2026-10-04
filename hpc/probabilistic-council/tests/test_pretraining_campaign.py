@@ -3,7 +3,7 @@ import numpy as np
 import pytest
 import torch
 
-from execution_pretraining_campaign import normalize, masked_view_loss, VARIANTS
+from execution_pretraining_campaign import normalize, masked_view_loss, VARIANTS, source_files
 from execution_risk_model import ExecutionRiskJev
 
 
@@ -40,3 +40,14 @@ def test_empty_mask_rejected_and_budget_control_fixed():
     with pytest.raises(ValueError, match='mask'):
         masked_view_loss(model, torch.zeros(1, 16, 24), torch.zeros(1, 16, dtype=torch.bool), 'A')
     assert sum(VARIANTS['scratch6']) == sum(VARIANTS['masked3_supervised3']) == 6
+
+
+def test_dependency_provenance_uses_imported_module_location(monkeypatch, tmp_path):
+    import execution_pretraining_campaign as campaign
+    staged = tmp_path / 'campaign.py'
+    staged.write_text('# staged wrapper')
+    monkeypatch.setattr(campaign, '__file__', str(staged))
+    sources = source_files()
+    assert sources[0] == staged
+    assert len(sources) == 6 and all(p.is_file() for p in sources)
+    assert all(p.parent != tmp_path for p in sources[1:])
