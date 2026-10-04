@@ -27,6 +27,8 @@ reproduce every number. Gates pass, 38 test suites pass. Both holdouts remain un
 
 **The research has produced truths and no edge yet.** That is the state, stated without softening.
 
+**Update, 2026-10-04 build series.** The expectation gap is now measured and partly forecastable, the council is a validated combiner, and the intensity backtest was repaired. Full record below, under "Session record, 2026-10-04 build series".
+
 ## The core method, in one paragraph
 
 Correlation, association and causation are relations. None of them is an edge. An edge is a repeatable, cost
@@ -190,3 +192,84 @@ filing documents at 12,903, research acquisition rows at 433,781. The perpetual 
 - A work record holds its write scope, so a relaunch needs a fresh record with distinct paths.
 - A commit is built on `origin/main` with an explicit file list, never on the current branch's state.
 - A performance table is never the headline. Mechanism, then identification, then costs, then numbers.
+
+---
+
+# Session record, 2026-10-04 build series
+
+Everything below is committed and pushed. Read this before restarting the expectation work.
+
+## What landed, in commit order
+
+| Commit | What it does |
+|---|---|
+| `c1fd8b5` | Repo gates repaired: orderbook engine registered, path checker scoped, `src/strategy/README.md` restored, chain node declarations corrected, volume cache ignored |
+| `ed5dd89` | JEV council design draft: bundle ladder, distribution map, fine-tune loop, quantum entry points |
+| `cb97956` | Intensity backtest accounting repaired and corrected numbers reported |
+| `2dda48b` | Device-agnostic circuit Born machine: numpy, HiPerGator GPU and IBM backends |
+| `a0ef2d7` | One specialist contract 0.3.0: quantile and categorical representations with measured conversions |
+| `b8282fe` | Declared council comparison harness against every single checkpoint |
+| `0c1f7e4` | Filing specialist v0: point-in-time filing to revision join and the metadata baseline |
+| `dcd679e` | Filing corpus: 238 PWR and ETN 8-K documents, deterministic text extraction, committed manifest |
+| `de5bfa9` | First text run: the tiny scratch scorer loses to prevalence |
+| `b80ee68` | Frozen MiniLM encoder run recorded with its weight revision |
+| `9e77a61` | Point-in-time RPO expectation vintages: 2,803 measured rows across 236 names |
+| `9344af6` | RPO specialist beats prevalence; truth T36 |
+| `1c4a67c` | RPO forecast wrapped as a council specialist with declared clocks and abstention |
+| `bd4e98b` | Filing metadata adds a small lift to the RPO history model; truth T37 |
+| `5f68138` | Frozen document text beats metadata on the proper scores; truth T38 |
+| `f4009a8` | The council as combiner beats every single block; truth T39 |
+| `a34c502` | Point-in-time obligation vintages and the four-firm filing panel; truth T40 |
+| `d386e7a` | Text adds little to metadata on the obligation panel; truth T41 |
+| `7b2ad7a` | Risk-track role plan builder and the collection protocol |
+| `138a26d` | Shared memory refresh |
+
+## The measured results, with their truth ids
+
+| Study | Baseline | Model | Reading |
+|---|---|---|---|
+| RPO history model, 2,782 rows, 236 issuers (T36) | prevalence 1.609 | **1.473** log loss | the expectation gap is partly forecastable |
+| Plus filing metadata (T37) | 1.473 | **1.461** | small but consistent lift |
+| Revision panel, frozen text alone (T38) | metadata 1.679 | **1.508** | text carries what metadata does not |
+| Council over metadata and text (T39) | best single 2.044 | **1.705** | the council layer earns its place |
+| Four-firm obligation panel (T40) | prevalence 1.558 | **1.238** | point-in-time labels predict better |
+| Obligation panel text (T41) | metadata 1.238 | 1.214 combined | metadata dominates, text adds about 0.02 |
+
+The intensity strategy correction (truth T32): the old 13.1 percent net and 34.3 percent volatility were
+mostly leverage from summing overlapping cohorts. Corrected: 2.9 percent net annualised at base costs,
+1.4 at doubled, Sharpe 0.347 and 0.170, capacity 1.17M median and 71k at the tenth percentile.
+
+## Protocols declared this session
+
+`docs/plan/rpo-specialist.md`, `rpo-filing-join.md`, `filing-specialist.md`, `filing-council.md`,
+`filing-obligation-panel.md`, `jev-council-comparison.md`, `risk-council-collection.md`. Every runner
+writes a declared artifact, and `results/README.md` lists all of them as generated paths.
+
+## Live and open
+
+- **The BTC capture**: six-hour block started 2026-10-04T08:12Z in `data/tape/btc-20261004T0812Z/`,
+  recorder pid 793279, about 8.4 MB after ninety minutes. It is training-date volume only.
+- **The risk-track comparison needs five whole UTC dates.** The path is contracted and one command
+  per date once they exist: `scripts/build_live_risk_plan.py`, then `prepare_live_execution_risk.py`,
+  then `council_comparison.py`. See `docs/plan/risk-council-collection.md`.
+- **Unlanded work from the other session**: the Makefile hunk with eight convenience targets
+  (`parent-bond-panel`, `market-panel`, `option-snapshots`, `positioning-nodes`, `queue-panel`,
+  `indenture-covenants`, `implied-vol-test`, `credit-response-test`). It was preserved through every
+  commit by staging only our own hunk. It is theirs to land.
+- **Four work records from another session are running**: `gqh-universe-inventory-20261004`,
+  `gqh-decisions-truths-20261004`, `gqh-jev-research-20261004`, `gqh-factors-regimes-20261004`.
+- **Unverified**: the HiPerGator GPU simulator path and the IBM device path (code committed, no
+  completed cluster or device run yet), and the text-side encoder venv (`.venv-text`, git ignored).
+
+## Traps this session, worth not repeating
+
+- The Pi task-control guard needs `CONTROL_WORK_ID` on mutating bash, and when several work records
+  run at once it blocks `edit`/`write` as ambiguous. Protocol docs were written with a bash heredoc
+  carrying the work id and write paths.
+- A stale git index lock appeared once; a plain commit retry worked.
+- `make share` drops long memory entries; the repo documents are the durable owner, not the memory
+  store.
+- The vintages artifact once wrote an empty `availability` column and the RPO specialist saw no rows.
+  A contract now pins the clock into the output.
+- Two decisions that share a timestamp cannot serve as each other's cutoff; the council clock falls
+  back to a declared year-long window, and block boundaries never split a shared timestamp.
