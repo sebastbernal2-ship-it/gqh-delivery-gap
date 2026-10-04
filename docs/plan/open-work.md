@@ -82,8 +82,11 @@ armed and awaiting its first new filing. Nothing in the repository is a fresh-ho
    `capex-vintages.csv`, `revenue-universe-vintages.csv`, `capex-universe-vintages.csv`) are
    untracked and unusable because of the 400-day clock. They were deleted at the end of the session;
    the `-pit` and `universe-` versions are the owners.
-4. **No scheduler** runs the forward snapshot or the option capture. Needed: a daily timer, with the
-   append-only rule intact.
+4. **Scheduling is installed.** `quanthacks-daily.timer` runs the forward snapshot and the option
+   capture at 02:17 UTC daily, `quanthacks-tape.timer` starts one BTC block at 08:02 UTC daily until
+   five whole dates exist (`scripts/tape_block_due.py` makes it self-limiting). Units live in
+   `scripts/systemd/` and are installed under `~/.config/systemd/user/`. Disable with
+   `systemctl --user disable --now quanthacks-tape.timer` once the risk cache has its dates.
 5. **Cache hygiene**: the bar cache still holds roughly two hundred tickers with bad data, excluded
    per run by the drivers but not by the intensity engine, whose calendar was diluted once already.
    Needed: one quarantine list consulted by every load path.

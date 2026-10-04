@@ -1,0 +1,10 @@
+[Unit]
+Description=Start a quanthacks BTC capture block each UTC day until five dates exist
+
+[Timer]
+OnCalendar=*-*-* 08:02:00 UTC
+Persistent=false
+RandomizedDelaySec=120
+
+[Install]
+WantedBy=timers.target

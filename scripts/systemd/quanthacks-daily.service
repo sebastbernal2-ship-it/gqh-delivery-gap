@@ -1,0 +1,10 @@
+[Unit]
+Description=Quanthacks daily captures: forward window snapshot and option chain snapshot
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/sebas/kun-agent-workspace/projects/quanthacks
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
+ExecStart=/bin/bash scripts/run_daily_captures.sh
+Nice=10

@@ -50,6 +50,12 @@ backfilled.
 4. **No re-fitting to the window.** Model fitting uses only data available at the snapshot time.
 5. **One evaluation.** The window is scored once, at the end, and reported whether good or bad.
 
+## Cadence
+
+`quanthacks-daily.timer` runs `scripts/run_daily_captures.sh` at 02:17 UTC each day, which refreshes
+the complex filings, writes one forward snapshot and one option snapshot, and is idempotent within a
+day. A missed run is caught up by the timer's persistent setting. No snapshot is ever overwritten.
+
 ## What is not claimed
 
 Nothing about the window until it closes. The development numbers, including the best measured

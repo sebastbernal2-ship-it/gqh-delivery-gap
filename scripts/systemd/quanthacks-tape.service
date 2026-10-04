@@ -1,0 +1,11 @@
+[Unit]
+Description=Quanthacks BTC capture block, self-limiting to five whole UTC dates
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/sebas/kun-agent-workspace/projects/quanthacks
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
+ExecStart=/bin/bash scripts/run_tape_block.sh
+TimeoutStartSec=25200
+Nice=10

@@ -1,0 +1,10 @@
+[Unit]
+Description=Run the quanthacks daily captures each UTC day
+
+[Timer]
+OnCalendar=*-*-* 02:17:00 UTC
+Persistent=true
+RandomizedDelaySec=600
+
+[Install]
+WantedBy=timers.target
