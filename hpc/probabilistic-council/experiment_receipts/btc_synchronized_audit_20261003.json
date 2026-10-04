@@ -1,0 +1,115 @@
+{
+  "adapter_sha256": "cfbbc1f1501f6edce8ac0d34bada2f5c2c381e18402d56600ef7cf222eb04b67",
+  "availability_basis": "retrospective_assumption",
+  "availability_note": "Parquet recorded timestamp is an unverified receipt-time proxy; never join solely on venue event time",
+  "causal_states": 42,
+  "coin": "BTC",
+  "counts": {
+    "books": {
+      "other_coin_rows": 117343,
+      "selected_events": 548,
+      "source_rows": 117891,
+      "unique_events": 548
+    },
+    "trades": {
+      "other_coin_rows": 3743,
+      "selected_events": 1877,
+      "source_rows": 4345,
+      "unique_events": 1877
+    }
+  },
+  "exclusions": {
+    "stale book": 1
+  },
+  "feature_order": [
+    "spread_bps",
+    "depth_imbalance",
+    "reported_flow_30s",
+    "log_observed_volume_30s",
+    "move_5s_bps",
+    "rv_30s_bps"
+  ],
+  "groups": {
+    "A": [
+      0,
+      1
+    ],
+    "B": [
+      2,
+      3
+    ],
+    "C": [
+      4,
+      5
+    ]
+  },
+  "limitations": [
+    "third-party mirror byte equivalence to venue unverified",
+    "recorded-clock meaning and feed completeness unverified",
+    "aggregated L2 snapshots, not order-level L4 or queue replay",
+    "trade prints, not account fills; liquidation labels unavailable",
+    "trade side retained as reported, aggressor semantics not verified",
+    "single short session, no independent regime or execution evidence"
+  ],
+  "overlap": {
+    "duration_ns": 287864540000,
+    "end_ns": 1765199827831509000,
+    "start_ns": 1765199539966969000
+  },
+  "panel_blockers": [
+    "less than ten minutes of recorded-clock overlap; five-role training blocked"
+  ],
+  "panel_candidate_ready": false,
+  "plan_sha256": "b35d3d0a2063ec144a36b891f447c6e284326f6aad30bfb025ae8d0f043609e9",
+  "scope": "development_only",
+  "sources": [
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "books",
+      "path": "data/l4_l2book/l4_l2book_1765199828.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "sha256": "b263e5548bf5218ebc6717006b96a9637e53e9386ca3628ac7fd9e596793f531",
+      "size": 49262665
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "kind": "trades",
+      "path": "data/l4_trades/l4_trades_1765199829.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "sha256": "74e006611b358974ec8491d6729d512a016afc64698e3d0c6b3b2181c750e256",
+      "size": 1616725
+    }
+  ],
+  "states_sha256": "a0a119be14ebb401bf632a478e3eb07193f899174f7611d4f32c10d62cd0dbc0",
+  "summaries": {
+    "books": {
+      "event_gaps_over_2s": 0,
+      "events": 548,
+      "first_event_ns": 1765199528368000000,
+      "first_recorded_ns": 1765199539966932000,
+      "last_event_ns": 1765199827541000000,
+      "last_recorded_ns": 1765199827831509000,
+      "max_event_gap_ns": 772000000,
+      "recorded_minus_event_ns": {
+        "max": 11598932000,
+        "median": 327810000,
+        "min": 183630000
+      }
+    },
+    "trades": {
+      "event_gaps_over_2s": 10,
+      "events": 1877,
+      "first_event_ns": 1765199525938000000,
+      "first_recorded_ns": 1765199539966969000,
+      "last_event_ns": 1765199827741000000,
+      "last_recorded_ns": 1765199828017608000,
+      "max_event_gap_ns": 3546000000,
+      "recorded_minus_event_ns": {
+        "max": 14028969000,
+        "median": 325526000,
+        "min": 151916000
+      }
+    }
+  },
+  "training_run_performed": false
+}

@@ -1,5 +1,9 @@
 # JevLike probabilistic council
 
+Current execution work: [structured JevLike sequence prototype](EXECUTION_JEV.md). The user's
+reserved HiPerGator allocation is for JevLike model work only. Prepare raw data/labels elsewhere
+and use the Jev-only execution job. Historical mixed workload submission is retired.
+
 This is the active HiPerGator implementation of our JevLike project. The product target is an
 open-source, Jev-inspired one-pass choice model: given a context and a variable set of text
 options, it scores all options and returns a probability distribution. We vendor the MIT-licensed
@@ -23,6 +27,9 @@ choice, HPG/Vultr roles, and build gates.
 - `run-jevlike.slurm`: HPG synthetic train → evaluate → export → C++ compile → parity workflow.
 - `run-cpp.slurm`: compile and run the C++ council smoke workload.
 - `INTERFACE.md`: probability, identity, calibration and fusion contracts.
+- `specialist_lab.py`: synthetic-only comparison of one all-feature JevLike, three feature-view
+  JevLike specialists, a numeric baseline and calibrated pools. See [SPECIALIST_LAB.md](SPECIALIST_LAB.md)
+  for the declared experiment, timestamp/label contract, commands and real-data bottlenecks.
 
 The Slurm workflow uses synthetic choices to validate plumbing and numerical agreement. It is not
 evidence of decision quality, finance performance, calibration, or usefulness on a target task.
@@ -66,9 +73,15 @@ not itself validate the JSON manifest.
 
 ## Boundaries
 
-The current system is a buildable prototype, not the full research program. It does not yet include
-real domain data, multi-specialist training, out-of-sample benchmark acceptance, production
-calibration, low-latency service measurements, QPU execution, or a Vultr deployment. Quantum
+The current system is a buildable prototype, not the full research program. The
+[seven-view development experiment](INFORMATION_VIEWS.md) trains tiny specialists on a bounded
+public book sample. The [synchronized tape audit](SYNCHRONIZED_TAPE.md) adds causal book/trade
+features and tests, while rejecting its short candidate for training.
+The follow-up [six-session experiment](MULTISESSION_TAPE.md) joins both streams and runs all
+declared information views; its selected model fails to beat prevalence on development evaluation.
+These runs do not provide
+out-of-sample benchmark acceptance, production calibration, low-latency service measurements,
+QPU execution, or a Vultr deployment. Quantum
 methods remain experimental candidates evaluated against equal-budget classical baselines. Vultr
 is scoped as a possible serving/deployment and external-load-test layer for HPG-trained artifacts;
 it is not placed in the latency-sensitive request path until measurements support that choice.

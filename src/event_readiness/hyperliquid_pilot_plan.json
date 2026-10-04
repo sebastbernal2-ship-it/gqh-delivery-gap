@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "dataset": "gionuibk/hyperliquid-node-fills-by-block",
+      "revision": "754fe22c46b1e061d3594c75815c9e672001964a",
+      "path": "data/batch_upto_20250729_17.lz4_1765106012.parquet",
+      "size": 41587255,
+      "sha256": "f623585fa3c3395325244c2e065c1da61fe1b92f491adaa641760824d8d9bd73",
+      "kind": "node_fills"
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "path": "data/l2book/l2book_1765083431_1765085446.parquet",
+      "size": 114038645,
+      "sha256": "3783f2f7c3ea5705a3c5f35c37d4d6ec54a6713b291b851b06e3d6aabb0bfff9",
+      "kind": "l2book"
+    }
+  ],
+  "selection": "First listed L2 book partition and smallest of first 30 dated fill partitions; schema/access pilot only, not a synchronized test sample."
+}

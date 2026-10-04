@@ -1,0 +1,924 @@
+{
+  "artifacts": {
+    "AB_early_fusion.pt": "63818dda4702d777ad502537dbba1001e9d0ef426e0d9aabbca283eeb38ff9e5",
+    "A_book.pt": "8163b335043cf5fa70c15d24bdb64c4dc7c1a6c660d96aa02b828df934f98abc",
+    "B_trades.pt": "d2590e47c21ebe89172ce5dd0f162d9192bafa5487fcbe7f2f86d3b0022a9cf0",
+    "evaluation_AB_early_fusion.npy": "80cfbb956a2a7b27a539455f6e9e3619894de26298fd53ad2bcfcd4fe813b0ef",
+    "evaluation_AB_late_equal_pool.npy": "a1aaea0c1b4693978f35a0468b834ba672934da973f25d8348ff87342aa29254",
+    "evaluation_A_book.npy": "a46f8058f065a220a72a4efef31e6f6128152ab86771946a16201ae60d46350a",
+    "evaluation_B_trades.npy": "36f2e53e2733c72af2624fe51b2728d6208790ffdcefb0764a1386496942e61f",
+    "evaluation_training_prevalence.npy": "35abd01fedd746b4835e37378a1cc7dcde194f08813f3552a4837481f99d6219"
+  },
+  "code_sha256": {
+    "execution_ablation.py": "f444a3538e4e6d40b2af97bb5bc5fc0408051a677eebc294a450f096d6bcc33a",
+    "execution_dataset.py": "1f72754c43a944c0cc25cac9fa8a6ec3cf5ff4e2f160ca2ecbf30f77b23b5cdb",
+    "execution_model.py": "f6202858181ec7afe1674c0637f6f296d0ca5df2044057a45e92fc75b6655700",
+    "execution_predict.py": "ee7f46e254eaee41a319a36eb4d85bf7b65a30dfb8ec69ec3e8894262b0fcacf"
+  },
+  "dataset_manifest": {
+    "adapter_sha256": "71fbbb9b52b565754f34724aa2295c37fe11d2a76adbf97a5a9a2efb103ed178",
+    "adverse_edges_bps": [
+      0.5,
+      1.0,
+      2.0,
+      5.0
+    ],
+    "array_sha256": {
+      "clocks.npy": "0ea87e2b5cdd58f2f77f6e5888f171a0c689393d2bf1ae2536b7ca46a34e83a2",
+      "features.npy": "ee61fbba4a282488c105cc8351e2cdbcc3e4fd9be1b58eb8fda403cb60cacde1",
+      "pretraining_clocks.npy": "92f9373c6ffbc419ea42a2c8c1656c51922f53ff41844abcabf2e2651cea5902",
+      "pretraining_features.npy": "04e81f5d305efa88644bb5baee512b6b744b9a56f30b53e01a35114c1d1044e3",
+      "roles.npy": "9f4b9e11a8cb8951b2463f02e80bc951bf2a36b0a2aecdf9a30180f3abe40ac1",
+      "targets.npy": "6bdae89f7f89eb0abf8de12fbf6420f92107bac35645bd5a95ee01ad048cc424"
+    },
+    "availability_basis": "retrospective_assumption",
+    "causal_adapter_sha256": "cfbbc1f1501f6edce8ac0d34bada2f5c2c381e18402d56600ef7cf222eb04b67",
+    "feature_order": [
+      "bid_offset_bps_1",
+      "bid_depth_fraction_1",
+      "ask_offset_bps_1",
+      "ask_depth_fraction_1",
+      "bid_offset_bps_2",
+      "bid_depth_fraction_2",
+      "ask_offset_bps_2",
+      "ask_depth_fraction_2",
+      "bid_offset_bps_3",
+      "bid_depth_fraction_3",
+      "ask_offset_bps_3",
+      "ask_depth_fraction_3",
+      "bid_offset_bps_4",
+      "bid_depth_fraction_4",
+      "ask_offset_bps_4",
+      "ask_depth_fraction_4",
+      "bid_offset_bps_5",
+      "bid_depth_fraction_5",
+      "ask_offset_bps_5",
+      "ask_depth_fraction_5",
+      "spread_bps",
+      "flow_5s",
+      "log_volume_5s",
+      "book_age_s"
+    ],
+    "horizons": [
+      5,
+      15,
+      60
+    ],
+    "label_audit_sha256": "2de141f770f7883482ef8b112d8a536be3f97326609e413370b8e9bc6ce4b111",
+    "limitations": [
+      "previously inspected development acquisition, not competition holdout",
+      "recorded availability proxy and trade completeness unverified",
+      "observed snapshot excursions only; no own impact, fills, costs or joint path claim"
+    ],
+    "merge_adapter_sha256": "a4f1b06fe284e4fa828c8dd7a094335cedeb4f141652ad81c4b2d9dd26da9d0f",
+    "panel_rows": 41,
+    "partitions": [
+      "training",
+      "specialist_calibration",
+      "gate_fit",
+      "pool_calibration",
+      "evaluation"
+    ],
+    "plan_sha256": "a1cd72fbec459a0365050b2c3614d5daa526b3249a07adf4b0e536b7a7299fcd",
+    "pretraining_clock_range_ns": [
+      1765199579966969000,
+      1765238783383668000
+    ],
+    "pretraining_rows": 106,
+    "pretraining_sessions": [
+      "2025-12-08",
+      "2025-12-09"
+    ],
+    "pretraining_stride_seconds": 10,
+    "pretraining_window_sessions": [
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09"
+    ],
+    "scope": "development_only",
+    "sequence_steps": 16,
+    "session_coverage": {
+      "2025-12-08": {
+        "cases": 6,
+        "exclusions": {
+          "stale book": 44
+        },
+        "unlabeled_pretraining_windows": 52
+      },
+      "2025-12-09": {
+        "cases": 7,
+        "exclusions": {
+          "stale book": 1
+        },
+        "unlabeled_pretraining_windows": 54
+      },
+      "2025-12-10": {
+        "cases": 7,
+        "exclusions": {
+          "stale book": 1
+        }
+      },
+      "2025-12-20": {
+        "cases": 6,
+        "exclusions": {
+          "stale book": 2
+        }
+      },
+      "2025-12-21": {
+        "cases": 7,
+        "exclusions": {
+          "stale book": 1
+        }
+      },
+      "2025-12-24": {
+        "cases": 8,
+        "exclusions": {}
+      }
+    },
+    "sessions": [
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-08",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-09",
+      "2025-12-10",
+      "2025-12-10",
+      "2025-12-10",
+      "2025-12-10",
+      "2025-12-10",
+      "2025-12-10",
+      "2025-12-10",
+      "2025-12-20",
+      "2025-12-20",
+      "2025-12-20",
+      "2025-12-20",
+      "2025-12-20",
+      "2025-12-20",
+      "2025-12-21",
+      "2025-12-21",
+      "2025-12-21",
+      "2025-12-21",
+      "2025-12-21",
+      "2025-12-21",
+      "2025-12-21",
+      "2025-12-24",
+      "2025-12-24",
+      "2025-12-24",
+      "2025-12-24",
+      "2025-12-24",
+      "2025-12-24",
+      "2025-12-24",
+      "2025-12-24"
+    ],
+    "sides": [
+      "buy",
+      "sell"
+    ],
+    "sources": [
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1765199828.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-08",
+        "sha256": "b263e5548bf5218ebc6717006b96a9637e53e9386ca3628ac7fd9e596793f531",
+        "size": 49262665
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1765202863.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-08",
+        "sha256": "1c782b8455d0356949280625319e9f78aa7d8189ebc2f813c040555ee936646b",
+        "size": 51341889
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1765199829.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-08",
+        "sha256": "74e006611b358974ec8491d6729d512a016afc64698e3d0c6b3b2181c750e256",
+        "size": 1616725
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1765202864.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-08",
+        "sha256": "d3d71e9b1c4ff6ee25a624ce3b47ba8afdec337c2e070e8ea11db39e81e0ff0f",
+        "size": 669796
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1765238485.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-09",
+        "sha256": "2fcde7b0777451157bfc71e774e117ec8e333a0b1d06ae957d92ca854f26b1dd",
+        "size": 51258750
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1765238789.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-09",
+        "sha256": "0d9bc46889b7fd657572e55cdd435fef2336854b48a034b888ff3a67987de8a4",
+        "size": 51930361
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1765238486.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-09",
+        "sha256": "103f688819042c1a3b8ef536fa01fae71f9768aab3c050025201cae9d90c9db3",
+        "size": 592507
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1765238790.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-09",
+        "sha256": "53629401809b6206b4e28b317d6b4c981c092a621017aac6c9205f78cfecca12",
+        "size": 621387
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1765325014.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-10",
+        "sha256": "d1ac81a439fb9a2d772a3793ff01c2f996c444a4ac00ec1f5a7ebbf533f810c6",
+        "size": 51762471
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1765325319.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-10",
+        "sha256": "7c3fa09e147c39e82aa8c9df6da170d8ff99dc14cef0d6226f849911348a34db",
+        "size": 51907498
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1765325015.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-10",
+        "sha256": "ebb269aa434f93bc106428fffa5aa295cbb7f458108f7d7e120e5f658fa8ed5b",
+        "size": 949311
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1765325320.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-10",
+        "sha256": "390a683026964618fbb57b6be929b60c30769c9fd8c22a042296f008d1f48d10",
+        "size": 659730
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1766263240.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-20",
+        "sha256": "0efebda70568e76f7ad87470f2b1e05f521b09b8e329d6307d2105d9cbf6ec99",
+        "size": 50413572
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1766263557.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-20",
+        "sha256": "eba39df88d76251281c6afd0a189517a851a9d81d90118e7d1eab4c1e60f9c68",
+        "size": 54838047
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1766263246.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-20",
+        "sha256": "d84c1483a80711e3abfbd01ec3384bf423042a57585aedef79be45e0ac26a7f3",
+        "size": 1168143
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1766263561.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-20",
+        "sha256": "ae6e59fbe99ddb6aac396221fce48a6c877998847d9ea1213bfe0198019e5b0b",
+        "size": 339242
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1766275235.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-21",
+        "sha256": "a434d379478017c23104128adf1934962389a5b3c4886eeb2b64f1685b0faeb0",
+        "size": 52557990
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1766275608.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-21",
+        "sha256": "dd179b224195fb6487a7c6169cc7e95e1702596a3fb09852ec6e0e9d1355044c",
+        "size": 52814711
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1766275236.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-21",
+        "sha256": "ffc0826b44a802e2c31791fe095ab299d50fe3e4e9bdd820021868bcdc8142a3",
+        "size": 554760
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1766275622.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-21",
+        "sha256": "d87fa9b5f8cf5ae931efedcc4895107dc12ea4df7b798d45514dbb9b70751d69",
+        "size": 590563
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1766589586.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-24",
+        "sha256": "73e31eb669960b24187d6923d32a60ffd5caf76ffc084e49de84549228edbd3d",
+        "size": 50525612
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "books",
+        "path": "data/l4_l2book/l4_l2book_1766589891.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-24",
+        "sha256": "98ed53ae2d7393042771881863d1b9f3ae941ac079116bc036e66448b3df22a0",
+        "size": 52317113
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1766589587.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-24",
+        "sha256": "b605be57521f80a3b14b01ee4cb7dd2908195c5a0fc57b2ba3c755522b57b805",
+        "size": 1398195
+      },
+      {
+        "dataset": "gionuibk/hyperliquidL2Book-v2",
+        "kind": "trades",
+        "path": "data/l4_trades/l4_trades_1766589892.parquet",
+        "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+        "session": "2025-12-24",
+        "sha256": "818c6c3d37c6d977fab71b968ffe90bd8af59195cd900460f643fd865824003e",
+        "size": 881934
+      }
+    ],
+    "target_id": "btc-observed-proxy-terminal-excursion-v1",
+    "tasks": [
+      "terminal",
+      "adverse"
+    ],
+    "terminal_edges_bps": [
+      -2.0,
+      -0.5,
+      0.5,
+      2.0
+    ]
+  },
+  "dataset_manifest_sha256": "08a0e4d322ef08a8205abbec7e16200b3b860315619e87d00a365dea134210aa",
+  "device": "cpu",
+  "environment": {
+    "numpy": "2.5.3",
+    "python": "3.12.0",
+    "torch": "2.14.1"
+  },
+  "epochs": 3,
+  "evaluation_metrics": {
+    "AB_early_fusion": {
+      "marginal_queries": 96,
+      "mean_case_brier": 0.8125729095448695,
+      "mean_case_log_loss": 1.6419250216726216,
+      "parent_cases": 8,
+      "session_metrics": {
+        "2025-12-24": {
+          "cases": 8,
+          "mean_case_brier": 0.8125729095448695,
+          "mean_case_log_loss": 1.6419250216726216
+        }
+      },
+      "warning": "Queries within a parent case and cases within a session are dependent."
+    },
+    "AB_late_equal_pool": {
+      "marginal_queries": 96,
+      "mean_case_brier": 0.8127589062933238,
+      "mean_case_log_loss": 1.6739386284427353,
+      "parent_cases": 8,
+      "session_metrics": {
+        "2025-12-24": {
+          "cases": 8,
+          "mean_case_brier": 0.8127589062933238,
+          "mean_case_log_loss": 1.6739386284427353
+        }
+      },
+      "warning": "Queries within a parent case and cases within a session are dependent."
+    },
+    "A_book": {
+      "marginal_queries": 96,
+      "mean_case_brier": 0.8218808235841544,
+      "mean_case_log_loss": 1.6682119799548984,
+      "parent_cases": 8,
+      "session_metrics": {
+        "2025-12-24": {
+          "cases": 8,
+          "mean_case_brier": 0.8218808235841544,
+          "mean_case_log_loss": 1.6682119799548984
+        }
+      },
+      "warning": "Queries within a parent case and cases within a session are dependent."
+    },
+    "B_trades": {
+      "marginal_queries": 96,
+      "mean_case_brier": 0.8106428319048784,
+      "mean_case_log_loss": 1.6570007828247175,
+      "parent_cases": 8,
+      "session_metrics": {
+        "2025-12-24": {
+          "cases": 8,
+          "mean_case_brier": 0.8106428319048784,
+          "mean_case_log_loss": 1.6570007828247175
+        }
+      },
+      "warning": "Queries within a parent case and cases within a session are dependent."
+    },
+    "gate_selected": {
+      "marginal_queries": 96,
+      "mean_case_brier": 0.8106428319048784,
+      "mean_case_log_loss": 1.6570007828247175,
+      "parent_cases": 8,
+      "session_metrics": {
+        "2025-12-24": {
+          "cases": 8,
+          "mean_case_brier": 0.8106428319048784,
+          "mean_case_log_loss": 1.6570007828247175
+        }
+      },
+      "warning": "Queries within a parent case and cases within a session are dependent."
+    },
+    "training_prevalence": {
+      "marginal_queries": 96,
+      "mean_case_brier": 0.7984825102880657,
+      "mean_case_log_loss": 1.5904058686326055,
+      "parent_cases": 8,
+      "session_metrics": {
+        "2025-12-24": {
+          "cases": 8,
+          "mean_case_brier": 0.7984825102880657,
+          "mean_case_log_loss": 1.5904058686326055
+        }
+      },
+      "warning": "Queries within a parent case and cases within a session are dependent."
+    }
+  },
+  "gate_best_singleton": "B_trades",
+  "gate_metrics": {
+    "AB_early_fusion": {
+      "marginal_queries": 72,
+      "mean_case_brier": 0.7268690851356169,
+      "mean_case_log_loss": 1.4351396238184295,
+      "parent_cases": 6,
+      "session_metrics": {
+        "2025-12-20": {
+          "cases": 6,
+          "mean_case_brier": 0.7268690851356169,
+          "mean_case_log_loss": 1.4351396238184295
+        }
+      },
+      "warning": "Queries within a parent case and cases within a session are dependent."
+    },
+    "A_book": {
+      "marginal_queries": 72,
+      "mean_case_brier": 0.735024828459358,
+      "mean_case_log_loss": 1.4597747399509338,
+      "parent_cases": 6,
+      "session_metrics": {
+        "2025-12-20": {
+          "cases": 6,
+          "mean_case_brier": 0.735024828459358,
+          "mean_case_log_loss": 1.4597747399509338
+        }
+      },
+      "warning": "Queries within a parent case and cases within a session are dependent."
+    },
+    "B_trades": {
+      "marginal_queries": 72,
+      "mean_case_brier": 0.6174798271680909,
+      "mean_case_log_loss": 1.2248327063557416,
+      "parent_cases": 6,
+      "session_metrics": {
+        "2025-12-20": {
+          "cases": 6,
+          "mean_case_brier": 0.6174798271680909,
+          "mean_case_log_loss": 1.2248327063557416
+        }
+      },
+      "warning": "Queries within a parent case and cases within a session are dependent."
+    }
+  },
+  "gate_selected": "B_trades",
+  "git_revision": "83bb44a24c4292114c94acebe532ce6354166585",
+  "interpretation_gate": "SMOKE_ONLY",
+  "limitations": [
+    "all views use the same small, previously inspected development panel; not competition OOS",
+    "fewer than three eligible dates in any role prevents interpreting this as a useful view comparison",
+    "all twelve marginals share one parent decision; scores are dependent within case and session",
+    "recorded availability is an unverified retrospective proxy; mirror trade completeness and side meaning unresolved",
+    "scratch only: pretraining is intentionally excluded to isolate input views",
+    "no fills, own impact, costs, HFT latency, live HiPerGator execution or quantum advantage"
+  ],
+  "minimum_three_sessions_per_role_met": false,
+  "pool_calibration": [
+    {
+      "log_loss_after": 1.0817547957980753,
+      "log_loss_before": 1.1958654889436577,
+      "method": "grid_minimum_multiclass_log_loss",
+      "sample_count": 7,
+      "temperature": 0.5
+    },
+    {
+      "log_loss_after": 1.3521457048306176,
+      "log_loss_before": 1.3665076339452988,
+      "method": "grid_minimum_multiclass_log_loss",
+      "sample_count": 7,
+      "temperature": 0.8
+    },
+    {
+      "log_loss_after": 1.0266623830038437,
+      "log_loss_before": 1.1384493703789926,
+      "method": "grid_minimum_multiclass_log_loss",
+      "sample_count": 7,
+      "temperature": 0.5
+    },
+    {
+      "log_loss_after": 0.8684681684324435,
+      "log_loss_before": 1.1710718779581417,
+      "method": "grid_minimum_multiclass_log_loss",
+      "sample_count": 7,
+      "temperature": 0.5
+    },
+    {
+      "log_loss_after": 1.5936332095823496,
+      "log_loss_before": 1.6228055831566854,
+      "method": "grid_minimum_multiclass_log_loss",
+      "sample_count": 7,
+      "temperature": 2.0
+    },
+    {
+      "log_loss_after": 1.3582210965478474,
+      "log_loss_before": 1.3759598951587861,
+      "method": "grid_minimum_multiclass_log_loss",
+      "sample_count": 7,
+      "temperature": 0.65
+    },
+    {
+      "log_loss_after": 1.518982858320675,
+      "log_loss_before": 1.520040824448298,
+      "method": "grid_minimum_multiclass_log_loss",
+      "sample_count": 7,
+      "temperature": 1.1
+    },
+    {
+      "log_loss_after": 1.1962559370499206,
+      "log_loss_before": 1.3773762713136652,
+      "method": "grid_minimum_multiclass_log_loss",
+      "sample_count": 7,
+      "temperature": 0.5
+    },
+    {
+      "log_loss_after": 1.6282978261620011,
+      "log_loss_before": 1.6682526842378027,
+      "method": "grid_minimum_multiclass_log_loss",
+      "sample_count": 7,
+      "temperature": 3.0
+    },
+    {
+      "log_loss_after": 1.383423279481584,
+      "log_loss_before": 1.388711294490306,
+      "method": "grid_minimum_multiclass_log_loss",
+      "sample_count": 7,
+      "temperature": 0.8
+    },
+    {
+      "log_loss_after": 1.6526575784682174,
+      "log_loss_before": 1.7832986548986616,
+      "method": "grid_minimum_multiclass_log_loss",
+      "sample_count": 7,
+      "temperature": 3.0
+    },
+    {
+      "log_loss_after": 1.6045838261197787,
+      "log_loss_before": 1.6062491293729912,
+      "method": "grid_minimum_multiclass_log_loss",
+      "sample_count": 7,
+      "temperature": 0.5
+    }
+  ],
+  "role_cases": {
+    "evaluation": 8,
+    "gate_fit": 6,
+    "pool_calibration": 7,
+    "specialist_calibration": 7,
+    "training": 13
+  },
+  "role_sessions": {
+    "evaluation": [
+      "2025-12-24"
+    ],
+    "gate_fit": [
+      "2025-12-20"
+    ],
+    "pool_calibration": [
+      "2025-12-21"
+    ],
+    "specialist_calibration": [
+      "2025-12-10"
+    ],
+    "training": [
+      "2025-12-08",
+      "2025-12-09"
+    ]
+  },
+  "seed": 20261003,
+  "selection_rule": "AB selected only when gate loss is at least 0.01 nats/case below best singleton; otherwise gate-best singleton",
+  "status": "development_engineering_only",
+  "study": "same structured Jev, same target, three information ablations",
+  "views": {
+    "AB_early_fusion": {
+      "feature_indexes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "feature_names": [
+        "bid_offset_bps_1",
+        "bid_depth_fraction_1",
+        "ask_offset_bps_1",
+        "ask_depth_fraction_1",
+        "bid_offset_bps_2",
+        "bid_depth_fraction_2",
+        "ask_offset_bps_2",
+        "ask_depth_fraction_2",
+        "bid_offset_bps_3",
+        "bid_depth_fraction_3",
+        "ask_offset_bps_3",
+        "ask_depth_fraction_3",
+        "bid_offset_bps_4",
+        "bid_depth_fraction_4",
+        "ask_offset_bps_4",
+        "ask_depth_fraction_4",
+        "bid_offset_bps_5",
+        "bid_depth_fraction_5",
+        "ask_offset_bps_5",
+        "ask_depth_fraction_5",
+        "spread_bps",
+        "flow_5s",
+        "log_volume_5s",
+        "book_age_s"
+      ],
+      "optimizer_steps": 3,
+      "parameter_count": 14256,
+      "pretraining_epochs": 0,
+      "supervised_losses": [
+        1.613148808479309,
+        1.5625890493392944,
+        1.513639211654663
+      ]
+    },
+    "A_book": {
+      "feature_indexes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        23
+      ],
+      "feature_names": [
+        "bid_offset_bps_1",
+        "bid_depth_fraction_1",
+        "ask_offset_bps_1",
+        "ask_depth_fraction_1",
+        "bid_offset_bps_2",
+        "bid_depth_fraction_2",
+        "ask_offset_bps_2",
+        "ask_depth_fraction_2",
+        "bid_offset_bps_3",
+        "bid_depth_fraction_3",
+        "ask_offset_bps_3",
+        "ask_depth_fraction_3",
+        "bid_offset_bps_4",
+        "bid_depth_fraction_4",
+        "ask_offset_bps_4",
+        "ask_depth_fraction_4",
+        "bid_offset_bps_5",
+        "bid_depth_fraction_5",
+        "ask_offset_bps_5",
+        "ask_depth_fraction_5",
+        "spread_bps",
+        "book_age_s"
+      ],
+      "optimizer_steps": 3,
+      "parameter_count": 14256,
+      "pretraining_epochs": 0,
+      "supervised_losses": [
+        1.6143571138381958,
+        1.5618888139724731,
+        1.511513113975525
+      ]
+    },
+    "B_trades": {
+      "feature_indexes": [
+        21,
+        22
+      ],
+      "feature_names": [
+        "flow_5s",
+        "log_volume_5s"
+      ],
+      "optimizer_steps": 3,
+      "parameter_count": 14256,
+      "pretraining_epochs": 0,
+      "supervised_losses": [
+        1.6073163747787476,
+        1.5339668989181519,
+        1.4701416492462158
+      ]
+    }
+  }
+}
