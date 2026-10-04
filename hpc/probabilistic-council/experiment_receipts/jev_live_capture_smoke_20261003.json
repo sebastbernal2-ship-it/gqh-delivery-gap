@@ -1,0 +1,36 @@
+{
+  "schema_version": "execution-live-capture-v1",
+  "scope": "development_only",
+  "endpoint": "wss://api.hyperliquid.xyz/ws",
+  "coin": "BTC",
+  "duration_seconds": 60.27213825006038,
+  "stop_reason": "duration_limit",
+  "counts": {
+    "l2Book": 109,
+    "trades": 32
+  },
+  "bytes": 77924,
+  "max_bytes": 1000000,
+  "messages_sha256": "260e86f1ea5c946b1851a04a09f0120897dad140b1fd7a1050269025ab3dbd71",
+  "recorder_sha256": "657e89587ea7e7f56553a2587973747efa8e9d3e09e2037a2379fdcfa2d38e4e",
+  "boundaries": [
+    {
+      "segment": 1,
+      "reason": "connection_open",
+      "wall_ns": 1791079298127697000,
+      "monotonic_ns": 1725891605396625
+    }
+  ],
+  "errors": [],
+  "labels_computed": false,
+  "clock_basis": "time.time_ns immediately after recv; paired with time.monotonic_ns",
+  "payload_basis": "projected public messages; users/hash removed; not byte-exact raw feed",
+  "limitations": [
+    "receipt includes network and local queue/buffering time",
+    "wall clock UTC synchronization is not independently attested",
+    "no exchange message sequence or completeness guarantee",
+    "never bridge segments in features or labels; warm up each segment",
+    "trade initial backlog remains event-timestamp filtered",
+    "no venue fills, account data, orders, model fit or trading result"
+  ]
+}
