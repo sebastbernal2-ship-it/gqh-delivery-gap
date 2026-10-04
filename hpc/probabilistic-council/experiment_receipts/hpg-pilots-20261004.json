@@ -1,0 +1,97 @@
+{
+  "eligible_for_performance_claim": false,
+  "environment": {
+    "device": "cuda",
+    "numpy": "2.3.2",
+    "python": "3.13.5",
+    "torch": "2.8.0+cu128"
+  },
+  "evidence_method": "scheduler and hash-pinned report fields inspected through authenticated UF OnDemand terminal",
+  "fresh_evaluation": false,
+  "jobs": [
+    {
+      "artifact_sha256": {
+        "masked_pretrained.pt": "a3ae7c7d9c0c4845ce830ad7666ef836ee12e79634867711e623f745ac93792f",
+        "masked_pretrained_evaluation.npy": "f1cd3f3be536adffeaa357a0bccb564c0a0f442905eff5772b154004eb52459e",
+        "scratch.pt": "4a61046d887bebfc8dbf344d37a4b5185e8ba3c1fbd5bde92ec8d689c2773289",
+        "scratch_evaluation.npy": "6a320a1b67f8ba692c02ce615ca2fab9e1f1197477e3f8e11fb2f5ac528efa88"
+      },
+      "elapsed_seconds": 9,
+      "evaluation_metrics": {
+        "masked_pretrained": {
+          "mean_query_brier": 0.8125206455077336,
+          "mean_query_log_loss": 1.639561400425068
+        },
+        "scratch": {
+          "mean_query_brier": 0.8110704317795677,
+          "mean_query_log_loss": 1.6390030547944825
+        },
+        "training_prevalence": {
+          "mean_query_brier": 0.7984825102880659,
+          "mean_query_log_loss": 1.5904058686326057
+        }
+      },
+      "exit_code": "0:0",
+      "gate_selected": "scratch",
+      "job_id": 44662708,
+      "kind": "masked_pretraining_reproduction",
+      "report_sha256": "e6d840f4ea0f4165717d67ba0726d1761a7af754297ffda36a3a496e930f464f",
+      "run_directory": "jev-training/runs/pretraining-20261004T054134Z",
+      "state": "COMPLETED"
+    },
+    {
+      "artifact_sha256": {
+        "A.pt": "0d74ada45d67723e276a95b44c6483325e2b4d9ab4a5587d36b5bddb0704bd51",
+        "AB.pt": "cd8c8c3e9b42fa9acb5161984a35ccb07a36da5c7a2c6d411560bf1456edf339",
+        "AB_evaluation.npy": "69c04215ee84cd050c305853d8d5d0cb0c2987af39c982f706b88bef2b2393b3",
+        "A_evaluation.npy": "c70da539d88ed7ed697ee92227bb356055597bd8d71b8d03386c8d2f504f7a78",
+        "B.pt": "98cb36a5dd44553af8550f188659e423f4f516cbb2acde61e784f4ac12f5238c",
+        "B_evaluation.npy": "9c690418e7b3123744eae5b78608f2dc9980954acd954278d4e567614a4fd7de",
+        "empirical_quantiles.pt": "2429e5d2da60af638a83042af424e2b065bbce917d9bf648f167057827b51b36",
+        "empirical_quantiles_evaluation.npy": "245429bbbc80261f3c93edf6e63a0fa21c474bc67dd2e931b67bcaaaf7946314"
+      },
+      "elapsed_seconds": 5,
+      "evaluation_metrics": {
+        "A": {
+          "interval_80_coverage": 0.3645833333333333,
+          "mean_parent_pinball_bps": 1.4917686931853735,
+          "parent_cases": 8
+        },
+        "AB": {
+          "interval_80_coverage": 0.34375,
+          "mean_parent_pinball_bps": 1.480337030120031,
+          "parent_cases": 8
+        },
+        "B": {
+          "interval_80_coverage": 0.3333333333333333,
+          "mean_parent_pinball_bps": 1.2682955166201992,
+          "parent_cases": 8
+        },
+        "empirical_quantiles": {
+          "interval_80_coverage": 0.59375,
+          "mean_parent_pinball_bps": 0.8957531206744411,
+          "parent_cases": 8
+        }
+      },
+      "exit_code": "0:0",
+      "gate_selected": "empirical_quantiles",
+      "job_id": 44662850,
+      "kind": "movement_risk_gpu_pilot",
+      "package": "jev-risk-training",
+      "pretraining": false,
+      "report_sha256": "970d49a050b6ccf5d93fcfda00a8ef7f1d243cb9d5dec5a35ba8cc90bf02565e",
+      "run_timestamp_utc": "20261004T054355Z",
+      "state": "COMPLETED",
+      "zip_sha256": "c6ce9473858efec6505e6661292373a5db6cc0576251d4d8383447545466ad0d"
+    }
+  ],
+  "limitations": [
+    "previously inspected small development sample; no fresh OOS",
+    "CUDA device recorded; L4 requested by verified launcher",
+    "no measured production latency, fills, net trading returns or quantum advantage",
+    "movement-risk pilot uses scratch A/B/AB, not pretrained movement-risk specialists",
+    "unmodified historical archive availability assumptions remain unverified"
+  ],
+  "schema_version": "jev-hpg-pilot-receipt-v1",
+  "scope": "development_engineering_only"
+}
