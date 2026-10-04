@@ -6,7 +6,7 @@ import argparse
 import csv
 import hashlib
 import json
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 REQUIRED = {
@@ -14,6 +14,14 @@ REQUIRED = {
     "expectation_available_at_utc", "expectation_type", "prior_expectation", "current_value",
     "review_status", "exposure_status", "sector_symbol", "document_sha256", "in_sealed_window",
 }
+
+
+def utc_date(stamp: str) -> date:
+    value = stamp.strip().replace("Z", "+00:00")
+    parsed = datetime.fromisoformat(value)
+    if parsed.tzinfo is None:
+        raise ValueError("timestamp must include a timezone")
+    return parsed.astimezone(timezone.utc).date()
 
 
 def main() -> int:
@@ -44,7 +52,11 @@ def main() -> int:
         stamp = row["available_at_utc"].strip()
         if len(stamp) < 20 or stamp[10] != "T" or not (stamp.endswith("Z") or "+" in stamp[10:] or "-" in stamp[10:]):
             parser.error("each event needs a timezone-aware ISO-8601 available_at_utc")
-        if date.fromisoformat(stamp[:10]) >= args.sealed_start:
+        try:
+            event_date_utc = utc_date(stamp)
+        except ValueError:
+            parser.error("each event needs a valid timezone-aware ISO-8601 available_at_utc")
+        if event_date_utc >= args.sealed_start:
             parser.error("event CSV contains a sealed-date event")
     manifest = {
         "schema_version": 1,

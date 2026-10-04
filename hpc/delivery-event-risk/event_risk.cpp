@@ -152,8 +152,23 @@ long long timestamp_epoch(const std::string& s, const std::string& label) {
 }
 
 std::string utc_day(const std::string& timestamp) {
-    (void)timestamp_epoch(timestamp, "available_at_utc");
-    return date_string(timestamp.substr(0, 10));
+    const long long epoch = timestamp_epoch(timestamp, "available_at_utc");
+    long long days = epoch / 86400LL;
+    if (epoch % 86400LL < 0) --days;
+    long long z = days + 719468;
+    const long long era = (z >= 0 ? z : z - 146096) / 146097;
+    const unsigned doe = static_cast<unsigned>(z - era * 146097);
+    const unsigned yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+    long long year = static_cast<long long>(yoe) + era * 400;
+    const unsigned doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
+    const unsigned mp = (5 * doy + 2) / 153;
+    const unsigned day = doy - (153 * mp + 2) / 5 + 1;
+    const unsigned month = mp < 10 ? mp + 3 : mp - 9;
+    year += month <= 2;
+    std::ostringstream out;
+    out << std::setfill('0') << std::setw(4) << year << '-'
+        << std::setw(2) << month << '-' << std::setw(2) << day;
+    return out.str();
 }
 
 std::string csv(const std::string& s) {
@@ -221,8 +236,8 @@ Series read_bars(const fs::path& path, const std::string& sealed_start,
             throw std::runtime_error("bar close_px_e8usd must be an integer");
         if (scaled <= 0) throw std::runtime_error("bar close must be positive");
         const double volume = numeric(get(row, col, "volume"), "bar volume");
-        if (volume < 0 || std::floor(volume) != volume)
-            throw std::runtime_error("bar volume must be a nonnegative integer");
+        if (volume < 0)
+            throw std::runtime_error("bar volume must be nonnegative");
         result[sym].push_back({date, static_cast<double>(scaled) / kPriceScale, volume});
     }
     for (auto& item : result) {
@@ -439,12 +454,14 @@ void attach_outcomes(std::vector<Event>& events, const Series& bars, double cost
             event.exit[horizon] = stock_exit;
             event.stock[horizon] = sr;
             event.market[horizon] = mr;
-            if (sr && mr) event.market_abnormal[horizon] = *sr - *mr;
+            if (sr && mr && stock_entry == market_entry && stock_exit == market_exit)
+                event.market_abnormal[horizon] = *sr - *mr;
             auto sector = event.sector.empty() ? bars.end() : bars.find(event.sector);
             if (sector != bars.end()) {
                 std::string sector_entry, sector_exit;
                 auto rr = window_return(sector->second, event.event_day, horizon, sector_entry, sector_exit, sealed_start);
-                if (sr && rr) event.sector_return[horizon] = *sr - *rr;
+                if (sr && rr && stock_entry == sector_entry && stock_exit == sector_exit)
+                    event.sector_return[horizon] = *sr - *rr;
             }
         }
         // Both long and short stock sensitivities are displayed; neither is selected as a strategy.

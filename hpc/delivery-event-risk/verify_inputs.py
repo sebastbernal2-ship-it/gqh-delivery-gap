@@ -6,8 +6,16 @@ import argparse
 import csv
 import hashlib
 import json
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
+
+
+def utc_date(stamp: str) -> date:
+    value = stamp.strip().replace("Z", "+00:00")
+    parsed = datetime.fromisoformat(value)
+    if parsed.tzinfo is None:
+        raise ValueError("timestamp must include a timezone")
+    return parsed.astimezone(timezone.utc).date()
 
 
 def main() -> int:
@@ -43,7 +51,11 @@ def main() -> int:
         parser.error("event columns do not match manifest")
     if any(row.get("in_sealed_window", "").strip().lower() in {"true", "1", "yes"} for row in rows):
         parser.error("sealed events are forbidden in staged input")
-    if any(date.fromisoformat(row["available_at_utc"][:10]) >= args.sealed_start for row in rows):
+    try:
+        event_dates = [utc_date(row["available_at_utc"]) for row in rows]
+    except ValueError:
+        parser.error("each event needs a valid timezone-aware ISO-8601 available_at_utc")
+    if any(day >= args.sealed_start for day in event_dates):
         parser.error("event file contains sealed-date observations")
 
     bar_meta = json.loads(args.bars_manifest.read_text(encoding="utf-8"))

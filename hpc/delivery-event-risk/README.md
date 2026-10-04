@@ -51,11 +51,27 @@ Include its `sector_symbol` too to get sector-adjusted outcomes. If a sector ser
 runner leaves sector results blank and says so; it never substitutes another benchmark silently.
 Only rows dated before the supplied sealed cutoff are parsed for prices.
 
-`bars.tsv.manifest.json` is the sidecar produced by
-[`export_tiger_bars.py`](../kdb-timeseries/scripts/export_tiger_bars.py). `events.manifest.json`
-is created with the included helper after the reviewed development event panel is frozen. Both input
+`bars.tsv.manifest.json` is produced by the included
+[`export_event_bars.py`](export_event_bars.py), which reads one explicitly selected TigerData batch,
+checks it against the ingestion manifest, validates the source prices and provenance, and preserves
+the source volume value as a decimal. Volume is not used by this analysis; the shared KDB exporter
+requires integer volume and therefore rejects some adjusted-bar rows. `events.manifest.json` is
+created with the included helper after the reviewed development event panel is frozen. Both input
 files are hash-checked before analysis. The event manifest records the development role, explicit
 date fences, source document hashes, row count and full file SHA-256.
+
+Export a verified bar batch on a machine with the project’s TigerData read access and
+`psycopg[binary]` installed:
+
+```sh
+python3 hpc/delivery-event-risk/export_event_bars.py \
+  --batch massive_bars=<selected-batch-sha256> \
+  --output /private/staging/bars.tsv
+```
+
+Provide `TIGERDATA_URL` and `TIGERDATA_PASSWORD` through the local environment or an ignored `.env`
+file. The exporter writes the TSV and sidecar outside Git; transfer both to the approved Blue
+staging directory before submitting the compute job.
 
 Create the event manifest once the upstream event rows have passed human review and the development
 cutoff is frozen:
@@ -90,7 +106,9 @@ manifest.
   UTC date. Return horizons are 1, 2, 5, 10 and 20 sessions. Outcomes that reach the sealed cutoff
   are blank and excluded from summary statistics.
 - The runner reports raw, market-adjusted (`stock - SPY`), and, when supplied, sector-adjusted
-  returns. It also reports unadjusted Pearson association between the past-only surprise score and
+  returns. Adjusted returns are blank unless the instrument and benchmark have matching entry and
+  exit sessions, so missing or halted bars cannot silently compare different windows. It also
+  reports unadjusted Pearson association between the past-only surprise score and
   subsequent benchmark-adjusted returns. This is descriptive, not a fitted trading rule. Long and
   short stock-return cost sensitivities at five sessions are shown at the configured cost per
   execution side and at twice that cost. The cost is an assumption, not a measured spread or a
