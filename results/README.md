@@ -69,3 +69,15 @@ generated-path: results/queue-exit-study.json
 Produced by `scripts/build_graph_propagation.py`:
 
 generated-path: results/graph-propagation-summary.json
+
+Produced by `scripts/build_provider_transmission_study.py`:
+
+generated-path: results/provider-transmission-study.json
+
+Produced by `scripts/build_cascade_reversion_study.py`:
+
+generated-path: results/cascade-reversion-study.json
+
+Produced by `scripts/fetch_provider_revenue.py`:
+
+generated-path: results/provider-revenue-quarterly.csv

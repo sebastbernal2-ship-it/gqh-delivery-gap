@@ -441,16 +441,13 @@ def main() -> int:
 
     status_tier = {"curated": "E2", "declared": "E2", "inferred": "E3", "proposed": "E4", "blocked": "E5"}
     tier_rank = {"E1": 1, "E2": 2, "E3": 3, "E4": 4, "E5": 5, "undeclared": 6}
+    # Level by level across every seed at once, so the map is not one seed's story.
     paths = []
     seen = set()
-    for seed in seeds:
-        if seed not in nodes:
-            continue
-        stack = [([seed], [])]
-        while stack and len(paths) < 3000:
-            path, hops = stack.pop()
-            if len(path) >= 5:
-                continue
+    frontier = [([seed], []) for seed in seeds if seed in nodes]
+    for _depth in range(4):
+        next_frontier = []
+        for path, hops in frontier:
             current = path[-1]
             current_tags = domain_tags(current, nodes[current].get("meaning", ""))
             for target, conn in edges[current]:
@@ -471,7 +468,10 @@ def main() -> int:
                 if key not in seen:
                     seen.add(key)
                     paths.append((new_path, new_hops))
-                stack.append((new_path, new_hops))
+                    next_frontier.append((new_path, new_hops))
+        frontier = next_frontier
+        if len(paths) > 80000 or not frontier:
+            break
     ranked = []
     for path, hops in paths:
         tiers = [status_tier.get(hop.get("status", ""), "undeclared") for hop in hops]
@@ -502,7 +502,16 @@ def main() -> int:
                        "testable": {"data_in_hand": matched, "status": test_status},
                        "payer": path[-1] if path[-1].startswith(("asset:", "entity:", "outcome:")) else None})
     status_order = {"testable_now": 0, "partially_testable": 1, "needs_data": 2}
-    ranked.sort(key=lambda entry: (status_order[entry["testable"]["status"]],
+    # Keep the seeds from flooding the map: at most twenty paths per seed before ranking.
+    per_seed: collections.Counter = collections.Counter()
+    diverse = []
+    for entry in ranked:
+        if per_seed[entry["seed"]] >= 12:
+            continue
+        per_seed[entry["seed"]] += 1
+        diverse.append(entry)
+    ranked = diverse
+    ranked.sort(key=lambda entry: (entry["payer"] is None, status_order[entry["testable"]["status"]],
                                    tier_rank[entry["evidence_floor"]], entry["hops"], entry["seed"]))
     ranked = ranked[:1500]
     OUT_PROP.write_text("".join(json.dumps(entry) + "\n" for entry in ranked))

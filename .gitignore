@@ -62,6 +62,7 @@ results/eia-cache/
 
 # Local SEC capex cache: fetched, never committed.
 results/sec-capex/
+results/sec-revenue/
 
 # Local price cache: fetched, never committed.
 results/bar-cache/

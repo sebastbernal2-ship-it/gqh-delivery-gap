@@ -1,70 +1,70 @@
 {
- "nodes": 156543,
- "connections": 1093132,
+ "nodes": 168434,
+ "connections": 1169772,
  "by_status": {
-  "declared": 1065650,
-  "inferred": 24870,
+  "declared": 1141136,
+  "inferred": 25966,
   "proposed": 2058,
-  "curated": 532,
+  "curated": 590,
   "blocked": 22
  },
  "by_type": {
-  "sibling_subnode": 450090,
-  "part_of": 156492,
-  "splits_into": 155842,
-  "refined_by": 151650,
-  "refines": 151636,
-  "co_layer_peer": 17371,
+  "sibling_subnode": 478380,
+  "part_of": 168360,
+  "splits_into": 167710,
+  "refined_by": 163380,
+  "refines": 163370,
+  "co_layer_peer": 18063,
   "ties_by_source": 3848,
-  "shares_semantics": 1604,
+  "shares_semantics": 1616,
   "ties_by_observable": 1005,
   "candidate_for": 914,
-  "conditions": 674,
-  "same_dig_context": 664,
-  "ties_by_player": 378,
+  "same_dig_context": 790,
+  "conditions": 692,
+  "ties_by_player": 644,
   "contains": 162,
-  "chain_precedes": 128,
-  "chain_follows": 128,
+  "chain_precedes": 136,
+  "chain_follows": 136,
   "requires": 110,
   "belongs_to": 96,
   "anchors": 38,
-  "feeds": 32,
+  "feeds": 34,
+  "drives": 34,
   "gates": 20,
   "observes": 18,
-  "drives": 18,
   "measures": 14,
-  "competes_for": 14
+  "exposes": 14
  },
  "degrees": {
   "min": 4,
-  "median": 5,
+  "median": 5.0,
   "max": 150,
-  "mean": 7.0
+  "mean": 6.9
  },
- "nodes_with_50_plus": 697,
- "nodes_with_50_plus_share": 0.0045,
- "core_nodes": 699,
+ "nodes_with_50_plus": 720,
+ "nodes_with_50_plus_share": 0.0043,
+ "core_nodes": 722,
  "core_degrees": {
-  "min": 48,
-  "median": 74,
+  "min": 49,
+  "median": 74.0,
   "max": 150
  },
- "core_with_50_plus": 697,
- "core_with_50_plus_share": 0.9971,
- "skeleton_nodes": 155844,
+ "core_with_50_plus": 720,
+ "core_with_50_plus_share": 0.9972,
+ "skeleton_nodes": 167712,
  "under_connected_core": [
-  {
-   "id": "strategy:monitor:scarcity-state",
-   "degree": 48
-  },
   {
    "id": "concept:thesis:delivery-gap",
    "degree": 49
+  },
+  {
+   "id": "strategy:monitor:scarcity-state",
+   "degree": 49
   }
  ],
- "chains": 65,
- "hops": 130,
+ "chains": 67,
+ "hops": 138,
  "bridges": 47,
- "digs": 18,
+ "digs": 20,
  "note": "inferred connections are questions with a type and a falsifier, never facts"
 }

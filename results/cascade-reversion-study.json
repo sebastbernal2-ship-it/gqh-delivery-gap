@@ -1,0 +1,393 @@
+{
+ "status": "development only; recorded window, not a backtest; protocol docs/plan/cascade-reversion-study.md",
+ "markets": {
+  "BTC": 2440,
+  "ETH": 2442,
+  "GAS": 2442,
+  "SPX": 2442
+ },
+ "levels": {
+  "L1": {
+   "events": 6,
+   "per_market": {
+    "BTC": 1,
+    "ETH": 1,
+    "GAS": 2,
+    "SPX": 2
+   },
+   "results": {
+    "4": {
+     "n": 6,
+     "gross_mean_bps": 2.73,
+     "gross_median_bps": 1.22,
+     "net_mean_bps": -8.2,
+     "net_median_bps": -9.0,
+     "cost_mean_bps": 10.93,
+     "doubled_cost_net_mean_bps": -19.13,
+     "median_depth_usd": 3363.0,
+     "per_market_gross_mean_bps": {
+      "BTC": -1.06,
+      "ETH": 0.37,
+      "GAS": 1.4,
+      "SPX": 7.15
+     },
+     "null_p": 0.1736
+    },
+    "20": {
+     "n": 6,
+     "gross_mean_bps": -2.28,
+     "gross_median_bps": -1.1,
+     "net_mean_bps": -13.21,
+     "net_median_bps": -12.86,
+     "cost_mean_bps": 10.93,
+     "doubled_cost_net_mean_bps": -24.14,
+     "median_depth_usd": 3363.0,
+     "per_market_gross_mean_bps": {
+      "BTC": -5.9,
+      "ETH": -1.49,
+      "GAS": -0.35,
+      "SPX": -2.8
+     },
+     "null_p": 0.7303
+    },
+    "60": {
+     "n": 6,
+     "gross_mean_bps": 17.87,
+     "gross_median_bps": 12.41,
+     "net_mean_bps": 6.94,
+     "net_median_bps": 2.21,
+     "cost_mean_bps": 10.93,
+     "doubled_cost_net_mean_bps": -3.99,
+     "median_depth_usd": 3363.0,
+     "per_market_gross_mean_bps": {
+      "BTC": 0.83,
+      "ETH": 9.32,
+      "GAS": 14.69,
+      "SPX": 33.84
+     },
+     "null_p": 0.0852
+    }
+   }
+  },
+  "L2": {
+   "events": 103,
+   "per_market": {
+    "BTC": 25,
+    "ETH": 28,
+    "GAS": 25,
+    "SPX": 25
+   },
+   "results": {
+    "4": {
+     "n": 103,
+     "gross_mean_bps": -0.53,
+     "gross_median_bps": -0.0,
+     "net_mean_bps": -12.45,
+     "net_median_bps": -10.06,
+     "cost_mean_bps": 11.92,
+     "doubled_cost_net_mean_bps": -24.37,
+     "median_depth_usd": 1805912.0,
+     "per_market_gross_mean_bps": {
+      "BTC": 0.4,
+      "ETH": -0.35,
+      "GAS": 0.28,
+      "SPX": -2.46
+     },
+     "null_p": 0.8406
+    },
+    "20": {
+     "n": 103,
+     "gross_mean_bps": -2.57,
+     "gross_median_bps": 0.94,
+     "net_mean_bps": -14.49,
+     "net_median_bps": -8.29,
+     "cost_mean_bps": 11.92,
+     "doubled_cost_net_mean_bps": -26.41,
+     "median_depth_usd": 1805912.0,
+     "per_market_gross_mean_bps": {
+      "BTC": 1.32,
+      "ETH": 1.28,
+      "GAS": -1.0,
+      "SPX": -12.35
+     },
+     "null_p": 0.9072
+    },
+    "60": {
+     "n": 102,
+     "gross_mean_bps": 3.93,
+     "gross_median_bps": 1.86,
+     "net_mean_bps": -8.0,
+     "net_median_bps": -7.47,
+     "cost_mean_bps": 11.93,
+     "doubled_cost_net_mean_bps": -19.93,
+     "median_depth_usd": 1923361.0,
+     "per_market_gross_mean_bps": {
+      "BTC": 1.46,
+      "ETH": 3.31,
+      "GAS": -3.99,
+      "SPX": 14.69
+     },
+     "null_p": 0.2907
+    }
+   }
+  },
+  "L3": {
+   "events": 490,
+   "per_market": {
+    "BTC": 124,
+    "ETH": 122,
+    "GAS": 122,
+    "SPX": 122
+   },
+   "results": {
+    "4": {
+     "n": 489,
+     "gross_mean_bps": 0.56,
+     "gross_median_bps": 0.35,
+     "net_mean_bps": -10.29,
+     "net_median_bps": -9.37,
+     "cost_mean_bps": 10.85,
+     "doubled_cost_net_mean_bps": -21.14,
+     "median_depth_usd": 1113009.0,
+     "per_market_gross_mean_bps": {
+      "BTC": 0.22,
+      "ETH": 0.52,
+      "GAS": 1.93,
+      "SPX": -0.39
+     },
+     "null_p": 0.5423
+    },
+    "20": {
+     "n": 489,
+     "gross_mean_bps": 1.73,
+     "gross_median_bps": 0.94,
+     "net_mean_bps": -9.12,
+     "net_median_bps": -8.41,
+     "cost_mean_bps": 10.85,
+     "doubled_cost_net_mean_bps": -19.97,
+     "median_depth_usd": 1113009.0,
+     "per_market_gross_mean_bps": {
+      "BTC": 0.86,
+      "ETH": 1.99,
+      "GAS": 1.94,
+      "SPX": 2.13
+     },
+     "null_p": 0.3739
+    },
+    "60": {
+     "n": 486,
+     "gross_mean_bps": 3.14,
+     "gross_median_bps": 1.77,
+     "net_mean_bps": -7.7,
+     "net_median_bps": -7.64,
+     "cost_mean_bps": 10.84,
+     "doubled_cost_net_mean_bps": -18.55,
+     "median_depth_usd": 1400834.0,
+     "per_market_gross_mean_bps": {
+      "BTC": 2.45,
+      "ETH": 2.58,
+      "GAS": -0.38,
+      "SPX": 7.82
+     },
+     "null_p": 0.1408
+    }
+   }
+  },
+  "L4": {
+   "events": 769,
+   "per_market": {
+    "BTC": 316,
+    "ETH": 3,
+    "GAS": 3,
+    "SPX": 447
+   },
+   "results": {
+    "4": {
+     "n": 769,
+     "gross_mean_bps": -2.15,
+     "gross_median_bps": 0.0,
+     "net_mean_bps": -12.86,
+     "net_median_bps": -9.35,
+     "cost_mean_bps": 10.71,
+     "doubled_cost_net_mean_bps": -23.57,
+     "median_depth_usd": 5880.0,
+     "per_market_gross_mean_bps": {
+      "BTC": -0.03,
+      "ETH": 0.75,
+      "GAS": -1.05,
+      "SPX": -3.67
+     },
+     "null_p": 0.8916
+    },
+    "20": {
+     "n": 769,
+     "gross_mean_bps": -7.06,
+     "gross_median_bps": -0.71,
+     "net_mean_bps": -17.77,
+     "net_median_bps": -10.69,
+     "cost_mean_bps": 10.71,
+     "doubled_cost_net_mean_bps": -28.48,
+     "median_depth_usd": 5880.0,
+     "per_market_gross_mean_bps": {
+      "BTC": -0.29,
+      "ETH": 2.11,
+      "GAS": 2.1,
+      "SPX": -11.98
+     },
+     "null_p": 0.9604
+    },
+    "60": {
+     "n": 769,
+     "gross_mean_bps": -3.41,
+     "gross_median_bps": -0.83,
+     "net_mean_bps": -14.12,
+     "net_median_bps": -10.06,
+     "cost_mean_bps": 10.71,
+     "doubled_cost_net_mean_bps": -24.83,
+     "median_depth_usd": 5880.0,
+     "per_market_gross_mean_bps": {
+      "BTC": -1.13,
+      "ETH": 0.49,
+      "GAS": -8.52,
+      "SPX": -5.01
+     },
+     "null_p": 0.8712
+    }
+   }
+  },
+  "L5": {
+   "events": 2141,
+   "per_market": {
+    "BTC": 530,
+    "ETH": 528,
+    "GAS": 553,
+    "SPX": 530
+   },
+   "results": {
+    "4": {
+     "n": 2137,
+     "gross_mean_bps": -0.08,
+     "gross_median_bps": 0.0,
+     "net_mean_bps": -10.67,
+     "net_median_bps": -9.69,
+     "cost_mean_bps": 10.59,
+     "doubled_cost_net_mean_bps": -21.26,
+     "median_depth_usd": 4122.0,
+     "per_market_gross_mean_bps": {
+      "BTC": 0.02,
+      "ETH": -0.06,
+      "GAS": 0.34,
+      "SPX": -0.65
+     },
+     "null_p": 0.5397
+    },
+    "20": {
+     "n": 2129,
+     "gross_mean_bps": 1.43,
+     "gross_median_bps": 0.12,
+     "net_mean_bps": -9.15,
+     "net_median_bps": -9.47,
+     "cost_mean_bps": 10.58,
+     "doubled_cost_net_mean_bps": -19.74,
+     "median_depth_usd": 4186.0,
+     "per_market_gross_mean_bps": {
+      "BTC": 0.24,
+      "ETH": 0.49,
+      "GAS": 1.77,
+      "SPX": 3.22
+     },
+     "null_p": 0.4123
+    },
+    "60": {
+     "n": 2081,
+     "gross_mean_bps": 2.92,
+     "gross_median_bps": 0.75,
+     "net_mean_bps": -7.66,
+     "net_median_bps": -9.0,
+     "cost_mean_bps": 10.58,
+     "doubled_cost_net_mean_bps": -18.25,
+     "median_depth_usd": 4174.0,
+     "per_market_gross_mean_bps": {
+      "BTC": 0.41,
+      "ETH": 1.33,
+      "GAS": 1.36,
+      "SPX": 8.67
+     },
+     "null_p": 0.0892
+    }
+   }
+  },
+  "L6": {
+   "events": 40,
+   "per_market": {
+    "BTC": 7,
+    "ETH": 8,
+    "GAS": 14,
+    "SPX": 11
+   },
+   "results": {
+    "4": {
+     "n": 40,
+     "gross_mean_bps": -2.94,
+     "gross_median_bps": 0.77,
+     "net_mean_bps": -17.36,
+     "net_median_bps": -9.99,
+     "cost_mean_bps": 14.42,
+     "doubled_cost_net_mean_bps": -31.78,
+     "median_depth_usd": 950.0,
+     "per_market_gross_mean_bps": {
+      "BTC": 1.3,
+      "ETH": 0.07,
+      "GAS": 1.51,
+      "SPX": -13.47
+     },
+     "null_p": 0.9868
+    },
+    "20": {
+     "n": 40,
+     "gross_mean_bps": -7.31,
+     "gross_median_bps": 0.88,
+     "net_mean_bps": -21.73,
+     "net_median_bps": -8.29,
+     "cost_mean_bps": 14.42,
+     "doubled_cost_net_mean_bps": -36.15,
+     "median_depth_usd": 950.0,
+     "per_market_gross_mean_bps": {
+      "BTC": 1.38,
+      "ETH": 2.81,
+      "GAS": 1.62,
+      "SPX": -31.56
+     },
+     "null_p": 0.9678
+    },
+    "60": {
+     "n": 40,
+     "gross_mean_bps": 5.68,
+     "gross_median_bps": 3.2,
+     "net_mean_bps": -8.74,
+     "net_median_bps": -6.05,
+     "cost_mean_bps": 14.42,
+     "doubled_cost_net_mean_bps": -23.17,
+     "median_depth_usd": 950.0,
+     "per_market_gross_mean_bps": {
+      "BTC": 0.91,
+      "ETH": 3.18,
+      "GAS": -0.11,
+      "SPX": 17.88
+     },
+     "null_p": 0.4327
+    }
+   }
+  }
+ },
+ "costs": {
+  "taker_bps_per_side": 4.5,
+  "spread_charged": "half spread per side, measured at entry",
+  "doubled": "reported per horizon as doubled_cost_net_mean_bps"
+ },
+ "caveats": [
+  "one recorded window, four markets, one venue",
+  "entry at the condition bar close, no speed used",
+  "a positive level here is a candidate, not an edge"
+ ]
+}

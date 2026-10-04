@@ -5,18 +5,18 @@ decomposed. Nothing here grades a path as dead.
 
 ## The graph, expanded
 
-- Nodes: **156,543**
-- Typed connections: **1,093,132**
+- Nodes: **168,434**
+- Typed connections: **1,169,772**
 - Distributions written down: **86** samples
-- Propagation paths: **1,500** from 155 seeds
-- Hidden objects: **29** (nodes 1, edges 5, gaps 2, assumptions 21)
+- Propagation paths: **584** from 167 seeds
+- Hidden objects: **45** (nodes 1, edges 20, gaps 3, assumptions 21)
 
 ## Delineation
 
-- Layers: `raw` 86,371, `mechanism` 41,063, `feature` 26,037, `asset` 1,023, `entity` 412, `dataset` 210, `event` 172, `outcome` 158
-- Connection status: `declared` 1,065,650, `inferred` 24,870, `proposed` 2,058, `curated` 532, `blocked` 22
+- Layers: `raw` 93,754, `mechanism` 44,676, `feature` 26,898, `asset` 1,024, `entity` 436, `dataset` 210, `event` 173, `outcome` 160
+- Connection status: `declared` 1,141,136, `inferred` 25,966, `proposed` 2,058, `curated` 590, `blocked` 22
 - Every connection carries a condition and a falsifier: 99.99% and 99.99%
-- Components: 1, largest 156,543, unreachable from anchors 0
+- Components: 1, largest 168,434, unreachable from anchors 0
 
 ## Distributions, centre, spread, tails
 
@@ -84,39 +84,40 @@ Top samples by tail ratio (p90 over median):
 | hidden_edge | `dig:power:goes -> dig:compute:power-commitment` | cross-dig pair sharing ['power'] and observable tokens ['announcements'] | add the typed edge or record why the shared observable stops here |
 | hidden_edge | `dig:power:core-stacking -> dig:nuc:firm-power` | cross-dig pair sharing ['power'] and observable tokens ['announcements'] | add the typed edge or record why the shared observable stops here |
 | hidden_edge | `dig:hvdc:copper-aluminium -> dig:copper:demand` | cross-dig pair sharing ['copper'] and observable tokens ['cable', 'commentary', 'maker'] | add the typed edge or record why the shared observable stops here |
-| hidden_gap | `concept:thesis:delivery-gap` | core node at degree 49, under the 50 connection target | add the missing connections as questions with falsifiers |
-| hidden_gap | `strategy:monitor:scarcity-state` | core node at degree 48, under the 50 connection target | add the missing connections as questions with falsifiers |
-| hidden_assumption | `index-wide` | 0 inferred connections lack a condition, 0 lack a falsifier | keep filling conditions and falsifiers as part of every deepening pass |
+| hidden_edge | `dig:compute:provider-capex -> dig:compute:equity-transmission` | cross-dig pair sharing ['compute'] and observable tokens ['capex'] | add the typed edge or record why the shared observable stops here |
+| hidden_edge | `dig:compute:inference-cost -> dig:compute:rental-to-revenue-link` | cross-dig pair sharing ['compute'] and observable tokens ['provider'] | add the typed edge or record why the shared observable stops here |
+| hidden_edge | `dig:compute:inference-cost -> dig:compute:family-exposure-map` | cross-dig pair sharing ['compute'] and observable tokens ['provider'] | add the typed edge or record why the shared observable stops here |
+| hidden_edge | `dig:compute:inference-cost -> dig:compute:revenue-per-mw` | cross-dig pair sharing ['compute'] and observable tokens ['provider'] | add the typed edge or record why the shared observable stops here |
 
 ## Propagation paths, truth to payer
 
 | Seed | Path | Hops | Floor | Data in hand | Greatest assumption |
 |---|---|---|---|---|---|
+| `dig:grid:capex-plan` | `dig:grid:capex-plan` -> `outcome:firm:capex-level` | 1 | E2 | provider-capex-quarterly.csv | The outcome remains the measured object. |
+| `dig:providers:firm-capacity` | `dig:providers:firm-capacity` -> `asset:equity:utility-basket` | 1 | E2 | capacity-strategy.csv | The basket remains the traded surface. |
+| `dig:providers:provider-margin` | `dig:providers:provider-margin` -> `outcome:firm:cash-flow-revision` | 1 | E2 | provider-capex-quarterly.csv, delivery-revisions.csv, cascade-tape.json | Contracted revenue remains the margin driver. |
+| `dig:grid:rate-case` | `dig:grid:rate-case` -> `dig:grid:capex-plan` -> `outcome:firm:capex-level` | 2 | E2 | provider-capex-quarterly.csv | Capital recovery runs through the rate case process. |
+| `dig:providers:credit` | `dig:providers:credit` -> `dig:providers:provider-margin` -> `outcome:firm:cash-flow-revision` | 2 | E2 | delivery-revisions.csv, cascade-tape.json, credit-deal-registry.csv | Margins support the credit that funds new supply. |
+| `dig:providers:ppa-price` | `dig:providers:ppa-price` -> `dig:providers:provider-margin` -> `outcome:firm:cash-flow-revision` | 2 | E2 | delivery-revisions.csv, cascade-tape.json | Contract prices set provider margins. |
+| `entity:issuer:company` | `entity:issuer:company` -> `outcome:market:post-event-drift` | 1 | E3 | capacity-event-ledger.csv | Both nodes read the same source. |
+| `outcome:market:abnormal-return` | `outcome:market:abnormal-return` -> `outcome:market:post-event-drift` | 1 | E3 | capacity-event-ledger.csv | Both nodes read the same source. |
+| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `outcome:firm:capex-level` | 1 | E4 | provider-capex-quarterly.csv | The node receives a verified representation and a declared role |
+| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `outcome:firm:capex-timing` | 1 | E4 | provider-capex-quarterly.csv | The node receives a verified representation and a declared role |
+| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `outcome:firm:free-cash-flow` | 1 | E4 | cascade-tape.json | The node receives a verified representation and a declared role |
+| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `outcome:firm:revenue-level` | 1 | E4 | needs data | The node receives a verified representation and a declared role |
+| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `outcome:firm:gross-margin` | 1 | E4 | needs data | The node receives a verified representation and a declared role |
+| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `outcome:firm:operating-margin` | 1 | E4 | needs data | The node receives a verified representation and a declared role |
+| `outcome:portfolio:net-pnl` | `outcome:portfolio:net-pnl` -> `asset:equity:sector-basket` | 1 | E4 | needs data | The cross-layer relation is supported by point-in-time evidence |
+| `outcome:portfolio:net-pnl` | `outcome:portfolio:net-pnl` -> `asset:equity:market-index` | 1 | E4 | needs data | The cross-layer relation is supported by point-in-time evidence |
+| `outcome:portfolio:net-pnl` | `outcome:portfolio:net-pnl` -> `asset:equity:supplier-basket` | 1 | E4 | needs data | The cross-layer relation is supported by point-in-time evidence |
+| `outcome:portfolio:net-pnl` | `outcome:portfolio:net-pnl` -> `asset:equity:utility-basket` | 1 | E4 | needs data | The cross-layer relation is supported by point-in-time evidence |
+| `outcome:portfolio:net-pnl` | `outcome:portfolio:net-pnl` -> `asset:options:defined-risk-spread` | 1 | E4 | needs data | The cross-layer relation is supported by point-in-time evidence |
 | `dig:compute:depreciation` | `dig:compute:depreciation` -> `dig:compute:provider-capex` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | Short useful lives turn capex into a recurring cash cost, changing the build economics. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:signal:composition` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:signal:inputs` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:signal:constraints` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:signal:observables` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:signal:substitutes` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:sizing:composition` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:sizing:inputs` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:sizing:constraints` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:sizing:observables` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:sizing:substitutes` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:costs:composition` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:costs:inputs` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:costs:constraints` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:costs:observables` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:costs:substitutes` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:capacity:composition` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:capacity:inputs` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:capacity:constraints` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:capacity:observables` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:capacity:substitutes` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:kill-switch:composition` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:kill-switch:inputs` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:kill-switch:constraints` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
-| `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `strategy:expression:event-equity` -> `sub:sub:strategy:expression:event-equity:kill-switch:observables` | 2 | E2 | capacity-strategy.csv, capacity-event-ledger.csv | The refinement chain from this node is valid. |
+| `dig:compute:financing-cost` | `dig:compute:financing-cost` -> `dig:compute:equity-transmission` | 1 | E2 | compute-price-monthly.csv | Funding cost sets the discount applied to capacity cash flows. |
+| `dig:compute:financing-cost` | `dig:compute:financing-cost` -> `dig:compute:provider-revenue-line` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | Securitised and debt funded capacity shows up as contracted revenue before it shows up as equity value. |
+| `dig:compute:financing-cost` | `dig:compute:financing-cost` -> `sub:sub:dig:compute:financing-cost:composition:composition` | 1 | E2 | compute-price-monthly.csv | The refinement chain from this node is valid. |
+| `dig:compute:financing-cost` | `dig:compute:financing-cost` -> `sub:sub:dig:compute:financing-cost:composition:inputs` | 1 | E2 | compute-price-monthly.csv | The refinement chain from this node is valid. |
+| `dig:compute:financing-cost` | `dig:compute:financing-cost` -> `sub:sub:dig:compute:financing-cost:composition:constraints` | 1 | E2 | compute-price-monthly.csv | The refinement chain from this node is valid. |
 
 ## Reproduce
 

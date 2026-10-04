@@ -204,6 +204,36 @@ request MW within the state, point-in-time safe. Development only; both sealed w
 crowding variable is retired as an exit predictor. Any device that leans on queue age or crowding to
 order exits inherits a dead link.
 
+## T19. The aggregate rental change does not reach provider revenue, and the family signs disagree
+
+**Statement**: across 91 provider-quarters, the lagged aggregate compute rental change does not order
+year over year provider revenue growth (rho -0.16, circular shift p 0.85), and the reverse control is
+also null (rho -0.05). Family level signs disagree, p5 at +0.21 against p3 at -0.23, so the aggregate
+median washes out family heterogeneity rather than the mechanism being absent.
+**Evidence**: `results/provider-transmission-study.json`; `results/provider-revenue-quarterly.csv`;
+`scripts/build_provider_transmission_study.py`; `scripts/fetch_provider_revenue.py`.
+**Scope**: ten providers with SEC XBRL revenue, 91 usable provider-quarters from 2023 to 2026; aggregate
+rental change is the cross-family median; development only.
+**Consequence**: the provider family's revenue link is open at the family level, not the aggregate. The
+next object is the provider to family exposure map, tested family by family. The aggregate is retired as
+the transmission variable.
+
+## T20. The cascade cost hurdle binds, and the frozen conjunction's gross clears it
+
+**Statement**: on the recorded tape, percentile dislocation levels (top 1 percent and top 5 percent of
+one minute moves, funding beyond two sigma, thin books) land between -8 and -22 basis points net of base
+costs, with gross means of at most +3.9 basis points at fifteen minutes, all inside their random-time
+nulls. The frozen conjunction fired six times, and its gross reversion at fifteen minutes is +17.9 basis
+points: +6.9 net of base costs, -4.0 net of doubled costs, permutation p 0.085. Reversion is market
+specific, SPX +14.7 against GAS -4.0 on the same level.
+**Evidence**: `results/cascade-reversion-study.json`; `scripts/build_cascade_reversion_study.py`;
+`data/tape`.
+**Scope**: one recorded window, four markets (BTC, ETH, GAS, SPX), one venue, 7.3 nominal hours, entry at
+the condition bar close with no speed advantage used; development only.
+**Consequence**: the binding constraint is the cost hurdle near ten basis points round trip, not the
+presence of reversion. The conjunction is the only condition whose gross clears it, on six events, so the
+family's next work is more events and cheaper entry, not wider level ladders.
+
 ---
 
 # What these truths are pointing at

@@ -45,3 +45,14 @@ Development only, and no result here opens a sealed window.
 
     python3 scripts/fetch_provider_revenue.py
     python3 scripts/build_provider_transmission_study.py
+
+## Result, 2026-10-04
+
+Run as declared. 91 usable provider-quarters across ten providers. The lagged aggregate rental change
+shows rho -0.16 against year over year revenue growth, and the circular shift null places that inside
+noise (p 0.85, null median +0.01). The reverse control is also null at -0.05, so the panel is not
+discounting either. The family level signs disagree: p5 at +0.21 against p3 at -0.23.
+
+The fact this leaves is precise: the aggregate rental median washes out family heterogeneity, and the
+next object is the provider to family exposure map, tested family by family against the providers that
+actually sell that family. The aggregate is retired as the transmission variable.

@@ -12,10 +12,10 @@
 <h1>Connection index</h1>
 <p class="meta">Method owner: docs/plan/deep-chaining.md. Inferred connections are questions with a type and a falsifier.</p>
 <ul>
-<li>25,345 nodes indexed: 685 core, 24,660 skeleton</li>
-<li>220,663 typed connections</li>
-<li>Core degree median 73; 683 core nodes at 50+ (99.7%)</li>
-<li>65 chains, 130 hops, 47 bridges</li>
+<li>168,434 nodes indexed: 722 core, 167,712 skeleton</li>
+<li>1,169,772 typed connections</li>
+<li>Core degree median 74; 720 core nodes at 50+ (99.7%)</li>
+<li>67 chains, 138 hops, 47 bridges</li>
 </ul>
 <h2>Worked node record: mechanism:capacity:transformer-bottleneck (degree 75)</h2>
 <table><thead><tr><th>Connected to</th><th>Type</th><th>Status</th><th>Why</th><th>Falsifier</th></tr></thead>
@@ -68,6 +68,7 @@
 <tr><td><code>dig:compute:inventory-state</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:compute:power-commitment</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:compute:provider-capex</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
+<tr><td><code>dig:compute:rental-to-revenue-link</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:cool:liquid-cooling</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:cool:load</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:copper:concentrate</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
@@ -87,11 +88,10 @@
 <tr><td><code>dig:fcc:fcc-unit-throughput</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:fcc:separation-plants</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:fiber:interconnect</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
+<tr><td><code>dig:flow:liquidation-engine</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:grid:capacity-auction</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:grid:capex-plan</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:grid:equity-financing</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
-<tr><td><code>dig:grid:load-growth</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
-<tr><td><code>dig:grid:transmission-planning</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:power:lpt</code></td><td>chain_precedes</td><td>curated</td><td>previous hop in chain:bridge:transformer-lpt-to-anchor</td><td>The dig contradicts the anchor and the anchor is updated.</td></tr>
 <tr><td><code>dig:switch:gear</code></td><td>chain_precedes</td><td>curated</td><td>previous hop in chain:bridge:switchgear-to-anchor</td><td>Switchgear lead times decouple from transformer lead times.</td></tr></tbody></table>
 <h2>Worked chain: dig:fcc:catalyst-minerals</h2>
@@ -155,6 +155,6 @@
 <tr><td><code>bridge:cycles-buildout-to-anchor</code></td><td><code>dig:cycles:buildout</code></td><td><code>mechanism:capacity:constraint</code></td><td>anchors</td><td>Capacity constraint remains the governing mechanism.</td><td>Cycles stop repeating.</td></tr>
 <tr><td><code>bridge:exec-entry-to-anchor</code></td><td><code>dig:exec:entry-window</code></td><td><code>event:sec:8k-material-agreement</code></td><td>anchors</td><td>Disclosures remain the event class.</td><td>The edge moves to non-disclosure events.</td></tr></tbody></table>
 <h2>Under-connected core nodes, the research queue</h2>
-<table><thead><tr><th>Node</th><th>Degree</th></tr></thead><tbody><tr><td><code>strategy:monitor:scarcity-state</code></td><td>48</td></tr>
-<tr><td><code>concept:thesis:delivery-gap</code></td><td>49</td></tr></tbody></table>
+<table><thead><tr><th>Node</th><th>Degree</th></tr></thead><tbody><tr><td><code>concept:thesis:delivery-gap</code></td><td>49</td></tr>
+<tr><td><code>strategy:monitor:scarcity-state</code></td><td>49</td></tr></tbody></table>
 </main></body></html>

@@ -3,33 +3,33 @@
 Method owner: `docs/plan/deep-chaining.md`. Every node carries its own typed connections and
 its chain hops. Inferred connections are questions with a type and a falsifier.
 
-- Nodes indexed: **25,345** (685 core nodes from the manifest
-  and the digs, 24,660 skeleton sub-nodes)
-- Typed connections: **220,663**
-- Core degree: min 48, median 73, max 150; **683 core nodes at 50+ connections (99.7%)**
-- Skeleton degree: structural only, median 6
-- Chains 65, hops 130, bridges 47
+- Nodes indexed: **168,434** (722 core nodes from the manifest
+  and the digs, 167,712 skeleton sub-nodes)
+- Typed connections: **1,169,772**
+- Core degree: min 49, median 74, max 150; **720 core nodes at 50+ connections (99.7%)**
+- Skeleton degree: structural only, median 5
+- Chains 67, hops 138, bridges 47
 
 ## Connection types
 
 | Type | Count |
 |---|---|
-| `sibling_subnode` | 102,750 |
-| `part_of` | 25,308 |
-| `splits_into` | 24,658 |
-| `refined_by` | 20,550 |
-| `refines` | 20,536 |
-| `co_layer_peer` | 16,972 |
-| `ties_by_source` | 3,716 |
-| `shares_semantics` | 1,604 |
+| `sibling_subnode` | 478,380 |
+| `part_of` | 168,360 |
+| `splits_into` | 167,710 |
+| `refined_by` | 163,380 |
+| `refines` | 163,370 |
+| `co_layer_peer` | 18,063 |
+| `ties_by_source` | 3,848 |
+| `shares_semantics` | 1,616 |
 | `ties_by_observable` | 1,005 |
 | `candidate_for` | 914 |
-| `conditions` | 670 |
-| `same_dig_context` | 664 |
-| `ties_by_player` | 378 |
+| `same_dig_context` | 790 |
+| `conditions` | 692 |
+| `ties_by_player` | 644 |
 | `contains` | 162 |
-| `chain_precedes` | 128 |
-| `chain_follows` | 128 |
+| `chain_precedes` | 136 |
+| `chain_follows` | 136 |
 | `requires` | 110 |
 | `belongs_to` | 96 |
 
@@ -88,6 +88,7 @@ its chain hops. Inferred connections are questions with a type and a falsifier.
 | `dig:compute:inventory-state` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 | `dig:compute:power-commitment` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 | `dig:compute:provider-capex` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
+| `dig:compute:rental-to-revenue-link` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 | `dig:cool:liquid-cooling` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 | `dig:cool:load` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 | `dig:copper:concentrate` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
@@ -98,7 +99,6 @@ its chain hops. Inferred connections are questions with a type and a falsifier.
 | `dig:cycles:overbuild` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 | `dig:cycles:second-wave` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 | `dig:cycles:shakeout` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
-| `dig:cycles:shortage` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 
 Chain memberships for this node: `chain:bridge:transformer-lpt-to-anchor` at hop:bridge:transformer-lpt-to-anchor:01, `chain:bridge:switchgear-to-anchor` at hop:bridge:switchgear-to-anchor:01.
 
@@ -179,6 +179,6 @@ to write, not a licence to pad:
 
 | Node | Degree |
 |---|---|
-| `strategy:monitor:scarcity-state` | 48 |
 | `concept:thesis:delivery-gap` | 49 |
+| `strategy:monitor:scarcity-state` | 49 |
 

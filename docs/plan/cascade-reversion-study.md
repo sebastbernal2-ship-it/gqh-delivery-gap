@@ -53,3 +53,24 @@ result is a fact about this window and this condition ladder.
 ## Reproduce
 
     python3 scripts/build_cascade_reversion_study.py
+
+## Result, 2026-10-04
+
+Run as declared over all six tape files, four markets, one venue, 7.3 nominal hours.
+
+The percentile levels do not clear costs. Top one percent moves (103 events), top five percent (490
+events), funding beyond two sigma (769 events) and thin books (2,139 events) all land between -8 and
+-22 basis points net of base costs, with gross means of at most +3.9 basis points at fifteen minutes,
+and every one of them sits inside its random-time null.
+
+The frozen conjunction is the exception. It fired six times (BTC 1, ETH 1, GAS 2, SPX 2). Gross
+reversion at fifteen minutes is +17.9 basis points, +6.9 net of base costs and -4.0 net of doubled
+costs, with a permutation p of 0.085. Six events decide nothing on their own, and the doubled cost line
+is negative.
+
+Reversion is market specific: on the same top one percent level, SPX shows +14.7 basis points gross at
+fifteen minutes and GAS shows -4.0. The binding constraint in this family is the cost hurdle, which sits
+near ten basis points round trip, and the conjunction is the only condition whose gross clears it.
+
+The next objects are therefore more events and cheaper entry: a maker fill candidate tested against the
+recorded book, not wider level ladders.

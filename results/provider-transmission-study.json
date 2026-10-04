@@ -1,0 +1,39 @@
+{
+ "status": "development only; both sealed windows spent; protocol docs/plan/provider-transmission-study.md",
+ "providers": [
+  "AMZN",
+  "APLD",
+  "CORZ",
+  "CRWV",
+  "EQIX",
+  "GOOGL",
+  "IREN",
+  "META",
+  "MSFT",
+  "ORCL"
+ ],
+ "observations": 91,
+ "lagged_rho": -0.1634,
+ "shift_null_p": 0.8537,
+ "shift_null_median": 0.0089,
+ "reverse_control_rho": -0.052,
+ "reverse_observations": 75,
+ "family_rhos": {
+  "p5": 0.209,
+  "g4dn": 0.141,
+  "g3": 0.121,
+  "p3dn": 0.086,
+  "g3s": 0.077,
+  "g5": 0.052,
+  "g4ad": -0.023,
+  "g6": -0.069,
+  "g5g": -0.145,
+  "p4d": -0.188,
+  "p3": -0.231
+ },
+ "caveats": [
+  "ten providers, short revenue history",
+  "aggregate rental change is a median across families",
+  "development only, this does not open a sealed window"
+ ]
+}
