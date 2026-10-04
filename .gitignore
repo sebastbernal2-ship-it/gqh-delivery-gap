@@ -68,6 +68,9 @@ results/sec-complex/
 # Local price cache: fetched, never committed.
 results/bar-cache/
 
+# Frozen-encoder venv for the filing text scorer.
+.venv-text/
+
 # Local volume cache: fetched, never committed.
 results/bar-volume/
 

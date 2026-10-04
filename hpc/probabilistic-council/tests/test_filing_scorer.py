@@ -41,6 +41,16 @@ class FilingScorerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             run(examples(20), (rows, rows), fraction=0.5, epochs=1, seed=1)
 
+    def test_hf_revision_names_the_cached_snapshot(self):
+        import tempfile
+        from filing_scorer import hf_revision
+        with tempfile.TemporaryDirectory() as tmp:
+            refs = Path(tmp) / "models--org--name" / "refs"
+            refs.mkdir(parents=True)
+            (refs / "main").write_text("abc123\n")
+            self.assertEqual(hf_revision("org/name", Path(tmp)), "abc123")
+            self.assertIsNone(hf_revision("org/missing", Path(tmp)))
+
     def test_smallest_working_split_stays_finite(self):
         report = run(examples(6), None, fraction=0.5, epochs=2, seed=2)
         self.assertGreaterEqual(report["split"]["train"], 1)

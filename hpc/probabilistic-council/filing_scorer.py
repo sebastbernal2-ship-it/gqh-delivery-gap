@@ -33,6 +33,28 @@ from jevlike.model import make_system  # noqa: E402
 from jevlike.train import move  # noqa: E402
 
 CONFIG = {"encoder": "tiny", "width": 64, "rank": 64, "context_tokens": 192, "option_tokens": 32}
+DEFAULT_HF_MODEL = "prajjwal1/bert-tiny"
+
+
+def make_config(encoder: str = "tiny", hf_model: str = DEFAULT_HF_MODEL) -> dict:
+    config = dict(CONFIG)
+    config["encoder"] = encoder
+    config["hf_model"] = hf_model
+    return config
+
+
+def hf_revision(model: str, cache: Path | None = None) -> str | None:
+    """The cached snapshot commit for a model name, so a run names its exact weights."""
+    cache = cache or Path.home() / ".cache" / "huggingface" / "hub"
+    ref = cache / ("models--" + model.replace("/", "--")) / "refs" / "main"
+    if ref.exists():
+        value = ref.read_text().strip()
+        return value or None
+    snapshots = cache / ("models--" + model.replace("/", "--")) / "snapshots"
+    if snapshots.exists():
+        names = sorted(path.name for path in snapshots.iterdir() if path.is_dir())
+        return names[-1] if names else None
+    return None
 
 
 def load_examples(path: Path) -> tuple[list, list]:
@@ -45,11 +67,11 @@ def load_panel(path: Path) -> list[dict]:
     return list(csv.DictReader(path.open()))
 
 
-def train_model(examples: list, epochs: int, seed: int, batch_size: int = 16,
+def train_model(examples: list, epochs: int, seed: int, config: dict, batch_size: int = 16,
                 learning_rate: float = 2e-3) -> tuple:
     torch.manual_seed(seed)
     device = torch.device("cpu")
-    model, collator = make_system(CONFIG, device)
+    model, collator = make_system(config, device)
     parameters = [parameter for parameter in model.parameters() if parameter.requires_grad]
     optimiser = torch.optim.AdamW(parameters, lr=learning_rate, weight_decay=1e-4)
     generator = torch.Generator().manual_seed(seed)
@@ -82,7 +104,8 @@ def predict(model, collator, device, examples: list) -> np.ndarray:
 
 
 def run(examples: list, baseline_split: tuple | None, fraction: float, epochs: int,
-        seed: int) -> dict:
+        seed: int, config: dict | None = None) -> dict:
+    config = dict(config) if config else dict(CONFIG)
     if baseline_split is not None:
         train_rows, test_rows = baseline_split
         if len(train_rows) + len(test_rows) != len(examples):
@@ -92,14 +115,20 @@ def run(examples: list, baseline_split: tuple | None, fraction: float, epochs: i
         test_rows = None
         split = max(1, min(len(examples) - 1, int(round(len(examples) * fraction))))
     train_examples, test_examples = examples[:split], examples[split:]
-    model, collator, device, trajectory = train_model(train_examples, epochs, seed)
+    model, collator, device, trajectory = train_model(train_examples, epochs, seed, config)
     probabilities = predict(model, collator, device, test_examples)
     labels = np.array([example.label for example in test_examples], dtype=int)
     classes = tuple(sorted({example.label for example in train_examples}))
+    encoder_info = {"parameters": int(sum(parameter.numel() for parameter in model.parameters())),
+                    "trainable": int(sum(parameter.numel() for parameter in model.parameters()
+                                        if parameter.requires_grad))}
+    if config.get("encoder") == "hf":
+        encoder_info["model"] = config.get("hf_model")
+        encoder_info["revision"] = hf_revision(config.get("hf_model", ""))
     report = {
         "split": {"train": len(train_examples), "test": len(test_examples),
                   "classes": list(classes), "fraction": fraction},
-        "config": CONFIG, "epochs": epochs, "seed": seed,
+        "config": config, "encoder_info": encoder_info, "epochs": epochs, "seed": seed,
         "train_nll_trajectory": [round(value, 6) for value in trajectory],
         "text": score(probabilities, labels, classes),
     }
@@ -125,6 +154,8 @@ def main() -> int:
     parser.add_argument("--split", type=float, default=0.7)
     parser.add_argument("--epochs", type=int, default=30)
     parser.add_argument("--seed", type=int, default=20261004)
+    parser.add_argument("--encoder", choices=("tiny", "hf"), default="tiny")
+    parser.add_argument("--hf-model", default=DEFAULT_HF_MODEL)
     args = parser.parse_args()
 
     examples, accessions = load_examples(args.examples)
@@ -133,7 +164,8 @@ def main() -> int:
     if len(covered) != len(examples):
         raise SystemExit("the panel and the examples disagree; rebuild the examples")
     train_rows, test_rows = chronological_split(covered, args.split)
-    report = run(examples, (train_rows, test_rows), args.split, args.epochs, args.seed)
+    report = run(examples, (train_rows, test_rows), args.split, args.epochs, args.seed,
+                 make_config(args.encoder, args.hf_model))
     report.update({
         "schema": "filing-text-comparison-v1",
         "scope": "development_only",
@@ -142,7 +174,8 @@ def main() -> int:
         "ready_for_performance_claim": False,
         "limitations": [
             "81 labels, PWR dominated, three of four candidate firms have no obligations",
-            "tiny byte-encoder scorer trained from scratch on 58 rows, 30 declared epochs",
+            f"{args.encoder} encoder on {report['split']['train']} training rows, "
+            f"{args.epochs} declared epochs",
             "the excerpt is a 1200 character window; a missing document is a recorded skip",
         ],
     })

@@ -63,3 +63,14 @@ be built with every feature strictly earlier than its label. Either outcome is r
 is a point-in-time plumbing result and a baseline, not a trading claim. The declared next step is
 the filing text and the JevLike scorer on the same rows, with this baseline as the equal-budget
 comparator.
+
+## Results so far, all on the same 58/23 split
+
+| Model | Log loss | Brier | Accuracy |
+|---|---|---|---|
+| Training prevalence | 1.599 | 0.782 | 0.435 |
+| Metadata softmax (15 features) | 1.679 | 0.750 | 0.478 |
+| JevLike tiny byte encoder, scratch, 30 epochs | 1.847 | 0.861 | 0.391 |
+| Frozen all-MiniLM-L6-v2 encoder, 75k trainable head, 30 epochs | 1.853 | 0.848 | 0.217 |
+
+Both text variants lose to prevalence on log loss, and the frozen encoder loses on every metric. With 58 training rows and a dominant flat class, the text representation does not carry learnable signal for this task yet. Recorded levers, in order: point-in-time expectation vintages to raise the label count, a calibrated head with fewer free parameters, and a class-balanced objective. Neither text run is a claim of failure for the mechanism; both are recorded negatives at this sample size.

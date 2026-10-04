@@ -205,3 +205,7 @@ generated-path: results/filing-text-manifest.json
 Produced by `hpc/probabilistic-council/filing_scorer.py`:
 
 generated-path: results/filing-text-scores.json
+
+Produced by `hpc/probabilistic-council/filing_scorer.py --encoder hf`:
+
+generated-path: results/filing-text-scores-frozen.json
