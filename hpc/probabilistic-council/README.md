@@ -72,7 +72,10 @@ not itself validate the JSON manifest.
 The current system is a buildable prototype, not the full research program. The
 [seven-view development experiment](INFORMATION_VIEWS.md) trains tiny specialists on a bounded
 public book sample. The [synchronized tape audit](SYNCHRONIZED_TAPE.md) adds causal book/trade
-features and tests, while rejecting its short candidate for training. Neither provides
+features and tests, while rejecting its short candidate for training.
+The follow-up [six-session experiment](MULTISESSION_TAPE.md) joins both streams and runs all
+declared information views; its selected model fails to beat prevalence on development evaluation.
+These runs do not provide
 out-of-sample benchmark acceptance, production calibration, low-latency service measurements,
 QPU execution, or a Vultr deployment. Quantum
 methods remain experimental candidates evaluated against equal-budget classical baselines. Vultr

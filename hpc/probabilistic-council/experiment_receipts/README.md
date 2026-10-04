@@ -20,3 +20,9 @@ them to HiPerGator.
 Parquet coverage, exact clock offsets, causal-state counts and blockers, without price outcomes.
 It records the first matched book/trade candidate's duration failure; no training run was performed.
 See [the declared protocol and reproduction](../SYNCHRONIZED_TAPE.md).
+
+`btc_multisession_views_20261003.json` is copied unedited from the frozen `information_views.py`
+run on the six-session panel. The acquisition rule and panel adapter were committed before its
+evaluation was opened. It reports all 14 model checkpoints and 18 evaluation forecasts, including
+the gate-selected model's failure to beat prevalence. This is development evidence, not competition
+OOS or a trading result. See [the protocol, commands and limitations](../MULTISESSION_TAPE.md).
