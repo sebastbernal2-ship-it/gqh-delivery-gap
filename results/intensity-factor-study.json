@@ -1,0 +1,127 @@
+{
+ "status": "development only; both sealed windows spent; protocol docs/plan/intensity-factor-study.md",
+ "observations": 640,
+ "names": 58,
+ "horizons": {
+  "5": {
+   "complex": {
+    "n": 640,
+    "quarters": 29,
+    "mean_within_quarter_rho": -0.0353,
+    "pooled_rho": -0.0674,
+    "two_sided_permutation_p": 0.4543,
+    "bottom_third_mean": 0.001,
+    "top_third_mean": -0.0037,
+    "tercile_spread": -0.0047,
+    "per_group_rho": {
+     "power": -0.167,
+     "hyperscaler": -0.136,
+     "data_center_reit": 0.083,
+     "fuel_and_nuclear": -0.129,
+     "buildout": -0.135,
+     "compute_and_ai": -0.172
+    }
+   },
+   "group": {
+    "n": 640,
+    "quarters": 29,
+    "mean_within_quarter_rho": -0.083,
+    "pooled_rho": -0.1106,
+    "two_sided_permutation_p": 0.0808,
+    "bottom_third_mean": 0.0041,
+    "top_third_mean": -0.0058,
+    "tercile_spread": -0.0099,
+    "per_group_rho": {
+     "power": -0.025,
+     "hyperscaler": -0.213,
+     "data_center_reit": -0.008,
+     "fuel_and_nuclear": -0.189,
+     "buildout": -0.179,
+     "compute_and_ai": -0.073
+    }
+   }
+  },
+  "20": {
+   "complex": {
+    "n": 636,
+    "quarters": 29,
+    "mean_within_quarter_rho": -0.0002,
+    "pooled_rho": -0.0334,
+    "two_sided_permutation_p": 0.997,
+    "bottom_third_mean": -0.0016,
+    "top_third_mean": -0.0116,
+    "tercile_spread": -0.01,
+    "per_group_rho": {
+     "power": -0.175,
+     "hyperscaler": -0.232,
+     "data_center_reit": 0.028,
+     "fuel_and_nuclear": 0.156,
+     "buildout": -0.133,
+     "compute_and_ai": -0.133
+    }
+   },
+   "group": {
+    "n": 636,
+    "quarters": 29,
+    "mean_within_quarter_rho": -0.06,
+    "pooled_rho": -0.0578,
+    "two_sided_permutation_p": 0.204,
+    "bottom_third_mean": 0.0038,
+    "top_third_mean": -0.0182,
+    "tercile_spread": -0.022,
+    "per_group_rho": {
+     "power": 0.037,
+     "hyperscaler": -0.283,
+     "data_center_reit": 0.003,
+     "fuel_and_nuclear": 0.039,
+     "buildout": -0.166,
+     "compute_and_ai": -0.408
+    }
+   }
+  },
+  "60": {
+   "complex": {
+    "n": 632,
+    "quarters": 29,
+    "mean_within_quarter_rho": 0.0385,
+    "pooled_rho": 0.0774,
+    "two_sided_permutation_p": 0.4283,
+    "bottom_third_mean": -0.0515,
+    "top_third_mean": -0.0431,
+    "tercile_spread": 0.0084,
+    "per_group_rho": {
+     "power": 0.138,
+     "hyperscaler": -0.129,
+     "data_center_reit": 0.17,
+     "fuel_and_nuclear": -0.005,
+     "buildout": -0.139,
+     "compute_and_ai": -0.143
+    }
+   },
+   "group": {
+    "n": 632,
+    "quarters": 29,
+    "mean_within_quarter_rho": -0.0252,
+    "pooled_rho": 0.0399,
+    "two_sided_permutation_p": 0.5907,
+    "bottom_third_mean": -0.0253,
+    "top_third_mean": -0.0294,
+    "tercile_spread": -0.0041,
+    "per_group_rho": {
+     "power": 0.062,
+     "hyperscaler": -0.129,
+     "data_center_reit": 0.19,
+     "fuel_and_nuclear": -0.025,
+     "buildout": -0.204,
+     "compute_and_ai": -0.001
+    }
+   }
+  }
+ },
+ "caveats": [
+  "quarterly fundamentals against daily prices",
+  "overlapping windows",
+  "one free price source",
+  "development only"
+ ]
+}

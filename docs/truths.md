@@ -296,6 +296,35 @@ dislocation.
 with trivial capacity, useful as a monitor and not as a trade until a larger venue shows the same
 behaviour.
 
+## T25. In the provider panel, the market charges capital intensity over weeks
+
+**Statement**: across 108 provider quarters and eight names, the year over year change in capex intensity
+is negatively associated with peer excess return: rho -0.29 (two sided p 0.005) at five trading days,
+-0.24 (p 0.012) at twenty, and -0.07 (p 0.49) at sixty. The tercile spread is -2.2 percentage points at
+five days and -6.0 at twenty, against the name's own declared group.
+**Evidence**: `results/intensity-pricing-study.json`; `scripts/build_intensity_pricing_study.py`;
+`results/bar-cache/`.
+**Scope**: eight providers with aligned XBRL capex and revenue, event dated at the later filing, daily
+closes from a free source; development only.
+**Consequence**: this is the first priced link found in the provider family. It is the lead object for
+the cross-section study, which tests whether it generalises.
+
+## T26. The intensity effect does not generalise across the complex, and the segment split is the structure
+
+**Statement**: across 640 observations and 58 names with a within-quarter design, the mean within-quarter
+correlation between intensity change and forward excess return is -0.035 against the complex benchmark at
+five days (p 0.45) and -0.083 against own group (p 0.08), with no more than a weak negative reading at
+twenty days. Segment signs are consistent though: hyperscalers negative at every horizon (-0.14 to
+-0.28), compute and AI negative at twenty days (-0.41), buildout negative at every horizon (-0.13 to
+-0.20), and data center REITs positive at five and sixty days (+0.08 to +0.19).
+**Evidence**: `results/intensity-factor-study.json`; `results/complex-capex-quarterly.csv`;
+`results/complex-revenue-quarterly.csv`; `scripts/build_intensity_factor_study.py`;
+`scripts/fetch_complex_fundamentals.py`.
+**Scope**: 58 listed names in the declared market panel groups, 29 quarters, quarterly fundamentals
+against daily closes, development only.
+**Consequence**: the intensity surprise is retired as a complex wide factor and kept as a segment level
+hypothesis: charged where capital is owned, not charged where capacity is leased or regulated.
+
 ---
 
 # What these truths are pointing at

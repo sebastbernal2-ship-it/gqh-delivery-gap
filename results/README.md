@@ -101,3 +101,19 @@ generated-path: results/capex-revenue-gap.json
 Produced by `scripts/build_spillover_study.py`:
 
 generated-path: results/spillover-study.json
+
+Produced by `scripts/build_intensity_pricing_study.py`:
+
+generated-path: results/intensity-pricing-study.json
+
+Produced by `scripts/build_intensity_factor_study.py`:
+
+generated-path: results/intensity-factor-study.json
+
+Produced by `scripts/fetch_complex_fundamentals.py`:
+
+generated-path: results/complex-capex-quarterly.csv
+
+Produced by `scripts/fetch_complex_fundamentals.py`:
+
+generated-path: results/complex-revenue-quarterly.csv

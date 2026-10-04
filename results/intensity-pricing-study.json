@@ -1,0 +1,393 @@
+{
+ "status": "development only; both sealed windows spent; protocol docs/plan/intensity-pricing-study.md",
+ "observations": 108,
+ "providers": [
+  "APLD",
+  "CORZ",
+  "CRWV",
+  "EQIX",
+  "IREN",
+  "META",
+  "MSFT",
+  "ORCL"
+ ],
+ "horizons": {
+  "5": {
+   "n": 108,
+   "rho": -0.2915,
+   "two_sided_permutation_p": 0.0048,
+   "upper_tail_p": 0.9978,
+   "bottom_third_mean_excess": 0.0059,
+   "top_third_mean_excess": -0.0163,
+   "tercile_spread": -0.0222,
+   "per_provider": {
+    "APLD": {
+     "n": 3,
+     "mean_excess": 0.1389
+    },
+    "CORZ": {
+     "n": 5,
+     "mean_excess": -0.0959
+    },
+    "CRWV": {
+     "n": 2,
+     "mean_excess": -0.0464
+    },
+    "EQIX": {
+     "n": 32,
+     "mean_excess": 0.0077
+    },
+    "IREN": {
+     "n": 1,
+     "mean_excess": -0.1101
+    },
+    "META": {
+     "n": 14,
+     "mean_excess": -0.0068
+    },
+    "MSFT": {
+     "n": 35,
+     "mean_excess": 0.0039
+    },
+    "ORCL": {
+     "n": 16,
+     "mean_excess": -0.0067
+    }
+   }
+  },
+  "20": {
+   "n": 106,
+   "rho": -0.2384,
+   "two_sided_permutation_p": 0.012,
+   "upper_tail_p": 0.9942,
+   "bottom_third_mean_excess": 0.01,
+   "top_third_mean_excess": -0.0504,
+   "tercile_spread": -0.0604,
+   "per_provider": {
+    "APLD": {
+     "n": 3,
+     "mean_excess": -0.0191
+    },
+    "CORZ": {
+     "n": 5,
+     "mean_excess": 0.0348
+    },
+    "CRWV": {
+     "n": 2,
+     "mean_excess": -0.2791
+    },
+    "EQIX": {
+     "n": 32,
+     "mean_excess": -0.0293
+    },
+    "IREN": {
+     "n": 1,
+     "mean_excess": -0.2367
+    },
+    "META": {
+     "n": 14,
+     "mean_excess": -0.0083
+    },
+    "MSFT": {
+     "n": 35,
+     "mean_excess": 0.0128
+    },
+    "ORCL": {
+     "n": 14,
+     "mean_excess": -0.0127
+    }
+   }
+  },
+  "60": {
+   "n": 106,
+   "rho": -0.0668,
+   "two_sided_permutation_p": 0.4923,
+   "upper_tail_p": 0.754,
+   "bottom_third_mean_excess": 0.0182,
+   "top_third_mean_excess": -0.0419,
+   "tercile_spread": -0.0601,
+   "per_provider": {
+    "APLD": {
+     "n": 3,
+     "mean_excess": 0.0087
+    },
+    "CORZ": {
+     "n": 5,
+     "mean_excess": 0.0487
+    },
+    "CRWV": {
+     "n": 2,
+     "mean_excess": -0.1798
+    },
+    "EQIX": {
+     "n": 32,
+     "mean_excess": -0.0084
+    },
+    "IREN": {
+     "n": 1,
+     "mean_excess": -0.1702
+    },
+    "META": {
+     "n": 14,
+     "mean_excess": 0.0133
+    },
+    "MSFT": {
+     "n": 35,
+     "mean_excess": 0.0185
+    },
+    "ORCL": {
+     "n": 14,
+     "mean_excess": -0.0673
+    }
+   }
+  }
+ },
+ "sample": [
+  {
+   "ticker": "APLD",
+   "period_end": "2023-08-31",
+   "event_date": "2024-10-09",
+   "intensity_change": 1.938
+  },
+  {
+   "ticker": "APLD",
+   "period_end": "2024-08-31",
+   "event_date": "2025-10-09",
+   "intensity_change": 1.467
+  },
+  {
+   "ticker": "APLD",
+   "period_end": "2025-08-31",
+   "event_date": "2025-10-09",
+   "intensity_change": 1.297
+  },
+  {
+   "ticker": "CORZ",
+   "period_end": "2022-03-31",
+   "event_date": "2023-05-15",
+   "intensity_change": 2.516
+  },
+  {
+   "ticker": "CORZ",
+   "period_end": "2023-03-31",
+   "event_date": "2024-05-09",
+   "intensity_change": -3.929
+  },
+  {
+   "ticker": "CORZ",
+   "period_end": "2024-03-31",
+   "event_date": "2026-03-02",
+   "intensity_change": 2.733
+  },
+  {
+   "ticker": "CORZ",
+   "period_end": "2025-03-31",
+   "event_date": "2026-05-06",
+   "intensity_change": 1.431
+  },
+  {
+   "ticker": "CORZ",
+   "period_end": "2026-03-31",
+   "event_date": "2026-05-06",
+   "intensity_change": 1.352
+  },
+  {
+   "ticker": "CRWV",
+   "period_end": "2025-03-31",
+   "event_date": "2026-05-08",
+   "intensity_change": -0.214
+  },
+  {
+   "ticker": "CRWV",
+   "period_end": "2026-03-31",
+   "event_date": "2026-05-08",
+   "intensity_change": 2.219
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2013-06-30",
+   "event_date": "2014-08-08",
+   "intensity_change": -0.415
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2013-09-30",
+   "event_date": "2014-11-07",
+   "intensity_change": -0.602
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2014-03-31",
+   "event_date": "2015-05-01",
+   "intensity_change": 0.546
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2014-06-30",
+   "event_date": "2015-07-31",
+   "intensity_change": 0.264
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2014-09-30",
+   "event_date": "2015-10-30",
+   "intensity_change": -0.392
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2015-03-31",
+   "event_date": "2016-05-09",
+   "intensity_change": 0.268
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2015-06-30",
+   "event_date": "2016-08-08",
+   "intensity_change": 0.368
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2015-09-30",
+   "event_date": "2015-10-30",
+   "intensity_change": 0.393
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2016-03-31",
+   "event_date": "2016-05-09",
+   "intensity_change": 0.311
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2016-06-30",
+   "event_date": "2016-08-08",
+   "intensity_change": 0.155
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2019-03-31",
+   "event_date": "2020-05-07",
+   "intensity_change": 0.094
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2019-06-30",
+   "event_date": "2020-07-31",
+   "intensity_change": -0.108
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2019-09-30",
+   "event_date": "2020-10-30",
+   "intensity_change": 0.075
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2020-03-31",
+   "event_date": "2021-04-30",
+   "intensity_change": 0.157
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2020-06-30",
+   "event_date": "2021-07-30",
+   "intensity_change": 0.137
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2020-09-30",
+   "event_date": "2021-11-04",
+   "intensity_change": 0.039
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2021-03-31",
+   "event_date": "2022-04-29",
+   "intensity_change": 0.374
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2021-06-30",
+   "event_date": "2022-07-29",
+   "intensity_change": 0.399
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2021-09-30",
+   "event_date": "2022-11-04",
+   "intensity_change": 0.233
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2022-03-31",
+   "event_date": "2023-05-05",
+   "intensity_change": -0.263
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2022-06-30",
+   "event_date": "2023-08-04",
+   "intensity_change": -0.298
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2022-09-30",
+   "event_date": "2023-10-27",
+   "intensity_change": -0.156
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2023-03-31",
+   "event_date": "2024-05-08",
+   "intensity_change": 0.285
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2023-06-30",
+   "event_date": "2024-08-07",
+   "intensity_change": 0.321
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2023-09-30",
+   "event_date": "2024-10-30",
+   "intensity_change": 0.169
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2024-03-31",
+   "event_date": "2025-04-30",
+   "intensity_change": 0.478
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2024-06-30",
+   "event_date": "2025-07-30",
+   "intensity_change": -0.082
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2024-09-30",
+   "event_date": "2025-10-29",
+   "intensity_change": 0.083
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2025-03-31",
+   "event_date": "2026-04-29",
+   "intensity_change": 0.091
+  },
+  {
+   "ticker": "EQIX",
+   "period_end": "2025-06-30",
+   "event_date": "2025-07-30",
+   "intensity_change": 0.438
+  }
+ ],
+ "caveats": [
+  "six providers, short panels",
+  "overlapping return windows",
+  "one free price source",
+  "development only"
+ ]
+}
