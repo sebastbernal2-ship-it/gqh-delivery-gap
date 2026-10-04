@@ -453,3 +453,7 @@ generated-path: results/eia-load-refinement.json
 Produced by `scripts/run_distillation_test.py`:
 
 generated-path: results/distillation-test.json
+
+Produced by `scripts/run_system_optimizer.py`:
+
+generated-path: results/system-optimizer.json

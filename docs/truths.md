@@ -1205,3 +1205,31 @@ mostly carried by exposure to a rising complex plus the gated charge expression,
 model's directional edge over constant long is about 0.025 Sharpe in this window. Any forward claim must
 therefore report the model against that rival, not against zero, and the forward window's falsifiers
 should include it.
+
+## T68. Optimising the whole expression as one unit does not beat the frozen configuration, and the horizon is where it overfits
+
+**Statement**: the system was optimised jointly for the first time instead of one arm at a time. Six
+declared dimensions, 120 sampled configurations, and expanding-window refits: each evaluation year from
+2022 chooses the configuration with the best net Sharpe on everything strictly before it, then applies
+it to that year alone. The stitched out-of-sample path returns **+20.12 percent at volatility 26.4
+percent, Sharpe 0.763 and a -45.4 percent drawdown**, against the frozen published configuration's
+**+16.58 percent at volatility 14.8 percent, Sharpe 1.123 and -22.9 percent** over the same years and
+the same composite builder. The optimised system earns more and carries roughly twice the risk, so on
+the objective that matters it loses; the daily difference has a point of +0.069 with interval -0.113 to
++0.274, positive in 76.5 percent of resamples, while the drawdown and volatility differences are
+measured directly. Both beat constant long exposure (Sharpe 0.604 at a -57.8 percent drawdown), so the
+system as a whole is real, but the searched version of it is worse. The stability evidence says why:
+every year independently selects **horizon 10**, the shortest allowed, while gate strictness moves
+across 0.0, 0.5 and 1.0, the intensity weight moves from 0.41 to 0.77, and conviction shaping settles
+mostly on 0.5. The search chases the shortest hold because it raises training net return, and out of
+sample that buys volatility rather than Sharpe; the rest of the surface is not stationary either.
+**Evidence**: `results/system-optimizer.json` (the full choice table, per-year training Sharpe, and both
+intervals); `scripts/run_system_optimizer.py`; `tests/test_system_optimizer.py`; the disclosure leg of
+the harness reproduces the published sleeve exactly (+27.65 percent at 0.756), which is the control that
+the joint harness is measuring what it claims.
+**Scope**: development only; the configuration sample is finite and declared with its seed; the same
+evaluation years appear in earlier one-arm tests; costs are the flat base tier inside the search.
+**Consequence**: the frozen configuration survives a joint search, so it is not an artefact of testing
+arms separately, and no further development run should chase system-level parameter tuning. The systems
+view did change two things permanently: constant long exposure is now the floor every sleeve test is
+reported against, and the forward window inherits the frozen configuration as the system to be tested.

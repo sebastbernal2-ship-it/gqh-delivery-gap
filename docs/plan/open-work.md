@@ -185,6 +185,13 @@ What remains, in order:
    separate conditioning variables, and the exported-winner discipline of calibrating the exact shipped
    model on separate earlier data.
 
+5e. **The system was optimised as one unit and lost (T68).** Six declared dimensions, 120 sampled
+   configurations and expanding-window refits produced +20.12 percent at Sharpe 0.763 against the frozen
+   configuration's +16.58 percent at 1.123 over the same years; the search overfits the horizon, picking
+   ten sessions every year because it raises training net return, and pays in volatility and drawdown.
+   The frozen configuration therefore stands as the system, joint testing is closed as a lever, and every
+   sleeve result is now reported against constant long exposure as the floor.
+
 6. **The vision gaps** unchanged: the bundle ladder as a routine, fine-tune rounds with drift monitors
    and rollback, the full policy layer, a model registry, quantum only against an equal-budget
    classical win, and scenario and tail diagnostics beyond what T54 covers.

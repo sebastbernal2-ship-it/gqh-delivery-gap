@@ -1,0 +1,162 @@
+{
+ "schema": "system-optimizer-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/open-work.md",
+ "space": {
+  "horizon": [
+   10,
+   20,
+   30
+  ],
+  "gate_threshold": [
+   null,
+   0.0,
+   0.5,
+   1.0
+  ],
+  "w_intensity": "uniform 0.40 to 0.85",
+  "vol_target": [
+   null,
+   0.1,
+   0.14
+  ],
+  "sizing_gamma": [
+   0.5,
+   1.0,
+   1.5
+  ],
+  "entry_threshold": [
+   0.0,
+   0.1,
+   0.2
+  ],
+  "sample": 120,
+  "seed": 20261004
+ },
+ "objective": "net Sharpe on all data strictly before the evaluation year, base costs",
+ "choices": [
+  {
+   "year": "2022",
+   "params": {
+    "horizon": 10,
+    "gate_threshold": 0.0,
+    "w_intensity": 0.521,
+    "vol_target": 0.14,
+    "sizing_gamma": 0.5,
+    "entry_threshold": 0.1
+   },
+   "train_sharpe": 1.676,
+   "train_days": 600
+  },
+  {
+   "year": "2023",
+   "params": {
+    "horizon": 10,
+    "gate_threshold": 1.0,
+    "w_intensity": 0.411,
+    "vol_target": 0.1,
+    "sizing_gamma": 0.5,
+    "entry_threshold": 0.1
+   },
+   "train_sharpe": 1.556,
+   "train_days": 810
+  },
+  {
+   "year": "2024",
+   "params": {
+    "horizon": 10,
+    "gate_threshold": 0.5,
+    "w_intensity": 0.646,
+    "vol_target": null,
+    "sizing_gamma": 0.5,
+    "entry_threshold": 0.1
+   },
+   "train_sharpe": 1.825,
+   "train_days": 1021
+  },
+  {
+   "year": "2025",
+   "params": {
+    "horizon": 10,
+    "gate_threshold": 0.0,
+    "w_intensity": 0.481,
+    "vol_target": null,
+    "sizing_gamma": 0.5,
+    "entry_threshold": 0.2
+   },
+   "train_sharpe": 1.722,
+   "train_days": 1214
+  },
+  {
+   "year": "2026",
+   "params": {
+    "horizon": 10,
+    "gate_threshold": 0.0,
+    "w_intensity": 0.768,
+    "vol_target": 0.14,
+    "sizing_gamma": 1.0,
+    "entry_threshold": 0.0
+   },
+   "train_sharpe": 1.514,
+   "train_days": 1470
+  }
+ ],
+ "optimised": {
+  "days": 1042,
+  "metrics": {
+   "days": 1042,
+   "annual_return": 0.2011786376493349,
+   "annual_vol": 0.26360149978761066,
+   "sharpe": 0.7631923104057786,
+   "total_return": 0.9945756398905483,
+   "max_drawdown": -0.4544573843024836,
+   "hit_rate": 0.5249520153550864
+  }
+ },
+ "baseline": {
+  "days": 1183,
+  "metrics": {
+   "days": 1183,
+   "annual_return": 0.1657838237427955,
+   "annual_vol": 0.14763607226674533,
+   "sharpe": 1.1229222045629963,
+   "total_return": 1.0687986054210574,
+   "max_drawdown": -0.22883363549739744,
+   "hit_rate": 0.5232459847844463
+  }
+ },
+ "constant_long": {
+  "days": 1183,
+  "metrics": {
+   "days": 1183,
+   "annual_return": 0.2531047438564892,
+   "annual_vol": 0.4191863513122304,
+   "sharpe": 0.6038000594822909,
+   "total_return": 1.1551314901706857,
+   "max_drawdown": -0.5776319179843714,
+   "hit_rate": 0.5156382079459002
+  }
+ },
+ "interval_optimised_minus_baseline": {
+  "point": 0.06915194841748233,
+  "lower": -0.11344440298591785,
+  "upper": 0.2743450144035106,
+  "months": 57,
+  "share_positive": 0.765,
+  "resamples": 1000
+ },
+ "interval_optimised_minus_long": {
+  "point": -0.03897472285373751,
+  "lower": -0.3463290947259876,
+  "upper": 0.25774400124763325,
+  "months": 57,
+  "share_positive": 0.395,
+  "resamples": 1000
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only; the parameter sample is declared and finite",
+  "the same evaluation years were used in earlier one-arm tests, so this is still development evidence",
+  "costs are flat and base tier only in the search objective"
+ ]
+}

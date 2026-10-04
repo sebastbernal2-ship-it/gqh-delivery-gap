@@ -58,3 +58,5 @@
 {"artifact": "T66", "axis": "data", "declared_before": true, "id": "V058", "question": "specialist families", "status": "rejected", "variant": "load seasonal surprise, peak, ramp, acceleration, and the event-level test"}
 {"artifact": "T67", "axis": "training", "declared_before": true, "id": "V059", "question": "student targets", "status": "rejected", "variant": "distillation from forward-fold teacher probabilities"}
 {"artifact": "T67", "axis": "expression", "declared_before": true, "id": "V060", "question": "rival bounding", "status": "reported", "variant": "constant long exposure at every event, equal weight"}
+{"artifact": "T68", "axis": "system", "declared_before": true, "id": "V061", "question": "joint parameter search", "status": "rejected", "variant": "six-dimension walk-forward optimiser over the whole expression"}
+{"artifact": "T68", "axis": "system", "declared_before": true, "id": "V062", "question": "joint parameter search", "status": "reported", "variant": "frozen published configuration"}

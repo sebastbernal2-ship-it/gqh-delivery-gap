@@ -55,6 +55,15 @@
    "tier": "full"
   },
   {
+   "artifact": "results/system-optimizer.json",
+   "claim": "the joint six-dimension search against the frozen configuration",
+   "command": "python3 scripts/run_system_optimizer.py --output {output}",
+   "exact": true,
+   "name": "system optimizer",
+   "sha256": "ab3f0dbcc5ad2a775da6a31e271b3dc321a36ac7f9d30bc152ed0a5e646a8f9a",
+   "tier": "full"
+  },
+  {
    "artifact": "results/walk-forward-baseline.json",
    "claim": "the rolling-origin record and the two-sleeve composite",
    "command": "python3 scripts/run_walk_forward.py --output {output}",
