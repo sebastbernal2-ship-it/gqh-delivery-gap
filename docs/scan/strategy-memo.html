@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategy memo</title>
+<style>
+ body{font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:2.2rem;background:#0e1116;color:#e6edf3}
+ main{max-width:1050px;margin:0 auto} h1{font-size:1.7rem} h2{font-size:1.25rem;margin-top:2.2rem;border-top:1px solid #232b3a;padding-top:1rem}
+ h3{font-size:1.02rem;margin-top:1.5rem;color:#c9d1d9}
+ code{background:#161b22;padding:.1rem .3rem;border-radius:4px;font-size:.86em}
+ table{border-collapse:collapse;width:100%;font-size:.84rem;margin:1rem 0}
+ th,td{border:1px solid #30363d;padding:.35rem .5rem;vertical-align:top;text-align:left} th{background:#161b22}
+ p{margin:.6rem 0} ul,ol{margin:.5rem 0 .8rem 1.2rem} li{margin:.25rem 0}
+</style></head><body><main>
+<h1>Strategy memo: two theses, one implementation order</h1>
+<p>Owner: sebas. Date: 2026-10-04. Status: working memo for implementation, development only.</p>
+<p>This is the build document. It states what we believe, what is measured, what is still a hypothesis, and</p>
+<p>what has to be built, in the order that gets to a live decision fastest. Everything here traces to an</p>
+<p>artifact in <code>results/</code>, <code>docs/scan/</code> or <code>docs/theses/</code>. Both sealed windows are spent; nothing here is a</p>
+<p>sealed test.</p>
+<h2>One page summary</h2>
+<table><thead><tr><th></th><th>Thesis A, forced deleveraging</th><th>Thesis B, expectation gap</th></tr></thead><tbody><tr><td>Counterparty</td><td>leveraged account closed by the margin engine</td><td>holder who was told one thing and gets another</td></tr><tr><td>Why they cannot avoid paying</td><td>the engine chooses the timing, not the account</td><td>the revision is public and they reprice late</td></tr><tr><td>Instrument</td><td>perpetual futures, venue native</td><td>long short equity in the 59 name complex</td></tr><tr><td>Edge channel</td><td>liquidity risk premium</td><td>data and processing, filings versus tape</td></tr><tr><td>Speed needed</td><td>no, entry is the bar close after the flow</td><td>no, information half life is weeks</td></tr><tr><td>Status</td><td>mechanism plausible, economics measured, significance open</td><td>association fails controls so far (T33)</td></tr><tr><td>Promotion gate</td><td>30 or more events, net positive at doubled costs, null beaten</td><td>controlled interaction negative with counterparty named, disjoint names</td></tr><tr><td>Capacity</td><td>about 1.9M dollars of depth inside 10 bps at the events</td><td>3.9M at one percent participation of the binding name</td></tr><tr><td>Next build step</td><td>multi day tape, event counter, replay of the proposed rule</td><td>8-K metadata plus RPO conversion test</td></tr></tbody></table>
+<p>Nothing above is an edge yet. A is closer because every component exists. B is broader but unproven.</p>
+<h2>Thesis A: liquidity provision to forced deleveraging</h2>
+<h3>Mechanism</h3>
+<p>A leveraged account on a perpetual venue is closed by the margin engine at a price and a time it does not</p>
+<p>choose. The liquidation order is marketable, consumes displayed depth, and pushes price away from fair</p>
+<p>value. The move overshoots in proportion to how thin the book is. Whoever supplies liquidity to that flow</p>
+<p>is paid the overshoot, net of costs, provided the dislocation is larger than the round trip.</p>
+<p>Why it persists: supplying capital into a cascade requires holding inventory exactly when it is</p>
+<p>dangerous. This is a risk premium, not an information edge, so it does not close the way a mispricing</p>
+<p>does. The barrier to entry is the willingness to hold that risk and the machinery to do it without being</p>
+<p>the fastest participant.</p>
+<h3>Trigger specification, as frozen</h3>
+<p>The conjunction in <code>docs/plan/cascade-protocol.md</code>, implemented in <code>src/live/hyperliquid.py</code>:</p>
+<ul><li>a one sample step beyond three trailing standard deviations, the trailing window sixty samples at</li><li>fifteen seconds;</li></ul>
+<ul><li>and open interest down one percent or more against the sixty sample median.</li></ul>
+<p>This is the only condition whose measured gross reversion clears the cost hurdle. Percentile based</p>
+<p>conditions do not (T20, T22).</p>
+<h3>Measured so far</h3>
+<table><thead><tr><th>Level</th><th>Events</th><th>Gross 15 min</th><th>Net base</th><th>Net doubled</th><th>Null p</th></tr></thead><tbody><tr><td>Frozen conjunction</td><td>6</td><td>+17.9 bps</td><td>+6.9 bps</td><td>-4.0 bps</td><td>0.085</td></tr><tr><td>Top 1 percent moves</td><td>109</td><td>+3.9 bps</td><td>-8.0 bps</td><td>-19.9 bps</td><td>0.29</td></tr><tr><td>Top 5 percent moves</td><td>505</td><td>+3.1 bps</td><td>-7.7 bps</td><td>-18.6 bps</td><td>0.15</td></tr><tr><td>Thin book</td><td>2,139</td><td>+2.9 bps</td><td>-7.7 bps</td><td>-18.2 bps</td><td>0.09</td></tr></tbody></table>
+<ul><li>Costs: taker 4.5 bps per side plus half the measured spread; maker 1.5 bps. Round trip hurdle near 10 bps</li><li>at base, near 20 doubled.</li></ul>
+<ul><li>Maker entry fails by adverse selection: the fills are the events that keep going (T22). Entry is taken</li><li>immediately, the resting order is a size tool at best.</li></ul>
+<ul><li>Cross market expression does not rescue it: every entry into BTC or ETH nets negative; only thin markets</li><li>show positive cells, under 5k dollars of depth (T24).</li></ul>
+<ul><li>Capacity at the events: median depth inside 10 bps of 1.9M dollars at the top one percent level, 950</li><li>dollars when the book is thin. BTC and ETH are the only markets with usable depth.</li></ul>
+<ul><li>Rarity: about 0.6 conjunction events per hour across four markets in the recorded window.</li></ul>
+<h3>What we do not know</h3>
+<p>Whether the reversion survives outside the recorded window; whether the reversion is concentrated in the</p>
+<p>first seconds (which would turn this into a speed business and violate our latency clause); whether venue</p>
+<p>fees stay at current levels; whether the same conjunction fires in other venues with deeper books.</p>
+<h3>Promotion gate</h3>
+<p>At least thirty conjunction events in a tape of several days, net positive at doubled costs, permutation</p>
+<p>null beaten, and a replay of the exact proposed rule (entry, size, exit) on the recorded tape matching the</p>
+<p>study&#x27;s numbers within one basis point. Until then this stays a candidate.</p>
+<h3>Implementation components</h3>
+<table><thead><tr><th>Component</th><th>State</th><th>Path</th><th>Notes</th></tr></thead><tbody><tr><td>Tape collector</td><td>exists</td><td><code>scripts/collect_tape.py</code></td><td>fifteen second cadence, four markets, local JSONL</td></tr><tr><td>Trigger algebra</td><td>exists</td><td><code>src/live/hyperliquid.py</code></td><td><code>trigger()</code>, frozen parameters</td></tr><tr><td>Tape evaluator</td><td>exists</td><td><code>scripts/evaluate_cascade_tape.py</code></td><td>applies the frozen rule to a recording</td></tr><tr><td>Study harness</td><td>exists</td><td><code>scripts/build_cascade_reversion_study.py</code></td><td>levels, horizons, costs, nulls</td></tr><tr><td>Event counter and alarm</td><td>to build</td><td><code>src/live/</code></td><td>counts conjunction events, alerts on the first one</td></tr><tr><td>Execution adapter</td><td>partly exists</td><td><code>orderbook-engine/</code></td><td>the other session&#x27;s engine; needs an interface contract</td></tr><tr><td>Risk and sizing rules</td><td>to build</td><td><code>src/strategy/</code></td><td>see below</td></tr><tr><td>Fill and P&amp;L ledger</td><td>to build</td><td><code>results/</code> + <code>src/live/</code></td><td>every event, order, fill, cost</td></tr></tbody></table>
+<p>Sizing rule, first version: per event, notional at most one percent of the depth inside 10 bps at the</p>
+<p>entry bar; at most two concurrent events per market; daily loss stop at three times the median event cost;</p>
+<p>no holding beyond the declared horizon. Exit at the horizon bar, taker.</p>
+<p>Milestones: M1 tape extension with an event counter and a first event review. M2 replay of the full rule</p>
+<p>on the recorded tape, matching the study. M3 live paper at zero size. M4 live at one percent of capacity.</p>
+<p>M5 scale only after thirty events and the doubled cost gate.</p>
+<h2>Thesis B: expectation gap in the capital intensive complex</h2>
+<h3>Mechanism</h3>
+<p>A firm raises capex as a share of revenue. Intensity alone is not information: it is a spending pattern,</p>
+<p>and under controls it does not predict relative returns (T33). The thesis becomes an expectation claim</p>
+<p>only with a conversion or surprise measure: the firm promised backlog, guidance or revenue conversion, and</p>
+<p>the filing shows it did not deliver. The counterparty is the holder who acted on the promise. The receiver</p>
+<p>is whoever is positioned before the revision is fully in the tape.</p>
+<h3>Signal specification, current and planned</h3>
+<ul><li><b>Base measure, built</b>: year over year change in capex intensity from SEC XBRL, known at the later</li><li>filing date, valid 180 days.</li></ul>
+<ul><li><b>Surprise measures, planned</b>: guidance revisions from earnings exhibits (item 2.02 releases), backlog</li><li>conversion from RPO change against its typical seasonal change, and revenue conversion below the name&#x27;s</li><li>own trailing four quarter norm.</li></ul>
+<ul><li><b>The hypothesis to test</b>: intensity up and a negative filing surprise interacts to predict weaker</li><li>relative returns. The realised conversion version of this test failed so far; guidance is the untested</li><li>and more faithful version.</li></ul>
+<h3>Measured so far</h3>
+<ul><li>The charge existed in the simple design: -0.29 at five days, -0.24 at twenty (T25), and it is not asset</li><li>growth (T29), sign stable across three regimes (T30), fragile without the disclosure names (T31).</li></ul>
+<ul><li>Under controls it fails: +0.0061, t 0.65 with sector, growth, margin and the common factor (T33).</li></ul>
+<ul><li>The expression layer, if the channel is later established: net 13.1 percent annualised against 15.9</li><li>gross, Sharpe 0.381, drawdown -65.8 percent, 231 cohorts, capacity 3.87M dollars at one percent</li><li>participation, 19.4M at five (T32). Unattributed until the channel test passes.</li></ul>
+<h3>What we do not know</h3>
+<p>Whether guidance revisions carry the channel; whether the effect is concentrated in a few names; whether</p>
+<p>borrow is available and at what cost for the short leg; whether a risk overlay can bring the drawdown to an</p>
+<p>acceptable level.</p>
+<h3>Promotion gate</h3>
+<p>The interaction coefficient negative with t beyond two in the controlled specification, on a disjoint name</p>
+<p>set, with borrow measured, and the strategy&#x27;s risk overlay bounded.</p>
+<h3>Implementation components</h3>
+<table><thead><tr><th>Component</th><th>State</th><th>Path</th><th>Notes</th></tr></thead><tbody><tr><td>XBRL panels</td><td>exists</td><td><code>results/complex-capex-quarterly.csv</code>, <code>complex-revenue-quarterly.csv</code>, <code>complex-margins-quarterly.csv</code>, <code>complex-assets-quarterly.csv</code></td><td>point in time via filed dates</td></tr><tr><td>Filing register</td><td>partial</td><td><code>results/filings-register.csv</code></td><td>covers a few names; extend to all 59</td></tr><tr><td>8-K metadata fetch</td><td>to build</td><td><code>scripts/fetch_filings_surfaces.py</code></td><td>submissions per CIK, items, acceptance times</td></tr><tr><td>RPO conversion</td><td>exists</td><td><code>results/rpo-events.csv</code></td><td>22 complex names, change versus typical change</td></tr><tr><td>Guidance parser</td><td>to build</td><td><code>scripts/parse_guidance.py</code></td><td>earnings exhibits, last stage, highest effort</td></tr><tr><td>Signal builder</td><td>exists</td><td><code>scripts/run_intensity_strategy.py</code></td><td>clock, ranks, costs, capacity</td></tr><tr><td>Risk overlay</td><td>to build</td><td><code>src/strategy/</code></td><td>cluster caps, drawdown control, vol target was rejected</td></tr><tr><td>Borrow data</td><td>to build or buy</td><td>external</td><td>blocks the short leg at size</td></tr></tbody></table>
+<p>Milestones: M1 8-K metadata for 59 names and the filing surface panel. M2 RPO conversion test with the</p>
+<p>intensity interaction. M3 guidance parsing on the top twenty names. M4 controlled interaction test and</p>
+<p>disjoint name check. M5 risk overlay and capacity sign off.</p>
+<h2>What we will not do</h2>
+<ul><li>No queue or delivery trades: no instrument isolates the units (T6, T21).</li></ul>
+<ul><li>No options expressions without an entitlement that does not exist here.</li></ul>
+<ul><li>No latency race: if a thesis only works in the first seconds, it is out of scope by our own rule.</li></ul>
+<ul><li>No new variants after a sealed window opens; both are spent, so the remaining work is declared</li><li>development and labelled as such.</li></ul>
+<h2>Cross cutting</h2>
+<ul><li><b>State machine</b>: the queue and delivery work supplies regime state (where interconnection binds, who</li><li>withdraws, phase of the cycle). It sizes and gates the other two, it is not a P&amp;L chain.</li></ul>
+<ul><li><b>Data</b>: <code>docs/scan/datasets.jsonl</code> lists the 162 datasets with sources and coverage; the graph holds</li><li>them as nodes.</li></ul>
+<ul><li><b>Bookkeeping</b>: every thesis keeps a chain log (<code>docs/chains/</code>), every measurement becomes a truth</li><li>(<code>docs/truths.md</code>), every choice is a decision event.</li></ul>
+<ul><li><b>Capital</b>: thesis A is measured in single digit millions before depth binds; thesis B in single digit</li><li>millions at one percent participation. Both are small books by construction.</li></ul>
+<h2>Open decisions for the captain</h2>
+<ol><li>Thesis A: do we run the tape collector standing (multi day) and wire the engine&#x27;s interface to the</li></ol>
+<p>   orderbook engine, or keep this in replay until the event count reaches thirty?</p>
+<ol><li>Thesis B: do we spend the build on the guidance parser now, or first exhaust the 8-K and RPO surfaces</li></ol>
+<p>   which are cheaper?</p>
+<ol><li>Capital: what book size should the implementation target, so capacity and risk rules are set against a</li></ol>
+<p>   real number rather than an adjective?</p>
+</main></body></html>
