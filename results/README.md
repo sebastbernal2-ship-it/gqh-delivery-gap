@@ -185,3 +185,7 @@ generated-path: results/hyperliquid-fixture/
 Produced by `scripts/detect_forced_flow.py`:
 
 generated-path: results/hyperliquid-forced-flow-candidates.jsonl
+
+Produced by `scripts/evaluate_ws_capture_conjunction.py`:
+
+generated-path: results/hyperliquid-ws-conjunction.json
