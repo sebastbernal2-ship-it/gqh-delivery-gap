@@ -1,0 +1,515 @@
+{
+ "schema": "decision-layer-v1",
+ "scope": "development_only",
+ "protocol": "hpc/probabilistic-council/decision_layer.py",
+ "rule": "act when reward * (2 * p_best - 1) > cost; a correct call pays +1, a wrong one -1",
+ "thresholds": [
+  0.2,
+  0.25,
+  0.3,
+  0.35,
+  0.4,
+  0.45,
+  0.5,
+  0.55,
+  0.6,
+  0.65,
+  0.7,
+  0.75,
+  0.8,
+  0.85,
+  0.9
+ ],
+ "costs": [
+  0.0,
+  0.05,
+  0.1,
+  0.2,
+  0.4
+ ],
+ "sources": {
+  "rpo_with_filings": {
+   "rows": 833,
+   "classes": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "selective": [
+    {
+     "threshold": 0.2,
+     "acted": 833,
+     "coverage": 1.0,
+     "accuracy_acted": 0.32533013205282113,
+     "accuracy_overall": 0.32533013205282113
+    },
+    {
+     "threshold": 0.25,
+     "acted": 756,
+     "coverage": 0.907563025210084,
+     "accuracy_acted": 0.32671957671957674,
+     "accuracy_overall": 0.2965186074429772
+    },
+    {
+     "threshold": 0.3,
+     "acted": 432,
+     "coverage": 0.5186074429771909,
+     "accuracy_acted": 0.3587962962962963,
+     "accuracy_overall": 0.18607442977190877
+    },
+    {
+     "threshold": 0.35,
+     "acted": 186,
+     "coverage": 0.22328931572629052,
+     "accuracy_acted": 0.4032258064516129,
+     "accuracy_overall": 0.09003601440576231
+    },
+    {
+     "threshold": 0.4,
+     "acted": 96,
+     "coverage": 0.11524609843937575,
+     "accuracy_acted": 0.46875,
+     "accuracy_overall": 0.05402160864345738
+    },
+    {
+     "threshold": 0.45,
+     "acted": 60,
+     "coverage": 0.07202881152460984,
+     "accuracy_acted": 0.55,
+     "accuracy_overall": 0.03961584633853541
+    },
+    {
+     "threshold": 0.5,
+     "acted": 37,
+     "coverage": 0.04441776710684274,
+     "accuracy_acted": 0.5945945945945946,
+     "accuracy_overall": 0.026410564225690276
+    },
+    {
+     "threshold": 0.55,
+     "acted": 21,
+     "coverage": 0.025210084033613446,
+     "accuracy_acted": 0.5714285714285714,
+     "accuracy_overall": 0.014405762304921969
+    },
+    {
+     "threshold": 0.6,
+     "acted": 11,
+     "coverage": 0.013205282112845138,
+     "accuracy_acted": 0.36363636363636365,
+     "accuracy_overall": 0.004801920768307323
+    },
+    {
+     "threshold": 0.65,
+     "acted": 5,
+     "coverage": 0.006002400960384154,
+     "accuracy_acted": 0.6,
+     "accuracy_overall": 0.003601440576230492
+    },
+    {
+     "threshold": 0.7,
+     "acted": 3,
+     "coverage": 0.003601440576230492,
+     "accuracy_acted": 1.0,
+     "accuracy_overall": 0.003601440576230492
+    },
+    {
+     "threshold": 0.75,
+     "acted": 3,
+     "coverage": 0.003601440576230492,
+     "accuracy_acted": 1.0,
+     "accuracy_overall": 0.003601440576230492
+    },
+    {
+     "threshold": 0.8,
+     "acted": 2,
+     "coverage": 0.0024009603841536613,
+     "accuracy_acted": 1.0,
+     "accuracy_overall": 0.0024009603841536613
+    },
+    {
+     "threshold": 0.85,
+     "acted": 2,
+     "coverage": 0.0024009603841536613,
+     "accuracy_acted": 1.0,
+     "accuracy_overall": 0.0024009603841536613
+    },
+    {
+     "threshold": 0.9,
+     "acted": 2,
+     "coverage": 0.0024009603841536613,
+     "accuracy_acted": 1.0,
+     "accuracy_overall": 0.0024009603841536613
+    }
+   ],
+   "utility": [
+    {
+     "cost": 0.0,
+     "threshold": 0.5,
+     "acted": 37,
+     "coverage": 0.04441776710684274,
+     "accuracy_acted": 0.5945945945945946,
+     "utility_per_row": 0.008403361344537815,
+     "utility_acting_on_every_row": -0.34933973589435774,
+     "utility_gain_over_blind": 0.3577430972388956
+    },
+    {
+     "cost": 0.05,
+     "threshold": 0.525,
+     "acted": 33,
+     "coverage": 0.03961584633853541,
+     "accuracy_acted": 0.6060606060606061,
+     "utility_per_row": 0.006422569027611044,
+     "utility_acting_on_every_row": -0.39933973589435773,
+     "utility_gain_over_blind": 0.4057623049219688
+    },
+    {
+     "cost": 0.1,
+     "threshold": 0.55,
+     "acted": 21,
+     "coverage": 0.025210084033613446,
+     "accuracy_acted": 0.5714285714285714,
+     "utility_per_row": 0.0010804321728691475,
+     "utility_acting_on_every_row": -0.4493397358943578,
+     "utility_gain_over_blind": 0.4504201680672269
+    },
+    {
+     "cost": 0.2,
+     "threshold": 0.6,
+     "acted": 11,
+     "coverage": 0.013205282112845138,
+     "accuracy_acted": 0.36363636363636365,
+     "utility_per_row": -0.00624249699879952,
+     "utility_acting_on_every_row": -0.5493397358943578,
+     "utility_gain_over_blind": 0.5430972388955583
+    },
+    {
+     "cost": 0.4,
+     "threshold": 0.7,
+     "acted": 3,
+     "coverage": 0.003601440576230492,
+     "accuracy_acted": 1.0,
+     "utility_per_row": 0.002160864345738295,
+     "utility_acting_on_every_row": -0.7493397358943578,
+     "utility_gain_over_blind": 0.751500600240096
+    }
+   ],
+   "ordinal_utility": [
+    {
+     "cost": 0.0,
+     "acted": 434,
+     "coverage": 0.5210084033613446,
+     "accuracy_acted": 0.3433179723502304,
+     "utility_per_row": 0.08883553421368548,
+     "utility_acting_on_every_row": 0.0012004801920768306,
+     "utility_gain_over_blind": 0.08763505402160865
+    },
+    {
+     "cost": 0.05,
+     "acted": 329,
+     "coverage": 0.3949579831932773,
+     "accuracy_acted": 0.3586626139817629,
+     "utility_per_row": 0.06548619447779111,
+     "utility_acting_on_every_row": -0.04879951980792318,
+     "utility_gain_over_blind": 0.1142857142857143
+    },
+    {
+     "cost": 0.1,
+     "acted": 214,
+     "coverage": 0.25690276110444177,
+     "accuracy_acted": 0.37383177570093457,
+     "utility_per_row": 0.03673469387755102,
+     "utility_acting_on_every_row": -0.09879951980792319,
+     "utility_gain_over_blind": 0.1355342136854742
+    },
+    {
+     "cost": 0.2,
+     "acted": 68,
+     "coverage": 0.08163265306122448,
+     "accuracy_acted": 0.36764705882352944,
+     "utility_per_row": 0.00048019207683073486,
+     "utility_acting_on_every_row": -0.19879951980792315,
+     "utility_gain_over_blind": 0.19927971188475388
+    },
+    {
+     "cost": 0.4,
+     "acted": 6,
+     "coverage": 0.007202881152460984,
+     "accuracy_acted": 0.6666666666666666,
+     "utility_per_row": 0.001920768307322929,
+     "utility_acting_on_every_row": -0.3987995198079232,
+     "utility_gain_over_blind": 0.4007202881152461
+    }
+   ],
+   "accuracy_at_target": {
+    "0.5": {
+     "threshold": 0.45,
+     "acted": 60,
+     "coverage": 0.07202881152460984,
+     "accuracy_acted": 0.55,
+     "accuracy_overall": 0.03961584633853541
+    },
+    "0.6": {
+     "threshold": 0.65,
+     "acted": 5,
+     "coverage": 0.006002400960384154,
+     "accuracy_acted": 0.6,
+     "accuracy_overall": 0.003601440576230492
+    },
+    "0.7": {
+     "threshold": 0.75,
+     "acted": 3,
+     "coverage": 0.003601440576230492,
+     "accuracy_acted": 1.0,
+     "accuracy_overall": 0.003601440576230492
+    },
+    "0.8": {
+     "threshold": 0.75,
+     "acted": 3,
+     "coverage": 0.003601440576230492,
+     "accuracy_acted": 1.0,
+     "accuracy_overall": 0.003601440576230492
+    }
+   },
+   "always_on_accuracy": 0.32533013205282113
+  },
+  "filing_council": {
+   "rows": 20,
+   "classes": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "selective": [
+    {
+     "threshold": 0.2,
+     "acted": 20,
+     "coverage": 1.0,
+     "accuracy_acted": 0.3,
+     "accuracy_overall": 0.3
+    },
+    {
+     "threshold": 0.25,
+     "acted": 18,
+     "coverage": 0.9,
+     "accuracy_acted": 0.3333333333333333,
+     "accuracy_overall": 0.3
+    },
+    {
+     "threshold": 0.3,
+     "acted": 2,
+     "coverage": 0.1,
+     "accuracy_acted": 0.5,
+     "accuracy_overall": 0.05
+    },
+    {
+     "threshold": 0.35,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "accuracy_overall": 0.0
+    },
+    {
+     "threshold": 0.4,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "accuracy_overall": 0.0
+    },
+    {
+     "threshold": 0.45,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "accuracy_overall": 0.0
+    },
+    {
+     "threshold": 0.5,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "accuracy_overall": 0.0
+    },
+    {
+     "threshold": 0.55,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "accuracy_overall": 0.0
+    },
+    {
+     "threshold": 0.6,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "accuracy_overall": 0.0
+    },
+    {
+     "threshold": 0.65,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "accuracy_overall": 0.0
+    },
+    {
+     "threshold": 0.7,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "accuracy_overall": 0.0
+    },
+    {
+     "threshold": 0.75,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "accuracy_overall": 0.0
+    },
+    {
+     "threshold": 0.8,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "accuracy_overall": 0.0
+    },
+    {
+     "threshold": 0.85,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "accuracy_overall": 0.0
+    },
+    {
+     "threshold": 0.9,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "accuracy_overall": 0.0
+    }
+   ],
+   "utility": [
+    {
+     "cost": 0.0,
+     "threshold": 0.5,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "utility_per_row": 0.0,
+     "utility_acting_on_every_row": -0.4,
+     "utility_gain_over_blind": 0.4
+    },
+    {
+     "cost": 0.05,
+     "threshold": 0.525,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "utility_per_row": 0.0,
+     "utility_acting_on_every_row": -0.45,
+     "utility_gain_over_blind": 0.45
+    },
+    {
+     "cost": 0.1,
+     "threshold": 0.55,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "utility_per_row": 0.0,
+     "utility_acting_on_every_row": -0.5,
+     "utility_gain_over_blind": 0.5
+    },
+    {
+     "cost": 0.2,
+     "threshold": 0.6,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "utility_per_row": 0.0,
+     "utility_acting_on_every_row": -0.6,
+     "utility_gain_over_blind": 0.6
+    },
+    {
+     "cost": 0.4,
+     "threshold": 0.7,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "utility_per_row": 0.0,
+     "utility_acting_on_every_row": -0.8,
+     "utility_gain_over_blind": 0.8
+    }
+   ],
+   "ordinal_utility": [
+    {
+     "cost": 0.0,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "utility_per_row": 0.0,
+     "utility_acting_on_every_row": -0.25,
+     "utility_gain_over_blind": 0.25
+    },
+    {
+     "cost": 0.05,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "utility_per_row": 0.0,
+     "utility_acting_on_every_row": -0.3,
+     "utility_gain_over_blind": 0.3
+    },
+    {
+     "cost": 0.1,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "utility_per_row": 0.0,
+     "utility_acting_on_every_row": -0.35,
+     "utility_gain_over_blind": 0.35
+    },
+    {
+     "cost": 0.2,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "utility_per_row": 0.0,
+     "utility_acting_on_every_row": -0.45,
+     "utility_gain_over_blind": 0.45
+    },
+    {
+     "cost": 0.4,
+     "acted": 0,
+     "coverage": 0.0,
+     "accuracy_acted": null,
+     "utility_per_row": 0.0,
+     "utility_acting_on_every_row": -0.65,
+     "utility_gain_over_blind": 0.65
+    }
+   ],
+   "accuracy_at_target": {
+    "0.5": {
+     "threshold": 0.3,
+     "acted": 2,
+     "coverage": 0.1,
+     "accuracy_acted": 0.5,
+     "accuracy_overall": 0.05
+    },
+    "0.6": null,
+    "0.7": null,
+    "0.8": null
+   },
+   "always_on_accuracy": 0.3
+  }
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only; both sealed windows are spent",
+  "the RPO source is one model, the council source is the fused ensemble",
+  "20 evaluation rows on the council source, 833 on the RPO source",
+  "no trade is placed: utility is the declared classification payoff, not P&L"
+ ]
+}

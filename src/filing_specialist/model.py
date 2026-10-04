@@ -119,8 +119,9 @@ def chronological_split(rows: list[dict], fraction: float = 0.7) -> tuple[list[d
     return ordered[:cut], ordered[cut:]
 
 
-def compare(rows: list[dict], features: tuple[str, ...], fraction: float = 0.7) -> dict:
-    """Prevalence reference versus the fitted baseline on the same chronological split."""
+def fit_and_forecast(rows: list[dict], features: tuple[str, ...],
+                     fraction: float = 0.7) -> dict:
+    """Fit on the earlier rows, forecast the later ones, and keep the per-row probabilities."""
     train, test = chronological_split(rows, fraction)
     if not train or not test:
         raise ValueError("both splits must be nonempty")
@@ -136,9 +137,26 @@ def compare(rows: list[dict], features: tuple[str, ...], fraction: float = 0.7) 
                   "test_from": min(row["label_available"] for row in test),
                   "classes": list(classes)},
         "features": list(features),
-        "prevalence": score(np.tile(prior, (len(test), 1)), test_labels, classes),
-        "softmax": score(predict_softmax(parameters, apply_scaler(test_matrix, stats)),
-                         test_labels, classes),
+        "classes": classes,
+        "test_labels": test_labels,
+        "prior": prior,
+        "prevalence_probabilities": np.tile(prior, (len(test), 1)),
+        "softmax_probabilities": predict_softmax(parameters, apply_scaler(test_matrix, stats)),
         "training_prevalence": {int(label): float(value) for label, value in zip(classes, prior)},
         "coefficients": parameters.tolist(),
+    }
+
+
+def compare(rows: list[dict], features: tuple[str, ...], fraction: float = 0.7) -> dict:
+    """Prevalence reference versus the fitted baseline on the same chronological split."""
+    fitted = fit_and_forecast(rows, features, fraction)
+    classes = fitted["classes"]
+    labels = fitted["test_labels"]
+    return {
+        "split": fitted["split"],
+        "features": fitted["features"],
+        "prevalence": score(fitted["prevalence_probabilities"], labels, classes),
+        "softmax": score(fitted["softmax_probabilities"], labels, classes),
+        "training_prevalence": fitted["training_prevalence"],
+        "coefficients": fitted["coefficients"],
     }

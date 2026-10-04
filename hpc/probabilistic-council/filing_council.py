@@ -225,4 +225,11 @@ def evaluate_council(blocks: tuple[list[dict], ...], metadata: np.ndarray, text:
         if calibration_cases else {},
         "specialists": list(council.specialists),
         "metadata_features": list(metadata_features),
+        "row_detail": {
+            "classes": [int(label) for label in classes],
+            "labels": [int(label) for label in evaluation_labels],
+            "council": [[float(value) for value in row] for row in council_rows],
+            "metadata": [[float(value) for value in row] for row in meta_rows],
+            "text": [[float(value) for value in row] for row in text_rows],
+        },
     }

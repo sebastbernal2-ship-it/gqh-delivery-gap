@@ -222,6 +222,10 @@ Produced by `scripts/run_filing_council.py`:
 
 generated-path: results/filing-council-ab.json
 
+Produced by `scripts/run_decision_layer.py`:
+
+generated-path: results/decision-layer.json
+
 Produced by `scripts/build_rpo_vintages.py`:
 
 generated-path: results/rpo-vintages.csv
