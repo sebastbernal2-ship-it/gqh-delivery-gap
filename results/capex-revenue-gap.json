@@ -1,0 +1,86 @@
+{
+ "status": "development only; both sealed windows spent; protocol docs/plan/capex-revenue-gap.md",
+ "providers": {
+  "AMZN": {
+   "quarters": 5,
+   "status": "insufficient"
+  },
+  "APLD": {
+   "quarters": 4,
+   "status": "insufficient"
+  },
+  "CORZ": {
+   "quarters": 7,
+   "status": "tested",
+   "intensity_mean": 1.112,
+   "intensity_last": 4.082,
+   "intensity_trend_rho": 0.286,
+   "gap_mean": -0.605,
+   "gap_autocorr": -0.479
+  },
+  "CRWV": {
+   "quarters": 3,
+   "status": "insufficient"
+  },
+  "EQIX": {
+   "quarters": 39,
+   "status": "tested",
+   "intensity_mean": 0.399,
+   "intensity_last": 0.571,
+   "intensity_trend_rho": 0.174,
+   "gap_mean": 0.028,
+   "gap_autocorr": 0.349
+  },
+  "GOOGL": {
+   "quarters": 24,
+   "status": "tested",
+   "intensity_mean": 0.184,
+   "intensity_last": 0.404,
+   "intensity_trend_rho": 0.35,
+   "gap_mean": -0.04,
+   "gap_autocorr": 0.073
+  },
+  "IREN": {
+   "quarters": 2,
+   "status": "insufficient"
+  },
+  "META": {
+   "quarters": 15,
+   "status": "tested",
+   "intensity_mean": 0.324,
+   "intensity_last": 0.468,
+   "intensity_trend_rho": -0.221,
+   "gap_mean": 0.006,
+   "gap_autocorr": 0.001
+  },
+  "MSFT": {
+   "quarters": 46,
+   "status": "tested",
+   "intensity_mean": 0.136,
+   "intensity_last": 0.471,
+   "intensity_trend_rho": 0.943,
+   "gap_mean": -0.098,
+   "gap_autocorr": 0.528
+  },
+  "ORCL": {
+   "quarters": 17,
+   "status": "tested",
+   "intensity_mean": 0.212,
+   "intensity_last": 2.017,
+   "intensity_trend_rho": 0.922,
+   "gap_mean": -0.283,
+   "gap_autocorr": 0.163
+  }
+ },
+ "pooled_intensity_mean": 0.287,
+ "pooled_gap_mean": -0.089,
+ "pooled_gap_autocorr": -0.275,
+ "capex_leads_revenue_rho": -0.0724,
+ "capex_leads_revenue_p": 0.7027,
+ "lead_observations": 122,
+ "caveats": [
+  "ten providers",
+  "capex concepts differ across filers",
+  "development only"
+ ]
+}

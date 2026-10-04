@@ -267,6 +267,20 @@ queue position modelled; development only.
 optimistic fills, so maker entry is a size tool rather than a source of edge on this window, and the
 reversion that exists is taken immediately at the event.
 
+## T23. Hyperscaler capex intensity is running ahead of revenue, and the aggregate gap is not yet persistent
+
+**Statement**: on six providers with aligned panels, pooled capex intensity is 0.287 of revenue, and the
+most recent quarters sit far above each mean for the hyperscalers: MSFT 0.471 against 0.136 with a trend
+rho of +0.94, ORCL 2.017 against 0.212 at +0.92, GOOGL 0.404 against 0.184 at +0.35. The pooled gap,
+capex growth minus revenue growth, averages -0.089 with autocorrelation -0.28, and capex growth does not
+lead revenue growth at one quarter (rho -0.07, p 0.70, 122 ordered pairs). AMZN, APLD, CRWV and IREN have
+no usable panel: stale concept tags, annual only capex, and short histories.
+**Evidence**: `results/capex-revenue-gap.json`; `scripts/build_capex_revenue_gap.py`;
+`results/provider-capex-quarterly.csv`; `results/provider-revenue-quarterly.csv`.
+**Scope**: six providers, SEC XBRL quarterly facts, development only.
+**Consequence**: the depreciation wall node carries evidence now, and the open object is whether the
+equity market prices the intensity rise, which requires the market panel.
+
 ---
 
 # What these truths are pointing at

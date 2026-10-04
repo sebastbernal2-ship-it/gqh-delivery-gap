@@ -5,18 +5,18 @@ decomposed. Nothing here grades a path as dead.
 
 ## The graph, expanded
 
-- Nodes: **168,951**
-- Typed connections: **1,173,112**
+- Nodes: **169,468**
+- Typed connections: **1,176,458**
 - Distributions written down: **86** samples
-- Propagation paths: **632** from 171 seeds
-- Hidden objects: **45** (nodes 1, edges 20, gaps 3, assumptions 21)
+- Propagation paths: **644** from 172 seeds
+- Hidden objects: **47** (nodes 1, edges 22, gaps 3, assumptions 21)
 
 ## Delineation
 
-- Layers: `raw` 94,075, `mechanism` 44,834, `feature` 26,935, `asset` 1,024, `entity` 437, `dataset` 210, `event` 173, `outcome` 160
-- Connection status: `declared` 1,144,418, `inferred` 26,018, `proposed` 2,058, `curated` 596, `blocked` 22
+- Layers: `raw` 94,396, `mechanism` 44,991, `feature` 26,973, `asset` 1,024, `entity` 438, `dataset` 210, `event` 173, `outcome` 160
+- Connection status: `declared` 1,147,700, `inferred` 26,078, `proposed` 2,058, `curated` 600, `blocked` 22
 - Every connection carries a condition and a falsifier: 99.99% and 99.99%
-- Components: 1, largest 168,951, unreachable from anchors 0
+- Components: 1, largest 169,468, unreachable from anchors 0
 
 ## Distributions, centre, spread, tails
 
@@ -84,10 +84,10 @@ Top samples by tail ratio (p90 over median):
 | hidden_edge | `dig:power:goes -> dig:compute:power-commitment` | cross-dig pair sharing ['power'] and observable tokens ['announcements'] | add the typed edge or record why the shared observable stops here |
 | hidden_edge | `dig:power:core-stacking -> dig:nuc:firm-power` | cross-dig pair sharing ['power'] and observable tokens ['announcements'] | add the typed edge or record why the shared observable stops here |
 | hidden_edge | `dig:hvdc:copper-aluminium -> dig:copper:demand` | cross-dig pair sharing ['copper'] and observable tokens ['cable', 'commentary', 'maker'] | add the typed edge or record why the shared observable stops here |
+| hidden_edge | `dig:grid:capex-plan -> dig:compute:capex-intensity` | cross-dig pair sharing ['capex'] and observable tokens ['capex'] | add the typed edge or record why the shared observable stops here |
 | hidden_edge | `dig:compute:provider-capex -> dig:compute:equity-transmission` | cross-dig pair sharing ['compute'] and observable tokens ['capex'] | add the typed edge or record why the shared observable stops here |
 | hidden_edge | `dig:compute:inference-cost -> dig:compute:rental-to-revenue-link` | cross-dig pair sharing ['compute'] and observable tokens ['provider'] | add the typed edge or record why the shared observable stops here |
 | hidden_edge | `dig:compute:inference-cost -> dig:compute:family-exposure-map` | cross-dig pair sharing ['compute'] and observable tokens ['provider'] | add the typed edge or record why the shared observable stops here |
-| hidden_edge | `dig:compute:inference-cost -> dig:compute:revenue-per-mw` | cross-dig pair sharing ['compute'] and observable tokens ['provider'] | add the typed edge or record why the shared observable stops here |
 
 ## Propagation paths, truth to payer
 
@@ -112,12 +112,12 @@ Top samples by tail ratio (p90 over median):
 | `outcome:portfolio:net-pnl` | `outcome:portfolio:net-pnl` -> `asset:equity:supplier-basket` | 1 | E4 | needs data | The cross-layer relation is supported by point-in-time evidence |
 | `outcome:portfolio:net-pnl` | `outcome:portfolio:net-pnl` -> `asset:equity:utility-basket` | 1 | E4 | needs data | The cross-layer relation is supported by point-in-time evidence |
 | `outcome:portfolio:net-pnl` | `outcome:portfolio:net-pnl` -> `asset:options:defined-risk-spread` | 1 | E4 | needs data | The cross-layer relation is supported by point-in-time evidence |
-| `dig:compute:depreciation` | `dig:compute:depreciation` -> `dig:compute:provider-capex` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | Short useful lives turn capex into a recurring cash cost, changing the build economics. |
-| `dig:compute:family-exposure-map` | `dig:compute:family-exposure-map` -> `dig:compute:rental-to-revenue-link` | 1 | E2 | compute-price-monthly.csv, exposure-panel.csv | Each provider's revenue is levered to specific families, so family level tests replace the aggregate. |
-| `dig:compute:family-exposure-map` | `dig:compute:family-exposure-map` -> `dig:compute:revenue-per-mw` | 1 | E2 | compute-price-monthly.csv, exposure-panel.csv | With family price mapping retired, the transmission object is the level variable: revenue per contracted megawatt. |
-| `dig:compute:financing-cost` | `dig:compute:financing-cost` -> `dig:compute:equity-transmission` | 1 | E2 | compute-price-monthly.csv | Funding cost sets the discount applied to capacity cash flows. |
-| `dig:compute:financing-cost` | `dig:compute:financing-cost` -> `dig:compute:provider-revenue-line` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | Securitised and debt funded capacity shows up as contracted revenue before it shows up as equity value. |
-| `dig:compute:financing-cost` | `dig:compute:financing-cost` -> `sub:sub:dig:compute:financing-cost:composition:composition` | 1 | E2 | compute-price-monthly.csv | The refinement chain from this node is valid. |
+| `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `dig:compute:provider-revenue-line` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | Investment outruns revenue before it either lifts revenue or compresses margin. |
+| `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `dig:compute:depreciation-policy` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | High intensity becomes depreciation and interest inside reported earnings. |
+| `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `sub:sub:dig:compute:capex-intensity:inputs:composition` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | The refinement chain from this node is valid. |
+| `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `sub:sub:dig:compute:capex-intensity:inputs:inputs` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | The refinement chain from this node is valid. |
+| `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `sub:sub:dig:compute:capex-intensity:inputs:constraints` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | The refinement chain from this node is valid. |
+| `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `sub:sub:dig:compute:capex-intensity:inputs:observables` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | The refinement chain from this node is valid. |
 
 ## Reproduce
 
