@@ -409,3 +409,11 @@ generated-path: results/walk-forward-baseline.json
 Produced by `scripts/run_walk_forward.py --size-panel results/revenue-z-on-pit.csv`:
 
 generated-path: results/walk-forward-decoupled.json
+
+Produced by `scripts/run_council_sleeve.py` (conviction sizing):
+
+generated-path: results/council-sleeve.json
+
+Produced by `scripts/run_council_sleeve.py --sizing sign`:
+
+generated-path: results/council-sleeve-sign.json

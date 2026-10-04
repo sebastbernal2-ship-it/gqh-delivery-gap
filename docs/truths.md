@@ -1008,3 +1008,30 @@ the difference is the sizing rule alone. The interval is blocked by month, ninet
 candidate that the forward window must separate. It is the first variant in this series that improves
 the sleeve's Sharpe without improving its drawdown, so the next honest test of it is the forward
 window's own falsifiers, not another development pass.
+
+## T60. The fusion wins on the score and loses on the positions: the single specialist keeps the sleeve
+
+**Statement**: the council was run as a sleeve, three declared blocks fused by a simplex-weighted
+linear opinion pool whose weights are fitted on the last fifth of each fold's training rows, with the
+fused expected class as the position's conviction on the same annual origins, prices and costs as the
+surviving sleeve. The council sleeve returns **+21.11 percent at Sharpe 0.528 with a -74.0 percent
+drawdown** against the single-specialist sleeve's **+27.65 percent at 0.756 with -58.1 percent**, and
+its two-sleeve composite falls from Sharpe 1.493 to **0.980**, with the month-blocked difference of the
+daily composite series at -5.35 basis points and interval -12.06 to +1.11, positive in only **5.3
+percent** of ninety months. Equal-weighting the council's signals is worse still, +15.85 percent at
+0.456, so the loss is not a sizing artefact. The mechanism is measured: on the 449 rows whose realised
+label is extreme, the council's log loss is better than the single specialist's, **1.6102 against
+1.8288**, while its directional hit rate is slightly **worse**, 61.7 percent against 62.6 percent. The
+fusion improves the distribution and smooths the expected class, and the sleeve earns its return from
+the direction of the extremes.
+**Evidence**: `results/council-sleeve.json`; `results/council-sleeve-sign.json`;
+`scripts/run_council_sleeve.py`; `tests/test_council_sleeve.py`; the per-fold pool weights in the
+artifact; `results/walk-forward-baseline.json` for the baseline arm.
+**Scope**: development only; the pool grid is coarse at eighths and is allowed to collapse onto a
+single specialist, so the fusion is not handicapped; the peer map and the peer-momentum block are
+declared in this runner and are not a frozen recipe.
+**Consequence**: the acceptance criterion of the fusion stage is **not met** and the single-specialist
+sleeve stays the headline. The council keeps its demonstrated role where calibration is what matters,
+the decision layer, and the declared follow-up is a split rule: the single specialist sets direction,
+the council's better-calibrated distribution sets size. That is a variant, not a claim, and the forward
+window remains the only place a claim can be earned.
