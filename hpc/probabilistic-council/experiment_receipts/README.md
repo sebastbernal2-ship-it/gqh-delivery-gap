@@ -48,3 +48,8 @@ unedited operational receipts from a bounded direct BTC capture and its segment-
 No journal/market payload or checkpoint is published. The one-minute recording cannot form the
 existing 30-second-history/60-second-label supervised case and is explicitly not ready for training.
 See [source gate, limitations and reproduction](../../../docs/inbox/aidan-2026-10-03/jev-data-clock-gate.md).
+
+`jev_training_pilot_bundle_20261003.json` is the unedited private training ZIP's generated
+identity/inventory receipt. It packages the already inspected 41-case real-data cache, training-
+only reconstruction windows and off-cluster linear forecasts. It is neither a HiPerGator training
+result nor a new evaluation. See [deployment and limitations](../../../docs/inbox/aidan-2026-10-03/jev-first-training-package.md).
