@@ -1,5 +1,9 @@
 # JevLike probabilistic council
 
+Current execution work: [structured JevLike sequence prototype](EXECUTION_JEV.md). The user's
+reserved HiPerGator allocation is for JevLike model work only. Prepare raw data/labels elsewhere
+and use the Jev-only execution job. Historical mixed workload submission is retired.
+
 This is the active HiPerGator implementation of our JevLike project. The product target is an
 open-source, Jev-inspired one-pass choice model: given a context and a variable set of text
 options, it scores all options and returns a probability distribution. We vendor the MIT-licensed
