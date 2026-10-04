@@ -1,36 +1,58 @@
-# Data source matrix, verified 2026-10-04
+# Data-source eligibility matrix — verified 2026-10-04
 
-No adapter is built on an assumption. Each row below was checked against the live source on 2026-10-04.
+This matrix separates data that exists from data eligible for a strategy replay. The current first
+deliverable is a daily equity event study; it needs no order book. Perpetuals remain deferred until
+the team has a verified, synchronized Hyperliquid source and adapter.
 
-| source | trades | quotes, level 1 | depth, level 2 | span | role |
-|---|---|---|---|---|---|
-| Snowflake `VECTOR_RESEARCH` | no | no | no | daily and monthly | research and context only |
-| Tiger Cloud, our Binance capture | yes, 100,961 rows | no | yes, 42,652 rows, aggregated | 2026-10-03 23:42 to 2026-10-04 00:54 | real depth, span grows with the Vultr collector |
-| Binance public history, `data.binance.vision` | yes | no | yes, aggregated, `bookDepth` | daily since 2020 | multi-day fixtures |
-| Massive, `api.massive.com` | yes, tick, since 2005 | yes, tick NBBO, since 2010 | no | 20 years | level 1 replay for US equities |
+| Source | Actually present now | Data level | Eligible use |
+|---|---|---|---|
+| Massive daily equities | PWR, ETN, EME, DLR, SPY, XLI, XLRE in Snowflake `RAW.SOURCE_RECORDS` | Split-adjusted daily OHLCV; separate dividend/split actions | Equity event outcomes and market/sector controls. No L2 required. |
+| SEC / company facts | Filing register and SEC XBRL-derived obligation facts; original filing archive is being backfilled | Filing metadata, XBRL and source documents; availability clocks vary | Point-in-time event construction after accession/document reconciliation. Not order-book input. |
+| AWS GPU Spot | 1,592,024 rows in Snowflake and TigerData; source gap March–June 2026 | Irregular price-history observations, USD per instance-hour | Separate descriptive compute study. Not equity L2 or an order-book feed. |
+| TigerData `depth_events` / `trade_events` | 42,652 depth updates and 100,961 trades for BTCUSDT, captured from Binance | Aggregated L2 and trades; short capture | **Quarantined: do not use for this project’s strategy, Hyperliquid replay, or evidence.** |
+| TigerData `observations` | 28,800 BTCUSDT observations, separate legacy capture | Derived book-depth metrics | **Quarantined with the Binance capture; not a replacement for synchronized venue events.** |
+| Hyperliquid | No validated project batch in Snowflake/TigerData at this inventory check | Official archive can provide aggregate L2 snapshots; no verified receipt-time capture here | Future A/perp work only after source provenance, gaps, event/receive clocks, and adapter are certified. |
+| Binance public archive / engine Binance parsers | Legacy project data, fixtures and code remain in the repository | Aggregated depth, trades and Binance-specific formats | Software compatibility tests only if needed; never treat these as strategy inputs or Hyperliquid proxies. |
+| TigerData engine outputs (target; not yet populated) | Proposed `engine_run_reports`, `engine_metric_points`, and hourly continuous aggregate in `collector/tiger/engine_output_schema.sql` | Compact per-run quality, latency/throughput, execution/accounting/risk metrics | Operational retrieval and dashboard only, after service capacity is verified; never the research archive. |
 
-## Evidence
+## Warehouse facts and caveats
 
-Snowflake: `RAW.EQUITY_BARS` columns are `TICKER, EVENT_TIME, OPEN, HIGH, LOW, CLOSE, VOLUME, SOURCE, SOURCE_VERSION, INGESTED_AT`, and the table holds zero rows. `RAW.SOURCE_RECORDS` is a raw document store whose top sources are `eia860m_full_2024_12`, `eia923_pjm_2024`, `fred_rates`, `fred_market`, `massive_bars`, `massive_bars_unadjusted`, `m3_shipments`, and Census construction data. The only price-shaped tables in the account are `RAW.AWS_GPU_SPOT_PRICES`, which is compute pricing, and `RAW.EQUITY_BARS`. There is no bid, ask, size, or time-in-force anywhere in the account.
+- Snowflake's typed `RAW.EQUITY_BARS` and `RAW.FILINGS_8K` tables exist but are empty. The usable
+  equity data is presently in the generic `VECTOR_RESEARCH.RAW.SOURCE_RECORDS` landing table and
+  must be selected by exact `SOURCE_ID` plus `BATCH_SHA256`. `NORMALIZED.AWS_GPU_SPOT_DAILY` is a
+  daily rollup view, not a second raw archive.
+- TigerData's `public.gqh_source_records` mirrors most raw sources, but it also has a separate
+  2,329-row `massive_8k` batch not reconciled to the Snowflake 201-row batch. Do not silently merge
+  or count these as one dataset.
+- The live TigerData database size was approximately 888 MB at the audit, above the previously
+  observed 750 MiB allowance. No additional TigerData writes are approved by this data plan until
+  the active service limit is verified. Snowflake is the destination for the new historical equity
+  panel and SEC originals.
+- Massive aggregates are split-adjusted, **not dividend-adjusted**. The event-study runner uses
+  the separate dividend adjustment factors for total-return outcomes. Those realized outcomes are
+  labels, never decision-time features.
+- Massive NBBO/tick data is not in the current daily event study, and no equity order-book feed is
+  needed for it. The engine must not synthesize depth or trades from OHLCV.
+- No source verified here supplies order-level FIFO/L4 for Hyperliquid. Do not claim queue position,
+  maker fill probability, own market impact, or a live latency edge from aggregate L2 snapshots.
 
-Tiger Cloud: `depth_events` holds 42,652 rows from 2026-10-03T23:42:24Z to 2026-10-04T00:54:59Z, with the update-id columns and the level arrays. `trade_events` holds 100,961 rows from 2026-10-03T21:55:00Z to 2026-10-04T00:54:59Z. `observations` holds the book-depth metrics. This is our own capture and it is real depth data.
+## Adapter decision
 
-Binance public history: `BTCUSDT-bookDepth-2026-10-01.zip` downloads, 562,333 bytes. The bucket listing also serves trades. No daily diff-depth files exist, and Binance publishes no order-by-order feed at all, so Binance can never support order-level FIFO, only aggregated depth.
+1. **Now — equity event study:** query pinned daily bars, dividend factors, SEC facts and filings
+   from Snowflake. Keep outcomes and source timestamps distinct. The exact CSV/JSON outputs are
+   centrally stored in Snowflake `RAW.RESEARCH_ARTIFACTS`. Do not route equity bars through the
+   order-book simulator or TigerData.
+2. **Now — compute study:** use the existing AWS spot history as a separate measured context
+   experiment, with the March–June 2026 hole and irregular observation times preserved. Do not
+   promote it to an equity signal without a predeclared exposure mechanism and independent tests.
+3. **Later — order-book engine / perps:** select Hyperliquid as the target venue, not Binance.
+   Acquire a bounded, source-documented Hyperliquid batch or forward capture; certify sequence,
+   event-time/receive-time semantics, gaps, and market metadata; then build a one-way adapter into
+   the fixed JSONL contract. Keep source fixtures and immutable reports in Snowflake; send only
+   compact engine output time series to TigerData after verifying headroom. Until those gates pass,
+   the legacy Binance datasets stay quarantined.
 
-Massive: trades are served for 2026-09-15, 2015-01-05, and 2005-01-03. Quotes are served for 2026-09-15 and 2010-01-04, with bid and ask price, size, and exchange. Order book endpoints do not exist: `/v3/book` and `/v2/l2` return 404, and the crypto level 2 snapshot returns 403 `NOT_AUTHORIZED`.
-
-## What each source can feed
-
-- Level 2, aggregated book and bounded fills: Tiger Cloud, and Binance public `bookDepth` for multi-day fixtures.
-- Level 1, top of book only: Massive trades and NBBO quotes. The engine replays these in the aggregated bounded-fill modes and never as order-level FIFO.
-- Order-level FIFO: no source here provides it. Binance publishes aggregated depth only, and Massive has no book product. Order-level FIFO stays a property of feeds that carry order identity, not something reconstructed from quotes.
-- Research and context, never replay: Snowflake. Daily bars, filings, energy, compute, and macro series drive regime labels, factor inputs, and context. A daily bar is not a depth update and must not be turned into one.
-
-## Consequences for adapters
-
-1. Snowflake gets a feature reader, not a market data reader. Its output is a feature table joined to a run, never depth rows.
-2. Tiger gets the recall path that already exists, extended to the full captured span.
-3. Binance public history gets a small downloader and the same fixture builder, which gives multi-day aggregated L2 fixtures without a live capture.
-4. Massive gets an L1 adapter only, and every fixture it produces must record the mode as aggregated with bounded fills.
-
-A historical quote with a zero ask, which old Massive quote records do contain, must be dropped rather than replayed.
+The accounting library currently supports a single instrument with visible-depth IOC/FOK fills;
+it does not establish passive FIFO fills or a synchronized Hyperliquid replay. See
+[`ADR-008-instrument-accounting.md`](adr/ADR-008-instrument-accounting.md) for the remaining
+accounting and execution gates.

@@ -90,7 +90,10 @@ let merge_events left right =
 
 let mid_ticks book =
   match (L2_book.best_bid book, L2_book.best_ask book) with
-  | Some bid, Some ask -> Some (Int64.div (Int64.add bid ask) 2L)
+  | Some bid, Some ask -> (
+      match Exec_units.checked_add bid ask with
+      | Ok total -> Some (Int64.div total 2L)
+      | Error _ -> None)
   | Some bid, None -> Some bid
   | None, Some ask -> Some ask
   | None, None -> None
@@ -118,6 +121,41 @@ let aggressive_units_for ~side event price_ticks =
   | _ -> 0L
 
 let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
+  let valid_sha256 text =
+    String.length text = 64
+    && String.for_all
+         (function '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' -> true | _ -> false)
+         text
+  in
+  let validate_events events =
+    let previous = ref None in
+    let identity = ref None in
+    List.iter
+      (fun event ->
+        if event.Exec_event.venue = "" || event.Exec_event.symbol = ""
+           || event.Exec_event.source_id = "" || event.Exec_event.source_path = ""
+           || not (valid_sha256 event.Exec_event.source_sha256)
+        then invalid_arg "event provenance is incomplete or source_sha256 is not SHA-256";
+        (match event.Exec_event.quality, event.Exec_event.payload with
+        | Exec_event.Suspect _,
+          (Exec_event.Depth_snapshot _ | Exec_event.Depth_update _ | Exec_event.Trade _
+          | Exec_event.Mark _ | Exec_event.Funding _ | Exec_event.Liquidation _) ->
+            invalid_arg "suspect market event cannot enter execution replay"
+        | _ -> ());
+        (match !identity with
+        | None -> identity := Some (event.Exec_event.venue, event.Exec_event.symbol)
+        | Some (venue, symbol)
+          when venue <> event.Exec_event.venue || symbol <> event.Exec_event.symbol ->
+            invalid_arg "one execution replay must contain exactly one venue and symbol"
+        | Some _ -> ());
+        (match !previous with
+        | Some prior when Timestamp.compare event.Exec_event.receive_time prior < 0 ->
+            invalid_arg "execution events must be ordered by receive_time"
+        | _ -> ());
+        previous := Some event.Exec_event.receive_time)
+      events
+  in
+  validate_events events;
   let book = ref L2_book.empty in
   let account = ref (Exec_account.empty ~collateral:initial_collateral) in
   let resting = Hashtbl.create 8 in
@@ -130,6 +168,7 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
   let cancelled = ref 0 in
   let chain = Depth_chain.create () in
   let buffered = ref [] in
+  let book_trusted = ref false in
   let chain_gaps = ref 0 in
   let min_bid_ticks = ref None in
   let max_bid_ticks = ref None in
@@ -173,8 +212,13 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
   let order_list () =
     Hashtbl.fold (fun _ (order, _) acc -> order :: acc) resting []
   in
-  let apply_fill ?(at = Timestamp.zero) order price_ticks quantity_units
+  let apply_fill ~at order price_ticks quantity_units
       liquidity =
+    let order =
+      match Hashtbl.find_opt resting order.Exec_account.id with
+      | Some (current, _) -> current
+      | None -> order
+    in
     let fee =
       match Exec_account.fee config liquidity ~price_ticks ~quantity_units with
       | Ok value -> value
@@ -190,24 +234,43 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
         None
     | Ok (updated, updated_account) ->
         let realized =
-          Int64.sub updated_account.Exec_account.realized_pnl realized_before
+          match Exec_units.checked_sub updated_account.Exec_account.realized_pnl realized_before with
+          | Ok value -> value
+          | Error _ -> invalid_arg "fill realized P&L delta overflow"
         in
         fills_log :=
           { at; price_ticks; quantity_units; liquidity; fee; realized }
           :: !fills_log;
         account := updated_account;
         incr fills;
-        filled_units := Int64.add !filled_units quantity_units;
+        (match Exec_units.checked_add !filled_units quantity_units with
+        | Ok value -> filled_units := value
+        | Error _ -> invalid_arg "report filled_units overflow");
         (match liquidity with
-        | Exec_event.Maker -> maker_units := Int64.add !maker_units quantity_units
-        | Exec_event.Taker -> taker_units := Int64.add !taker_units quantity_units);
+        | Exec_event.Maker ->
+            (match Exec_units.checked_add !maker_units quantity_units with
+            | Ok value -> maker_units := value
+            | Error _ -> invalid_arg "report maker_units overflow")
+        | Exec_event.Taker ->
+            (match Exec_units.checked_add !taker_units quantity_units with
+            | Ok value -> taker_units := value
+            | Error _ -> invalid_arg "report taker_units overflow"));
         (match Hashtbl.find_opt resting updated.Exec_account.id with
         | Some (_, metadata) ->
             Hashtbl.replace resting updated.Exec_account.id (updated, metadata)
         | None -> ());
         Some updated
   in
-  let take_from_book order =
+  let consume_visible_fill side price quantity =
+    let book_side = match side with Exec_event.Buy -> L2_book.Ask | Sell -> L2_book.Bid in
+    let old = level_units !book book_side price in
+    let remaining = Int64.sub old quantity in
+    if remaining < 0L then invalid_arg "visible book liquidity was consumed twice";
+    book :=
+      L2_book.set_level !book book_side
+        { Exec_event.price_ticks = price; quantity_units = remaining }
+  in
+  let take_from_book ~at order =
     let order =
       match Hashtbl.find_opt resting order.Exec_account.id with
       | Some (current, _) -> current
@@ -220,19 +283,90 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
             ~quantity_units:order.Exec_account.remaining_units
             ?limit_ticks:order.Exec_account.price_ticks ()
         in
-        (match result with
+        match result with
         | Error _ -> incr rejected
         | Ok taken ->
             List.iter
               (fun (fill : Exec_fills.taker_fill) ->
-                ignore
-                  (apply_fill order fill.Exec_fills.price_ticks
-                     fill.Exec_fills.quantity_units Exec_event.Taker))
-              taken.Exec_fills.fills)
+                let current =
+                  match Hashtbl.find_opt resting order.Exec_account.id with
+                  | Some (current, _) -> current
+                  | None -> order
+                in
+                match
+                  apply_fill ~at current fill.Exec_fills.price_ticks
+                    fill.Exec_fills.quantity_units Exec_event.Taker
+                with
+                | None -> ()
+                | Some updated ->
+                    consume_visible_fill updated.Exec_account.side
+                      fill.Exec_fills.price_ticks fill.Exec_fills.quantity_units)
+              taken.Exec_fills.fills
   in
-  let submit order =
-    match Exec_account.submit config !account order with
+  let fok_account_ok accepted submitted_account =
+    match
+      Exec_fills.take mode ~book:!book ~side:accepted.Exec_account.side
+        ~quantity_units:accepted.Exec_account.quantity_units
+        ?limit_ticks:accepted.Exec_account.price_ticks ()
+    with
+    | Error _ -> false
+    | Ok taken when taken.Exec_fills.remaining_units <> 0L -> false
+    | Ok taken ->
+        let result =
+          List.fold_left
+            (fun state_result fill ->
+              match state_result with
+              | Error _ -> state_result
+              | Ok (order, state) ->
+                  Exec_account.apply_fill config state order
+                    ~price_ticks:fill.Exec_fills.price_ticks
+                    ~quantity_units:fill.Exec_fills.quantity_units
+                    ~liquidity:Exec_event.Taker
+                  |> Result.map (fun (order, state) -> (order, state)))
+            (Ok (accepted, submitted_account)) taken.Exec_fills.fills
+        in
+        (match result with
+        | Ok (order, _) -> order.Exec_account.remaining_units = 0L
+        | Error _ -> false)
+  in
+  let submit ~at order =
+    let crosses price_ticks side =
+      match side with
+      | Exec_event.Buy ->
+          (match L2_book.best_ask !book with Some ask -> price_ticks >= ask | None -> false)
+      | Exec_event.Sell ->
+          (match L2_book.best_bid !book with Some bid -> price_ticks <= bid | None -> false)
+    in
+    let crossing =
+      match order.Exec_account.price_ticks with
+      | Some price -> crosses price order.Exec_account.side
+      | None -> false
+    in
+    if not !book_trusted then incr rejected
+    else if Hashtbl.mem resting order.Exec_account.id then incr rejected
+    else if order.Exec_account.post_only && order.Exec_account.price_ticks = None then
+      incr rejected
+    else if order.Exec_account.post_only && crossing then incr rejected
+    else
+    let market_tif_full = order.Exec_account.tif = Exec_event.Fok in
+    let fok_available =
+      if not market_tif_full then true
+      else
+        match
+          Exec_fills.take mode ~book:!book ~side:order.Exec_account.side
+            ~quantity_units:order.Exec_account.quantity_units
+            ?limit_ticks:order.Exec_account.price_ticks ()
+        with
+        | Ok result -> result.Exec_fills.remaining_units = 0L
+        | Error _ -> false
+    in
+    if not fok_available then incr rejected
+    else match Exec_account.submit config !account order with
     | Error _ -> incr rejected
+    | Ok (accepted, updated_account)
+      when accepted.Exec_account.tif = Exec_event.Fok
+           && not (fok_account_ok accepted updated_account) ->
+        incr rejected
     | Ok (accepted, updated_account) ->
         account := updated_account;
         incr submitted;
@@ -262,7 +396,7 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
                  level_units !book book_side price_ticks);
             trades_units = 0L;
             inferred_units = 0L;
-            placed_at = Timestamp.zero;
+            placed_at = at;
           }
         in
         Hashtbl.replace resting accepted.Exec_account.id (accepted, metadata);
@@ -270,7 +404,7 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
         if is_market then begin
           (* A market order takes what is visible, then its remainder is
              cancelled like an IOC order at the venue. *)
-          take_from_book accepted;
+            take_from_book ~at accepted;
           match Hashtbl.find_opt resting accepted.Exec_account.id with
           | Some (current, _) when current.Exec_account.remaining_units > 0L -> (
               match Exec_account.cancel config !account current with
@@ -281,19 +415,15 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
           | _ -> ()
         end
         else begin
-          (* A limit that crosses the book takes liquidity at once. *)
-          let crossing =
-            match accepted.Exec_account.side with
-            | Exec_event.Buy -> (
-                match L2_book.best_ask !book with
-                | Some ask -> Int64.compare price_ticks ask >= 0
-                | None -> false)
-            | Exec_event.Sell -> (
-                match L2_book.best_bid !book with
-                | Some bid -> Int64.compare price_ticks bid <= 0
-                | None -> false)
-          in
-          if crossing then take_from_book accepted
+          if crossing then take_from_book ~at accepted;
+          (match Hashtbl.find_opt resting accepted.Exec_account.id with
+          | Some (current, _) when current.Exec_account.tif <> Exec_event.Gtc ->
+              (match Exec_account.cancel config !account current with
+              | Ok (_, updated_account) ->
+                  account := updated_account;
+                  Hashtbl.remove resting accepted.Exec_account.id
+              | Error _ -> incr rejected)
+          | _ -> ())
         end
   in
   let cancel id =
@@ -308,6 +438,17 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
             if updated.Exec_account.remaining_units > 0L then
               Hashtbl.remove resting id
             else Hashtbl.replace resting id (updated, snd (Hashtbl.find resting id)))
+  in
+  let invalidate_book () =
+    book := L2_book.empty;
+    book_trusted := false;
+    Hashtbl.iter
+      (fun id (order, _) ->
+        (match Exec_account.cancel config !account order with
+        | Ok (_, updated_account) -> account := updated_account
+        | Error _ -> incr rejected);
+        Hashtbl.remove resting id)
+      resting
   in
   let schedule effective_time action =
     incr sequence;
@@ -330,7 +471,7 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
     in
     List.iter
       (function
-        | _, _, Submit order -> submit order
+        | effective_time, _, Submit order -> submit ~at:effective_time order
         | _, _, Cancel id -> cancel id)
       ordered
   in
@@ -368,7 +509,7 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
               else delta
             in
             ignore
-              (apply_fill order metadata.price_ticks delta Exec_event.Maker);
+              (apply_fill ~at:event.Exec_event.receive_time order metadata.price_ticks delta Exec_event.Maker);
             match Hashtbl.find_opt resting order.Exec_account.id with
             | Some (current, metadata) ->
                 Hashtbl.replace resting order.Exec_account.id
@@ -422,9 +563,7 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
           book :=
             L2_book.apply_snapshot !book ~bids:snapshot.Exec_event.bids
               ~asks:snapshot.Exec_event.asks;
-          (* The normalizer writes updates buffered during a snapshot fetch
-             before the snapshot row, so they belong after it. Rebuild the
-             fresh baseline and re-apply what the chain accepts. *)
+          book_trusted := true;
           (match snapshot.Exec_event.last_update_id with
           | Some last_update_id ->
               Depth_chain.reset chain last_update_id;
@@ -447,19 +586,44 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
                           ~bids:update.Exec_event.bids
                           ~asks:update.Exec_event.asks
                   | Depth_chain.Superseded -> incr chain_superseded
-                  | Depth_chain.Gap -> incr chain_gaps)
+                  | Depth_chain.Gap ->
+                      incr chain_gaps;
+                      invalidate_book ())
                 (List.rev !buffered);
               buffered := []
-          | None -> ())
+          | None ->
+              Depth_chain.clear chain;
+              buffered := [])
       | Exec_event.Depth_update update ->
-          book :=
-            L2_book.apply_update !book ~bids:update.Exec_event.bids
-              ~asks:update.Exec_event.asks;
-          buffered := update :: !buffered
+          if not !book_trusted && Depth_chain.current chain = None then
+            buffered := update :: !buffered
+          else if not !book_trusted then incr chain_gaps
+          else
+            let previous =
+              match update.Exec_event.previous_update_id with
+              | Some value -> value
+              | None -> Int64.min_int
+            in
+            (match
+               Depth_chain.apply chain
+                 ~first_update_id:update.Exec_event.first_update_id
+                 ~last_update_id:update.Exec_event.last_update_id
+                 ~previous_update_id:previous
+             with
+            | Depth_chain.Accept ->
+                book :=
+                  L2_book.apply_update !book ~bids:update.Exec_event.bids
+                    ~asks:update.Exec_event.asks
+            | Depth_chain.Superseded -> incr chain_superseded
+            | Depth_chain.Gap ->
+                incr chain_gaps;
+                invalidate_book ())
       | Exec_event.Trade _ -> accumulate_trades event
       | _ -> ());
-      update_maker_fills event;
-      maybe_liquidate ();
+      if !book_trusted then begin
+        update_maker_fills event;
+        maybe_liquidate ()
+      end;
       track_range ();
       let context =
         {
@@ -470,7 +634,7 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
           orders = order_list ();
         }
       in
-      let actions = strategy context in
+      let actions = if !book_trusted then strategy context else [] in
       if actions <> [] then incr decisions;
       List.iter
         (function
@@ -498,7 +662,7 @@ let run ~mode ~latency ~config ~strategy ~initial_collateral ~events =
       in
       List.iter
         (function
-          | _, _, Submit order -> submit order
+        | effective_time, _, Submit order -> submit ~at:effective_time order
           | _, _, Cancel id -> cancel id)
         ordered);
   (* Apply whatever the chain still holds once the stream ends. *)

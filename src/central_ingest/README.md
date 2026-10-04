@@ -61,6 +61,7 @@ stores; no retained local CSV is needed:
 ```sh
 python3 src/central_ingest/sync.py --source massive_bars --from 2016-01-01 --to 2016-01-31 --ticker PWR
 python3 src/central_ingest/sync.py --source massive_8k --from 2022-01-01 --to 2022-12-31 --ticker PWR
+.venv/bin/python src/central_ingest/sync.py --source sec_obligation_facts --target snowflake
 .venv/bin/python src/central_ingest/sync.py --source eia923_pjm_2024 --target tigerdata
 ```
 
@@ -129,6 +130,47 @@ source IDs: `massive_bars`, `massive_bars_unadjusted`, `massive_splits`, `massiv
 `massive_ticker_events`, and `massive_ticker_metadata`. Query batches in the manifests; the
 per-run receipt records URL, retrieval timestamp, license assertion, row count, and batch hash.
 Daily bars are sufficient for the first event study; no L2/L3 data is in this initial package.
+
+The first event study also needs market/sector controls. Massive adjusted daily bars for XLI and
+XLRE were added to **Snowflake only** in batch
+`2fe0dd7ac31d8ed7b990e895a4872490f24b5418b292488a83025a64361a55b9` (5,404 rows total,
+2,702 per ticker, 2016-01-04–2026-10-02). Do not append this history to TigerData while its
+storage allowance is unresolved. The initial SEC XBRL-derived obligation panel was added as
+`sec_obligation_facts`, batch
+`7beffd642ed1389829b72fb2a3cda8e0b657f6a10761a56fc0c084350c0846f2` (130 rows, Snowflake
+only). It is a derived fact/event panel, not original SEC documents or analyst consensus.
+Reproduce the descriptive outcome study with:
+
+```sh
+.venv/bin/python scripts/run_warehouse_revision_event_study.py \
+  --event-batch-sha256 7beffd642ed1389829b72fb2a3cda8e0b657f6a10761a56fc0c084350c0846f2
+```
+
+The script reads only pinned Snowflake batches: operating equities/SPY
+`bec91f7c380937d3d647ade8214968c13abd4bde032c9a7cf7741f0ee58306cd`, controls above, and the
+SEC obligation batch above. It writes a CSV of event/horizon outcomes and a JSON receipt. The
+study is development-only; the 84 eligible rows span 52 accessions, only PWR and ETN have this
+obligation-panel coverage, and no analyst expectation/surprise or strategy P&L is inferred.
+The exact CSV and JSON outputs are also stored in `VECTOR_RESEARCH.RAW.RESEARCH_ARTIFACTS` with
+artifact SHA-256 identity and input-batch lineage. This keeps gathered analytical results
+centrally retrievable rather than dependent on one developer's local `results/` directory.
+
+### AWS compute second-deliverable inputs
+
+The raw AWS price history is in `VECTOR_RESEARCH.RAW.AWS_GPU_SPOT_PRICES`. Its study uses two
+additional pinned source batches in `RAW.SOURCE_RECORDS`, loaded Snowflake-only (not TigerData):
+
+- `aws_compute_monthly_family`: 566 monthly family summaries,
+  batch `044a082fe24c9afd3410a974f7fa471ce3b5dc12a6f4cf2a651b6accc9d331bb`. Derived from AWS Spot
+  Price History v2026-09, DOI `10.5281/zenodo.23082767`, CC BY 4.0.
+- `sec_provider_capex_quarterly`: 192 SEC XBRL-derived quarterly capex observations,
+  batch `48534d7bf98d785d2e1f738eaa867882dca57056e634b9deaa453e7844e0ee6e`. This current
+  extract may contain restatements and is not a point-in-time filing-vintage feature table.
+
+Reproduce the unique-quarter diagnostic with `.venv/bin/python
+scripts/audit_compute_lead_dependence.py`; it reads only those exact hashes from Snowflake and
+stores the exact CSV/JSON outputs in `RAW.RESEARCH_ARTIFACTS`. This is retrospective descriptive
+analysis, not a trading signal.
 
 `eia860m.py` is the monthly 860M vintages loader. It retains the official original XLSX and
 parsed generator rows in Snowflake `VECTOR_RESEARCH.RAW.EIA860M_ARCHIVE` and

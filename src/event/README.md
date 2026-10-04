@@ -30,6 +30,31 @@ python scripts/run_revision_event_study.py --horizons 1,2,5,10,20
 
 It reads `results/obligation-panel.csv` and writes `results/revision-events.csv`.
 
+For a reproducible run using centralized, hash-pinned inputs (no live Yahoo/yfinance fetch), use:
+
+```sh
+.venv/bin/python scripts/run_warehouse_revision_event_study.py \
+  --event-batch-sha256 7beffd642ed1389829b72fb2a3cda8e0b657f6a10761a56fc0c084350c0846f2
+```
+
+This reads the SEC XBRL-derived event batch and Massive adjusted daily bars from Snowflake,
+including retained SPY, XLI and XLRE controls. It currently writes
+`results/revision-events-snowflake.csv` plus a JSON provenance/limitations receipt. In the pinned
+development panel there are 84 eligible event rows but only 52 distinct accessions, across PWR
+and ETN; the event facts are RPO and unapproved-change-order amounts. They are **not** analyst
+consensus surprises. EME and DLR price series are present, but comparable event facts are not.
+The run reports descriptive raw and market/sector abnormal returns at 1/2/5/10/20 sessions; it
+does not infer a strategy, significance or causal effect. Overlapping return windows and repeated
+issuer/accession exposures make row count larger than independent information.
+
+Both exact output files are also upserted into Snowflake `VECTOR_RESEARCH.RAW.RESEARCH_ARTIFACTS`,
+keyed by artifact name and SHA-256 and linked to the event, price, and dividend batch hashes. The
+committed `results/` files are review copies; Snowflake is the shared retrieval point for the run.
+
+The older script above is retained for development comparison. The Snowflake-backed run is the
+reproducible shared-data path; do not cite the older yfinance output as if it were sourced from
+the warehouse batches.
+
 ## What the first pass found, and why it is not a result
 
 Eighty-four timestamped revisions across PWR and ETN. Negative surprises, the direction the mechanism

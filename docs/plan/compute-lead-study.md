@@ -16,12 +16,17 @@ rather than a clearing price (T9).
 
 - **Feature**: monthly median price per instance hour by family, `results/compute-price-monthly.csv`,
   2022-05 to 2026-09, 18 families. Quarter-over-quarter log change per family, and the cross-family
-  median as the aggregate stand-in.
+  median as the aggregate stand-in. The exact 566-row family panel is also in Snowflake
+  `RAW.SOURCE_RECORDS` source `aws_compute_monthly_family`, batch
+  `044a082fe24c9afd3410a974f7fa471ce3b5dc12a6f4cf2a651b6accc9d331bb`.
 - **Outcome**: quarterly capital spending from SEC XBRL `PaymentsToAcquirePropertyPlantAndEquipment`,
   fetched per issuer and cached under `results/sec-capex/`. Declared issuers, resolved from the SEC
   ticker file at fetch time: hyperscalers MSFT, AMZN, GOOGL, META, ORCL; host and neocloud issuers
   CRWV, IREN, HUT, CORZ, APLD; data centre REITs EQIX and DLR as a separate group. Quarter-over-quarter
-  log growth of capex.
+  log growth of capex. The current 192-row extract is centrally loaded as
+  `sec_provider_capex_quarterly`, batch
+  `48534d7bf98d785d2e1f738eaa867882dca57056e634b9deaa453e7844e0ee6e`; it may contain
+  restatements and is not a point-in-time filing-vintage panel.
 - **Overlap**: quarters with both a compute observation and a reported capex figure. Providers with
   fewer than six usable quarters are reported but excluded from the pooled test.
 
@@ -75,6 +80,40 @@ is not read as a reversed signal. What the negative sign most plausibly shows is
 policy responses to inventory, not a leading demand signal: providers already building tend to list
 softer prices, and price spikes arrive when capacity is already tight rather than before capex turns.
 That reading is a hypothesis for a new study, not a result.
+
+## Unit-of-observation audit, 2026-10-04
+
+The original 42-row inference is retained above as its immutable historical receipt, but it should
+not be read as 42 independent compute shocks: the same quarterly AWS feature is repeated across
+several issuers. There are also two implementation caveats in that run: the displayed compute
+window used the legacy `g3` family’s last month (2025-02), not the latest family in the archive, and
+the implementation permitted adjacent *observed* quarters to bridge calendar-quarter gaps. Family
+hourly-instance prices also combine SKUs of different sizes, so composition can move the family
+median even without a matched-SKU price change.
+
+The separate, conservative audit in `scripts/audit_compute_lead_dependence.py` leaves the original
+protocol/result untouched. It requires all three monthly observations for each family/quarter,
+requires calendar-adjacent quarters, uses log changes, and collapses issuer outcomes to one median
+per group per compute quarter. It excludes the 2026 March–June source gap and produces no p-values.
+Current diagnostic: 13 unique quarter pairs for the pooled issuer group (descriptive Spearman rho
+about -0.03), 7 hyperscaler pairs (about -0.29), 0 host pairs, and 6 REIT pairs (about +0.09).
+Those small counts are not evidence for a trade; the changed unit, stricter completeness, and
+provider composition make the result a diagnostic rather than a replacement hypothesis test.
+Reproduce with:
+
+```sh
+python3 scripts/audit_compute_lead_dependence.py
+```
+
+The audit queries those pinned Snowflake batches directly and archives the exact CSV/JSON outputs
+to `VECTOR_RESEARCH.RAW.RESEARCH_ARTIFACTS`.
+
+The AWS archive is still useful as a bounded compute-rental context stream: 1.592M observations,
+62 instance types, USD per whole instance-hour, 2022-05-31 through 2026-09-30, with March–June 2026
+absent. It is not GPU-hour price, utilization, fulfilled allocation, total supply, a named-company
+capacity meter, nor verified historical data-arrival time. Keep it as a separate retrospective
+study; do not feed it into the equity event study without a new exposure mechanism and declared
+test.
 
 Both the compute index removal clause and the falsifier are met by the data: only the aggregate
 produces anything, and it is not a positive association. The chain must stand on its other links.

@@ -1,4 +1,4 @@
-.PHONY: market sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test secrets check strategy-check manifest pdf-check gate-status status agency-deals tranche-table credit-deals deal-structure deal-diligence deal-ratings gate-scorecard credit-gauntlet credit-gauntlet-long ownership-layer index-mandate cascade-tape
+.PHONY: market sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test engine-test secrets check strategy-check manifest pdf-check gate-status status agency-deals tranche-table credit-deals deal-structure deal-diligence deal-ratings gate-scorecard credit-gauntlet credit-gauntlet-long ownership-layer index-mandate cascade-tape
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -128,6 +128,15 @@ test:
 	@python3 tests/test_rpo_specialist.py
 	@python3 tests/test_rpo_filing_panel.py
 	@python3 tests/test_text_ab.py
+	@python3 tests/test_build_hyperliquid_fixture.py
+	@python3 tests/test_split_hyperliquid_engine_fixture.py
+	@python3 tests/test_compute_lead_dependence_audit.py
+	@python3 tests/test_warehouse_revision_event_study.py
+	@python3 -m unittest discover -s orderbook-engine/collector/tiger -p 'test_*.py'
+
+# Exact-integer simulator regression suite; requires the orderbook-engine opam environment.
+engine-test:
+	cd orderbook-engine && opam exec -- dune runtest --force
 
 # Fit the delivery model: what moves a promise, controls first then factors.
 delivery-model:

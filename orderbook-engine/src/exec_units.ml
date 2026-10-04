@@ -65,6 +65,12 @@ let checked_add left right =
     Serror.fail "integer overflow"
   else Ok (Int64.add left right)
 
+let checked_sub left right =
+  if right = Int64.min_int then
+    if left >= 0L then Serror.fail "integer overflow"
+    else Ok (Int64.sub left right)
+  else checked_add left (Int64.neg right)
+
 let digits value =
   if value = "" then Serror.fail "empty decimal digits"
   else

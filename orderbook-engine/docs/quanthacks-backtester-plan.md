@@ -2,7 +2,7 @@
 
 Status: accepted 2026-10-03.
 Owner: this file.
-Related: `docs/quanthacks-data-boundaries.md`, `docs/oci-audit.md`, `docs/adr/ADR-006-kdbx-data-layer.md`.
+Related: `orderbook-engine/docs/quanthacks-data-boundaries.md`, `orderbook-engine/docs/oci-audit.md`, `orderbook-engine/docs/adr/ADR-006-kdbx-data-layer.md`.
 
 ## Goal
 
@@ -89,7 +89,7 @@ Every event carries venue, symbol, event time, receive time, source ID, source h
 Money, price, and quantity use integer ticks, lots, and fixed-point units in the engine; decimal strings stay at the ingestion boundary.
 
 Exit: contract module with round-trip tests and a documented unit policy.
-Status: done 2026-10-03. `src/exec_event.ml` owns the event envelope, `src/exec_units.ml` owns the fixed-point arithmetic, and `docs/adr/ADR-007-execution-units.md` owns the unit policy.
+Status: done 2026-10-03. `src/exec_event.ml` owns the event envelope, `src/exec_units.ml` owns the fixed-point arithmetic, and `orderbook-engine/docs/adr/ADR-007-execution-units.md` owns the unit policy.
 
 ### Phase 2: Tiger fixture pipeline
 
@@ -107,7 +107,7 @@ Status: ingest and canonical export are live 2026-10-03.
 The observations path is proven end to end on 2024-01-01 BTCUSDT data.
 Status update 2026-10-03: the trade path is proven end to end on a real capture slice from the OCI VM (2,613 trades, manifest-verified hashes, canonical fixture validated by the checker).
 The depth path is now proven too: the collector refreshes its REST snapshot at every window, and the first post-fix window produced a canonical depth fixture that validates with zero chain breaks.
-Fixture hashes and the capture-quality rule live in `docs/oci-audit.md`.
+Fixture hashes and the capture-quality rule live in `orderbook-engine/docs/oci-audit.md`.
 
 ### Phase 3: OCaml replay kernel
 
@@ -286,4 +286,3 @@ Cross-machine check: the Vultr fixture replayed on the development machine gives
 Three defects were found and fixed while making the clone work. Docker created the data directory as root, so the service now runs as the invoking user. A capture window still being written has no snapshot, so the daily job skips it and retries next run instead of failing. Day selection follows receive time rather than the label in the file name, because a window starting before midnight carries the previous day's label.
 
 The OCI collector stays up until Vultr has produced a full day of replayable windows.
-

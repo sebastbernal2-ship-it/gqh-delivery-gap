@@ -129,8 +129,8 @@ opam exec -- dune exec examples/binance_normalized_check.exe -- \
   --json-report BTCUSDT 0.10 0.001 /tmp/btcusdt-tiger.jsonl
 ```
 
-See `docs/quanthacks-data-boundaries.md` and `collector/tiger/schema.sql` for the storage contract.
-The backtester phases built on this store are owned by `docs/quanthacks-backtester-plan.md`.
+See `orderbook-engine/docs/quanthacks-data-boundaries.md` and `orderbook-engine/collector/tiger/schema.sql` for the storage contract.
+The backtester phases built on this store are owned by `orderbook-engine/docs/quanthacks-backtester-plan.md`.
 
 ## KDB-X data layer
 

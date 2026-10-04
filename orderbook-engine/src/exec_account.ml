@@ -53,6 +53,10 @@ let bps_divisor = 10_000L
 let notional_divisor = 100L
 let funding_divisor = 100_000_000L
 
+let magnitude value =
+  if value = Int64.min_int then Serror.fail "position magnitude overflow"
+  else Ok (Int64.abs value)
+
 let make_config ~leverage ~maintenance_margin_rate_bps ~maker_fee_bps
     ~taker_fee_bps ?(liquidation_fee_bps = 0) () =
   if leverage < 1 then invalid_arg "leverage must be at least one";
@@ -110,7 +114,7 @@ let equity state ~mark_ticks =
 
 let maintenance_margin config state ~mark_ticks =
   let open Exec_units in
-  let magnitude = if state.position < 0L then Int64.neg state.position else state.position in
+  let* magnitude = magnitude state.position in
   let* product = checked_mul magnitude mark_ticks in
   let* notional = div_round product notional_divisor in
   bps ~money:notional ~bps:config.maintenance_margin_rate_bps
@@ -136,7 +140,7 @@ let same_direction left right =
 let release_reservation config state ~price_ticks ~quantity_units =
   let open Exec_units in
   let* released = required_margin config ~price_ticks ~quantity_units in
-  let remaining = Int64.sub state.reserved_margin released in
+  let* remaining = checked_sub state.reserved_margin released in
   let remaining = if remaining < 0L then 0L else remaining in
   Ok { state with reserved_margin = remaining }
 
@@ -145,6 +149,8 @@ let submit config state order =
   if order.id = "" then Serror.fail "order ID must not be empty"
   else if order.quantity_units <= 0L then
     Serror.fail "order quantity must be positive"
+  else if order.remaining_units <> order.quantity_units || order.status <> New then
+    Serror.fail "submitted order must be new with full remaining quantity"
   else if state.liquidated then Serror.fail "account is liquidated"
   else
     let* () =
@@ -158,9 +164,11 @@ let submit config state order =
         if state.position = 0L then Serror.fail "reduce-only order needs a position"
         else if same_direction requested state.position then
           Serror.fail "reduce-only order would increase the position"
-        else if Int64.compare order.quantity_units (Int64.abs state.position) > 0
-        then Serror.fail "reduce-only order exceeds the position"
-        else Ok ()
+        else
+          let* position_size = magnitude state.position in
+          if Int64.compare order.quantity_units position_size > 0 then
+            Serror.fail "reduce-only order exceeds the position"
+          else Ok ()
       else Ok ()
     in
     let* reservation =
@@ -179,9 +187,10 @@ let submit config state order =
     if reservation > 0L && Int64.compare reservation available > 0 then
       Serror.fail "order exceeds available margin"
     else
+      let* reserved_margin = checked_add state.reserved_margin reservation in
       Ok
         ( { order with status = New },
-          { state with reserved_margin = Int64.add state.reserved_margin reservation } )
+          { state with reserved_margin } )
 
 let cancel config state order =
   match order.status with
@@ -211,19 +220,18 @@ let apply_position state ~price_ticks ~quantity_units ~side =
         ( { state with position = incoming; entry_ticks = Some price_ticks },
           0L )
   | Some entry when same_direction state.position incoming ->
-      let old_size = Int64.abs state.position in
+      let* old_size = magnitude state.position in
       let* weighted = checked_mul old_size entry in
       let* added = checked_mul quantity_units price_ticks in
       let* total = checked_add weighted added in
       let* size = checked_add old_size quantity_units in
       let* average = div_round total size in
+      let* position = checked_add state.position incoming in
       Ok
-        ( { state with
-            position = Int64.add state.position incoming;
-            entry_ticks = Some average },
+        ( { state with position; entry_ticks = Some average },
           0L )
   | Some entry ->
-      let magnitude = Int64.abs state.position in
+      let* magnitude = magnitude state.position in
       let closing =
         if Int64.compare magnitude quantity_units <= 0 then magnitude
         else quantity_units
@@ -235,9 +243,9 @@ let apply_position state ~price_ticks ~quantity_units ~side =
       in
       let* product = checked_mul difference closing in
       let* realized = div_round product notional_divisor in
-      let remaining = Int64.sub quantity_units closing in
+      let* remaining = checked_sub quantity_units closing in
       if remaining <= 0L then
-        let position = Int64.add state.position incoming in
+        let* position = checked_add state.position incoming in
         let entry_ticks = if position = 0L then None else Some entry in
         Ok ({ state with position; entry_ticks }, realized)
       else
@@ -255,8 +263,6 @@ let apply_fill config state order ~price_ticks ~quantity_units ~liquidity =
   else if order.status = Canceled || order.status = Filled then
     Serror.fail "order is not fillable"
   else if state.liquidated then Serror.fail "account is liquidated"
-  else if order.tif = Exec_event.Fok && quantity_units < order.quantity_units then
-    Serror.fail "FOK order requires a complete fill"
   else
     let requested = signed order.side quantity_units in
     let* () =
@@ -264,9 +270,11 @@ let apply_fill config state order ~price_ticks ~quantity_units ~liquidity =
         if state.position = 0L then Serror.fail "reduce-only fill has no position"
         else if same_direction requested state.position then
           Serror.fail "reduce-only fill would increase the position"
-        else if Int64.compare quantity_units (Int64.abs state.position) > 0 then
-          Serror.fail "reduce-only fill exceeds the position"
-        else Ok ()
+        else
+          let* position_size = magnitude state.position in
+          if Int64.compare quantity_units position_size > 0 then
+            Serror.fail "reduce-only fill exceeds the position"
+          else Ok ()
       else Ok ()
     in
     let* fee = fee config liquidity ~price_ticks ~quantity_units in
@@ -274,7 +282,7 @@ let apply_fill config state order ~price_ticks ~quantity_units ~liquidity =
       apply_position state ~price_ticks ~quantity_units ~side:order.side
     in
     let* collateral = checked_add state.collateral realized in
-    let* collateral = checked_add collateral (Int64.neg fee) in
+    let* collateral = checked_sub collateral fee in
     let* realized_pnl = checked_add state.realized_pnl realized in
     let* fees = checked_add state.fees fee in
     let state = { state with collateral; realized_pnl; fees } in
@@ -291,15 +299,15 @@ let apply_fill config state order ~price_ticks ~quantity_units ~liquidity =
         let* required =
           if state.position = 0L then Ok 0L
           else
-            required_margin config ~price_ticks
-              ~quantity_units:(Int64.abs state.position)
+            let* position_size = magnitude state.position in
+            required_margin config ~price_ticks ~quantity_units:position_size
         in
         let* available = checked_add equity (Int64.neg state.reserved_margin) in
         if Int64.compare required available > 0 then
           Serror.fail "fill exceeds available margin"
         else Ok ()
     in
-    let remaining = Int64.sub order.remaining_units quantity_units in
+    let* remaining = checked_sub order.remaining_units quantity_units in
     let status = if remaining = 0L then Filled else Partially_filled in
     Ok ({ order with remaining_units = remaining; status }, state)
 
@@ -311,7 +319,7 @@ let apply_funding state ~mark_ticks ~rate =
     let* notional = div_round product notional_divisor in
     let* scaled = checked_mul notional rate in
     let* payment = div_round scaled funding_divisor in
-    let* collateral = checked_add state.collateral (Int64.neg payment) in
+    let* collateral = checked_sub state.collateral payment in
     let* funding_paid = checked_add state.funding_paid payment in
     Ok { state with collateral; funding_paid }
 
@@ -321,14 +329,15 @@ let liquidate config state ~mark_ticks =
   if not liquidated_now then Serror.fail "account is above maintenance margin"
   else
     let* unrealized = unrealized state ~mark_ticks in
-    let magnitude = Int64.abs state.position in
+    let* magnitude = magnitude state.position in
     let* fee =
       if magnitude = 0L then Ok 0L
-      else fee config Exec_event.Taker ~price_ticks:mark_ticks
-             ~quantity_units:magnitude
+      else
+        let* notional = notional ~price_ticks:mark_ticks ~quantity_units:magnitude in
+        Exec_units.bps ~money:notional ~bps:config.liquidation_fee_bps
     in
     let* collateral = checked_add state.collateral unrealized in
-    let* collateral = checked_add collateral (Int64.neg fee) in
+    let* collateral = checked_sub collateral fee in
     let collateral = if collateral < 0L then 0L else collateral in
     let* realized_pnl = checked_add state.realized_pnl unrealized in
     let* fees = checked_add state.fees fee in

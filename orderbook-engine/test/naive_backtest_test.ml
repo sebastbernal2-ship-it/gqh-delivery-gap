@@ -22,7 +22,7 @@ let envelope seconds payload =
     sequence = None;
     source_id = "test";
     source_path = "test.jsonl";
-    source_sha256 = "abc";
+    source_sha256 = String.make 64 'a';
     quality = E.Healthy;
     payload;
   }

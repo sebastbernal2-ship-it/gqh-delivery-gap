@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 import hashlib
 import json
 from pathlib import Path
@@ -29,35 +30,52 @@ RATE_SCALE = 100_000_000
 BUCKET_SECONDS = 300
 
 
-def rfc3339(seconds: float) -> str:
-    stamp = dt.datetime.fromtimestamp(seconds, tz=dt.timezone.utc)
-    return stamp.strftime("%Y-%m-%dT%H:%M:%S.") + f"{stamp.microsecond:06d}000Z"
+NANOSECONDS = 1_000_000_000
+MILLISECONDS_TO_NANOSECONDS = 1_000_000
 
 
-def ms_to_seconds(value) -> float | None:
+def scaled_integer(value, scale: int) -> int:
+    """Convert a decimal source value to integer units, ties away from zero."""
     try:
-        return float(value) / 1000.0
-    except (TypeError, ValueError):
-        return None
+        number = value if isinstance(value, Decimal) else Decimal(str(value))
+    except (InvalidOperation, TypeError, ValueError) as exc:
+        raise ValueError(f"not a decimal value: {value!r}") from exc
+    if not number.is_finite():
+        raise ValueError(f"non-finite decimal value: {value!r}")
+    return int((number * scale).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+
+
+def rfc3339_ns(epoch_ns: int) -> str:
+    seconds, nanoseconds = divmod(epoch_ns, NANOSECONDS)
+    stamp = dt.datetime.fromtimestamp(seconds, tz=dt.timezone.utc)
+    return stamp.strftime("%Y-%m-%dT%H:%M:%S.") + f"{nanoseconds:09d}Z"
+
+
+def seconds_to_ns(value) -> int:
+    return scaled_integer(value, NANOSECONDS)
+
+
+def milliseconds_to_ns(value) -> int:
+    return scaled_integer(value, MILLISECONDS_TO_NANOSECONDS)
 
 
 def ticks(price) -> int:
-    return int(round(float(price) * PRICE_SCALE))
+    return scaled_integer(price, PRICE_SCALE)
 
 
 def units(quantity) -> int:
-    return int(round(float(quantity) * QUANTITY_SCALE))
+    return scaled_integer(quantity, QUANTITY_SCALE)
 
 
 def rate(value) -> int:
-    return int(round(float(value) * RATE_SCALE))
+    return scaled_integer(value, RATE_SCALE)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("capture")
     parser.add_argument("--out-dir", default=str(ROOT / "data" / "hyperliquid" / "fixtures"))
-    parser.add_argument("--sample-minutes", type=float, default=10.0,
+    parser.add_argument("--sample-minutes", default="10.0",
                         help="how many minutes of the capture go into the committed sample")
     parser.add_argument("--sample-out", default=str(ROOT / "results" / "hyperliquid-fixture"))
     args = parser.parse_args()
@@ -69,51 +87,55 @@ def main() -> int:
     source_path = str(capture.relative_to(ROOT)) if capture.is_relative_to(ROOT) else str(capture)
 
     rows = []
-    first_receive = last_receive = None
+    first_receive_ns = last_receive_ns = None
     for line in capture.open():
         if not line.strip():
             continue
-        record = json.loads(line)
+        # Decimal parsing preserves every decimal digit in the immutable capture.
+        record = json.loads(line, parse_float=Decimal)
         channel = record.get("channel")
         receive = record.get("recv_ts")
         data = record.get("data")
         if receive is None or data is None:
             continue
-        first_receive = receive if first_receive is None else min(first_receive, receive)
-        last_receive = receive if last_receive is None else max(last_receive, receive)
+        receive_ns = seconds_to_ns(receive)
+        first_receive_ns = receive_ns if first_receive_ns is None else min(first_receive_ns, receive_ns)
+        last_receive_ns = receive_ns if last_receive_ns is None else max(last_receive_ns, receive_ns)
         envelope = {"venue": VENUE, "source_id": "hyperliquid-ws", "source_path": source_path,
                     "source_sha256": digest, "sequence": None, "quality": "healthy"}
         if channel == "l2Book" and isinstance(data, dict):
             coin = data.get("coin", "")
-            venue_time = ms_to_seconds(data.get("time")) or receive
+            venue_time_ns = (milliseconds_to_ns(data["time"])
+                             if data.get("time") is not None else receive_ns)
             levels = data.get("levels") or [[], []]
             bids = [[ticks(level["px"]), units(level["sz"])] for level in levels[0]] if levels else []
             asks = [[ticks(level["px"]), units(level["sz"])] for level in levels[1]] if len(levels) > 1 else []
             rows.append({**envelope, "kind": "depth_snapshot", "symbol": coin,
-                         "event_time": rfc3339(venue_time), "receive_time": rfc3339(receive),
+                         "event_time": rfc3339_ns(venue_time_ns), "receive_time": rfc3339_ns(receive_ns),
                          "sequence": int(data.get("time") or 0), "last_update_id": None,
-                         "bids": bids, "asks": asks, "_bucket": int(receive // BUCKET_SECONDS),
+                         "bids": bids, "asks": asks, "_bucket": receive_ns // (BUCKET_SECONDS * NANOSECONDS),
                          "_snapshot": True})
         elif channel == "trades" and isinstance(data, list):
             for trade in data:
                 coin = trade.get("coin", "")
-                venue_time = ms_to_seconds(trade.get("time")) or receive
+                venue_time_ns = (milliseconds_to_ns(trade["time"])
+                                 if trade.get("time") is not None else receive_ns)
                 side = str(trade.get("side", "")).upper()
                 rows.append({**envelope, "kind": "trade", "symbol": coin,
-                             "event_time": rfc3339(venue_time), "receive_time": rfc3339(receive),
+                             "event_time": rfc3339_ns(venue_time_ns), "receive_time": rfc3339_ns(receive_ns),
                              "sequence": int(trade.get("tid") or 0),
                              "trade_id": int(trade.get("tid") or 0),
                              "price_ticks": ticks(trade.get("px")),
                              "quantity_units": units(trade.get("sz")),
                              "buyer_is_maker": side == "A",
-                             "_bucket": int(receive // BUCKET_SECONDS), "_snapshot": False})
+                             "_bucket": receive_ns // (BUCKET_SECONDS * NANOSECONDS), "_snapshot": False})
         elif channel == "activeAssetCtx" and isinstance(data, dict):
             coin = data.get("coin", "")
             ctx = data.get("ctx") or {}
             payload = {**envelope, "kind": "mark", "symbol": coin,
-                       "event_time": rfc3339(receive), "receive_time": rfc3339(receive),
+                       "event_time": rfc3339_ns(receive_ns), "receive_time": rfc3339_ns(receive_ns),
                        "quality": "suspect", "quality_reason": "venue provides no timestamp; receive time used",
-                       "_bucket": int(receive // BUCKET_SECONDS), "_snapshot": False}
+                       "_bucket": receive_ns // (BUCKET_SECONDS * NANOSECONDS), "_snapshot": False}
             if ctx.get("markPx"):
                 payload["mark_ticks"] = ticks(ctx["markPx"])
             if ctx.get("oraclePx"):
@@ -123,10 +145,10 @@ def main() -> int:
             rows.append(payload)
             if ctx.get("openInterest"):
                 rows.append({**envelope, "kind": "observation", "symbol": coin,
-                             "event_time": rfc3339(receive), "receive_time": rfc3339(receive),
+                             "event_time": rfc3339_ns(receive_ns), "receive_time": rfc3339_ns(receive_ns),
                              "quality": "suspect", "quality_reason": "venue provides no timestamp; receive time used",
                              "field": "open_interest_units", "value": units(ctx["openInterest"]),
-                             "_bucket": int(receive // BUCKET_SECONDS), "_snapshot": False})
+                             "_bucket": receive_ns // (BUCKET_SECONDS * NANOSECONDS), "_snapshot": False})
 
     # The engine's ordering contract: bucket by five minute receive windows, snapshots first, then by time.
     rows.sort(key=lambda row: (row["_bucket"], 0 if row["_snapshot"] else 1, row["receive_time"], row["kind"]))
@@ -139,8 +161,11 @@ def main() -> int:
     full = out_dir / (capture.stem + ".fixture.jsonl")
     full.write_text("".join(json.dumps(row, separators=(",", ":")) + "\n" for row in rows))
 
+    sample_cutoff_ns = (first_receive_ns + scaled_integer(args.sample_minutes, 60 * NANOSECONDS)
+                        if first_receive_ns is not None else None)
+    sample_cutoff = rfc3339_ns(sample_cutoff_ns) if sample_cutoff_ns is not None else None
     sample_rows = [row for row in rows
-                   if first_receive is not None and row["receive_time"] <= rfc3339(first_receive + args.sample_minutes * 60)]
+                   if sample_cutoff is not None and row["receive_time"] <= sample_cutoff]
     sample_dir = Path(args.sample_out)
     sample_dir.mkdir(parents=True, exist_ok=True)
     sample = sample_dir / "hyperliquid-10min.fixture.jsonl"
@@ -152,7 +177,7 @@ def main() -> int:
         "venue": VENUE,
         "kind": "mixed depth, trades, mark and observation",
         "row_count": len(sample_rows),
-        "event_time_range": [rows[0]["event_time"], rows[-1]["event_time"]] if rows else [],
+        "event_time_range": [min(row["event_time"] for row in rows), max(row["event_time"] for row in rows)] if rows else [],
         "source": source_path,
         "source_sha256": digest,
         "created_at": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -165,6 +190,8 @@ def main() -> int:
             "ordering": "five minute receive buckets, snapshots first, then receive time",
         },
         "mode": "aggregated book snapshots with bounded fills; no order level FIFO is available",
+        "execution_config": None,
+        "execution_config_note": "Not known from the source capture; supply fee, latency, collateral, and replay assumptions explicitly to the bridge/run CLI.",
     }
     (sample_dir / "hyperliquid-10min.manifest.json").write_text(json.dumps(sample_manifest, indent=1) + "\n")
     counts: dict[str, int] = {}

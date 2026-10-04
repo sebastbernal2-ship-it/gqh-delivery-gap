@@ -39,12 +39,24 @@ let empty_features =
 type quote_phase = Idle | Pending | Live
 (** A quote lifecycle: idle, submitted but not yet live, or resting live. *)
 
+let checked_or_invalid label = function
+  | Ok value -> value
+  | Error _ -> invalid_arg (label ^ " overflow")
+
+let add label left right =
+  checked_or_invalid label (Exec_units.checked_add left right)
+
+let sub label left right =
+  checked_or_invalid label (Exec_units.checked_sub left right)
+
 let imbalance_bps bids asks =
-  let total = Int64.add bids asks in
+  let total = add "book imbalance total" bids asks in
   if total <= 0L then 0
   else
-    let difference = Int64.sub bids asks in
-    let scaled = Int64.div (Int64.mul difference 10_000L) total in
+    let difference = sub "book imbalance difference" bids asks in
+    let numerator = checked_or_invalid "book imbalance scaling"
+        (Exec_units.checked_mul difference 10_000L) in
+    let scaled = Int64.div numerator total in
     Int64.to_int scaled
 
 let prefetch ~window (events : Exec_event.t list) =
@@ -64,9 +76,9 @@ let prefetch ~window (events : Exec_event.t list) =
       match Queue.pop trades with
       | (quantity, buyer_is_maker) ->
           trade_count := !trade_count - 1;
-          trade_units := Int64.sub !trade_units quantity;
-          if buyer_is_maker then sell_units := Int64.sub !sell_units quantity
-          else buy_units := Int64.sub !buy_units quantity
+          trade_units := sub "rolling trade volume" !trade_units quantity;
+          if buyer_is_maker then sell_units := sub "rolling sell volume" !sell_units quantity
+          else buy_units := sub "rolling buy volume" !buy_units quantity
       | exception Queue.Empty -> ()
     end;
     if Queue.length mids >= window then begin
@@ -80,17 +92,20 @@ let prefetch ~window (events : Exec_event.t list) =
         let step =
           match !previous with
           | None -> 0L
-          | Some last -> Int64.abs (Int64.sub value last)
+          | Some last ->
+              let difference = sub "mid-price movement" value last in
+              if difference = Int64.min_int then invalid_arg "mid-price movement overflow"
+              else Int64.abs difference
         in
         previous := Some value;
-        Int64.add total step)
+        add "mid-price travel" total step)
       0L mids
   in
   let recompute_mid_range () =
     let minimum = Queue.fold (fun acc value -> match acc with None -> Some value | Some current -> Some (if value < current then value else current)) None mids in
     let maximum = Queue.fold (fun acc value -> match acc with None -> Some value | Some current -> Some (if value > current then value else current)) None mids in
     match (minimum, maximum) with
-    | Some minimum, Some maximum -> Int64.sub maximum minimum
+    | Some minimum, Some maximum -> sub "mid-price range" maximum minimum
     | _ -> 0L
   in
   List.iteri
@@ -99,10 +114,10 @@ let prefetch ~window (events : Exec_event.t list) =
       | Exec_event.Trade trade ->
           Queue.push (trade.Exec_event.quantity_units, trade.Exec_event.buyer_is_maker) trades;
           incr trade_count;
-          trade_units := Int64.add !trade_units trade.Exec_event.quantity_units;
+          trade_units := add "rolling trade volume" !trade_units trade.Exec_event.quantity_units;
           if trade.Exec_event.buyer_is_maker then
-            sell_units := Int64.add !sell_units trade.Exec_event.quantity_units
-          else buy_units := Int64.add !buy_units trade.Exec_event.quantity_units
+            sell_units := add "rolling sell volume" !sell_units trade.Exec_event.quantity_units
+          else buy_units := add "rolling buy volume" !buy_units trade.Exec_event.quantity_units
       | _ -> ());
       (match event.Exec_event.payload with
       | Exec_event.Depth_snapshot snapshot ->
@@ -123,7 +138,8 @@ let prefetch ~window (events : Exec_event.t list) =
         if !trade_units <= 0L then 5_000
         else
           match
-            Exec_units.div_round (Int64.mul !buy_units 10_000L) !trade_units
+            Result.bind (Exec_units.checked_mul !buy_units 10_000L)
+              (fun numerator -> Exec_units.div_round numerator !trade_units)
           with
           | Ok value -> Int64.to_int value
           | Error _ -> 5_000

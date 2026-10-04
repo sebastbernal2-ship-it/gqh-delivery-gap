@@ -21,6 +21,10 @@ let reset t last_update_id =
   t.current <- Some last_update_id;
   t.bootstrapped <- false
 
+let clear t =
+  t.current <- None;
+  t.bootstrapped <- false
+
 let apply t ~first_update_id ~last_update_id ~previous_update_id =
   match t.current with
   | None -> Gap
@@ -28,8 +32,9 @@ let apply t ~first_update_id ~last_update_id ~previous_update_id =
       if last_update_id <= current then Superseded
       else if not t.bootstrapped then
         let bridges =
-          first_update_id <= Int64.add current 1L
-          && Int64.add current 1L <= last_update_id
+          current <> Int64.max_int
+          && first_update_id <= Int64.succ current
+          && Int64.succ current <= last_update_id
         in
         if previous_update_id <> current && not bridges then Gap
         else begin

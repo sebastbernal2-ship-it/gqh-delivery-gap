@@ -1,4 +1,7 @@
--- Quanthacks research store boundaries for Tiger Cloud / TimescaleDB.
+-- LEGACY input-capture schema for Tiger Cloud / TimescaleDB.
+-- Existing rows were sourced from Binance BTCUSDT and are quarantined. Do not add
+-- strategy data here or treat these rows as Hyperliquid. New TigerData project
+-- writes should use engine_output_schema.sql after quota approval.
 -- Apply this file only after reviewing the target Tiger service.
 
 CREATE TABLE IF NOT EXISTS source_manifests (

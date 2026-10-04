@@ -2,7 +2,7 @@
 
 The simulator reads one interchange format and writes one report format. Data sources adapt to the interface, not the other way around.
 
-`src/exec_event.ml` owns the input contract. `docs/adr/ADR-007-execution-units.md` owns the units. Working samples live in `examples/io-contract/`.
+`orderbook-engine/src/exec_event.ml` owns the input contract. `orderbook-engine/docs/adr/ADR-007-execution-units.md` owns the units. Working samples live in `orderbook-engine/examples/io-contract/`.
 
 ## Input: canonical JSONL
 
@@ -114,8 +114,10 @@ If an explicit `run_id` field is wanted for lineage, it is a one-line addition t
 
 ## Adapting other sources
 
-`docs/data-source-matrix.md` records what each source actually holds, checked against the live source. Read it before writing an adapter: Snowflake carries daily bars and macro series and no quotes or depth at all, Massive carries tick trades and tick NBBO quotes but no order book, and Binance carries aggregated depth with no order identity.
+`orderbook-engine/docs/data-source-matrix.md` records what each source actually holds, checked against the live source. Read it before writing an adapter. The current Snowflake equity panel is daily-only; it is not an order-book input. Massive trades/NBBO are not being used for this project engine. Binance's aggregated book capture remains quarantined legacy data and is not a Hyperliquid substitute.
+
+On 2026-10-04, a real public Hyperliquid WebSocket capture was validated and replayed for BTC: 171 aggregated L2 snapshots and 1,706 trade prints over about 15 minutes, with 0 parser errors, 0 chain gaps, and no final book mismatch. The exact capture, BTC-only canonical input, manifest, execution config, and deterministic report are archived in Snowflake; TigerData contains only the run row and scalar report metrics. This proves the ingestion/replay/output plumbing, not a strategy result. The capture has snapshots but no venue delta sequence or order IDs, so it cannot establish queue position/FIFO; maker fills remain inference bounded by the engine's liquidity modes. See `docs/inbox/vishnu-2026-10-04/orderbook-flow-status.md` for hashes, artifact IDs, and remaining limitations.
 
 - Snowflake export: select the range, convert price and quantity to the recorded scales, and emit these rows with `source_id` set to the table and `source_sha256` to the query result hash. `collector/build_fixture.py` shows the conversion path already used locally.
-- Tiger telemetry: the same rows, with `source_id` naming the Tiger table.
-- Massive trades and NBBO quotes: trades map directly. Quotes map to `depth_update` rows that carry only the top of book, which the engine replays in the aggregated bounded-fill modes and never as order-level FIFO.
+- TigerData is the verified operational sink for compact engine run metadata, scalar report telemetry, and dashboard time series. The live writer stores no raw market depth or source events; it is not a replacement source for market depth.
+- Daily equity bars are for the separate event study and must not be synthesized into book events.

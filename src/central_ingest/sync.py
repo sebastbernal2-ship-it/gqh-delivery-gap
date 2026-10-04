@@ -53,6 +53,28 @@ class Source:
 
 SOURCES: dict[str, Source] = {
     "sec_filings": Source("results/filings-register.csv", "https://data.sec.gov/submissions/", ("cik", "accession", "acceptance_utc"), "acceptance_utc", "earliest_availability_utc"),
+    "sec_obligation_facts": Source(
+        "results/obligation-panel.csv",
+        "https://data.sec.gov/api/xbrl/companyfacts/",
+        ("ticker", "cik", "concept", "period_end", "value", "change", "accession",
+         "acceptance_utc", "earliest_availability_utc"),
+        "earliest_availability_utc", "earliest_availability_utc",
+        license_status="public SEC Company Facts-derived event panel; preserve SEC attribution; derived panel, not raw filing text",
+    ),
+    "aws_compute_monthly_family": Source(
+        "results/compute-price-monthly.csv",
+        "https://doi.org/10.5281/zenodo.23082767",
+        ("month", "family", "quotes", "median_usd_per_instance_hour", "zones"),
+        "month",
+        license_status="CC BY 4.0; derived monthly family medians from AWS Spot Price History v2026-09; cite the Zenodo DOI",
+    ),
+    "sec_provider_capex_quarterly": Source(
+        "results/provider-capex-quarterly.csv",
+        "https://data.sec.gov/api/xbrl/companyfacts/",
+        ("ticker", "cik", "concept", "period_end", "value_usd", "form", "filed", "fy", "fp"),
+        "period_end",
+        license_status="Public SEC Company Facts-derived quarterly panel; preserve SEC attribution; current extract may contain restated values and is not a PIT vintage archive",
+    ),
     "census_c30": Source("data/orthogonal-starter-2026-10-03/census_c30_ai_infra_nsa.csv", "https://www.census.gov/construction/c30/xlsx/privtime.xlsx", ("observation_month", "data_center_musd"), "observation_month"),
     "eia860m_full_2024_12": Source("data/public-first-wave/eia860m-2024-12-capacity.csv", "https://www.eia.gov/electricity/data/eia860m/archive/xls/december_generator2024.xlsx", ("inventory_status", "vintage_month", "plant_id", "generator_id"), "vintage_month"),
     "eia860m_proposed_2024_12": Source("data/public-first-wave/eia860m-2024-12-proposed.csv", "https://www.eia.gov/electricity/data/eia860m/archive/xls/december_generator2024.xlsx", ("vintage_month", "inventory_status", "plant_id", "generator_id"), "vintage_month"),

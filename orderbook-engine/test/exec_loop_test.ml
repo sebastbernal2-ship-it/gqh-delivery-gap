@@ -20,7 +20,7 @@ let envelope seconds payload =
     sequence = None;
     source_id = "test";
     source_path = "test.jsonl";
-    source_sha256 = "abc";
+    source_sha256 = String.make 64 'a';
     quality = E.Healthy;
     payload;
   }
@@ -61,16 +61,17 @@ let config =
   A.make_config ~leverage:10 ~maintenance_margin_rate_bps:50 ~maker_fee_bps:2
     ~taker_fee_bps:4 ~liquidation_fee_bps:125 ()
 
-let order ?(id = "quote-1") ?price_ticks ?(reduce_only = false) quantity_units =
+let order ?(id = "quote-1") ?price_ticks ?(reduce_only = false)
+    ?(tif = E.Gtc) ?(post_only = false) quantity_units =
   {
     A.id;
     side = E.Buy;
     price_ticks;
     quantity_units;
     remaining_units = quantity_units;
-    tif = E.Gtc;
+    tif;
     reduce_only;
-    post_only = false;
+    post_only;
     status = A.New;
   }
 
@@ -147,6 +148,103 @@ let test_crossing_limit_takes_immediately () =
   let report = run_loop ~strategy [ snapshot (); update ~second:5 101L 110L 100L [] [] ] in
   check int64 "taker units" 400_000L report.L.taker_units;
   check int64 "position" 400_000L report.L.account.A.position
+
+let test_visible_liquidity_is_consumed_across_orders () =
+  let second_order = ref false in
+  let strategy (context : L.context) =
+    match context.L.event.E.payload with
+    | E.Depth_snapshot _ when not !second_order ->
+        [ L.Submit (order ~id:"first" 750_000L) ]
+    | E.Trade _ when not !second_order ->
+        second_order := true;
+        [ L.Submit (order ~id:"second" 750_000L) ]
+    | _ -> []
+  in
+  let report = run_loop ~strategy [ snapshot (); trade ~second:1 1L ] in
+  check int64 "only displayed liquidity can fill twice" 1_000_000L
+    report.L.filled_units;
+  check int64 "position is bounded by visible liquidity" 1_000_000L
+    report.L.account.A.position
+
+let test_multilevel_fill_uses_current_order_remainder_and_timestamp () =
+  let two_levels =
+    envelope 0
+      (E.Depth_snapshot
+         { E.last_update_id = None;
+           bids = [ level 1_000_000L 1_000_000L ];
+           asks = [ level 1_000_100L 1_000_000L; level 1_000_200L 1_000_000L ] })
+  in
+  let report =
+    run_loop ~strategy:(once (L.Submit (order ~tif:E.Fok 1_500_000L))) [ two_levels ]
+  in
+  check int "two price-level fills" 2 report.L.fills;
+  check int64 "whole order filled" 1_500_000L report.L.filled_units;
+  check int64 "account position matches fills" 1_500_000L
+    report.L.account.A.position;
+  check bool "fill timestamps are replay time" true
+    (List.for_all
+       (fun fill -> T.compare fill.L.at two_levels.E.receive_time = 0)
+       report.L.fills_log)
+
+let test_fok_is_atomic_when_visible_depth_is_insufficient () =
+  let report =
+    run_loop
+      ~strategy:(once (L.Submit (order ~tif:E.Fok 1_500_000L)))
+      [ snapshot () ]
+  in
+  check int "FOK rejected" 1 report.L.rejected;
+  check int "no partial FOK fills" 0 report.L.fills;
+  check int64 "account unchanged" 0L report.L.account.A.position
+
+let test_post_only_crossing_order_is_rejected () =
+  let report =
+    run_loop
+      ~strategy:(once
+                   (L.Submit
+                      (order ~price_ticks:1_000_200L ~post_only:true 500_000L)))
+      [ snapshot () ]
+  in
+  check int "crossing post-only rejected" 1 report.L.rejected;
+  check int "not submitted" 0 report.L.submitted;
+  check int "not filled" 0 report.L.fills
+
+let test_post_only_market_order_is_rejected () =
+  let report =
+    run_loop
+      ~strategy:(once (L.Submit (order ~post_only:true 100_000L)))
+      [ snapshot () ]
+  in
+  check int "market post-only rejected" 1 report.L.rejected;
+  check int "no take" 0 report.L.fills
+
+let test_sequence_gap_invalidates_book_until_snapshot () =
+  let gap = update ~second:1 102L 103L 99L [] [] in
+  let later_trade = trade ~second:2 2_000_000L in
+  let strategy (context : L.context) =
+    match context.L.event.E.payload with
+    | E.Trade _ -> [ L.Submit (order 100_000L) ]
+    | _ -> []
+  in
+  let report = run_loop ~strategy [ snapshot (); gap; later_trade ] in
+  check int "one chain gap" 1 report.L.chain_gaps;
+  check int "stale book cannot submit" 0 report.L.submitted;
+  check bool "book cleared while untrusted" true
+    (L.mid_ticks report.L.book = None)
+
+let test_rejects_invalid_provenance_and_unsorted_input () =
+  let raises f =
+    try f (); false with Invalid_argument _ -> true
+  in
+  check bool "reject malformed source digest" true
+    (raises (fun () ->
+         ignore
+           (run_loop ~strategy:(fun _ -> [])
+              [ { (snapshot ()) with E.source_sha256 = "abc" } ])));
+  check bool "reject receive-time regression" true
+    (raises (fun () ->
+         ignore
+           (run_loop ~strategy:(fun _ -> [])
+              [ trade ~second:2 1L; snapshot ~second:1 () ])))
 
 let test_rejects_are_counted () =
   let strategy = once (L.Submit (order ~price_ticks:1_000_000L 100_000_000_000L)) in
@@ -226,6 +324,13 @@ let () =
       ( "fills",
         [ test_case "market takes" `Quick test_market_intent_takes_liquidity;
           test_case "crossing limit" `Quick test_crossing_limit_takes_immediately;
+          test_case "visible liquidity consumed" `Quick test_visible_liquidity_is_consumed_across_orders;
+          test_case "multi-level fill timestamp" `Quick test_multilevel_fill_uses_current_order_remainder_and_timestamp;
+          test_case "FOK atomic" `Quick test_fok_is_atomic_when_visible_depth_is_insufficient;
+          test_case "post-only crossing" `Quick test_post_only_crossing_order_is_rejected;
+          test_case "post-only market" `Quick test_post_only_market_order_is_rejected;
           test_case "rejects counted" `Quick test_rejects_are_counted ] );
+      ("sequence", [ test_case "gap fail-closed" `Quick test_sequence_gap_invalidates_book_until_snapshot ]);
+      ("input", [ test_case "provenance and order" `Quick test_rejects_invalid_provenance_and_unsorted_input ]);
       ("risk", [ test_case "liquidation" `Quick test_liquidation_stops_the_loop ]);
     ]

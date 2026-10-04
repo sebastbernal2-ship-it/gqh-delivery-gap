@@ -1,5 +1,11 @@
 # Market Simulator
 
+> **Project data boundary (2026-10-04):** The Binance parsers, collector, samples and captured
+> BTCUSDT rows are legacy engineering material only. Do not use them in the project strategy,
+> claim Hyperliquid replay validation, or mix them with another venue. Perpetuals are deferred until
+> a synchronized Hyperliquid source is verified. Daily equity event studies do not use this engine.
+> See [`data-source-matrix.md`](orderbook-engine/docs/data-source-matrix.md).
+
 [![CI](https://github.com/sebastbernal2-ship-it/market_simulator/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/sebastbernal2-ship-it/market_simulator/actions/workflows/ci.yml) 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) 
 [![OCaml 5.2](https://img.shields.io/badge/OCaml-5.2-orange.svg)](https://ocaml.org)
@@ -11,7 +17,7 @@ git clone https://github.com/sebastbernal2-ship-it/gqh-delivery-gap.git ~/gqh-de
 cd ~/gqh-delivery-gap/orderbook-engine
 bash deploy/setup.sh
 
-`docs/engine-io-contract.md` owns the input and output format: canonical JSONL in, one report out, with samples in `examples/io-contract/`.
+`orderbook-engine/docs/engine-io-contract.md` owns the input and output format: canonical JSONL in, one report out, with samples in `examples/io-contract/`.
 
 For source-neutral accounting, `Instrument_spec`, `Asset_account`, `Asset_replay`, and `Asset_loop`
 provide a tested opt-in library path for a single cash equity, listed future, perpetual, or long
@@ -19,7 +25,7 @@ cash-settled option. It consumes the canonical event contract, executes visible-
 taker orders, and posts fees, settlement, funding, and expiry to a fixed-point account. It is not
 yet wired to the legacy CLI/report and does not certify passive fills, multi-symbol portfolios,
 physical option exercise, short stock, or venue liquidation rules. The exact scope and remaining
-gates are in `docs/adr/ADR-008-instrument-accounting.md`.
+gates are in `orderbook-engine/docs/adr/ADR-008-instrument-accounting.md`.
 
 ## Deploy on a machine
 
@@ -155,11 +161,11 @@ The first argument can also be an HTTPS fixture URL.
 
 Tiger Cloud is the primary queryable research store for Quanthacks.
 
-The accepted backtester architecture, phases, and first build slice are owned by `docs/quanthacks-backtester-plan.md`.
+The accepted backtester architecture, phases, and first build slice are owned by `orderbook-engine/docs/quanthacks-backtester-plan.md`.
 
 KDB-X remains an optional legacy analytics layer during migration.
 
-The raw evidence and OCaml replay boundaries are documented in `docs/quanthacks-data-boundaries.md`.
+The raw evidence and OCaml replay boundaries are documented in `orderbook-engine/docs/quanthacks-data-boundaries.md`.
 
 ```bash
 q collector/kdbx/analytics.q /data/kdbx spread BTCUSDT
@@ -170,7 +176,7 @@ q collector/kdbx/analytics.q /data/kdbx trade_flow BTCUSDT
 
 ## Key design decisions
 
-See `docs/adr/` for architecture decision records:
+See `orderbook-engine/docs/adr/` for architecture decision records:
 - ADR-001: Custom incremental engine vs. Jane Street's Incremental library
 - ADR-002: Lwt over Async/Eio for concurrency
 - ADR-003: Bitemporal model with closed-open intervals

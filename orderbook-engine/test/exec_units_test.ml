@@ -65,6 +65,14 @@ let test_notional_overflow () =
   check bool "zero price rejected" true
     (is_error (U.notional ~price_ticks:0L ~quantity_units:1_000_000L))
 
+let test_checked_subtraction_overflow () =
+  check int64 "minimum minus minimum is zero" 0L
+    (ok (U.checked_sub Int64.min_int Int64.min_int));
+  check bool "positive minus minimum overflows" true
+    (is_error (U.checked_sub 1L Int64.min_int));
+  check int64 "negative minus minimum remains representable" Int64.max_int
+    (ok (U.checked_sub (-1L) Int64.min_int))
+
 let test_bps () =
   check int64 "4 bps of 100" 4_000_000L (ok (U.bps ~money:10_000_000_000L ~bps:4));
   check int64 "round to zero" 0L (ok (U.bps ~money:50L ~bps:1));
@@ -108,6 +116,7 @@ let () =
         [ test_case "notional exact" `Quick test_notional_exact;
           test_case "notional rounding" `Quick test_notional_rounding;
           test_case "notional overflow" `Quick test_notional_overflow;
+          test_case "checked subtraction" `Quick test_checked_subtraction_overflow;
           test_case "bps" `Quick test_bps;
           test_case "rounding" `Quick test_div_round_and_ceil;
           test_case "price interop" `Quick test_price_interop ] );

@@ -148,6 +148,14 @@ let test_ignores_other_payloads () =
   check int "ignored" 1 result.B.ignored_events;
   check int "snapshots" 1 result.B.snapshots
 
+let test_total_quantity_overflow_fails_closed () =
+  let book =
+    B.apply_snapshot B.empty
+      ~bids:[ level 100L Int64.max_int; level 99L 1L ] ~asks:[]
+  in
+  check bool "overflow is not silently wrapped" true
+    (try ignore (B.total_quantity book B.Bid); false with Invalid_argument _ -> true)
+
 let () =
   run "l2_book"
     [
@@ -161,4 +169,5 @@ let () =
           test_case "gap stops the book" `Quick test_gap_stops_the_book;
           test_case "snapshot recovers" `Quick test_snapshot_recovers_after_a_gap;
           test_case "ignores other payloads" `Quick test_ignores_other_payloads ] );
+      ("overflow", [ test_case "quantity sum" `Quick test_total_quantity_overflow_fails_closed ]);
     ]

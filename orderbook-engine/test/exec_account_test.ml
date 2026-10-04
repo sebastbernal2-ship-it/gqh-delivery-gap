@@ -182,11 +182,19 @@ let test_liquidation_closes_and_clamps_collateral () =
     (ok (A.should_liquidate aggressive state ~mark_ticks:950_000L));
   let state = ok (A.liquidate aggressive state ~mark_ticks:950_000L) in
   check bool "flagged" true state.A.liquidated;
+  check int64 "configured liquidation fee applied" 122_750_000L state.A.fees;
   check int64 "flat" 0L state.A.position;
   check int64 "collateral clamped" 0L state.A.collateral;
   check bool "cannot trade again" true
     (is_error
        (A.submit aggressive state (make_order ~price_ticks:price ~side:E.Buy quantity)))
+
+let test_position_magnitude_overflow_fails_closed () =
+  let malformed =
+    { (state ()) with A.position = Int64.min_int; entry_ticks = Some price }
+  in
+  check bool "maintenance rejects unrepresentable absolute position" true
+    (is_error (A.maintenance_margin config malformed ~mark_ticks:price))
 
 let () =
   run "exec_account"
@@ -206,4 +214,5 @@ let () =
         [ test_case "funding" `Quick test_funding_payment;
           test_case "equity" `Quick test_equity_and_maintenance_margin;
           test_case "liquidation" `Quick test_liquidation_closes_and_clamps_collateral ] );
+      ("overflow", [ test_case "position abs overflow" `Quick test_position_magnitude_overflow_fails_closed ]);
     ]

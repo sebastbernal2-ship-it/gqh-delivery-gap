@@ -40,7 +40,7 @@ Refusal to compute is always an error value, never a wrapped or truncated number
 - Quantity precision of 1e-6 covers every Binance Futures lot step with margin.
 - A notional beyond the declared range fails closed with an overflow error.
 - Float remains only in legacy modules, display code, and ingestion adapters.
-- The float-based `Binance_account`, `L2_execution`, and `L2_backtest` modules are replaced by the fixed-point kernel in Phase 4 of `docs/quanthacks-backtester-plan.md`.
+- The float-based `Binance_account`, `L2_execution`, and `L2_backtest` modules are replaced by the fixed-point kernel in Phase 4 of `orderbook-engine/docs/quanthacks-backtester-plan.md`.
 
 ## Alternatives
 

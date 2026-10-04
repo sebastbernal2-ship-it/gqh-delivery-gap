@@ -94,9 +94,9 @@ Do not re-ask what is already decided here.
 **Source:** socratic: Tiger role decision
 
 ---
-## 2026-10-03: Accept the phased Quanthacks backtester plan owned by docs/quanthacks-backtester-plan.md: Tiger Cloud as the research store, OCaml as the correctness authority, an event-driven fixed-point execution kernel, and a Rust port only after profiling.
+## 2026-10-03: Accept the phased Quanthacks backtester plan owned by orderbook-engine/docs/quanthacks-backtester-plan.md: Tiger Cloud as the research store, OCaml as the correctness authority, an event-driven fixed-point execution kernel, and a Rust port only after profiling.
 
-**Decision:** Accept the phased Quanthacks backtester plan owned by docs/quanthacks-backtester-plan.md: Tiger Cloud as the research store, OCaml as the correctness authority, an event-driven fixed-point execution kernel, and a Rust port only after profiling.
+**Decision:** Accept the phased Quanthacks backtester plan owned by orderbook-engine/docs/quanthacks-backtester-plan.md: Tiger Cloud as the research store, OCaml as the correctness authority, an event-driven fixed-point execution kernel, and a Rust port only after profiling.
 **Context:** The re-audit showed strong replay foundations but float-based account math, snapshot-driven backtesting, no order lifecycle latency, and no ingested Quanthacks fixtures. The captain wants a realistic backtester reusable and embeddable for Quanthacks.
 **Alternatives considered:** A broad Rust or C++ rewrite was rejected because the correctness gap is in the model, not the language. Keeping KDB-X as the primary store was rejected in favor of Tiger Cloud. A snapshot-only backtest extension was rejected because it cannot model capital, liquidity, or latency.
 **Source:** socratic: Quanthacks backtester architecture and scoping
@@ -105,7 +105,7 @@ Do not re-ask what is already decided here.
 ## 2026-10-03: Use int64 fixed-point units in the execution kernel: price 1e-4 ticks, quantity 1e-6 units, money 1e-8 units, rate 1e-8 fraction, with checked overflow and half-away-from-zero rounding; decimals convert to units only at the ingestion boundary.
 
 **Decision:** Use int64 fixed-point units in the execution kernel: price 1e-4 ticks, quantity 1e-6 units, money 1e-8 units, rate 1e-8 fraction, with checked overflow and half-away-from-zero rounding; decimals convert to units only at the ingestion boundary.
-**Context:** Phase 1 of the Quanthacks backtester plan. The execution kernel must compute notionals, fees, funding, P&L, margin, and liquidation exactly, and the float-based legacy modules cannot be hashed into a reproducible fixture contract. Unit policy owner: docs/adr/ADR-007-execution-units.md.
+**Context:** Phase 1 of the Quanthacks backtester plan. The execution kernel must compute notionals, fees, funding, P&L, margin, and liquidation exactly, and the float-based legacy modules cannot be hashed into a reproducible fixture contract. Unit policy owner: orderbook-engine/docs/adr/ADR-007-execution-units.md.
 **Alternatives considered:** Float arithmetic was rejected because rounding drift breaks reproducibility and fixture hashing. A 1e-8 quantity scale was rejected because the decomposed notional multiply would overflow for large positions. Zarith arbitrary-precision decimals were rejected as a heavy dependency for scales that fit int64.
 **Source:** Quanthacks backtester Phase 1: canonical event contract and unit policy
 

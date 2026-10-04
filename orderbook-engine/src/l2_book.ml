@@ -83,7 +83,10 @@ let level_count t side = Price_map.cardinal (side_map t side)
 
 let total_quantity t side =
   Price_map.fold
-    (fun _ quantity total -> Int64.add total quantity)
+    (fun _ quantity total ->
+      match Exec_units.checked_add total quantity with
+      | Ok total -> total
+      | Error _ -> invalid_arg "book side total quantity overflow")
     (side_map t side) 0L
 
 let spread t =
