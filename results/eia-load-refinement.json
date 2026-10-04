@@ -1,0 +1,510 @@
+{
+ "schema": "eia-load-refinement-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/open-work.md",
+ "events": 582,
+ "information": {
+  "AEP": {
+   "authority": "PJM",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": -0.1257882425668012
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": -0.11908258178417724
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": -0.12038127968106199
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": 0.03393555858241125
+    }
+   }
+  },
+  "AMZN": {
+   "authority": "PJM",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": 0.09354344403785554
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": 0.14071671988411777
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": 0.15511817417430002
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": 0.029092249378899416
+    }
+   }
+  },
+  "APLD": {
+   "authority": "ERCO",
+   "features": {
+    "level_surprise": {
+     "samples": 221,
+     "ic": -0.018647648059412766
+    },
+    "peak_surprise": {
+     "samples": 221,
+     "ic": -0.018647648059412766
+    },
+    "ramp_surprise": {
+     "samples": 221,
+     "ic": -0.09294251058956941
+    },
+    "acceleration": {
+     "samples": 221,
+     "ic": 0.017595917595917596
+    }
+   }
+  },
+  "CEG": {
+   "authority": "PJM",
+   "features": {
+    "level_surprise": {
+     "samples": 233,
+     "ic": -0.18161887197701904
+    },
+    "peak_surprise": {
+     "samples": 233,
+     "ic": -0.18161887197701904
+    },
+    "ramp_surprise": {
+     "samples": 233,
+     "ic": -0.10983102044223841
+    },
+    "acceleration": {
+     "samples": 233,
+     "ic": -0.17939420847516152
+    }
+   }
+  },
+  "CIFR": {
+   "authority": "ERCO",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": 0.17075860407002175
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": 0.17075860407002175
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": -0.07124188313814446
+    },
+    "acceleration": {
+     "samples": 295,
+     "ic": 0.14571129413744427
+    }
+   }
+  },
+  "D": {
+   "authority": "PJM",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": -0.04507408969345176
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": -0.026409302008816894
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": -0.03379443482543017
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": 0.023070251960229157
+    }
+   }
+  },
+  "DLR": {
+   "authority": "PJM",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": 0.1165931052186281
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": 0.12892575838142112
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": 0.12436590904923682
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": -0.009948322390739861
+    }
+   }
+  },
+  "DTE": {
+   "authority": "MISO",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": -0.12584063054166544
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": -0.12584063054166544
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": 0.0320677271739045
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": -0.0492648821821929
+    }
+   }
+  },
+  "DUK": {
+   "authority": "DUK",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": -0.12033989318091924
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": -0.12033989318091924
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": 0.027683901437264086
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": -0.06812338348050995
+    }
+   }
+  },
+  "ED": {
+   "authority": "NYIS",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": -0.052652010257565475
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": -0.052652010257565475
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": 0.04717537136525681
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": 0.004821628074256593
+    }
+   }
+  },
+  "EQIX": {
+   "authority": "PJM",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": 0.04446743694452375
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": 0.06125725900876712
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": 0.0862683259684572
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": -0.027979369767833367
+    }
+   }
+  },
+  "ETR": {
+   "authority": "MISO",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": -0.1699481620988718
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": -0.1699481620988718
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": 0.12889537335599985
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": 0.018690153706452814
+    }
+   }
+  },
+  "EXC": {
+   "authority": "PJM",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": -0.19360238050957781
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": -0.22166766640385363
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": -0.23548813805279134
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": -0.06299643409191778
+    }
+   }
+  },
+  "META": {
+   "authority": "PJM",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": 0.16058223995264126
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": 0.18561269046303108
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": 0.16567854214743546
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": 0.009675140162123832
+    }
+   }
+  },
+  "MSFT": {
+   "authority": "PJM",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": 0.14960800697807825
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": 0.1221823782568949
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": 0.06340097494021221
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": -0.1285418037679252
+    }
+   }
+  },
+  "NEE": {
+   "authority": "FPL",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": -0.10849968698185017
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": -0.116855568972698
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": -0.11207516626633521
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": -0.12920091009728452
+    }
+   }
+  },
+  "NRG": {
+   "authority": "ERCO",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": 0.02350438880259425
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": 0.02350438880259425
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": -0.06625664345006246
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": -0.018836565096952907
+    }
+   }
+  },
+  "PPL": {
+   "authority": "PJM",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": -0.12979435100467038
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": -0.10322317015352295
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": -0.07012759091278187
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": -0.04571019727276901
+    }
+   }
+  },
+  "SO": {
+   "authority": "SOCO",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": -0.0618660072766897
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": -0.0618660072766897
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": -0.059285375634876764
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": -0.0996936583972289
+    }
+   }
+  },
+  "VST": {
+   "authority": "ERCO",
+   "features": {
+    "level_surprise": {
+     "samples": 284,
+     "ic": -0.006365662825754975
+    },
+    "peak_surprise": {
+     "samples": 284,
+     "ic": -0.006365662825754975
+    },
+    "ramp_surprise": {
+     "samples": 284,
+     "ic": -0.05522425982340013
+    },
+    "acceleration": {
+     "samples": 361,
+     "ic": 0.03506858889007922
+    }
+   }
+  }
+ },
+ "information_summary": {
+  "level_surprise": {
+   "tickers": 20,
+   "mean_ic": -0.029049020548495345,
+   "median_ic": -0.04886304997550862,
+   "share_positive": 0.35
+  },
+  "peak_surprise": {
+   "tickers": 20,
+   "mean_ic": -0.024577968833705957,
+   "median_ic": -0.039530656133191185,
+   "share_positive": 0.35
+  },
+  "ramp_surprise": {
+   "tickers": 20,
+   "mean_ic": -0.009799700160231264,
+   "median_ic": -0.04450934732441515,
+   "share_positive": 0.45
+  },
+  "acceleration": {
+   "tickers": 20,
+   "mean_ic": -0.025101447626635087,
+   "median_ic": -0.014392443743846385,
+   "share_positive": 0.45
+  }
+ },
+ "best_feature": "level_surprise",
+ "pricing": {
+  "ranking_feature": "level_surprise",
+  "rebalances": 69,
+  "days": 1380,
+  "metrics": {
+   "days": 1380,
+   "annual_return": 0.15806328046980453,
+   "annual_vol": 0.24249011615674365,
+   "sharpe": 0.6518339096659664,
+   "total_return": 1.0242312986057716,
+   "max_drawdown": -0.3292691249585219,
+   "hit_rate": 0.4891304347826087
+  },
+  "interval": {
+   "point": 0.1351025141870252,
+   "lower": -0.06823111766016204,
+   "upper": 0.3285852084672212,
+   "months": 70,
+   "share_positive": 0.924,
+   "resamples": 1000
+  }
+ },
+ "incremental_at_events": {
+  "level_surprise": {
+   "folds": 8,
+   "log_loss_baseline": 1.6771857072233174,
+   "log_loss_with_load": 1.6975812354610191,
+   "improved_folds": 4
+  },
+  "peak_surprise": {
+   "folds": 8,
+   "log_loss_baseline": 1.6771857072233174,
+   "log_loss_with_load": 1.6944293055356279,
+   "improved_folds": 3
+  },
+  "ramp_surprise": {
+   "folds": 8,
+   "log_loss_baseline": 1.6771857072233174,
+   "log_loss_with_load": 1.6800147562253325,
+   "improved_folds": 3
+  },
+  "acceleration": {
+   "folds": 8,
+   "log_loss_baseline": 1.6771857072233174,
+   "log_loss_with_load": 1.6771858667420632,
+   "improved_folds": 3
+  }
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only",
+  "the exposure map is declared, not fitted",
+  "load is demand, not price",
+  "the incremental test uses the mapped names only"
+ ]
+}

@@ -1154,3 +1154,27 @@ writable.
 **Consequence**: every number in the repository now has one command that either reproduces it or names
 the drift, and a "differs" row is a finding rather than noise. The mechanism is the repository's answer
 to the reproduction requirement, and it should be the first thing any change updates.
+
+## T66. Seasonal, peak and ramp load measures do not add per-name information and do not help the disclosure events
+
+**Statement**: the four physically motivated refinements of the grid-load family were tested on the
+same declared exposure map, all point in time against each authority's own prior-year calendar window.
+**Information**, mean information coefficient over the mapped names: level surprise -0.0290, peak
+surprise -0.0246, ramp surprise -0.0098, acceleration -0.0251, each positive in only 35 to 45 percent of
+names, so none of them ranks names. **Pricing**, the monthly cross-sectional long-short on the level
+surprise: +15.81 percent net at Sharpe 0.652 with a -32.9 percent drawdown, mean +0.1351, interval
+-0.0682 to +0.3286 and 92.4 percent of resamples positive: better than the raw-growth version of T64 and
+still **not separated from zero**. **Incremental**, the decisive test: at the 582 disclosure events whose
+issuer carries a declared exposure, adding the load block to the surviving specialist's own features
+makes the out-of-sample log loss **worse** for every measure, 1.6772 to 1.6800 through 1.6976, and the
+fold count improves in only three or four of eight.
+**Evidence**: `results/eia-load-refinement.json`; `scripts/run_eia_load_refinement.py`;
+`tests/test_eia_load_refinement.py`; the extended panel `results/eia-load-daily.csv.gz` now carrying
+daily minimum and mean hour-to-hour ramp per authority.
+**Scope**: development only; 582 mapped events; the exposure map is declared rather than fitted; load is
+demand, not price, so congestion and energy prices remain absent.
+**Consequence**: the grid-load family stays out of the sleeve and out of the council. Its consistent
+*negative* sign is worth naming rather than hiding: regions running below their own seasonal norm have
+slightly better forward returns in this complex, which is a mean-reversion flavour rather than a demand
+surprise, and it is too weak to trade. The family is closed as measured, and the next non-SEC candidates
+are rates and positioning, where the causal chain does not require the equity market to be slow.

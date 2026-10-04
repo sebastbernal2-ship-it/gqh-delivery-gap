@@ -55,3 +55,4 @@
 {"artifact": "T63", "axis": "overlay", "declared_before": true, "id": "V055", "question": "risk control", "status": "rejected", "variant": "halve exposure in the phase that was weakest in the first half"}
 {"artifact": "T64", "axis": "data", "declared_before": true, "id": "V056", "question": "specialist families", "status": "reported", "variant": "EIA-930 regional load growth, unconditional tests"}
 {"artifact": "T64", "axis": "data", "declared_before": true, "id": "V057", "question": "specialist families", "status": "untried", "variant": "load against seasonal norm, peaks, ramps, acceleration"}
+{"artifact": "T66", "axis": "data", "declared_before": true, "id": "V058", "question": "specialist families", "status": "rejected", "variant": "load seasonal surprise, peak, ramp, acceleration, and the event-level test"}

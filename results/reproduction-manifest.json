@@ -37,6 +37,15 @@
    "tier": "default"
   },
   {
+   "artifact": "results/eia-load-refinement.json",
+   "claim": "the seasonal, peak, ramp and acceleration refinements and the event-level test",
+   "command": "python3 scripts/run_eia_load_refinement.py --output {output}",
+   "exact": true,
+   "name": "eia load refinement",
+   "sha256": "358621268d5ba582e3fc4bd3b0e902cee055887b351cc04fe91e5450e2dfae61",
+   "tier": "default"
+  },
+  {
    "artifact": "results/walk-forward-baseline.json",
    "claim": "the rolling-origin record and the two-sleeve composite",
    "command": "python3 scripts/run_walk_forward.py --output {output}",
@@ -87,7 +96,7 @@
    "command": "python3 scripts/build_eia930_load_panel.py",
    "exact": false,
    "name": "eia load panel",
-   "sha256": "c5f909221ac6fbe0607a92e5b8bcee4034e3a3eceb001190e1f65a2ae1370468",
+   "sha256": "2a68bb4b52e690baff638336388a488824b0cb6f7826d408f5e2c7747bb323cb",
    "tier": "network"
   },
   {

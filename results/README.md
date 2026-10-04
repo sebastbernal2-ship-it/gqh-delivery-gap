@@ -445,3 +445,7 @@ generated-path: results/price-subset/
 Produced by `scripts/reproduce.py --write` (digests, tiers and claims for every reproduced artifact):
 
 generated-path: results/reproduction-manifest.json
+
+Produced by `scripts/run_eia_load_refinement.py`:
+
+generated-path: results/eia-load-refinement.json

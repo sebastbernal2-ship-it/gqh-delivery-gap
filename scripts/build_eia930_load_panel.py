@@ -17,8 +17,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-FIELDS = ("authority", "date", "hours", "demand_mean", "demand_peak", "net_generation_mean",
-          "solar_mean", "wind_mean", "gas_mean", "nuclear_mean")
+FIELDS = ("authority", "date", "hours", "demand_mean", "demand_peak", "demand_min",
+          "demand_ramp_mean", "net_generation_mean", "solar_mean", "wind_mean", "gas_mean",
+          "nuclear_mean")
 
 
 def main() -> int:
@@ -60,7 +61,8 @@ def main() -> int:
                     continue
                 key = (authority, day)
                 bucket = buckets.setdefault(key, {"hours": 0, "demand": [], "generation": [],
-                                                  "solar": [], "wind": [], "gas": [], "nuclear": []})
+                                                  "solar": [], "wind": [], "gas": [], "nuclear": [],
+                                                  "ramps": [], "previous": None})
 
                 def value(position, sink):
                     if position is None:
@@ -72,7 +74,13 @@ def main() -> int:
                         except ValueError:
                             pass
 
+                before = len(bucket["demand"])
                 value(demand, bucket["demand"])
+                if len(bucket["demand"]) > before:          # an hour-to-hour ramp needs the lag
+                    current = bucket["demand"][-1]
+                    if bucket["previous"] is not None:
+                        bucket["ramps"].append(abs(current - bucket["previous"]))
+                    bucket["previous"] = current
                 value(generation, bucket["generation"])
                 for position in (solar, solar_battery):
                     value(position, bucket["solar"])
@@ -94,6 +102,8 @@ def main() -> int:
                 "authority": authority, "date": day, "hours": bucket["hours"],
                 "demand_mean": mean(bucket["demand"]),
                 "demand_peak": max(bucket["demand"]) if bucket["demand"] else "",
+                "demand_min": min(bucket["demand"]) if bucket["demand"] else "",
+                "demand_ramp_mean": mean(bucket["ramps"]),
                 "net_generation_mean": mean(bucket["generation"]),
                 "solar_mean": mean(bucket["solar"]), "wind_mean": mean(bucket["wind"]),
                 "gas_mean": mean(bucket["gas"]), "nuclear_mean": mean(bucket["nuclear"])})

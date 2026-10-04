@@ -147,6 +147,11 @@ What remains, in order:
 4. **The risk track**, once the tape has five whole dates: the declared council comparison and the
    coupling layer over its twelve marginals.
 5. **The forward window**, running; it closes at 250 scored events or twelve months.
+5b-pre0. **Grid load is closed as measured (T63, T64, T66).** Growth, seasonal-level, peak, ramp and
+   acceleration forms were all tested for information, pricing and the incremental effect at 582 mapped
+   disclosure events; none adds, and the incremental test makes the model worse. The family is retained
+   as data, not as a signal.
+
 5b-pre. **First non-SEC results (T63, T64).** The phase overlay was significantly harmful (no phase is
    losing; the sleeve does best in stress), and grid load growth showed no per-name information with an
    unproven cross-section. Neither enters the sleeve yet. The load refinements that the evidence points
