@@ -368,6 +368,32 @@ def main() -> int:
                 connect(hop["to"], hop["from"], "chain_precedes", "curated",
                         f"previous hop in {chain_id}", hop.get("condition", ""), hop.get("falsifier", ""))
 
+    # Unification: every force is tied to the measured nodes it bears on, by domain vocabulary overlap.
+    measured = [(node_id, node) for node_id, node in nodes.items()
+                if node.get("origin") in ("manifest", "dig")]
+    measured_signatures = [(node_id, tokens(node.get("meaning", "") + " " + node_id)) for node_id, node in measured]
+    for force_id, force in nodes.items():
+        if not force_id.startswith("force:"):
+            continue
+        force_signature = tokens(" ".join([force.get("meaning", ""), force_id,
+                                           " ".join(force.get("observables", []))]))
+        scored = []
+        for node_id, signature in measured_signatures:
+            shared = force_signature & signature
+            union = force_signature | signature
+            if len(shared) >= 2 and union and len(shared) / len(union) >= 0.08:
+                scored.append((len(shared), node_id))
+        scored.sort(reverse=True)
+        for score, node_id in scored[:6]:
+            connect(force_id, node_id, "bears_on", "inferred",
+                    f"shared vocabulary with the measured layer ({score} tokens)",
+                    "The force bears on this measured node rather than on the domain in general.",
+                    "The overlap is generic vocabulary and the force does not touch this node.")
+            connect(node_id, force_id, "bears_on", "inferred",
+                    f"the force {force_id.split('force:')[1]} bears on this node",
+                    "The measured node reads the force rather than an unrelated one.",
+                    "The overlap is generic vocabulary and the force does not touch this node.")
+
     # Attach assumption nodes that would otherwise float, by token overlap against the non-assumption graph.
     for assumption_id, assumption in nodes.items():
         if assumption.get("layer") != "assumption":

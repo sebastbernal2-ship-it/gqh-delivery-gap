@@ -39,7 +39,7 @@ PROP_TYPES = {"drives", "feeds", "conditions", "requires", "exposes", "supports"
               "refines", "ties_by_observable", "ties_by_source", "chain_precedes", "chain_follows",
               "belongs_to", "candidate_for", "shares_semantics", "dampens", "amplifies", "substitutes",
               "complements", "competes_for", "reveals", "delays", "accelerates", "crowds_in",
-              "crowds_out", "re_rates", "finances", "prices", "bounds", "bounded_by"}
+              "crowds_out", "re_rates", "finances", "prices", "bounds", "bounded_by", "bears_on"}
 FUNDAMENTAL = ["constraint", "price", "margin", "capex", "cash_flow", "equity"]
 CASCADE = ["disclosure", "flow", "depth", "dislocation", "reversion"]
 DOMAIN_TOKENS = {

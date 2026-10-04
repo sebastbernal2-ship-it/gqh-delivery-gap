@@ -6,15 +6,15 @@ decomposed. Nothing here grades a path as dead.
 ## The graph, expanded
 
 - Nodes: **175,978**
-- Typed connections: **1,225,856**
+- Typed connections: **1,226,392**
 - Distributions written down: **86** samples
-- Propagation paths: **1,486** from 263 seeds
+- Propagation paths: **1,500** from 263 seeds
 - Hidden objects: **39** (nodes 1, edges 15, gaps 2, assumptions 21)
 
 ## Delineation
 
 - Layers: `raw` 97,791, `mechanism` 46,193, `feature` 28,024, `asset` 1,024, `assumption` 545, `entity` 529, `force` 356, `dataset` 210
-- Connection status: `declared` 1,196,114, `inferred` 26,950, `proposed` 2,058, `curated` 712, `blocked` 22
+- Connection status: `declared` 1,196,114, `inferred` 27,486, `proposed` 2,058, `curated` 712, `blocked` 22
 - Every connection carries a condition and a falsifier: 99.99% and 99.99%
 - Components: 1, largest 175,978, unreachable from anchors 0
 
@@ -184,6 +184,8 @@ Relations in use: drives 49, dampens 34, reveals 12, gates 11, conditions 8, com
 | `dig:grid:capacity-auction` | `dig:grid:capacity-auction` -> `dig:providers:firm-capacity` -> `asset:equity:utility-basket` | 2 | E2 | capacity-strategy.csv | The basket remains the traded surface. |
 | `dig:grid:rate-case` | `dig:grid:rate-case` -> `dig:grid:capex-plan` -> `outcome:firm:capex-level` | 2 | E2 | provider-capex-quarterly.csv | Capital recovery runs through the rate case process. |
 | `dig:providers:credit` | `dig:providers:credit` -> `dig:providers:provider-margin` -> `outcome:firm:cash-flow-revision` | 2 | E2 | delivery-revisions.csv, cascade-tape.json, credit-deal-registry.csv | Margins support the credit that funds new supply. |
+| `force:grid:allowed-return` | `force:grid:allowed-return` -> `dig:grid:capex-plan` -> `outcome:firm:capex-level` | 2 | E2 | provider-capex-quarterly.csv | The outcome remains the measured object. |
+| `force:power:firm-capacity-scarcity` | `force:power:firm-capacity-scarcity` -> `dig:providers:firm-capacity` -> `asset:equity:utility-basket` | 2 | E2 | capacity-strategy.csv | The basket remains the traded surface. |
 | `entity:issuer:company` | `entity:issuer:company` -> `outcome:market:post-event-drift` | 1 | E3 | capacity-event-ledger.csv | Both nodes read the same source. |
 | `outcome:market:abnormal-return` | `outcome:market:abnormal-return` -> `outcome:market:post-event-drift` | 1 | E3 | capacity-event-ledger.csv | Both nodes read the same source. |
 | `claim:pricing:underreacts` | `claim:pricing:underreacts` -> `outcome:firm:capex-level` | 1 | E4 | provider-capex-quarterly.csv | The node receives a verified representation and a declared role |
@@ -201,8 +203,6 @@ Relations in use: drives 49, dampens 34, reveals 12, gates 11, conditions 8, com
 | `outcome:portfolio:net-pnl` | `outcome:portfolio:net-pnl` -> `asset:equity:utility-basket` | 1 | E4 | needs data | The cross-layer relation is supported by point-in-time evidence |
 | `outcome:portfolio:net-pnl` | `outcome:portfolio:net-pnl` -> `asset:options:defined-risk-spread` | 1 | E4 | needs data | The cross-layer relation is supported by point-in-time evidence |
 | `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `dig:compute:provider-revenue-line` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | Investment outruns revenue before it either lifts revenue or compresses margin. |
-| `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `dig:compute:depreciation-policy` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | High intensity becomes depreciation and interest inside reported earnings. |
-| `dig:compute:capex-intensity` | `dig:compute:capex-intensity` -> `dig:compute:intensity-charge` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | A capex intensity surprise relative to revenue is charged in the equity over weeks. |
 
 ## Reproduce
 

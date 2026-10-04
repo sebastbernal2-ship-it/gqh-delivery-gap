@@ -1,9 +1,9 @@
 {
  "nodes": 175978,
- "connections": 1225856,
+ "connections": 1226392,
  "by_status": {
   "declared": 1196114,
-  "inferred": 26950,
+  "inferred": 27486,
   "proposed": 2058,
   "curated": 712,
   "blocked": 22
@@ -22,6 +22,7 @@
   "same_dig_context": 858,
   "conditions": 714,
   "ties_by_player": 688,
+  "bears_on": 536,
   "bounds": 529,
   "chain_precedes": 182,
   "chain_follows": 182,
@@ -32,8 +33,7 @@
   "dampens": 68,
   "bounded_by": 57,
   "gates": 42,
-  "feeds": 38,
-  "anchors": 38
+  "feeds": 38
  },
  "degrees": {
   "min": 4,
@@ -41,12 +41,12 @@
   "max": 150,
   "mean": 7.0
  },
- "nodes_with_50_plus": 728,
- "nodes_with_50_plus_share": 0.0041,
+ "nodes_with_50_plus": 736,
+ "nodes_with_50_plus_share": 0.0042,
  "core_nodes": 726,
  "core_degrees": {
   "min": 49,
-  "median": 74.0,
+  "median": 75.0,
   "max": 150
  },
  "core_with_50_plus": 725,

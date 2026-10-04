@@ -1,6 +1,6 @@
 {
  "nodes": 175978,
- "connections": 1225856,
+ "connections": 1226392,
  "distributions": 86,
  "hidden_objects": {
   "total": 39,
@@ -15,21 +15,20 @@
  },
  "propagation": {
   "seeds": 263,
-  "paths": 1486,
-  "testable_now": 746,
-  "partially_testable": 64,
-  "needs_data": 676,
-  "payers": 22,
+  "paths": 1500,
+  "testable_now": 801,
+  "partially_testable": 70,
+  "needs_data": 629,
+  "payers": 24,
   "evidence_floor": {
-   "E2": 1201,
-   "E3": 245,
-   "E4": 39,
-   "E5": 1
+   "E2": 1236,
+   "E3": 235,
+   "E4": 29
   }
  },
  "delineation": {
   "nodes": 175978,
-  "connections": 1225856,
+  "connections": 1226392,
   "by_layer": {
    "raw": 97791,
    "mechanism": 46193,
@@ -55,7 +54,7 @@
   },
   "by_status": {
    "declared": 1196114,
-   "inferred": 26950,
+   "inferred": 27486,
    "proposed": 2058,
    "curated": 712,
    "blocked": 22
@@ -74,6 +73,7 @@
    "same_dig_context": 858,
    "conditions": 714,
    "ties_by_player": 688,
+   "bears_on": 536,
    "bounds": 529,
    "chain_precedes": 182,
    "chain_follows": 182,
@@ -89,21 +89,20 @@
    "reveals": 30,
    "competes_for": 22,
    "observes": 18,
-   "measures": 14,
-   "exposes": 14
+   "measures": 14
   },
   "degree_histogram": {
    "0": 148080,
    "10": 17958,
    "20": 4710,
-   "30": 4456,
-   "40": 46,
-   "50": 86,
-   "60": 128,
+   "30": 4433,
+   "40": 61,
+   "50": 91,
+   "60": 125,
    "70": 253,
-   "80": 65,
-   "90": 178,
-   "100": 11,
+   "80": 69,
+   "90": 175,
+   "100": 16,
    "110": 2,
    "130": 1,
    "150": 4
