@@ -57,6 +57,10 @@ SOURCES: dict[str, Source] = {
     "eia860m_full_2024_12": Source("data/public-first-wave/eia860m-2024-12-capacity.csv", "https://www.eia.gov/electricity/data/eia860m/archive/xls/december_generator2024.xlsx", ("inventory_status", "vintage_month", "plant_id", "generator_id"), "vintage_month"),
     "eia860m_proposed_2024_12": Source("data/public-first-wave/eia860m-2024-12-proposed.csv", "https://www.eia.gov/electricity/data/eia860m/archive/xls/december_generator2024.xlsx", ("vintage_month", "inventory_status", "plant_id", "generator_id"), "vintage_month"),
     "eia930_pjm_sample": Source("data/public-first-wave/eia930-pjm-2024-01-01.csv", "https://api.eia.gov/v2/electricity/rto/region-data/data/", ("period", "respondent", "demand_mwh"), "period"),
+    "hyperliquid_ws_capture": Source("data/hyperliquid/ws", "wss://api.hyperliquid.xyz/ws",
+                                      ("recv_ts", "channel"), "recv_ts", "available_at"),
+    "hyperliquid_book_capture": Source("data/hyperliquid/book", "https://api.hyperliquid.xyz/info",
+                                       ("recv_ts", "coin"), "recv_ts", "available_at"),
     "philly_delivery_times": Source("data/orthogonal-starter-2026-10-03/philly_delivery_times.csv", "https://www.philadelphiafed.org/-/media/FRBP/Assets/Surveys-And-Data/MBOS/Historical-Data/Data-Series/bos_history.csv?sc_lang=en", ("DATE", "dtcdfsa"), "DATE"),
     "nyfed_gscpi": Source("data/orthogonal-starter-2026-10-03/nyfed_gscpi_monthly.csv", "https://www.newyorkfed.org/medialibrary/research/interactives/gscpi/downloads/gscpi_data.xlsx", ("observation_date", "gscpi"), "observation_date"),
     "fred_rates": Source("data/orthogonal-starter-2026-10-03/fred_daily.csv", "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2,DGS10", ("observation_date", "DGS10"), "observation_date"),
@@ -143,6 +147,38 @@ def read_csv(source_id: str) -> tuple[list[dict[str, Any]], Source]:
         rows = list(reader)
     if not rows:
         raise ValueError(f"{source_id}: empty source")
+    return rows, source
+
+
+def read_jsonl_capture(source_id: str) -> tuple[list[dict[str, Any]], Source]:
+    """Read a local JSONL capture directory as one batch: one row per recorded message.
+
+    The payload keeps the recorded message and its file and line, so provenance survives the load. New
+    files produce a new batch; the repo's rule is to query by source and pick the intended batch hash.
+    """
+    source = SOURCES[source_id]
+    directory = ROOT / source.path
+    files = sorted(directory.glob("*.jsonl"))
+    if not files:
+        raise ValueError(f"{source_id}: no capture files under {source.path}")
+    rows: list[dict[str, Any]] = []
+    for path in files:
+        for number, line in enumerate(path.open(), start=1):
+            if not line.strip():
+                continue
+            record = json.loads(line)
+            missing = [key for key in source.required if key not in record]
+            if missing:
+                raise ValueError(f"{source_id}: {path.name} line {number} missing {missing}")
+            try:
+                stamp = float(record["recv_ts"])
+            except (TypeError, ValueError) as exc:
+                raise ValueError(f"{source_id}: {path.name} line {number} bad recv_ts") from exc
+            iso = datetime.fromtimestamp(stamp, timezone.utc).isoformat()
+            rows.append({"recv_ts": iso, "available_at": iso, "file": path.name, "line": number,
+                         "channel": record.get("channel"), "payload": record.get("data")})
+    if not rows:
+        raise ValueError(f"{source_id}: empty capture")
     return rows, source
 
 
@@ -445,6 +481,8 @@ def main() -> int:
             rows, source = read_massive(args.source, args.start, args.end, args.ticker)
         elif args.source in M3_FILES:
             rows, source = read_m3(args.source)
+        elif args.source in ("hyperliquid_ws_capture", "hyperliquid_book_capture"):
+            rows, source = read_jsonl_capture(args.source)
         elif args.source == "eia923_pjm_2024":
             rows, source = read_eia923_pjm_2024()
         else:

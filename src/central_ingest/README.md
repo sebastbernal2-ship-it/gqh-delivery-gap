@@ -123,6 +123,8 @@ availability; join original SEC filings using accession and conservative accepta
 
 The full daily-market panel has adjusted and unadjusted Massive aggregates, split/dividend
 actions, and ticker event/metadata snapshots for PWR, ETN, EME, DLR, SPY. These are separate
+source IDs also include `hyperliquid_ws_capture` (data/hyperliquid/ws) and `hyperliquid_book_capture` (data/hyperliquid/book), registered 2026-10-04: the local venue captures, dry-run validated, and blocked on credentials in this checkout.
+
 source IDs: `massive_bars`, `massive_bars_unadjusted`, `massive_splits`, `massive_dividends`,
 `massive_ticker_events`, and `massive_ticker_metadata`. Query batches in the manifests; the
 per-run receipt records URL, retrieval timestamp, license assertion, row count, and batch hash.
