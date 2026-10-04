@@ -197,3 +197,7 @@ generated-path: results/filing-specialist-events.csv
 Produced by `scripts/run_filing_specialist.py`:
 
 generated-path: results/filing-specialist-scores.json
+
+Produced by `scripts/fetch_filing_texts.py`:
+
+generated-path: results/filing-text-manifest.json
