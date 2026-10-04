@@ -210,6 +210,10 @@ Produced by `hpc/probabilistic-council/filing_scorer.py --encoder hf`:
 
 generated-path: results/filing-text-scores-frozen.json
 
+Produced by `hpc/probabilistic-council/run_filing_text_ab.py`:
+
+generated-path: results/filing-text-ab.json
+
 Produced by `scripts/build_rpo_vintages.py`:
 
 generated-path: results/rpo-vintages.csv

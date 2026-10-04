@@ -540,3 +540,23 @@ document text, no returns, development only, both sealed windows spent.
 **Consequence**: the equity bridge has a small measured lift from filing metadata. The next tests are
 whether document text adds beyond metadata on the four-firm corpus where text exists, and whether the
 forecast carries useful weight inside the council.
+
+## T38. Frozen document text carries information that filing metadata does not
+
+**Statement**: on the 81-label four-firm filing panel, split 58/23 chronologically, a softmax on
+eight training-only principal components of frozen MiniLM document embeddings, text alone, beats
+both the training prevalence and the metadata-only model on the proper scores: log loss 1.508
+against 1.599 and 1.679, and Brier 0.741 against 0.782 and 0.750. Its accuracy is lower, 0.391
+against 0.435 and 0.478, so the gain is in probability quality rather than in the top-class pick.
+The naive concatenation of metadata and text is the worst model on log loss at 1.746, which says
+the two evidence blocks need stacking or gating rather than one linear head. The declared question
+was whether document text adds beyond filing metadata; on this sample it does, and the combined
+linear model fails to capture it.
+**Evidence**: `results/filing-text-ab.json`; `results/filing-specialist-events.csv`;
+`results/filing-text-manifest.json`; `hpc/probabilistic-council/run_filing_text_ab.py`;
+`src/filing_specialist/text_ab.py`; `docs/plan/filing-specialist.md`.
+**Scope**: 81 labels, PWR dominated, one frozen encoder, eight components, metadata and text both
+from the same four firms, development only, both sealed windows spent.
+**Consequence**: the text side of the equity bridge has a measured sign. The next work is a
+stacking or gating layer over the two evidence blocks, and the same test on a larger label set,
+not more linear features.

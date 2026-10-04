@@ -74,3 +74,17 @@ comparator.
 | Frozen all-MiniLM-L6-v2 encoder, 75k trainable head, 30 epochs | 1.853 | 0.848 | 0.217 |
 
 Both text variants lose to prevalence on log loss, and the frozen encoder loses on every metric. With 58 training rows and a dominant flat class, the text representation does not carry learnable signal for this task yet. Recorded levers, in order: point-in-time expectation vintages to raise the label count, a calibrated head with fewer free parameters, and a class-balanced objective. Neither text run is a claim of failure for the mechanism; both are recorded negatives at this sample size.
+
+## Text versus metadata, three ways on one split
+
+| Model | Log loss | Brier | Accuracy |
+|---|---|---|---|
+| Training prevalence | 1.599 | 0.782 | 0.435 |
+| Metadata only, 15 features | 1.679 | 0.750 | 0.478 |
+| Frozen text only, 8 PCA components | **1.508** | **0.741** | 0.391 |
+| Metadata and text concatenated | 1.746 | 0.748 | 0.478 |
+
+The text alone carries information that the metadata does not, on both proper scores, while giving
+up accuracy. Concatenating the two blocks inside one linear head makes log loss worse, so the next
+method is a stacking or gating layer, not more features. Runner:
+`hpc/probabilistic-council/run_filing_text_ab.py`; result: `results/filing-text-ab.json`.

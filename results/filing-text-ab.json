@@ -1,0 +1,79 @@
+{
+ "split": {
+  "train_rows": 58,
+  "test_rows": 23,
+  "train_through": "2022-08-04T14:28:37+00:00",
+  "test_from": "2022-11-01T18:49:31+00:00",
+  "classes": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ "components": 8,
+ "prevalence": {
+  "rows": 23,
+  "log_loss": 1.5986699718121486,
+  "brier": 0.7823238796323682,
+  "accuracy": 0.43478260869565216,
+  "class_support": {
+   "0": 0,
+   "1": 6,
+   "2": 10,
+   "3": 1,
+   "4": 6
+  }
+ },
+ "metadata_only": {
+  "rows": 23,
+  "log_loss": 1.6786442736328184,
+  "brier": 0.7500645719684246,
+  "accuracy": 0.4782608695652174,
+  "class_support": {
+   "0": 0,
+   "1": 6,
+   "2": 10,
+   "3": 1,
+   "4": 6
+  }
+ },
+ "text_only": {
+  "rows": 23,
+  "log_loss": 1.5083529700279372,
+  "brier": 0.7406785933248494,
+  "accuracy": 0.391304347826087,
+  "class_support": {
+   "0": 0,
+   "1": 6,
+   "2": 10,
+   "3": 1,
+   "4": 6
+  }
+ },
+ "metadata_and_text": {
+  "rows": 23,
+  "log_loss": 1.7462436874489204,
+  "brier": 0.7482289857834565,
+  "accuracy": 0.4782608695652174,
+  "class_support": {
+   "0": 0,
+   "1": 6,
+   "2": 10,
+   "3": 1,
+   "4": 6
+  }
+ },
+ "schema": "filing-text-ab-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/filing-specialist.md",
+ "encoder": "sentence-transformers/all-MiniLM-L6-v2",
+ "rows": 81,
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "81 labels, PWR dominated; an A/B here cannot establish general text value",
+  "text is reduced to the declared components with training-only PCA",
+  "the encoder is frozen; nothing in it was fitted on this task"
+ ]
+}
