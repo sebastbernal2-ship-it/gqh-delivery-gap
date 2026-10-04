@@ -49,15 +49,16 @@ consolidator in phase 5, and long nothing in phase 3.
 ## Compute as a regime instrument
 
 The compute rental index is a read on provider behaviour under inventory conditions, not a clearing
-price: our own measures found ten essentially independent families and no listed instrument that
-isolates them. So the compute index enters this framework the honest way:
+price: our measures found ten essentially independent families and no listed instrument that isolates
+them. The direct provider-capex, provider-revenue, and provider-family transmission studies did not support
+the rental series as a standalone equity signal. So the compute index enters this framework the honest way:
 
-- as a **phase marker**: falling rental prices with rising capacity signal phase 3; rising prices with
-  sold out inventory signal phase 1;
-- as a **forward feed**: family level price changes lead provider capex adjustments, which lead power
-  demand commitments;
-- never as a required link. The chain must stand with the compute index removed, and the index may only
-  shift timing or confidence.
+- as a **phase marker**: falling rental prices with rising capacity can mark phase 3, while rising prices
+  with constrained inventory can mark phase 1;
+- as a **conditioning variable**: the rental level relative to its trailing family baseline can modify the
+  measured effect of a delivery revision, subject to a new point-in-time interaction test;
+- never as a required link, direct P&L sleeve, or hedge instrument. The chain must stand with the compute
+  index removed, and the index may only shift timing, confidence, or position size after conditional evidence.
 
 ## The latency clause
 

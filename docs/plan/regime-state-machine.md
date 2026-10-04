@@ -12,7 +12,10 @@ withdrawal hazard and the compute rental level, the second leading the first by 
 The bottleneck panel gives construction spend, supply chain pressure, delivery times and rates. Together
 they can be reduced to a dated state.
 
-## Inputs, all point in time
+## Inputs and timestamp status
+
+These are declared sensors, not all verified point-in-time inputs. A row cannot gate size until its historical
+availability time and threshold construction pass the leakage check.
 
 | Reading | Source | Coverage |
 |---|---|---|
@@ -21,7 +24,7 @@ they can be reduced to a dated state.
 | Supply chain pressure index, z | same | same |
 | Delivery times, months | same | same |
 | Ten year rate | same | same |
-| Compute rental level against trailing twelve month mean | `results/compute-price-monthly.csv` | 2022-05 onward |
+| Compute rental level against trailing twelve month mean | `results/compute-price-monthly.csv` | 2022-05 onward; historical arrival time unverified |
 | Queue withdrawal hazard, trailing three months | `results/queue-panel.csv` | 2015 onward |
 | Median age of live queue projects | same | same |
 
@@ -41,8 +44,9 @@ agreeing, and the file reports the agreement share so a reader can re-map with d
 - **Second wave**: hazard falling for three months, rental level recovering from below trend, construction
   spend growth turning positive.
 
-Thresholds: trend is the trailing twelve month mean, medians and quartiles are computed on the full
-available history of each reading and stated in the output.
+Thresholds: trend is the trailing twelve month mean. Version 1 medians and quartiles use the full
+available history, so the labels are descriptive and cannot gate size. Version 2 must use expanding or
+trailing thresholds computed only from data available before each label date.
 
 ## Output
 
