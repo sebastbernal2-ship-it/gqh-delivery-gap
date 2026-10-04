@@ -137,3 +137,7 @@ generated-path: results/complex-assets-quarterly.csv
 Produced by `scripts/build_intensity_preboom_study.py`:
 
 generated-path: results/intensity-preboom-study.json
+
+Produced by `scripts/build_intensity_robustness_study.py`:
+
+generated-path: results/intensity-robustness-study.json

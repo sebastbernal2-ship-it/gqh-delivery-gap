@@ -383,6 +383,18 @@ no volume; development only.
 **Consequence**: the direction of the charge is not a property of this buildout, but its significance is
 fragile and its capacity is unknown. The next objects are volume and costs, not more cuts.
 
+## T31. The intensity charge is fragile and name concentrated
+
+**Statement**: removing the ten discovery names halves the effect and removes its significance: 498
+observations across 49 names show -0.042 (p 0.44) at five days, -0.026 (p 0.63) at twenty and +0.001 at
+sixty, against -0.087 (p 0.064), -0.072 (p 0.13) and -0.017 on the full panel. Per quarter, across 39
+quarters, the correlation is negative in 56 percent of quarters at five days, 62 percent at twenty and 56
+percent at sixty, with tercile spreads negative in 56, 67 and 56 percent.
+**Evidence**: `results/intensity-robustness-study.json`; `scripts/build_intensity_robustness_study.py`.
+**Scope**: the same panel, robustness pass, development only.
+**Consequence**: the charge is a candidate, not an edge. Further cuts of this panel are not evidence; the
+next real test is a disjoint sample with a capacity and cost check.
+
 ---
 
 # What these truths are pointing at

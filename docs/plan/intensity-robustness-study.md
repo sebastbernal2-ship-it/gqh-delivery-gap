@@ -29,3 +29,20 @@ Same panel, same price source, overlapping windows. This is a robustness pass, n
 ## Reproduce
 
     python3 scripts/build_intensity_robustness_study.py
+
+## Result, 2026-10-04
+
+Two facts, both uncomfortable for the charge.
+
+Without the discovery names, the effect halves and loses significance: 498 observations across 49 names
+show -0.042 (p 0.44) at five days, -0.026 (p 0.63) at twenty and +0.001 at sixty, against the full panel's
+-0.087 (p 0.064), -0.072 (p 0.13) and -0.017.
+
+The per quarter record is close to a coin: across 39 quarters the correlation is negative in 56 percent
+at five days, 62 percent at twenty and 56 percent at sixty, and the tercile spread is negative in 56, 67
+and 56 percent.
+
+The fact this leaves: the intensity charge is directionally consistent, economically motivated, and
+statistically fragile, with about half of it living in the ten names that produced the first result.
+Further cuts of this panel are not evidence. The next real evidence is a disjoint sample and a capacity
+and cost check, and until then it is a candidate, not an edge.
