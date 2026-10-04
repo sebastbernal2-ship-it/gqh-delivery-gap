@@ -17,6 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SUMMARY = ROOT / "docs" / "scan" / "decomposition-summary.json"
 DIGS = ROOT / "docs" / "scan" / "deep-digs.jsonl"
+CYCLES = ROOT / "docs" / "scan" / "analogue-cycles.jsonl"
 SKELETON = ROOT / "docs" / "scan" / "decomposition.jsonl.gz"
 OUT_MD = ROOT / "docs" / "scan" / "decomposition.md"
 OUT_HTML = ROOT / "docs" / "scan" / "decomposition.html"
@@ -47,6 +48,7 @@ SUB_ITEMS = ["composition", "inputs", "constraints", "observables", "substitutes
 def main() -> int:
     summary = json.loads(SUMMARY.read_text())
     digs = [json.loads(line) for line in DIGS.open() if line.strip()]
+    cycles = [json.loads(line) for line in CYCLES.open() if line.strip()] if CYCLES.exists() else []
     sample = []
     if SKELETON.exists():
         with gzip.open(SKELETON, "rt") as handle:
@@ -100,6 +102,25 @@ def main() -> int:
             lines.append(f"| `{edge['from']}` -> `{edge['to']}` | {edge['relation']} | "
                          f"{edge['condition']} | {edge['falsifier']} |")
         lines.append("")
+    if cycles:
+        lines += ["", "## The analogue cycles, the temporal backbone", "",
+                  "Nine recorded infrastructure cycles with the same phase ordering. Method owner:",
+                  "`docs/plan/regimes.md`. Every claim of a ten to twenty year rationale is checked against",
+                  "at least two of these.", "",
+                  "| Cycle | Era | Trigger | What persisted | What died |", "|---|---|---|---|---|"]
+        for cycle in cycles:
+            lines.append(f"| **{cycle['name']}** `{cycle['id']}` | {cycle['era']} | {cycle['trigger']} | "
+                         f"{cycle['what_persisted']} | {cycle['what_died']} |")
+        for cycle in cycles:
+            lines += ["", f"### {cycle['name']}", "", f"`{cycle['id']}` | {cycle['era']}", "",
+                      "| Phase | Years | Markers | Outcome |", "|---|---|---|---|"]
+            for phase in cycle.get("phases", []):
+                lines.append(f"| {phase['phase']} | {phase['years']} | {phase['markers']} | {phase['outcome']} |")
+            lines += ["", f"**Funding.** {cycle['funding']}", "",
+                      f"**Mapping to current nodes.** " +
+                      "; ".join(f"`{m['current_node']}` ({m['relation']}: {m['why']})"
+                                for m in cycle.get("mapping_to_current", [])), "",
+                      f"**Falsifier.** {cycle['falsifier']}", ""]
     OUT_MD.write_text("\n".join(lines) + "\n")
 
     def dig_html(dig: dict) -> str:
@@ -126,7 +147,24 @@ def main() -> int:
                 f"<table><thead><tr><th>Edge</th><th>Relation</th><th>Condition</th><th>Falsifier</th>"
                 f"</tr></thead><tbody>{edge_rows}</tbody></table></section>")
 
+    def cycle_html(cycle: dict) -> str:
+        phase_rows = "\n".join(
+            f"<tr><td>{phase['phase']}</td><td>{phase['years']}</td><td>{html.escape(phase['markers'])}</td>"
+            f"<td>{html.escape(phase['outcome'])}</td></tr>" for phase in cycle.get("phases", []))
+        mapping = "; ".join(f"<code>{html.escape(m['current_node'])}</code> ({html.escape(m['relation'])})"
+                            for m in cycle.get("mapping_to_current", []))
+        return (f"<section><h3>{html.escape(cycle['name'])}</h3>"
+                f"<p class=\"meta\"><code>{html.escape(cycle['id'])}</code> · {html.escape(cycle['era'])}</p>"
+                f"<p><b>Trigger.</b> {html.escape(cycle['trigger'])}</p>"
+                f"<table><thead><tr><th>Phase</th><th>Years</th><th>Markers</th><th>Outcome</th></tr></thead>"
+                f"<tbody>{phase_rows}</tbody></table>"
+                f"<p><b>Funding.</b> {html.escape(cycle['funding'])}</p>"
+                f"<p><b>What persisted.</b> {html.escape(cycle['what_persisted'])} "
+                f"<b>What died.</b> {html.escape(cycle['what_died'])}</p>"
+                f"<p><b>Mapping.</b> {mapping}</p>"
+                f"<p><b>Falsifier.</b> {html.escape(cycle['falsifier'])}</p></section>")
     body = "\n".join(dig_html(dig) for dig in digs)
+    cycle_body = ("<h2>The analogue cycles</h2>" + "".join(cycle_html(cycle) for cycle in cycles)) if cycles else ""
     OUT_HTML.write_text(f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Decomposition: the graph at sub-node resolution</title>
@@ -143,6 +181,7 @@ def main() -> int:
 {summary['manifest_nodes']:,} declared, {summary['subnodes_total']:,} skeleton children,
 {summary['curated_children']:,} children of curated dig nodes. {len(digs)} curated digs.
 Method owner: <code>docs/plan/decomposition.md</code>.</p>
+{cycle_body}
 {body}
 </main></body></html>
 """)

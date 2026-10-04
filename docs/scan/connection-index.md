@@ -3,35 +3,35 @@
 Method owner: `docs/plan/deep-chaining.md`. Every node carries its own typed connections and
 its chain hops. Inferred connections are questions with a type and a falsifier.
 
-- Nodes indexed: **23,791** (643 core nodes from the manifest
-  and the digs, 23,148 skeleton sub-nodes)
-- Typed connections: **206,757**
-- Core degree: min 48, median 73, max 150; **641 core nodes at 50+ connections (99.7%)**
+- Nodes indexed: **25,345** (685 core nodes from the manifest
+  and the digs, 24,660 skeleton sub-nodes)
+- Typed connections: **220,663**
+- Core degree: min 48, median 73, max 150; **683 core nodes at 50+ connections (99.7%)**
 - Skeleton degree: structural only, median 6
-- Chains 40, hops 89, bridges 27
+- Chains 65, hops 130, bridges 47
 
 ## Connection types
 
 | Type | Count |
 |---|---|
-| `sibling_subnode` | 96,450 |
-| `part_of` | 23,796 |
-| `splits_into` | 23,146 |
-| `refined_by` | 19,290 |
-| `refines` | 19,276 |
-| `co_layer_peer` | 15,732 |
+| `sibling_subnode` | 102,750 |
+| `part_of` | 25,308 |
+| `splits_into` | 24,658 |
+| `refined_by` | 20,550 |
+| `refines` | 20,536 |
+| `co_layer_peer` | 16,972 |
 | `ties_by_source` | 3,716 |
-| `shares_semantics` | 1,596 |
+| `shares_semantics` | 1,604 |
+| `ties_by_observable` | 1,005 |
 | `candidate_for` | 914 |
-| `ties_by_observable` | 799 |
 | `conditions` | 670 |
-| `same_dig_context` | 428 |
-| `ties_by_player` | 194 |
+| `same_dig_context` | 664 |
+| `ties_by_player` | 378 |
 | `contains` | 162 |
+| `chain_precedes` | 128 |
+| `chain_follows` | 128 |
+| `requires` | 110 |
 | `belongs_to` | 96 |
-| `requires` | 94 |
-| `chain_precedes` | 87 |
-| `chain_follows` | 87 |
 
 ## Worked node record
 
@@ -85,20 +85,20 @@ its chain hops. Inferred connections are questions with a type and a falsifier.
 | `feature:equipment:transformer-backlog` | shares_semantics | inferred | 2 shared meaning tokens across layers | The overlap is generic vocabulary and the nodes move separately. |
 | `feature:equipment:transformer-lead-days` | shares_semantics | inferred | 2 shared meaning tokens across layers | The overlap is generic vocabulary and the nodes move separately. |
 | `dig:bess:systems` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
+| `dig:compute:inventory-state` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
+| `dig:compute:power-commitment` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
+| `dig:compute:provider-capex` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 | `dig:cool:liquid-cooling` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 | `dig:cool:load` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 | `dig:copper:concentrate` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 | `dig:copper:power-cost` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 | `dig:copper:scrap` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 | `dig:copper:smelters` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
-| `dig:fcc:catalyst-inventory` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
-| `dig:fcc:fcc-unit-throughput` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
-| `dig:fcc:separation-plants` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
-| `dig:fiber:interconnect` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
-| `dig:hvdc:converters` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
-| `dig:hvdc:transfer` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
-| `dig:labor:apprenticeship` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
-| `dig:labor:crews` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
+| `dig:cycles:buildout` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
+| `dig:cycles:overbuild` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
+| `dig:cycles:second-wave` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
+| `dig:cycles:shakeout` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
+| `dig:cycles:shortage` | co_layer_peer | inferred | same layer peer family | The layer label does not imply a comparable role. |
 
 Chain memberships for this node: `chain:bridge:transformer-lpt-to-anchor` at hop:bridge:transformer-lpt-to-anchor:01, `chain:bridge:switchgear-to-anchor` at hop:bridge:switchgear-to-anchor:01.
 
@@ -151,6 +151,26 @@ The same chain in the captain's form: `dig:fcc:catalyst-inventory` holds `dig:fc
 | `bridge:copper-demand-to-anchor` | `dig:copper:demand` | `factor:commodity:copper` | anchors | The factor remains the market reference. | Contract structures decouple physical from factor. |
 | `bridge:nuclear-firm-power-to-anchor` | `dig:nuc:firm-power` | `mechanism:capacity:constraint` | anchors | Firm power remains the binding commitment for load growth. | Firm obligations loosen. |
 | `bridge:fcc-catalyst-to-anchor` | `dig:fcc:catalyst-inventory` | `mechanism:capacity:constraint` | anchors | Catalyst supply remains a material constraint for refiners. | Catalyst is never supply constrained. |
+| `bridge:compute-power-to-firm-capacity` | `dig:compute:power-commitment` | `dig:providers:firm-capacity` | draws_from | Firm capacity remains the product operators contract for. | Operators build their own generation entirely. |
+| `bridge:compute-tokens-to-load-growth` | `dig:compute:token-demand` | `dig:grid:load-growth` | drives | Workload growth continues to convert into electricity demand. | Efficiency decouples workload from power. |
+| `bridge:compute-inventory-to-overbuild` | `dig:compute:inventory-state` | `dig:cycles:overbuild` | marker_of | Listed prices and availability reflect inventory. | Prices are policy artifacts decoupled from utilisation. |
+| `bridge:providers-firm-to-nuclear` | `dig:providers:firm-capacity` | `dig:nuc:firm-power` | competes_for | Nuclear remains a contracted firm source. | Nuclear capacity is allocated outside the market. |
+| `bridge:providers-firm-to-turbines` | `dig:providers:firm-capacity` | `dig:turbine:heavy-duty` | requires | Turbines remain the marginal firm capacity technology. | Storage or imports satisfy firm obligations. |
+| `bridge:grid-contracts-to-cooling-load` | `dig:grid:special-contracts` | `dig:cool:load` | prices | Large load tariffs remain the allocation mechanism. | Standard tariffs absorb the cost. |
+| `bridge:grid-planning-to-transformers` | `dig:grid:transmission-planning` | `dig:power:lpt` | requires | Transmission and generation compete for the same equipment. | Transmission uses distinct equipment classes. |
+| `bridge:cycles-buildout-to-transformers` | `dig:cycles:buildout` | `dig:power:lpt` | observed_in | Equipment bottlenecks recur in buildout phases. | Equipment supply keeps pace this time. |
+| `bridge:cycles-fiber-to-interconnection` | `dig:cycles:fiber` | `mechanism:capacity:interconnection-bottleneck` | analogue_of | Interconnection capacity can be re-used by later projects. | Queue capacity is consumed immediately on award. |
+| `bridge:cycles-second-wave-to-transmission-owner` | `dig:cycles:second-wave` | `dig:providers:transmission-owner` | same_shape | Regulated ownership remains the end state. | Political change breaks the regulated model. |
+| `bridge:exec-timestamps-to-queue-milestones` | `dig:exec:event-stamp` | `event:power:queue-milestone` | observes | Queue updates are published with usable timestamps. | Queue updates are undated or retrospective. |
+| `bridge:exec-entry-to-drift` | `dig:exec:entry-window` | `outcome:market:post-event-drift` | tests | Drift survives delayed entry. | Drift vanishes when entries are delayed. |
+| `bridge:compute-capex-to-grid-plan` | `dig:compute:provider-capex` | `dig:grid:capex-plan` | drives | Provider projects reach utilities as committed load. | Projects stay behind the meter on self generation. |
+| `bridge:cycles-colocation-to-datacenter-site` | `dig:cycles:colocation` | `entity:datacenter:site` | analogue_of | Site economics repeat the colocation pattern. | AI sites have fundamentally different contracts. |
+| `bridge:providers-margin-to-cash-flow` | `dig:providers:provider-margin` | `outcome:firm:cash-flow-revision` | feeds | Contracted revenue remains the margin driver. | Margins are regulated to cost of service. |
+| `bridge:grid-capex-to-anchor` | `dig:grid:capex-plan` | `outcome:firm:capex-level` | anchors | The outcome remains the measured object. | The dig contradicts the outcome construction. |
+| `bridge:compute-rental-to-anchor` | `dig:compute:rental-change` | `feature:compute:rental-price` | anchors | The feature remains the measured object. | The dig contradicts the feature construction. |
+| `bridge:providers-firm-to-anchor` | `dig:providers:firm-capacity` | `asset:equity:utility-basket` | anchors | The basket remains the traded surface. | The expression moves to credit or contracts. |
+| `bridge:cycles-buildout-to-anchor` | `dig:cycles:buildout` | `mechanism:capacity:constraint` | anchors | Capacity constraint remains the governing mechanism. | Cycles stop repeating. |
+| `bridge:exec-entry-to-anchor` | `dig:exec:entry-window` | `event:sec:8k-material-agreement` | anchors | Disclosures remain the event class. | The edge moves to non-disclosure events. |
 
 ## Under-connected core nodes, the research queue
 

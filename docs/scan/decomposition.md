@@ -5,11 +5,11 @@ along the dimensions of its layer, and every child decomposes again. The skeleto
 out and labelled `proposed_unverified`; the curated digs are where domain knowledge fills the
 levels with named minerals, suppliers, observables and payers.
 
-**Written graph: 23,703 nodes** (555 declared + 19,980 skeleton children + 3,168 children of curated dig nodes), 23,148 split edges.
+**Written graph: 25,215 nodes** (555 declared + 19,980 skeleton children + 4,680 children of curated dig nodes), 24,660 split edges.
 
 - Manifest nodes decomposed: 555, minimum children per node: 6
 
-- Curated dig nodes: 88, digs: 13
+- Curated dig nodes: 130, digs: 18
 
 ## The dimensions
 
@@ -457,4 +457,368 @@ Sub-items to fetch for every node above: composition, inputs, constraints, obser
 | `dig:nuc:enrichment` -> `dig:nuc:conversion` | requires | Enrichment needs UF6, so conversion is upstream of it. | Conversion capacity is ample through the period. |
 | `dig:nuc:conversion` -> `dig:nuc:uranium` | requires | Conversion needs mined and milled uranium. | Secondary supply covers demand. |
 | `dig:nuc:cladding` -> `dig:nuc:firm-power` | supplies | Fuel fabrication needs cladding, tying the zirconium chain to reactor operation. | Alternative cladding materials qualify. |
+
+### Load growth to the rate base and the rate case
+
+`dig:grid:utility-economics` · root `outcome:firm:capex-level` · ceiling **testable** · nodes 9 · edges 8
+
+**Why.** Data center load growth lands on regulated utilities, and the path from a load forecast to shareholder return runs through a rate case. The analogue utilities followed the same path after their own buildout bust.
+
+**Chain.** `dig:grid:load-growth` -> `dig:grid:capex-plan` -> `dig:grid:rate-case` -> `dig:grid:allowed-return` -> `dig:grid:special-contracts`
+
+**Greatest assumption.** The regulatory compact converts demand-driven capex into rate base at a fair return without political interruption.
+
+**Kill test.** Rate cases disallow demand-driven capex or slow recovery while capex rises.
+
+| Node | Layer | Players | Observables | Payer | Evidence | Source |
+|---|---|---|---|---|---|---|
+| **Load growth forecast** `dig:grid:load-growth` | mechanism | utilities, consultants | EIA-930 demand; utility IRPs | ratepayers | E2 | EIA, utility filings |
+| **Utility capital plan** `dig:grid:capex-plan` | mechanism | utilities | 10-K and 10-Q capex guidance; EIA-861; FERC Form 1 | ratepayers | E2 | company filings, FERC |
+| **Rate case** `dig:grid:rate-case` | event | state PUCs, intervenors, utilities | state commission dockets; testimony; orders | ratepayers | E2 | state commission dockets |
+| **Allowed return on equity** `dig:grid:allowed-return` | outcome | state PUCs | commission orders; ROE comparisons | shareholders | E2 | commission orders |
+| **Large load special contracts** `dig:grid:special-contracts` | contract | utilities, hyperscalers, commissions | special contract filings; commission orders | ratepayers and the new load | E2 | state dockets |
+| **Transmission planning and cost allocation** `dig:grid:transmission-planning` | mechanism | RTOs, FERC, utilities | FERC filings; RTO planning reports; Order 1000 records | ratepayers | E2 | FERC, RTO documents |
+| **Capacity market** `dig:grid:capacity-auction` | mechanism | RTOs, generators, load | ISO capacity auction clearing prices | load | E2 | ISO results |
+| **Ratepayer politics** `dig:grid:ratepayer-politics` | entity | state legislators, advocates, commissions | bill impact testimony; legislative activity | utilities via allowed returns | E3 | state dockets |
+| **Utility equity issuance and financing** `dig:grid:equity-financing` | mechanism | utilities, investors | equity issuance records; credit ratings | shareholders | E2 | company filings |
+
+Sub-items to fetch for every node above: composition, inputs, constraints, observables, substitutes, payers.
+
+| Edge | Relation | Condition | Falsifier |
+|---|---|---|---|
+| `dig:grid:load-growth` -> `dig:grid:capex-plan` | drives | Load forecasts set the capex that regulators are asked to approve. | Capex plans shrink while load forecasts rise. |
+| `dig:grid:capex-plan` -> `dig:grid:rate-case` | requires | Capital recovery runs through the rate case process. | Costs are recovered without a filing. |
+| `dig:grid:rate-case` -> `dig:grid:allowed-return` | sets | The case sets the authorised return on the rate base. | Returns are set by formula without a case. |
+| `dig:grid:load-growth` -> `dig:grid:special-contracts` | requires | New large load needs a cost responsibility arrangement. | Standard tariffs absorb the cost. |
+| `dig:grid:special-contracts` -> `dig:grid:ratepayer-politics` | influences | Contract design decides who pays and therefore how loud the politics gets. | Cost allocation is never contested. |
+| `dig:grid:capex-plan` -> `dig:grid:equity-financing` | requires | Capex growth needs funding at the authorised capital structure. | Cash flow funds capex with no external finance. |
+| `dig:grid:transmission-planning` -> `dig:grid:capex-plan` | feeds | Approved transmission projects enter the capital plan. | Projects proceed outside the plan. |
+| `dig:grid:capacity-auction` -> `dig:grid:allowed-return` | complements | Capacity revenue supports the merchant side of the fleet. | Energy and contracts cover all fixed costs. |
+
+### The compute index as a phase marker and a feed
+
+`dig:cloud:compute-index` · root `feature:compute:rental-price` · ceiling **testable** · nodes 9 · edges 7
+
+**Why.** We hold 566 monthly observations across 18 compute families, and our own measures found ten independent markets and a provider policy price, not a clearing price. That makes the index a read on provider inventory state, which is exactly what phases turn on.
+
+**Chain.** `dig:compute:families` -> `dig:compute:rental-change` -> `dig:compute:inventory-state` -> `dig:compute:provider-capex` -> `dig:compute:power-commitment` -> `dig:compute:inference-cost`
+
+**Greatest assumption.** Family level compute price changes lead provider capex and power commitments rather than merely reflecting demand that is already visible elsewhere.
+
+**Kill test.** No measurable relation between family level price changes and later provider capex or power commitments.
+
+| Node | Layer | Players | Observables | Payer | Evidence | Source |
+|---|---|---|---|---|---|---|
+| **Compute families** `dig:compute:families` | factor | providers | results/compute-price-monthly.csv; provider price pages | buyers of compute | E1 | results/compute-price-monthly.csv; truth T8 |
+| **Family rental price change** `dig:compute:rental-change` | factor | providers | results/compute-price-monthly.csv | providers and buyers | E1 | results/compute-price-monthly.csv |
+| **Provider inventory state** `dig:compute:inventory-state` | mechanism | providers | availability zones; waiting lists; price levels | providers | E2 | provider behaviour; truth T9 |
+| **Provider capital spending** `dig:compute:provider-capex` | mechanism | hyperscalers, neoclouds | 10-Q capex; guidance; supplier backlogs | shareholders | E2 | company filings |
+| **Power commitment** `dig:compute:power-commitment` | mechanism | operators, utilities, IPPs | PPA announcements; interconnection requests; load forecasts | ratepayers and operators | E2 | company and utility filings |
+| **Inference cost per token** `dig:compute:inference-cost` | factor | model providers, operators | provider pricing pages; model releases | buyers of inference | E2 | public pricing |
+| **Token and workload demand** `dig:compute:token-demand` | factor | enterprises, consumers | API usage disclosures; cloud revenue; model release cadence | end users | E3 | company disclosures |
+| **Depreciation schedule** `dig:compute:depreciation` | accounting | hyperscalers, neoclouds | 10-K useful life disclosures | shareholders | E2 | company filings |
+| **Rental volatility** `dig:compute:rental-volatility` | factor | providers | results/compute-price-monthly.csv | providers | E1 | results/compute-price-monthly.csv |
+
+Sub-items to fetch for every node above: composition, inputs, constraints, observables, substitutes, payers.
+
+| Edge | Relation | Condition | Falsifier |
+|---|---|---|---|
+| `dig:compute:families` -> `dig:compute:rental-change` | measures | Family level prices are the finest observable we hold. | Family prices are unavailable or unreliable. |
+| `dig:compute:rental-change` -> `dig:compute:inventory-state` | indicates | Price changes are how the provider expresses inventory conditions. | Prices are contractual and do not move with inventory. |
+| `dig:compute:inventory-state` -> `dig:compute:provider-capex` | drives | Scarcity invites capex and surplus defers it. | Capex is fixed by strategy regardless of inventory. |
+| `dig:compute:provider-capex` -> `dig:compute:power-commitment` | requires | New compute needs firm power and grid capacity. | Compute growth decouples from power through efficiency. |
+| `dig:compute:inference-cost` -> `dig:compute:token-demand` | drives | Falling unit cost has expanded demand, the Jevons pattern of this cycle. | Demand saturates despite falling cost. |
+| `dig:compute:depreciation` -> `dig:compute:provider-capex` | gates | Short useful lives turn capex into a recurring cash cost, changing the build economics. | Accelerator life extends far beyond current assumptions. |
+| `dig:compute:rental-volatility` -> `dig:compute:inventory-state` | reveals | Volatility rises when inventory is stressed. | Volatility stays flat through inventory cycles. |
+
+### Energy providers, the payer side of the buildout
+
+`dig:power:energy-providers` · root `asset:equity:utility-basket` · ceiling **testable** · nodes 7 · edges 5
+
+**Why.** The buildout pays a specific set of providers: regulated utilities, merchant generators, nuclear operators and transmission owners. Each has a different mechanism and a different regime response.
+
+**Chain.** `dig:providers:load-growth` -> `dig:providers:firm-capacity` -> `dig:providers:ppa-price` -> `dig:providers:provider-margin` -> `dig:providers:credit`
+
+**Greatest assumption.** Firm capacity and grid services remain the scarce product through the buildout, so providers with existing assets keep pricing power.
+
+**Kill test.** Storage, demand response and self generation remove the scarcity before new supply arrives.
+
+| Node | Layer | Players | Observables | Payer | Evidence | Source |
+|---|---|---|---|---|---|---|
+| **Local load growth** `dig:providers:load-growth` | mechanism | utilities, IPPs | EIA-930; IRPs; interconnection requests | ratepayers | E2 | EIA, utility filings |
+| **Firm capacity** `dig:providers:firm-capacity` | mechanism | nuclear, gas, storage, imports | ISO auctions; PPA volumes | operators | E2 | ISO and company data |
+| **PPA and capacity price** `dig:providers:ppa-price` | factor | utilities, hyperscalers, IPPs | PPA announcements; capacity clearing prices | ratepayers and operators | E2 | company announcements |
+| **Provider margin** `dig:providers:provider-margin` | accounting | utilities, IPPs, nuclear operators | 10-K segment results | shareholders | E2 | company filings |
+| **Provider credit** `dig:providers:credit` | asset | utilities, IPPs | credit ratings; bond spreads | shareholders | E2 | rating agencies |
+| **Transmission owner** `dig:providers:transmission-owner` | entity | transmission utilities, ITCs | FERC Form 1; rate filings | ratepayers | E2 | FERC filings |
+| **Retail and large load contracts** `dig:providers:retail-load` | contract | utilities, load | special contracts; tariff filings | ratepayers | E2 | state dockets |
+
+Sub-items to fetch for every node above: composition, inputs, constraints, observables, substitutes, payers.
+
+| Edge | Relation | Condition | Falsifier |
+|---|---|---|---|
+| `dig:providers:load-growth` -> `dig:providers:firm-capacity` | requires | Load growth raises the firm capacity requirement. | Load growth is met by interruptible demand. |
+| `dig:providers:firm-capacity` -> `dig:providers:ppa-price` | prices | Scarcity of firm capacity sets the price of contracts. | Regulated rates decouple price from scarcity. |
+| `dig:providers:ppa-price` -> `dig:providers:provider-margin` | drives | Contract prices set provider margins. | Costs move one for one with prices. |
+| `dig:providers:provider-margin` -> `dig:providers:credit` | funds | Margins support the credit that funds new supply. | New supply is funded externally regardless of margins. |
+| `dig:providers:transmission-owner` -> `dig:providers:load-growth` | serves | Transmission delivers the growth and earns a regulated return. | Growth reaches load without new transmission. |
+
+### Nine infrastructure cycles as one phase machine
+
+`dig:cycles:analogue-infrastructure` · root `mechanism:capacity:constraint` · ceiling **testable** · nodes 10 · edges 7
+
+**Why.** The current buildout is not the first. Nine recorded infrastructure cycles share a phase ordering, and the analogue requirement in docs/plan/regimes.md makes the ordering testable rather than rhetorical.
+
+**Chain.** `dig:cycles:shortage` -> `dig:cycles:buildout` -> `dig:cycles:overbuild` -> `dig:cycles:shakeout` -> `dig:cycles:second-wave`
+
+**Greatest assumption.** The current complex follows the same phase ordering as at least two of the nine analogues.
+
+**Kill test.** The current build stays fully preleased and self-funded with no price collapse, which would show phase 3 was skipped rather than delayed.
+
+| Node | Layer | Players | Observables | Payer | Evidence | Source |
+|---|---|---|---|---|---|---|
+| **Phase 1, shortage** `dig:cycles:shortage` | mechanism | none named | analogue-cycles.jsonl | incumbent capacity holders | E2 | docs/scan/analogue-cycles.jsonl |
+| **Phase 2, buildout** `dig:cycles:buildout` | mechanism | none named | analogue-cycles.jsonl | suppliers and early builders | E2 | docs/scan/analogue-cycles.jsonl |
+| **Phase 3, overbuild** `dig:cycles:overbuild` | mechanism | none named | analogue-cycles.jsonl | no one; shorts | E2 | docs/scan/analogue-cycles.jsonl |
+| **Phase 4, shakeout** `dig:cycles:shakeout` | mechanism | none named | analogue-cycles.jsonl | distressed buyers | E2 | docs/scan/analogue-cycles.jsonl |
+| **Phase 5, second wave** `dig:cycles:second-wave` | mechanism | none named | analogue-cycles.jsonl | consolidated owners | E2 | docs/scan/analogue-cycles.jsonl |
+| **Railroads analogue** `dig:cycles:railroads` | event | none named | analogue-cycles.jsonl | reorganizers | E2 | cycle:railroads-us |
+| **Merchant power analogue** `dig:cycles:merchant-power` | event | none named | analogue-cycles.jsonl | asset buyers | E2 | cycle:merchant-power-us |
+| **Fiber analogue** `dig:cycles:fiber` | event | none named | analogue-cycles.jsonl | dark fiber buyers | E2 | cycle:telecom-fiber |
+| **Cloud and colocation analogue** `dig:cycles:colocation` | event | none named | analogue-cycles.jsonl | contracted owners | E2 | cycle:cloud-colocation |
+| **Nuclear analogue** `dig:cycles:nuclear` | event | none named | analogue-cycles.jsonl | completed plant owners | E2 | cycle:nuclear-build-us |
+
+Sub-items to fetch for every node above: composition, inputs, constraints, observables, substitutes, payers.
+
+| Edge | Relation | Condition | Falsifier |
+|---|---|---|---|
+| `dig:cycles:shortage` -> `dig:cycles:buildout` | precedes | Shortage invites capital. | Capital arrives without scarcity. |
+| `dig:cycles:buildout` -> `dig:cycles:overbuild` | precedes | Capex clusters because competitors can see the same shortage. | Builds are staggered enough to match demand. |
+| `dig:cycles:overbuild` -> `dig:cycles:shakeout` | precedes | Price collapse bankrupts the levered. | Declines are shallow enough to avoid failures. |
+| `dig:cycles:shakeout` -> `dig:cycles:second-wave` | precedes | Distressed assets need operators with cheap capital. | Assets stay stranded. |
+| `dig:cycles:merchant-power` -> `dig:cycles:buildout` | observed_in | Turbine scarcity in 1999 to 2002 is the same marker as the current cycle. | Current turbine scarcity has a different cause. |
+| `dig:cycles:fiber` -> `dig:cycles:overbuild` | observed_in | Dark fiber is the same overbuild object as idle interconnection capacity. | Interconnection capacity is consumed on arrival. |
+| `dig:cycles:colocation` -> `dig:cycles:buildout` | observed_in | Hyperscale self-build is the same capital pattern as the current build. | Capital is all equity and preleased. |
+
+### Entry windows: the edge must work without latency, and then latency adds
+
+`dig:exec:entry-windows` · root `event:sec:8k-material-agreement` · ceiling **testable** · nodes 7 · edges 6
+
+**Why.** A fast estimate of what a filing or disclosure means is worth size and timing, not existence. Every chain here must survive at zero latency advantage, and the entry windows are written down so the improvement can be measured.
+
+**Chain.** `dig:exec:event-stamp` -> `dig:exec:parse-latency` -> `dig:exec:state-estimate` -> `dig:exec:entry-window` -> `dig:exec:capacity`
+
+**Greatest assumption.** The edge is profitable with no latency advantage, so speed improves size and price rather than being the reason the edge exists.
+
+**Kill test.** The strategy's profit disappears when entries are delayed by one bar, which would prove it was a latency business.
+
+| Node | Layer | Players | Observables | Payer | Evidence | Source |
+|---|---|---|---|---|---|---|
+| **Event timestamp** `dig:exec:event-stamp` | event | SEC EDGAR, RTOs, issuers | EDGAR acceptance timestamps; queue update posts | the strategy | E1 | results/; EDGAR |
+| **Interpretation latency** `dig:exec:parse-latency` | mechanism | our stack | parser logs | the strategy | E1 | internal |
+| **State estimation job** `dig:exec:state-estimate` | mechanism | our stack | job runtimes; estimate error against settled states | the strategy | E3 | docs/inbox notes on QGM and spectral methods |
+| **Entry window** `dig:exec:entry-window` | mechanism | the market | quote snapshots; post-disclosure drift | the strategy | E2 | market data |
+| **Capacity and slippage** `dig:exec:capacity` | mechanism | the market | adv; fill ledger; impact estimates | the strategy | E1 | results/ |
+| **Edge decay half life** `dig:exec:decay` | outcome | the strategy | event study by horizon | the strategy | E3 | to measure |
+| **Zero latency rehearsal** `dig:exec:zero-latency-rehearsal` | experiment | our stack | delayed entry backtest | the strategy | E3 | to run |
+
+Sub-items to fetch for every node above: composition, inputs, constraints, observables, substitutes, payers.
+
+| Edge | Relation | Condition | Falsifier |
+|---|---|---|---|
+| `dig:exec:event-stamp` -> `dig:exec:parse-latency` | requires | The clock starts at publication. | Timestamps are unavailable or wrong. |
+| `dig:exec:parse-latency` -> `dig:exec:state-estimate` | feeds | The parser hands a classified event to the estimator. | The estimate needs no classification. |
+| `dig:exec:state-estimate` -> `dig:exec:entry-window` | beats_clock | A faster estimate reaches the entry window earlier. | The window is long enough that speed does not matter. |
+| `dig:exec:entry-window` -> `dig:exec:capacity` | bounds | The window length bounds the size that can be filled. | Liquidity exceeds what the window allows. |
+| `dig:exec:capacity` -> `dig:exec:decay` | gates | Impact consumed at entry competes with the decay of the edge. | Impact is negligible at target size. |
+| `dig:exec:zero-latency-rehearsal` -> `dig:exec:decay` | tests | Delayed entries test whether the edge exists without speed. | Delayed entry performs the same, which is fine, and the rehearsal still decides. |
+
+
+## The analogue cycles, the temporal backbone
+
+Nine recorded infrastructure cycles with the same phase ordering. Method owner:
+`docs/plan/regimes.md`. Every claim of a ten to twenty year rationale is checked against
+at least two of these.
+
+| Cycle | Era | Trigger | What persisted | What died |
+|---|---|---|---|---|
+| **US railroads, the first infrastructure bubble** `cycle:railroads-us` | 1840s to 1900 | Land grants and the telegraph making long distance freight and information cheap. | Freight demand and the physical network; the second owner of an asset bought at receiver prices. | The promotional equity and the first generation of parallel lines. |
+| **Electrification and the utility holding company bubble** `cycle:electric-utilities-us` | 1890s to 1935 | Cheap alternating current transmission made electricity a networked product. | The physical grid and the regulated compact. | Layered holding company leverage and the promotional marketing behind it. |
+| **Merchant power and deregulation** `cycle:merchant-power-us` | 1998 to 2006 | Deregulation promised competitive generation markets and merchant plants earned development premiums. | Physical generation and the capacity market design that pays for standing still. | The merchant development premium and its high yield financing. |
+| **The nuclear build and its cancellations** `cycle:nuclear-build-us` | 1965 to 1990 | Utility demand growth forecasts and a technology seen as too cheap to meter. | Completed plants, and the lesson that late cost arrives after demand forecasts decay. | Construction work in progress and the demand forecasts underwriting it. |
+| **The fiber and telecom bubble** `cycle:telecom-fiber` | 1996 to 2005 | The 1996 Telecom Act and the internet traffic forecasts of the late 1990s. | The glass in the ground and the traffic that eventually used it. | The debt and the equipment vendor financing cycle. |
+| **Midstream MLPs and pipeline overbuild** `cycle:midstream-mlp` | 2008 to 2020 | Shale production growth needed gathering and takeaway capacity. | The pipes and the fee-based contracts on them. | The distribution growth promise and the leverage behind it. |
+| **Cloud and colocation, the most recent analogue** `cycle:cloud-colocation` | 2006 to 2018 | Commodity server virtualization and the shift of enterprise IT to rented capacity. | Land, power interconnections and the leasing contracts. | Speculative wholesale builds without preleasing. |
+| **US LNG export buildout** `cycle:lng-export-us` | 2012 to 2026 | Shale gas abundance and global demand for flexible molecules. | The contracted tolling model that survived the price cycle. | Speculative merchant capacity. |
+| **Offshore wind and the cable bottleneck** `cycle:offshore-wind-hvdc` | 2010 to 2026 | Decarbonisation targets and maturing fixed bottom technology. | The cable, vessel and port capacity, which re-priced upward through the bust. | Fixed price contracts written before cost inflation. |
+
+### US railroads, the first infrastructure bubble
+
+`cycle:railroads-us` | 1840s to 1900
+
+| Phase | Years | Markers | Outcome |
+|---|---|---|---|
+| 1. Shortage | 1840s-1850s | Ports and canals at capacity, freight rates high, charters granted freely. | Incumbent carriers and canal owners collect. |
+| 2. Buildout | 1860s-1870s | Mileage doubles, labor and iron shortages, bond issuance explodes, promoters paid in stock. | Suppliers and early promoters win. |
+| 3. Overbuild | 1870s-1890s | Parallel lines, rate wars, freight rates collapse, receiverships. | Equity holders wiped out in successive panics. |
+| 4. Shakeout | 1893-1898 | A quarter of US rail mileage in receivership, consolidation into trunk systems. | Bondholders and reorganizers take control. |
+| 5. Second wave | 1900s | Regulated rates, stable freight, consolidated trunk lines earn steady returns. | Regulated returns for consolidated owners. |
+
+**Funding.** Bonds, land grants, and speculative equity, with many lines oversubscribed before a single rail was laid.
+
+**Mapping to current nodes.** `mechanism:capacity:constraint` (same_shape: Capacity shortage, promotional capital, overbuild, consolidation is the same sequence.); `outcome:firm:capex-timing` (marker: Capex growth alone never identified the turning point, which is why phase markers are paired.)
+
+**Falsifier.** Infrastructure cycles since then show no overbuild or shakeout phase.
+
+
+### Electrification and the utility holding company bubble
+
+`cycle:electric-utilities-us` | 1890s to 1935
+
+| Phase | Years | Markers | Outcome |
+|---|---|---|---|
+| 1. Shortage | 1890s | City franchises scarce, electricity expensive, small isolated plants. | Franchise holders collect. |
+| 2. Buildout | 1900s-1920s | Generation and grid capex booms, holding companies acquire hundreds of utilities, pyramided leverage. | Equipment makers and promoters win. |
+| 3. Overbuild | 1920s | Capacity ahead of demand, rate competition, holding company leverage opaque. | Equity prices detached from earnings. |
+| 4. Shakeout | 1929-1935 | Holding company collapse, defaults, Public Utility Holding Company Act breaking the pyramids. | Retail investors wiped out. |
+| 5. Second wave | 1935 onward | Regulated rate base, stable allowed returns, utility becomes a bond-like asset. | Regulated returns for decades. |
+
+**Funding.** Holding company structures with layered debt, marketed to retail investors as a growth story.
+
+**Mapping to current nodes.** `outcome:firm:capex-level` (same_shape: Load growth to capex to rate base is the same regulated conversion that followed the bust.); `factor:macro:rates` (conditional: Rate base economics are rate sensitive, which ties the analogue to our rates factor.)
+
+**Falsifier.** The regulated compact fails to survive the current buildout where it held before.
+
+
+### Merchant power and deregulation
+
+`cycle:merchant-power-us` | 1998 to 2006
+
+| Phase | Years | Markers | Outcome |
+|---|---|---|---|
+| 1. Shortage | 1998-2000 | California and other markets with reserve shortfalls, spark spreads wide. | Existing generators earn windfalls. |
+| 2. Buildout | 1999-2002 | Over 200GW announced, turbine slots scarce, developers IPO at premiums. | Turbine makers and developers win. |
+| 3. Overbuild | 2002-2004 | Reserve margins jump, spark spreads collapse, plants worth less than cost. | Merchant equity destroyed. |
+| 4. Shakeout | 2002-2006 | Calpine, Mirant, NRG and others restructure; assets sold at fractions of cost. | Debt holders and buyers take assets. |
+| 5. Second wave | 2006 onward | Consolidated fleets with contracts, capacity markets formalised in ISOs. | Contracted and capacity revenue returns. |
+
+**Funding.** Project finance, high yield debt, and IPO windows for merchant developers.
+
+**Mapping to current nodes.** `mechanism:capacity:constraint` (same_shape: Turbine slot scarcity in the current cycle is the same marker as 1999-2002.); `mechanism:capacity:labor-bottleneck` (same_shape: In the analogue, skilled construction labour priced up before the overbuild.)
+
+**Falsifier.** Capacity markets and contracts fail to stabilise returns after the current overbuild.
+
+
+### The nuclear build and its cancellations
+
+`cycle:nuclear-build-us` | 1965 to 1990
+
+| Phase | Years | Markers | Outcome |
+|---|---|---|---|
+| 1. Shortage | 1965-1970 | Demand growth strong, oil price risk, reactor orders surge. | Vendors and utilities with early plants. |
+| 2. Buildout | 1970-1978 | Order book peaks above 200 reactors, lead times stretch, cost estimates triple. | Vendors and construction firms win. |
+| 3. Overbuild | 1974-1982 | Demand growth halves after the oil shocks, plants arrive late and massively over budget. | Utilities with construction work in progress carry the cost. |
+| 4. Shakeout | 1979-1990 | Cancellations of over 100 units, WPPSS default, prudence disallowances. | Ratepayers and shareholders absorb the losses. |
+| 5. Second wave | 1990s onward | Completed plants run cheaply for decades, life extensions, uprates. | Owners of completed plants earn durable margins. |
+
+**Funding.** Regulated rate base and construction work in progress, with cost overruns eventually disallowed.
+
+**Mapping to current nodes.** `dig:nuc:firm-power` (same_shape: The current firm power contracts are the analogue's early phase, and the cancellation risk is phase 3.); `mechanism:delivery:revision-to-cash-flow` (same_shape: Cost and schedule revisions are the analogue's central failure mode, which is exactly the object we measured.)
+
+**Falsifier.** Modular construction and fixed price contracts remove the overrun mechanism.
+
+
+### The fiber and telecom bubble
+
+`cycle:telecom-fiber` | 1996 to 2005
+
+| Phase | Years | Markers | Outcome |
+|---|---|---|---|
+| 1. Shortage | 1995-1997 | Long distance and internet capacity tight, incumbents profitable. | Incumbents collect. |
+| 2. Buildout | 1997-2001 | Long haul fiber mileage multiplied, equipment order books full, vendor financing hides demand quality. | Equipment makers and contractors win. |
+| 3. Overbuild | 2000-2002 | Most installed fiber dark, bandwidth prices collapse over ninety percent, traffic forecasts missed by years. | Carrier equity destroyed. |
+| 4. Shakeout | 2001-2005 | Global Crossing, 360networks, WorldCom failures; equipment vendors restructure. | Dark fiber bought at cents on the dollar. |
+| 5. Second wave | 2005 onward | Survivors and new entrants light the fiber for video and cloud traffic at low cost. | Buyers of cheap assets earn the second wave. |
+
+**Funding.** High yield bonds, vendor financing from equipment makers, and equity at extraordinary multiples.
+
+**Mapping to current nodes.** `mechanism:capacity:interconnection-bottleneck` (same_shape: Dark fiber is the analogue of dark interconnection capacity, bought cheap by the second wave.); `dig:fiber:interconnect` (same_shape: Interconnect is that same physical layer in the current cycle.)
+
+**Falsifier.** Current capacity additions are matched to demand with contracts that cannot reprice.
+
+
+### Midstream MLPs and pipeline overbuild
+
+`cycle:midstream-mlp` | 2008 to 2020
+
+| Phase | Years | Markers | Outcome |
+|---|---|---|---|
+| 1. Shortage | 2008-2012 | Takeaway constraints, basis differentials wide, gathering fees strong. | Existing pipeline owners collect. |
+| 2. Buildout | 2012-2016 | Capital spending multiples distributable cash flow, projects announced far ahead of volume. | Contractors and early investors win. |
+| 3. Overbuild | 2015-2019 | Basin congestion reverses, fee compression, some pipelines underutilised at completion. | Levered MLPs de-rate as distributions exceed cash flow. |
+| 4. Shakeout | 2018-2021 | Distribution cuts, consolidation into corporate structures, ESG-driven capital exit. | Units holders lose a decade. |
+| 5. Second wave | 2021 onward | Consolidated midstream with buybacks and fee-based contracts, energy transition discount slowly lifts. | Consolidators earn returns on cheap assets. |
+
+**Funding.** MLP structures with distribution growth promises, funded by debt and equity issuance.
+
+**Mapping to current nodes.** `outcome:firm:free-cash-flow` (same_shape: The phase 4-5 value came from free cash flow discipline after growth died.); `asset:equity:utility-basket` (same_shape: The shift to contracted, fee-like structures is the same second wave shape.)
+
+**Falsifier.** Contracted take-or-pay structures prevent the overbuild repricing.
+
+
+### Cloud and colocation, the most recent analogue
+
+`cycle:cloud-colocation` | 2006 to 2018
+
+| Phase | Years | Markers | Outcome |
+|---|---|---|---|
+| 1. Shortage | 2006-2010 | Power-dense colocation scarce in primary markets, rents firm. | Early colocation owners collect. |
+| 2. Buildout | 2010-2015 | Hyperscaler self-build plus REIT acquisition, powered shell development booms. | REITs and contractors win. |
+| 3. Overbuild | 2015-2018 | Secondary market vacancies rise, rent concessions, wholesale leases at lower spreads. | Speculative developers underperform. |
+| 4. Shakeout | 2016-2019 | Consolidation of small hosts, operator exits, asset sales. | Platforms acquire distressed capacity. |
+| 5. Second wave | 2019 onward | Preleased hyperscale campuses, REIT structures with long contracts, dividends. | Contracted owners earn stable returns. |
+
+**Funding.** REIT conversions, venture capital for platforms, vendor financing from server makers.
+
+**Mapping to current nodes.** `entity:datacenter:site` (same_shape: The current AI build is the same asset class entering its own phase 2.); `mechanism:capacity:cooling-bottleneck` (new_in_cycle: Cooling density is the variable the cloud cycle largely did not have at scale, so the analogue is partial.)
+
+**Falsifier.** Current build is fully preleased and self-funded, which would skip the speculative phase.
+
+
+### US LNG export buildout
+
+`cycle:lng-export-us` | 2012 to 2026
+
+| Phase | Years | Markers | Outcome |
+|---|---|---|---|
+| 1. Shortage | 2012-2016 | Global LNG tight, Asian spot prices high, US projects queue for permits. | Existing exporters and engineering firms. |
+| 2. Buildout | 2016-2024 | Train FIDs cluster, engineering and module yards saturated, long lead equipment booked. | Engineers and early contract holders win. |
+| 3. Overbuild | 2025 onward | Global liquefaction capacity grows faster than contracted demand, spot spreads compress. | Contracted sellers protected, merchant volumes exposed. |
+| 4. Shakeout | ahead | Cancellations of speculative trains, consolidation of developers. | Buyers of stranded assets. |
+| 5. Second wave | ahead | Fully contracted trains with stable tolling revenue. | Contracted owners. |
+
+**Funding.** 20 year take-or-pay contracts and project finance on contracted volumes.
+
+**Mapping to current nodes.** `dig:nuc:firm-power` (same_shape: Take-or-pay contracts are the analogue of firm power PPAs for data centers.); `mechanism:capacity:constraint` (same_shape: Engineer and module capacity were the binding constraint in phase 2.)
+
+**Falsifier.** Contracted volumes cover all new capacity so no merchant exposure remains.
+
+
+### Offshore wind and the cable bottleneck
+
+`cycle:offshore-wind-hvdc` | 2010 to 2026
+
+| Phase | Years | Markers | Outcome |
+|---|---|---|---|
+| 1. Shortage | 2010-2016 | Subsidy support strong, few capable installers, costs falling. | Developers and turbine makers. |
+| 2. Buildout | 2016-2022 | Cable and vessel capacity sells out years ahead, turbine prices firm, auction prices hit zero subsidy. | Cable makers, ships, contractors win. |
+| 3. Overbuild | 2022-2025 | Cost inflation and financing rates break project economics, developers cancel contracted projects and write penalties. | Developers and utilities absorb losses. |
+| 4. Shakeout | 2023-2026 | Auction cancellations, supply chain losses, turbine maker writedowns. | Owners of scarce inputs keep pricing power. |
+| 5. Second wave | ahead | Indexed contracts pass cost through, consolidated supply chain. | Contracted infrastructure owners. |
+
+**Funding.** Contract for difference auctions, utility balance sheets, and supply chain credit.
+
+**Mapping to current nodes.** `dig:hvdc:cable-ships` (same_shape: Cable ships and cables are the current cycle's analogue of scarce installation capacity.); `dig:power:hvdc-converter` (same_shape: Converter and valve capacity repeat the same bottlenecks.)
+
+**Falsifier.** Supply chain capacity expands ahead of project awards so no bottleneck pricing appears.
 
