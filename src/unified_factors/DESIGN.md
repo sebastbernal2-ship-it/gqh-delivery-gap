@@ -26,6 +26,7 @@ diagnostic. Live hedge construction, cost estimates, risk limits and execution a
 | core.py | Factor metadata, panel validation, joint regression, overlap diagnostics, covariance, attribution, hedge span |
 | garch.py | Optional two-stage CCC-GARCH fitting and frozen-origin variance forecast comparison |
 | run.py | Explicit panel loading, fixed baseline grid, deterministic synthetic fixture, report and artifact export |
+| industry_audit.py | Quarantined same-sample FF5 versus FF5-plus-industry-block sensitivity audit |
 | test_core.py | Information-boundary and numerical accounting tests |
 | test_garch.py | Forecast, estimator-failure, timing and covariance tests |
 | requirements-garch.txt | Optional dependency constraints; no global repository dependency change |
@@ -76,6 +77,22 @@ covariance: OLS residual orthogonality under unweighted estimation need not surv
 Sample and centered EWMA covariance support fixed diagonal shrinkage. Shrinkage changes estimated risk,
 so exact reconstruction of raw sample variance is asserted only for the unshrunk corresponding estimator.
 No automatic annualization or tail-probability interpretation is made.
+
+## Industry-control sensitivity audit
+
+The separate `industry_audit.py` compares a fixed FF5 base with the same model augmented by the twelve
+French daily industry portfolios. It tests whether broad industry returns explain additional historical
+co-movement before an issuer-matched sector-control build is justified. It is not called by the standard
+runner; it accepts only the quarantined `retrospective_only` panel, enforces the 2024-10-02 development
+cutoff in code, and refuses later rows even if mislabeled. It requires exact period alignment, checks
+timestamps, records input hashes, and reports incremental/partial R-squared, standardized factor condition,
+pairwise overlap, and residual correlation/eigenvalue summaries. It emits no p-values or model winner.
+
+These are broad research portfolios, not issuer-matched controls. Fit gains from adding twelve regressors
+do not establish forecast utility, causality, a tradable hedge, or a new mechanism. The current result lowers
+some operating-company residual correlations but leaves a 35.8% leading residual-covariance eigenvalue share;
+economic naming still requires dated firm exposure evidence and an admissible out-of-sample design. See
+`panel/README.md` for the measured development-only results and their limits.
 
 ## GARCH design
 
