@@ -1,0 +1,89 @@
+{
+  "schema_version": "jev-checkpoint-release-v1",
+  "training_job": 44665003,
+  "scope": "development_only",
+  "calibrated": false,
+  "gate_selected": "empirical_quantiles",
+  "dataset_manifest_sha256": "8ff9dd4618389067b71fe68db3149f7eb77b8f9b9611803abf788de36d842007",
+  "report_sha256": "84bbcad2427ba0c31449d5d3f5dcfddf647405354b6b6026fcdf0c2e3d55b0f9",
+  "checkpoints": {
+    "AB_masked3_supervised3.pt": {
+      "sha256": "2f4cbd2ba47994bfec12639632e95b036f39cb26260fa5cdce2dc1ecf9316cb5",
+      "bytes": 63221,
+      "view": "AB",
+      "evaluation_pinball_bps": 1.5200343049343505
+    },
+    "AB_scratch3.pt": {
+      "sha256": "a540d5ad2d9ec431f5ca73b23cd6c99225a32acc45ef4780f307dcf239541f96",
+      "bytes": 62741,
+      "view": "AB",
+      "evaluation_pinball_bps": 1.4803370548943846
+    },
+    "AB_scratch6.pt": {
+      "sha256": "205dc476f4bc7b458c26c68afa6cd458bcc31b344dd077ee24a175230a44e492",
+      "bytes": 62741,
+      "view": "AB",
+      "evaluation_pinball_bps": 1.3554963140101433
+    },
+    "A_masked3_supervised3.pt": {
+      "sha256": "aac30afa8be1b56fd9838fd053c980c9a7d2fe8f42aa52048f1ef79973213189",
+      "bytes": 63125,
+      "view": "A",
+      "evaluation_pinball_bps": 1.5233575194823614
+    },
+    "A_scratch3.pt": {
+      "sha256": "d650eedbc224bf9e794f2348edc41aad418e6186d572ccb5d8951370a2b2886f",
+      "bytes": 62709,
+      "view": "A",
+      "evaluation_pinball_bps": 1.4917687186065698
+    },
+    "A_scratch6.pt": {
+      "sha256": "cf7da30530f2c80aca73b04bd90047947a9f1e727518bcd9df3d8fe6393228db",
+      "bytes": 62709,
+      "view": "A",
+      "evaluation_pinball_bps": 1.3691474969622561
+    },
+    "B_masked3_supervised3.pt": {
+      "sha256": "e831d082f8dbbd4833551b90a62123f84c5f528999855ec76cfbeb1ce0645e77",
+      "bytes": 63125,
+      "view": "B",
+      "evaluation_pinball_bps": 1.3331503778887417
+    },
+    "B_scratch3.pt": {
+      "sha256": "b4e68a32722bc6d7a9bae236fc6fc015f81c8174758e5614034e8e0eeeaf8c82",
+      "bytes": 62709,
+      "view": "B",
+      "evaluation_pinball_bps": 1.2682955286293631
+    },
+    "B_scratch6.pt": {
+      "sha256": "2ffc18cf8dab2460848f8dbd6763bed888c8314fa3e80e3a212b5a2a0c8e308c",
+      "bytes": 62709,
+      "view": "B",
+      "evaluation_pinball_bps": 1.0838957605989894
+    }
+  },
+  "training_dependency_differences": {
+    "execution_risk_dataset.py": {
+      "training_sha256": "6bb6137201d7185d0a2e54bbb99ea00da44943b29f52f04f1dd6441be8d72093",
+      "current_sha256": "5a5b97ff57ee86cbd161f8b2669dea22a34f10e809c1013abcf2dc96bd948133",
+      "reason": "Current validator additionally accepts and audits local-receipt training caches. Model architecture and inference preprocessing unchanged."
+    }
+  },
+  "export_job": 44666121,
+  "archive_sha256": "79eb2f9d4180b20a75482b74a0c0a6b43d98fbde720decd494134eb2c884a830",
+  "runtime_code_sha256": {
+    "execution_risk_predict.py": "9ee2279e85970b4a0e970a9ff77b2169b3a1ad68c49c9923cf26e406c6471c46",
+    "execution_risk_model.py": "471ae2750b55082aa8bc7801f47fd2770870110a8874bb8a22821d93f8c5d66f",
+    "execution_model.py": "f6202858181ec7afe1674c0637f6f296d0ca5df2044057a45e92fc75b6655700",
+    "execution_risk_train.py": "fa5ec0ae9053c156399381f9afb286a54efa9492136d95b4311243fb5f5c83cf",
+    "execution_risk_cost.py": "78fb5b805e1d543bbadc6c30bd543eb8a889365898c32db9aa1bd290e7e2254c",
+    "execution_action_model.py": "ccdf246e915cba1e463c81c46c8fe1bd3646765d44a0954be665bbabe3822a79",
+    "execution_dataset.py": "09aa66aa16aaf70fe79b7be399a3db9d7384219269d379a6e40fd54a12dac611",
+    "jevlike/model.py": "ee322ac3db49a84133f163798a60a378534b944e8489e9cb1e504c7c57728c69"
+  },
+  "limitations": [
+    "Research checkpoints: every neural variant lost to empirical quantiles on reused development cases.",
+    "Not calibrated or approved for trading.",
+    "Synthetic parity fixture tests portability only, not meaningful market inputs."
+  ]
+}
