@@ -353,3 +353,23 @@ generated-path: results/matched-universe.json
 Produced by `scripts/run_gate_recalibration.py`:
 
 generated-path: results/gate-recalibration.json
+
+Produced by `scripts/build_complex_panels_pit.py --concepts OperatingIncomeLoss NetIncomeLoss GrossProfit`:
+
+generated-path: results/complex-margins-quarterly-pit.csv
+
+Produced by `scripts/build_driver_vintages.py` on the corrected margins panel:
+
+generated-path: results/margins-vintages.csv
+
+Produced by `scripts/build_driver_vintages.py --level` on the assets panel:
+
+generated-path: results/assets-vintages.csv
+
+Produced by `scripts/run_driver_surprise.py` on margins:
+
+generated-path: results/margins-surprise.json
+
+Produced by `scripts/run_driver_surprise.py` on assets:
+
+generated-path: results/assets-surprise.json

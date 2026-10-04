@@ -23,7 +23,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from filing_specialist.vintages import COLUMNS, build_vintages  # noqa: E402
 
 
-def build_input_rows(rows: list[dict], preferred: str, group_of: dict[str, str]) -> tuple[list[dict], dict]:
+def build_input_rows(rows: list[dict], preferred: str, group_of: dict[str, str],
+                     level: bool = False) -> tuple[list[dict], dict]:
     """One input row per (ticker, period) with the prior value, the change and the filing clock."""
     chosen: dict[tuple[str, str], dict] = {}
     drops: dict[str, int] = collections.Counter()
@@ -40,18 +41,20 @@ def build_input_rows(rows: list[dict], preferred: str, group_of: dict[str, str])
             drops["no_clock_or_value"] += 1
             continue
         # a change is only meaningful between like periods: keep durations near one quarter, so a
-        # ten-K annual column can never be compared against a ten-Q quarter
-        try:
-            import datetime
-            start = datetime.date.fromisoformat(row["period_start"])
-            end = datetime.date.fromisoformat(period_end)
-            duration = (end - start).days
-        except (KeyError, TypeError, ValueError):
-            drops["no_duration"] += 1
-            continue
-        if not 80 <= duration <= 100:
-            drops["not_a_quarter"] += 1
-            continue
+        # ten-K annual column can never be compared against a ten-Q quarter. Balance-sheet levels
+        # have no duration: there the quarterly cadence is enforced by the prior-observation gap.
+        if not level:
+            try:
+                import datetime
+                start = datetime.date.fromisoformat(row["period_start"])
+                end = datetime.date.fromisoformat(period_end)
+                duration = (end - start).days
+            except (KeyError, TypeError, ValueError):
+                drops["no_duration"] += 1
+                continue
+            if not 80 <= duration <= 100:
+                drops["not_a_quarter"] += 1
+                continue
         key = (ticker, period_end)
         current = chosen.get(key)
         if current is None or (row.get("concept") == preferred and current["concept"] != preferred):
@@ -88,6 +91,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--panel", type=Path, required=True)
     parser.add_argument("--preferred", default="")
+    parser.add_argument("--level", action="store_true",
+                        help="balance-sheet level: no period_start, cadence from the observation gap")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--group-panel", type=Path, default=ROOT / "results" / "market-panel.json")
     args = parser.parse_args()
@@ -101,7 +106,7 @@ def main() -> int:
                 group_of[series["ticker"]] = group
 
     rows = list(csv.DictReader(args.panel.open()))
-    prepared, drops = build_input_rows(rows, args.preferred, group_of)
+    prepared, drops = build_input_rows(rows, args.preferred, group_of, level=args.level)
     records, vintage_drops = build_vintages(prepared)
 
     with args.output.open("w", newline="") as handle:

@@ -57,6 +57,32 @@ def build(concepts: tuple[str, ...]) -> list[dict]:
 
 
 def main() -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--concepts", nargs="*", default=None,
+                        help="concept names to build; defaults to the capex and revenue sets")
+    parser.add_argument("--output", type=Path, default=None,
+                        help="single output path when --concepts is given")
+    args = parser.parse_args()
+    if args.concepts:
+        rows = build(tuple(args.concepts))
+        output = args.output or (ROOT / "results" / "complex-extra-quarterly-pit.csv")
+        with output.open("w", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=FIELDS)
+            writer.writeheader()
+            writer.writerows(rows)
+        lags = []
+        for row in rows:
+            try:
+                lags.append((datetime.date.fromisoformat(row["filed"])
+                             - datetime.date.fromisoformat(row["period_end"])).days)
+            except ValueError:
+                continue
+        print(json.dumps({"rows": len(rows), "tickers": len({row["ticker"] for row in rows}),
+                          "median_filing_lag_days": statistics.median(lags) if lags else None,
+                          "output": str(output)}, indent=1))
+        return 0
     capex = build(CAPEX_CONCEPTS)
     revenue = build(REVENUE_CONCEPTS)
     for path, rows, label in ((ROOT / "results" / "complex-capex-quarterly-pit.csv", capex, "capex"),

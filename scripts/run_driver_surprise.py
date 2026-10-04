@@ -161,8 +161,8 @@ def main() -> int:
                 f"{scoped_interval['upper']:+.4f}" if scoped_interval.get('upper') is not None else 'n/a'))
         print("   20d %-19s IC %+.4f | spread %+.4f | net(20bps) %+.4f | interval [%s, %s]" % (
             variant, block["information_coefficient"],
-            spread["spread"] if spread["spread"] is not None else float("nan"),
-            spread["net"] if spread["net"] is not None else float("nan"),
+            spread.get("spread") if spread.get("spread") is not None else float("nan"),
+            spread.get("net") if spread.get("net") is not None else float("nan"),
             f"{interval['lower']:+.4f}" if interval.get("lower") is not None else "n/a",
             f"{interval['upper']:+.4f}" if interval.get("upper") is not None else "n/a"))
     return 0

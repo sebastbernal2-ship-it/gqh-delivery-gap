@@ -909,3 +909,26 @@ with respect to each other.
 stage fired. The deeper finding is that the model's miscalibration is not stable across periods, so
 calibration fixes must be fitted and validated inside the same era, and the forward window is where
 that will be tested.
+
+## T57. Margins do not price and assets cannot be scored under the declared bins, and both were caught by clocks and label geometry
+
+**Statement**: the margins panel (`OperatingIncomeLoss`, `NetIncomeLoss`, `GrossProfit`, 6,544 rows,
+59 tickers) carries the **same 403-day latest-filed clock defect** as the original capex and revenue
+panels. Rebuilt from the same raw cache with the earliest filing it keeps an identical 6,544 rows and
+its median lag falls to 36 days, which is the fix, not a finding about returns. On the corrected clock
+the operating-income expectation gap has 2,267 measured events and **does not price**: twenty-session
+long-short by predicted bin is -0.98 percent month neutral with interval -3.58 to +0.75 and -0.45
+percent month and group neutral with interval -2.68 to +1.29, with information coefficients near
+-0.03. It is declined as a sleeve. The assets panel is clean at a 37-day median lag with 3,009
+measured events, but under the declared bin edges its surprises are degenerate: most quarterly asset
+changes fall inside the middle bin, the model predicts one class, and **the long-short spread cannot
+be formed at all**. That is a label-geometry mismatch, not a clock or data problem.
+**Evidence**: `results/complex-margins-quarterly-pit.csv`; `results/margins-vintages.csv`;
+`results/assets-vintages.csv`; `results/margins-surprise.json`; `results/assets-surprise.json`;
+`scripts/build_driver_vintages.py` `--level`; `tests/test_driver_vintages.py`.
+**Scope**: development only; margins measured on 625 test rows after the split; assets scored on none
+because no side exists; both are complex names with the same price and cost conventions as T43.
+**Consequence**: neither candidate is added as a sleeve. Assets and margins get one more fair test
+only through a **concept-agnostic surprise scaling**, a declared z-score of the change against its own
+trailing volatility before binning, which is the next declared variant and must be tested on the
+surviving revenue sleeve as well before it is adopted anywhere.

@@ -63,6 +63,20 @@ def test_the_preferred_concept_wins_on_a_shared_period():
     assert prepared[0]["previous_value"] == 60.0
 
 
+def test_level_mode_accepts_rows_without_a_period_start():
+    rows = [
+        {"ticker": "T", "concept": "Assets", "period_end": "2020-03-31", "value_usd": "500",
+         "form": "10-Q", "filed": "2020-04-28"},
+        {"ticker": "T", "concept": "Assets", "period_end": "2020-06-30", "value_usd": "540",
+         "form": "10-Q", "filed": "2020-07-28"},
+    ]
+    without_level, _ = build_input_rows(rows, "Assets", {})
+    assert without_level == []                       # no duration means it cannot be a flow
+    with_level, drops = build_input_rows(rows, "Assets", {}, level=True)
+    assert len(with_level) == 1 and with_level[0]["change"] == 40.0
+    assert drops["no_previous_value"] == 1
+
+
 if __name__ == "__main__":
     tests = [value for name, value in sorted(globals().items()) if name.startswith("test_")]
     for test in tests:
