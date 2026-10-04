@@ -21,6 +21,9 @@ decisions and data flow; `INTERFACE.md` describes integration contracts; `VALIDA
 - Unconstrained hedge-span projection. It says what the proposed hedges span in caller-scaled coordinates;
   it does not authorize positions or establish an executable hedge.
 - Fixed-loading evaluation on a later development panel, plus input and model artifact hashes.
+- A separate retrospective industry-block audit comparing FF5 with FF5 plus the 12 broad French
+  industry returns. It reports incremental in-sample fit and overlap diagnostics; the standard model
+runner still rejects the retrospective-only panel.
 
 ## Run
 
@@ -31,6 +34,7 @@ not new global repository requirements. The local verification used NumPy 2.5.3.
 PYTHONPATH=src python -m unittest unified_factors.test_core -v
 PYTHONPATH=src python -m unified_factors.run --synthetic --output /tmp/unified-factor-demo
 PYTHONPATH=src python -m unified_factors.run --panel /tmp/development-panel.json --cutoff 2021-12-31T23:59:59Z --weights 0.4,0.3,0.2,0.1 --output /tmp/unified-factor-development
+PYTHONPATH=src python -m unified_factors.industry_audit --panel /private/tmp/factor-panel-2016-2024/ff5_panel.json --industry-controls /private/tmp/factor-panel-2016-2024/industry12_controls.csv --output /private/tmp/factor-panel-industry-audit.json
 ```
 
 Output directories must be new. The demo is 420 artificial daily observations of four assets, including an
@@ -97,6 +101,14 @@ The hedge helper is an unweighted least-squares diagnostic, requires caller-spec
 and ignores costs, bounds, margin, liquidity and hedge-specific risk. A systematic market factor can be
 hedgeable; a company residual can be hard to diversify in a concentrated portfolio. Neither classification
 is a boolean inferred from a regression coefficient.
+
+The industry audit is an explicitly separate descriptive tool. It accepts only the quarantined
+`retrospective_only` panel and enforces the 2024-10-02 cutoff in code, including rejecting later rows even
+if their role is mislabeled. It compares the same observations under
+FF5 and FF5 plus all 12 broad industry research portfolios. These returns are not mapped to issuer SIC
+codes, sector ETFs, or executable hedges. The audit asks whether broad industry returns explain additional
+historical co-movement, while overlap diagnostics warn when factor labels are unstable. It neither opens
+sealed data nor promotes its panel to a valid training or forecast dataset.
 
 ## Next integration gates
 

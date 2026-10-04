@@ -19,13 +19,16 @@ BATCHES = {
     'massive_splits': '07c65ecbfac427f5b32e79329c4a4557501950e9268444536571ce95b3d28480',
 }
 ASSETS = ('PWR', 'ETN', 'EME', 'DLR', 'SPY')
-MAX_DEVELOPMENT_DATE = '2022-09-30'
+MAX_DEVELOPMENT_DATE = '2024-10-02'
+HISTORY_END = '2026-10-02'
+SEALED_HOLDOUT_START = '2024-10-03'
+DEVELOPMENT_START = '2016-01-04'
 NY = ZoneInfo('America/New_York')
 
 
 def sessions(start, end):
     if not '2016-01-04' <= start < end <= MAX_DEVELOPMENT_DATE:
-        raise ValueError('bounds must stay inside existing 2016-01-04..2022-09-30 development history')
+        raise ValueError('bounds must stay inside 2016-01-04..2024-10-02 development history')
     calendar = xcals.get_calendar('XNYS', start=start, end=end)
     return {s.date().isoformat(): calendar.session_close(s).to_pydatetime().isoformat()
             for s in calendar.sessions_in_range(start, end)}
@@ -134,7 +137,8 @@ def normalize_prices(records, schedule, assets=ASSETS):
                      'last_return_session':days[-1],'return_convention':'cash-distribution-inclusive ex-date accrual; no splits in declared interval'}
 
 
-def build(export, french_dir, output, start='2016-01-04', end=MAX_DEVELOPMENT_DATE):
+def build(export, french_dir, output):
+    start, end = DEVELOPMENT_START, MAX_DEVELOPMENT_DATE
     schedule = sessions(start,end)
     records, loaded = load_export(export)
     returns, qa = normalize_prices(records,schedule)
@@ -153,8 +157,16 @@ def build(export, french_dir, output, start='2016-01-04', end=MAX_DEVELOPMENT_DA
             if factors['ff3'][day][field] != factors['ff5'][day][field]:
                 raise ValueError('FF3/FF5 common market or RF vintage mismatch')
     available = max(clock(loaded),clock(receipt['retrieved_at'])).isoformat()
+    holdout_calendar = xcals.get_calendar('XNYS', start=SEALED_HOLDOUT_START, end=HISTORY_END)
+    holdout_sessions = len(holdout_calendar.sessions_in_range(SEALED_HOLDOUT_START, HISTORY_END))
     manifest = {'window':{'price_start':start,'end':end},'study_role':'retrospective_only',
                 'historical_availability_verified':False,'universe':'fixed five-name research basket; not survivorship-free',
+                'excluded_sealed_holdout':{'start':SEALED_HOLDOUT_START,'end':HISTORY_END,
+                    'sessions':holdout_sessions,'status':'sealed_unopened',
+                    'rule':'shorter of ceil(20% of 2,703 sessions) and latest two calendar years',
+                    'development_cutoff_basis':'2016-01-04..2026-10-02 inventory has 2,703 XNYS sessions; '
+                        'latest two calendar years have fewer sessions than the latest fifth',
+                    'market_values_exported_or_parsed':False},
                 'export_sha256':digest(export),'french_receipt':receipt,'pinned_batches':BATCHES,
                 'snapshot_available_at':available,'calendar':'XNYS',
                 'runtime':{n:version(n) for n in ('exchange-calendars','numpy','pandas')},
@@ -194,7 +206,6 @@ def build(export, french_dir, output, start='2016-01-04', end=MAX_DEVELOPMENT_DA
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--export',required=True);p.add_argument('--french-dir',required=True)
-    p.add_argument('--output',required=True);p.add_argument('--start',default='2016-01-04')
-    p.add_argument('--end',default=MAX_DEVELOPMENT_DATE)
-    a=p.parse_args();m=build(a.export,a.french_dir,a.output,a.start,a.end)
+    p.add_argument('--output',required=True)
+    a=p.parse_args();m=build(a.export,a.french_dir,a.output)
     print(json.dumps({'qa':m['qa'],'study_role':m['study_role'],'blocking_gates':m['blocking_gates']}))

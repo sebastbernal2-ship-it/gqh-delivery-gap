@@ -1,5 +1,27 @@
 # Validation status
 
+## 2026-10-03 industry-block sensitivity extension
+
+The branch `research/local-snowflake-panel-export` adds `industry_audit.py`, a reproducible, descriptive
+comparison of FF5 with FF5 plus twelve broad French industry controls. On the quarantined 2,201-row panel,
+the fit gains for PWR/ETN/EME/DLR were 7.02/9.88/3.09/11.86 R-squared percentage points; SPY gained 0.05
+points. The standardized factor condition number was 79.4 and maximum absolute pairwise factor correlation
+was 0.949. The leading residual covariance eigenvalue share fell only from 37.3% to 35.8%. These are
+retrospective in-sample diagnostics, not alpha, forecasting, causal, hedge or holdout evidence. The report
+was written outside the repository at `/private/tmp/factor-panel-industry-audit-v2.json`.
+
+Eighteen core and industry-audit tests pass in the current environment, including exact date alignment,
+sealed-boundary rejection, and nested-fit behavior. The optional GARCH tests could not be rerun here because
+the current Python 3.12 runtime lacks `arch`; the earlier PR #4 validation ran the 30 core/GARCH/export tests
+in its configured environment. `make check` and `git diff --check` pass after this extension. No holdout
+values were exported or opened, no result artifact or credentials were added to Git.
+
+The output justifies retaining industry controls as a research comparison only. The next useful model layer
+needs point-in-time issuer-to-industry membership and asset-specific measured economic exposures; do not
+infer a mechanism name from the in-sample fit improvement.
+
+---
+
 2026-10-03, branch `research/unified-factor-model`, based on `09b6385`.
 Research implementation; feature-branch delivery authorized by the user. No production data, strategy trades or sealed holdout opened.
 
