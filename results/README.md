@@ -141,3 +141,7 @@ generated-path: results/intensity-preboom-study.json
 Produced by `scripts/build_intensity_robustness_study.py`:
 
 generated-path: results/intensity-robustness-study.json
+
+Produced by `scripts/fetch_universe_volume.py`:
+
+generated-path: results/universe-adv-monthly.csv

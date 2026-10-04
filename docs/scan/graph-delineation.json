@@ -1,6 +1,6 @@
 {
- "nodes": 175978,
- "connections": 1226392,
+ "nodes": 176139,
+ "connections": 1226732,
  "by_layer": {
   "raw": 97791,
   "mechanism": 46193,
@@ -8,12 +8,12 @@
   "asset": 1024,
   "assumption": 545,
   "entity": 529,
+  "dataset": 360,
   "force": 356,
-  "dataset": 210,
   "event": 173,
   "outcome": 160,
   "rule": 151,
-  "source": 133,
+  "source": 144,
   "factor": 128,
   "experiment": 117,
   "evidence": 98,
@@ -25,7 +25,7 @@
   "accounting": 2
  },
  "by_status": {
-  "declared": 1196114,
+  "declared": 1196454,
   "inferred": 27486,
   "proposed": 2058,
   "curated": 712,
@@ -50,6 +50,8 @@
   "chain_precedes": 182,
   "chain_follows": 182,
   "contains": 162,
+  "sourced_from": 150,
+  "provides": 150,
   "drives": 140,
   "requires": 110,
   "belongs_to": 96,
@@ -58,24 +60,22 @@
   "gates": 42,
   "feeds": 38,
   "anchors": 38,
-  "reveals": 30,
-  "competes_for": 22,
-  "observes": 18,
-  "measures": 14
+  "measures": 34,
+  "reveals": 30
  },
  "degree_histogram": {
-  "0": 148080,
-  "10": 17958,
+  "0": 148239,
+  "10": 17959,
   "20": 4710,
   "30": 4433,
-  "40": 61,
-  "50": 91,
+  "40": 60,
+  "50": 92,
   "60": 125,
-  "70": 253,
-  "80": 69,
+  "70": 252,
+  "80": 70,
   "90": 175,
   "100": 16,
-  "110": 2,
+  "110": 3,
   "130": 1,
   "150": 4
  },
@@ -84,11 +84,11 @@
   "connections_with_falsifier_pct": 99.99
  },
  "components": {
-  "count": 1,
-  "largest": 175978,
-  "nodes_in_components_of_3_or_less": 0
+  "count": 3,
+  "largest": 176024,
+  "nodes_in_components_of_3_or_less": 2
  },
- "anchors": 316,
- "reachable_from_anchors": 175978,
+ "anchors": 526,
+ "reachable_from_anchors": 176139,
  "unreachable_from_anchors": 0
 }

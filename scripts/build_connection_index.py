@@ -29,6 +29,7 @@ CONCEPT_FORCES = ROOT / "docs" / "scan" / "forces.jsonl"
 CONCEPT_INTERACTIONS = ROOT / "docs" / "scan" / "interactions.jsonl"
 CONCEPT_ASSUMPTIONS = ROOT / "docs" / "scan" / "assumptions.jsonl"
 CONCEPT_CHAINS = ROOT / "docs" / "scan" / "conceptual-chains.jsonl"
+DATASETS = ROOT / "docs" / "scan" / "datasets.jsonl"
 BRIDGES = ROOT / "docs" / "scan" / "deep-bridges.jsonl"
 SKELETON = ROOT / "docs" / "scan" / "decomposition.jsonl.gz"
 MAX_INFERRED = 120
@@ -100,6 +101,23 @@ def load_nodes_edges(manifest: str) -> tuple[dict[str, dict], list[dict]]:
                                        "observables": [assumption.get("test", "")],
                                        "source": assumption.get("owner", ""),
                                        "kill": assumption.get("kill", "")}
+    # The data inventory: every dataset becomes a node, wired to its source and to what it measures.
+    if DATASETS.exists():
+        for line in DATASETS.open():
+            if not line.strip():
+                continue
+            entry = json.loads(line)
+            dataset_id = entry["id"]
+            nodes[dataset_id] = {"id": dataset_id, "layer": "dataset",
+                                 "meaning": entry.get("name", dataset_id), "origin": "inventory",
+                                 "observables": [entry.get("coverage", "")],
+                                 "source": entry.get("source", ""), "status": entry.get("status", ""),
+                                 "path": entry.get("path", ""), "notes": entry.get("notes", "")}
+            source_id = entry.get("source", "")
+            if source_id:
+                nodes.setdefault(source_id, {"id": source_id, "layer": "source",
+                                             "meaning": f"source {source_id.split('source:')[1]}",
+                                             "origin": "inventory", "observables": [], "source": source_id})
     return nodes, edges
 
 
@@ -367,6 +385,30 @@ def main() -> int:
                         f"next hop in {chain_id}", hop.get("condition", ""), hop.get("falsifier", ""))
                 connect(hop["to"], hop["from"], "chain_precedes", "curated",
                         f"previous hop in {chain_id}", hop.get("condition", ""), hop.get("falsifier", ""))
+
+    # Dataset wiring: sourced from, measures, and produced by.
+    if DATASETS.exists():
+        for line in DATASETS.open():
+            if not line.strip():
+                continue
+            entry = json.loads(line)
+            dataset_id = entry["id"]
+            source_id = entry.get("source", "")
+            if source_id:
+                connect(dataset_id, source_id, "sourced_from", "declared",
+                        "the dataset comes from this source",
+                        "The dataset is the product of this source.", "The provenance is wrong.")
+                connect(source_id, dataset_id, "provides", "declared",
+                        "the source provides this dataset",
+                        "The source provides this dataset.", "The provenance is wrong.")
+            for measured in entry.get("measures", []):
+                if measured in nodes:
+                    connect(dataset_id, measured, "measures", "declared",
+                            "the dataset is the measurement for this node",
+                            "The dataset reads this mechanism.", "The dataset does not read this node.")
+                    connect(measured, dataset_id, "measured_by", "declared",
+                            "this node is measured by the dataset",
+                            "The dataset reads this mechanism.", "The dataset does not read this node.")
 
     # Unification: every force is tied to the measured nodes it bears on, by domain vocabulary overlap.
     measured = [(node_id, node) for node_id, node in nodes.items()

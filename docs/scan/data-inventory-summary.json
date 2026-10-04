@@ -1,0 +1,23 @@
+{
+ "datasets": 162,
+ "by_status": {
+  "in_hand": 162
+ },
+ "by_source": {
+  "source:internal": 124,
+  "source:sec": 11,
+  "source:market": 6,
+  "source:lbnl": 5,
+  "source:edgar": 5,
+  "source:hyperliquid": 3,
+  "source:mixed": 3,
+  "source:options": 2,
+  "source:rental-marketplace": 1,
+  "source:rating-agency": 1,
+  "source:eia": 1
+ },
+ "total_bytes": 2208182509,
+ "with_coverage": 24,
+ "with_measures": 23,
+ "missing": []
+}

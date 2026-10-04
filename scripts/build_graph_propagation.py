@@ -193,7 +193,7 @@ def main() -> int:
     biggest = components.most_common(1)[0] if components else (None, 0)
     anchor_ids = [identifier for identifier in nodes
                   if identifier.startswith(("mechanism:", "truth:", "asset:", "factor:", "entity:",
-                                            "force:", "chain:", "interaction:"))]
+                                            "force:", "chain:", "interaction:", "source:", "dataset:"))]
     reachable = set()
     adjacency = collections.defaultdict(set)
     for record in nodes.values():
@@ -420,6 +420,8 @@ def main() -> int:
     # Under-connected core nodes, and conceptual nodes with too few interactions of their own.
     for identifier, record in nodes.items():
         if identifier.startswith("sub:"):
+            continue
+        if identifier.startswith(("dataset:", "source:")):
             continue
         if identifier.startswith(("force:", "assumption:")):
             if record["degree"] < 4:
