@@ -125,3 +125,11 @@ generated-path: results/intensity-segment-study.json
 Produced by `scripts/build_intensity_timesplit_study.py`:
 
 generated-path: results/intensity-timesplit-study.json
+
+Produced by `scripts/build_intensity_vs_assetgrowth_study.py`:
+
+generated-path: results/intensity-vs-assetgrowth-study.json
+
+Produced by `scripts/fetch_complex_assets.py`:
+
+generated-path: results/complex-assets-quarterly.csv

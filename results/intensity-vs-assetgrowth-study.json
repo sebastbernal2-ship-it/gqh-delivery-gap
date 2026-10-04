@@ -1,0 +1,34 @@
+{
+ "status": "development only; protocol docs/plan/intensity-vs-assetgrowth-study.md",
+ "observations": 640,
+ "names": 58,
+ "horizons": {
+  "5": {
+   "n": 640,
+   "quarters": 39,
+   "intensity_rho": -0.0874,
+   "asset_growth_rho": 0.0665,
+   "intensity_residual_rho": -0.1093,
+   "residual_two_sided_p": 0.0176,
+   "predictor_overlap_mean": -0.0062
+  },
+  "20": {
+   "n": 636,
+   "quarters": 39,
+   "intensity_rho": -0.0724,
+   "asset_growth_rho": 0.1331,
+   "intensity_residual_rho": -0.0757,
+   "residual_two_sided_p": 0.1032,
+   "predictor_overlap_mean": -0.0062
+  },
+  "60": {
+   "n": 632,
+   "quarters": 39,
+   "intensity_rho": -0.0171,
+   "asset_growth_rho": 0.0917,
+   "intensity_residual_rho": -0.0074,
+   "residual_two_sided_p": 0.8866,
+   "predictor_overlap_mean": -0.0059
+  }
+ }
+}

@@ -353,6 +353,22 @@ observations; development only.
 relative equity returns over five to twenty trading days, with a reversal candidate at sixty days. The
 ownership mechanism is downgraded and the reversal is the next declared object.
 
+## T29. The intensity charge is not asset growth, and asset growth is rewarded
+
+**Statement**: on the 640 observation complex panel, the within-quarter correlation between intensity
+change and asset growth is -0.006, so they are distinct predictors. Asset growth is positively associated
+with forward excess return (+0.067 at five days, +0.133 at twenty, +0.092 at sixty), the opposite sign of
+the classic asset growth anomaly and coherent with a buildout. Intensity is negatively associated (-0.087,
+-0.072, -0.017), and the intensity reading after removing asset growth within each quarter is -0.109 at
+five days (two sided p 0.018), -0.076 at twenty (p 0.10) and -0.007 at sixty.
+**Evidence**: `results/intensity-vs-assetgrowth-study.json`; `results/complex-assets-quarterly.csv`;
+`scripts/build_intensity_vs_assetgrowth_study.py`; `scripts/fetch_complex_assets.py`.
+**Scope**: 58 names, 640 observations, within-quarter design, group excess returns, one free price
+source; compared against asset growth only, other known factors untested; development only.
+**Consequence**: the intensity object survives its first separation test and stays a short-horizon
+candidate. The next evidence is the pre-boom window and a capacity screen with volume, before anything is
+called an edge.
+
 ---
 
 # What these truths are pointing at
