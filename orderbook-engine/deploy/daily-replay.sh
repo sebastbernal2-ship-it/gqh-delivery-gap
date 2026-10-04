@@ -16,6 +16,7 @@ NORMALIZED="$DATA_DIR/normalized"
 FIXTURES="$DATA_DIR/fixtures"
 REPORTS="$DATA_DIR/reports"
 SYMBOL="${SYMBOL:-BTCUSDT}"
+RETAIN_DAYS="${RETAIN_DAYS:-30}"
 
 mkdir -p "$STATE_DIR" "$NORMALIZED" "$FIXTURES" "$REPORTS"
 
@@ -31,8 +32,9 @@ for capture in "$DATA_DIR"/*.jsonl.gz; do
   [ -e "$capture" ] || continue
   base="$(basename "$capture" .jsonl.gz)"
   case "$base" in
-    *trades*) target="$NORMALIZED/$base.trades.jsonl"; mode=trades;;
-    *)        target="$NORMALIZED/$base.depth.jsonl"; mode=depth;;
+    rejected-*) continue;;
+    *trades*)   target="$NORMALIZED/$base.trades.jsonl"; mode=trades;;
+    *)          target="$NORMALIZED/$base.depth.jsonl"; mode=depth;;
   esac
   [ -s "$target" ] && continue
   # Write beside the target and move it in, so a rejected or interrupted run
@@ -98,3 +100,18 @@ for mode in data.get("modes", []):
     )
 PY
 say "report=$report"
+
+# 4. Retention. Raw windows, their normalized rows, and their fixtures age out
+# together; reports are small and stay. Set RETAIN_DAYS=0 to keep everything.
+if [ "$RETAIN_DAYS" -gt 0 ]; then
+  pruned=0
+  for area in "$DATA_DIR" "$NORMALIZED" "$FIXTURES"; do
+    [ -d "$area" ] || continue
+    while IFS= read -r stale; do
+      [ -n "$stale" ] || continue
+      rm -f "$stale"
+      pruned=$((pruned + 1))
+    done < <(find "$area" -maxdepth 1 -type f \( -name '*.jsonl.gz' -o -name '*.depth.jsonl' -o -name '*.trades.jsonl' -o -name 'depth-*.jsonl' -o -name 'trades-*.jsonl' \) -mtime "+$RETAIN_DAYS" 2>/dev/null)
+  done
+  say "pruned=$pruned older than ${RETAIN_DAYS}d"
+fi
