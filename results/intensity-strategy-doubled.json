@@ -7,43 +7,43 @@
    "quantile": "third",
    "weight": "equal",
    "neutral": "group",
-   "cost_mult": 1.0,
+   "cost_mult": 2.0,
    "target_vol": null
   },
   "cohorts": 267,
   "names_median": 13,
   "metrics": {
    "days": 2427,
-   "total_return": 0.2825,
-   "annual_return": 0.0294,
-   "annual_vol": 0.0847,
-   "sharpe": 0.347,
+   "total_return": 0.1096,
+   "annual_return": 0.0144,
+   "annual_vol": 0.0849,
+   "sharpe": 0.17,
    "gross_annual_return": 0.0445,
-   "hit_rate": 0.348,
-   "profit_factor": 1.081,
-   "max_drawdown": -0.2286
+   "hit_rate": 0.342,
+   "profit_factor": 1.038,
+   "max_drawdown": -0.2649
   },
   "early": {
    "days": 1984,
-   "total_return": 0.1957,
-   "annual_return": 0.0259,
-   "annual_vol": 0.0798,
-   "sharpe": 0.325,
+   "total_return": 0.0568,
+   "annual_return": 0.0102,
+   "annual_vol": 0.08,
+   "sharpe": 0.128,
    "gross_annual_return": 0.0416,
-   "hit_rate": 0.332,
-   "profit_factor": 1.078,
-   "max_drawdown": -0.2286
+   "hit_rate": 0.325,
+   "profit_factor": 1.03,
+   "max_drawdown": -0.2649
   },
   "late": {
    "days": 443,
-   "total_return": 0.0726,
-   "annual_return": 0.0453,
+   "total_return": 0.05,
+   "annual_return": 0.0331,
    "annual_vol": 0.1041,
-   "sharpe": 0.435,
+   "sharpe": 0.318,
    "gross_annual_return": 0.0574,
-   "hit_rate": 0.42,
-   "profit_factor": 1.087,
-   "max_drawdown": -0.1467
+   "hit_rate": 0.418,
+   "profit_factor": 1.062,
+   "max_drawdown": -0.158
   },
   "window": {
    "from": "2017-02-14",
@@ -52,13 +52,13 @@
   "capacity_1pct_median": 1165618.0,
   "capacity_5pct_median": 5828092.0,
   "capacity_1pct_p10": 71448.0,
-  "entry_cost_bps_median": 5.56,
+  "entry_cost_bps_median": 11.11,
   "sample_cohort": {
    "date": "2017-03-01",
    "names": 4,
    "longs": 2,
    "shorts": 2,
-   "entry_cost_bps": 40.0,
+   "entry_cost_bps": 80.0,
    "capacity_1pct": null,
    "capacity_5pct": null
   }

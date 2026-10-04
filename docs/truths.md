@@ -409,7 +409,7 @@ million capacity) were an artifact of summing overlapping full-gross cohorts and
 defects are listed in the thesis record and pinned by `tests/test_intensity_accounting.py`. A trailing
 volatility overlay moves the Sharpe from 0.347 to 0.348 and deepens the drawdown to -28.6 percent; it is
 recorded as rejected.
-**Evidence**: `results/intensity-strategy.json`; `scripts/run_intensity_strategy.py`;
+**Evidence**: `results/intensity-strategy.json` (base costs) and `results/intensity-strategy-doubled.json` (doubled costs); `scripts/run_intensity_strategy.py`;
 `tests/test_intensity_accounting.py`; `docs/theses/t-intensity-charge.md`;
 `docs/chains/t-intensity-charge.jsonl`.
 **Scope**: 58 names, development only, both sealed windows spent, one price source, borrow cost unmeasured;

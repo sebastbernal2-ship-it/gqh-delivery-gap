@@ -242,7 +242,7 @@ mostly leverage from summing overlapping cohorts. Corrected: 2.9 percent net ann
 ## Protocols declared this session
 
 `docs/plan/rpo-specialist.md`, `rpo-filing-join.md`, `filing-specialist.md`, `filing-council.md`,
-`filing-obligation-panel.md`, `jev-council-comparison.md`, `risk-council-collection.md`. Every runner
+`filing-obligation-panel.md`, `jev-council-comparison.md`, `risk-council.md`. Every runner
 writes a declared artifact, and `results/README.md` lists all of them as generated paths.
 
 ## Live and open
@@ -251,7 +251,7 @@ writes a declared artifact, and `results/README.md` lists all of them as generat
   recorder pid 793279, about 8.4 MB after ninety minutes. It is training-date volume only.
 - **The risk-track comparison needs five whole UTC dates.** The path is contracted and one command
   per date once they exist: `scripts/build_live_risk_plan.py`, then `prepare_live_execution_risk.py`,
-  then `council_comparison.py`. See `docs/plan/risk-council-collection.md`.
+  then `council_comparison.py`. See `docs/plan/risk-council.md`.
 - **Unlanded work from the other session**: the Makefile hunk with eight convenience targets
   (`parent-bond-panel`, `market-panel`, `option-snapshots`, `positioning-nodes`, `queue-panel`,
   `indenture-covenants`, `implied-vol-test`, `credit-response-test`). It was preserved through every

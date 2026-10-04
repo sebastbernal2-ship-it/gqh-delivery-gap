@@ -334,6 +334,8 @@ def main() -> int:
     parser.add_argument("--weight", default=BASE["weight"])
     parser.add_argument("--neutral", default=BASE["neutral"])
     parser.add_argument("--cost-mult", type=float, default=BASE["cost_mult"])
+    parser.add_argument("--output", type=Path, default=OUT,
+                        help="where the run report lands; never overwrite another variant's file")
     parser.add_argument("--min-adv", type=float, default=0.0, help="minimum monthly dollar volume")
     parser.add_argument("--target-vol", type=float, default=0.0, help="optional annualised volatility target")
     args = parser.parse_args()
@@ -368,8 +370,8 @@ def main() -> int:
         report = {"status": "development only; both sealed windows spent; protocol docs/theses/t-intensity-charge.md",
                   "base": BASE, "variants": runs, "variant_count": len(runs),
                   "positive_share": round(sum(1 for row in runs if (row["annual_return"] or 0) > 0) / len(runs), 3),
-                  "out_path": str(OUT.relative_to(ROOT))}
-        OUT.write_text(json.dumps(report, indent=1) + "\n")
+                  "out_path": str(args.output.relative_to(ROOT))}
+        args.output.write_text(json.dumps(report, indent=1) + "\n")
         runs.sort(key=lambda row: -(row["sharpe"] or -99))
         print(f"grid {len(runs)} variants, share with positive annual return {report['positive_share']}")
         for row in runs[:6]:
@@ -386,7 +388,7 @@ def main() -> int:
     result = run(config, signals, dates, prices, adv, group_of, min_adv=args.min_adv)
     report = {"status": "development only; both sealed windows spent; protocol docs/theses/t-intensity-charge.md",
               "min_adv": args.min_adv, "base": result}
-    OUT.write_text(json.dumps(report, indent=1) + "\n")
+    args.output.write_text(json.dumps(report, indent=1) + "\n")
     print("config:", json.dumps(config))
     print("cohorts", result["cohorts"], "median names", result["names_median"],
           "median entry cost bps", result["entry_cost_bps_median"])

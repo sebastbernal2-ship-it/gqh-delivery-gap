@@ -150,6 +150,10 @@ Produced by `scripts/run_intensity_strategy.py`:
 
 generated-path: results/intensity-strategy.json
 
+Produced by `scripts/run_intensity_strategy.py --cost-mult 2.0 --output results/intensity-strategy-doubled.json`:
+
+generated-path: results/intensity-strategy-doubled.json
+
 Produced by `scripts/build_intensity_controls_study.py`:
 
 generated-path: results/intensity-controls-study.json
