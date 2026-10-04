@@ -55,3 +55,18 @@ of sample. All three need things this study does not have.
 ## Reproduce
 
     python3 scripts/build_queue_tail_study.py
+
+## Result, 2026-10-04
+
+Run as declared, on 137 plants with both a queue duration and a survival row. The tail test points the
+declared way and does not clear the null: the slower half shows a 28.6 percent tail share against 16.4
+percent in the faster half, a shift of plus 0.121 against a state-conditioned null 95th percentile of
+plus 0.151, p = 0.152. The exit test is null (5.7 against 6.0 percent, p = 0.50). Verdict: not
+established at this sample size, and not refuted.
+
+Two limitations govern how this should be read. First, the feature is censored by the outcome: a
+project that withdrew never signed an agreement, so `days_ir_to_ia` exists only for projects that
+reached one, and 617 of the 754 matched plants were excluded for exactly that reason. The exit test is
+therefore nearly powerless by construction. Second, this is development only; both sealed windows are
+spent. A stronger design would use queue age at a fixed date for every project, including the ones that
+never reached an agreement, which turns the censoring into the object of study rather than a filter.

@@ -1,0 +1,42 @@
+{
+ "status": "development only; both sealed windows spent and untouched",
+ "protocol": "docs/plan/queue-tail-study.md",
+ "population": {
+  "plants": 137,
+  "excluded": {
+   "no_duration": 617,
+   "no_survival": 131
+  }
+ },
+ "median_days_ir_to_ia": 660.0,
+ "tests": {
+  "tail": {
+   "slow_half": {
+    "n": 70,
+    "share": 0.2857
+   },
+   "fast_half": {
+    "n": 67,
+    "share": 0.1642
+   },
+   "observed_shift": 0.1215,
+   "null_mean": 0.0435,
+   "null_p95": 0.1507,
+   "p_value": 0.1518
+  },
+  "exit": {
+   "slow_half": {
+    "n": 70,
+    "share": 0.0571
+   },
+   "fast_half": {
+    "n": 67,
+    "share": 0.0597
+   },
+   "observed_shift": -0.0026,
+   "null_mean": -0.0171,
+   "null_p95": 0.0559,
+   "p_value": 0.4975
+  }
+ }
+}

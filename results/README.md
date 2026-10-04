@@ -49,6 +49,10 @@ Produced by `scripts/build_queue_crosswalk.py`:
 generated-path: results/queue-crosswalk.csv
 generated-path: results/queue-crosswalk-summary.json
 
+Produced by `scripts/build_queue_tail_study.py`:
+
+generated-path: results/queue-tail-study.json
+
 Produced by `scripts/probe_queue_slip.py`:
 
 generated-path: results/queue-slip-probe.json
