@@ -481,3 +481,7 @@ generated-path: results/culmination-series.json
 Produced by `scripts/render_culmination.py` (equity with regime boundaries, era bars, same-window bars):
 
 generated-path: results/figures/
+
+Produced by `docs/inbox/vishnu-2026-10-03/visualization/culmination.py` (daily ledgers in that section's schema, one per candidate):
+
+generated-path: results/culmination-ledgers/

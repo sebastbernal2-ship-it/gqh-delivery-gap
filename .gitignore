@@ -86,3 +86,5 @@ results/forward/*-quarterly.csv
 results/eia-raw/
 results/eia-*.csv
 results/fred-raw/
+docs/inbox/vishnu-2026-10-03/visualization/dashboard-culmination-*.html
+!docs/inbox/vishnu-2026-10-03/visualization/dashboard-culmination-C_conditioned.html
