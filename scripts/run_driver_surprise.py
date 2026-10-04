@@ -22,6 +22,9 @@ sys.path.insert(0, str(ROOT / "src"))
 from filing_specialist.event_returns import (HORIZONS, attach_returns, blocked_spread_ci,  # noqa: E402
                                              entry_month, group_means, long_short, neutralise, rank_ic)
 from filing_specialist.market_state import load_series  # noqa: E402
+from repair_unadjusted_bars import suspicious  # noqa: E402
+
+CLOSE_CACHE = ROOT / "results" / "bar-cache"
 from filing_specialist.model import chronological_split, fit_and_forecast  # noqa: E402
 from filing_specialist.rpo_model import FEATURES, prepare_rows  # noqa: E402
 
@@ -34,9 +37,20 @@ def main() -> int:
     parser.add_argument("--cache", type=Path, default=ROOT / "results" / "bar-cache")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--split", type=float, default=0.7)
+    parser.add_argument("--label", default="")
+    parser.add_argument("--complex-panel", type=Path,
+                        default=ROOT / "results" / "market-panel.json")
     args = parser.parse_args()
 
     rows, drops = prepare_rows(list(csv.DictReader(args.vintages.open())))
+    dirty = set()
+    for ticker in {str(row["ticker"]) for row in rows}:
+        series = load_series(ticker, args.cache)
+        if series and suspicious({str(day): float(value) for day, value in series.items()}):
+            dirty.add(ticker)
+    dropped_rows = sum(1 for row in rows if str(row["ticker"]) in dirty)
+    if dirty:
+        rows = [row for row in rows if str(row["ticker"]) not in dirty]
     train, test = chronological_split(rows, args.split)
     fitted = fit_and_forecast(rows, tuple(FEATURES), fraction=args.split)
     classes = list(fitted["classes"])
@@ -54,7 +68,12 @@ def main() -> int:
         row["entry_month"] = entry_month(row)
         flag = next((g for g in GROUPS if float(row.get(f"group_{g}") or 0.0) >= 0.5), None)
         row["peer_group"] = flag or str(row.get("group_name") or row.get("group") or "").strip() or "other"
+    winsor = 0.50
     for horizon in HORIZONS:
+        for row in test:
+            value = row.get(f"fwd_ret_{horizon}", float("nan"))
+            row[f"winsor_{horizon}"] = (float("nan") if value != value
+                                        else max(-winsor, min(winsor, value)))
         for variant, keys in (("month_neutral", ("entry_month",)),
                               ("month_group_neutral", ("entry_month", "peer_group"))):
             for row, value in zip(test, neutralise(test, horizon, keys)):
@@ -67,7 +86,8 @@ def main() -> int:
         "vintages": str(args.vintages),
         "panel": {"rows": len(rows), "train_rows": len(train), "test_rows": len(test),
                   "issuers": len({row["ticker"] for row in test}), "drops": drops,
-                  "return_coverage": coverage},
+                  "return_coverage": coverage, "series_with_unexplained_drops": sorted(dirty),
+                  "rows_dropped_for_dirty_series": dropped_rows},
         "classes": classes,
         "scores": {"prevalence": fitted and None, "log_loss": None},
         "variants": {},
@@ -85,10 +105,18 @@ def main() -> int:
     report["scores"] = {"prevalence": score(prior, labels, tuple(classes)),
                         "softmax": score(probabilities, labels, tuple(classes)),
                         "rows": len(labels)}
-    for variant in ("raw", "month_neutral", "month_group_neutral"):
+    complex_tickers = set()
+    if args.complex_panel.exists():
+        panel = json.loads(args.complex_panel.read_text())
+        complex_tickers = {series["ticker"] for group, payload in panel.get("groups", {}).items()
+                           for series in payload.get("series", [])}
+    for row in test:
+        row["scope"] = "complex" if str(row["ticker"]) in complex_tickers else "rest"
+    for variant in ("raw", "winsor", "month_neutral", "month_group_neutral"):
         report["variants"][variant] = {}
         for horizon in HORIZONS:
-            key = f"fwd_ret_{horizon}" if variant == "raw" else f"{variant}_{horizon}"
+            key = (f"fwd_ret_{horizon}" if variant == "raw"
+                   else f"{variant}_{horizon}")
             report["variants"][variant][str(horizon)] = {
                 "by_predicted_bin": group_means(test, "predicted_bin", key),
                 "information_coefficient": rank_ic([row["expected_bin"] for row in test],
@@ -97,17 +125,40 @@ def main() -> int:
                                for cost in (0.0, 20.0)],
                 "long_short_interval_20bps": blocked_spread_ci(test, horizon, top, bottom,
                                                                cost_bps=20.0, value_key=key),
+                "by_scope": {
+                    scope: {
+                        "rows": sum(1 for row in test if row["scope"] == scope
+                                    and row[key] == row[key]),
+                        "long_short": [long_short([row for row in test if row["scope"] == scope],
+                                                  horizon, top, bottom, cost, value_key=key)
+                                       for cost in (0.0, 20.0)],
+                        "long_short_interval_20bps": blocked_spread_ci(
+                            [row for row in test if row["scope"] == scope], horizon, top, bottom,
+                            cost_bps=20.0, value_key=key),
+                    }
+                    for scope in ("complex", "rest")
+                },
             }
+    report["label"] = args.label
     args.output.write_text(json.dumps(report, indent=1) + "\n")
     print(f"--- {args.vintages.name}: rows {len(rows)} | test {len(test)} | issuers {report['panel']['issuers']}"
           f" | coverage {coverage['share']}")
     print(f"   prevalence log loss {report['scores']['prevalence']['log_loss']:.4f} | "
           f"model {report['scores']['softmax']['log_loss']:.4f} | accuracy "
           f"{report['scores']['softmax']['accuracy']:.3f}")
-    for variant in ("raw", "month_neutral", "month_group_neutral"):
+    for variant in ("raw", "winsor", "month_neutral", "month_group_neutral"):
         block = report["variants"][variant]["20"]
         spread = block["long_short"][1]
         interval = block["long_short_interval_20bps"]
+        for scope, scoped in block["by_scope"].items():
+            scoped_spread = scoped["long_short"][1]
+            scoped_interval = scoped["long_short_interval_20bps"]
+            print("     20d %-13s %-8s rows %4d spread %s net20 %s CI [%s, %s]" % (
+                variant, scope, scoped["rows"],
+                f"{scoped_spread['spread']:+.4f}" if scoped_spread.get("spread") is not None else "  n/a ",
+                f"{scoped_spread['net']:+.4f}" if scoped_spread.get("net") is not None else "  n/a ",
+                f"{scoped_interval['lower']:+.4f}" if scoped_interval.get('lower') is not None else 'n/a',
+                f"{scoped_interval['upper']:+.4f}" if scoped_interval.get('upper') is not None else 'n/a'))
         print("   20d %-19s IC %+.4f | spread %+.4f | net(20bps) %+.4f | interval [%s, %s]" % (
             variant, block["information_coefficient"],
             spread["spread"] if spread["spread"] is not None else float("nan"),

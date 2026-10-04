@@ -31,10 +31,10 @@ CONCEPT = "RevenueRemainingPerformanceObligation"
 MAX_GAP_DAYS = 120
 
 
-def load_frames() -> dict[tuple[int, str], dict]:
+def load_frames(concept: str = CONCEPT) -> dict[tuple[int, str], dict]:
     """(cik, period end) to the frame row that reported it."""
     rows = {}
-    for path in sorted(CACHE.glob(f"*frames_us-gaap_{CONCEPT}_USD_CY*.json*")):
+    for path in sorted(CACHE.glob(f"*frames_us-gaap_{concept}_USD_CY*.json*")):
         payload = json.loads(path.read_text())
         for row in payload.get("data", []):
             cik = row.get("cik")
@@ -76,7 +76,7 @@ def load_filers() -> dict[int, dict]:
     return filers
 
 
-def prepared_rows(frames: dict, filers: dict) -> tuple[list[dict], dict]:
+def prepared_rows(frames: dict, filers: dict, concept: str = CONCEPT) -> tuple[list[dict], dict]:
     drops: Counter = Counter()
     by_filer: dict[int, list[dict]] = defaultdict(list)
     for (cik, end), row in frames.items():
@@ -113,7 +113,7 @@ def prepared_rows(frames: dict, filers: dict) -> tuple[list[dict], dict]:
                 "ticker": filer["ticker"] or f"CIK{cik}",
                 "cik": str(cik),
                 "name": filer["name"],
-                "concept": CONCEPT,
+                "concept": concept,
                 "sic": filer["sic"],
                 "group": "",
                 "period_end": row["period_end"],
@@ -123,20 +123,23 @@ def prepared_rows(frames: dict, filers: dict) -> tuple[list[dict], dict]:
                 "change": row["value"] - previous["value"],
                 "availability_resolution": "accession acceptance timestamp",
                 "accession": row["accession"],
-                "source_receipt": f"frames/{CONCEPT}",
+                "source_receipt": f"frames/{concept}",
             })
     return out, dict(drops)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path,
-                        default=ROOT / "results" / "rpo-universe-vintages.csv")
+    parser.add_argument("--concept", default=CONCEPT)
+    parser.add_argument("--output", type=Path, default=None)
     args = parser.parse_args()
+    if args.output is None:
+        slug = "rpo" if args.concept == CONCEPT else ("revenue" if "Revenue" in args.concept else "capex")
+        args.output = ROOT / "results" / f"{slug}-universe-vintages.csv"
 
-    frames = load_frames()
+    frames = load_frames(args.concept)
     filers = load_filers()
-    prepared, drops = prepared_rows(frames, filers)
+    prepared, drops = prepared_rows(frames, filers, args.concept)
     records, vintage_drops = build_vintages(prepared)
 
     with args.output.open("w", newline="") as handle:

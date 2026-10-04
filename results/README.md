@@ -265,6 +265,21 @@ Produced by `scripts/run_universe_surprise.py`:
 
 generated-path: results/rpo-universe-scores.json
 
+Produced by `scripts/build_universe_driver_panels.py` (broad companyconcept, earliest-filed):
+
+generated-path: results/universe-revenue-quarterly.csv
+generated-path: results/universe-capex-quarterly.csv
+
+Produced by `scripts/build_driver_vintages.py` on the broad panels:
+
+generated-path: results/universe-revenue-vintages.csv
+generated-path: results/universe-capex-vintages.csv
+
+Produced by `scripts/run_driver_surprise.py` on the broad panels:
+
+generated-path: results/universe-revenue-scores.json
+generated-path: results/universe-capex-scores.json
+
 Produced by `scripts/build_rpo_vintages.py`:
 
 generated-path: results/rpo-vintages.csv

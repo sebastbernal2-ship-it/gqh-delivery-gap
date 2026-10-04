@@ -693,3 +693,23 @@ revenue flow.
 at breadth as measured; the edge may be specific to the complex, the size bucket, or the revenue
 concept. Stage 2b must expand price coverage and repeat the test for the revenue and capex drivers
 before any sleeve decision.
+
+## T46. At breadth, the surprise is forecastable but its pricing is not: the edge is complex-specific
+
+**Statement**: with the price panel expanded to 839 series and dirty tickers excluded, three broad
+universes were measured out of sample. Revenue: 291 issuers, 1,693 test rows, 97.8 percent price
+coverage, model log loss 1.4947 against prevalence 1.5563, twenty-session long-short spread -0.55
+percent raw and +0.47 percent month neutral, both intervals crossing zero. Capex: 301 issuers, 1,093
+rows, 98.2 percent coverage, 1.1034 against 1.1297, spread -0.52 percent raw and -0.29 percent month
+neutral. RPO: 935 issuers, 84 percent coverage, spread +1.75 percent raw and +0.06 percent month
+neutral. In every case the model forecasts the surprise better than the base rate and the pricing is
+zero. The measured pricing edges remain the AI-capex driver ones of T43, +4.75 percent for revenue at
+month and group neutral and -4.87 percent for capex, on a much smaller panel.
+**Evidence**: `results/universe-revenue-scores.json`, `results/universe-capex-scores.json`,
+`results/rpo-universe-scores.json`, `results/universe-*-vintages.csv`,
+`scripts/fetch_universe_bars.py`, `scripts/run_driver_surprise.py`, `docs/plan/alpha-build.md`.
+**Scope**: development only, both sealed windows spent, one price source, dirty series excluded, no
+borrow cost, no capacity model. The complex subsets inside the broad panels are too small to measure.
+**Consequence**: breadth creates information, not alpha. The Sharpe target cannot be reached by
+widening the universe; it needs depth inside the complex, more sleeves inside it, and execution cost
+work. A market-wide disclosure-drift claim is not supported and will not be made.

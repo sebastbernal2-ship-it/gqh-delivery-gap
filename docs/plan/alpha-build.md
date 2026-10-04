@@ -96,6 +96,38 @@ Deliverable: the risk cache with five whole dates, the declared council comparis
 over its twelve marginals, and a measured entry-cost saving on the equity side. Falsifier: the
 coupling or the risk council does not beat its classical comparator at matched budget.
 
+### Stage 2b: price coverage, driver breadth, and the scope of the edge
+
+Stage 2 left two gaps: price coverage of 26 percent, and a per-event edge measured only on the RPO
+balance. Stage 2b closes both.
+
+1. **Price coverage.** `scripts/fetch_universe_bars.py` fills the daily close and volume cache for
+   every broad-universe ticker that lacks one. Acceptance: coverage above 60 percent on the test
+   rows, or the shortfall reported with its cause.
+2. **Driver breadth.** Revenue and capex for the broad universe, built with the earliest-filed rule
+   from `companyconcept`. Acceptance: a panel per concept with at least several hundred issuers, a
+   median availability lag inside the clock rule, and scores beating prevalence out of sample.
+3. **Scope of the edge.** Every breadth result is reported for complex members and for everyone else
+   separately, because the edge may be a complex effect and a market-wide claim would then be false.
+
+Declared falsifier: if the per-event edge on the broad universe is no better than zero once the
+complex is removed, then the edge is a complex effect and must be stated as a concentrated strategy
+with a capacity limit, not a general one.
+
+A clock finding from this stage, recorded before the results: **XBRL duration frames cannot carry a
+point-in-time clock.** The accession attached to a duration frame is frequently a later comparative,
+so a frame-built revenue panel has a 403-day median lag and fails the clock rule. Instantaneous
+frames (the RPO balance) behaved correctly at 39 days. Any duration concept must therefore be built
+from `companyconcept`, which lists every occurrence with its own filing date, and take the earliest.
+
+**Stage 2b outcome, 2026-10-04.** The clock finding was confirmed: duration frames fail the
+clock rule and `companyconcept` with the earliest occurrence passes at 36 to 38 days. Price coverage
+rose from 26 to 84 percent on the broad RPO panel and 98 percent on the driver panels, and the price
+sanity rule (rule 10) flagged 204 split-contaminated series, which were refetched adjusted. The
+declared falsifier fired: outside the complex the per-event edge is indistinguishable from zero on
+revenue, capex and RPO, while the model's scores beat prevalence on all three. The edge is
+complex-specific as measured, so the next stages target depth inside the complex, not breadth.
+
 ## 4. What we will not do
 
 1. No quantum claim without an equal-budget classical win, and no QPU dependency.
