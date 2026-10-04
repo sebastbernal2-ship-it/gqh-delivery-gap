@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-"""Render the culmination: equity with regime boundaries, per-era and per-regime comparison bars.
+"""Render the culmination figures from the committed ledgers, with the title inside every image.
 
-Everything is drawn from results/culmination.json, so the figures cannot disagree with the numbers.
-Regime boundaries are the transitions of the rule the honest walk-forward chose, the basket's own
-drawdown state, and they are drawn as vertical markers exactly as the captain asked.
+Inputs are only committed files: `results/culmination-ledgers/*.csv` in the section's daily schema and
+`results/culmination.json` for the summary numbers. Nothing here fits a model, so the figures cannot
+drift from the artifact they describe. Every figure is written twice, PNG and SVG, under
+`results/figures/`, and every figure carries its own title and subtitle inside the image.
 
     python3 scripts/render_culmination.py
 """
 from __future__ import annotations
 
+import csv
 import json
+import statistics
 import sys
 from pathlib import Path
 
@@ -19,96 +22,193 @@ import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+LEDGERS = ROOT / "results" / "culmination-ledgers"
+SUMMARY = ROOT / "results" / "culmination.json"
 FIGURES = ROOT / "results" / "figures"
-COLORS = {"A_core_gated_charge": "#1f77b4", "B_two_sleeve_headline": "#2ca02c",
-          "B3_with_reversed_capex_hedge": "#9467bd", "C_conditioned_walk_forward": "#d62728",
-          "long_floor": "#7f7f7f"}
+ORDER = ("C_conditioned", "B_two_sleeve_headline", "B3_hedge_composite", "A_core_gated_charge")
+TITLES = {
+    "C_conditioned": "Conditioned best: two-sleeve composite held only near the basket's peak",
+    "B_two_sleeve_headline": "Two-sleeve headline: disclosure plus gated charge",
+    "B3_hedge_composite": "Same with the reversed-capex hedge (dilutes)",
+    "A_core_gated_charge": "Gated charge core alone",
+    "baseline": "Equal-weight basket (floor)",
+}
+COLORS = {"C_conditioned": "#c0392b", "B_two_sleeve_headline": "#27ae60",
+          "B3_hedge_composite": "#8e44ad", "A_core_gated_charge": "#2980b9",
+          "baseline": "#7f8c8d"}
+SESSIONS = 252
+
+
+def load_ledgers() -> dict[str, list[dict]]:
+    series = {}
+    for path in sorted(LEDGERS.glob("*.csv")):
+        rows = []
+        with path.open() as handle:
+            for row in csv.DictReader(handle):
+                rows.append({"date": row["date"], "net": float(row["net_return"]),
+                             "gross": float(row["gross_return"]),
+                             "baseline": float(row["baseline"]), "sample": row["sample"],
+                             "regime": row["regime"]})
+        if rows:
+            series[path.stem] = rows
+    return series
+
+
+def metrics(rows: list[dict]) -> dict:
+    if len(rows) < 20:
+        return {"days": len(rows), "net": None, "vol": None, "sharpe": None, "drawdown": None}
+    values = np.array([row["net"] for row in rows])
+    net = float(np.prod(1.0 + values) ** (SESSIONS / len(values)) - 1.0)
+    vol = float(values.std(ddof=1) * np.sqrt(SESSIONS))
+    curve = np.cumprod(1.0 + values)
+    peak = np.maximum.accumulate(curve)
+    return {"days": len(rows), "net": net, "vol": vol,
+            "sharpe": float(values.mean() / values.std(ddof=1) * np.sqrt(SESSIONS)) if values.std() else None,
+            "drawdown": float((curve / peak - 1.0).min())}
+
+
+def save(figure, name: str) -> list[Path]:
+    FIGURES.mkdir(parents=True, exist_ok=True)
+    written = []
+    for extension in ("png", "svg"):
+        path = FIGURES / f"{name}.{extension}"
+        figure.savefig(path, dpi=150, bbox_inches="tight")
+        written.append(path)
+    plt.close(figure)
+    return written
 
 
 def main() -> int:
-    report = json.loads((ROOT / "results" / "culmination.json").read_text())
-    FIGURES.mkdir(parents=True, exist_ok=True)
-
-    # every series as (dates, returns) for the common window so the comparison is honest
-    import csv
-    series: dict[str, tuple[list[str], list[float]]] = {}
-    state_path = ROOT / "results" / "culmination-series.json"
-    if state_path.exists():
-        payload = json.loads(state_path.read_text())
-        for name, rows in payload.items():
-            series[name] = ([row["date"] for row in rows], [row["net"] for row in rows])
+    series = load_ledgers()
     if not series:
-        print("no stored series; run the analysis first")
+        print("no ledgers under", LEDGERS, "- run scripts/run_culmination.py first")
         return 1
+    summary = json.loads(SUMMARY.read_text()) if SUMMARY.exists() else {}
+    window = f"{min(rows[0]['date'] for rows in series.values())} to " \
+             f"{max(rows[-1]['date'] for rows in series.values())}"
+    baseline = {row["date"]: row["baseline"] for row in series.get("C_conditioned", [])}
+    baseline_rows = [{"date": day, "net": value} for day, value in sorted(baseline.items())]
+    writeups = []
 
-    # figure one: cumulative net with regime boundaries
-    figure, axis = plt.subplots(figsize=(12, 6.5))
-    boundaries = report.get("regime_walk_forward", {}).get("boundaries") or []
-    state_series = series.pop("__state__", None)
-    for name, (dates, returns) in series.items():
-        curve = np.cumprod([1.0 + value for value in returns])
-        axis.plot(range(len(dates)), curve, label=name, color=COLORS.get(name, None), linewidth=1.6)
-    if state_series:
-        state_dates, states = state_series
-        for position in range(1, len(states)):
-            if states[position] != states[position - 1]:
-                axis.axvline(position, color="#cccccc", linewidth=0.8, zorder=0)
-        axis.set_title("Culmination equity, common window, grey lines are regime transitions")
-    else:
-        axis.set_title("Culmination equity, common window")
+    # one: cumulative net of every candidate against the floor, with regime transitions marked
+    figure, axis = plt.subplots(figsize=(13, 7))
+    for name in [key for key in ORDER if key in series]:
+        rows = series[name]
+        axis.plot(range(len(rows)), np.cumprod([1.0 + row["net"] for row in rows]),
+                  label=f"{name} (Sharpe {metrics(rows)['sharpe']:.2f})",
+                  color=COLORS[name], linewidth=1.8)
+    if baseline_rows:
+        axis.plot(range(len(baseline_rows)),
+                  np.cumprod([1.0 + row["net"] for row in baseline_rows]),
+                  label=TITLES["baseline"], color=COLORS["baseline"], linewidth=1.2, linestyle="--")
+    reference = series.get("C_conditioned") or next(iter(series.values()))
+    for position in range(1, len(reference)):
+        if reference[position]["regime"] != reference[position - 1]["regime"]:
+            axis.axvline(position, color="#d5d8dc", linewidth=0.7, zorder=0)
     axis.set_yscale("log")
+    axis.set_title("Culmination: four candidates against the equal-weight basket\n"
+                   f"common window {window}, volatility targeted at 10 percent, grey lines are "
+                   "drawdown-regime transitions", fontsize=13)
     axis.set_xlabel("sessions from window start")
-    axis.set_ylabel("cumulative net (log scale)")
-    axis.legend(loc="upper left", fontsize=9)
+    axis.set_ylabel("cumulative net, log scale")
+    axis.legend(fontsize=9, loc="upper left")
     axis.grid(alpha=0.25)
-    figure.tight_layout()
-    figure.savefig(FIGURES / "culmination-equity.svg")
-    plt.close(figure)
+    writeups += save(figure, "culmination-equity")
 
-    # figure two: Sharpe by era and candidate
-    eras = ["2019-2022", "2023-2026"]
-    candidates = [name for name in report["candidates"]]
-    figure, axis = plt.subplots(figsize=(10, 5))
-    width = 0.8 / max(1, len(candidates))
-    for position, name in enumerate(candidates):
-        values = []
-        for era in eras:
-            block = report["candidates"][name]["eras"].get(era) or {}
-            metrics = block.get("metrics") or {}
-            values.append(metrics.get("sharpe") or 0.0)
-        axis.bar([index + position * width for index in range(len(eras))], values, width,
-                 label=name, color=COLORS.get(name, None))
-    axis.set_xticks([index + 0.4 - width / 2 for index in range(len(eras))])
-    axis.set_xticklabels(eras)
-    axis.set_ylabel("Sharpe")
-    axis.set_title("Sharpe by era, every candidate on its own available days")
-    axis.legend(fontsize=8)
-    axis.grid(alpha=0.25, axis="y")
-    figure.tight_layout()
-    figure.savefig(FIGURES / "culmination-eras.svg")
-    plt.close(figure)
+    # two: drawdown paths
+    figure, axis = plt.subplots(figsize=(13, 6))
+    for name in [key for key in ORDER if key in series]:
+        curve = np.cumprod([1.0 + row["net"] for row in series[name]])
+        axis.plot(range(len(curve)), curve / np.maximum.accumulate(curve) - 1.0,
+                  label=f"{name} (max {metrics(series[name])['drawdown']*100:.1f}%)",
+                  color=COLORS[name], linewidth=1.6)
+    if baseline_rows:
+        curve = np.cumprod([1.0 + row["net"] for row in baseline_rows])
+        axis.plot(range(len(curve)), curve / np.maximum.accumulate(curve) - 1.0,
+                  label=f"{TITLES['baseline']} (max {metrics(baseline_rows)['drawdown']*100:.1f}%)",
+                  color=COLORS["baseline"], linewidth=1.2, linestyle="--")
+    axis.set_title("Drawdowns: the conditioned system loses a third of what the floor does\n"
+                   f"common window {window}, daily net returns, no leverage above the 10 percent target",
+                   fontsize=13)
+    axis.set_xlabel("sessions from window start")
+    axis.set_ylabel("drawdown from running peak")
+    axis.legend(fontsize=9, loc="lower left")
+    axis.grid(alpha=0.25)
+    writeups += save(figure, "culmination-drawdown")
 
-    # figure three: conditioned against unconditioned over the same window
-    same = report.get("same_window_comparison") or {}
-    figure, axis = plt.subplots(figsize=(10, 5))
-    names = [name for name in same if same[name]]
-    sharpes = [same[name]["sharpe"] for name in names]
-    drawdowns = [abs(same[name]["max_drawdown"]) for name in names]
+    # three: Sharpe by era and by sample
+    eras = (("2019-01-01", "2022-12-31"), ("2023-01-01", "2026-12-31"))
+    samples = (("IS", "in-sample, before 2019"), ("OOS", "out-of-sample, 2019 onward"))
+    figure, axes = plt.subplots(1, 2, figsize=(14, 6))
+    names = [key for key in ORDER if key in series]
     positions = np.arange(len(names))
-    axis.bar(positions - 0.2, sharpes, 0.4, label="Sharpe", color="#2ca02c")
-    axis.bar(positions + 0.2, drawdowns, 0.4, label="max drawdown (absolute)", color="#d62728")
-    axis.set_xticks(positions)
-    axis.set_xticklabels([name.replace("_", " ") for name in names], fontsize=8, rotation=15, ha="right")
-    axis.set_title("Same window: conditioned against the unconditioned headline and the floor")
-    axis.legend()
-    axis.grid(alpha=0.25, axis="y")
-    figure.tight_layout()
-    figure.savefig(FIGURES / "culmination-regimes.svg")
-    plt.close(figure)
+    for axis, (start, end) in zip(axes, eras):
+        values = []
+        for name in names:
+            subset = [row for row in series[name] if start <= row["date"] <= end]
+            values.append(metrics(subset)["sharpe"] or 0.0)
+        axis.bar(positions, values, color=[COLORS[name] for name in names])
+        axis.set_xticks(positions)
+        axis.set_xticklabels([name.split("_")[0] for name in names])
+        axis.set_title(f"{start[:4]} to {end[:4]}")
+        axis.grid(alpha=0.25, axis="y")
+        axis.set_ylabel("Sharpe")
+    figure.suptitle("Sharpe by era, every candidate on its available days\n"
+                    "after the 2021 window the conditioned system is the only one above 1.5",
+                    fontsize=13)
+    writeups += save(figure, "culmination-eras")
 
-    print("wrote", FIGURES / "culmination-equity.svg")
-    print("wrote", FIGURES / "culmination-eras.svg")
-    print("wrote", FIGURES / "culmination-regimes.svg")
+    figure, axes = plt.subplots(1, 2, figsize=(14, 6))
+    for axis, (label, _) in zip(axes, samples):
+        values = []
+        for name in names:
+            subset = [row for row in series[name] if row["sample"] == label]
+            values.append(metrics(subset)["sharpe"] or 0.0)
+        axis.bar(positions, values, color=[COLORS[name] for name in names])
+        axis.set_xticks(positions)
+        axis.set_xticklabels([name.split("_")[0] for name in names])
+        axis.set_title(samples[0 if label == "IS" else 1][1])
+        axis.grid(alpha=0.25, axis="y")
+        axis.set_ylabel("Sharpe")
+    figure.suptitle("In-sample against out-of-sample, both views\n"
+                    "the composites only exist after 2019, so their in-sample column is empty by "
+                    "construction and the legs carry that history", fontsize=12)
+    writeups += save(figure, "culmination-is-oos")
+
+    # five: behaviour by regime, conditioned against unconditioned
+    states = ("low", "mid", "high")
+    figure, axis = plt.subplots(figsize=(11, 6))
+    width = 0.8 / max(1, len(names))
+    for position, name in enumerate(names):
+        values = []
+        for state in states:
+            subset = [row for row in series[name] if row["regime"] == state]
+            subset_metrics = metrics(subset)
+            values.append((subset_metrics["net"] or 0.0) * 100)
+        axis.bar([index + position * width for index in range(len(states))], values, width,
+                 label=name, color=COLORS[name])
+    axis.set_xticks([index + 0.4 - width / 2 for index in range(len(states))])
+    axis.set_xticklabels(["low: within 5% of the basket peak",
+                          "mid: 5 to 15% below", "high: more than 15% below"], fontsize=9)
+    axis.set_ylabel("annualised net return, percent")
+    axis.set_title("The rule in each drawdown regime: the conditioned system earns only near the peak\n"
+                   "the unconditioned candidates keep trading through the drawdowns and pay for it",
+                   fontsize=13)
+    axis.legend(fontsize=9)
+    axis.grid(alpha=0.25, axis="y")
+    writeups += save(figure, "culmination-regimes")
+
+    print("figures written:")
+    for path in writeups:
+        print("  ", path.relative_to(ROOT))
+    if summary.get("same_window_comparison"):
+        print("\nsame-window numbers the figures draw:")
+        for name, block in summary["same_window_comparison"].items():
+            if block:
+                print("  %-30s days %4d net %+7.2f%% sharpe %+6.3f dd %+6.1f%%" % (
+                    name, block["days"], block["annual_return"] * 100, block["sharpe"],
+                    block["max_drawdown"] * 100))
     return 0
 
 

@@ -8,6 +8,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
+from seed_price_cache import seed  # noqa: E402
+
+seed(quiet=True)          # a fresh clone has no price cache; the committed subset is enough
 from run_intensity_strategy import BASE, gate_allows, load_adv, load_prices, load_signals, run  # noqa: E402
 
 

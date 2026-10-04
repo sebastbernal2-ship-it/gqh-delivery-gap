@@ -131,6 +131,19 @@ actually touch are committed as a 7 MB subset under `results/price-subset/` and 
 seeds the cache from it when a clone has none. Producers write into a sandbox unless `--apply` is given,
 so reproduction leaves the tree clean.
 
+### One file, results instantly
+
+```bash
+python3 docs/inbox/vishnu-2026-10-03/visualization/culmination.py
+```
+
+Prints the cached metrics of the four candidates and the basket floor from `results/culmination.json`,
+writes five figures with their titles inside the images, PNG and SVG, under `results/figures/`, and
+builds the interactive dashboard through the visualization section's own builder. Nothing is
+recomputed, so it takes seconds: the conditioned best is +14.09 percent net at Sharpe 1.793 with a -5.3
+percent drawdown, against the equal-weight basket's +33.77 at 1.339 with -27.8 on the same window.
+`--all` renders every candidate, `--rebuild` regenerates the cache from the analysis.
+
 The `paths` check reads the working tree, so an untracked draft that references a file it has not
 written will fail that one row locally while the published tree stays clean. Untracked files are never
 part of what a judge clones.

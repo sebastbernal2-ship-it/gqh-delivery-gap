@@ -80,6 +80,7 @@ reproduce-full:
 	@python3 scripts/reproduce.py --tier full
 
 test:
+	@python3 scripts/seed_price_cache.py --quiet
 	@python3 tests/test_snowflake_research_sidecar.py
 	@python3 tests/test_regime_risk_control.py
 	@python3 tests/test_market_map.py
