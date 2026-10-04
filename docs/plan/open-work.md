@@ -140,10 +140,10 @@ What remains, in order:
    needs the captain's word; the matching convention is that every specialist in
    `docs/specialists/registry.jsonl` names the manifest node ids it reads, so the two registries cannot
    drift apart.
-3. **The council fusion as a sleeve: measured and not accepted (T60).** Fusing three blocks lost to
-   the single specialist on positions, +21.11 percent against +27.65, with the composite difference
-   negative in 94.7 percent of months, while the fusion still scored better. The declared follow-up is
-   the split rule: the specialist sets direction, the council's calibration sets size.
+3. **The fusion family as a sleeve: closed (T60, T61).** Conviction, sign and split sizing all lost to
+   the single specialist, and the split rule recovered the net without the quality. No further fusion
+   for positions is worth a development run; the council stays in the decision layer and in size
+   calibration. The development levers on this line are exhausted.
 4. **The risk track**, once the tape has five whole dates: the declared council comparison and the
    coupling layer over its twelve marginals.
 5. **The forward window**, running; it closes at 250 scored events or twelve months.

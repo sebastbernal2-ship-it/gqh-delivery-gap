@@ -45,6 +45,23 @@ PEER_FEATURES = ("peer_last_surprise", "peer_mean_surprise_3", "peer_coverage")
 WEIGHT_STEP = 0.125
 
 
+
+
+def split_conviction(expected_council: float, expected_issuer: float) -> float | None:
+    """The declared T60 follow-up: the specialist's direction, the fused distribution's magnitude.
+
+    T60 measured that the single specialist reads the direction of the extreme rows slightly better
+    while the council scores the same rows better. This rule keeps both advantages: the sign comes
+    from the specialist's expected class, the size from the council's distance to the middle.
+    Returns None when either side is neutral, so the caller skips the event.
+    """
+    magnitude = min(1.0, abs(expected_council - 2.0) / 2.0)
+    direction = expected_issuer - 2.0
+    if abs(direction) < 1e-9 or magnitude < 1e-9:
+        return None
+    return math.copysign(magnitude, direction)
+
+
 def peer_momentum(rows: list[dict]) -> list[dict]:
     """Each row's declared peer group's most recent prior disclosures, strictly before the event."""
     by_group: dict[str, list[tuple[str, float]]] = {}
@@ -138,8 +155,9 @@ def main() -> int:
     parser.add_argument("--cache", type=Path, default=ROOT / "results" / "bar-cache")
     parser.add_argument("--baseline", type=Path, default=ROOT / "results" / "walk-forward-baseline.json")
     parser.add_argument("--output", type=Path, default=ROOT / "results" / "council-sleeve.json")
-    parser.add_argument("--sizing", choices=("conviction", "sign"), default="conviction",
-                        help="sign: every acted event carries the same weight, direction from the council")
+    parser.add_argument("--sizing", choices=("conviction", "sign", "split"), default="conviction",
+                        help="sign: equal weight, council direction; split: specialist direction, "
+                             "council magnitude (the declared T60 follow-up)")
     args = parser.parse_args()
 
     rows, drops = prepare_rows(list(csv.DictReader(args.vintages.open())))
@@ -172,13 +190,17 @@ def main() -> int:
             conviction = (expected - 2.0) / 2.0
             if abs(conviction) < 1e-9:
                 continue
+            expected_issuer = sum(k * float(p) for k, p in zip(classes, opinions["issuer_facts"]))
             if args.sizing == "sign":
                 conviction = math.copysign(1.0, conviction)
+            elif args.sizing == "split":
+                split = split_conviction(expected, expected_issuer)
+                if split is None:
+                    continue
+                conviction = split
             rows_detail.append({"label": int(row["label_bin"]), "council": list(fused),
                                 "issuer_facts": list(opinions["issuer_facts"]),
-                                "expected_council": expected,
-                                "expected_issuer": sum(k * float(p) for k, p
-                                                       in zip(classes, opinions["issuer_facts"]))})
+                                "expected_council": expected, "expected_issuer": expected_issuer})
             events.append({"ticker": str(row["ticker"]), "decision": str(row["label_available"])[:10],
                            "weight": conviction, "period_end": str(row["period_end"]), "block": start})
             fold_events += 1

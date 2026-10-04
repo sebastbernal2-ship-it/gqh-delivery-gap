@@ -1035,3 +1035,26 @@ sleeve stays the headline. The council keeps its demonstrated role where calibra
 the decision layer, and the declared follow-up is a split rule: the single specialist sets direction,
 the council's better-calibrated distribution sets size. That is a variant, not a claim, and the forward
 window remains the only place a claim can be earned.
+
+## T61. Every fusion variant loses to the single specialist, so the fusion family as a sleeve driver is closed
+
+**Statement**: the declared T60 follow-up, the specialist's direction with the fused distribution's
+magnitude, was measured on the same folds, prices, costs and window as the other arms. It recovers the
+net return but not the quality: **+27.96 percent at Sharpe 0.702 with a -65.7 percent drawdown** against
+the single specialist's **+27.65 at 0.756 with -58.1**, and its two-sleeve composite reaches Sharpe
+**1.100** against the baseline 1.493 with the month-blocked difference positive in only 11.0 percent of
+ninety months. The full family, all on the same window: council conviction +21.11 at 0.528 with
+composite 0.980, council sign +15.85 at 0.456 with composite 0.926, split +27.96 at 0.702 with
+composite 1.100, and the single specialist +27.65 at 0.756 with composite 1.493. Every fused variant
+loses, and the split rule improves on both of the others, which confirms the mechanism T60 measured
+rather than contradicting it.
+**Evidence**: `results/council-sleeve-split.json`; `results/council-sleeve.json`;
+`results/council-sleeve-sign.json`; `results/walk-forward-baseline.json`;
+`scripts/run_council_sleeve.py` `split_conviction`; `tests/test_council_sleeve.py`.
+**Scope**: development only; one sizing formula per variant, no search over the split's clip, and the
+pool grid is coarse at eighths.
+**Consequence**: no further fusion-for-positions variant is worth a development run: the score-optimal
+fusion does not produce the directional exposure the sleeve needs, and the measurement has been made
+three ways. The council keeps its role in the decision layer and in the calibration of size, where it
+is scored rather than traded. Development levers on this line are now exhausted, and what remains is
+the forward window, the risk-track execution work on its five dates, and the vision gaps.

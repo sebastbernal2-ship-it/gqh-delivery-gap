@@ -43,6 +43,16 @@ def test_pool_grid_offers_the_corners_and_never_the_empty_combination():
     assert all(abs(sum(weights.values()) - 1.0) < 1e-9 for weights in grid)
 
 
+def test_split_conviction_takes_the_specialists_direction_and_the_councils_size():
+    from run_council_sleeve import split_conviction
+    # a weak council and a strongly bullish specialist: the direction is the specialist's
+    assert split_conviction(2.00, 3.00) is None     # a neutral council means no trade at all
+    assert split_conviction(2.50, 3.00) == 0.25
+    # a strongly bearish council with a mildly bearish specialist: the magnitude is the council's
+    assert split_conviction(0.50, 1.50) == -0.75
+    assert split_conviction(2.00, 1.00) is None      # a neutral council means no trade at all
+
+
 if __name__ == "__main__":
     tests = [value for name, value in sorted(globals().items()) if name.startswith("test_")]
     for test in tests:
