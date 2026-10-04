@@ -45,5 +45,7 @@ python3 "$ROOT/verify_inputs.py" \
 "$SCRATCH/event_risk" --events "$GQH_EVENT_CSV" --bars "$GQH_BARS_TSV" \
     --development-start "$GQH_DEVELOPMENT_START" --sealed-start "$GQH_SEALED_START" \
     --cost-bps-per-side "${GQH_COST_BPS_PER_SIDE:-10}" --output "$GQH_OUTPUT_DIR"
+python3 "$ROOT/learned_regimes.py" --events "$GQH_EVENT_CSV" --bars "$GQH_BARS_TSV" \
+    --sealed-start "$GQH_SEALED_START" --output "$GQH_OUTPUT_DIR/learned-regimes.csv"
 cp "$SCRATCH/input-receipt.json" "$GQH_OUTPUT_DIR/input-receipt.json"
 echo "event-risk run complete: $GQH_OUTPUT_DIR"

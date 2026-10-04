@@ -142,10 +142,31 @@ sbatch "$GQH_REPO_ROOT/hpc/delivery-event-risk/run.slurm"
 
 Use the actual cut dates frozen for the selected study; the example dates above are illustrative and
 must not be copied without checking its protocol. The job rejects missing, relative, invalid, or
-already-used paths. Slurm logs go to the submission directory. A successful run writes
+already-used paths. Slurm logs go to the submission directory. The core runner needs only C++17;
+the job also runs the learned-regime sidecar, which requires `hmmlearn` installed from
+`requirements-regimes.txt` into the compute-node Python environment. A successful run writes
 `event-outcomes.csv`, `regime-summary.csv`, `surprise-association.csv`, `report.md`,
-`run-metadata.json`, and a verified `input-receipt.json` into the new output directory. The metadata
-records cutoffs, thresholds, exclusions, cost assumptions and bar batch IDs.
+`run-metadata.json`, `learned-regimes.csv` plus its manifest, and a verified `input-receipt.json`
+into the new output directory. The metadata records cutoffs, thresholds, exclusions, cost
+assumptions and bar batch IDs.
+
+`learned-regimes.csv` is the initial data-learned classification. It fits a two-state Gaussian HMM
+to SPY daily log returns and their absolute values, re-fitting on data ending no later than each
+event's last completed SPY session. The filter uses only observations through that session; it does
+not use the full-sequence smoothed probabilities returned by common HMM APIs. The state with the
+larger fitted mean absolute return is named `high_vol`; its filtered probability is recorded. Fit
+parameters and state identity can move as the expanding training sample changes, so treat this as an
+exploratory regime description, not a trading signal. The existing threshold label remains in
+`event-outcomes.csv` as a baseline until the learned version is reviewed.
+
+Other simple candidates, in increasing model complexity, are: (1) a two-component Gaussian mixture
+on return/realized-volatility features (learns clusters but not persistence), (2) a two-state
+Markov-switching variance model (estimates persistence and state-specific variance), and (3) online
+Bayesian change-point detection (detects changes in the data-generating distribution rather than
+assigning recurring states). `ruptures` is an offline change-point library; its full-sample
+segmentation must not label historical event-time states because it can use later observations.
+Compare these candidates on the same chronological development window and frozen features before
+choosing one. Do not select by event returns or open the sealed window.
 
 ## Synthetic HPG smoke check
 
