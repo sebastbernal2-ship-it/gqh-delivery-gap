@@ -1,0 +1,156 @@
+{
+ "schema": "intensity-gate-test-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/alpha-build.md",
+ "window": {
+  "from": "2023-07-28",
+  "to": "2026-10-02",
+  "sessions": 804
+ },
+ "coverage": {
+  "signals": 632,
+  "signals_in_window": 184,
+  "revenue_surprises": 505,
+  "capex_surprises": 236
+ },
+ "runs": {
+  "baseline_base": {
+   "cohorts": 97,
+   "names_median": 18,
+   "annual_return": -0.0949,
+   "annual_vol": 0.1049,
+   "sharpe": -0.904,
+   "max_drawdown": -0.3796,
+   "hit_rate": 0.379,
+   "total_return": -0.2727,
+   "entry_cost_bps_median": 5.0,
+   "capacity_1pct_median": 10725342.0
+  },
+  "baseline_doubled": {
+   "cohorts": 97,
+   "names_median": 18,
+   "annual_return": -0.1085,
+   "annual_vol": 0.105,
+   "sharpe": -1.033,
+   "max_drawdown": -0.3936,
+   "hit_rate": 0.374,
+   "total_return": -0.3035,
+   "entry_cost_bps_median": 10.0,
+   "capacity_1pct_median": 10725342.0
+  },
+  "baseline_vol_target": {
+   "cohorts": 97,
+   "names_median": 18,
+   "annual_return": -0.0887,
+   "annual_vol": 0.1064,
+   "sharpe": -0.834,
+   "max_drawdown": -0.3644,
+   "hit_rate": 0.378,
+   "total_return": -0.2586,
+   "entry_cost_bps_median": 5.0,
+   "capacity_1pct_median": 10725342.0
+  },
+  "revenue_gate_base": {
+   "cohorts": 97,
+   "names_median": 5,
+   "annual_return": 0.1048,
+   "annual_vol": 0.1079,
+   "sharpe": 0.971,
+   "max_drawdown": -0.1627,
+   "hit_rate": 0.416,
+   "total_return": 0.3687,
+   "entry_cost_bps_median": 2.08,
+   "capacity_1pct_median": 13647176.0
+  },
+  "revenue_gate_doubled": {
+   "cohorts": 97,
+   "names_median": 5,
+   "annual_return": 0.0996,
+   "annual_vol": 0.108,
+   "sharpe": 0.922,
+   "max_drawdown": -0.1632,
+   "hit_rate": 0.414,
+   "total_return": 0.3462,
+   "entry_cost_bps_median": 4.17,
+   "capacity_1pct_median": 13647176.0
+  },
+  "revenue_gate_vol_target": {
+   "cohorts": 97,
+   "names_median": 5,
+   "annual_return": 0.1067,
+   "annual_vol": 0.1091,
+   "sharpe": 0.978,
+   "max_drawdown": -0.1541,
+   "hit_rate": 0.416,
+   "total_return": 0.3763,
+   "entry_cost_bps_median": 2.08,
+   "capacity_1pct_median": 13647176.0
+  },
+  "combined_gate_base": {
+   "cohorts": 97,
+   "names_median": 8,
+   "annual_return": -0.0725,
+   "annual_vol": 0.0799,
+   "sharpe": -0.907,
+   "max_drawdown": -0.2699,
+   "hit_rate": 0.37,
+   "total_return": -0.2134,
+   "entry_cost_bps_median": 2.92,
+   "capacity_1pct_median": 12272236.0
+  },
+  "combined_gate_doubled": {
+   "cohorts": 97,
+   "names_median": 8,
+   "annual_return": -0.0789,
+   "annual_vol": 0.0799,
+   "sharpe": -0.987,
+   "max_drawdown": -0.2809,
+   "hit_rate": 0.368,
+   "total_return": -0.2292,
+   "entry_cost_bps_median": 5.83,
+   "capacity_1pct_median": 12272236.0
+  },
+  "combined_gate_vol_target": {
+   "cohorts": 97,
+   "names_median": 8,
+   "annual_return": -0.0833,
+   "annual_vol": 0.0897,
+   "sharpe": -0.929,
+   "max_drawdown": -0.3029,
+   "hit_rate": 0.37,
+   "total_return": -0.2418,
+   "entry_cost_bps_median": 2.92,
+   "capacity_1pct_median": 12272236.0
+  }
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "out-of-sample window only, about three years, few cohorts",
+  "the surprise model is frozen from the first seventy percent of the driver vintages",
+  "missing surprise data never confirms, so gated exposure is below the baseline by design",
+  "no borrow cost, no capacity expansion, one price source"
+ ],
+ "intervals": {
+  "revenue_gate_minus_baseline_base": {
+   "point": 0.21441006439939722,
+   "lower": 0.07746058095297315,
+   "upper": 0.3530054299093496,
+   "months": 40,
+   "share_positive": 0.999
+  },
+  "revenue_gate_minus_baseline_doubled": {
+   "point": 0.22234465265017472,
+   "lower": 0.08488534779162767,
+   "upper": 0.3601326734414923,
+   "months": 40,
+   "share_positive": 0.999
+  },
+  "combined_gate_minus_revenue_gate": {
+   "point": -0.17797625654520646,
+   "lower": -0.3170846755284171,
+   "upper": -0.029927604411727676,
+   "months": 40,
+   "share_positive": 0.005
+  }
+ }
+}

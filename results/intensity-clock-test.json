@@ -1,0 +1,127 @@
+{
+ "schema": "intensity-clock-test-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/intensity-clock-test.md",
+ "runs": {
+  "latest_filed_base": {
+   "config": {
+    "horizon": 20,
+    "quantile": "third",
+    "weight": "equal",
+    "neutral": "group",
+    "cost_mult": 1.0,
+    "target_vol": null
+   },
+   "signals": 633,
+   "first_filed": "2010-10-28",
+   "last_filed": "2026-09-11",
+   "cohorts": 267,
+   "annual_return": 0.0294,
+   "annual_vol": 0.0847,
+   "sharpe": 0.347,
+   "max_drawdown": -0.2286,
+   "hit_rate": 0.348,
+   "profit_factor": 1.081,
+   "early_annual_return": 0.0259,
+   "early_sharpe": 0.325,
+   "late_annual_return": 0.0453,
+   "late_sharpe": 0.435,
+   "capacity_1pct_median": 1165618.0,
+   "capacity_1pct_p10": 71448.0,
+   "median_entry_cost_bps": 5.56,
+   "window": {
+    "from": null
+   }
+  },
+  "latest_filed_doubled": {
+   "config": {
+    "horizon": 20,
+    "quantile": "third",
+    "weight": "equal",
+    "neutral": "group",
+    "cost_mult": 2.0,
+    "target_vol": null
+   },
+   "signals": 633,
+   "first_filed": "2010-10-28",
+   "last_filed": "2026-09-11",
+   "cohorts": 267,
+   "annual_return": 0.0144,
+   "annual_vol": 0.0849,
+   "sharpe": 0.17,
+   "max_drawdown": -0.2649,
+   "hit_rate": 0.342,
+   "profit_factor": 1.038,
+   "early_annual_return": 0.0102,
+   "early_sharpe": 0.128,
+   "late_annual_return": 0.0331,
+   "late_sharpe": 0.318,
+   "capacity_1pct_median": 1165618.0,
+   "capacity_1pct_p10": 71448.0,
+   "median_entry_cost_bps": 11.11,
+   "window": {
+    "from": null
+   }
+  },
+  "earliest_filed_base": {
+   "config": {
+    "horizon": 20,
+    "quantile": "third",
+    "weight": "equal",
+    "neutral": "group",
+    "cost_mult": 1.0,
+    "target_vol": null
+   },
+   "signals": 632,
+   "first_filed": "2009-10-23",
+   "last_filed": "2026-09-11",
+   "cohorts": 260,
+   "annual_return": -0.0489,
+   "annual_vol": 0.0776,
+   "sharpe": -0.63,
+   "max_drawdown": -0.4801,
+   "hit_rate": 0.333,
+   "profit_factor": 0.869,
+   "early_annual_return": -0.0612,
+   "early_sharpe": -0.851,
+   "late_annual_return": 0.0065,
+   "late_sharpe": 0.066,
+   "capacity_1pct_median": 1251496.0,
+   "capacity_1pct_p10": 304766.0,
+   "median_entry_cost_bps": 5.42,
+   "window": {
+    "from": null
+   }
+  },
+  "earliest_filed_doubled": {
+   "config": {
+    "horizon": 20,
+    "quantile": "third",
+    "weight": "equal",
+    "neutral": "group",
+    "cost_mult": 2.0,
+    "target_vol": null
+   },
+   "signals": 632,
+   "first_filed": "2009-10-23",
+   "last_filed": "2026-09-11",
+   "cohorts": 260,
+   "annual_return": -0.0624,
+   "annual_vol": 0.0776,
+   "sharpe": -0.804,
+   "max_drawdown": -0.5344,
+   "hit_rate": 0.327,
+   "profit_factor": 0.836,
+   "early_annual_return": -0.0751,
+   "early_sharpe": -1.043,
+   "late_annual_return": -0.0057,
+   "late_sharpe": -0.058,
+   "capacity_1pct_median": 1251496.0,
+   "capacity_1pct_p10": 304766.0,
+   "median_entry_cost_bps": 10.83,
+   "window": {
+    "from": null
+   }
+  }
+ }
+}

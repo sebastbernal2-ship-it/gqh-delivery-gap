@@ -157,6 +157,21 @@ def load_adv() -> dict[str, dict[str, float]]:
     return adv
 
 
+def gate_allows(gate, ticker: str, filed_of: dict, sign: float) -> bool:
+    """A signed gate confirms a leg when the surprise points the same way.
+
+    The gate maps (ticker, filing date) to a signed surprise. A long leg needs a non-negative
+    surprise and a short leg a non-positive one. Missing data never confirms. With gate None the
+    engine is unchanged.
+    """
+    if gate is None:
+        return True
+    value = gate.get((ticker, filed_of.get(ticker)))
+    if value is None:
+        return False
+    return value >= 0.0 if sign > 0 else value <= 0.0
+
+
 def cost_bps(adv_value: float | None, multiplier: float) -> float:
     if not adv_value:
         return 40.0 * multiplier
@@ -167,7 +182,8 @@ def cost_bps(adv_value: float | None, multiplier: float) -> float:
 
 
 def run(config: dict, signals: list[dict], dates: list[str], prices: dict[str, dict[str, float]],
-        adv: dict[str, dict[str, float]], group_of: dict[str, str], min_adv: float = 0.0) -> dict:
+        adv: dict[str, dict[str, float]], group_of: dict[str, str], min_adv: float = 0.0,
+        gate: dict | None = None) -> dict:
     date_index = {date: index for index, date in enumerate(dates)}
     daily = []
     cohort_log = []
@@ -216,6 +232,7 @@ def run(config: dict, signals: list[dict], dates: list[str], prices: dict[str, d
             active_from = date
         if live and len(live) >= 6:
             values = {row["ticker"]: row["intensity_change"] for row in live}
+            filed_of = {row["ticker"]: row["filed"] for row in live}
             quantile = 1 / 3 if config["quantile"] == "third" else 0.5
             weights: dict[str, float] = {}
             if config["neutral"] == "group":
@@ -229,6 +246,10 @@ def run(config: dict, signals: list[dict], dates: list[str], prices: dict[str, d
                     ranked = sorted(buckets[key].items(), key=lambda item: item[1])
                     count = max(1, int(len(ranked) * quantile))
                     for leg, sign in ((ranked[:count], 1.0), (ranked[-count:], -1.0)):
+                        leg = [(ticker, value) for ticker, value in leg
+                               if gate_allows(gate, ticker, filed_of, sign)]
+                        if not leg:
+                            continue
                         if config["weight"] == "equal":
                             shares = [leg_gross / len(leg)] * len(leg)
                         else:
@@ -243,6 +264,10 @@ def run(config: dict, signals: list[dict], dates: list[str], prices: dict[str, d
                 ranked = sorted(values.items(), key=lambda item: item[1])
                 count = max(1, int(len(ranked) * quantile))
                 for leg, sign in ((ranked[:count], 1.0), (ranked[-count:], -1.0)):
+                    leg = [(ticker, value) for ticker, value in leg
+                           if gate_allows(gate, ticker, filed_of, sign)]
+                    if not leg:
+                        continue
                     if config["weight"] == "equal":
                         weight = 0.5 / len(leg)
                         for ticker, _ in leg:
@@ -251,30 +276,31 @@ def run(config: dict, signals: list[dict], dates: list[str], prices: dict[str, d
                         total = sum(range(1, len(leg) + 1))
                         for position, (ticker, _) in enumerate(leg, start=1):
                             weights[ticker] = weights.get(ticker, 0.0) + sign * 0.5 * position / total
-            entry_costs = 0.0
-            capacity_terms = []
-            for ticker, weight in weights.items():
-                adv_value = lagged_adv(adv.get(ticker, {}), date)
-                entry_costs += abs(weight) * cost_bps(adv_value, config["cost_mult"]) / 1e4
-                if adv_value and weight:
-                    capacity_terms.append(adv_value / abs(weight))
-            if config.get("target_vol") and len(daily) > 60:
-                trailing = [row["net"] for row in daily[-60:]]
-                realised = statistics.pstdev(trailing) * math.sqrt(252) if len(trailing) > 5 else 0.0
-                if realised > 0:
-                    scale = min(2.0, config["target_vol"] / realised)
-                    weights = {ticker: weight * scale for ticker, weight in weights.items()}
-            open_cohorts.append({"start": rebalance, "horizon": config["horizon"], "weights": weights,
-                                 "entry_cost": entry_costs,
-                                 "capacity_1pct": 0.01 * min(capacity_terms) if capacity_terms else None,
-                                 "capacity_5pct": 0.05 * min(capacity_terms) if capacity_terms else None,
-                                 "names": len(weights)})
-            cohort_log.append({"date": date, "names": len(weights),
-                               "longs": sum(1 for weight in weights.values() if weight > 0),
-                               "shorts": sum(1 for weight in weights.values() if weight < 0),
-                               "entry_cost_bps": round(entry_costs * 1e4, 2),
-                               "capacity_1pct": open_cohorts[-1]["capacity_1pct"],
-                               "capacity_5pct": open_cohorts[-1]["capacity_5pct"]})
+            if weights:
+                entry_costs = 0.0
+                capacity_terms = []
+                for ticker, weight in weights.items():
+                    adv_value = lagged_adv(adv.get(ticker, {}), date)
+                    entry_costs += abs(weight) * cost_bps(adv_value, config["cost_mult"]) / 1e4
+                    if adv_value and weight:
+                        capacity_terms.append(adv_value / abs(weight))
+                if config.get("target_vol") and len(daily) > 60:
+                    trailing = [row["net"] for row in daily[-60:]]
+                    realised = statistics.pstdev(trailing) * math.sqrt(252) if len(trailing) > 5 else 0.0
+                    if realised > 0:
+                        scale = min(2.0, config["target_vol"] / realised)
+                        weights = {ticker: weight * scale for ticker, weight in weights.items()}
+                open_cohorts.append({"start": rebalance, "horizon": config["horizon"], "weights": weights,
+                                     "entry_cost": entry_costs,
+                                     "capacity_1pct": 0.01 * min(capacity_terms) if capacity_terms else None,
+                                     "capacity_5pct": 0.05 * min(capacity_terms) if capacity_terms else None,
+                                     "names": len(weights)})
+                cohort_log.append({"date": date, "names": len(weights),
+                                   "longs": sum(1 for weight in weights.values() if weight > 0),
+                                   "shorts": sum(1 for weight in weights.values() if weight < 0),
+                                   "entry_cost_bps": round(entry_costs * 1e4, 2),
+                                   "capacity_1pct": open_cohorts[-1]["capacity_1pct"],
+                                   "capacity_5pct": open_cohorts[-1]["capacity_5pct"]})
         # daily P&L from cohorts open on this date, one unit of gross capital split equally
         if open_cohorts:
             active_to = date
@@ -323,7 +349,8 @@ def run(config: dict, signals: list[dict], dates: list[str], prices: dict[str, d
         "capacity_1pct_p10": round(sorted(capacities)[max(0, len(capacities) // 10 - 1)], 0) if capacities else None,
         "entry_cost_bps_median": round(statistics.median([entry["entry_cost_bps"] for entry in cohort_log]), 2)
         if cohort_log else None,
-        "sample_cohort": cohort_log[0] if cohort_log else None}
+        "sample_cohort": cohort_log[0] if cohort_log else None,
+        "daily": daily}
 
 
 def main() -> int:

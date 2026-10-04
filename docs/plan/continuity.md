@@ -261,6 +261,30 @@ writes a declared artifact, and `results/README.md` lists all of them as generat
 - **Unverified**: the HiPerGator GPU simulator path and the IBM device path (code committed, no
   completed cluster or device run yet), and the text-side encoder venv (`.venv-text`, git ignored).
 
+## Late addition, 2026-10-04: specialists are data bundles, and the council now proves it
+
+The council's blocks had all been filing-family data, two views of one document family. Corrected:
+
+- `src/filing_specialist/market_state.py` adds the market-state bundle: trailing returns at 60 and
+  252 days, realised 60-day volatility, 5-day pre-event drift, distance from the 252-day high, and
+  peer-relative returns, all from bars strictly before the decision date.
+- `hpc/probabilistic-council/panel_council.py` runs a council over any number of declared data
+  blocks and reports the three numbers the design asks for: incremental information, redundancy,
+  and leave-one-out marginal contribution, with issuer-blocked bootstrap intervals.
+- `scripts/run_rpo_market_council.py` produces `results/rpo-market-council.json` on the powered
+  panel, 2,782 rows, 772 evaluation rows, 188 issuers: council 1.5447 log loss against 1.5995 for
+  the best single bundle, interval 0.029 to 0.080 and 100 percent of resamples favouring the
+  council; concatenation 1.5677, difference 0.032 with an interval that straddles zero, so open;
+  redundancy is low, top-probability correlation 0.14 and argmax agreement 60 percent, so the
+  bundles are genuinely different views. The decision view is roughly break-even at this budget.
+- `docs/specialists/registry.jsonl` is now the admission gate: a specialist is a data bundle with a
+  declared question, cutoff, recipe and evidence artifact. Architectures are a second axis,
+  compared under matched budgets, never a reason to call something a new specialist.
+- Still absent, in the design's own order: the coupling layer that makes one joint law from the
+  calibrated marginals, the bundle ladder above two blocks, the fine-tune rounds, and the policy
+  layer. The option-implied bundle, which the ledger names as the risk-neutral anchor, is not in
+  the council yet.
+
 ## Traps this session, worth not repeating
 
 - The Pi task-control guard needs `CONTROL_WORK_ID` on mutating bash, and when several work records

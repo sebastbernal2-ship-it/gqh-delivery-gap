@@ -615,3 +615,147 @@ beat metadata on the revision panel: the value of text is panel-dependent.
 frozen encoder, development only, both sealed windows spent.
 **Consequence**: further text work should target the panel where text carried information, the
 revision panel, or a larger label set. On this panel metadata is enough.
+
+## T42. The intensity strategy's published edge does not survive the corrected disclosure clock
+
+**Statement**: the published panels date every quarter by the latest filing that reported it, a
+ten-K comparative, with a median availability lag of 401 days. Rebuilt with the earliest filing, the
+median lag is 34 days for capex and 36 for revenue, same rows and same tickers. Re-running the
+declared base configuration changes +2.94 percent net, Sharpe 0.347 and drawdown -22.9 percent into
+-4.89 percent net, Sharpe -0.630 and drawdown -48.0 percent; doubled costs go from +1.44 to -6.24
+percent. The RPO and obligation panels are unaffected, medians 38 and 55 days.
+**Evidence**: `results/intensity-clock-test.json`; `scripts/run_intensity_pit_clock_test.py`;
+`scripts/build_complex_panels_pit.py`; `results/complex-capex-quarterly-pit.csv`;
+`results/complex-revenue-quarterly-pit.csv`.
+**Scope**: development only, both sealed windows spent, one price source. The original panels were
+not modified; they belong to the intensity workstream.
+**Consequence**: the note's intensity numbers stand as measured on the earlier clock, and this
+discrepancy must be reported to that owner before the strategy is used again. Any further work on
+the intensity signal must use the earliest-filed clock.
+
+## T43. The strategy's own drivers carry a correctly clocked expectation gap, and its two halves point opposite ways
+
+**Statement**: on the corrected clocks, the revenue surprise forecast covers 509 out-of-sample rows
+over 55 issuers and beats prevalence on log loss, 1.5667 against 1.5868. Long-short by predicted bin
+at twenty sessions: raw +9.35 percent with interval +3.19 to +18.21, month neutral +11.35 with
+interval +6.59 to +17.06, and month and group neutral +4.75 with interval +1.13 to +9.28, so the
+revenue surprise survives both neutralisations. The capex surprise goes the other way: month and
+group neutral -4.87 percent, interval -10.51 to -1.34, which is the sign the intensity expression
+already trades.
+**Evidence**: `results/revenue-surprise.json`; `results/capex-surprise.json`;
+`results/revenue-vintages-pit.csv`; `results/capex-vintages-pit.csv`;
+`scripts/run_driver_surprise.py`; `docs/plan/driver-surprise.md`.
+**Scope**: development only, 55 issuers, quarterly windows that overlap, one price source, flat
+twenty basis point costs, no borrow and no capacity model.
+**Consequence**: the expectation gap now covers the strategy's own universe, both halves carry the
+economic sign the thesis expects, and gating the intensity cohorts by these signals is the next
+test.
+
+## T44. A revenue-surprise gate rescues the intensity expression out of sample, and the capex condition hurts
+
+**Statement**: on the corrected clock, inside the out-of-sample window 2023-07-28 to 2026-10-02
+where the surprise model never saw the rows, the ungated intensity expression returns -9.49 percent
+net at Sharpe -0.904 with a -38.0 percent drawdown, 97 cohorts. Confirming each leg with the
+revenue surprise, long when the expected bin is at or above expectation and short when below,
+returns +10.48 percent net at Sharpe 0.971 with a -16.3 percent drawdown, and +9.96 percent at
+doubled costs. The month-blocked interval for the difference is +7.75 to +35.30 percent annualised,
+with 99.9 percent of 1,000 resamples positive and 40 months of blocks. Adding a capex condition on
+top of the revenue gate destroys the result: -7.25 percent net, difference against the revenue gate
+-17.80 percent with interval -31.71 to -2.99.
+**Evidence**: `results/intensity-gate-test.json`; `scripts/run_intensity_gate_test.py`;
+`docs/plan/alpha-build.md`; `scripts/run_intensity_strategy.py` gate argument.
+**Scope**: development only, one out-of-sample window of about three years, 97 cohorts, a median of
+five names per gated cohort, no borrow cost, no capacity expansion, one price source. Both sealed
+windows are spent, so this is not a fresh holdout.
+**Consequence**: the gate is the first interval-backed improvement in the programme and the
+drawdown target is met in this window while the Sharpe target is not; breadth expansion and sleeves
+are the next stages, and the combined gate is recorded as a rejected variant.
+
+## T45. Breadth is built: 11,031 RPO events across 1,168 issuers, but the per-event edge does not generalise at that breadth
+
+**Statement**: the broad panel, built from cached XBRL frames joined to accession acceptance
+timestamps with no network calls, holds 15,547 vintages and 11,031 measured relative surprises across
+1,168 issuers, 2017-03 to 2024-11, with a median availability lag of 39 days and 5.8 percent above
+300 days, so the clock rule passes. The model beats prevalence out of sample on 3,373 rows and 935
+issuers, log loss 1.5525 against 1.6103 and accuracy 0.266 against 0.191. The per-event edge does
+not follow: price coverage is 26.4 percent, and on the covered rows the twenty-session long-short
+spread is +2.17 percent raw with interval -7.29 to +11.01, and +1.31 percent month neutral with
+interval -7.28 to +9.19, with an information coefficient near zero or slightly negative. Compare the
+AI-capex revenue driver, +11.35 percent month neutral with interval +6.59 to +17.06 on the same
+construction.
+**Evidence**: `results/rpo-universe-vintages.csv`; `results/rpo-universe-scores.json`;
+`scripts/build_rpo_universe_panel.py`; `scripts/run_universe_surprise.py`;
+`tests/test_rpo_universe_panel.py`.
+**Scope**: development only, price coverage confounds the edge test because only liquid names have
+cached bars, no borrow cost, no capacity model, and the label is the RPO balance rather than the
+revenue flow.
+**Consequence**: breadth machinery works and the scores hold up, but the RPO edge does not generalise
+at breadth as measured; the edge may be specific to the complex, the size bucket, or the revenue
+concept. Stage 2b must expand price coverage and repeat the test for the revenue and capex drivers
+before any sleeve decision.
+
+## T46. At breadth, the surprise is forecastable but its pricing is not: the edge is complex-specific
+
+**Statement**: with the price panel expanded to 839 series and dirty tickers excluded, three broad
+universes were measured out of sample. Revenue: 291 issuers, 1,693 test rows, 97.8 percent price
+coverage, model log loss 1.4947 against prevalence 1.5563, twenty-session long-short spread -0.55
+percent raw and +0.47 percent month neutral, both intervals crossing zero. Capex: 301 issuers, 1,093
+rows, 98.2 percent coverage, 1.1034 against 1.1297, spread -0.52 percent raw and -0.29 percent month
+neutral. RPO: 935 issuers, 84 percent coverage, spread +1.75 percent raw and +0.06 percent month
+neutral. In every case the model forecasts the surprise better than the base rate and the pricing is
+zero. The measured pricing edges remain the AI-capex driver ones of T43, +4.75 percent for revenue at
+month and group neutral and -4.87 percent for capex, on a much smaller panel.
+**Evidence**: `results/universe-revenue-scores.json`, `results/universe-capex-scores.json`,
+`results/rpo-universe-scores.json`, `results/universe-*-vintages.csv`,
+`scripts/fetch_universe_bars.py`, `scripts/run_driver_surprise.py`, `docs/plan/alpha-build.md`.
+**Scope**: development only, both sealed windows spent, one price source, dirty series excluded, no
+borrow cost, no capacity model. The complex subsets inside the broad panels are too small to measure.
+**Consequence**: breadth creates information, not alpha. The Sharpe target cannot be reached by
+widening the universe; it needs depth inside the complex, more sleeves inside it, and execution cost
+work. A market-wide disclosure-drift claim is not supported and will not be made.
+
+## T47. The two-sleeve complex composite buys risk, not return, and its capacity is far larger than the intensity expression
+
+**Statement**: inside the complex, out of sample, the revenue sleeve returns +35.94 percent a year at
+51.1 percent volatility, Sharpe 0.704 and a -65.1 percent drawdown over 797 sessions and 506 events.
+The capex sleeve, which is long low capex surprises and short high, returns +1.01 percent at 49.4
+percent volatility, Sharpe 0.021 and a -61.3 percent drawdown over 836 sessions and 237 events. The
+equal-gross composite returns +27.53 percent at 29.4 percent volatility, **Sharpe 0.938** and a
+**-20.2 percent drawdown**; volatility-targeted to ten percent it returns +11.28 percent at 16.1
+percent volatility, Sharpe 0.699 and a -15.6 percent drawdown. The composite-minus-revenue interval
+is -14.95 percent, -66.64 to +35.99, so no return improvement is claimed: the composite's gain is a
+40 percent volatility reduction and a two-thirds drawdown reduction at a better Sharpe. Capacity at
+one percent participation is a median of 56.2 million dollars for the revenue sleeve and 42.4 million
+for capex, with tenth percentiles of 6.8 and 5.3 million, over 54 and 55 tickers.
+**Evidence**: `results/sleeve-portfolio.json`; `scripts/run_sleeve_portfolio.py`;
+`src/filing_specialist/portfolio_stats.py`.
+**Scope**: development only, both sealed windows spent, complex names only, flat twenty and forty
+basis point round-trip costs, capacity from 60-session median dollar volume, models frozen from the
+first seventy percent of each panel, overlapping events, 633 overlapping sessions.
+**Consequence**: the drawdown requirement of the target is met by the composite and the volatility
+target while Sharpe 2 is not, at 0.94. The next increment is a third sleeve, the gated intensity
+expression of T44 at Sharpe 0.971 and -16.3 percent on the same window, plus more names and concepts
+inside the complex. The sleeves' capacity is twenty to forty times the intensity expression's, so the
+binding constraint on the combined strategy is the charge signal, not the expectation gap.
+
+## T48. Three sleeves, and the gated charge expression is the anchor
+
+**Statement**: on the common calendar of the three sleeves, 633 sessions from 2023-08-04 to
+2026-08-31, the daily correlations are revenue against capex -0.261, revenue against the gated
+intensity expression +0.481, and capex against intensity -0.218. Equal gross, the three-sleeve
+portfolio returns +22.27 percent at 20.5 percent volatility, Sharpe 1.087 and a -16.1 percent
+drawdown. Weighted by inverse volatility, which puts a mean 67 percent on the intensity sleeve, it
+returns +18.31 percent at 13.4 percent volatility, **Sharpe 1.365** and a -14.5 percent drawdown, and
+volatility-targeted to ten percent +16.34 percent at 11.0 percent volatility, **Sharpe 1.491** with a
+**-9.0 percent drawdown**. The three-sleeve minus best-sleeve interval is +8.46 percent with an
+interval of -24.11 to +36.98, and against the two-sleeve composite -4.23 percent, -18.49 to +12.05,
+so the risk-adjusted gain is not a proven return gain.
+**Evidence**: `results/three-sleeve-portfolio.json`; `scripts/run_three_sleeve_portfolio.py`;
+`tests/test_three_sleeve.py`; `src/filing_specialist/portfolio_stats.py`.
+**Scope**: development only, both sealed windows spent, complex names only, flat costs on the driver
+sleeves and the engine's volume-bucket costs on the intensity sleeve, capacity mixed and bound by the
+intensity expression at 1.17 million median, one common window of 37 months.
+**Consequence**: this is the best measured configuration in the programme, Sharpe 1.49 with a
+drawdown under ten percent, and the intensity sleeve carries most of the weight because it is both
+calmer and better on its own. The next levers are within-complex breadth for the intensity sleeve,
+which is the capacity bottleneck, and the frozen forward window.

@@ -1,0 +1,1080 @@
+{
+ "schema": "surprise-alpha-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/surprise-alpha.md",
+ "entry_rule": "close of the first session strictly after the disclosure availability date",
+ "variants": {
+  "raw": "raw close-to-close",
+  "month_neutral": "demeaned inside month",
+  "month_group_neutral": "demeaned inside month x group"
+ },
+ "panel": {
+  "rows": 2782,
+  "train_rows": 1949,
+  "test_rows": 833,
+  "issuers": 188,
+  "drops": {
+   "not_measured": 869,
+   "no_relative_surprise": 21
+  },
+  "join_drops": {
+   "no_filing_for_issuer": 128
+  },
+  "return_coverage": {
+   "rows": 833,
+   "rows_with_the_longest_horizon": 805,
+   "share": 0.9664
+  }
+ },
+ "classes": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "top_bin": 4,
+ "bottom_bin": 0,
+ "statistics": {
+  "raw": {
+   "1": {
+    "rows_with_returns": 805,
+    "mean_return": -0.0003264793559132403,
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": -0.00013506890333012884
+     },
+     {
+      "group": 1,
+      "n": 187,
+      "mean": 0.0005056711876377148
+     },
+     {
+      "group": 2,
+      "n": 109,
+      "mean": -0.0018603965820904957
+     },
+     {
+      "group": 3,
+      "n": 259,
+      "mean": 0.0015630607979005607
+     },
+     {
+      "group": 4,
+      "n": 189,
+      "mean": -0.002916331797373833
+     }
+    ],
+    "by_confidence_quintile": [
+     {
+      "quintile": 1,
+      "n": 161,
+      "mean_confidence": 0.2502494039440564,
+      "mean_return": -4.409127944256888e-05
+     },
+     {
+      "quintile": 2,
+      "n": 161,
+      "mean_confidence": 0.27964133557924314,
+      "mean_return": 0.0019201422905566813
+     },
+     {
+      "quintile": 3,
+      "n": 161,
+      "mean_confidence": 0.3022047511271606,
+      "mean_return": -0.0016819126635749424
+     },
+     {
+      "quintile": 4,
+      "n": 161,
+      "mean_confidence": 0.3322447283830313,
+      "mean_return": -0.0011037514131235274
+     },
+     {
+      "quintile": 5,
+      "n": 161,
+      "mean_confidence": 0.44713771344191927,
+      "mean_return": -0.0007227837139818441
+     }
+    ],
+    "information_coefficient": -0.016497450098765076,
+    "long_short": [
+     {
+      "horizon": 1,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": -0.002916331797373833,
+      "mean_short": -0.00013506890333012884,
+      "spread": -0.002781262894043704,
+      "cost_bps": 0.0,
+      "net": -0.002781262894043704
+     },
+     {
+      "horizon": 1,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": -0.002916331797373833,
+      "mean_short": -0.00013506890333012884,
+      "spread": -0.002781262894043704,
+      "cost_bps": 10.0,
+      "net": -0.003781262894043704
+     },
+     {
+      "horizon": 1,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": -0.002916331797373833,
+      "mean_short": -0.00013506890333012884,
+      "spread": -0.002781262894043704,
+      "cost_bps": 20.0,
+      "net": -0.004781262894043704
+     },
+     {
+      "horizon": 1,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": -0.002916331797373833,
+      "mean_short": -0.00013506890333012884,
+      "spread": -0.002781262894043704,
+      "cost_bps": 40.0,
+      "net": -0.006781262894043704
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": -0.004781262894043704,
+     "lower": -0.019137581566330795,
+     "upper": 0.008604960284945937,
+     "issuers": 89,
+     "share_positive": 0.227,
+     "resamples": 1000
+    }
+   },
+   "5": {
+    "rows_with_returns": 805,
+    "mean_return": 0.011785127134522878,
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": -0.0011805374960214313
+     },
+     {
+      "group": 1,
+      "n": 187,
+      "mean": 0.010015628596419045
+     },
+     {
+      "group": 2,
+      "n": 109,
+      "mean": 0.009145487707729409
+     },
+     {
+      "group": 3,
+      "n": 259,
+      "mean": 0.010807073256575043
+     },
+     {
+      "group": 4,
+      "n": 189,
+      "mean": 0.02058321401810805
+     }
+    ],
+    "by_confidence_quintile": [
+     {
+      "quintile": 1,
+      "n": 161,
+      "mean_confidence": 0.2502494039440564,
+      "mean_return": 0.004980905026595661
+     },
+     {
+      "quintile": 2,
+      "n": 161,
+      "mean_confidence": 0.27964133557924314,
+      "mean_return": 0.011908354768761396
+     },
+     {
+      "quintile": 3,
+      "n": 161,
+      "mean_confidence": 0.3022047511271606,
+      "mean_return": 0.009858234641959786
+     },
+     {
+      "quintile": 4,
+      "n": 161,
+      "mean_confidence": 0.3322447283830313,
+      "mean_return": 0.002008309515246968
+     },
+     {
+      "quintile": 5,
+      "n": 161,
+      "mean_confidence": 0.44713771344191927,
+      "mean_return": 0.03016983172005058
+     }
+    ],
+    "information_coefficient": 0.045638317704923693,
+    "long_short": [
+     {
+      "horizon": 5,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.02058321401810805,
+      "mean_short": -0.0011805374960214313,
+      "spread": 0.02176375151412948,
+      "cost_bps": 0.0,
+      "net": 0.02176375151412948
+     },
+     {
+      "horizon": 5,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.02058321401810805,
+      "mean_short": -0.0011805374960214313,
+      "spread": 0.02176375151412948,
+      "cost_bps": 10.0,
+      "net": 0.02076375151412948
+     },
+     {
+      "horizon": 5,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.02058321401810805,
+      "mean_short": -0.0011805374960214313,
+      "spread": 0.02176375151412948,
+      "cost_bps": 20.0,
+      "net": 0.019763751514129478
+     },
+     {
+      "horizon": 5,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.02058321401810805,
+      "mean_short": -0.0011805374960214313,
+      "spread": 0.02176375151412948,
+      "cost_bps": 40.0,
+      "net": 0.01776375151412948
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.019763751514129478,
+     "lower": -0.006691343876648536,
+     "upper": 0.04958551111302567,
+     "issuers": 89,
+     "share_positive": 0.927,
+     "resamples": 1000
+    }
+   },
+   "20": {
+    "rows_with_returns": 805,
+    "mean_return": 0.03516050485626233,
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": -0.018613965964616754
+     },
+     {
+      "group": 1,
+      "n": 187,
+      "mean": 0.030658813298530773
+     },
+     {
+      "group": 2,
+      "n": 109,
+      "mean": 0.03839768872771858
+     },
+     {
+      "group": 3,
+      "n": 259,
+      "mean": 0.024138023416546608
+     },
+     {
+      "group": 4,
+      "n": 189,
+      "mean": 0.07020827571481823
+     }
+    ],
+    "by_confidence_quintile": [
+     {
+      "quintile": 1,
+      "n": 161,
+      "mean_confidence": 0.2502494039440564,
+      "mean_return": 0.03413113650591144
+     },
+     {
+      "quintile": 2,
+      "n": 161,
+      "mean_confidence": 0.27964133557924314,
+      "mean_return": 0.02361807831714589
+     },
+     {
+      "quintile": 3,
+      "n": 161,
+      "mean_confidence": 0.3022047511271606,
+      "mean_return": 0.02485563805276386
+     },
+     {
+      "quintile": 4,
+      "n": 161,
+      "mean_confidence": 0.3322447283830313,
+      "mean_return": 0.029672287243653214
+     },
+     {
+      "quintile": 5,
+      "n": 161,
+      "mean_confidence": 0.44713771344191927,
+      "mean_return": 0.06352538416183724
+     }
+    ],
+    "information_coefficient": -0.006289288970331332,
+    "long_short": [
+     {
+      "horizon": 20,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.07020827571481823,
+      "mean_short": -0.018613965964616754,
+      "spread": 0.08882224167943499,
+      "cost_bps": 0.0,
+      "net": 0.08882224167943499
+     },
+     {
+      "horizon": 20,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.07020827571481823,
+      "mean_short": -0.018613965964616754,
+      "spread": 0.08882224167943499,
+      "cost_bps": 10.0,
+      "net": 0.08782224167943499
+     },
+     {
+      "horizon": 20,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.07020827571481823,
+      "mean_short": -0.018613965964616754,
+      "spread": 0.08882224167943499,
+      "cost_bps": 20.0,
+      "net": 0.08682224167943499
+     },
+     {
+      "horizon": 20,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.07020827571481823,
+      "mean_short": -0.018613965964616754,
+      "spread": 0.08882224167943499,
+      "cost_bps": 40.0,
+      "net": 0.08482224167943499
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.08682224167943499,
+     "lower": 0.01538773605121727,
+     "upper": 0.16778902266795181,
+     "issuers": 89,
+     "share_positive": 0.989,
+     "resamples": 1000
+    }
+   }
+  },
+  "month_neutral": {
+   "1": {
+    "rows_with_returns": 805,
+    "mean_return": 1.4060957367389649e-19,
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": 0.00251359709125883
+     },
+     {
+      "group": 1,
+      "n": 187,
+      "mean": 0.000124368473635936
+     },
+     {
+      "group": 2,
+      "n": 109,
+      "mean": -0.0023442436312682913
+     },
+     {
+      "group": 3,
+      "n": 259,
+      "mean": 0.00202903611581784
+     },
+     {
+      "group": 4,
+      "n": 189,
+      "mean": -0.002362878969975055
+     }
+    ],
+    "by_confidence_quintile": [
+     {
+      "quintile": 1,
+      "n": 161,
+      "mean_confidence": 0.2502494039440564,
+      "mean_return": -5.673724473267008e-05
+     },
+     {
+      "quintile": 2,
+      "n": 161,
+      "mean_confidence": 0.27964133557924314,
+      "mean_return": 0.002828743202226859
+     },
+     {
+      "quintile": 3,
+      "n": 161,
+      "mean_confidence": 0.3022047511271606,
+      "mean_return": -0.001468586835388984
+     },
+     {
+      "quintile": 4,
+      "n": 161,
+      "mean_confidence": 0.3322447283830313,
+      "mean_return": -0.0019739473373958983
+     },
+     {
+      "quintile": 5,
+      "n": 161,
+      "mean_confidence": 0.44713771344191927,
+      "mean_return": 0.0006705282152906941
+     }
+    ],
+    "information_coefficient": -0.048229613167457185,
+    "long_short": [
+     {
+      "horizon": 1,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": -0.002362878969975055,
+      "mean_short": 0.00251359709125883,
+      "spread": -0.004876476061233885,
+      "cost_bps": 0.0,
+      "net": -0.004876476061233885
+     },
+     {
+      "horizon": 1,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": -0.002362878969975055,
+      "mean_short": 0.00251359709125883,
+      "spread": -0.004876476061233885,
+      "cost_bps": 10.0,
+      "net": -0.005876476061233885
+     },
+     {
+      "horizon": 1,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": -0.002362878969975055,
+      "mean_short": 0.00251359709125883,
+      "spread": -0.004876476061233885,
+      "cost_bps": 20.0,
+      "net": -0.0068764760612338854
+     },
+     {
+      "horizon": 1,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": -0.002362878969975055,
+      "mean_short": 0.00251359709125883,
+      "spread": -0.004876476061233885,
+      "cost_bps": 40.0,
+      "net": -0.008876476061233885
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": -0.0068764760612338854,
+     "lower": -0.020712857832436024,
+     "upper": 0.006103206649034418,
+     "issuers": 89,
+     "share_positive": 0.139,
+     "resamples": 1000
+    }
+   },
+   "5": {
+    "rows_with_returns": 805,
+    "mean_return": 3.6068241216350073e-19,
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": -0.006689963143530137
+     },
+     {
+      "group": 1,
+      "n": 187,
+      "mean": -0.00271034670661514
+     },
+     {
+      "group": 2,
+      "n": 109,
+      "mean": -0.003543138153731534
+     },
+     {
+      "group": 3,
+      "n": 259,
+      "mean": -0.0009120654664989063
+     },
+     {
+      "group": 4,
+      "n": 189,
+      "mean": 0.008134124870223936
+     }
+    ],
+    "by_confidence_quintile": [
+     {
+      "quintile": 1,
+      "n": 161,
+      "mean_confidence": 0.2502494039440564,
+      "mean_return": -0.007980118066979815
+     },
+     {
+      "quintile": 2,
+      "n": 161,
+      "mean_confidence": 0.27964133557924314,
+      "mean_return": -0.000334097257228696
+     },
+     {
+      "quintile": 3,
+      "n": 161,
+      "mean_confidence": 0.3022047511271606,
+      "mean_return": -0.0016282374125562303
+     },
+     {
+      "quintile": 4,
+      "n": 161,
+      "mean_confidence": 0.3322447283830313,
+      "mean_return": -0.01040298353769841
+     },
+     {
+      "quintile": 5,
+      "n": 161,
+      "mean_confidence": 0.44713771344191927,
+      "mean_return": 0.020345436274463155
+     }
+    ],
+    "information_coefficient": 0.03245695835311753,
+    "long_short": [
+     {
+      "horizon": 5,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.008134124870223936,
+      "mean_short": -0.006689963143530137,
+      "spread": 0.014824088013754073,
+      "cost_bps": 0.0,
+      "net": 0.014824088013754073
+     },
+     {
+      "horizon": 5,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.008134124870223936,
+      "mean_short": -0.006689963143530137,
+      "spread": 0.014824088013754073,
+      "cost_bps": 10.0,
+      "net": 0.013824088013754073
+     },
+     {
+      "horizon": 5,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.008134124870223936,
+      "mean_short": -0.006689963143530137,
+      "spread": 0.014824088013754073,
+      "cost_bps": 20.0,
+      "net": 0.012824088013754073
+     },
+     {
+      "horizon": 5,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.008134124870223936,
+      "mean_short": -0.006689963143530137,
+      "spread": 0.014824088013754073,
+      "cost_bps": 40.0,
+      "net": 0.010824088013754073
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.012824088013754073,
+     "lower": -0.013161932854346175,
+     "upper": 0.04220498644618069,
+     "issuers": 89,
+     "share_positive": 0.813,
+     "resamples": 1000
+    }
+   },
+   "20": {
+    "rows_with_returns": 805,
+    "mean_return": 3.228363487512738e-18,
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": -0.02530178957834659
+     },
+     {
+      "group": 1,
+      "n": 187,
+      "mean": -0.001613974505390923
+     },
+     {
+      "group": 2,
+      "n": 109,
+      "mean": -0.0064652892663287515
+     },
+     {
+      "group": 3,
+      "n": 259,
+      "mean": -0.013800871767890497
+     },
+     {
+      "group": 4,
+      "n": 189,
+      "mean": 0.032404046109527615
+     }
+    ],
+    "by_confidence_quintile": [
+     {
+      "quintile": 1,
+      "n": 161,
+      "mean_confidence": 0.2502494039440564,
+      "mean_return": -0.01169883622653236
+     },
+     {
+      "quintile": 2,
+      "n": 161,
+      "mean_confidence": 0.27964133557924314,
+      "mean_return": -0.020017699520873705
+     },
+     {
+      "quintile": 3,
+      "n": 161,
+      "mean_confidence": 0.3022047511271606,
+      "mean_return": -0.0116440660594478
+     },
+     {
+      "quintile": 4,
+      "n": 161,
+      "mean_confidence": 0.3322447283830313,
+      "mean_return": 0.0017287488700405524
+     },
+     {
+      "quintile": 5,
+      "n": 161,
+      "mean_confidence": 0.44713771344191927,
+      "mean_return": 0.04163185293681333
+     }
+    ],
+    "information_coefficient": 0.025786201463357986,
+    "long_short": [
+     {
+      "horizon": 20,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.032404046109527615,
+      "mean_short": -0.02530178957834659,
+      "spread": 0.057705835687874206,
+      "cost_bps": 0.0,
+      "net": 0.057705835687874206
+     },
+     {
+      "horizon": 20,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.032404046109527615,
+      "mean_short": -0.02530178957834659,
+      "spread": 0.057705835687874206,
+      "cost_bps": 10.0,
+      "net": 0.056705835687874205
+     },
+     {
+      "horizon": 20,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.032404046109527615,
+      "mean_short": -0.02530178957834659,
+      "spread": 0.057705835687874206,
+      "cost_bps": 20.0,
+      "net": 0.055705835687874204
+     },
+     {
+      "horizon": 20,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.032404046109527615,
+      "mean_short": -0.02530178957834659,
+      "spread": 0.057705835687874206,
+      "cost_bps": 40.0,
+      "net": 0.05370583568787421
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.055705835687874204,
+     "lower": -0.013228623400360347,
+     "upper": 0.12828956410246853,
+     "issuers": 89,
+     "share_positive": 0.945,
+     "resamples": 1000
+    }
+   }
+  },
+  "month_group_neutral": {
+   "1": {
+    "rows_with_returns": 805,
+    "mean_return": -5.899137286318645e-20,
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": 0.0016864101086770578
+     },
+     {
+      "group": 1,
+      "n": 187,
+      "mean": 0.001385133985065553
+     },
+     {
+      "group": 2,
+      "n": 109,
+      "mean": -0.0021217770468878166
+     },
+     {
+      "group": 3,
+      "n": 259,
+      "mean": 0.0021087159749160443
+     },
+     {
+      "group": 4,
+      "n": 189,
+      "mean": -0.003580819107031971
+     }
+    ],
+    "by_confidence_quintile": [
+     {
+      "quintile": 1,
+      "n": 161,
+      "mean_confidence": 0.2502494039440564,
+      "mean_return": 0.0007202707185388425
+     },
+     {
+      "quintile": 2,
+      "n": 161,
+      "mean_confidence": 0.27964133557924314,
+      "mean_return": 0.0032521299435508025
+     },
+     {
+      "quintile": 3,
+      "n": 161,
+      "mean_confidence": 0.3022047511271606,
+      "mean_return": -0.001287480105931422
+     },
+     {
+      "quintile": 4,
+      "n": 161,
+      "mean_confidence": 0.3322447283830313,
+      "mean_return": -0.0014829036909390389
+     },
+     {
+      "quintile": 5,
+      "n": 161,
+      "mean_confidence": 0.44713771344191927,
+      "mean_return": -0.001202016865219184
+     }
+    ],
+    "information_coefficient": -0.07761195420457012,
+    "long_short": [
+     {
+      "horizon": 1,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": -0.003580819107031971,
+      "mean_short": 0.0016864101086770578,
+      "spread": -0.005267229215709029,
+      "cost_bps": 0.0,
+      "net": -0.005267229215709029
+     },
+     {
+      "horizon": 1,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": -0.003580819107031971,
+      "mean_short": 0.0016864101086770578,
+      "spread": -0.005267229215709029,
+      "cost_bps": 10.0,
+      "net": -0.006267229215709029
+     },
+     {
+      "horizon": 1,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": -0.003580819107031971,
+      "mean_short": 0.0016864101086770578,
+      "spread": -0.005267229215709029,
+      "cost_bps": 20.0,
+      "net": -0.007267229215709029
+     },
+     {
+      "horizon": 1,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": -0.003580819107031971,
+      "mean_short": 0.0016864101086770578,
+      "spread": -0.005267229215709029,
+      "cost_bps": 40.0,
+      "net": -0.009267229215709029
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": -0.007267229215709029,
+     "lower": -0.021051458663555754,
+     "upper": 0.005725037314052712,
+     "issuers": 89,
+     "share_positive": 0.13,
+     "resamples": 1000
+    }
+   },
+   "5": {
+    "rows_with_returns": 805,
+    "mean_return": -5.538185507155769e-19,
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": -0.00552043621098766
+     },
+     {
+      "group": 1,
+      "n": 187,
+      "mean": -0.0008049133086997389
+     },
+     {
+      "group": 2,
+      "n": 109,
+      "mean": -0.005070752004127405
+     },
+     {
+      "group": 3,
+      "n": 259,
+      "mean": -0.00045653220900019237
+     },
+     {
+      "group": 4,
+      "n": 189,
+      "mean": 0.006128143958613942
+     }
+    ],
+    "by_confidence_quintile": [
+     {
+      "quintile": 1,
+      "n": 161,
+      "mean_confidence": 0.2502494039440564,
+      "mean_return": -0.007175876478083983
+     },
+     {
+      "quintile": 2,
+      "n": 161,
+      "mean_confidence": 0.27964133557924314,
+      "mean_return": -0.0004545500524130377
+     },
+     {
+      "quintile": 3,
+      "n": 161,
+      "mean_confidence": 0.3022047511271606,
+      "mean_return": -0.0008117791540793737
+     },
+     {
+      "quintile": 4,
+      "n": 161,
+      "mean_confidence": 0.3322447283830313,
+      "mean_return": -0.009817171319833872
+     },
+     {
+      "quintile": 5,
+      "n": 161,
+      "mean_confidence": 0.44713771344191927,
+      "mean_return": 0.018259377004410264
+     }
+    ],
+    "information_coefficient": -0.004334159556605544,
+    "long_short": [
+     {
+      "horizon": 5,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.006128143958613942,
+      "mean_short": -0.00552043621098766,
+      "spread": 0.011648580169601602,
+      "cost_bps": 0.0,
+      "net": 0.011648580169601602
+     },
+     {
+      "horizon": 5,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.006128143958613942,
+      "mean_short": -0.00552043621098766,
+      "spread": 0.011648580169601602,
+      "cost_bps": 10.0,
+      "net": 0.010648580169601601
+     },
+     {
+      "horizon": 5,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.006128143958613942,
+      "mean_short": -0.00552043621098766,
+      "spread": 0.011648580169601602,
+      "cost_bps": 20.0,
+      "net": 0.009648580169601602
+     },
+     {
+      "horizon": 5,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.006128143958613942,
+      "mean_short": -0.00552043621098766,
+      "spread": 0.011648580169601602,
+      "cost_bps": 40.0,
+      "net": 0.007648580169601602
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.009648580169601602,
+     "lower": -0.016594643434515197,
+     "upper": 0.03843068669880964,
+     "issuers": 89,
+     "share_positive": 0.761,
+     "resamples": 1000
+    }
+   },
+   "20": {
+    "rows_with_returns": 805,
+    "mean_return": 2.8822268933155026e-19,
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": -0.02013277170188127
+     },
+     {
+      "group": 1,
+      "n": 187,
+      "mean": 0.002656448998878811
+     },
+     {
+      "group": 2,
+      "n": 109,
+      "mean": -0.009877088116052302
+     },
+     {
+      "group": 3,
+      "n": 259,
+      "mean": -0.012701044967772522
+     },
+     {
+      "group": 4,
+      "n": 189,
+      "mean": 0.026970986044059283
+     }
+    ],
+    "by_confidence_quintile": [
+     {
+      "quintile": 1,
+      "n": 161,
+      "mean_confidence": 0.2502494039440564,
+      "mean_return": -0.008173564456245085
+     },
+     {
+      "quintile": 2,
+      "n": 161,
+      "mean_confidence": 0.27964133557924314,
+      "mean_return": -0.016488684793631803
+     },
+     {
+      "quintile": 3,
+      "n": 161,
+      "mean_confidence": 0.3022047511271606,
+      "mean_return": -0.009663401661308807
+     },
+     {
+      "quintile": 4,
+      "n": 161,
+      "mean_confidence": 0.3322447283830313,
+      "mean_return": 0.002885333054265964
+     },
+     {
+      "quintile": 5,
+      "n": 161,
+      "mean_confidence": 0.44713771344191927,
+      "mean_return": 0.03144031785691973
+     }
+    ],
+    "information_coefficient": -0.005830407535502065,
+    "long_short": [
+     {
+      "horizon": 20,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.026970986044059283,
+      "mean_short": -0.02013277170188127,
+      "spread": 0.047103757745940555,
+      "cost_bps": 0.0,
+      "net": 0.047103757745940555
+     },
+     {
+      "horizon": 20,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.026970986044059283,
+      "mean_short": -0.02013277170188127,
+      "spread": 0.047103757745940555,
+      "cost_bps": 10.0,
+      "net": 0.046103757745940555
+     },
+     {
+      "horizon": 20,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.026970986044059283,
+      "mean_short": -0.02013277170188127,
+      "spread": 0.047103757745940555,
+      "cost_bps": 20.0,
+      "net": 0.045103757745940554
+     },
+     {
+      "horizon": 20,
+      "n_long": 189,
+      "n_short": 61,
+      "mean_long": 0.026970986044059283,
+      "mean_short": -0.02013277170188127,
+      "spread": 0.047103757745940555,
+      "cost_bps": 40.0,
+      "net": 0.04310375774594055
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.045103757745940554,
+     "lower": -0.018125382467521926,
+     "upper": 0.12035178787021425,
+     "issuers": 89,
+     "share_positive": 0.912,
+     "resamples": 1000
+    }
+   }
+  }
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only; the sealed windows are spent and no row here is a fresh holdout",
+  "one price source as cached; no borrow cost, no slippage beyond the flat tiers",
+  "quarterly disclosures: twenty-session returns overlap across adjacent quarters",
+  "about 89 evaluation issuers in the traded bins, so the intervals stay wide",
+  "a surprise forecast is not a strategy: no sizing, volatility target or capacity model"
+ ]
+}
