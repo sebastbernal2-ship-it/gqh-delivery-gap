@@ -373,11 +373,11 @@ Note: Truths T1 and T2.
 
 **point_in_time_panel / measured**
 
-The LBNL Queued Up project-level workbook is public and now in hand: 36,441 U.S. queue projects with request, agreement, withdrawal and operation dates. 57.4 percent were withdrawn and 12.2 percent reached operation; the median wait is 664 days from request to interconnection agreement and 1,268 days from request to operation. This is the ordering factor the delivery tail was missing.
+The LBNL Queued Up project-level workbook is public and now in hand: 36,441 U.S. queue projects with request, agreement, withdrawal and operation dates. 57.4 percent were withdrawn and 12.2 percent reached operation; the median wait is 664 days from request to interconnection agreement and 1,268 days from request to operation. A first crosswalk to the EIA plant universe matches 1,208 projects (12.9 percent of operational projects) on normalized name, state and capacity, with phase and capacity gates against false matches.
 
-*stats: projects = 36441; withdrawn_share = 0.574; operational_share = 0.122; median_days_ir_to_ia = 664; median_days_ir_to_cod = 1268*
+*stats: projects = 36441; withdrawn_share = 0.574; operational_share = 0.122; median_days_ir_to_ia = 664; median_days_ir_to_cod = 1268; crosswalk_matched = 1208; operational_matched_share = 0.129*
 
-Evidence: `results/queue-panel.csv`, `results/queue-summary.json`, `scripts/build_queue_panel.py`
+Evidence: `results/queue-panel.csv`, `results/queue-summary.json`, `results/queue-crosswalk-summary.json`, `scripts/build_queue_panel.py`, `scripts/build_queue_crosswalk.py`
 
 What it is: where a project sits in a grid queue, and how long it has waited
 
@@ -385,7 +385,7 @@ Representation: queue listing | iso-interconnection-queues | monthly | unknown |
 
 Connections: no counterpart in the expanded manifest yet, so this node's relations are not crosswalked.
 
-Note: Corrects truth T11: the queue was not unreachable, it was not looked for in the right place.
+Note: Corrects truth T11; the crosswalk builder is the bridge to the delivery panels.
 
 ## promise:power:planned-capacity-revision
 

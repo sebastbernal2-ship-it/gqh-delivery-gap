@@ -43,3 +43,8 @@ Produced by `scripts/build_queue_panel.py`:
 
 generated-path: results/queue-panel.csv
 generated-path: results/queue-summary.json
+
+Produced by `scripts/build_queue_crosswalk.py`:
+
+generated-path: results/queue-crosswalk.csv
+generated-path: results/queue-crosswalk-summary.json

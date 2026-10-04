@@ -1,0 +1,131 @@
+{
+ "queue_projects": 36441,
+ "matched": 1208,
+ "matched_share": 0.0331,
+ "eia_plants": 15749,
+ "by_status": {
+  "active": {
+   "projects": 10538,
+   "matched": 287,
+   "matched_share": 0.0272
+  },
+  "operational": {
+   "projects": 4432,
+   "matched": 571,
+   "matched_share": 0.1288
+  },
+  "suspended": {
+   "projects": 546,
+   "matched": 32,
+   "matched_share": 0.0586
+  },
+  "unknown": {
+   "projects": 4,
+   "matched": 0,
+   "matched_share": 0.0
+  },
+  "withdrawn": {
+   "projects": 20921,
+   "matched": 318,
+   "matched_share": 0.0152
+  }
+ },
+ "examples": [
+  {
+   "project": "Big Horn 2",
+   "plant": "Big Horn Wind II",
+   "state": "WA",
+   "queue_mw": "50",
+   "eia_mw": 50.0,
+   "ratio": 1.0
+  },
+  {
+   "project": "Montague I",
+   "plant": "Montague Wind Power Facility LLC",
+   "state": "OR",
+   "queue_mw": "202",
+   "eia_mw": 200.0,
+   "ratio": 1.0
+  },
+  {
+   "project": "Montague 2",
+   "plant": "Montague Wind Power Facility LLC",
+   "state": "OR",
+   "queue_mw": "202",
+   "eia_mw": 200.0,
+   "ratio": 1.0
+  },
+  {
+   "project": "Tucannon River Wind Farm",
+   "plant": "Tucannon River Wind Farm",
+   "state": "WA",
+   "queue_mw": "250",
+   "eia_mw": 266.8,
+   "ratio": 1.0
+  },
+  {
+   "project": "Coastal Energy Project",
+   "plant": "Coastal Energy Project",
+   "state": "WA",
+   "queue_mw": "6",
+   "eia_mw": 6.0,
+   "ratio": 1.0
+  },
+  {
+   "project": "Lund Hill",
+   "plant": "Lund Hill",
+   "state": "WA",
+   "queue_mw": "60",
+   "eia_mw": 60.0,
+   "ratio": 1.0
+  },
+  {
+   "project": "MESA 2 Energy Storage Project",
+   "plant": "MESA 2",
+   "state": "WA",
+   "queue_mw": "3",
+   "eia_mw": 2.4,
+   "ratio": 1.0
+  },
+  {
+   "project": "Hopkins Ridge Wind",
+   "plant": "Hopkins Ridge Wind",
+   "state": "WA",
+   "queue_mw": "150",
+   "eia_mw": 149.4,
+   "ratio": 1.0
+  },
+  {
+   "project": "White Creek Wind I",
+   "plant": "White Creek Wind Farm",
+   "state": "WA",
+   "queue_mw": "200",
+   "eia_mw": 204.0,
+   "ratio": 1.0
+  },
+  {
+   "project": "Klondike Wind Power",
+   "plant": "Klondike Wind Power",
+   "state": "OR",
+   "queue_mw": "24",
+   "eia_mw": 24.5,
+   "ratio": 1.0
+  },
+  {
+   "project": "Klondike 1 Wind",
+   "plant": "Klondike Wind Power",
+   "state": "OR",
+   "queue_mw": "26",
+   "eia_mw": 24.5,
+   "ratio": 1.0
+  },
+  {
+   "project": "LITTLE BEAR SOLAR 1",
+   "plant": "Little Bear Solar 2, LLC",
+   "state": "CA",
+   "queue_mw": "20",
+   "eia_mw": 20.0,
+   "ratio": 1.0
+  }
+ ]
+}
