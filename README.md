@@ -1,4 +1,5 @@
-[Uploading Pricing-the-Buildout (4).pdf…]()
+[Pricing-the-Buildout (4).pdf](https://github.com/user-attachments/files/33027927/Pricing-the-Buildout.4.pdf)
+
 ## Pricing the Buildout
 
 **Testing whether power-and-infrastructure delivery changes contain usable information for equity investors.**
