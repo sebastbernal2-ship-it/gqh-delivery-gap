@@ -6,15 +6,15 @@ decomposed. Nothing here grades a path as dead.
 ## The graph, expanded
 
 - Nodes: **169,985**
-- Typed connections: **1,179,790**
+- Typed connections: **1,179,818**
 - Distributions written down: **86** samples
 - Propagation paths: **656** from 173 seeds
-- Hidden objects: **46** (nodes 1, edges 22, gaps 2, assumptions 21)
+- Hidden objects: **39** (nodes 1, edges 15, gaps 2, assumptions 21)
 
 ## Delineation
 
 - Layers: `raw` 94,717, `mechanism` 45,148, `feature` 27,010, `asset` 1,024, `entity` 439, `dataset` 210, `event` 173, `outcome` 160
-- Connection status: `declared` 1,150,982, `inferred` 26,126, `proposed` 2,058, `curated` 602, `blocked` 22
+- Connection status: `declared` 1,150,982, `inferred` 26,126, `proposed` 2,058, `curated` 630, `blocked` 22
 - Every connection carries a condition and a falsifier: 99.99% and 99.99%
 - Components: 1, largest 169,985, unreachable from anchors 0
 
@@ -79,15 +79,15 @@ Top samples by tail ratio (p90 over median):
 | hidden_assumption | `chain:promise:revision-to-cash-flow:04` | high-load link resting on weak evidence | test this link first, it decides the chain |
 | hidden_assumption | `chain:power:panama-drought-to-power:03` | high-load link resting on weak evidence | test this link first, it decides the chain |
 | hidden_assumption | `chain:power:wildfire-insurance-to-utility-credit:02` | high-load link resting on weak evidence | test this link first, it decides the chain |
-| hidden_edge | `dig:power:lpt -> dig:sic:power-devices` | cross-dig pair sharing ['power'] and observable tokens ['lead'] | add the typed edge or record why the shared observable stops here |
 | hidden_edge | `dig:power:goes -> dig:nuc:firm-power` | cross-dig pair sharing ['power'] and observable tokens ['announcements'] | add the typed edge or record why the shared observable stops here |
-| hidden_edge | `dig:power:goes -> dig:compute:power-commitment` | cross-dig pair sharing ['power'] and observable tokens ['announcements'] | add the typed edge or record why the shared observable stops here |
-| hidden_edge | `dig:power:core-stacking -> dig:nuc:firm-power` | cross-dig pair sharing ['power'] and observable tokens ['announcements'] | add the typed edge or record why the shared observable stops here |
-| hidden_edge | `dig:hvdc:copper-aluminium -> dig:copper:demand` | cross-dig pair sharing ['copper'] and observable tokens ['cable', 'commentary', 'maker'] | add the typed edge or record why the shared observable stops here |
-| hidden_edge | `dig:grid:capex-plan -> dig:compute:capex-intensity` | cross-dig pair sharing ['capex'] and observable tokens ['capex'] | add the typed edge or record why the shared observable stops here |
-| hidden_edge | `dig:compute:provider-capex -> dig:compute:equity-transmission` | cross-dig pair sharing ['compute'] and observable tokens ['capex'] | add the typed edge or record why the shared observable stops here |
 | hidden_edge | `dig:compute:inference-cost -> dig:compute:rental-to-revenue-link` | cross-dig pair sharing ['compute'] and observable tokens ['provider'] | add the typed edge or record why the shared observable stops here |
 | hidden_edge | `dig:compute:inference-cost -> dig:compute:family-exposure-map` | cross-dig pair sharing ['compute'] and observable tokens ['provider'] | add the typed edge or record why the shared observable stops here |
+| hidden_edge | `dig:compute:inference-cost -> dig:compute:revenue-per-mw` | cross-dig pair sharing ['compute'] and observable tokens ['provider'] | add the typed edge or record why the shared observable stops here |
+| hidden_edge | `dig:compute:inference-cost -> dig:compute:contracted-share` | cross-dig pair sharing ['compute'] and observable tokens ['provider'] | add the typed edge or record why the shared observable stops here |
+| hidden_edge | `dig:compute:inference-cost -> dig:compute:lease-spread` | cross-dig pair sharing ['compute'] and observable tokens ['provider'] | add the typed edge or record why the shared observable stops here |
+| hidden_edge | `dig:compute:inference-cost -> dig:compute:tenant-concentration` | cross-dig pair sharing ['compute'] and observable tokens ['provider'] | add the typed edge or record why the shared observable stops here |
+| hidden_edge | `dig:compute:inference-cost -> dig:compute:equity-transmission` | cross-dig pair sharing ['compute'] and observable tokens ['provider'] | add the typed edge or record why the shared observable stops here |
+| hidden_edge | `dig:compute:token-demand -> dig:compute:family-exposure-map` | cross-dig pair sharing ['compute'] and observable tokens ['disclosures'] | add the typed edge or record why the shared observable stops here |
 
 ## Propagation paths, truth to payer
 

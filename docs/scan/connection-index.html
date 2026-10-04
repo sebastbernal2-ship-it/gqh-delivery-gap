@@ -12,10 +12,10 @@
 <h1>Connection index</h1>
 <p class="meta">Method owner: docs/plan/deep-chaining.md. Inferred connections are questions with a type and a falsifier.</p>
 <ul>
-<li>168,434 nodes indexed: 722 core, 167,712 skeleton</li>
-<li>1,169,772 typed connections</li>
-<li>Core degree median 74; 720 core nodes at 50+ (99.7%)</li>
-<li>67 chains, 138 hops, 47 bridges</li>
+<li>169,985 nodes indexed: 725 core, 169,260 skeleton</li>
+<li>1,179,818 typed connections</li>
+<li>Core degree median 74; 724 core nodes at 50+ (99.9%)</li>
+<li>74 chains, 145 hops, 54 bridges</li>
 </ul>
 <h2>Worked node record: mechanism:capacity:transformer-bottleneck (degree 75)</h2>
 <table><thead><tr><th>Connected to</th><th>Type</th><th>Status</th><th>Why</th><th>Falsifier</th></tr></thead>
@@ -88,10 +88,10 @@
 <tr><td><code>dig:fcc:fcc-unit-throughput</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:fcc:separation-plants</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:fiber:interconnect</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
+<tr><td><code>dig:flow:fill-selection</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:flow:liquidation-engine</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:grid:capacity-auction</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:grid:capex-plan</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
-<tr><td><code>dig:grid:equity-financing</code></td><td>co_layer_peer</td><td>inferred</td><td>same layer peer family</td><td>The layer label does not imply a comparable role.</td></tr>
 <tr><td><code>dig:power:lpt</code></td><td>chain_precedes</td><td>curated</td><td>previous hop in chain:bridge:transformer-lpt-to-anchor</td><td>The dig contradicts the anchor and the anchor is updated.</td></tr>
 <tr><td><code>dig:switch:gear</code></td><td>chain_precedes</td><td>curated</td><td>previous hop in chain:bridge:switchgear-to-anchor</td><td>Switchgear lead times decouple from transformer lead times.</td></tr></tbody></table>
 <h2>Worked chain: dig:fcc:catalyst-minerals</h2>
@@ -153,8 +153,14 @@
 <tr><td><code>bridge:compute-rental-to-anchor</code></td><td><code>dig:compute:rental-change</code></td><td><code>feature:compute:rental-price</code></td><td>anchors</td><td>The feature remains the measured object.</td><td>The dig contradicts the feature construction.</td></tr>
 <tr><td><code>bridge:providers-firm-to-anchor</code></td><td><code>dig:providers:firm-capacity</code></td><td><code>asset:equity:utility-basket</code></td><td>anchors</td><td>The basket remains the traded surface.</td><td>The expression moves to credit or contracts.</td></tr>
 <tr><td><code>bridge:cycles-buildout-to-anchor</code></td><td><code>dig:cycles:buildout</code></td><td><code>mechanism:capacity:constraint</code></td><td>anchors</td><td>Capacity constraint remains the governing mechanism.</td><td>Cycles stop repeating.</td></tr>
-<tr><td><code>bridge:exec-entry-to-anchor</code></td><td><code>dig:exec:entry-window</code></td><td><code>event:sec:8k-material-agreement</code></td><td>anchors</td><td>Disclosures remain the event class.</td><td>The edge moves to non-disclosure events.</td></tr></tbody></table>
+<tr><td><code>bridge:exec-entry-to-anchor</code></td><td><code>dig:exec:entry-window</code></td><td><code>event:sec:8k-material-agreement</code></td><td>anchors</td><td>Disclosures remain the event class.</td><td>The edge moves to non-disclosure events.</td></tr>
+<tr><td><code>bridge:hvdc-cable-to-copper-demand</code></td><td><code>dig:hvdc:copper-aluminium</code></td><td><code>dig:copper:demand</code></td><td>feeds</td><td>Cable orders translate into conductor demand within the same procurement window.</td><td>Cable makers hold conductor inventory through the build cycle and orders do not reach the metal market.</td></tr>
+<tr><td><code>bridge:compute-capex-to-grid-capex</code></td><td><code>dig:compute:capex-intensity</code></td><td><code>dig:grid:capex-plan</code></td><td>competes_for</td><td>Both are constrained by the same equipment and labor supply, so one raises the other&#x27;s cost and lead time.</td><td>Equipment lead times and crew wages are flat while both capex lines rise.</td></tr>
+<tr><td><code>bridge:provider-capex-to-equity</code></td><td><code>dig:compute:provider-capex</code></td><td><code>dig:compute:equity-transmission</code></td><td>drives</td><td>Capex is funded with debt or equity and its depreciation reaches reported earnings within two years.</td><td>Capex is fully expensed against revenue with no earnings footprint, or is so contracted that it carries no market risk.</td></tr>
+<tr><td><code>bridge:token-demand-to-provider-revenue</code></td><td><code>dig:compute:token-demand</code></td><td><code>dig:compute:provider-revenue-line</code></td><td>drives</td><td>Demand growth shows up as utilisation first and revenue per megawatt second.</td><td>Provider revenue grows while token volume is flat, or falls while token volume grows.</td></tr>
+<tr><td><code>bridge:goes-to-compute-power</code></td><td><code>dig:power:goes</code></td><td><code>dig:compute:power-commitment</code></td><td>competes_for</td><td>The same mills and casters serve both the grid equipment and the on site power equipment.</td><td>Data center power equipment is sourced from a supply base independent of grid transformer steel.</td></tr>
+<tr><td><code>bridge:core-stacking-to-nuclear-firm-power</code></td><td><code>dig:power:core-stacking</code></td><td><code>dig:nuc:firm-power</code></td><td>feeds</td><td>Nuclear restarts and new builds order grid equipment from the same supply as everything else.</td><td>Nuclear projects source their electrical equipment outside the shared supply chain.</td></tr>
+<tr><td><code>bridge:lpt-to-sic-devices</code></td><td><code>dig:power:lpt</code></td><td><code>dig:sic:power-devices</code></td><td>co_layer_peer</td><td>Both sit in the same substation and converter budgets, so their orders move together.</td><td>Substation budgets show one rising while the other falls for reasons of technology substitution.</td></tr></tbody></table>
 <h2>Under-connected core nodes, the research queue</h2>
-<table><thead><tr><th>Node</th><th>Degree</th></tr></thead><tbody><tr><td><code>concept:thesis:delivery-gap</code></td><td>49</td></tr>
-<tr><td><code>strategy:monitor:scarcity-state</code></td><td>49</td></tr></tbody></table>
+<table><thead><tr><th>Node</th><th>Degree</th></tr></thead><tbody><tr><td><code>concept:thesis:delivery-gap</code></td><td>49</td></tr></tbody></table>
 </main></body></html>

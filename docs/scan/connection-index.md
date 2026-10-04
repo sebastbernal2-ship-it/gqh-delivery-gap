@@ -3,33 +3,33 @@
 Method owner: `docs/plan/deep-chaining.md`. Every node carries its own typed connections and
 its chain hops. Inferred connections are questions with a type and a falsifier.
 
-- Nodes indexed: **168,434** (722 core nodes from the manifest
-  and the digs, 167,712 skeleton sub-nodes)
-- Typed connections: **1,169,772**
-- Core degree: min 49, median 74, max 150; **720 core nodes at 50+ connections (99.7%)**
+- Nodes indexed: **169,985** (725 core nodes from the manifest
+  and the digs, 169,260 skeleton sub-nodes)
+- Typed connections: **1,179,818**
+- Core degree: min 49, median 74, max 150; **724 core nodes at 50+ connections (99.9%)**
 - Skeleton degree: structural only, median 5
-- Chains 67, hops 138, bridges 47
+- Chains 74, hops 145, bridges 54
 
 ## Connection types
 
 | Type | Count |
 |---|---|
-| `sibling_subnode` | 478,380 |
-| `part_of` | 168,360 |
-| `splits_into` | 167,710 |
-| `refined_by` | 163,380 |
-| `refines` | 163,370 |
-| `co_layer_peer` | 18,063 |
+| `sibling_subnode` | 482,070 |
+| `part_of` | 169,908 |
+| `splits_into` | 169,258 |
+| `refined_by` | 164,910 |
+| `refines` | 164,904 |
+| `co_layer_peer` | 18,143 |
 | `ties_by_source` | 3,848 |
 | `shares_semantics` | 1,616 |
-| `ties_by_observable` | 1,005 |
+| `ties_by_observable` | 1,007 |
 | `candidate_for` | 914 |
-| `same_dig_context` | 790 |
-| `conditions` | 692 |
-| `ties_by_player` | 644 |
+| `same_dig_context` | 842 |
+| `conditions` | 698 |
+| `ties_by_player` | 672 |
 | `contains` | 162 |
-| `chain_precedes` | 136 |
-| `chain_follows` | 136 |
+| `chain_precedes` | 143 |
+| `chain_follows` | 143 |
 | `requires` | 110 |
 | `belongs_to` | 96 |
 
@@ -171,6 +171,13 @@ The same chain in the captain's form: `dig:fcc:catalyst-inventory` holds `dig:fc
 | `bridge:providers-firm-to-anchor` | `dig:providers:firm-capacity` | `asset:equity:utility-basket` | anchors | The basket remains the traded surface. | The expression moves to credit or contracts. |
 | `bridge:cycles-buildout-to-anchor` | `dig:cycles:buildout` | `mechanism:capacity:constraint` | anchors | Capacity constraint remains the governing mechanism. | Cycles stop repeating. |
 | `bridge:exec-entry-to-anchor` | `dig:exec:entry-window` | `event:sec:8k-material-agreement` | anchors | Disclosures remain the event class. | The edge moves to non-disclosure events. |
+| `bridge:hvdc-cable-to-copper-demand` | `dig:hvdc:copper-aluminium` | `dig:copper:demand` | feeds | Cable orders translate into conductor demand within the same procurement window. | Cable makers hold conductor inventory through the build cycle and orders do not reach the metal market. |
+| `bridge:compute-capex-to-grid-capex` | `dig:compute:capex-intensity` | `dig:grid:capex-plan` | competes_for | Both are constrained by the same equipment and labor supply, so one raises the other's cost and lead time. | Equipment lead times and crew wages are flat while both capex lines rise. |
+| `bridge:provider-capex-to-equity` | `dig:compute:provider-capex` | `dig:compute:equity-transmission` | drives | Capex is funded with debt or equity and its depreciation reaches reported earnings within two years. | Capex is fully expensed against revenue with no earnings footprint, or is so contracted that it carries no market risk. |
+| `bridge:token-demand-to-provider-revenue` | `dig:compute:token-demand` | `dig:compute:provider-revenue-line` | drives | Demand growth shows up as utilisation first and revenue per megawatt second. | Provider revenue grows while token volume is flat, or falls while token volume grows. |
+| `bridge:goes-to-compute-power` | `dig:power:goes` | `dig:compute:power-commitment` | competes_for | The same mills and casters serve both the grid equipment and the on site power equipment. | Data center power equipment is sourced from a supply base independent of grid transformer steel. |
+| `bridge:core-stacking-to-nuclear-firm-power` | `dig:power:core-stacking` | `dig:nuc:firm-power` | feeds | Nuclear restarts and new builds order grid equipment from the same supply as everything else. | Nuclear projects source their electrical equipment outside the shared supply chain. |
+| `bridge:lpt-to-sic-devices` | `dig:power:lpt` | `dig:sic:power-devices` | co_layer_peer | Both sit in the same substation and converter budgets, so their orders move together. | Substation budgets show one rising while the other falls for reasons of technology substitution. |
 
 ## Under-connected core nodes, the research queue
 
@@ -180,5 +187,4 @@ to write, not a licence to pad:
 | Node | Degree |
 |---|---|
 | `concept:thesis:delivery-gap` | 49 |
-| `strategy:monitor:scarcity-state` | 49 |
 

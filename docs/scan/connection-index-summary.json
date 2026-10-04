@@ -1,11 +1,11 @@
 {
  "nodes": 169985,
- "connections": 1179790,
+ "connections": 1179818,
  "by_status": {
   "declared": 1150982,
   "inferred": 26126,
   "proposed": 2058,
-  "curated": 602,
+  "curated": 630,
   "blocked": 22
  },
  "by_type": {
@@ -14,7 +14,7 @@
   "splits_into": 169258,
   "refined_by": 164910,
   "refines": 164904,
-  "co_layer_peer": 18141,
+  "co_layer_peer": 18143,
   "ties_by_source": 3848,
   "shares_semantics": 1616,
   "ties_by_observable": 1007,
@@ -23,17 +23,17 @@
   "conditions": 698,
   "ties_by_player": 672,
   "contains": 162,
-  "chain_precedes": 136,
-  "chain_follows": 136,
+  "chain_precedes": 143,
+  "chain_follows": 143,
   "requires": 110,
   "belongs_to": 96,
+  "drives": 40,
+  "feeds": 38,
   "anchors": 38,
-  "drives": 36,
-  "feeds": 34,
   "gates": 20,
   "observes": 18,
-  "measures": 14,
-  "exposes": 14
+  "competes_for": 18,
+  "measures": 14
  },
  "degrees": {
   "min": 4,
@@ -58,9 +58,9 @@
    "degree": 49
   }
  ],
- "chains": 67,
- "hops": 138,
- "bridges": 47,
+ "chains": 74,
+ "hops": 145,
+ "bridges": 54,
  "digs": 20,
  "note": "inferred connections are questions with a type and a falsifier, never facts"
 }
