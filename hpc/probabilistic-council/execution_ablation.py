@@ -6,7 +6,6 @@ from dataclasses import asdict
 import json
 from pathlib import Path
 import platform
-import subprocess
 
 import numpy as np
 import torch
@@ -16,6 +15,7 @@ from execution_dataset import FEATURES, load_cache
 from execution_model import ExecutionJev
 from execution_train import apply, probabilities
 from synchronized_tape import digest
+from runtime_provenance import git_revision
 
 
 VIEWS = {
@@ -55,7 +55,7 @@ def summarize(p, y, sessions):
     }
 
 
-def run(dataset, output, epochs=3, seed=20261003, device="cpu"):
+def run(dataset, output, epochs=3, seed=20261003, device="cpu", reference=None):
     if epochs < 1:
         raise ValueError("epochs must be positive")
     spec, arrays = load_cache(dataset)
@@ -63,6 +63,20 @@ def run(dataset, output, epochs=3, seed=20261003, device="cpu"):
     labels = np.asarray(arrays["targets"])
     roles = np.asarray(arrays["roles"])
     sessions = list(spec["sessions"])
+    reference_spec = reference_p = None
+    if reference is not None:
+        reference = Path(reference)
+        reference_spec = json.loads((reference / 'manifest.json').read_text())
+        if (reference_spec.get('schema_version') != 'execution-linear-reference-v1' or
+            reference_spec.get('dataset_manifest_sha256') != digest(Path(dataset)/'manifest.json') or
+            reference_spec.get('fit_roles') != ['training','specialist_calibration'] or
+            reference_spec.get('evaluation_scored') is not False or
+            digest(reference/'probabilities.npy') != reference_spec.get('probabilities_sha256')):
+            raise ValueError('linear reference provenance mismatch')
+        reference_p = np.load(reference/'probabilities.npy',allow_pickle=False)
+        if (reference_p.shape != (len(raw),3,2,2,5) or not np.isfinite(reference_p).all() or
+            (reference_p<0).any() or not np.allclose(reference_p.sum(axis=-1),1.,atol=1e-6)):
+            raise ValueError('invalid reference probability array')
     if raw.shape[-1] != len(FEATURES):
         raise ValueError("cache feature order is not the canonical 24-input execution schema")
     if device.startswith("cuda") and not torch.cuda.is_available():
@@ -184,8 +198,12 @@ def run(dataset, output, epochs=3, seed=20261003, device="cpu"):
     evaluation["training_prevalence"] = summarize(prior_eval, labels[role_masks[4]],
                                                    [sessions[i] for i in np.flatnonzero(role_masks[4])])
     evaluation["gate_selected"] = evaluation[selected]
-    for name, forecast in {**all_predictions[4], "AB_late_equal_pool": late[4],
-                           "training_prevalence": prior_eval}.items():
+    forecasts = {**all_predictions[4], "AB_late_equal_pool": late[4], "training_prevalence": prior_eval}
+    if reference_p is not None:
+        forecasts['linear_latest_state'] = reference_p[role_masks[4]]
+        evaluation['linear_latest_state'] = summarize(reference_p[role_masks[4]],labels[role_masks[4]],
+                                                       [sessions[i] for i in np.flatnonzero(role_masks[4])])
+    for name, forecast in forecasts.items():
         np.save(out / f"evaluation_{name}.npy", forecast, allow_pickle=False)
 
     sessions_by_role = {
@@ -200,13 +218,14 @@ def run(dataset, output, epochs=3, seed=20261003, device="cpu"):
         "gate_metrics": gate_scores, "gate_best_singleton": singleton,
         "gate_selected": selected, "pool_calibration": [asdict(item) for item in flat_cal],
         "evaluation_metrics": evaluation,
+        "forecast_comparison_count": len(forecasts), "linear_reference_manifest": reference_spec,
         "role_cases": {PARTITIONS[r]: int(role_masks[r].sum()) for r in range(5)},
         "role_sessions": sessions_by_role,
         "minimum_three_sessions_per_role_met": minimum_support,
         "interpretation_gate": "SMOKE_ONLY" if not minimum_support else "DEVELOPMENT_COMPARISON_ONLY",
         "seed": seed, "epochs": epochs, "device": device,
         "environment": {"python": platform.python_version(), "numpy": np.__version__, "torch": torch.__version__},
-        "git_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=Path(__file__).parent, text=True).strip(),
+        "git_revision": git_revision(Path(__file__).parent),
         "code_sha256": {p.name: digest(p) for p in [Path(__file__), Path(__file__).with_name("execution_model.py"),
                                                       Path(__file__).with_name("execution_dataset.py"),
                                                       Path(__file__).with_name("execution_predict.py")]},
@@ -214,12 +233,12 @@ def run(dataset, output, epochs=3, seed=20261003, device="cpu"):
         "dataset_manifest_sha256": digest(Path(dataset) / "manifest.json"),
         "artifacts": {p.name: digest(p) for p in sorted(out.iterdir())},
         "limitations": [
-            "all views use the same small, previously inspected development panel; not competition OOS",
+            "all views use the same development panel; not competition OOS",
             "fewer than three eligible dates in any role prevents interpreting this as a useful view comparison",
             "all twelve marginals share one parent decision; scores are dependent within case and session",
             "recorded availability is an unverified retrospective proxy; mirror trade completeness and side meaning unresolved",
             "scratch only: pretraining is intentionally excluded to isolate input views",
-            "no fills, own impact, costs, HFT latency, live HiPerGator execution or quantum advantage",
+            "no fills, own impact, costs, HFT latency or quantum advantage established",
         ],
     }
     (out / "report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
@@ -233,8 +252,9 @@ if __name__ == "__main__":
     parser.add_argument("--epochs", type=int, default=3)
     parser.add_argument("--seed", type=int, default=20261003)
     parser.add_argument("--device", default="cpu")
+    parser.add_argument("--reference",type=Path,help="pre-fitted off-cluster linear forecast directory")
     args = parser.parse_args()
-    report = run(args.dataset, args.output, args.epochs, args.seed, args.device)
+    report = run(args.dataset, args.output, args.epochs, args.seed, args.device,args.reference)
     print(json.dumps({"status": report["status"], "gate_selected": report["gate_selected"],
                       "interpretation_gate": report["interpretation_gate"],
                       "evaluation_metrics": report["evaluation_metrics"]}, indent=2))

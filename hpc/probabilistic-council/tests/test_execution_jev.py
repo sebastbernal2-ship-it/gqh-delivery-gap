@@ -24,21 +24,33 @@ def fixture(start=START,change=False):
     return books,trades
 
 
-def cache(root):
+def cache(root,days=6,explicit=False):
     entries=[];sources={}
-    for day in range(6):
+    for day in range(days):
         for kind in ('books','trades'):
             for file in range(2):
                 p=root/'tmp';p.write_text(f'{day}-{kind}-{file}');sha=digest(p);p.rename(root/sha)
-                entries.append(dict(session=f'2025-12-{8+day:02}',kind=kind,size=(root/sha).stat().st_size,sha256=sha))
+                entries.append(dict(session=f'2025-12-{8+day:02}',kind=kind,size=(root/sha).stat().st_size,sha256=sha,
+                                    pair_id=f'{day}-{file}',filename_timestamp_s=START//NS+day*86400+file))
                 t=START+day*86400*NS
                 sources[sha]=[book_message(t+i*NS) if kind=='books' else trade_message(t+i*NS,tid=i) for i in range(280)]
-    plan=root/'plan';plan.write_text(json.dumps(dict(scope='development_only',selection_rule='synthetic',files=entries)))
+    spec=dict(scope='development_only',selection_rule='synthetic',files=entries)
+    if explicit:
+        from multisession_panel import PARTITIONS
+        spec['session_roles']={f'2025-12-{8+day:02}':PARTITIONS[day//3] for day in range(days)}
+    plan=root/'plan';plan.write_text(json.dumps(spec))
     with patch('execution_dataset.parquet_rows',side_effect=lambda p:sources[p.name]):prepare(plan,root,root/'cache')
     return root/'cache'
 
 
 class ExecutionTests(unittest.TestCase):
+    def test_explicit_fifteen_session_cache_keeps_all_roles_and_pretraining_train_only(self):
+        with tempfile.TemporaryDirectory() as temp:
+            s,a=load_cache(cache(Path(temp),days=15,explicit=True))
+            self.assertEqual(set(a['roles']),set(range(5)))
+            self.assertEqual(len(s['session_roles']),15)
+            self.assertEqual(len(s['pretraining_sessions']),3)
+            self.assertLess(int(a['pretraining_clocks'].max()),int(a['clocks'][a['roles']==1,0].min()))
     def test_future_path_changes_excursion_not_inputs_and_sides_share_case(self):
         before,_=cases(*fixture());after,_=cases(*fixture(change=True))
         self.assertEqual(before[0]['sequence'],after[0]['sequence'])

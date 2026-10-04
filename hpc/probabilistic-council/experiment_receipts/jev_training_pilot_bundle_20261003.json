@@ -1,0 +1,107 @@
+{
+  "dataset_manifest_sha256": "08a0e4d322ef08a8205abbec7e16200b3b860315619e87d00a365dea134210aa",
+  "files_sha256": {
+    "README.txt": "c082006c3c39fd211dd300a6a6d10a08c6779ff4067c6ff7f820993269165df4",
+    "dataset/clocks.npy": "0ea87e2b5cdd58f2f77f6e5888f171a0c689393d2bf1ae2536b7ca46a34e83a2",
+    "dataset/features.npy": "ee61fbba4a282488c105cc8351e2cdbcc3e4fd9be1b58eb8fda403cb60cacde1",
+    "dataset/manifest.json": "08a0e4d322ef08a8205abbec7e16200b3b860315619e87d00a365dea134210aa",
+    "dataset/pretraining_clocks.npy": "92f9373c6ffbc419ea42a2c8c1656c51922f53ff41844abcabf2e2651cea5902",
+    "dataset/pretraining_features.npy": "04e81f5d305efa88644bb5baee512b6b744b9a56f30b53e01a35114c1d1044e3",
+    "dataset/roles.npy": "9f4b9e11a8cb8951b2463f02e80bc951bf2a36b0a2aecdf9a30180f3abe40ac1",
+    "dataset/targets.npy": "6bdae89f7f89eb0abf8de12fbf6420f92107bac35645bd5a95ee01ad048cc424",
+    "hpc/probabilistic-council/book_panel.py": "1a56f65f629401e6bc37bb11af1c5ea9fdd0cca75ab53f06be388cd3b8846c64",
+    "hpc/probabilistic-council/council/__init__.py": "e4ba5d755dcd2fe46bc4e9a9821aa46417136d8f190d4dfa6481793a8959841b",
+    "hpc/probabilistic-council/council/calibration.py": "6be2665a06cf3ed7cfc210d6bfa8264bdf2d19b7043ee07578e7eb2b339fab42",
+    "hpc/probabilistic-council/council/council.py": "ea0b79c79a0c73fa18b95df785c1be03107a179da289cc589a47577789632a86",
+    "hpc/probabilistic-council/council/distributions.py": "2b3f3eec8ddc2bb4ca872ee2517cc236aa1ac55bfb92456ddec4f89766425b90",
+    "hpc/probabilistic-council/council/fusion.py": "e7421ad7131490c1012411dd68150b9bd29d3ee5311a1f6cf8b00736227cf366",
+    "hpc/probabilistic-council/council/gating.py": "1c8470812f4e897fa3b85b3be10c9e0a7a51c6db5cbebab35d221d96098bafa2",
+    "hpc/probabilistic-council/council/jevlike_adapter.py": "6a9211ca33eee007c765d347312a520ad0a363dfd8f0e90e1e87adbcaf4ba2e2",
+    "hpc/probabilistic-council/execution_ablation.py": "4038bf6931343d8c3b2d9b8d4a8ebc110f0ade91c3bed0a58713a9d296e6d321",
+    "hpc/probabilistic-council/execution_dataset.py": "09aa66aa16aaf70fe79b7be399a3db9d7384219269d379a6e40fd54a12dac611",
+    "hpc/probabilistic-council/execution_linear_reference.py": "1e7b1c5d8adbd429ed4a7e5296c0a2ce59c03a80f8f68d899218fffdc67b9613",
+    "hpc/probabilistic-council/execution_model.py": "f6202858181ec7afe1674c0637f6f296d0ca5df2044057a45e92fc75b6655700",
+    "hpc/probabilistic-council/execution_predict.py": "ee7f46e254eaee41a319a36eb4d85bf7b65a30dfb8ec69ec3e8894262b0fcacf",
+    "hpc/probabilistic-council/execution_train.py": "e92c8c867851b5e9bfaa4b2aebabd8e8f2591ce70aa7e73c85008506d8a434e6",
+    "hpc/probabilistic-council/export_execution_capture.py": "e450b78302a419b6252a326b7e436218a8b5e18b7610c6ed0d62bf74393efd71",
+    "hpc/probabilistic-council/fetch_public_plan.py": "32ffe71d0528162b69bc276008cafedefb7cc26d525c1f5285e3b44871cf45cd",
+    "hpc/probabilistic-council/information_views.py": "50ea60aef99b13e609ef42399590981bf7323210b024e0c7e118103ea7097c21",
+    "hpc/probabilistic-council/jevlike/LICENSE": "f65840769b9385e6f04b4a91633ab812c8e9dadd4b0b888b1579e5f84bcb9308",
+    "hpc/probabilistic-council/jevlike/__init__.py": "0b0d268c89c223a5a6bf8fc2e4f9a9bdf446ef4d9f4c4a1f4fd89769d7f2418a",
+    "hpc/probabilistic-council/jevlike/data.py": "801cc11a29d96aa4854138451240d7f53637a092c2609ceee256cd62ae322788",
+    "hpc/probabilistic-council/jevlike/eval.py": "b7d85c5d5072694037441da19c00484560ddd43591ccf5f5bf360a9ee7e5e44c",
+    "hpc/probabilistic-council/jevlike/export_tiny_cpp.py": "434749602f9e2499bb7fdf4f310d3838fe74bddbdd31a4757597ccc254b9fee3",
+    "hpc/probabilistic-council/jevlike/model.py": "ee322ac3db49a84133f163798a60a378534b944e8489e9cb1e504c7c57728c69",
+    "hpc/probabilistic-council/jevlike/predict.py": "72000c90d4574e45b82e40a48ea36f9341a94adb2a7a5b720166bf95a177ee73",
+    "hpc/probabilistic-council/jevlike/train.py": "b7956b90b2bb546f08ed24f0d93562fe40ed2e3373a58b9d3401773c56fa2c32",
+    "hpc/probabilistic-council/jevlike/verify_cpp_parity.py": "720bd64f0189d31f896abd82c41be1a0eba8b0a7029b01637b9969ccf4a47628",
+    "hpc/probabilistic-council/jevlike/vision.py": "ff55fd21b37e630ca1002c2619bd3528c000e30c64b4cbd440bc54f74566aaf6",
+    "hpc/probabilistic-council/modular_pilot.py": "42d71052baf0d6d789d3fca1ef2f74a49f0f04532fec7bfdc7b2fe757ced54db",
+    "hpc/probabilistic-council/multisession_panel.py": "20215b4636c7801640e44b42c228c43e809446234abc6062e3ec66cdd79e6bc3",
+    "hpc/probabilistic-council/package_execution_training.py": "cab5d9e2a487b699b8f68c67f74fac8bbbfe65ccd0da4399095e4a5789d663b9",
+    "hpc/probabilistic-council/pilot.py": "dfb861a19e80ff5e1fcde6dbf793c281de0b36d092d11df0eba6231ee0e75f20",
+    "hpc/probabilistic-council/qcbm_pilot.py": "a6ab64e0f62f85ef298e90160bea12e18c83c7129fc8e9173c40c75ee4062049",
+    "hpc/probabilistic-council/record_execution_tape.py": "657e89587ea7e7f56553a2587973747efa8e9d3e09e2037a2379fdcfa2d38e4e",
+    "hpc/probabilistic-council/run-execution-ablation.slurm": "3b2687c881c7457e432cc73c62a3b52115dd6b2524da1e516d02a1e7a1bd2b33",
+    "hpc/probabilistic-council/runtime_provenance.py": "0741834582a76d8c7db1329d5a7cc265d2f364c3c489af2168ff3d8a7c6aeb00",
+    "hpc/probabilistic-council/source_clock_audit.py": "e3d8446177d6eaa7b8cf6ff0cbb2dc5fb8af4597002322e30f7fe494121bb814",
+    "hpc/probabilistic-council/specialist_lab.py": "697b1688e48208d7169511d32a4dc51e383d3605d1a8d8131f4fa49fd6d1bc03",
+    "hpc/probabilistic-council/synchronized_tape.py": "cfbbc1f1501f6edce8ac0d34bada2f5c2c381e18402d56600ef7cf222eb04b67",
+    "reference/manifest.json": "cdb4a0749afd0f2514843f83e096ede264eca79720d084770cfdf035720e9715",
+    "reference/probabilities.npy": "06fb356c2ed8eafabbf5fc7f7feb324b0be81e9d2a64da4003f1788aaad8ccdf",
+    "submit.sh": "e4764e016cc3bcefc774ff23663bcede255cb1c71bfe769f2a76dfea41efb691"
+  },
+  "limitations": [
+    "archive deployment may have null git revision; code hashes pin actual sources",
+    "market-data receipt proxy and completeness remain unverified",
+    "small previously inspected caches are wiring evidence only"
+  ],
+  "linear_reference_manifest": {
+    "code_sha256": "1e7b1c5d8adbd429ed4a7e5296c0a2ce59c03a80f8f68d899218fffdc67b9613",
+    "dataset_manifest_sha256": "08a0e4d322ef08a8205abbec7e16200b3b860315619e87d00a365dea134210aa",
+    "evaluation_scored": false,
+    "fit_roles": [
+      "training",
+      "specialist_calibration"
+    ],
+    "parameters_sha256": "7273aaea07aec998f87bb7368ba6ab5a0638c56889e57c454fd2d8950b78cfe2",
+    "parent_cases": 41,
+    "probabilities_sha256": "06fb356c2ed8eafabbf5fc7f7feb324b0be81e9d2a64da4003f1788aaad8ccdf",
+    "protocol": "fixed latest-state multinomial L2 reference, not an architecture-matched sequence model",
+    "schema_version": "execution-linear-reference-v1",
+    "scope": "development_only"
+  },
+  "masked_pretraining_epochs": 0,
+  "pretraining_rows": 106,
+  "role_cases": {
+    "evaluation": 8,
+    "gate_fit": 6,
+    "pool_calibration": 7,
+    "specialist_calibration": 7,
+    "training": 13
+  },
+  "role_sessions": {
+    "evaluation": [
+      "2025-12-24"
+    ],
+    "gate_fit": [
+      "2025-12-20"
+    ],
+    "pool_calibration": [
+      "2025-12-21"
+    ],
+    "specialist_calibration": [
+      "2025-12-10"
+    ],
+    "training": [
+      "2025-12-08",
+      "2025-12-09"
+    ]
+  },
+  "schema_version": "execution-training-bundle-v1",
+  "scope": "development_only",
+  "seed": 20261003,
+  "supervised_epochs": 3,
+  "zip_bytes": 194679,
+  "zip_sha256": "495c5b34f6a8551120346f5d3c87640132b1294d3b73d70d3d01f2dcf6ba5a02"
+}

@@ -20,6 +20,11 @@ component="$GQH_REPO_ROOT/hpc/probabilistic-council"
 if [[ -z "${GQH_PYTHON:-}" ]]; then module load pytorch; GQH_PYTHON=python3; fi
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-2}"
 cd "$component"
+extra=()
+if [[ -n "${GQH_JEV_REFERENCE:-}" ]]; then
+    [[ "$GQH_JEV_REFERENCE" = /* && -f "$GQH_JEV_REFERENCE/manifest.json" ]] || { echo 'absolute prepared reference directory required' >&2; exit 2; }
+    extra=(--reference "$GQH_JEV_REFERENCE")
+fi
 "$GQH_PYTHON" -c 'import torch, numpy; from execution_dataset import load_cache; import sys; load_cache(sys.argv[1])' "$GQH_JEV_DATASET"
 "$GQH_PYTHON" execution_ablation.py --dataset "$GQH_JEV_DATASET" --output "$GQH_TAPE_RUN_DIR" \
-    --epochs 3 --seed 20261003 --device "${GQH_JEV_DEVICE:-cpu}"
+    --epochs 3 --seed 20261003 --device "${GQH_JEV_DEVICE:-cpu}" "${extra[@]}"

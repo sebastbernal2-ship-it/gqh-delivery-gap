@@ -211,3 +211,13 @@ emits clocks/counts without features or labels. `record_execution_tape.py` captu
 BTC messages off-cluster; `export_execution_capture.py` produces hash-pinned sources separated by
 reconnect/clock/date segment. Its source inventory is deliberately not a trainable dataset. A new
 segment-aware adapter and frozen chronological roles are required before using it for Jev training.
+
+## First HiPerGator real-data package
+
+The [training-package record](../../docs/inbox/aidan-2026-10-03/jev-first-training-package.md) owns
+the captain's successful L4 setup check, discovered partition, ZIP-deployment fixes, first private
+real-data pilot bundle and wider acquisition status. `execution_linear_reference.py` fits a fixed
+latest-state reference off-cluster without scoring evaluation. `package_execution_training.py`
+validates and packages numerical arrays, pre-fitted reference probabilities and pinned code; the
+included launcher verifies hashes and submits the fixed three-view Jev job. This first 41-case
+package is development wiring only, not adequate model-selection or trading evidence.

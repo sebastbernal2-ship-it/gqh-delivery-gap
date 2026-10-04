@@ -101,7 +101,7 @@ def prepare(plan_path,objects,output):
             seen[kind]|=keys
         rows,excluded=cases(streams['books'],streams['trades'])
         if not rows:raise ValueError('empty session')
-        role_name=plan.get('session_roles',{}).get(s,PARTITIONS[max(0,i-1)])
+        role_name=plan['session_roles'][s] if 'session_roles' in plan else PARTITIONS[max(0,i-1)]
         role=PARTITIONS.index(role_name)
         for row in rows:row.update(role=role,session=s)
         all_rows+=rows;coverage[s]={'cases':len(rows),'exclusions':excluded,'role':role_name}
@@ -133,7 +133,7 @@ def prepare(plan_path,objects,output):
           'pretraining_sessions':sorted(set(pretrain_sessions)),
           'pretraining_window_sessions':pretrain_sessions,
           'pretraining_clock_range_ns':[min(pretrain_clocks),max(pretrain_clocks)],
-          'session_roles':plan.get('session_roles',{s:PARTITIONS[max(0,i-1)] for i,s in enumerate(sessions)}),
+          'session_roles':plan['session_roles'] if 'session_roles' in plan else {s:PARTITIONS[max(0,i-1)] for i,s in enumerate(sessions)},
           'session_coverage':coverage,'sources':plan['files'],
           'plan_sha256':digest(plan_path),'adapter_sha256':digest(__file__),
           'causal_adapter_sha256':digest(Path(__file__).with_name('synchronized_tape.py')),
@@ -141,7 +141,7 @@ def prepare(plan_path,objects,output):
           'sessions':[r['session'] for r in kept],
           'array_sha256':{name+'.npy':digest(out/(name+'.npy')) for name in arrays},
           'label_audit_sha256':digest(out/'label_audit.jsonl'),
-          'limitations':['previously inspected development acquisition, not competition holdout',
+          'limitations':['development acquisition, not competition holdout',
                          'recorded availability proxy and trade completeness unverified',
                          'observed snapshot excursions only; no own impact, fills, costs or joint path claim']}
     (out/'manifest.json').write_text(json.dumps(spec,indent=2,sort_keys=True)+'\n')
