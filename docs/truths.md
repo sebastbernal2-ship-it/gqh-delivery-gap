@@ -670,3 +670,26 @@ windows are spent, so this is not a fresh holdout.
 **Consequence**: the gate is the first interval-backed improvement in the programme and the
 drawdown target is met in this window while the Sharpe target is not; breadth expansion and sleeves
 are the next stages, and the combined gate is recorded as a rejected variant.
+
+## T45. Breadth is built: 11,031 RPO events across 1,168 issuers, but the per-event edge does not generalise at that breadth
+
+**Statement**: the broad panel, built from cached XBRL frames joined to accession acceptance
+timestamps with no network calls, holds 15,547 vintages and 11,031 measured relative surprises across
+1,168 issuers, 2017-03 to 2024-11, with a median availability lag of 39 days and 5.8 percent above
+300 days, so the clock rule passes. The model beats prevalence out of sample on 3,373 rows and 935
+issuers, log loss 1.5525 against 1.6103 and accuracy 0.266 against 0.191. The per-event edge does
+not follow: price coverage is 26.4 percent, and on the covered rows the twenty-session long-short
+spread is +2.17 percent raw with interval -7.29 to +11.01, and +1.31 percent month neutral with
+interval -7.28 to +9.19, with an information coefficient near zero or slightly negative. Compare the
+AI-capex revenue driver, +11.35 percent month neutral with interval +6.59 to +17.06 on the same
+construction.
+**Evidence**: `results/rpo-universe-vintages.csv`; `results/rpo-universe-scores.json`;
+`scripts/build_rpo_universe_panel.py`; `scripts/run_universe_surprise.py`;
+`tests/test_rpo_universe_panel.py`.
+**Scope**: development only, price coverage confounds the edge test because only liquid names have
+cached bars, no borrow cost, no capacity model, and the label is the RPO balance rather than the
+revenue flow.
+**Consequence**: breadth machinery works and the scores hold up, but the RPO edge does not generalise
+at breadth as measured; the edge may be specific to the complex, the size bucket, or the revenue
+concept. Stage 2b must expand price coverage and repeat the test for the revenue and capex drivers
+before any sleeve decision.

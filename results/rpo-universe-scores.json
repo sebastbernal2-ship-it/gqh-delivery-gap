@@ -1,0 +1,422 @@
+{
+ "schema": "rpo-universe-scores-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/alpha-build.md",
+ "panel": {
+  "rows": 11244,
+  "train_rows": 7871,
+  "test_rows": 3373,
+  "issuers": 935,
+  "drops": {
+   "not_measured": 4303
+  },
+  "return_coverage": {
+   "rows": 3373,
+   "rows_with_the_longest_horizon": 890,
+   "share": 0.2639
+  }
+ },
+ "scores": {
+  "prevalence": {
+   "rows": 3373,
+   "log_loss": 1.6103223958986643,
+   "brier": 0.8003665296008862,
+   "accuracy": 0.19122442929143196,
+   "class_support": {
+    "0": 659,
+    "1": 746,
+    "2": 718,
+    "3": 605,
+    "4": 645
+   }
+  },
+  "softmax": {
+   "rows": 3373,
+   "log_loss": 1.5524655889746408,
+   "brier": 0.7774758688627532,
+   "accuracy": 0.26593536910761933,
+   "class_support": {
+    "0": 659,
+    "1": 746,
+    "2": 718,
+    "3": 605,
+    "4": 645
+   }
+  },
+  "rows": 3373,
+  "issuers": 680
+ },
+ "variants": {
+  "raw": {
+   "1": {
+    "information_coefficient": -0.011794646058181826,
+    "long_short": [
+     {
+      "horizon": 1,
+      "n_long": 290,
+      "n_short": 61,
+      "mean_long": 0.011140489809901321,
+      "mean_short": -0.009039477090896055,
+      "spread": 0.020179966900797375,
+      "cost_bps": 0.0,
+      "net": 0.020179966900797375
+     },
+     {
+      "horizon": 1,
+      "n_long": 290,
+      "n_short": 61,
+      "mean_long": 0.011140489809901321,
+      "mean_short": -0.009039477090896055,
+      "spread": 0.020179966900797375,
+      "cost_bps": 20.0,
+      "net": 0.018179966900797373
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.018179966900797373,
+     "lower": -0.0020074505049804273,
+     "upper": 0.043254655878260426,
+     "issuers": 90,
+     "share_positive": 0.951,
+     "resamples": 1000
+    },
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": -0.009039477090896055
+     },
+     {
+      "group": 1,
+      "n": 179,
+      "mean": 0.007610458876272312
+     },
+     {
+      "group": 2,
+      "n": 110,
+      "mean": 0.001738494443184312
+     },
+     {
+      "group": 3,
+      "n": 250,
+      "mean": 0.00029747435154968784
+     },
+     {
+      "group": 4,
+      "n": 290,
+      "mean": 0.011140489809901321
+     }
+    ]
+   },
+   "5": {
+    "information_coefficient": -0.0009265277148301104,
+    "long_short": [
+     {
+      "horizon": 5,
+      "n_long": 290,
+      "n_short": 61,
+      "mean_long": 0.024552616414144628,
+      "mean_short": 0.01063438612195911,
+      "spread": 0.013918230292185517,
+      "cost_bps": 0.0,
+      "net": 0.013918230292185517
+     },
+     {
+      "horizon": 5,
+      "n_long": 290,
+      "n_short": 61,
+      "mean_long": 0.024552616414144628,
+      "mean_short": 0.01063438612195911,
+      "spread": 0.013918230292185517,
+      "cost_bps": 20.0,
+      "net": 0.011918230292185517
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.011918230292185517,
+     "lower": -0.01992434594499083,
+     "upper": 0.04564038496848149,
+     "issuers": 90,
+     "share_positive": 0.735,
+     "resamples": 1000
+    },
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": 0.01063438612195911
+     },
+     {
+      "group": 1,
+      "n": 179,
+      "mean": 0.007939281620762698
+     },
+     {
+      "group": 2,
+      "n": 110,
+      "mean": -0.003329607166696686
+     },
+     {
+      "group": 3,
+      "n": 250,
+      "mean": 0.012416392519305668
+     },
+     {
+      "group": 4,
+      "n": 290,
+      "mean": 0.024552616414144628
+     }
+    ]
+   },
+   "20": {
+    "information_coefficient": -0.03779401821076533,
+    "long_short": [
+     {
+      "horizon": 20,
+      "n_long": 290,
+      "n_short": 61,
+      "mean_long": 0.06007407925072843,
+      "mean_short": 0.03835055295939073,
+      "spread": 0.021723526291337697,
+      "cost_bps": 0.0,
+      "net": 0.021723526291337697
+     },
+     {
+      "horizon": 20,
+      "n_long": 290,
+      "n_short": 61,
+      "mean_long": 0.06007407925072843,
+      "mean_short": 0.03835055295939073,
+      "spread": 0.021723526291337697,
+      "cost_bps": 20.0,
+      "net": 0.019723526291337695
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.019723526291337695,
+     "lower": -0.07285616702288467,
+     "upper": 0.11009784977442888,
+     "issuers": 90,
+     "share_positive": 0.646,
+     "resamples": 1000
+    },
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": 0.03835055295939073
+     },
+     {
+      "group": 1,
+      "n": 179,
+      "mean": 0.029853564875336584
+     },
+     {
+      "group": 2,
+      "n": 110,
+      "mean": -0.0037939522754383936
+     },
+     {
+      "group": 3,
+      "n": 250,
+      "mean": 0.031161626602169742
+     },
+     {
+      "group": 4,
+      "n": 290,
+      "mean": 0.06007407925072843
+     }
+    ]
+   }
+  },
+  "month_neutral": {
+   "1": {
+    "information_coefficient": -0.03554584387106415,
+    "long_short": [
+     {
+      "horizon": 1,
+      "n_long": 290,
+      "n_short": 61,
+      "mean_long": 0.0049896436828872764,
+      "mean_short": -0.00872918607799014,
+      "spread": 0.013718829760877417,
+      "cost_bps": 0.0,
+      "net": 0.013718829760877417
+     },
+     {
+      "horizon": 1,
+      "n_long": 290,
+      "n_short": 61,
+      "mean_long": 0.0049896436828872764,
+      "mean_short": -0.00872918607799014,
+      "spread": 0.013718829760877417,
+      "cost_bps": 20.0,
+      "net": 0.011718829760877417
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.011718829760877417,
+     "lower": -0.008763002984160136,
+     "upper": 0.03701075631369645,
+     "issuers": 90,
+     "share_positive": 0.804,
+     "resamples": 1000
+    },
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": -0.00872918607799014
+     },
+     {
+      "group": 1,
+      "n": 179,
+      "mean": 0.00038031111475405737
+     },
+     {
+      "group": 2,
+      "n": 110,
+      "mean": -0.005691615970460382
+     },
+     {
+      "group": 3,
+      "n": 250,
+      "mean": -0.0014260570002809832
+     },
+     {
+      "group": 4,
+      "n": 290,
+      "mean": 0.0049896436828872764
+     }
+    ]
+   },
+   "5": {
+    "information_coefficient": -0.01005369022339947,
+    "long_short": [
+     {
+      "horizon": 5,
+      "n_long": 290,
+      "n_short": 61,
+      "mean_long": 0.00997381654277536,
+      "mean_short": -0.004658165790484129,
+      "spread": 0.014631982333259488,
+      "cost_bps": 0.0,
+      "net": 0.014631982333259488
+     },
+     {
+      "horizon": 5,
+      "n_long": 290,
+      "n_short": 61,
+      "mean_long": 0.00997381654277536,
+      "mean_short": -0.004658165790484129,
+      "spread": 0.014631982333259488,
+      "cost_bps": 20.0,
+      "net": 0.012631982333259488
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.012631982333259488,
+     "lower": -0.018240181897129615,
+     "upper": 0.04588803798613713,
+     "issuers": 90,
+     "share_positive": 0.745,
+     "resamples": 1000
+    },
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": -0.004658165790484129
+     },
+     {
+      "group": 1,
+      "n": 179,
+      "mean": -0.004705149236191892
+     },
+     {
+      "group": 2,
+      "n": 110,
+      "mean": -0.01521862171020115
+     },
+     {
+      "group": 3,
+      "n": 250,
+      "mean": -0.0003679543311393868
+     },
+     {
+      "group": 4,
+      "n": 290,
+      "mean": 0.00997381654277536
+     }
+    ]
+   },
+   "20": {
+    "information_coefficient": -0.012926041831421611,
+    "long_short": [
+     {
+      "horizon": 20,
+      "n_long": 290,
+      "n_short": 61,
+      "mean_long": 0.01648489203744333,
+      "mean_short": 0.0033397529791862183,
+      "spread": 0.013145139058257113,
+      "cost_bps": 0.0,
+      "net": 0.013145139058257113
+     },
+     {
+      "horizon": 20,
+      "n_long": 290,
+      "n_short": 61,
+      "mean_long": 0.01648489203744333,
+      "mean_short": 0.0033397529791862183,
+      "spread": 0.013145139058257113,
+      "cost_bps": 20.0,
+      "net": 0.011145139058257113
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": 0.011145139058257113,
+     "lower": -0.07284801099482352,
+     "upper": 0.09191370581264688,
+     "issuers": 90,
+     "share_positive": 0.586,
+     "resamples": 1000
+    },
+    "by_predicted_bin": [
+     {
+      "group": 0,
+      "n": 61,
+      "mean": 0.0033397529791862183
+     },
+     {
+      "group": 1,
+      "n": 179,
+      "mean": -0.004766132023514277
+     },
+     {
+      "group": 2,
+      "n": 110,
+      "mean": -0.009173852843868787
+     },
+     {
+      "group": 3,
+      "n": 250,
+      "mean": -0.012488328710217206
+     },
+     {
+      "group": 4,
+      "n": 290,
+      "mean": 0.01648489203744333
+     }
+    ]
+   }
+  }
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only; the sealed windows are spent",
+  "price coverage is thin: most broad-universe filers have no cached bars",
+  "no borrow cost, no capacity model, no sector neutralisation (groups are empty here)",
+  "frame coverage starts in 2018 for most filers, so the panel is shorter than the frames"
+ ]
+}
