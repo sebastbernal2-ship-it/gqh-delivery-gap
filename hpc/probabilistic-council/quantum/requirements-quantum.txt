@@ -1,0 +1,9 @@
+# Quantum simulator and device pilot. Install into a user venv on HiPerGator.
+# GPU Aer wheels are tied to the CUDA version of the module in use; check with
+# `python -c "import torch; print(torch.version.cuda)"` after loading pytorch.
+numpy
+qiskit
+qiskit-aer
+qiskit-ibm-runtime
+# Only for the cuQuantum GPU device path; drop it if the wheel does not match the cluster CUDA.
+cuquantum-python-cu12
