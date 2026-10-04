@@ -267,6 +267,10 @@ Produced by `scripts/run_three_sleeve_portfolio.py`:
 
 generated-path: results/three-sleeve-portfolio.json
 
+Produced by `scripts/run_walk_forward.py` (rolling origins, annual refits):
+
+generated-path: results/walk-forward.json
+
 Produced by `scripts/run_forward_snapshot.py` (append-only, tracked on purpose so the frozen predictions are tamper-evident):
 
 generated-path: results/forward/snapshots/*.json

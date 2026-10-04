@@ -799,3 +799,26 @@ including the best measured configuration at Sharpe 1.549 and a -9.0 percent dra
 about this window, as T49 explains.
 **Consequence**: any new performance claim must come from this window. Until it closes, the honest
 statement of the programme is the development record plus an open, instrumented test.
+
+## T51. Rolling origin: the revenue and gated-intensity sleeves survive every era, the capex sleeve does not, and dropping it raises the Sharpe
+
+**Statement**: refitting every model at each of eight annual origins and scoring only the following
+block, 2019-02 to 2026-08, 1,492 common sessions: the revenue sleeve returns +27.65 percent net at
+Sharpe 0.756 and is positive in every single year from 2019 to 2026, +1.4 percent in the weakest and
++80.2 in the strongest; the gated intensity sleeve returns +6.49 percent at Sharpe 0.830 with a -10.7
+percent drawdown; the capex sleeve returns -12.32 percent at Sharpe -0.263 and is negative in every
+year but 2025 and 2026. The three-sleeve inverse-volatility composite returns +12.46 percent at Sharpe
+1.145 with a -13.1 percent drawdown, which clears all three declared falsifiers. **Removing the capex
+sleeve improves it**: two sleeves, inverse volatility with a mean 78.3 percent on intensity, return
++17.35 percent at Sharpe **1.493** with a -12.3 percent drawdown, and volatility-targeted +15.16
+percent at Sharpe 1.376 with a -10.2 percent drawdown. Equal gross over the two sleeves, +24.83
+percent at Sharpe 1.397.
+**Evidence**: `results/walk-forward.json`; `scripts/run_walk_forward.py`;
+`tests/test_walk_forward.py`.
+**Scope**: development only, both sealed windows spent, complex names only, flat costs on the driver
+sleeves and volume buckets on the intensity sleeve, block boundaries leaving up to twenty sessions of
+overlap, weights estimated on trailing sixty sessions.
+**Consequence**: the capex sleeve is retired from the portfolio, and T43's event-level sign stands as a
+fact about returns that did not survive as a sleeve construction. The best supported configuration is
+now the revenue and gated-intensity pair at Sharpe 1.49 across a rolling-origin record rather than a
+single window, and both remaining sleeves are era-robust on this evidence.

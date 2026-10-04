@@ -78,6 +78,11 @@ and scores. Acceptance: at least 1,000 measured events, at least 200 issuers, me
 clock rule, and scores beating prevalence out of sample. Falsifier: the larger universe degrades the
 per-event edge beyond its interval.
 
+**Stage 3 decision, recorded after the rolling-origin run (T51).** The capex sleeve is
+retired from the portfolio: it lost in every era in the walk-forward record, and removing it raised
+the composite Sharpe from 1.145 to 1.493. Its event-level sign remains a measured fact (T43) and it is
+kept only in the reproduction scripts, never with portfolio weight.
+
 ### Stage 3: the multi-sleeve portfolio
 
 Deliverable: one portfolio over the revenue, capex and RPO sleeves with a declared volatility
