@@ -46,6 +46,15 @@
    "tier": "default"
   },
   {
+   "artifact": "results/distillation-test.json",
+   "claim": "the distilled student against the teacher and the constant-long rival",
+   "command": "python3 scripts/run_distillation_test.py --output {output}",
+   "exact": true,
+   "name": "distillation",
+   "sha256": "934aaa9c063bbaecfe10e6fe30dc98b2e1c2208b16a5cb9f7288dbf60e8b7ebe",
+   "tier": "full"
+  },
+  {
    "artifact": "results/walk-forward-baseline.json",
    "claim": "the rolling-origin record and the two-sleeve composite",
    "command": "python3 scripts/run_walk_forward.py --output {output}",

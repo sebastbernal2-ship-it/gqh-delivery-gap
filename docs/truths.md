@@ -1178,3 +1178,30 @@ demand, not price, so congestion and energy prices remain absent.
 slightly better forward returns in this complex, which is a mean-reversion flavour rather than a demand
 surprise, and it is too weak to trade. The family is closed as measured, and the next non-SEC candidates
 are rates and positioning, where the causal chain does not require the equity market to be slow.
+
+## T67. Distillation sharpens the score, not the money, and the constant-long rival nearly matches the model
+
+**Statement**: Aidan's training design asks for teacher targets through forward chronological folds and a
+direct against distilled comparison. On the surviving panel, with identical features, folds and
+functional form: log loss **teacher 1.6111**, **hard student 1.6111** (the honest control, identical by
+construction), **distilled 1.5993**, with accuracy 0.3196 against **0.3198**, so soft targets improve
+the out-of-sample score by 0.012 and nothing else. The sleeves move the other way again: teacher +27.65
+percent at Sharpe 0.756, distilled **+25.86 at 0.705**, drawdowns equal at about -58 percent, and the
+distilled sleeve against the published baseline composite is positive in 85 percent of resamples with an
+interval of -0.087 to +0.265 that **includes zero**. The bounding rival is the finding that matters:
+trading **every event at equal weight with constant long exposure** returns **+28.14 percent at Sharpe
+0.731 with a -57.8 percent drawdown**, more net return than the teacher and only 0.025 of Sharpe behind
+it. Over this window the complex rose, and the directional model's contribution over simply being long
+is thin.
+**Evidence**: `results/distillation-test.json`; `scripts/run_distillation_test.py`;
+`tests/test_distillation.py`; the teacher and hard student agree exactly, which is the control that the
+comparison is clean.
+**Scope**: development only; the distilled targets are in-sample teacher outputs, so the test asks
+whether soft targets regularise rather than whether the teacher beats labels; one form, one window, one
+seed; the rival holds constant long exposure with the same twenty-session event engine and costs.
+**Consequence**: distillation is closed as a sleeve improvement and stays available as a calibration
+tool. The rival reframes the headline honestly: the published Sharpe of the two-sleeve portfolio is
+mostly carried by exposure to a rising complex plus the gated charge expression, and the disclosure
+model's directional edge over constant long is about 0.025 Sharpe in this window. Any forward claim must
+therefore report the model against that rival, not against zero, and the forward window's falsifiers
+should include it.

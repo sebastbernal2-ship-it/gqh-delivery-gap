@@ -449,3 +449,7 @@ generated-path: results/reproduction-manifest.json
 Produced by `scripts/run_eia_load_refinement.py`:
 
 generated-path: results/eia-load-refinement.json
+
+Produced by `scripts/run_distillation_test.py`:
+
+generated-path: results/distillation-test.json

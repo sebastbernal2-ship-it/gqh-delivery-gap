@@ -170,6 +170,21 @@ What remains, in order:
    the published numbers with digest comparison; the network tier is opt-in. Any new artifact belongs in
    `results/reproduction-manifest.json` in the same commit that creates it.
 
+5d. **Aidan's audits, idea by idea (triage, most recent first).** Corroborated and integrated: the
+   equity council is logistic and every fused rule loses to the single specialist (his audit, my T60 and
+   T61); independent data and appropriate targets are the binding constraints (his audit, my T62);
+   specialise only when information differs (my T62 transfer test); the prevalence rival is measured in
+   the council runs. Tested and rejected on our side: the regime size overlay (T63, harmful because the
+   sleeve does best in stress), distillation (T67, score up, sleeve down), and the constant-long
+   comparison (T67, which shows how much of the headline is exposure). Not done and not mine to finish:
+   his BTC/Hyperliquid execution programme (A and B views, movement quantiles, masked pretraining), whose
+   own receipts record that empirical quantiles beat every neural variant on eight evaluation cases, and
+   whose evidence floor of eleven dates his audit states plainly. Blocked by time, not by choice: the
+   multi-date execution evidence that his audit requires, which the tape timer is still collecting.
+   Open from his list and untried here: the market-stress and execution-stress state dimensions as
+   separate conditioning variables, and the exported-winner discipline of calibrating the exact shipped
+   model on separate earlier data.
+
 6. **The vision gaps** unchanged: the bundle ladder as a routine, fine-tune rounds with drift monitors
    and rollback, the full policy layer, a model registry, quantum only against an equal-budget
    classical win, and scenario and tail diagnostics beyond what T54 covers.

@@ -1,0 +1,178 @@
+{
+ "schema": "distillation-test-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/open-work.md",
+ "folds": [
+  {
+   "block": "2019-01-01",
+   "test": 116,
+   "teacher": 1.7717,
+   "distilled": 1.7145,
+   "hard_student": 1.7717
+  },
+  {
+   "block": "2020-01-01",
+   "test": 159,
+   "teacher": 1.7633,
+   "distilled": 1.7522,
+   "hard_student": 1.7633
+  },
+  {
+   "block": "2021-01-01",
+   "test": 152,
+   "teacher": 1.6621,
+   "distilled": 1.6446,
+   "hard_student": 1.6621
+  },
+  {
+   "block": "2022-01-01",
+   "test": 143,
+   "teacher": 1.5705,
+   "distilled": 1.5647,
+   "hard_student": 1.5705
+  },
+  {
+   "block": "2023-01-01",
+   "test": 150,
+   "teacher": 1.5788,
+   "distilled": 1.5836,
+   "hard_student": 1.5788
+  },
+  {
+   "block": "2024-01-01",
+   "test": 151,
+   "teacher": 1.5232,
+   "distilled": 1.5259,
+   "hard_student": 1.5232
+  },
+  {
+   "block": "2025-01-01",
+   "test": 165,
+   "teacher": 1.5192,
+   "distilled": 1.5086,
+   "hard_student": 1.5192
+  },
+  {
+   "block": "2026-01-01",
+   "test": 108,
+   "teacher": 1.4998,
+   "distilled": 1.5006,
+   "hard_student": 1.4998
+  }
+ ],
+ "summary": {
+  "teacher": {
+   "log_loss": 1.6110856544739085,
+   "accuracy": 0.3195570284804922,
+   "rows": 1144,
+   "log_loss_by_fold": [
+    1.7717318558875683,
+    1.763339025590749,
+    1.6621148632502007,
+    1.5704598170484778,
+    1.578821177279071,
+    1.5231565842871881,
+    1.5192213502451062,
+    1.499840562202907
+   ]
+  },
+  "distilled": {
+   "log_loss": 1.5993301047866177,
+   "accuracy": 0.31983917083769525,
+   "rows": 1144,
+   "log_loss_by_fold": [
+    1.7144779844490785,
+    1.7522224769824346,
+    1.6445698685113144,
+    1.5646802842255478,
+    1.5835978510930142,
+    1.5259143681519363,
+    1.5086033454154713,
+    1.5005746594641447
+   ]
+  },
+  "hard_student": {
+   "log_loss": 1.6110856544739085,
+   "accuracy": 0.3195570284804922,
+   "rows": 1144,
+   "log_loss_by_fold": [
+    1.7717318558875683,
+    1.763339025590749,
+    1.6621148632502007,
+    1.5704598170484778,
+    1.578821177279071,
+    1.5231565842871881,
+    1.5192213502451062,
+    1.499840562202907
+   ]
+  }
+ },
+ "sleeves": {
+  "teacher": {
+   "events": 1144,
+   "sessions": 1870,
+   "metrics": {
+    "days": 1869,
+    "annual_return": 0.2764660251816777,
+    "annual_vol": 0.36563091160670286,
+    "sharpe": 0.7561341681062872,
+    "total_return": 3.685380489665415,
+    "max_drawdown": -0.581087100164883,
+    "hit_rate": 0.5296950240770465
+   }
+  },
+  "distilled": {
+   "events": 1144,
+   "sessions": 1870,
+   "metrics": {
+    "days": 1869,
+    "annual_return": 0.2585877501934683,
+    "annual_vol": 0.3667470149381143,
+    "sharpe": 0.7050848123115685,
+    "total_return": 3.0915683645298477,
+    "max_drawdown": -0.582995275089646,
+    "hit_rate": 0.5238095238095238
+   }
+  },
+  "hard_student": {
+   "events": 1144,
+   "sessions": 1870,
+   "metrics": {
+    "days": 1869,
+    "annual_return": 0.2764660251816777,
+    "annual_vol": 0.36563091160670286,
+    "sharpe": 0.7561341681062872,
+    "total_return": 3.685380489665415,
+    "max_drawdown": -0.581087100164883,
+    "hit_rate": 0.5296950240770465
+   }
+  },
+  "rival_equal_weight": {
+   "events": 1144,
+   "sessions": 1870,
+   "metrics": {
+    "days": 1869,
+    "annual_return": 0.28142388805412205,
+    "annual_vol": 0.384863068141517,
+    "sharpe": 0.7312312127352277,
+    "total_return": 3.6132271893967998,
+    "max_drawdown": -0.5776319179843713,
+    "hit_rate": 0.5254146602461209
+   }
+  }
+ },
+ "interval_distilled_minus_baseline": {
+  "point": 0.10219877953253506,
+  "lower": -0.086992364195502,
+  "upper": 0.2652904147177371,
+  "months": 90,
+  "share_positive": 0.85,
+  "resamples": 1000
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only",
+  "the distilled targets are in-sample teacher outputs, so the test asks whether soft targets regularise, not whether the teacher is better than labels",
+  "one form, one window, one seed"
+ ]
+}

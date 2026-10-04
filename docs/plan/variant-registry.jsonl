@@ -56,3 +56,5 @@
 {"artifact": "T64", "axis": "data", "declared_before": true, "id": "V056", "question": "specialist families", "status": "reported", "variant": "EIA-930 regional load growth, unconditional tests"}
 {"artifact": "T64", "axis": "data", "declared_before": true, "id": "V057", "question": "specialist families", "status": "untried", "variant": "load against seasonal norm, peaks, ramps, acceleration"}
 {"artifact": "T66", "axis": "data", "declared_before": true, "id": "V058", "question": "specialist families", "status": "rejected", "variant": "load seasonal surprise, peak, ramp, acceleration, and the event-level test"}
+{"artifact": "T67", "axis": "training", "declared_before": true, "id": "V059", "question": "student targets", "status": "rejected", "variant": "distillation from forward-fold teacher probabilities"}
+{"artifact": "T67", "axis": "expression", "declared_before": true, "id": "V060", "question": "rival bounding", "status": "reported", "variant": "constant long exposure at every event, equal weight"}
