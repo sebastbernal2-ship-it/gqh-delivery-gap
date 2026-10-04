@@ -822,3 +822,25 @@ overlap, weights estimated on trailing sixty sessions.
 fact about returns that did not survive as a sleeve construction. The best supported configuration is
 now the revenue and gated-intensity pair at Sharpe 1.49 across a rolling-origin record rather than a
 single window, and both remaining sleeves are era-robust on this evidence.
+
+## T52. Combined capacity is single digit millions at one percent, and an earlier capacity figure was optimistic
+
+**Statement**: with each sleeve's daily positions gross-normalised to one unit of capital, capacity at
+one percent participation is a median 0.92 million dollars for the revenue sleeve alone and 1.83
+million for the gated intensity sleeve alone; the combined portfolio at equal sleeve weights gives a
+median 8.15 million with a tenth percentile of 0.93 million, and at the walk-forward inverse-volatility
+weights of T51, 21.7 percent revenue against 78.3 percent intensity, a median 8.14 million with a tenth
+percentile of 1.55 million. The binding names are the small caps, PLUG, APLD, LEU and PRIM, not the
+megacaps. At five percent participation the combined medians are forty million with tenth percentiles
+near five to eight million.
+**Evidence**: `results/capacity-curve.json`; `scripts/run_capacity_curve.py`;
+`tests/test_capacity_curve.py`.
+**Scope**: development only, volume cache covering the complex names, no borrow or shortability
+constraint, participation per name measured against the 60-session median dollar volume.
+**Correction**: T47's capacity figures, a median 56.2 million for revenue and 42.4 for capex, used
+un-normalised conviction weights and are therefore optimistic by roughly the gross they omitted.
+T52's normalised figures are the ones to quote, and any capacity number must state its weights and
+its normalisation.
+**Consequence**: the combined portfolio can carry single-digit millions at one percent participation,
+the constraint is small-cap names rather than the charge signal's universe, and widening the strategy
+means either dropping the smallest names or accepting larger participation.

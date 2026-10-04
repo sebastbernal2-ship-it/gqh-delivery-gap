@@ -222,6 +222,7 @@ def run(config: dict, signals: list[dict], dates: list[str], prices: dict[str, d
         if session:
             schedule_dates.add(session)
     open_cohorts: list[dict] = []
+    cohort_detail: list[dict] = []
     active_from = None
     active_to = None
     for rebalance, date in enumerate(dates):
@@ -295,6 +296,7 @@ def run(config: dict, signals: list[dict], dates: list[str], prices: dict[str, d
                                      "capacity_1pct": 0.01 * min(capacity_terms) if capacity_terms else None,
                                      "capacity_5pct": 0.05 * min(capacity_terms) if capacity_terms else None,
                                      "names": len(weights)})
+                cohort_detail.append({"date": date, "weights": dict(weights)})
                 cohort_log.append({"date": date, "names": len(weights),
                                    "longs": sum(1 for weight in weights.values() if weight > 0),
                                    "shorts": sum(1 for weight in weights.values() if weight < 0),
@@ -350,7 +352,9 @@ def run(config: dict, signals: list[dict], dates: list[str], prices: dict[str, d
         "entry_cost_bps_median": round(statistics.median([entry["entry_cost_bps"] for entry in cohort_log]), 2)
         if cohort_log else None,
         "sample_cohort": cohort_log[0] if cohort_log else None,
-        "daily": daily}
+        "daily": daily,
+        "cohort_weights": [{"date": entry["date"], "weights": entry["weights"]}
+                           for entry in cohort_detail]}
 
 
 def main() -> int:

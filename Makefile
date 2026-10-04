@@ -143,6 +143,7 @@ test:
 	@python3 tests/test_three_sleeve.py
 	@python3 tests/test_forward_window.py
 	@python3 tests/test_walk_forward.py
+	@python3 tests/test_capacity_curve.py
 	@python3 tests/test_build_hyperliquid_fixture.py
 	@python3 tests/test_split_hyperliquid_engine_fixture.py
 	@python3 tests/test_compute_lead_dependence_audit.py
