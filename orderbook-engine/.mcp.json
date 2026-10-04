@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "mcp": {
+      "url": "https://mcp.tigerdata.com/docs"
+    },
+    "tiger-cloud": {
+      "command": "/home/sebas/.local/bin/tiger",
+      "args": [
+        "mcp",
+        "start",
+        "stdio"
+      ],
+      "env": {
+        "TIGER_READ_ONLY": "true"
+      }
+    }
+  }
+}

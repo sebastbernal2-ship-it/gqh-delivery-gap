@@ -1,0 +1,250 @@
+{
+  "depth_fixture": "examples/io-contract/depth-sample.jsonl",
+  "trades_fixture": "examples/io-contract/trades-sample.jsonl",
+  "depth_events": 3,
+  "trade_events": 2,
+  "events": 5,
+  "parse_errors": 0,
+  "chain_gaps": 0,
+  "chain_superseded": 0,
+  "chain_pending": 0,
+  "chain_pending": 0,
+  "snapshots": 1,
+  "book_checksum": "e4a09c8d1a4350395c6d8615cca5781f",
+  "book_best_bid": 847440500,
+  "book_best_ask": 847441000,
+  "book_bid_levels": 2,
+  "book_ask_levels": 2,
+  "latency_decision_ms": 25.0,
+  "latency_cancel_ms": 10.0,
+  "manifest": {
+    "config_sha256": "6cafd3db6e306f257b31ea5dc3b9368977a62d9f6a0ddcff97fe756e5637b89c",
+    "created_at": "2026-10-04T03:01:56Z",
+    "end": "2026-10-04T00:00:03Z",
+    "event_time_range": [
+      "2026-10-04T00:00:00.000000000Z", "2026-10-04T00:00:02.000000000Z"
+    ],
+    "fixture": "examples/io-contract/depth-sample.jsonl",
+    "fixture_sha256": "72851578810bc4abc5b098c2f8d4653a153fed1b85ed23c1d80d3432a175047a",
+    "format": "canonical",
+    "kind": "depth",
+    "query_version": "quanthacks-fixture-v1",
+    "row_count": 3,
+    "source": "synthetic sample for the engine interface",
+    "source_hashes": [
+      "8f4a1c9d2e6b7a5c3d1e0f9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c"
+    ],
+    "start": "2026-10-04T00:00:00Z",
+    "symbol": "BTCUSDT"
+  },
+  "assumption_gap": {
+    "statement": "the naive baseline fills every order in full at the mid with no capital limit; the difference against each mode is the realism gap",
+    "naive": {
+      "orders": 1,
+      "filled_units": 100000,
+      "fees": 338976200,
+      "equity": 99661273800,
+      "capital_blocked": 0
+    },
+    "per_mode": [
+      {
+        "mode": "conservative",
+        "fill_shortfall_units": 100000,
+        "naive_filled_units": 100000,
+        "realistic_filled_units": 0,
+        "fill_ratio_bps": 0,
+        "naive_equity": 99661273800,
+        "realistic_equity": 100000000000,
+        "equity_gap": -338726200,
+        "naive_fees": 338976200,
+        "realistic_fees": 0,
+        "realistic_rejected": 0
+      },
+      {
+        "mode": "heuristic",
+        "fill_shortfall_units": 100000,
+        "naive_filled_units": 100000,
+        "realistic_filled_units": 0,
+        "fill_ratio_bps": 0,
+        "naive_equity": 99661273800,
+        "realistic_equity": 100000000000,
+        "equity_gap": -338726200,
+        "naive_fees": 338976200,
+        "realistic_fees": 0,
+        "realistic_rejected": 0
+      },
+      {
+        "mode": "optimistic",
+        "fill_shortfall_units": 0,
+        "naive_filled_units": 100000,
+        "realistic_filled_units": 100000,
+        "fill_ratio_bps": 10000,
+        "naive_equity": 99661273800,
+        "realistic_equity": 99830512000,
+        "equity_gap": -169238200,
+        "naive_fees": 338976200,
+        "realistic_fees": 169488000,
+        "realistic_rejected": 0
+      }
+    ]
+  },
+  "regimes": {
+    "threshold_ticks": 0,
+    "statement": "the volatility threshold is the median trailing mid travel of the first half; the holdout half applies the same threshold",
+    "attribution": [
+      {
+        "label": "low_volatility",
+        "fills": 0,
+        "units": 0,
+        "fees": 0,
+        "realized": 0,
+        "net": 0
+      },
+      {
+        "label": "high_volatility",
+        "fills": 0,
+        "units": 0,
+        "fees": 0,
+        "realized": 0,
+        "net": 0
+      }
+    ],
+    "training_attribution": [
+      {
+        "label": "low_volatility",
+        "fills": 0,
+        "units": 0,
+        "fees": 0,
+        "realized": 0,
+        "net": 0
+      },
+      {
+        "label": "high_volatility",
+        "fills": 0,
+        "units": 0,
+        "fees": 0,
+        "realized": 0,
+        "net": 0
+      }
+    ],
+    "holdout_attribution": [
+      {
+        "label": "low_volatility",
+        "fills": 0,
+        "units": 0,
+        "fees": 0,
+        "realized": 0,
+        "net": 0
+      },
+      {
+        "label": "high_volatility",
+        "fills": 0,
+        "units": 0,
+        "fees": 0,
+        "realized": 0,
+        "net": 0
+      }
+    ],
+    "rule_all": [],
+    "rule_training": [],
+    "rule_holdout": [],
+    "basis_mode": "conservative",
+    "caveat": "one fixture is weak evidence: the rule describes this data set, not the future"
+  },
+  "features": {
+    "buy_ratio_bps_min": 5000,
+    "buy_ratio_bps_max": 10000,
+    "events_above_floor": 5
+  },
+  "modes": [
+    {
+      "mode": "conservative",
+      "submitted": 1,
+      "rejected": 0,
+      "cancelled": 0,
+      "fills": 0,
+      "filled_units": 0,
+      "taker_units": 0,
+      "maker_units": 0,
+      "liquidations": 0,
+      "position": 0,
+      "collateral": 100000000000,
+      "fees": 0,
+      "realized_pnl": 0,
+      "reserved_margin": 84744000000,
+      "book_checksum": "e4a09c8d1a4350395c6d8615cca5781f",
+      "book_best_bid": 847440500,
+      "book_best_ask": 847441000,
+      "book_bid_levels": 2,
+      "book_ask_levels": 2,
+      "price_range_min_bid": 847439000,
+      "price_range_max_bid": 847440500,
+      "price_range_min_ask": 847441000,
+      "price_range_max_ask": 847441000,
+      "seconds": 0.0,
+      "heap_bytes": 0
+    },
+    {
+      "mode": "heuristic",
+      "submitted": 1,
+      "rejected": 0,
+      "cancelled": 0,
+      "fills": 0,
+      "filled_units": 0,
+      "taker_units": 0,
+      "maker_units": 0,
+      "liquidations": 0,
+      "position": 0,
+      "collateral": 100000000000,
+      "fees": 0,
+      "realized_pnl": 0,
+      "reserved_margin": 84744000000,
+      "book_checksum": "e4a09c8d1a4350395c6d8615cca5781f",
+      "book_best_bid": 847440500,
+      "book_best_ask": 847441000,
+      "book_bid_levels": 2,
+      "book_ask_levels": 2,
+      "price_range_min_bid": 847439000,
+      "price_range_max_bid": 847440500,
+      "price_range_min_ask": 847441000,
+      "price_range_max_ask": 847441000,
+      "seconds": 0.0,
+      "heap_bytes": 0
+    },
+    {
+      "mode": "optimistic",
+      "submitted": 1,
+      "rejected": 0,
+      "cancelled": 0,
+      "fills": 1,
+      "filled_units": 100000,
+      "taker_units": 0,
+      "maker_units": 100000,
+      "liquidations": 0,
+      "position": 100000,
+      "collateral": 99830512000,
+      "fees": 169488000,
+      "realized_pnl": 0,
+      "reserved_margin": 0,
+      "book_checksum": "e4a09c8d1a4350395c6d8615cca5781f",
+      "book_best_bid": 847440500,
+      "book_best_ask": 847441000,
+      "book_bid_levels": 2,
+      "book_ask_levels": 2,
+      "price_range_min_bid": 847439000,
+      "price_range_max_bid": 847440500,
+      "price_range_min_ask": 847441000,
+      "price_range_max_ask": 847441000,
+      "seconds": 0.0,
+      "heap_bytes": 0
+    }
+  ],
+  "uncertainty": {
+    "filled_units_min": 0,
+    "filled_units_max": 100000,
+    "statement": "maker fills are bounded: conservative is a lower bound and optimistic an upper bound for the same events"
+  },
+  "throughput": { "events_per_second": 0.0, "total_seconds": 0.0 },
+  "book_mismatch": false,
+  "book_mismatch_note": "the loop book matches the strict replay"
+}

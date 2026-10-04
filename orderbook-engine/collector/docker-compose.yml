@@ -1,0 +1,21 @@
+services:
+  binance-depth:
+    build: .
+    restart: unless-stopped
+    # Run as the invoking user so the capture windows land owned by the person
+    # who has to read them. Docker would otherwise create the data directory as
+    # root and the daily replay job could not write beside it.
+    user: "${CONTAINER_UID:-1000}:${CONTAINER_GID:-1000}"
+    healthcheck:
+      test: ["CMD", "python", "/app/healthcheck.py"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+    environment:
+      SYMBOLS: BTCUSDT
+      DEPTH_SPEED: 100ms
+      REST_LIMIT: 1000
+      CAPTURE_TRADES: 1
+      CAPTURE_INTERVAL_SECONDS: 300
+    volumes:
+      - ./data:/data/binance

@@ -1,0 +1,21 @@
+{
+  "config_sha256": "6cafd3db6e306f257b31ea5dc3b9368977a62d9f6a0ddcff97fe756e5637b89c",
+  "created_at": "2026-10-04T03:01:56Z",
+  "end": "2026-10-04T00:00:03Z",
+  "event_time_range": [
+    "2026-10-04T00:00:00.000000000Z",
+    "2026-10-04T00:00:02.000000000Z"
+  ],
+  "fixture": "examples/io-contract/depth-sample.jsonl",
+  "fixture_sha256": "72851578810bc4abc5b098c2f8d4653a153fed1b85ed23c1d80d3432a175047a",
+  "format": "canonical",
+  "kind": "depth",
+  "query_version": "quanthacks-fixture-v1",
+  "row_count": 3,
+  "source": "synthetic sample for the engine interface",
+  "source_hashes": [
+    "8f4a1c9d2e6b7a5c3d1e0f9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c"
+  ],
+  "start": "2026-10-04T00:00:00Z",
+  "symbol": "BTCUSDT"
+}
