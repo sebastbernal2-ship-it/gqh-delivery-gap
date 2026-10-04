@@ -163,6 +163,25 @@ not a claim that adding Snowflake, TigerData, GPUs or AI itself creates alpha.
 - The baseline is compared with a simpler TigerData/q-only implementation before adding Snowpark
   ML, Cortex, Laya or GPU training.
 
+## Snowflake API evidence sidecar (additive, not strategy input)
+
+The adopted use for the GQH Snowflake API prize is a filing-evidence panel alongside the order-book
+backtester. The deterministic engine continues to own all prices, book events, fills, arithmetic,
+signals, and backtest metrics. A post-run user action may ask Snowflake Cortex Search for related
+SEC evidence and then Cortex REST inference for a qualitative, cited explanation. The request
+contains a ticker and question—not the backtest's numeric results—and returns source cards with
+the exact retrieved context, accession, URL, timestamps, and document hash. The UI shows those
+source cards separately from model prose. AI annotations do not mutate source rows, strategy
+features, or results, and do not become alpha without an independently reviewed proposal and a new
+test.
+
+The implementation contract is in [`src/snowflake/README.md`](../../../src/snowflake/README.md),
+the separate annotation/query SQL in `src/snowflake/ai_evidence.sql`, the optional cost-bearing
+Cortex Search setup in `src/snowflake/cortex_search.sql`, and the API client in
+`src/snowflake/research_sidecar.py`. The UI hook and live service/API call still await the
+backtester source repository and Snowflake account setup; no Cortex service has been provisioned
+by this change.
+
 The MLH Snowflake partner page advertises a 120-day trial and Snowflake resources; this does not
 prove our account, edition, credits or entitlements. Feature Store use is optional because its
 edition requirements must be checked after account creation.

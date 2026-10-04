@@ -1068,3 +1068,23 @@ correctness repair authorized by the user; it changes no strategy or out-of-samp
 ## 2026-10-03: The regime overlay rejects stale history and reports undefined metrics
 
 **Regime input contract**: reject a latest pre-entry SPY close older than seven calendar days, and reject gaps over seven calendar days within retained history, before writing outputs. Seven days is a conservative data-coverage guard that allows weekends and ordinary holidays; it is not an exchange-calendar completeness check or a tuned strategy parameter. A missing pre-entry volatility observation fails, while a fresh observation with insufficient threshold history remains warmup. Empty subsets have blank performance metrics, and Sharpe is blank for fewer than two observations or zero dispersion. The development fence and exposure rule are unchanged. Synthetic regression tests cover these repairs without opening outcome data.
+
+## 2026-10-03: Snowflake Cortex is a read-only research sidecar, never a numeric source of truth
+
+**Decision**: Use Snowflake's Cortex Search and REST inference APIs as an optional post-run evidence
+assistant beside the order-book backtester. The deterministic backtester remains the sole owner of
+price, quote/book, fill, strategy, and performance values. The assistant retrieves SEC filing
+snippets by ticker/question and returns qualitative commentary with source citations; it is never
+passed the run's numeric metrics and is instructed not to restate numbers.
+
+**Data boundary**: preserve original filing packages, raw market data, feature tables, and result
+artifacts unchanged. AI outputs live in a separate `RESEARCH.FILING_AI_ANNOTATIONS` table and are
+candidate annotations with exact source context, document hash, model/prompt versions, timestamps,
+and a human review status. Candidate reported values stay verbatim strings. They are not joined to
+strategy inputs or promoted to reviewed facts without manual source verification.
+
+**Implementation state**: additive DDL/query, a bounded REST sidecar client, API setup SQL, and unit
+tests are in `src/snowflake/`. The optional Cortex Search service and inference have not been run;
+provisioning can consume Snowflake credits and requires verifying the account/model/role first. The
+actual order-book backtester UI repository is not in this checkout, so the post-run panel hook is
+still an integration step rather than a claimed completed connection.

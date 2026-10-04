@@ -74,6 +74,7 @@ absorb:
 	@bash scripts/memory-absorb.sh
 
 test:
+	@python3 tests/test_snowflake_research_sidecar.py
 	@python3 tests/test_regime_risk_control.py
 	@python3 tests/test_market_map.py
 	@python3 tests/test_memory_filter.py
