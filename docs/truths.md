@@ -448,6 +448,22 @@ shifts so the attainable share is 0.05. Development only.
 on the withdrawal hazard, and it is the first measured link from compute markets to the physical queue.
 It stays a phase marker, never a required link.
 
+## T35. The dated regime state, version 1, reads buildout from 2022 with an overbuild reading in 2024
+
+**Statement**: under the declared two sensor rules (demand economics from the rental level against a
+trailing twelve month mean, supply stress from the trailing three month withdrawal hazard, fixed bands,
+two month confirmation), the machine labels 132 months from 2014 to 2024 as buildout 79, overbuild 39,
+shakeout 8, shortage 6, with 15 transitions. Buildout runs from 2022 with an overbuild reading appearing in
+2024 as rental levels fell below trend and the withdrawal hazard rose, then wobbling between the two labels
+in late 2024 as the rental reading crossed its trend.
+**Evidence**: `results/regime-state-daily.csv`; `results/regime-state-summary.json`;
+`scripts/build_regime_state.py`; `docs/plan/regime-state-machine.md`.
+**Scope**: judgment thresholds, version 1; the rental sensor exists only from 2022-05 and earlier rows run
+on spend and hazard alone; one queue snapshot; development only.
+**Consequence**: the sizing layers of theses A and C have a dated state to read, and the 2024 overbuild
+reading is the first place the machine says something the queue alone would not, because the rental sensor
+leads the hazard the queue measures.
+
 ---
 
 # What these truths are pointing at

@@ -1,0 +1,98 @@
+{
+ "months": 132,
+ "phase_counts": {
+  "buildout": 79,
+  "overbuild": 39,
+  "shakeout": 8,
+  "shortage": 6
+ },
+ "transitions": [
+  {
+   "from": "2016-01",
+   "to": "2016-02",
+   "from_phase": "buildout",
+   "to_phase": "overbuild"
+  },
+  {
+   "from": "2016-05",
+   "to": "2016-06",
+   "from_phase": "overbuild",
+   "to_phase": "shakeout"
+  },
+  {
+   "from": "2016-08",
+   "to": "2016-09",
+   "from_phase": "shakeout",
+   "to_phase": "buildout"
+  },
+  {
+   "from": "2020-06",
+   "to": "2020-07",
+   "from_phase": "buildout",
+   "to_phase": "overbuild"
+  },
+  {
+   "from": "2020-09",
+   "to": "2020-10",
+   "from_phase": "overbuild",
+   "to_phase": "buildout"
+  },
+  {
+   "from": "2020-11",
+   "to": "2020-12",
+   "from_phase": "buildout",
+   "to_phase": "shakeout"
+  },
+  {
+   "from": "2021-04",
+   "to": "2021-05",
+   "from_phase": "shakeout",
+   "to_phase": "buildout"
+  },
+  {
+   "from": "2022-10",
+   "to": "2022-11",
+   "from_phase": "buildout",
+   "to_phase": "overbuild"
+  },
+  {
+   "from": "2022-12",
+   "to": "2023-01",
+   "from_phase": "overbuild",
+   "to_phase": "buildout"
+  },
+  {
+   "from": "2023-06",
+   "to": "2023-07",
+   "from_phase": "buildout",
+   "to_phase": "shortage"
+  },
+  {
+   "from": "2023-12",
+   "to": "2024-01",
+   "from_phase": "shortage",
+   "to_phase": "overbuild"
+  },
+  {
+   "from": "2024-09",
+   "to": "2024-10",
+   "from_phase": "overbuild",
+   "to_phase": "buildout"
+  }
+ ],
+ "latest": {
+  "month": "2024-12",
+  "gscpi": null,
+  "delivery_times": null,
+  "ten_year": null,
+  "hazard_3m": 0.010095486476254575,
+  "queue_age_months": 86.08703150633072,
+  "rental_level_z": 1.2659620083395793,
+  "markers": "demand high (rental 1.27), stress high (hazard 0.0101)",
+  "phase_agreement": 1.0,
+  "phase": "buildout"
+ },
+ "hazard_median": 0.003509,
+ "gscpi_median": 0.117,
+ "delivery_median": 9.0
+}

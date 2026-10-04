@@ -161,3 +161,11 @@ generated-path: results/complex-margins-quarterly.csv
 Produced by `scripts/build_compute_queue_study.py`:
 
 generated-path: results/compute-queue-study.json
+
+Produced by `scripts/build_regime_state.py`:
+
+generated-path: results/regime-state-daily.csv
+
+Produced by `scripts/build_regime_state.py`:
+
+generated-path: results/regime-state-summary.json
