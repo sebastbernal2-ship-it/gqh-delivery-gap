@@ -114,6 +114,23 @@ class RiskAdapterTests(unittest.TestCase):
         assert_compatible(tuple(terminal))
         self.assertEqual(len(terminal[0].outcome_space), 3)
 
+    def test_custom_id_prefix_keeps_ids_unique_across_specialists(self):
+        left = risk_forecasts(self.prediction(), {"terminal_loss": (-1.0, 1.0),
+                                                  "observed_adverse": (0.5, 1.0)},
+                              id_prefix="AB_scratch6", **STAMP)
+        right = risk_forecasts(self.prediction(), {"terminal_loss": (-1.0, 1.0),
+                                                   "observed_adverse": (0.5, 1.0)},
+                               id_prefix="B_scratch3", **STAMP)
+        self.assertEqual(len({f.specialist_id for f in left} & {f.specialist_id for f in right}), 0)
+        self.assertIn("AB_scratch6:15s:sell:observed_adverse", {f.specialist_id for f in left})
+
+    def test_flat_ids_name_the_model_not_the_marginal(self):
+        forecasts = risk_forecasts(self.prediction(), {"terminal_loss": (-1.0, 1.0),
+                                                       "observed_adverse": (0.5, 1.0)},
+                                   id_prefix="AB_scratch6", flat_id=True, **STAMP)
+        self.assertEqual({f.specialist_id for f in forecasts}, {"AB_scratch6"})
+        self.assertEqual(len(forecasts), 12)
+
     def test_shape_and_finiteness_are_enforced(self):
         with self.assertRaises(ValueError):
             risk_forecasts([[[]]], {"terminal_loss": (-1.0, 1.0),

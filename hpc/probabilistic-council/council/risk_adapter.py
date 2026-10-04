@@ -26,16 +26,26 @@ TASKS = ("terminal_loss", "observed_adverse")
 
 def quantile_forecasts(prediction: object, context: str, forecast_time: str, valid_until: str,
                        information_cutoff: str, model_version: str, data_version: str,
-                       horizon_suffix: str = "s") -> Tuple[QuantileForecast, ...]:
-    """One quantile forecast per horizon, side and task, before bin conversion."""
+                       horizon_suffix: str = "s", id_prefix: str = "risk",
+                       flat_id: bool = False) -> Tuple[QuantileForecast, ...]:
+    """One quantile forecast per horizon, side and task, before bin conversion.
+
+    With flat_id the specialist id is the plain prefix, one id per model. That is what the council
+    needs: the specialist is the checkpoint, and the horizon, side and task are the case, so twelve
+    outputs are never mistaken for twelve experts. The two tasks then share one id, so a caller using
+    flat_id must select one marginal per case.
+    """
     shape = (len(HORIZONS), len(SIDES), len(TASKS), len(QUANTILE_LEVELS))
     cubes = _validate_prediction(prediction, shape)
+    if not id_prefix:
+        raise ValueError("id_prefix must be nonempty")
     forecasts = []
     for horizon_index, horizon in enumerate(HORIZONS):
         for side_index, side in enumerate(SIDES):
             for task_index, task in enumerate(TASKS):
+                identifier = id_prefix if flat_id else f"{id_prefix}:{horizon}{horizon_suffix}:{side}:{task}"
                 forecasts.append(QuantileForecast(
-                    specialist_id=f"risk:{horizon}{horizon_suffix}:{side}:{task}",
+                    specialist_id=identifier,
                     levels=QUANTILE_LEVELS,
                     values=cubes[horizon_index][side_index][task_index],
                     unit="bps",
@@ -51,19 +61,27 @@ def quantile_forecasts(prediction: object, context: str, forecast_time: str, val
 
 def risk_forecasts(prediction: object, edges_by_task: Mapping[str, Sequence[float]],
                    context: str, forecast_time: str, valid_until: str, information_cutoff: str,
-                   model_version: str, data_version: str) -> Tuple[SpecialistForecast, ...]:
+                   model_version: str, data_version: str,
+                   id_prefix: str = "risk", flat_id: bool = False) -> Tuple[SpecialistForecast, ...]:
     """The same twelve marginals as categorical forecasts, one per horizon, side and task."""
     missing = [task for task in TASKS if task not in edges_by_task]
     if missing:
         raise ValueError("missing bin edges for: " + ", ".join(missing))
+    order = [task for _horizon in HORIZONS for _side in SIDES for task in TASKS]
     return tuple(
-        to_categorical(forecast, edges_by_task[forecast.specialist_id.rsplit(":", 1)[-1]])
-        for forecast in quantile_forecasts(prediction, context, forecast_time, valid_until,
-                                           information_cutoff, model_version, data_version)
+        to_categorical(forecast, edges_by_task[task])
+        for forecast, task in zip(
+            quantile_forecasts(prediction, context, forecast_time, valid_until,
+                               information_cutoff, model_version, data_version,
+                               id_prefix=id_prefix, flat_id=flat_id),
+            order)
     )
 
 
 def _validate_prediction(prediction: object, shape: Tuple[int, ...]) -> list:
+    # Arrays arrive from the risk predictor; convert once so the checks stay representation-free.
+    if hasattr(prediction, "tolist"):
+        prediction = prediction.tolist()
     if not isinstance(prediction, (list, tuple)) or len(prediction) != shape[0]:
         raise ValueError(f"risk prediction must have {shape[0]} horizons")
     cubes = []
