@@ -97,3 +97,7 @@ generated-path: results/maker-entry-study.json
 Produced by `scripts/build_capex_revenue_gap.py`:
 
 generated-path: results/capex-revenue-gap.json
+
+Produced by `scripts/build_spillover_study.py`:
+
+generated-path: results/spillover-study.json

@@ -281,6 +281,21 @@ no usable panel: stale concept tags, annual only capex, and short histories.
 **Consequence**: the depreciation wall node carries evidence now, and the open object is whether the
 equity market prices the intensity rise, which requires the market panel.
 
+## T24. Cross market entry does not rescue the cascade family at size
+
+**Statement**: every cross market entry into BTC or ETH nets negative at both dislocation levels,
+between -7.0 and -10.3 basis points on the median, and the same market cells are negative as well. The
+only positive cells enter the thin markets: ETH events followed by an SPX position net +5.9 basis points
+on 126 events (p 0.013) at the top five percent level, and ETH followed by GAS nets +5.4 on 28 events
+(p 0.0016) at the top one percent level, with median depth at entry of 3,400 and 1,489 dollars. The
+target is entered against the source move, so those cells say the thin targets move against the source
+dislocation.
+**Evidence**: `results/spillover-study.json`; `scripts/build_spillover_study.py`; `data/tape`.
+**Scope**: one venue, one recorded window, four markets, fifteen second snapshots; development only.
+**Consequence**: the reversion expression stays in the source market. The thin market cells are structure
+with trivial capacity, useful as a monitor and not as a trade until a larger venue shows the same
+behaviour.
+
 ---
 
 # What these truths are pointing at
