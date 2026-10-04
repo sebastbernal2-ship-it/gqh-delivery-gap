@@ -234,6 +234,35 @@ the condition bar close with no speed advantage used; development only.
 presence of reversion. The conjunction is the only condition whose gross clears it, on six events, so the
 family's next work is more events and cheaper entry, not wider level ladders.
 
+## T21. The provider to family map is not supported, raw or relative
+
+**Statement**: on raw family changes, ten mapped provider family pairs show mean rho -0.27 against thirty
+two unmapped pairs at -0.02, with zero mapped shift null survivors against five unmapped. On relative
+changes, the family change minus the cross-family median, mapped pairs show -0.17 against +0.04, zero
+survivors against four. The strongest single association, EQIX against g5 at +0.71, sits on the provider
+the map excludes from GPU families.
+**Evidence**: `results/provider-family-tests.json`; `results/provider-family-tests-relative.json`;
+`scripts/build_provider_family_tests.py`; `docs/scan/provider-family-map.jsonl`.
+**Scope**: ten providers, 42 tested provider family pairs, 11 usable quarters per pair; development only.
+**Consequence**: family price mapping is retired as the provider transmission variable. The provider
+object moves to level variables, revenue per megawatt, contracted share and lease spread, which need
+filing level data rather than rental prices.
+
+## T22. Maker entry improves the paired result and fails the absolute one
+
+**Statement**: resting at the dislocation extreme fills 33 percent of frozen conjunction events, 47
+percent at the top one percent level, and 42 percent at the top five percent and thin book levels. The
+paired result against taker entry is +4.6 to +17.3 basis points on the same events, but the absolute
+maker net is at or below zero everywhere except +0.83 and +2.64 basis points at fifteen minutes on two
+levels, both inside their nulls. At the frozen conjunction the maker variant nets -8.5 against the taker
++6.9, because the two fills are the events that kept moving.
+**Evidence**: `results/maker-entry-study.json`; `scripts/build_maker_entry_study.py`; `data/tape`.
+**Scope**: recorded window, four markets, one venue, best bid and ask snapshots at fifteen seconds, no
+queue position modelled; development only.
+**Consequence**: the binding constraint shifts from the cost hurdle to fill selection. The unfilled
+events are the reversion, so the next object is a fill model with queue position before maker entry can
+be treated as anything more than a size tool.
+
 ---
 
 # What these truths are pointing at

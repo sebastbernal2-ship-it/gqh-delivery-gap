@@ -1,0 +1,156 @@
+{
+ "status": "development only; recorded window; protocol docs/plan/maker-entry-study.md",
+ "markets": {
+  "BTC": 2469,
+  "ETH": 2471,
+  "GAS": 2471,
+  "SPX": 2471
+ },
+ "levels": {
+  "L1": {
+   "4": {
+    "events": 6,
+    "fills": 2,
+    "fill_rate": 0.333,
+    "maker_net_mean_bps": -8.65,
+    "maker_net_median_bps": -8.65,
+    "taker_net_mean_bps": -8.2,
+    "paired_difference_bps": 4.64,
+    "null_p": 0.6,
+    "doubled_cost_maker_bps": -14.65
+   },
+   "20": {
+    "events": 6,
+    "fills": 2,
+    "fill_rate": 0.333,
+    "maker_net_mean_bps": -11.41,
+    "maker_net_median_bps": -11.41,
+    "taker_net_mean_bps": -13.21,
+    "paired_difference_bps": 5.35,
+    "null_p": 0.8,
+    "doubled_cost_maker_bps": -17.41
+   },
+   "60": {
+    "events": 6,
+    "fills": 2,
+    "fill_rate": 0.333,
+    "maker_net_mean_bps": -8.52,
+    "maker_net_median_bps": -8.52,
+    "taker_net_mean_bps": 6.94,
+    "paired_difference_bps": 5.52,
+    "null_p": 0.8,
+    "doubled_cost_maker_bps": -14.52
+   }
+  },
+  "L2": {
+   "4": {
+    "events": 103,
+    "fills": 48,
+    "fill_rate": 0.466,
+    "maker_net_mean_bps": -10.32,
+    "maker_net_median_bps": -8.23,
+    "taker_net_mean_bps": -12.45,
+    "paired_difference_bps": 8.64,
+    "null_p": 0.6,
+    "doubled_cost_maker_bps": -16.32
+   },
+   "20": {
+    "events": 103,
+    "fills": 48,
+    "fill_rate": 0.466,
+    "maker_net_mean_bps": -13.35,
+    "maker_net_median_bps": -7.65,
+    "taker_net_mean_bps": -14.49,
+    "paired_difference_bps": 8.76,
+    "null_p": 1.0,
+    "doubled_cost_maker_bps": -19.35
+   },
+   "60": {
+    "events": 103,
+    "fills": 48,
+    "fill_rate": 0.466,
+    "maker_net_mean_bps": 0.83,
+    "maker_net_median_bps": -0.03,
+    "taker_net_mean_bps": -8.05,
+    "paired_difference_bps": 8.86,
+    "null_p": 0.2,
+    "doubled_cost_maker_bps": -5.17
+   }
+  },
+  "L3": {
+   "4": {
+    "events": 496,
+    "fills": 210,
+    "fill_rate": 0.423,
+    "maker_net_mean_bps": -9.56,
+    "maker_net_median_bps": -7.86,
+    "taker_net_mean_bps": -10.29,
+    "paired_difference_bps": 5.22,
+    "null_p": 0.6,
+    "doubled_cost_maker_bps": -15.56
+   },
+   "20": {
+    "events": 496,
+    "fills": 210,
+    "fill_rate": 0.423,
+    "maker_net_mean_bps": -7.32,
+    "maker_net_median_bps": -6.84,
+    "taker_net_mean_bps": -9.1,
+    "paired_difference_bps": 5.31,
+    "null_p": 0.6,
+    "doubled_cost_maker_bps": -13.32
+   },
+   "60": {
+    "events": 494,
+    "fills": 210,
+    "fill_rate": 0.425,
+    "maker_net_mean_bps": -3.96,
+    "maker_net_median_bps": -4.36,
+    "taker_net_mean_bps": -7.79,
+    "paired_difference_bps": 5.3,
+    "null_p": 0.2,
+    "doubled_cost_maker_bps": -9.96
+   }
+  },
+  "L6": {
+   "4": {
+    "events": 40,
+    "fills": 17,
+    "fill_rate": 0.425,
+    "maker_net_mean_bps": -14.49,
+    "maker_net_median_bps": -8.23,
+    "taker_net_mean_bps": -17.36,
+    "paired_difference_bps": 16.93,
+    "null_p": 1.0,
+    "doubled_cost_maker_bps": -20.49
+   },
+   "20": {
+    "events": 40,
+    "fills": 17,
+    "fill_rate": 0.425,
+    "maker_net_mean_bps": -21.71,
+    "maker_net_median_bps": -7.41,
+    "taker_net_mean_bps": -21.73,
+    "paired_difference_bps": 16.85,
+    "null_p": 1.0,
+    "doubled_cost_maker_bps": -27.71
+   },
+   "60": {
+    "events": 40,
+    "fills": 17,
+    "fill_rate": 0.425,
+    "maker_net_mean_bps": 2.64,
+    "maker_net_median_bps": -0.03,
+    "taker_net_mean_bps": -8.74,
+    "paired_difference_bps": 17.32,
+    "null_p": 0.2,
+    "doubled_cost_maker_bps": -3.36
+   }
+  }
+ },
+ "caveats": [
+  "best bid and ask snapshots at fifteen seconds",
+  "no queue position or partial fills modelled",
+  "maker results are an upper bound"
+ ]
+}

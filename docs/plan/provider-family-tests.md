@@ -44,3 +44,23 @@ so pair counts are descriptive and not independent. Development only.
 ## Reproduce
 
     python3 scripts/build_provider_family_tests.py
+    python3 scripts/build_provider_family_tests.py --mode relative
+
+## Result, 2026-10-04
+
+Pass one, raw family changes as declared: ten mapped pairs with mean rho -0.27 against thirty two
+unmapped pairs at -0.02. Mapped pairs produced zero shift null survivors, unmapped pairs produced five.
+The map as written is not supported, and the mapped direction leans against it.
+
+The strongest single association sits where the map says it should not: EQIX, the provider mapped to
+colocation rent rather than GPU families, shows +0.71 against g5 and +0.64 against g4ad. That reads as
+a shared demand factor rather than a family lever.
+
+Pass two, declared after pass one and before its own run: the same pairs against the relative family
+change, the family change minus the cross-family median at the same month, which removes the common
+factor. Mapped mean rho -0.17 against unmapped +0.04, with zero mapped survivors against four unmapped.
+The removal of the common factor does not rescue the map.
+
+The fact this leaves: family price mapping is retired as the provider transmission variable, on both raw
+and relative specifications. The provider object moves to level variables, revenue per megawatt,
+contracted share and lease spread, which need filing level data rather than rental prices.

@@ -1,0 +1,891 @@
+{
+ "status": "development only; both sealed windows spent; protocol docs/plan/provider-family-tests.md",
+ "providers": 10,
+ "mapped_pairs": 10,
+ "unmapped_pairs": 32,
+ "mapped_mean_rho": -0.2745,
+ "unmapped_mean_rho": -0.0185,
+ "mapped_positive_share": 0.1,
+ "unmapped_positive_share": 0.5,
+ "survivors_mapped": [],
+ "survivors_unmapped_count": 5,
+ "results": {
+  "AMZN": {
+   "mapped_families": [
+    "g5",
+    "g5g",
+    "g6",
+    "p4d"
+   ],
+   "pairs": [
+    {
+     "family": "g3",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g3s",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g4ad",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.2273,
+     "shift_p": 0.7347,
+     "mapped": false
+    },
+    {
+     "family": "g4dn",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.6182,
+     "shift_p": 0.0408,
+     "mapped": false
+    },
+    {
+     "family": "g5",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.1636,
+     "shift_p": 0.3265,
+     "mapped": true
+    },
+    {
+     "family": "g5g",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.1636,
+     "shift_p": 0.6939,
+     "mapped": true
+    },
+    {
+     "family": "g6",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": true
+    },
+    {
+     "family": "p3",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.2727,
+     "shift_p": 0.9388,
+     "mapped": false
+    },
+    {
+     "family": "p3dn",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.0545,
+     "shift_p": 0.3673,
+     "mapped": false
+    },
+    {
+     "family": "p4d",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.7455,
+     "shift_p": 1.0,
+     "mapped": true
+    },
+    {
+     "family": "p5",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    }
+   ],
+   "mapped_mean_rho": -0.2485,
+   "unmapped_mean_rho": 0.0432
+  },
+  "APLD": {
+   "mapped_families": [
+    "g5",
+    "g6"
+   ],
+   "pairs": [
+    {
+     "family": "g3",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": false
+    },
+    {
+     "family": "g3s",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": false
+    },
+    {
+     "family": "g4ad",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g4dn",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g5",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": true
+    },
+    {
+     "family": "g5g",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g6",
+     "status": "insufficient",
+     "n": 4,
+     "mapped": true
+    },
+    {
+     "family": "p3",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "p3dn",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "p4d",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "p5",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": false
+    }
+   ],
+   "mapped_mean_rho": 0.0,
+   "unmapped_mean_rho": 0.0
+  },
+  "CORZ": {
+   "mapped_families": [
+    "g5",
+    "g6"
+   ],
+   "pairs": [
+    {
+     "family": "g3",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g3s",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g4ad",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.3455,
+     "shift_p": 0.6596,
+     "mapped": false
+    },
+    {
+     "family": "g4dn",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.1455,
+     "shift_p": 0.3617,
+     "mapped": false
+    },
+    {
+     "family": "g5",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.1455,
+     "shift_p": 0.7234,
+     "mapped": true
+    },
+    {
+     "family": "g5g",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.4636,
+     "shift_p": 0.8511,
+     "mapped": false
+    },
+    {
+     "family": "g6",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": true
+    },
+    {
+     "family": "p3",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.1,
+     "shift_p": 0.5652,
+     "mapped": false
+    },
+    {
+     "family": "p3dn",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.3273,
+     "shift_p": 0.2979,
+     "mapped": false
+    },
+    {
+     "family": "p4d",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.1636,
+     "shift_p": 0.7234,
+     "mapped": false
+    },
+    {
+     "family": "p5",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    }
+   ],
+   "mapped_mean_rho": -0.1455,
+   "unmapped_mean_rho": -0.0667
+  },
+  "CRWV": {
+   "mapped_families": [
+    "g5",
+    "p5",
+    "p6-b200"
+   ],
+   "pairs": [
+    {
+     "family": "g3",
+     "status": "insufficient",
+     "n": 2,
+     "mapped": false
+    },
+    {
+     "family": "g3s",
+     "status": "insufficient",
+     "n": 2,
+     "mapped": false
+    },
+    {
+     "family": "g4ad",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": false
+    },
+    {
+     "family": "g4dn",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": false
+    },
+    {
+     "family": "g5",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": true
+    },
+    {
+     "family": "g5g",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": false
+    },
+    {
+     "family": "g6",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": false
+    },
+    {
+     "family": "p3",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": false
+    },
+    {
+     "family": "p3dn",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": false
+    },
+    {
+     "family": "p4d",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": false
+    },
+    {
+     "family": "p5",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": true
+    },
+    {
+     "family": "p6-b200",
+     "status": "no_series",
+     "detail": "no rental price series held for this family"
+    }
+   ],
+   "mapped_mean_rho": 0.0,
+   "unmapped_mean_rho": 0.0
+  },
+  "EQIX": {
+   "mapped_families": [
+    "colocation-power"
+   ],
+   "pairs": [
+    {
+     "family": "g3",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g3s",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g4ad",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.6364,
+     "shift_p": 0.0408,
+     "mapped": false
+    },
+    {
+     "family": "g4dn",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.0909,
+     "shift_p": 0.3469,
+     "mapped": false
+    },
+    {
+     "family": "g5",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.7091,
+     "shift_p": 0.0204,
+     "mapped": false
+    },
+    {
+     "family": "g5g",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.5273,
+     "shift_p": 0.0408,
+     "mapped": false
+    },
+    {
+     "family": "g6",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": false
+    },
+    {
+     "family": "p3",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.3273,
+     "shift_p": 0.8776,
+     "mapped": false
+    },
+    {
+     "family": "p3dn",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.2091,
+     "shift_p": 0.2857,
+     "mapped": false
+    },
+    {
+     "family": "p4d",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.1364,
+     "shift_p": 0.3673,
+     "mapped": false
+    },
+    {
+     "family": "p5",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "colocation-power",
+     "status": "no_series",
+     "detail": "no rental price series held for this family"
+    }
+   ],
+   "mapped_mean_rho": 0.0,
+   "unmapped_mean_rho": 0.2831
+  },
+  "GOOGL": {
+   "mapped_families": [
+    "g5",
+    "g5g",
+    "g6",
+    "p3"
+   ],
+   "pairs": [
+    {
+     "family": "g3",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g3s",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g4ad",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.3909,
+     "shift_p": 0.898,
+     "mapped": false
+    },
+    {
+     "family": "g4dn",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.3455,
+     "shift_p": 0.0816,
+     "mapped": false
+    },
+    {
+     "family": "g5",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.2455,
+     "shift_p": 0.7959,
+     "mapped": true
+    },
+    {
+     "family": "g5g",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.6727,
+     "shift_p": 1.0,
+     "mapped": true
+    },
+    {
+     "family": "g6",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": true
+    },
+    {
+     "family": "p3",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.1455,
+     "shift_p": 0.6531,
+     "mapped": true
+    },
+    {
+     "family": "p3dn",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.0727,
+     "shift_p": 0.4082,
+     "mapped": false
+    },
+    {
+     "family": "p4d",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.5273,
+     "shift_p": 0.9592,
+     "mapped": false
+    },
+    {
+     "family": "p5",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    }
+   ],
+   "mapped_mean_rho": -0.3546,
+   "unmapped_mean_rho": -0.125
+  },
+  "IREN": {
+   "mapped_families": [
+    "g5",
+    "g6"
+   ],
+   "pairs": [
+    {
+     "family": "g3",
+     "status": "insufficient",
+     "n": 0,
+     "mapped": false
+    },
+    {
+     "family": "g3s",
+     "status": "insufficient",
+     "n": 0,
+     "mapped": false
+    },
+    {
+     "family": "g4ad",
+     "status": "insufficient",
+     "n": 3,
+     "mapped": false
+    },
+    {
+     "family": "g4dn",
+     "status": "insufficient",
+     "n": 3,
+     "mapped": false
+    },
+    {
+     "family": "g5",
+     "status": "insufficient",
+     "n": 3,
+     "mapped": true
+    },
+    {
+     "family": "g5g",
+     "status": "insufficient",
+     "n": 3,
+     "mapped": false
+    },
+    {
+     "family": "g6",
+     "status": "insufficient",
+     "n": 3,
+     "mapped": true
+    },
+    {
+     "family": "p3",
+     "status": "insufficient",
+     "n": 3,
+     "mapped": false
+    },
+    {
+     "family": "p3dn",
+     "status": "insufficient",
+     "n": 3,
+     "mapped": false
+    },
+    {
+     "family": "p4d",
+     "status": "insufficient",
+     "n": 3,
+     "mapped": false
+    },
+    {
+     "family": "p5",
+     "status": "insufficient",
+     "n": 3,
+     "mapped": false
+    }
+   ],
+   "mapped_mean_rho": 0.0,
+   "unmapped_mean_rho": 0.0
+  },
+  "META": {
+   "mapped_families": [
+    "g5g",
+    "g6",
+    "p6-b200"
+   ],
+   "pairs": [
+    {
+     "family": "g3",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g3s",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g4ad",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.2636,
+     "shift_p": 0.7551,
+     "mapped": false
+    },
+    {
+     "family": "g4dn",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.4364,
+     "shift_p": 0.0408,
+     "mapped": false
+    },
+    {
+     "family": "g5",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.1909,
+     "shift_p": 0.7143,
+     "mapped": false
+    },
+    {
+     "family": "g5g",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.4909,
+     "shift_p": 0.9184,
+     "mapped": true
+    },
+    {
+     "family": "g6",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": true
+    },
+    {
+     "family": "p3",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.2,
+     "shift_p": 0.7143,
+     "mapped": false
+    },
+    {
+     "family": "p3dn",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.0182,
+     "shift_p": 0.3878,
+     "mapped": false
+    },
+    {
+     "family": "p4d",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.6818,
+     "shift_p": 0.9796,
+     "mapped": false
+    },
+    {
+     "family": "p5",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "p6-b200",
+     "status": "no_series",
+     "detail": "no rental price series held for this family"
+    }
+   ],
+   "mapped_mean_rho": -0.4909,
+   "unmapped_mean_rho": -0.1469
+  },
+  "MSFT": {
+   "mapped_families": [
+    "g5",
+    "g5g",
+    "g6",
+    "p5"
+   ],
+   "pairs": [
+    {
+     "family": "g3",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g3s",
+     "status": "insufficient",
+     "n": 8,
+     "mapped": false
+    },
+    {
+     "family": "g4ad",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.6273,
+     "shift_p": 0.9796,
+     "mapped": false
+    },
+    {
+     "family": "g4dn",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.0364,
+     "shift_p": 0.551,
+     "mapped": false
+    },
+    {
+     "family": "g5",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.0364,
+     "shift_p": 0.5102,
+     "mapped": true
+    },
+    {
+     "family": "g5g",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.2636,
+     "shift_p": 0.7551,
+     "mapped": true
+    },
+    {
+     "family": "g6",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": true
+    },
+    {
+     "family": "p3",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.0818,
+     "shift_p": 0.6327,
+     "mapped": false
+    },
+    {
+     "family": "p3dn",
+     "status": "tested",
+     "n": 11,
+     "rho": 0.0273,
+     "shift_p": 0.4286,
+     "mapped": false
+    },
+    {
+     "family": "p4d",
+     "status": "tested",
+     "n": 11,
+     "rho": -0.2455,
+     "shift_p": 0.7959,
+     "mapped": false
+    },
+    {
+     "family": "p5",
+     "status": "insufficient",
+     "n": 7,
+     "mapped": true
+    }
+   ],
+   "mapped_mean_rho": -0.15,
+   "unmapped_mean_rho": -0.1927
+  },
+  "ORCL": {
+   "mapped_families": [
+    "g6",
+    "p5",
+    "p6-b200"
+   ],
+   "pairs": [
+    {
+     "family": "g3",
+     "status": "insufficient",
+     "n": 6,
+     "mapped": false
+    },
+    {
+     "family": "g3s",
+     "status": "insufficient",
+     "n": 6,
+     "mapped": false
+    },
+    {
+     "family": "g4ad",
+     "status": "insufficient",
+     "n": 9,
+     "mapped": false
+    },
+    {
+     "family": "g4dn",
+     "status": "insufficient",
+     "n": 9,
+     "mapped": false
+    },
+    {
+     "family": "g5",
+     "status": "insufficient",
+     "n": 9,
+     "mapped": false
+    },
+    {
+     "family": "g5g",
+     "status": "insufficient",
+     "n": 9,
+     "mapped": false
+    },
+    {
+     "family": "g6",
+     "status": "insufficient",
+     "n": 4,
+     "mapped": true
+    },
+    {
+     "family": "p3",
+     "status": "insufficient",
+     "n": 9,
+     "mapped": false
+    },
+    {
+     "family": "p3dn",
+     "status": "insufficient",
+     "n": 9,
+     "mapped": false
+    },
+    {
+     "family": "p4d",
+     "status": "insufficient",
+     "n": 9,
+     "mapped": false
+    },
+    {
+     "family": "p5",
+     "status": "insufficient",
+     "n": 5,
+     "mapped": true
+    },
+    {
+     "family": "p6-b200",
+     "status": "no_series",
+     "detail": "no rental price series held for this family"
+    }
+   ],
+   "mapped_mean_rho": 0.0,
+   "unmapped_mean_rho": 0.0
+  }
+ },
+ "caveats": [
+  "short revenue history",
+  "providers share family series, so counts are descriptive",
+  "EQIX has no rental family series and is recorded as such"
+ ]
+}

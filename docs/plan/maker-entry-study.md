@@ -44,3 +44,24 @@ and adverse selection are not modelled, so every maker result here is an upper b
 ## Reproduce
 
     python3 scripts/build_maker_entry_study.py
+
+## Result, 2026-10-04
+
+Fill rates from the recorded book: 33 percent at the frozen conjunction (2 of 6 events), 47 percent at
+the top one percent level, 42 percent at the top five percent and at the thin book level.
+
+The paired result is positive everywhere, between +4.6 and +17.3 basis points against the taker entry on
+the same events, which is roughly the saved fee and spread plus a better entry price.
+
+The absolute result is not. Every cell is at or below zero except two: +0.83 basis points at the top one
+percent level and +2.64 at the thin book level, both at fifteen minutes, and both inside their nulls
+(p 0.2).
+
+The frozen conjunction shows why the fix is not free. Its taker entry nets +6.9 basis points at fifteen
+minutes from six events, and its maker variant nets -8.5, because the two events that filled are the two
+that kept moving. Waiting for a better price selects the adverse events and misses the reversion.
+
+The fact this leaves: the cost fix works in paired terms and fails in absolute terms. The binding
+constraint shifts from the cost hurdle to fill selection. The next object is a fill model with queue
+position, and a declared test of whether the unfilled events are the reversion, which would say that the
+reversion is taken immediately and maker entry is a size tool rather than a source of edge.

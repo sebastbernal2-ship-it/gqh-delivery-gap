@@ -81,3 +81,15 @@ generated-path: results/cascade-reversion-study.json
 Produced by `scripts/fetch_provider_revenue.py`:
 
 generated-path: results/provider-revenue-quarterly.csv
+
+Produced by `scripts/build_provider_family_tests.py`:
+
+generated-path: results/provider-family-tests.json
+
+Produced by `scripts/build_provider_family_tests.py --mode relative`:
+
+generated-path: results/provider-family-tests-relative.json
+
+Produced by `scripts/build_maker_entry_study.py`:
+
+generated-path: results/maker-entry-study.json

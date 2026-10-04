@@ -5,18 +5,18 @@ decomposed. Nothing here grades a path as dead.
 
 ## The graph, expanded
 
-- Nodes: **168,434**
-- Typed connections: **1,169,772**
+- Nodes: **168,951**
+- Typed connections: **1,173,112**
 - Distributions written down: **86** samples
-- Propagation paths: **584** from 167 seeds
+- Propagation paths: **632** from 171 seeds
 - Hidden objects: **45** (nodes 1, edges 20, gaps 3, assumptions 21)
 
 ## Delineation
 
-- Layers: `raw` 93,754, `mechanism` 44,676, `feature` 26,898, `asset` 1,024, `entity` 436, `dataset` 210, `event` 173, `outcome` 160
-- Connection status: `declared` 1,141,136, `inferred` 25,966, `proposed` 2,058, `curated` 590, `blocked` 22
+- Layers: `raw` 94,075, `mechanism` 44,834, `feature` 26,935, `asset` 1,024, `entity` 437, `dataset` 210, `event` 173, `outcome` 160
+- Connection status: `declared` 1,144,418, `inferred` 26,018, `proposed` 2,058, `curated` 596, `blocked` 22
 - Every connection carries a condition and a falsifier: 99.99% and 99.99%
-- Components: 1, largest 168,434, unreachable from anchors 0
+- Components: 1, largest 168,951, unreachable from anchors 0
 
 ## Distributions, centre, spread, tails
 
@@ -113,11 +113,11 @@ Top samples by tail ratio (p90 over median):
 | `outcome:portfolio:net-pnl` | `outcome:portfolio:net-pnl` -> `asset:equity:utility-basket` | 1 | E4 | needs data | The cross-layer relation is supported by point-in-time evidence |
 | `outcome:portfolio:net-pnl` | `outcome:portfolio:net-pnl` -> `asset:options:defined-risk-spread` | 1 | E4 | needs data | The cross-layer relation is supported by point-in-time evidence |
 | `dig:compute:depreciation` | `dig:compute:depreciation` -> `dig:compute:provider-capex` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | Short useful lives turn capex into a recurring cash cost, changing the build economics. |
+| `dig:compute:family-exposure-map` | `dig:compute:family-exposure-map` -> `dig:compute:rental-to-revenue-link` | 1 | E2 | compute-price-monthly.csv, exposure-panel.csv | Each provider's revenue is levered to specific families, so family level tests replace the aggregate. |
+| `dig:compute:family-exposure-map` | `dig:compute:family-exposure-map` -> `dig:compute:revenue-per-mw` | 1 | E2 | compute-price-monthly.csv, exposure-panel.csv | With family price mapping retired, the transmission object is the level variable: revenue per contracted megawatt. |
 | `dig:compute:financing-cost` | `dig:compute:financing-cost` -> `dig:compute:equity-transmission` | 1 | E2 | compute-price-monthly.csv | Funding cost sets the discount applied to capacity cash flows. |
 | `dig:compute:financing-cost` | `dig:compute:financing-cost` -> `dig:compute:provider-revenue-line` | 1 | E2 | compute-price-monthly.csv, provider-capex-quarterly.csv | Securitised and debt funded capacity shows up as contracted revenue before it shows up as equity value. |
 | `dig:compute:financing-cost` | `dig:compute:financing-cost` -> `sub:sub:dig:compute:financing-cost:composition:composition` | 1 | E2 | compute-price-monthly.csv | The refinement chain from this node is valid. |
-| `dig:compute:financing-cost` | `dig:compute:financing-cost` -> `sub:sub:dig:compute:financing-cost:composition:inputs` | 1 | E2 | compute-price-monthly.csv | The refinement chain from this node is valid. |
-| `dig:compute:financing-cost` | `dig:compute:financing-cost` -> `sub:sub:dig:compute:financing-cost:composition:constraints` | 1 | E2 | compute-price-monthly.csv | The refinement chain from this node is valid. |
 
 ## Reproduce
 
