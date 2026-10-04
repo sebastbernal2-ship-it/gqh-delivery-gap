@@ -1263,3 +1263,37 @@ timing it, and because de-risking a rising basket costs more than the signal ear
 matches T67 and T68: the system's edge is the gate and the charge sleeve, and no conditioning variable
 tested, phases, load or rates, has improved it. Rates remain available for a future macro expression
 with its own objective, not for this one.
+
+## T70. Culmination: three candidates, a regime rule that the honest walk-forward picked in every year, and the first system to beat the naive basket
+
+**Statement**: the whole expression was rebuilt as three candidates and the regime conditioning was
+swept rather than assumed, over six point-in-time definitions (basket volatility, basket trend, basket
+drawdown, VIX, term spread and the infrastructure phase) and 81 exposure maps each. The candidates on
+the common window 2021-01-05 to 2026-10-02, volatility targeted at ten percent: the gated charge core
+**+5.11 percent at Sharpe 0.475 with a -16.5 percent drawdown**, the published two-sleeve headline
+**+10.23 at 0.931 with -15.1**, the same with the reversed capex hedge **+8.57 at 0.778 with -13.8** (the
+hedge dilutes), the conditioned system **+14.09 at 1.793 with -5.3**, and the equal-weight basket floor
+**+33.77 at 1.339 with -27.8 percent**. The conditioned system is the first candidate in the whole
+programme to beat the naive basket on both Sharpe and drawdown, and it does so at a third of the
+volatility. The rule is not a fitted curiosity: **all six evaluation years independently chose the same
+definition and map**, the basket's own drawdown state with full exposure when the basket is within five
+percent of its running peak and zero otherwise, and the hindsight-best map over the full sample is the
+same rule at Sharpe 1.888. The conditioned-minus-unconditioned daily difference is +0.028 with interval
+-0.028 to +0.084 and positive in 82.8 percent of resamples, so the return gain is suggestive rather than
+established, while the drawdown and volatility gains are measured directly. On the four legs, the
+in-sample against out-of-sample split cannot be shown for the composites because their common window
+starts in 2019, but it can for the legs, and the reversed capex leg earns +6.15 percent at Sharpe 0.131
+with a -75.1 percent drawdown, which is why the inverse volatility blend gives it little weight.
+**Evidence**: `results/culmination.json`; `scripts/run_culmination.py`; `scripts/render_culmination.py`;
+the sweep table, the six yearly choices, the episode view with earlier-only fits, the factor
+decomposition and both interval tables inside the artifact.
+**Scope**: development only; the sweep space was declared by me after earlier regime failures, so the
+choice is honest walk-forward inside a space I designed; both sealed windows are spent; the reversed
+capex leg carries selection risk because it was chosen after seeing the capex sleeve lose every era; the
+long floor ignores costs, capacity and rebalancing.
+**Consequence**: the honest system to carry into the forward window is the headline conditioned on the
+basket's own drawdown state, because it is simple, stable across every year, and the only candidate that
+clears the basket on both risk measures. Weather was never in this programme and no weather-conditioned
+strategy exists; the number near three that memory associates with it is the shakeout phase attribution
+of T63, Sharpe 2.808 over seventy-five days, which is descriptive and was never tradable, and the episode
+table here shows the same class of short-run numbers honestly labelled.

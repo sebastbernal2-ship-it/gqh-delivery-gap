@@ -469,3 +469,15 @@ generated-path: results/fred-panel-coverage.json
 Produced by `scripts/run_fred_rates_test.py`:
 
 generated-path: results/fred-rates-test.json
+
+Produced by `scripts/run_culmination.py` (three candidates, the regime sweep, both walk-forwards, the factor decomposition):
+
+generated-path: results/culmination.json
+
+Produced by `scripts/run_culmination.py` (daily series the figures draw):
+
+generated-path: results/culmination-series.json
+
+Produced by `scripts/render_culmination.py` (equity with regime boundaries, era bars, same-window bars):
+
+generated-path: results/figures/
