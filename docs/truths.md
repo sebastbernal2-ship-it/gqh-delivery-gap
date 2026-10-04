@@ -395,25 +395,30 @@ percent at sixty, with tercile spreads negative in 56, 67 and 56 percent.
 **Consequence**: the charge is a candidate, not an edge. Further cuts of this panel are not evidence; the
 next real test is a disjoint sample with a capacity and cost check.
 
-## T32. The intensity charge carries a modest, cost surviving strategy with real but small capacity
+## T32. The intensity expression nets a thin return under repaired accounting, with small capacity
 
-**Statement**: the declared specification (twenty day horizon, terciles, equal weight, group neutral, ten
-million dollar volume floor, filing clock, base costs) returns 13.1 percent annualised net against 15.9
-gross across 231 cohorts from 2017-08-04 to 2026-10-02, with annual volatility 34.3 percent, Sharpe 0.381,
-profit factor 1.111 and a maximum drawdown of -65.8 percent. Early (through 2024) it is 8.4 percent at
-Sharpe 0.28; late (2025 onward) 32.7 percent at 0.676. Doubled costs leave 10.2 percent at Sharpe 0.299.
-Capacity at one percent participation of the binding name is 3.87 million dollars median and 1.31 million
-at the tenth percentile; at five percent, 19.4 million. A trailing volatility overlay cut the Sharpe to
-0.174 and is recorded as rejected.
+**Statement**: after the 2026-10-04 accounting repair, the declared specification (twenty day horizon,
+terciles, equal weight, group neutral, ten million dollar volume floor, filing clock, base costs) returns
+2.9 percent annualised net against 4.5 gross across 267 cohorts from 2017-02-14 to 2026-10-02, with annual
+volatility 8.5 percent, Sharpe 0.347, profit factor 1.081 and a maximum drawdown of -22.9 percent. Early
+(through 2024) it is 2.6 percent at Sharpe 0.33; late (2025 onward) 4.5 percent at 0.435. Doubled costs
+leave 1.4 percent at Sharpe 0.170. Capacity at one percent participation of the binding name is 1.17
+million dollars median and 71 thousand at the tenth percentile; at five percent, 5.83 million. The
+pre-repair numbers (13.1 percent net, 34.3 percent volatility, Sharpe 0.381, -65.8 percent drawdown, 3.87
+million capacity) were an artifact of summing overlapping full-gross cohorts and are superseded; the five
+defects are listed in the thesis record and pinned by `tests/test_intensity_accounting.py`. A trailing
+volatility overlay moves the Sharpe from 0.347 to 0.348 and deepens the drawdown to -28.6 percent; it is
+recorded as rejected.
 **Evidence**: `results/intensity-strategy.json`; `scripts/run_intensity_strategy.py`;
-`docs/theses/t-intensity-charge.md`; `docs/chains/t-intensity-charge.jsonl`.
+`tests/test_intensity_accounting.py`; `docs/theses/t-intensity-charge.md`;
+`docs/chains/t-intensity-charge.jsonl`.
 **Scope**: 58 names, development only, both sealed windows spent, one price source, borrow cost unmeasured;
 the fragility result (T31) remains the main threat.
-**Consequence**: the strategy is the first chain in this repository with a measured P&L role, and its
-binding limits are risk (drawdown) and capacity, not the signal. The next declared iterations are a
-cluster capped risk overlay, a disjoint name test, and borrow data. Attribution is unresolved: the
-controlled test (T33) does not support the intensity association, so the strategy's P&L is not yet
-explained by the tested mechanism.
+**Consequence**: the strategy keeps its measured P&L role, but the corrected margin over doubled costs is
+0.8 percentage points of annual return and the capacity is small, so it is not a demonstrated edge. The
+next declared iterations are a disjoint name test, borrow data, and a cluster capped risk overlay.
+Attribution is unresolved: the controlled test (T33) does not support the intensity association, so the
+strategy's P&L is not yet explained by the tested mechanism.
 
 ## T33. Intensity does not survive controls, and the realised-conversion split does not rescue it
 

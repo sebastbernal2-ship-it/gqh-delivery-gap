@@ -9,6 +9,10 @@ valid for a declared window. Portfolio: dollar neutral long the low intensity na
 intensity names, ranks within the complex after group demeaning. Cohorts open on a fixed cadence and hold
 for the horizon, so overlapping cohorts accumulate.
 
+Accounting: the signal waits for all four facts to be filed, entry is the first session strictly after
+that date, costs and capacity use the prior month's dollar volume, and overlapping cohorts share one
+unit of gross capital.
+
     python3 scripts/run_intensity_strategy.py                     # base specification
     python3 scripts/run_intensity_strategy.py --grid              # the declared variant grid
 """
@@ -17,6 +21,7 @@ from __future__ import annotations
 import argparse
 import collections
 import csv
+import datetime
 import json
 import math
 import statistics
@@ -38,16 +43,66 @@ GRID = {"horizon": [5, 20, 60], "quantile": ["third", "half"], "weight": ["equal
         "neutral": ["group", "complex", "none"], "cost_mult": [1.0, 2.0]}
 
 
-def month_gap(a: str, b: str) -> int:
-    return (int(a[:4]) - int(b[:4])) * 12 + (int(a[5:7]) - int(b[5:7]))
+def day_gap(a: str, b: str) -> int:
+    """Calendar day distance between two ISO dates; a parse failure reads as far apart."""
+    try:
+        return abs((datetime.date.fromisoformat(a) - datetime.date.fromisoformat(b)).days)
+    except ValueError:
+        return 99999
 
 
-def load_signals() -> list[dict]:
+def first_session_after(dates: list[str], filed: str) -> str | None:
+    """The first trading date strictly after a filing date."""
+    return next((date for date in dates if date > filed), None)
+
+
+def lagged_adv(adv_by_month: dict[str, float], date: str) -> float | None:
+    """The prior month's dollar volume, the last one fully known at the decision date."""
+    year, month = int(date[:4]), int(date[5:7])
+    month -= 1
+    if month == 0:
+        year, month = year - 1, 12
+    return adv_by_month.get(f"{year:04d}-{month:02d}")
+
+
+def daily_cohort_pnl(open_cohorts: list[dict], rebalance: int, dates: list[str],
+                     prices: dict[str, dict[str, float]], adv: dict[str, dict[str, float]],
+                     cost_mult: float) -> tuple[float, float]:
+    """One unit of gross capital per day, split equally across open cohorts.
+
+    A cohort can never carry the whole book, because overlapping cohorts share the unit. Entry cost
+    is charged on the cohort's first day, exit cost on its last, both at the same divisor. Expired
+    cohorts are removed from the list.
+    """
+    scale = 1.0 / max(1, len(open_cohorts))
+    gross = 0.0
+    cost = 0.0
+    previous, date = dates[rebalance - 1], dates[rebalance]
+    for cohort in list(open_cohorts):
+        elapsed = rebalance - cohort["start"]
+        if elapsed == 0:
+            cost += cohort["entry_cost"] * scale
+            continue
+        if 0 < elapsed <= cohort["horizon"]:
+            for ticker, weight in cohort["weights"].items():
+                series = prices.get(ticker)
+                if not series or previous not in series or date not in series:
+                    continue
+                gross += weight * (series[date] / series[previous] - 1) * scale
+        if elapsed == cohort["horizon"]:
+            exit_costs = sum(abs(weight) * cost_bps(lagged_adv(adv.get(ticker, {}), date), cost_mult)
+                             / 1e4 for ticker, weight in cohort["weights"].items())
+            cost += exit_costs * scale
+            open_cohorts.remove(cohort)
+    return gross, cost
+
+
+def load_signals(capex_path: Path = CAPEX, revenue_path: Path = REVENUE) -> list[dict]:
     capex: dict[str, dict[str, dict]] = collections.defaultdict(dict)
-    for row in csv.DictReader(CAPEX.open()):
+    for row in csv.DictReader(capex_path.open()):
         capex[row["ticker"]][row["period_end"]] = row
     revenue: dict[tuple[str, str], dict] = {}
-    for row in csv.DictReader(REVENUE.open()):
+    for row in csv.DictReader(revenue_path.open()):
         key = (row["ticker"], row["period_end"])
         current = revenue.get(key)
         if current is None or (row["concept"] == PREFERRED and current["concept"] != PREFERRED):
@@ -59,21 +114,22 @@ def load_signals() -> list[dict]:
     for ticker, quarters in sorted(capex.items()):
         for period_end, cap_row in sorted(quarters.items()):
             rev_row = next((candidate for rev_end, candidate in revenue_by_ticker[ticker].items()
-                            if abs(month_gap(rev_end, period_end)) <= 20), None)
+                            if day_gap(rev_end, period_end) <= 20), None)
             if not rev_row or float(rev_row["value_usd"]) <= 0 or float(cap_row["value_usd"]) <= 0:
                 continue
             year_ago = f"{int(period_end[:4]) - 1}{period_end[4:]}"
             year_cap = next((candidate for cand_end, candidate in quarters.items()
-                             if abs(month_gap(cand_end, year_ago)) <= 1), None)
+                             if day_gap(cand_end, year_ago) <= 10), None)
             year_rev = next((candidate for cand_end, candidate in revenue_by_ticker[ticker].items()
-                             if abs(month_gap(cand_end, year_ago)) <= 1), None)
+                             if day_gap(cand_end, year_ago) <= 10), None)
             if not year_cap or not year_rev:
                 continue
             if float(year_cap["value_usd"]) <= 0 or float(year_rev["value_usd"]) <= 0:
                 continue
             intensity = float(cap_row["value_usd"]) / float(rev_row["value_usd"])
             prior = float(year_cap["value_usd"]) / float(year_rev["value_usd"])
-            filed = max(cap_row.get("filed", ""), rev_row.get("filed", ""))
+            filed = max(cap_row.get("filed", ""), rev_row.get("filed", ""),
+                        year_cap.get("filed", ""), year_rev.get("filed", ""))
             if intensity <= 0 or prior <= 0 or not filed:
                 continue
             signals.append({"ticker": ticker, "filed": filed, "period_end": period_end,
@@ -123,16 +179,14 @@ def run(config: dict, signals: list[dict], dates: list[str], prices: dict[str, d
     def active_signals(date: str) -> list[dict]:
         usable = []
         for signal in signals:
-            if signal["filed"] > date:
+            if signal["filed"] >= date:
                 break
-            gap = (int(date[:4]) - int(signal["filed"][:4])) * 372 + \
-                  (int(date[5:7]) - int(signal["filed"][5:7])) * 31 + (int(date[8:10]) - int(signal["filed"][8:10]))
-            if gap > SIGNAL_VALID_DAYS:
+            if day_gap(date, signal["filed"]) > SIGNAL_VALID_DAYS:
                 continue
             if signal["ticker"] not in prices or date not in prices[signal["ticker"]]:
                 continue
             if min_adv:
-                adv_value = adv.get(signal["ticker"], {}).get(date[:7])
+                adv_value = lagged_adv(adv.get(signal["ticker"], {}), date)
                 if not adv_value or adv_value < min_adv:
                     continue
             usable.append(signal)
@@ -148,10 +202,9 @@ def run(config: dict, signals: list[dict], dates: list[str], prices: dict[str, d
     for signal in signals:
         if signal["filed"] < "2017-01-01":
             continue
-        for date in dates:
-            if date >= signal["filed"]:
-                schedule_dates.add(date)
-                break
+        session = first_session_after(dates, signal["filed"])
+        if session:
+            schedule_dates.add(session)
     open_cohorts: list[dict] = []
     active_from = None
     active_to = None
@@ -163,34 +216,45 @@ def run(config: dict, signals: list[dict], dates: list[str], prices: dict[str, d
             active_from = date
         if live and len(live) >= 6:
             values = {row["ticker"]: row["intensity_change"] for row in live}
-            if config["neutral"] != "none":
-                buckets = collections.defaultdict(list)
-                for ticker, value in values.items():
-                    key = group_of.get(ticker, "unlisted") if config["neutral"] == "group" else "complex"
-                    buckets[key].append(value)
-                means = {key: statistics.mean(group) for key, group in buckets.items()}
-                values = {ticker: value - means[group_of.get(ticker, "unlisted")
-                                                   if config["neutral"] == "group" else "complex"]
-                          for ticker, value in values.items()}
-            ranked = sorted(values.items(), key=lambda item: item[1])
-            count = max(1, int(len(ranked) * (1 / 3 if config["quantile"] == "third" else 0.5)))
-            longs = ranked[:count]
-            shorts = ranked[-count:]
+            quantile = 1 / 3 if config["quantile"] == "third" else 0.5
             weights: dict[str, float] = {}
-            for leg, sign in ((longs, 1.0), (shorts, -1.0)):
-                if config["weight"] == "equal":
-                    weight = 0.5 / len(leg)
-                    for ticker, _ in leg:
-                        weights[ticker] = weights.get(ticker, 0.0) + sign * weight
-                else:
-                    total = sum(range(1, len(leg) + 1))
-                    for position, (ticker, _) in enumerate(leg, start=1):
-                        weights[ticker] = weights.get(ticker, 0.0) + sign * 0.5 * position / total
+            if config["neutral"] == "group":
+                # Group neutral: each group selects its own terciles and carries equal gross, so a
+                # large group cannot outvote a small one.
+                buckets: dict[str, dict[str, float]] = collections.defaultdict(dict)
+                for ticker, value in values.items():
+                    buckets[group_of.get(ticker, "unlisted")][ticker] = value
+                leg_gross = 0.5 / max(1, len(buckets))
+                for key in sorted(buckets):
+                    ranked = sorted(buckets[key].items(), key=lambda item: item[1])
+                    count = max(1, int(len(ranked) * quantile))
+                    for leg, sign in ((ranked[:count], 1.0), (ranked[-count:], -1.0)):
+                        if config["weight"] == "equal":
+                            shares = [leg_gross / len(leg)] * len(leg)
+                        else:
+                            total = sum(range(1, len(leg) + 1))
+                            shares = [leg_gross * position / total for position in range(1, len(leg) + 1)]
+                        for (ticker, _), share in zip(leg, shares):
+                            weights[ticker] = weights.get(ticker, 0.0) + sign * share
+            else:
+                if config["neutral"] == "complex":
+                    mean = statistics.mean(values.values())
+                    values = {ticker: value - mean for ticker, value in values.items()}
+                ranked = sorted(values.items(), key=lambda item: item[1])
+                count = max(1, int(len(ranked) * quantile))
+                for leg, sign in ((ranked[:count], 1.0), (ranked[-count:], -1.0)):
+                    if config["weight"] == "equal":
+                        weight = 0.5 / len(leg)
+                        for ticker, _ in leg:
+                            weights[ticker] = weights.get(ticker, 0.0) + sign * weight
+                    else:
+                        total = sum(range(1, len(leg) + 1))
+                        for position, (ticker, _) in enumerate(leg, start=1):
+                            weights[ticker] = weights.get(ticker, 0.0) + sign * 0.5 * position / total
             entry_costs = 0.0
             capacity_terms = []
             for ticker, weight in weights.items():
-                month = date[:7]
-                adv_value = adv.get(ticker, {}).get(month)
+                adv_value = lagged_adv(adv.get(ticker, {}), date)
                 entry_costs += abs(weight) * cost_bps(adv_value, config["cost_mult"]) / 1e4
                 if adv_value and weight:
                     capacity_terms.append(adv_value / abs(weight))
@@ -205,30 +269,17 @@ def run(config: dict, signals: list[dict], dates: list[str], prices: dict[str, d
                                  "capacity_1pct": 0.01 * min(capacity_terms) if capacity_terms else None,
                                  "capacity_5pct": 0.05 * min(capacity_terms) if capacity_terms else None,
                                  "names": len(weights)})
-            cohort_log.append({"date": date, "names": len(weights), "longs": len(longs), "shorts": len(shorts),
+            cohort_log.append({"date": date, "names": len(weights),
+                               "longs": sum(1 for weight in weights.values() if weight > 0),
+                               "shorts": sum(1 for weight in weights.values() if weight < 0),
                                "entry_cost_bps": round(entry_costs * 1e4, 2),
                                "capacity_1pct": open_cohorts[-1]["capacity_1pct"],
                                "capacity_5pct": open_cohorts[-1]["capacity_5pct"]})
-        # daily P&L from cohorts open on this date
+        # daily P&L from cohorts open on this date, one unit of gross capital split equally
         if open_cohorts:
             active_to = date
-        gross_return = 0.0
-        cost_today = 0.0
-        for cohort in list(open_cohorts):
-            elapsed = rebalance - cohort["start"]
-            if elapsed > 0 and elapsed <= cohort["horizon"]:
-                for ticker, weight in cohort["weights"].items():
-                    series = prices.get(ticker)
-                    if not series:
-                        continue
-                    previous = dates[rebalance - 1]
-                    if previous in series and date in series:
-                        gross_return += weight * (series[date] / series[previous] - 1)
-            if elapsed == cohort["horizon"]:
-                exit_costs = sum(abs(weight) * cost_bps(adv.get(ticker, {}).get(date[:7]), config["cost_mult"]) / 1e4
-                                 for ticker, weight in cohort["weights"].items())
-                cost_today += cohort["entry_cost"] + exit_costs
-                open_cohorts.remove(cohort)
+        gross_return, cost_today = daily_cohort_pnl(open_cohorts, rebalance, dates, prices, adv,
+                                                    config["cost_mult"])
         net_return = gross_return - cost_today
         daily.append({"date": date, "gross": gross_return, "net": net_return, "open": len(open_cohorts)})
 
