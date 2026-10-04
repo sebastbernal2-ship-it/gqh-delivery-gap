@@ -1,4 +1,4 @@
-.PHONY: market sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test secrets check strategy-check manifest pdf-check gate-status status
+.PHONY: market sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test secrets check strategy-check manifest pdf-check gate-status status agency-deals tranche-table credit-deals deal-structure deal-diligence deal-ratings gate-scorecard credit-gauntlet credit-gauntlet-long ownership-layer index-mandate
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -117,6 +117,9 @@ test:
 	@python3 tests/test_factors.py
 	@python3 tests/test_scan_compute.py
 	@python3 tests/test_scan_windows.py
+	@python3 tests/test_cascade_evaluation.py
+	@python3 tests/test_index_mandate.py
+	@python3 tests/test_ownership_layer.py
 
 # Fit the delivery model: what moves a promise, controls first then factors.
 delivery-model:
@@ -129,6 +132,45 @@ variants:
 # Regenerate the idea view from the graph.
 ideas:
 	@python3 scripts/render_ideas.py
+
+# The credit and deal layer, the ownership crosswalk, and the index mandate study.
+agency-deals:
+	@python3 scripts/build_agency_only_deals.py --workers 10
+	@python3 scripts/declare_deal_nodes.py
+
+tranche-table:
+	@python3 scripts/build_tranche_table.py --workers 6
+	@python3 scripts/build_indenture_layer.py --workers 6
+
+credit-deals:
+	@python3 scripts/build_credit_deal_registry.py --pages 3
+
+deal-structure:
+	@python3 scripts/build_deal_structure.py
+
+deal-diligence:
+	@python3 scripts/build_deal_diligence.py --workers 4
+
+deal-ratings:
+	@python3 scripts/build_deal_ratings.py
+
+gate-scorecard:
+	@python3 scripts/build_gate_scorecard.py
+
+credit-gauntlet:
+	@python3 scripts/build_credit_panel.py
+	@python3 scripts/run_credit_gauntlet.py --draws 500 --block 20
+
+credit-gauntlet-long:
+	@python3 scripts/build_credit_panel.py
+	@python3 scripts/run_credit_gauntlet.py --set long --draws 500 --block 20
+	@python3 scripts/check_credit_stability.py
+
+ownership-layer:
+	@python3 scripts/build_ownership_crosswalk.py
+
+index-mandate:
+	@python3 scripts/build_index_mandate_study.py
 
 # Credential scan over every file. This repo is public.
 secrets:

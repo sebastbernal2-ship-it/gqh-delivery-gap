@@ -1,0 +1,7 @@
+measure,name,horizon_days,n,correlation,first_half_r,second_half_r,sign_stable_across_halves,r_after_dropping_top_10_days,survives_influence_check,implied_gross_bps_per_day,round_trip_cost_bps,clears_cost_gate
+credit:aaa:10y,ETN,1,2462,-0.080226,-0.118822,-0.039095,True,-0.024402,False,-10.456,10.0,False
+credit:aaa:10y,PWR,1,2462,-0.092186,-0.18761,-0.000855,True,-0.043276,False,-15.252,10.0,False
+credit:quality-gap,DLR,1,2470,0.059363,0.099515,0.002947,True,0.030253,True,9.199,10.0,False
+credit:quality-gap,DLR,5,2463,0.04814,0.099909,-0.031182,False,0.033297,True,16.671,10.0,True
+credit:quality-gap,ETN,1,2470,0.111763,0.16162,0.050689,True,0.021883,False,14.551,10.0,True
+credit:quality-gap,PWR,1,2470,0.088348,0.144071,0.028285,True,0.054161,True,14.602,10.0,True

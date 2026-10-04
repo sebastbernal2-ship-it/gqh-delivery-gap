@@ -174,12 +174,14 @@ filing documents at 12,903, research acquisition rows at 433,781. The perpetual 
 
 ## Next actions, in order
 
-1. **The FERC ownership layer** for the delivery tail and the contract forced chains. Name, link, evidence,
-   receipt, with FERC dockets as the source.
-2. **The index and mandate measurement**, still never run, and the last item that needs only public data and code.
-3. **The forward tape**, watched rather than modelled, until enough independent events exist to measure.
-4. **Run `make check` and `make test` on the merged state**, since the legs added files and only their own
-   verifiers were run.
+1. **The ownership coverage artifact** is complete for the current evidence ceiling. `results/ownership-crosswalk.csv`
+   keeps one verified mapping and nineteen unresolved top entities, with the source requirement in
+   `docs/plan/ownership-layer.md`.
+2. **The index mandate coverage artifact** is complete as development-only inventory. `results/index-mandate-events.csv`
+   records 339 event legs from 2015-07-01 through 2022-09-30, and `results/index-mandate-study.csv` records zero
+   eligible return rows because primary clocks and pre-effective quantities are missing.
+3. **The forward tape** remains watched rather than modelled until enough independent events exist to measure.
+4. **The merged-state checks** now pass with `make check` and `make test`.
 
 ## Working rules that were learned the hard way today
 

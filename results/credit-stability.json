@@ -1,0 +1,26 @@
+{
+  "survivors_checked": 6,
+  "sign_stable_across_halves": 5,
+  "survive_influence_check": 3,
+  "clear_cost_gate": 3,
+  "round_trip_cost_bps": 10.0,
+  "largest_implied_gross_bps_per_day": 16.671,
+  "measure_sign_pattern": {
+    "credit:aaa:10y": [
+      "-",
+      "-"
+    ],
+    "credit:quality-gap": [
+      "+",
+      "+",
+      "+",
+      "+"
+    ]
+  },
+  "sign_agreement_within_measure": {
+    "credit:aaa:10y": true,
+    "credit:quality-gap": true
+  },
+  "declared_after_the_grid": true,
+  "what_this_can_do": "weaken the finding only; it cannot upgrade a result"
+}

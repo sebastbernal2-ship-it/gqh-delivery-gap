@@ -1,0 +1,141 @@
+{
+  "generated_by": "scripts/build_credit_panel.py",
+  "credit_route": "FRED CSV export, keyless",
+  "credit_route_limit": "the ICE BofA series return 795 daily rows and ignore cosd, so the window is set by the vendor and not by us",
+  "credit_series": {
+    "credit:hy:oas": {
+      "fred_id": "BAMLH0A0HYM2",
+      "meaning": "ICE BofA US High Yield Index option adjusted spread, percent",
+      "rows": 786,
+      "first": "2023-10-03",
+      "last": "2026-10-01"
+    },
+    "credit:ig:oas": {
+      "fred_id": "BAMLC0A0CM",
+      "meaning": "ICE BofA US Corporate Index option adjusted spread, percent",
+      "rows": 785,
+      "first": "2023-10-03",
+      "last": "2026-10-01"
+    },
+    "credit:bbb:oas": {
+      "fred_id": "BAMLC0A4CBBB",
+      "meaning": "ICE BofA BBB US Corporate Index option adjusted spread, percent",
+      "rows": 786,
+      "first": "2023-10-03",
+      "last": "2026-10-01"
+    },
+    "credit:ccc:oas": {
+      "fred_id": "BAMLH0A3HYC",
+      "meaning": "ICE BofA CCC and lower US High Yield Index option adjusted spread, percent",
+      "rows": 786,
+      "first": "2023-10-03",
+      "last": "2026-10-01"
+    },
+    "credit:hy:yield": {
+      "fred_id": "BAMLH0A0HYM2EY",
+      "meaning": "ICE BofA US High Yield Index effective yield, percent",
+      "rows": 786,
+      "first": "2023-10-03",
+      "last": "2026-10-01"
+    },
+    "credit:tier-gap": {
+      "derived_from": [
+        "credit:bbb:oas",
+        "credit:ccc:oas"
+      ],
+      "meaning": "BBB spread minus CCC spread, the weakest link reading, percent",
+      "rows": 786,
+      "first": "2023-10-03",
+      "last": "2026-10-01"
+    },
+    "credit:baa:10y": {
+      "fred_id": "BAA10Y",
+      "route": "api.stlouisfed.org with FRED_API_KEY",
+      "meaning": "Moody's Baa corporate yield minus 10 year Treasury, percent",
+      "rows": 10188,
+      "first": "1986-01-02",
+      "last": "2026-10-01"
+    },
+    "credit:aaa:10y": {
+      "fred_id": "AAA10Y",
+      "route": "api.stlouisfed.org with FRED_API_KEY",
+      "meaning": "Moody's Aaa corporate yield minus 10 year Treasury, percent",
+      "rows": 10935,
+      "first": "1983-01-03",
+      "last": "2026-10-01"
+    },
+    "credit:baa:level": {
+      "fred_id": "DBAA",
+      "route": "api.stlouisfed.org with FRED_API_KEY",
+      "meaning": "Moody's Baa corporate bond yield, percent",
+      "rows": 10224,
+      "first": "1986-01-02",
+      "last": "2026-10-01"
+    },
+    "credit:aaa:level": {
+      "fred_id": "DAAA",
+      "route": "api.stlouisfed.org with FRED_API_KEY",
+      "meaning": "Moody's Aaa corporate bond yield, percent",
+      "rows": 10983,
+      "first": "1983-01-03",
+      "last": "2026-10-01"
+    },
+    "credit:quality-gap": {
+      "derived_from": [
+        "credit:baa:level",
+        "credit:aaa:level"
+      ],
+      "meaning": "Baa yield minus Aaa yield, the quality and tier gap, the long history analogue of the BBB minus CCC reading",
+      "rows": 10224,
+      "first": "1986-01-02",
+      "last": "2026-10-01"
+    }
+  },
+  "equity_route": "public.gqh_source_records, source_id = 'massive_bars', adjusted bars",
+  "equity_series": {
+    "DLR": {
+      "rows_in_window": 2702,
+      "rows_landed_total": 2703,
+      "first_in_window": "2016-01-04",
+      "last_in_window": "2026-10-01"
+    },
+    "EME": {
+      "rows_in_window": 2702,
+      "rows_landed_total": 2703,
+      "first_in_window": "2016-01-04",
+      "last_in_window": "2026-10-01"
+    },
+    "ETN": {
+      "rows_in_window": 2702,
+      "rows_landed_total": 2703,
+      "first_in_window": "2016-01-04",
+      "last_in_window": "2026-10-01"
+    },
+    "PWR": {
+      "rows_in_window": 2702,
+      "rows_landed_total": 2703,
+      "first_in_window": "2016-01-04",
+      "last_in_window": "2026-10-01"
+    },
+    "SPY": {
+      "rows_in_window": 2702,
+      "rows_landed_total": 2703,
+      "first_in_window": "2016-01-04",
+      "last_in_window": "2026-10-01"
+    }
+  },
+  "fred_api_key_present": true,
+  "fred_api_note": "the official API returns 786 observations for every ICE BofA series even with a valid key, so the three year window is ICE licensing on FRED and not a limit of the keyless export",
+  "study_window": {
+    "start": "1983-01-03",
+    "end": "2026-10-01",
+    "source": "the ICE BofA series carry only three years on FRED by ICE licence; the Moody's family carries full history, so the panel start is the earlier of the two",
+    "equity_join_start": "2016-01-04",
+    "equity_note": "the landed adjusted equity bars begin 2016-01-04, which is the binding constraint on the long window"
+  },
+  "development_end": "2026-02-24",
+  "holdout_start": "2026-02-25",
+  "holdout_opened": false,
+  "rows_written": 70779,
+  "inside_window_equity_rows": 13510
+}

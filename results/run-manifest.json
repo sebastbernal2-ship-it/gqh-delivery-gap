@@ -1,0 +1,46 @@
+{
+  "code_revision": "1dbd5661f6303cb3d55ea025bdfacca10286d4b3",
+  "command": [
+    "python3",
+    "scripts/build_run_manifest.py",
+    "docs/entity-crosswalk.csv",
+    "results/capacity-event-ledger.csv",
+    "results/issuer-exposure-ledger.csv",
+    "results/market-control-panel.csv",
+    "results/tradeability-panel.csv",
+    "results/physical-observation-ledger.csv"
+  ],
+  "created_at": "2026-10-03T16:54:14.436083+00:00",
+  "inputs": [
+    {
+      "path": "docs/entity-crosswalk.csv",
+      "sha256": "07d71a1c265b8716fe4aad53d461db182445904ac79684f915ef12b46c74c0b9",
+      "bytes": 370
+    },
+    {
+      "path": "results/capacity-event-ledger.csv",
+      "sha256": "2965852866b27e3268971f5a3d837c5a697a9b597024a0844b3aec2c8846efd5",
+      "bytes": 211765
+    },
+    {
+      "path": "results/issuer-exposure-ledger.csv",
+      "sha256": "a0539d807e780e6a61499da6cd9245925220503f9f283835d747501048eca4d7",
+      "bytes": 27910
+    },
+    {
+      "path": "results/market-control-panel.csv",
+      "sha256": "f99c972fa1c4ba2cac0ab1cb147a323360cbdbfc95050cdb04361a77341d8358",
+      "bytes": 22037
+    },
+    {
+      "path": "results/tradeability-panel.csv",
+      "sha256": "e783e7fc17979235f0e038f33381b188d8e5cc1651ef537128cce27a8bc1921a",
+      "bytes": 21500
+    },
+    {
+      "path": "results/physical-observation-ledger.csv",
+      "sha256": "fd29f550e8a9e6170ce238d57f22e8e940a4635692de9f3a4a6bd4da624468c9",
+      "bytes": 3881
+    }
+  ]
+}

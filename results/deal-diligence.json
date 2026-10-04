@@ -1,0 +1,42 @@
+{
+  "generated_by": "scripts/build_deal_diligence.py",
+  "route": "SEC EDGAR ABS-15G exhibits, no key, no entitlement",
+  "filings_read": 125,
+  "exhibits_found": 125,
+  "filings_with_characteristics": 88,
+  "cut_fields": {
+    "facility_codes": "attempted twice. A pattern rule over the whole exhibit returned boilerplate such as BZ7 and JTU31 ten times per report. Restricting the rule to codes within 80 characters of facility, location, property or site language left two filings out of 68. Real site codes do appear, verified on Switch as AUS.02 and TX1, so the route exists, but it is the Statistical Data File referenced by the report and not filed, not a better regex"
+  },
+  "securitizers": [
+    "Aligned Data Centers Issuer, LLC",
+    "BBCMS Mortgage Trust 2019-C5",
+    "CITIGROUP COMMERCIAL MORTGAGE SECURITIES INC",
+    "Cologix Canada, Inc.",
+    "Cologix US, Inc.",
+    "Compass Datacenters A, LLC",
+    "Compass Datacenters Issuer II, LLC",
+    "Compass Datacenters, LLC",
+    "CyrusOne Data Centers Issuer I LLC",
+    "CyrusOne Guarantor I LLC",
+    "CyrusOne LP",
+    "DataBank Holdings Ltd.",
+    "EdgeConneX N.A. Finance Holdings V, LLC",
+    "Flexential Corp.",
+    "MECP1 Mesa Intermediate 1, LLC",
+    "Phoenix Data Center Acquisitions LLC",
+    "Retained Vantage Data Centers, LP",
+    "STACK INFRASTRUCTURE ISSUER, LLC",
+    "STACK INFRASTRUCTURE PARENT, LLC",
+    "Sabey Data Center Asset Holdings LLC",
+    "Sabey Data Center Issuer LLC",
+    "Switch, Ltd.",
+    "Urbacon Developments (II) Ltd",
+    "Vantage Data Centers Holdings, LLC",
+    "Vantage Data Centers Issuer, LLC",
+    "Vantage Valkyrie BidCo S.a.r.l.",
+    "Vault DI Issuer LLC"
+  ],
+  "what_this_is": "the independent accountant's agreed upon procedures report behind each deal's tenant lease portfolio",
+  "known_gap": "the rents, lease expiries and tenant names sit in the Statistical Data File the report references, and that file is not filed with the SEC",
+  "workers": 4
+}

@@ -1,0 +1,35 @@
+{
+  "measure_set": "ice",
+  "measures": [
+    "credit:hy:oas",
+    "credit:ig:oas",
+    "credit:bbb:oas",
+    "credit:ccc:oas",
+    "credit:tier-gap",
+    "credit:hy:yield"
+  ],
+  "declared_grid": 48,
+  "measured_grid": 48,
+  "grid_printed_before_statistics": true,
+  "development_window": [
+    "2023-10-03",
+    "2026-02-24"
+  ],
+  "holdout_opened": false,
+  "draws": 500,
+  "block": 20,
+  "seed": 20261003,
+  "effective_breadth": {
+    "names": 4,
+    "average_pairwise_correlation": 0.3701149361627129,
+    "effective_bets_from_average_correlation": 0.47385621343860146
+  },
+  "nominal_hits_at_p_0.05": 7,
+  "bh_survivors": 0,
+  "expected_false_hits_at_p_0.05": 2.4,
+  "median_observed_correlation": 0.0498,
+  "median_placebo_correlation": null,
+  "ceiling": "descriptive_only",
+  "falsifier_2_raw_minus_adjusted_median": -0.034705,
+  "survivors": []
+}
