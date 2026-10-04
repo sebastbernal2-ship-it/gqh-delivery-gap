@@ -181,3 +181,7 @@ generated-path: results/hyperliquid-contract-terms.json
 Produced by `scripts/build_hyperliquid_fixture.py`:
 
 generated-path: results/hyperliquid-fixture/
+
+Produced by `scripts/detect_forced_flow.py`:
+
+generated-path: results/hyperliquid-forced-flow-candidates.jsonl

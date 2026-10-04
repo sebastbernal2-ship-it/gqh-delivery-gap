@@ -1,0 +1,28 @@
+{
+ "captures": [
+  "data/hyperliquid/ws/ws-20261004T071502Z.jsonl"
+ ],
+ "per_coin": {
+  "BTC": {
+   "prints": 392,
+   "bursts": 100,
+   "candidates": 0
+  },
+  "ETH": {
+   "prints": 179,
+   "bursts": 43,
+   "candidates": 1
+  },
+  "GAS": {
+   "prints": 37,
+   "bursts": 25,
+   "candidates": 0
+  },
+  "SPX": {
+   "prints": 41,
+   "bursts": 18,
+   "candidates": 0
+  }
+ },
+ "candidates": 1
+}
