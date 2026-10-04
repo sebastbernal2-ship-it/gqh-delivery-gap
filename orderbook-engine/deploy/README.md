@@ -7,8 +7,8 @@ The repository is self-sufficient on a fresh Ubuntu 24.04 machine with passwordl
 1. Copy or clone the repository onto the machine.
 
    ```
-   git clone https://github.com/sebastbernal2-ship-it/market_simulator.git ~/market_simulator
-   cd ~/market_simulator
+   git clone https://github.com/sebastbernal2-ship-it/gqh-delivery-gap.git ~/gqh-delivery-gap
+   cd ~/gqh-delivery-gap/orderbook-engine
    ```
 
 2. Put the credentials in the secret store, outside the repository.

@@ -7,7 +7,9 @@
 An incremental-computation-driven market simulator with a fully
 bitemporal order book, written in OCaml.
 
-## Interface
+git clone https://github.com/sebastbernal2-ship-it/gqh-delivery-gap.git ~/gqh-delivery-gap
+cd ~/gqh-delivery-gap/orderbook-engine
+bash deploy/setup.sh
 
 `docs/engine-io-contract.md` owns the input and output format: canonical JSONL in, one report out, with samples in `examples/io-contract/`.
 
@@ -16,8 +18,8 @@ bitemporal order book, written in OCaml.
 `deploy/README.md` is the runbook. On a fresh Ubuntu host with sudo:
 
 ```
-git clone https://github.com/sebastbernal2-ship-it/market_simulator.git ~/market_simulator
-cd ~/market_simulator
+git clone https://github.com/sebastbernal2-ship-it/gqh-delivery-gap.git ~/gqh-delivery-gap
+cd ~/gqh-delivery-gap/orderbook-engine
 bash deploy/setup.sh
 ```
 
