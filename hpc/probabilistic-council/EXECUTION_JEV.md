@@ -201,3 +201,13 @@ Transfer only the validated numerical cache and manifest to HiPerGator, then set
 variables documented above and submit `run-execution-ablation.slurm`. The pinned plan is 1.92 GB;
 it is metadata-selected but its objects have not yet passed the downstream schema, completeness or
 availability checks. No HPG run or performance conclusion is implied by the plan or local smoke.
+
+## Source-clock gate and direct capture
+
+The [source QA and contiguous capture record](../../docs/inbox/aidan-2026-10-03/jev-data-clock-gate.md)
+owns the new historical/live audits, pinned collector references, acquisition commands and remaining
+gates. `source_clock_audit.py` only opens exact training-role subsets of the frozen acquisition and
+emits clocks/counts without features or labels. `record_execution_tape.py` captures projected public
+BTC messages off-cluster; `export_execution_capture.py` produces hash-pinned sources separated by
+reconnect/clock/date segment. Its source inventory is deliberately not a trainable dataset. A new
+segment-aware adapter and frozen chronological roles are required before using it for Jev training.

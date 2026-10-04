@@ -1,0 +1,3 @@
+# OFF-CLUSTER capture only; do not install on HiPerGator for model training.
+websockets==12.0
+certifi==2025.10.05

@@ -11,9 +11,6 @@ import re
 import time
 from urllib.parse import quote
 
-import certifi
-import requests
-
 
 def sha256(path):
     h=hashlib.sha256()
@@ -42,6 +39,9 @@ def load_plan(path):
 
 
 def fetch_one(entry,root):
+    import certifi
+    import requests
+
     target=root/entry['sha256'];partial=root/(entry['sha256']+'.partial')
     if target.exists():
         if target.stat().st_size==entry['size'] and sha256(target)==entry['sha256']:

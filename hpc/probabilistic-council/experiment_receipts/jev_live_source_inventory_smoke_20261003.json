@@ -1,0 +1,81 @@
+{
+  "blockers": [
+    "source inventory only: chronological session roles and coverage not approved",
+    "split and warm up by capture segment; current date-only merger must not be used"
+  ],
+  "capture_receipt_sha256": "5a6152be7988ffa56fdba2a2cf3e1edcf9b25c16c10f6f19e51a1bc930f36005",
+  "clock_basis": "time.time_ns immediately after recv; paired with time.monotonic_ns",
+  "exporter_sha256": "e450b78302a419b6252a326b7e436218a8b5e18b7610c6ed0d62bf74393efd71",
+  "journal_sha256": "260e86f1ea5c946b1851a04a09f0120897dad140b1fd7a1050269025ab3dbd71",
+  "labels_computed": false,
+  "ready_for_training": false,
+  "schema_version": "execution-live-source-inventory-v1",
+  "scope": "development_only",
+  "sources": [
+    {
+      "clock_audit": {
+        "counts": {
+          "selected_events": 109,
+          "selected_rows": 109,
+          "source_rows": 109
+        },
+        "event_gaps_over_2s": 0,
+        "first_event_ns": 1791079298055000000,
+        "first_recorded_ns": 1791079298374598000,
+        "instrument_row_counts": {
+          "BTC": 109
+        },
+        "last_event_ns": 1791079357092000000,
+        "last_recorded_ns": 1791079357300381000,
+        "max_event_gap_ns": 632000000,
+        "recorded_minus_event_ns": {
+          "max": 845513000,
+          "median": 238527000,
+          "min": 195022000,
+          "p01": 205659000,
+          "p99": 514984000
+        },
+        "unique_event_timestamps": 109
+      },
+      "kind": "books",
+      "pair_id": "live:260e86f1ea5c946b1851a04a09f0120897dad140b1fd7a1050269025ab3dbd71:1",
+      "segment": 1,
+      "session": "2026-10-04",
+      "sha256": "30b45e9a6d1b22a2ca7189bea4a0304ce16fad8afba07fd7ea9ac14739d6e31e",
+      "size": 10181
+    },
+    {
+      "clock_audit": {
+        "counts": {
+          "lag_over_2s": 30,
+          "selected_events": 88,
+          "selected_rows": 32,
+          "source_rows": 32
+        },
+        "event_gaps_over_2s": 15,
+        "first_event_ns": 1791079275428000000,
+        "first_recorded_ns": 1791079298388501000,
+        "instrument_row_counts": {
+          "BTC": 32
+        },
+        "last_event_ns": 1791079356491000000,
+        "last_recorded_ns": 1791079356714782000,
+        "max_event_gap_ns": 7888000000,
+        "recorded_minus_event_ns": {
+          "max": 22960501000,
+          "median": 369739000,
+          "min": 164349000,
+          "p01": 164349000,
+          "p99": 22960501000
+        },
+        "unique_event_timestamps": 50
+      },
+      "kind": "trades",
+      "pair_id": "live:260e86f1ea5c946b1851a04a09f0120897dad140b1fd7a1050269025ab3dbd71:1",
+      "segment": 1,
+      "session": "2026-10-04",
+      "sha256": "c010afdb157d302e4dd75df2c7805a5d58a3a593dd70a0382fb8f948579359cc",
+      "size": 10260
+    }
+  ]
+}
