@@ -1,0 +1,114 @@
+{
+ "blocks": {
+  "training": 34,
+  "calibration": 9,
+  "gate": 9,
+  "pool": 9,
+  "evaluation": 20
+ },
+ "evaluation_window": {
+  "from": "2023-02-23T15:18:37+00:00",
+  "to": "2024-08-01T14:10:33+00:00"
+ },
+ "prevalence": {
+  "rows": 20,
+  "log_loss": 1.72823526794243,
+  "brier": 0.841157133464826,
+  "accuracy": 0.0,
+  "class_support": {
+   "0": 0,
+   "1": 5,
+   "2": 8,
+   "3": 1,
+   "4": 6
+  }
+ },
+ "metadata_only": {
+  "rows": 20,
+  "log_loss": 3.130307889074432,
+  "brier": 0.9876482710385472,
+  "accuracy": 0.3,
+  "class_support": {
+   "0": 0,
+   "1": 5,
+   "2": 8,
+   "3": 1,
+   "4": 6
+  }
+ },
+ "text_only": {
+  "rows": 20,
+  "log_loss": 2.0440960845273772,
+  "brier": 0.9135995213196034,
+  "accuracy": 0.15,
+  "class_support": {
+   "0": 0,
+   "1": 5,
+   "2": 8,
+   "3": 1,
+   "4": 6
+  }
+ },
+ "concatenated": {
+  "rows": 20,
+  "log_loss": 2.8279569468363093,
+  "brier": 0.9781872236722922,
+  "accuracy": 0.35,
+  "class_support": {
+   "0": 0,
+   "1": 5,
+   "2": 8,
+   "3": 1,
+   "4": 6
+  }
+ },
+ "council": {
+  "rows": 20,
+  "log_loss": 1.7050214861681372,
+  "brier": 0.8212246789353985,
+  "accuracy": 0.3,
+  "class_support": {
+   "0": 0,
+   "1": 5,
+   "2": 8,
+   "3": 1,
+   "4": 6
+  }
+ },
+ "gate_weights": {
+  "evidence:metadata": 0.4850537922601078,
+  "evidence:text": 0.5149462077398923
+ },
+ "specialists": [
+  "evidence:metadata",
+  "evidence:text"
+ ],
+ "metadata_features": [
+  "form_is_8k",
+  "has_item_101",
+  "has_item_202",
+  "has_item_701",
+  "filings_last_90d",
+  "days_since_last_filing",
+  "last_change_rel",
+  "trailing_mean_change_rel",
+  "prior_revision_count",
+  "last_surprise_rel",
+  "days_since_last_obligation",
+  "concept_is_rpo",
+  "missing_last_change_rel",
+  "missing_last_surprise_rel",
+  "missing_last_obligation"
+ ],
+ "schema": "filing-council-ab-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/filing-council.md",
+ "rows": 81,
+ "components": 8,
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "81 labels, PWR dominated; the three council blocks hold eight rows each",
+  "the block specialists are fitted on 34 rows and the council on 24",
+  "development only, both sealed windows spent, no returns or costs"
+ ]
+}

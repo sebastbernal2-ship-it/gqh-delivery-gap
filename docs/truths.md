@@ -560,3 +560,23 @@ from the same four firms, development only, both sealed windows spent.
 **Consequence**: the text side of the equity bridge has a measured sign. The next work is a
 stacking or gating layer over the two evidence blocks, and the same test on a larger label set,
 not more linear features.
+
+## T39. The council as a combiner beats every single evidence block on the four-firm panel
+
+**Statement**: on the 81-label four-firm filing panel with chronological blocks of 34 training,
+9 calibration, 9 gate, 9 pool and 20 evaluation rows, the council over the metadata specialist
+and the text specialist wins on both proper scores: log loss 1.705 against 3.130 for metadata
+alone, 2.044 for text alone and 2.828 for the naive concatenation; Brier 0.821 against 0.988,
+0.914 and 0.978. Training prevalence reaches 1.728 log loss with zero accuracy on the evaluation
+block because its argmax class is absent there. The gate weights are nearly equal, 0.485 and
+0.515, so the visible gain comes from temperature calibration and pooling rather than from
+reliability reweighting. Accuracy is not the council's win: 0.300 against 0.350 for the
+concatenation, so the gain is in probability quality, which is the quantity a council is for.
+**Evidence**: `results/filing-council-ab.json`; `results/filing-specialist-events.csv`;
+`results/filing-text-ab.json`; `hpc/probabilistic-council/filing_council.py`;
+`scripts/run_filing_council.py`; `docs/plan/filing-council.md`.
+**Scope**: 81 labels, PWR dominated, three council partitions of nine rows each, block specialists
+trained on 34 rows, development only, both sealed windows spent.
+**Consequence**: the council layer earns its place on measurable evidence for the first time, but
+the sample is far too thin to promote. The next step is the same experiment on a larger label set
+and then on the risk track's dates, where the partitions can be properly sized.

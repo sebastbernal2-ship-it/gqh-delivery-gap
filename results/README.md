@@ -214,6 +214,10 @@ Produced by `hpc/probabilistic-council/run_filing_text_ab.py`:
 
 generated-path: results/filing-text-ab.json
 
+Produced by `scripts/run_filing_council.py`:
+
+generated-path: results/filing-council-ab.json
+
 Produced by `scripts/build_rpo_vintages.py`:
 
 generated-path: results/rpo-vintages.csv
