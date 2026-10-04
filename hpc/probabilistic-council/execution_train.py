@@ -4,7 +4,7 @@ from dataclasses import asdict
 import json
 from pathlib import Path
 import platform
-import subprocess
+from runtime_provenance import git_revision
 
 import numpy as np
 import torch
@@ -98,7 +98,7 @@ def run(dataset,output,epochs=3,pretraining=3,seed=20261003,device='cpu'):
     report={'status':'development_engineering_only','dataset_manifest':spec,'dataset_manifest_sha256':digest(Path(dataset)/'manifest.json'),
             'epochs':epochs,'pretraining_epochs':pretraining,'seed':seed,'device':device,
             'environment':{'python':platform.python_version(),'numpy':np.__version__,'torch':torch.__version__},
-            'git_revision':subprocess.check_output(['git','rev-parse','HEAD'],cwd=Path(__file__).parent,text=True).strip(),
+            'git_revision':git_revision(Path(__file__).parent),
             'code_sha256':{p.name:digest(p) for p in [Path(__file__),Path(__file__).with_name('execution_model.py'),Path(__file__).with_name('execution_dataset.py')]},
             'normalizer':{'mean':mean.tolist(),'scale':scale.tolist()},'losses':models,'calibration':calibrators,
             'pretraining_corpus':{'windows':len(pretraining_x),'sessions':spec['pretraining_sessions'],

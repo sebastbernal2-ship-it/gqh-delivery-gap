@@ -156,7 +156,7 @@ def build(plan_path, objects, output):
         rows,audit,excluded,overlap=session_cases(books,trades,s)
         if not rows:
             raise ValueError('no causal cases in a declared session')
-        role=plan.get('session_roles',{}).get(s,PARTITIONS[max(0,index-1)])
+        role=plan['session_roles'][s] if 'session_roles' in plan else PARTITIONS[max(0,index-1)]
         for r in rows:r['partition']=role
         panel.extend(rows);labels.extend(audit)
         coverage[s]=dict(books=summarize(books),trades=summarize(trades),overlap=overlap,
