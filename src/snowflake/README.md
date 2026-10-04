@@ -49,3 +49,50 @@ are in the [feature contract](../inbox/vishnu-2026-10-03/strategy-feature-contra
 existence of DDL does not mean populated or validated features.
 
 No Snowflake credentials belong in this repository.
+
+## Additive AI-evidence layer for the backtester
+
+Snowflake Cortex is used as a **research sidecar**, not as a source of truth or a strategy
+engine. `ai_evidence.sql` creates a separate annotation table and contains a small, read-only
+`AI_COMPLETE` extraction query over pre-extracted SEC context snippets. It produces candidate
+evidence only. It never updates `RAW`, `NORMALIZED.OPERATIONAL_FACTS`, `FEATURES`, bars, fills,
+quotes, order-book events, P&L, or strategy outputs. Candidate values/dates remain verbatim text;
+there is no numeric normalization or conversion in this path. A human must verify the exact source
+quote and mark any resulting record reviewed before another process may use it.
+
+The order-book backtester can call `src/snowflake/research_sidecar.py` after a run to retrieve
+related filing snippets and request a qualitative Cortex answer. Its public interface accepts a
+question and an allowlisted ticker, **not** prices, order-book arrays, fills, signals, or result
+metrics. The backtester must render its computed values directly from its own immutable result
+artifact; the AI panel is visibly separate and must show the original SEC excerpt, accession,
+document URL, filed/accepted/available timestamps, and document hash beside any generated answer.
+The model is instructed not to restate numeric values or performance metrics, and a deterministic
+response guard suppresses generated prose containing any digit. The separate source card remains
+the evidence of record if the generated explanation is wrong.
+
+### Wiring and operations
+
+1. Load SEC filings/exhibits with `src/central_ingest/sec_archive.py`; it preserves originals in
+   Snowflake stages and writes source metadata/context rows to `RAW.SEC_FILING_DOCUMENTS`.
+2. Run `src/snowflake/cortex_search.sql` only after reviewing the account's Cortex Search serving
+   and warehouse consumption. The index is separate from source tables and uses a one-day refresh
+   target because archived filings are static. Check that service state is `RUNNING` before use.
+3. Configure the backend—not browser JavaScript—with `SNOWFLAKE_ACCOUNT_URL`, `SNOWFLAKE_PAT`,
+   and `SNOWFLAKE_CORTEX_MODEL`. Pick the model from Snowflake's `/api/v2/cortex/models` response.
+   The module then calls the Cortex Search REST endpoint and Snowflake's OpenAI-compatible Cortex
+   Chat Completions REST endpoint. A PAT must be restricted to an application/service identity;
+   never put it in the client bundle, URL, logs, GitHub issue, or repo.
+4. Add a post-run “Research evidence” panel in the backtester. Pass only user-selected ticker(s)
+   and a qualitative question; do not automatically call on every run, every row, or every order.
+   Include an explicit button and show the retrieved excerpts separately from the answer.
+5. Keep API failures non-fatal to the run: show a research-panel error, but never change,
+   recompute, suppress, or invalidate the deterministic backtest result. No Cortex output is joined
+   to the strategy feature view or exported as a strategy signal.
+
+`src/snowflake/cortex_search.sql` creates a continuously served feature and can consume credits;
+it is intentionally **not** part of bootstrap and has not been applied. `ai_evidence.sql`'s
+inference example is a deliberately small manual query and has not been run. The REST adapter is
+implemented and unit tested, but the actual order-book backtester repository is not present in this
+checkout, so the UI hook and live Snowflake service/API smoke test remain integration steps. The
+appropriate user-facing value is defensible provenance and fast evidence review—not claimed alpha
+or altered backtest values.
