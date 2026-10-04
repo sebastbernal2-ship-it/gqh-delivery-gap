@@ -53,11 +53,14 @@ or production deployment is implied by this prototype.
 ## Implementation and reproduction
 
 `execution_dataset.py` verifies every raw object against the acquisition plan before parsing.
-It writes `features.npy`, `targets.npy`, `clocks.npy`, `roles.npy`, a manifest and a private label
-provenance audit. The four numerical arrays are hash-verified and loaded without pickle, using
-memory mapping. Training currently materializes the small prepared cache in CPU RAM; GPU
-transfers are bounded minibatches (32 training, 128 inference). A genuinely out-of-core/sharded
-trainer remains future work, rather than an assumed scaling property.
+It writes supervised `features.npy`, `targets.npy`, `clocks.npy`, `roles.npy`, plus a separate
+`pretraining_features.npy` corpus, a manifest and a private label provenance audit. The extra
+unlabeled corpus is built only from the two whole training sessions, at a fixed 10-second stride;
+calibration, gate, pool-calibration and evaluation blocks never enter masked pretraining or the
+normalizer. Every numerical array is hash-verified and loaded without pickle, using memory mapping.
+Training currently materializes the small prepared cache in CPU RAM; GPU transfers are bounded
+minibatches (32 training, 128 inference). A genuinely out-of-core/sharded trainer remains future
+work, rather than an assumed scaling property.
 
 `execution_model.py` projects 24 typed numerical features per step into width 32, adds learned
 positions and uses one temporal transformer layer. The vendored JevLike `AttentionHead` scores
@@ -66,12 +69,13 @@ sequence encoding. This is a new structured JevLike research variant, not TypeSa
 It has no generic pretrained weights and is not compatible with the existing tiny byte-scorer's
 C++ exporter. Native/compiled serving and latency benchmarking require a separate acceptance gate.
 
-`execution_train.py` uses the prepared cache only. It fits train-only standardization in double
-precision, transfers minibatches to the chosen device, runs the two fixed model schedules,
-calibrates each query on calibration cases and chooses on gate cases. Pretrained and scratch
-variants share the supervised shuffle seed and budget; the pretrained variant receives additional
-explicitly disclosed reconstruction compute. Nonfinite losses or invalid probability vectors fail.
-All twelve labels share their parent case; neither the loss nor query count establishes independence.
+`execution_train.py` uses the prepared cache only. It fits standardization on the larger, training-
+only unlabeled corpus in double precision, transfers minibatches to the chosen device, runs the two
+fixed model schedules, calibrates each query on calibration cases and chooses on gate cases.
+Pretrained and scratch variants share the supervised shuffle seed and budget; the pretrained
+variant receives additional explicitly disclosed reconstruction compute. Nonfinite losses or
+invalid probability vectors fail. All twelve labels share their parent case; neither the loss nor
+query count establishes independence.
 
 Prepare data **off-cluster**, from this component directory:
 
@@ -139,6 +143,28 @@ No target edges, architectures, epochs, labels or selection rules were changed a
 this smoke target. This demonstrates implementation, not pretraining effectiveness, trustworthy
 tails, latency, stable calibration, execution improvement or quantum advantage. Wider prepared
 session coverage is required before spending substantial HiPerGator training budget.
+
+## Follow-on pretraining expansion
+
+The first smoke model had only 13 supervised training cases and reused those sequences for masked
+reconstruction. The follow-on cache now extracts 106 unlabeled 16x24 windows at a fixed 10-second
+stride from the same two training sessions, an 8.2x increase in pretraining windows. The windows
+overlap heavily and come from only two short development blocks, so this is a pipeline/data-volume
+improvement, not eight times more independent evidence. A single local CPU epoch over this cache
+completed with finite reconstruction and supervised losses. The development evaluation partition
+was not opened for that check; no updated predictive score or model-selection claim is made.
+
+For substantially more unsupervised history, Hyperliquid's [official archive](https://hyperliquid.gitbook.io/hyperliquid-docs/historical-data)
+documents hourly L2 book snapshots and says coverage may be delayed or missing; the requester pays
+transfer costs. Its separate node-fill archives require a distinct adapter and reconciliation.
+The archive documentation gives event-time history, not proof of the feed arrival time available to
+a live strategy. Therefore historical snapshots can be screened as Jev pretraining data after
+schema, gap and cost audits, but must not silently become receipt-time supervised labels or HFT
+execution validation. Start a durable live WebSocket capture of book/trade messages with both
+exchange and local receipt clocks, sequence numbers, and reconnect-gap records. Use Snowflake only
+for timestamped context that the execution decision can actually observe; slower filings or
+fundamental factors belong upstream as strategy/regime context, not as fabricated microsecond book
+signals.
 
 Regression checks cover future-path isolation, observed-gap rejection, cache/hash/schema guards,
 shared-query probabilities, pretraining gradients, checkpoint inference parity and monotone

@@ -12,6 +12,7 @@ from synchronized_tape import CausalTape, NS, digest, parquet_rows, parse_messag
 HORIZONS=(5,15,60)
 TERMINAL_EDGES=(-2.,-.5,.5,2.)
 ADVERSE_EDGES=(.5,1.,2.,5.)
+PRETRAIN_STRIDE_NS=10*NS
 FEATURES=tuple(f'{side}_{kind}_{i}' for i in range(1,6) for side in ('bid','ask') for kind in ('offset_bps','depth_fraction'))+('spread_bps','flow_5s','log_volume_5s','book_age_s')
 
 
@@ -61,6 +62,26 @@ def cases(books,trades):
     return output,dict(excluded)
 
 
+def pretraining_windows(books,trades):
+    """Unlabeled, past-only windows; called only for whole training-role sessions."""
+    tape=CausalTape(books,trades)
+    if not tape.books or not tape.trades:return [],[]
+    lo=max(tape.books[0].recorded_ns,tape.trades[0].recorded_ns)
+    hi=min(tape.books[-1].recorded_ns,tape.trades[-1].recorded_ns)
+    output=[];clocks=[];excluded=Counter()
+    for t in range(lo+30*NS,hi,PRETRAIN_STRIDE_NS):
+        try:
+            start=bisect_right(tape.book_times,t-30*NS)-1
+            stop=bisect_right(tape.book_times,t)
+            path=tape.book_states[start:stop]
+            if not path or any(b.event_ns-a.event_ns>2*NS for a,b in zip(path,path[1:])):
+                raise ValueError('pretraining history gap')
+            sequence=[step(tape,t+offset*NS) for offset in range(-30,1,2)]
+            output.append(sequence);clocks.append(t)
+        except ValueError as error:excluded[str(error)]+=1
+    return output,clocks
+
+
 def prepare(plan_path,objects,output):
     plan=json.loads(Path(plan_path).read_text());sessions=validate_plan(plan)
     for e in plan['files']:
@@ -70,7 +91,7 @@ def prepare(plan_path,objects,output):
     for e in plan['files']:
         events,_=parse_messages(parquet_rows(Path(objects)/e['sha256']),e['kind'],e['sha256'])
         groups[e['session']][e['kind']].extend(events)
-    all_rows=[];coverage={};seen={'books':set(),'trades':set()}
+    all_rows=[];coverage={};seen={'books':set(),'trades':set()};pretrain_rows=[];pretrain_clocks=[];pretrain_sessions=[]
     for i,s in enumerate(sessions):
         streams={}
         for kind in ('books','trades'):
@@ -83,6 +104,10 @@ def prepare(plan_path,objects,output):
         role=max(0,i-1)
         for row in rows:row.update(role=role,session=s)
         all_rows+=rows;coverage[s]={'cases':len(rows),'exclusions':excluded}
+        if role==0:
+            windows,clocks=pretraining_windows(streams['books'],streams['trades'])
+            pretrain_rows.extend(windows);pretrain_clocks.extend(clocks);pretrain_sessions.extend([s]*len(windows))
+            coverage[s]['unlabeled_pretraining_windows']=len(windows)
     all_rows.sort(key=lambda r:r['decision_ns'])
     kept=[]
     for role in range(5):
@@ -93,18 +118,26 @@ def prepare(plan_path,objects,output):
     arrays={'features':np.asarray([r['sequence'] for r in kept],dtype=np.float32),
             'targets':np.asarray([r['targets'] for r in kept],dtype=np.int64),
             'clocks':np.asarray([[r['decision_ns'],r['label_available_ns']] for r in kept],dtype=np.int64),
-            'roles':np.asarray([r['role'] for r in kept],dtype=np.int64)}
+            'roles':np.asarray([r['role'] for r in kept],dtype=np.int64),
+            'pretraining_features':np.asarray(pretrain_rows,dtype=np.float32),
+            'pretraining_clocks':np.asarray(pretrain_clocks,dtype=np.int64)}
+    if not len(arrays['pretraining_features']):raise ValueError('empty training-only pretraining corpus')
     for name,values in arrays.items():np.save(out/(name+'.npy'),values,allow_pickle=False)
     (out/'label_audit.jsonl').write_text(''.join(json.dumps(r,sort_keys=True)+'\n' for r in kept))
     spec={'scope':'development_only','availability_basis':'retrospective_assumption','target_id':'btc-observed-proxy-terminal-excursion-v1',
           'feature_order':FEATURES,'horizons':HORIZONS,'sides':['buy','sell'],'tasks':['terminal','adverse'],
           'terminal_edges_bps':TERMINAL_EDGES,'adverse_edges_bps':ADVERSE_EDGES,'partitions':PARTITIONS,
-          'sequence_steps':16,'panel_rows':len(kept),'session_coverage':coverage,'sources':plan['files'],
+          'sequence_steps':16,'panel_rows':len(kept),'pretraining_rows':len(pretrain_rows),
+          'pretraining_stride_seconds':PRETRAIN_STRIDE_NS//NS,
+          'pretraining_sessions':sorted(set(pretrain_sessions)),
+          'pretraining_window_sessions':pretrain_sessions,
+          'pretraining_clock_range_ns':[min(pretrain_clocks),max(pretrain_clocks)],
+          'session_coverage':coverage,'sources':plan['files'],
           'plan_sha256':digest(plan_path),'adapter_sha256':digest(__file__),
           'causal_adapter_sha256':digest(Path(__file__).with_name('synchronized_tape.py')),
           'merge_adapter_sha256':digest(Path(__file__).with_name('multisession_panel.py')),
           'sessions':[r['session'] for r in kept],
-          'array_sha256':{name:digest(out/name) for name in ('features.npy','targets.npy','clocks.npy','roles.npy')},
+          'array_sha256':{name+'.npy':digest(out/(name+'.npy')) for name in arrays},
           'label_audit_sha256':digest(out/'label_audit.jsonl'),
           'limitations':['previously inspected development acquisition, not competition holdout',
                          'recorded availability proxy and trade completeness unverified',
@@ -120,13 +153,19 @@ def load_cache(root):
         s['sides']!=['buy','sell'] or s['tasks']!=['terminal','adverse'] or s['terminal_edges_bps']!=list(TERMINAL_EDGES) or s['adverse_edges_bps']!=list(ADVERSE_EDGES)):
         raise ValueError('cache schema mismatch')
     arrays={}
-    for name in ('features','targets','clocks','roles'):
+    for name in ('features','targets','clocks','roles','pretraining_features','pretraining_clocks'):
         p=root/(name+'.npy')
         if digest(p)!=s['array_sha256'][p.name]:raise ValueError('cache hash mismatch')
         arrays[name]=np.load(p,mmap_mode='r',allow_pickle=False)
-    x,y,c,r=(arrays[k] for k in ('features','targets','clocks','roles'));n=len(x)
+    x,y,c,r,px,pc=(arrays[k] for k in ('features','targets','clocks','roles','pretraining_features','pretraining_clocks'));n=len(x)
     if x.shape!=(n,16,len(FEATURES)) or y.shape!=(n,3,2,2) or c.shape!=(n,2) or r.shape!=(n,) or len(s['sessions'])!=n:raise ValueError('cache shape mismatch')
     if not np.isfinite(x).all() or y.dtype.kind not in 'iu' or ((y<0)|(y>4)).any():raise ValueError('invalid cache values')
+    if (px.ndim!=3 or px.shape[1:]!=(16,len(FEATURES)) or pc.shape!=(len(px),) or
+        len(px)!=s['pretraining_rows'] or len(s['pretraining_window_sessions'])!=len(px) or
+        not np.isfinite(px).all() or pc.dtype!=np.int64 or (np.diff(pc)<0).any()):
+        raise ValueError('invalid training-only pretraining corpus')
+    if s['pretraining_clock_range_ns']!=[int(pc.min()),int(pc.max())]:
+        raise ValueError('pretraining clock manifest mismatch')
     if c.dtype!=np.int64 or r.dtype.kind not in 'iu' or ((r<0)|(r>4)).any() or (c[:,0]>=c[:,1]).any() or (np.diff(c[:,0])<=0).any():raise ValueError('invalid chronology')
     if (c[:,0]<1735689600*NS).any() or (c[:,1]>=1798761600*NS).any():raise ValueError('outside development fence')
     seen=set()
@@ -137,6 +176,10 @@ def load_cache(root):
         if episodes&seen:raise ValueError('session crosses roles')
         seen|=episodes
         if role<4 and c[mask,1].max()>=c[r==role+1,0].min():raise ValueError('unmatured role labels')
+    train_sessions={s['sessions'][i] for i in np.flatnonzero(r==0)}
+    if (not set(s['pretraining_sessions'])<=train_sessions or
+        set(s['pretraining_sessions'])!=set(s['pretraining_window_sessions'])):
+        raise ValueError('pretraining includes a non-training session')
     return s,arrays
 
 
