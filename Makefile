@@ -1,4 +1,4 @@
-.PHONY: market sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test secrets check strategy-check manifest pdf-check gate-status status agency-deals tranche-table credit-deals deal-structure deal-diligence deal-ratings gate-scorecard credit-gauntlet credit-gauntlet-long ownership-layer index-mandate
+.PHONY: market sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test secrets check strategy-check manifest pdf-check gate-status status agency-deals tranche-table credit-deals deal-structure deal-diligence deal-ratings gate-scorecard credit-gauntlet credit-gauntlet-long ownership-layer index-mandate cascade-tape
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -128,6 +128,10 @@ delivery-model:
 # Count every variant tried, from the artifacts that recorded them.
 variants:
 	@python3 scripts/build_variant_ledger.py
+
+# Apply the pre-registered cascade rule to the recorded tape: docs/plan/cascade-protocol.md.
+cascade-tape:
+	@python3 scripts/evaluate_cascade_tape.py --json results/cascade-tape.json | tee results/cascade-tape.txt
 
 # Regenerate the idea view from the graph.
 ideas:

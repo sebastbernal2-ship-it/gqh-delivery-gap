@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from live.hyperliquid import count_overdispersion, refractory_excess, trigger  # noqa: E402
+from live.hyperliquid import count_overdispersion, now_iso, refractory_excess, trigger  # noqa: E402
 
 TAPE_DIR = ROOT / "data" / "tape"
 
@@ -114,6 +114,7 @@ def summarize_paths(paths: list[dict], baseline: list[dict], cost_bps: float = 9
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--tape", default=str(TAPE_DIR))
+    parser.add_argument("--json", default=None, help="write the machine-readable summary here")
     args = parser.parse_args(argv)
 
     paths = sorted(Path(args.tape).glob("tape-*.jsonl"))
@@ -136,6 +137,7 @@ def main(argv: list[str] | None = None) -> int:
         spreads = [row["spread_bps"] for row in rows if row.get("spread_bps") is not None]
         depths = [min(row.get("depth_bid_notional") or 0, row.get("depth_ask_notional") or 0)
                   for row in rows]
+        times = [row["time"] for row in rows if row.get("time") is not None]
         hits, evaluable = [], 0
         for index in range(len(rows)):
             if index < 60:
@@ -151,6 +153,8 @@ def main(argv: list[str] | None = None) -> int:
             baseline = unconditional_paths(rows, horizon, exclude_hits=set(hits))
             path_stats[horizon] = summarize_paths(selected, baseline)
         summary[coin] = {"samples": len(rows), "evaluable": evaluable, "hits": hits,
+                         "first": min(times) if times else None,
+                         "last": max(times) if times else None,
                          "spread": statistics.median(spreads) if spreads else None,
                          "depth": statistics.median(depths) if depths else None,
                          "gaps": gaps, "path_stats": path_stats}
@@ -190,6 +194,8 @@ def main(argv: list[str] | None = None) -> int:
             buckets[min(3, hit // 240)] += 1
         overdispersion = count_overdispersion(buckets)
         refractory = refractory_excess([float(g) for g in stats["gaps"]])
+        stats["overdispersion"] = overdispersion
+        stats["refractory"] = refractory
         print(f"  {coin}: clustering overdispersed={overdispersion['overdispersed']} "
               f"(mean {overdispersion['mean']:.2f}, variance {overdispersion['variance']:.2f}); "
               f"refractory={refractory}")
@@ -205,6 +211,29 @@ def main(argv: list[str] | None = None) -> int:
         print("windows, and every conclusion must still name its sample length.")
     print("")
     print("This is not a backtest, and nothing here is a strategy.")
+    if args.json:
+        report = {
+            "generated": now_iso(),
+            "tape_files": len(paths),
+            "nominal_minutes": minutes,
+            "total_triggers": total_triggers,
+            "markets": {
+                coin: {
+                    "samples": stats["samples"],
+                    "evaluable": stats["evaluable"],
+                    "triggers": len(stats["hits"]),
+                    "first": stats["first"],
+                    "last": stats["last"],
+                    "spread_bps_median": stats["spread"],
+                    "depth_10bps_median": stats["depth"],
+                    "paths": stats["path_stats"],
+                    "clustering": stats.get("overdispersion"),
+                    "refractory": stats.get("refractory"),
+                }
+                for coin, stats in sorted(summary.items())
+            },
+        }
+        Path(args.json).write_text(json.dumps(report, indent=1) + "\n")
     return 0
 
 

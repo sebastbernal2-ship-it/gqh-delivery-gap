@@ -1,0 +1,96 @@
+{
+ "generated": "2026-10-04T01:42:04+00:00",
+ "tape_files": 5,
+ "nominal_minutes": 439.75,
+ "total_triggers": 0,
+ "markets": {
+  "BTC": {
+   "samples": 1758,
+   "evaluable": 1698,
+   "triggers": 0,
+   "first": 1791031614004,
+   "last": 1791078113102,
+   "spread_bps_median": 0.11795026037519978,
+   "depth_10bps_median": 3499318.4592049997,
+   "paths": {
+    "1": null,
+    "5": null,
+    "15": null,
+    "60": null
+   },
+   "clustering": {
+    "buckets": 4,
+    "mean": 0.0,
+    "variance": 0.0,
+    "overdispersed": false
+   },
+   "refractory": null
+  },
+  "ETH": {
+   "samples": 1760,
+   "evaluable": 1700,
+   "triggers": 0,
+   "first": 1791031614553,
+   "last": 1791078113102,
+   "spread_bps_median": 0.3724048040233267,
+   "depth_10bps_median": 8737856.124185,
+   "paths": {
+    "1": null,
+    "5": null,
+    "15": null,
+    "60": null
+   },
+   "clustering": {
+    "buckets": 4,
+    "mean": 0.0,
+    "variance": 0.0,
+    "overdispersed": false
+   },
+   "refractory": null
+  },
+  "GAS": {
+   "samples": 1760,
+   "evaluable": 1700,
+   "triggers": 0,
+   "first": 1791031614553,
+   "last": 1791078113102,
+   "spread_bps_median": 2.8215709131134967,
+   "depth_10bps_median": 1169.0395800000001,
+   "paths": {
+    "1": null,
+    "5": null,
+    "15": null,
+    "60": null
+   },
+   "clustering": {
+    "buckets": 4,
+    "mean": 0.0,
+    "variance": 0.0,
+    "overdispersed": false
+   },
+   "refractory": null
+  },
+  "SPX": {
+   "samples": 1760,
+   "evaluable": 1700,
+   "triggers": 0,
+   "first": 1791031615099,
+   "last": 1791078113710,
+   "spread_bps_median": 2.6839933350857637,
+   "depth_10bps_median": 3991.1153685,
+   "paths": {
+    "1": null,
+    "5": null,
+    "15": null,
+    "60": null
+   },
+   "clustering": {
+    "buckets": 4,
+    "mean": 0.0,
+    "variance": 0.0,
+    "overdispersed": false
+   },
+   "refractory": null
+  }
+ }
+}

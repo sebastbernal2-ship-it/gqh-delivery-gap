@@ -1,0 +1,21 @@
+tape files: 5   markets: 4   about 440 minutes of samples
+market  samples  evaluable  triggers  spread bps  depth 10bps
+BTC        1758       1698         0        0.12    3,499,318
+ETH        1760       1700         0        0.37    8,737,856
+GAS        1760       1700         0        2.82        1,169
+SPX        1760       1700         0        2.68        3,991
+
+post-trigger paths, raw and net of 9/18 bps round-trip costs:
+  no complete trigger paths
+
+the two structural tests the protocol declares:
+  BTC: clustering overdispersed=False (mean 0.00, variance 0.00); refractory=None
+  ETH: clustering overdispersed=False (mean 0.00, variance 0.00); refractory=None
+  GAS: clustering overdispersed=False (mean 0.00, variance 0.00); refractory=None
+  SPX: clustering overdispersed=False (mean 0.00, variance 0.00); refractory=None
+
+no trigger fired in this window. That is a description of the window, not a refutation of the
+mechanism: with a sixty sample baseline and a few thousand samples, a rare event can simply not
+appear. The protocol says every conclusion must name its sample length.
+
+This is not a backtest, and nothing here is a strategy.
