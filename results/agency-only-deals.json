@@ -1,0 +1,11 @@
+{
+  "generated_by": "scripts/build_agency_only_deals.py",
+  "pages_fetched": 164,
+  "fetch_errors": [],
+  "deals_named_by_agencies": 164,
+  "deals_in_the_register": 89,
+  "deals_outside_the_register": 75,
+  "outside_with_a_concentration_number": 0,
+  "outside_with_operating_metrics": 8,
+  "the_actionable_list": []
+}

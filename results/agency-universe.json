@@ -1,0 +1,34 @@
+{
+  "generated_by": "scripts/build_agency_universe.py",
+  "route": "KBRA publication listing, server rendered, no key",
+  "pages_read": 12,
+  "cards_tagged_data_center": 164,
+  "rating_actions": 49,
+  "distinct_issuers_named": 15,
+  "issuers_absent_from_the_edgar_register": [
+    "A+ Preliminary Rating to QTS Thunder Managing Issuer, LLC\u2019s",
+    "A+ Rating to QTS Thunder Managing Issuer, LLC\u2019s $3.25 Billion Senior Secured Term Loans",
+    "Lohrasp Enterprise II LLC",
+    "Ratings",
+    "TierPoint",
+    "TierPoint Issuer LLC",
+    "TierPoint LLC"
+  ],
+  "programs_matched_to_the_register": [
+    "centersquare",
+    "cologix",
+    "databank",
+    "flexential"
+  ],
+  "programs_absent_from_the_register": [
+    "lohrasp",
+    "qts",
+    "tierpoint"
+  ],
+  "match_rule": "programme level, on a brand token. The SEC filer, the rated issuer and the co-issuer are three legal entities of one programme, so a legal entity match would report every programme as a miss and did",
+  "register_issuers_checked": 28,
+  "limits": [
+    "KBRA is one agency, so a deal rated only elsewhere will not appear",
+    "the match is on issuer name tokens, and a miss is reported rather than forced"
+  ]
+}

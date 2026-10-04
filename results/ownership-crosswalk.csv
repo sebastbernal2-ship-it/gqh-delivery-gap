@@ -1,0 +1,21 @@
+entity_name,slipped_mw,exposure_rows,panel_statuses,attribution_status,ticker,cik,economic_channel,evidence,identity_vintage,source_receipt,reason
+Power Company of Wyoming LLC,10750.0,4,ambiguous,unresolved,,,,,,,no evidence-backed crosswalk row
+Georgia Power Co,9244.6,13,proposed,verified,SO,92122,slipped capacity sits inside the parent's regulated rate base and construction plan,"Georgia Power Co files its annual report jointly in The Southern Company 10-K, accession 0000092122-26-000006, document so-20251231.htm. The accession prefix is Southern's own filer id (CIK 92122), and the same report covers both registrants",2026-02-19,https://www.sec.gov/Archives/edgar/data/41091/000009212226000006/so-20251231.htm,evidence-backed crosswalk row
+Invenergy Services LLC,8958.7,11,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+Solar Proponent LLC,7622.6,2,proposed,unresolved,,,,,,,no evidence-backed crosswalk row
+"Tri Global Energy, LLC",5319.6,8,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+Guernsey Power Station LLC,4110.0,2,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+RWE Renewables Americas LLC,3833.3,10,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+Lincoln Land Energy Center LLC,3830.4,3,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+"Clean Path Energy Center, LLC",3510.0,9,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+Harrison Power LLC,3300.0,4,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+Renovo Energy Center,3078.0,3,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+FGE Texas I LLC,2972.0,5,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+First Solar Project Development,2621.0,5,proposed,unresolved,,,,,,,no evidence-backed crosswalk row
+"FGE Goodnight, LLC",2500.0,6,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+"NTE Connecticut, LLC",2470.6,3,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+Avangrid Renewables LLC,2409.5,10,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+ESC Harrison County Power,2315.6,4,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+"Leeward Asset Management, LLC",2305.0,5,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+"Indeck Niles, LLC",2280.7,2,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row
+Broad Reach Power,2233.9,2,unmatched,unresolved,,,,,,,no evidence-backed crosswalk row

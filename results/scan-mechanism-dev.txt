@@ -1,0 +1,46 @@
+declared pairs: 231   measurable by declaration: 105
+series built: 13
+nodes with no series wired in this pass: 9
+   disclosure:8k:material-agreement: no series built in this pass; the representation is declared but not wired
+   firm:obligation:unapproved-change-orders: no series built in this pass; the representation is declared but not wired
+   grid:demand:balancing-authority: no series built in this pass; the representation is declared but not wired
+   grid:generation:balancing-authority: no series built in this pass; the representation is declared but not wired
+   positioning:perp:funding-rate: no series built in this pass; the representation is declared but not wired
+   price:compute:executed-rental: no series built in this pass; the representation is declared but not wired
+   price:options:implied-move: no series built in this pass; the representation is declared but not wired
+   price:power:spot: no series built in this pass; the representation is declared but not wired
+   promise:power:interconnection-queue-position: no series built in this pass; the representation is declared but not wired
+wrote results/scan-mechanism-dev.csv (74 rows)
+
+measured inside the mechanism-and-strategy window: development 2015-07 to 2022-09, holdout 2022-10 to 2024-09 untouched
+Nothing measured in the compute era study may change the design of the mechanism and strategy study, because that study's holdout overlaps this one's development window.
+
+pairs measured: 51
+pairs with a usable null: 51
+pairs beating their own null at 95%: 8
+expected by chance at that level: 2.6
+
+survivors, with their numbers rather than their story:
+  buildout_basket ~ scarcity_basket                          n= 57 change rho +0.54 level rho +0.86 percentile 1.00 seasonal +0.01 best lag +0
+  uranium_price ~ buildout_basket                            n= 87 change rho +0.49 level rho +0.50 percentile 1.00 seasonal +0.02 best lag +0
+  copper_price ~ uranium_price                               n= 87 change rho +0.47 level rho +0.67 percentile 1.00 seasonal -0.15 best lag +0
+  copper_price ~ buildout_basket                             n= 87 change rho +0.44 level rho +0.86 percentile 1.00 seasonal -0.13 best lag +0
+  uranium_price ~ promise_next_year_level                    n= 87 change rho +0.35 level rho +0.41 percentile 1.00 seasonal +0.09 best lag +0
+  buildout_basket ~ promise_next_year_level                  n= 87 change rho +0.32 level rho +0.80 percentile 1.00 seasonal -0.17 best lag +0
+  scarcity_basket ~ promise_next_year_level                  n= 57 change rho +0.28 level rho +0.87 percentile 0.98 seasonal -0.03 best lag +0
+  gas_price ~ promise_total_level                            n= 87 change rho +0.23 level rho +0.41 percentile 0.96 seasonal +0.18 best lag +2
+
+A survivor is a candidate for a mechanism conversation, never a strategy. Nothing here
+is a position, and the count above is the multiplicity that any reader must apply.
+
+series-level pairs measured: 74
+with one canonical series per node: 45
+  inside one family: 10 (survivors 4, expected 0.5)
+  across families: 18 (survivors 0, expected 0.9)
+
+The cross-family line is the one that matters. A pair inside one family is two views of the
+same risk, which is not a discovery.
+
+series-level counts, since a node may contribute more than one representation:
+  measured         51
+  too few months   23

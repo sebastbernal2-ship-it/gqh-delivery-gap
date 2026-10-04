@@ -1,0 +1,24 @@
+{
+  "generated_by": "scripts/build_tranche_table.py",
+  "route": "EDGAR Exhibit 4 series supplements filed by the registered trusts that hold the deals",
+  "documents_read": 17,
+  "documents_with_rows": 11,
+  "class_rows": 17,
+  "rows_with_balance_and_rate": 7,
+  "rows_with_a_rating": 7,
+  "rows_with_an_anticipated_repayment_date": 7,
+  "series_covered": [
+    "2019-1",
+    "2019-2",
+    "2020-1",
+    "2021-1",
+    "2023-1",
+    "2023-2",
+    "2023-3",
+    "2024-1",
+    "2025-1",
+    "2026-1"
+  ],
+  "ground_truth_checked": "Series 2025-1 Class A-2: 345 million at 5.00 percent, A-(sf), repayment May 2030, final May 2050, post-ARD spread 1.45 percent",
+  "boundary": "a class row states the note's own terms. It carries no price, no trade and no cash flow, and a rate printed at issue is not a current yield"
+}

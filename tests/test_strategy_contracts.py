@@ -10,9 +10,11 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from event.study import revision_surprise  # noqa: E402
 from strategy.contracts import validate_exposure, validate_physical, validate_revision, validate_trade  # noqa: E402
+from strategy.gates import promotion_gate  # noqa: E402
+from strategy.contracts import validate_primary_expectation  # noqa: E402
 from strategy.ledger import validate_event_record, validate_exposure_record, validate_physical_record, validate_trade_record  # noqa: E402
 from strategy.physical import classify_confirmation  # noqa: E402
-from strategy.tradeability import net_return  # noqa: E402
+from strategy.tradeability import capacity_shares, cost_scenarios, net_return, no_trade_reasons  # noqa: E402
 
 
 BASE = {
@@ -39,6 +41,12 @@ assert validate_revision(revision) == revision
 event = {**revision, "event_id": "event-1", "source_receipt": "sec:file:1", "vintage": "2024Q1", "missingness_reason": ""}
 assert validate_event_record(event) == event
 assert fails(validate_event_record, {**event, "source_receipt": ""})
+assert fails(validate_event_record, {**event, "label_at": "2024-01-05T16:00:00+00:00"})
+assert fails(validate_event_record, {**event, "in_sealed_window": "true"})
+assert promotion_gate(verified_exposures=0, measured_expectations=0, market_control_rows=0, tradeability_rows=0, physical_rows=0)["status"] == "CLOSED"
+primary = {**event, "expectation_kind": "guidance", "expectation_status": "measured", "entity_key": "issuer:PWR"}
+assert validate_primary_expectation(primary) == primary
+assert fails(validate_primary_expectation, event)
 assert fails(validate_revision, {**revision, "usable_at": "2024-01-05T15:30:00+00:00"})
 assert fails(validate_revision, {**revision, "prior_value": None})
 assert revision_surprise(80.0, 100.0) == -20.0
@@ -63,6 +71,9 @@ assert validate_trade_record({**trade, "source_receipt": "market:file:1"})["secu
 assert fails(validate_trade, {**trade, "fill_at": "2024-01-05T15:59:00+00:00"})
 assert fails(validate_trade, {**trade, "cost_bps": -1})
 assert round(net_return(0.05, 10.0, 10.0, 4.0, 5), 6) == 0.046
+assert capacity_shares(100.0, 1_000_000.0, 0.1) == 1000
+assert no_trade_reasons("sell", False, 1000, 1001, 25.0, 20.0) == ["borrow unavailable", "quantity exceeds capacity", "spread exceeds limit"]
+assert round(cost_scenarios(0.05, 10.0, 10.0, 4.0, 5)["double"], 6) == 0.042
 
 physical = {
     "observation_id": "obs-1", "project_key": "project:1", "status": "energized",
@@ -76,4 +87,4 @@ assert fails(validate_physical, {**physical, "capacity_mw": -1})
 assert classify_confirmation("2024-01-12T00:00:00+00:00", [physical])["status"] == "confirmed"
 assert classify_confirmation("2024-01-05T00:00:00+00:00", [physical])["status"] == "unconfirmed"
 
-print("strategy contracts: 25/25 passed")
+print("strategy contracts: 31/31 passed")

@@ -47,6 +47,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--expectations", default="results/capacity-expectations.csv")
     parser.add_argument("--events", default="results/rpo-events.csv")
     parser.add_argument("--out", default="results/scan-pairs.csv")
+    parser.add_argument("--open-sealed", action="store_true",
+                        help="include this study's holdout months. Only at the sealed test, once")
     parser.add_argument("--window", default="compute-era",
                         help="which declared study window this measurement belongs to")
     parser.add_argument("--summary", action="store_true")
@@ -72,7 +74,8 @@ def main(argv: list[str] | None = None) -> int:
     for pair in measurable:
         for label_a in by_node.get(pair["a"], []):
             for label_b in by_node.get(pair["b"], []):
-                xs, ys, months = align(clip(series[label_a], window), clip(series[label_b], window))
+                xs, ys, months = align(clip(series[label_a], window, args.open_sealed),
+                                      clip(series[label_b], window, args.open_sealed))
                 if len(months) < 12:
                     rows.append({"pair": f"{label_a} ~ {label_b}", "a": pair["a"], "b": pair["b"],
                                  "series_a": label_a, "series_b": label_b, "coverage": "too few months",
@@ -99,7 +102,8 @@ def main(argv: list[str] | None = None) -> int:
 
     print("")
     print(f"measured inside the {window.name} window: development {window.history_start} to "
-          f"{window.development_end}, holdout {window.sealed_start} to {window.sealed_end} untouched")
+          f"{window.development_end}, holdout {window.sealed_start} to {window.sealed_end} "
+          f"{'OPENED BY REQUEST' if args.open_sealed else 'untouched'}")
     print(FIREWALL)
     print("")
     print(multiplicity_report(results))

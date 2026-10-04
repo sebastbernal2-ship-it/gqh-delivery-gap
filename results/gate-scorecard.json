@@ -1,0 +1,23 @@
+{
+  "generated_by": "scripts/build_gate_scorecard.py",
+  "deals_scored": 60,
+  "pure_play": 56,
+  "mixed_pool": 4,
+  "g1_counterparty_pass": 60,
+  "g2_flow_pass": 2,
+  "g2_flow_partial": 58,
+  "g3_transfer_pass": 0,
+  "g3_transfer_partial": 2,
+  "g3_transfer_blank": 58,
+  "g4_instrument_fail": 4,
+  "g4_instrument_partial": 56,
+  "g5_economics_partial": 2,
+  "g5_economics_blank": 58,
+  "gate_3_reads": "gate 3 passes only where a magnitude and a concentration number both exist. Four deals have a magnitude from an agency release and one has a concentration, so gate 3 is almost entirely blank, which is the honest state of the evidence and not a verdict on the deals",
+  "best_supported_deals": [
+    "Compass Datacenters Issuer II, LLC Series 2025-2",
+    "Switch ABS Co-Issuer, LLC and Switch ABS Issuer, LLC Series 2025-2"
+  ],
+  "attribution_rule": "agency evidence decides a gate only where programme and series both match. Programme level numbers are reported as programme scope evidence and leave the gate blank",
+  "barrier": "attention and processing across the layer: reading lease and indenture documents and holding local power market knowledge. Stated, not measured"
+}

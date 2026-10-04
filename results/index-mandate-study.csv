@@ -1,0 +1,11 @@
+metric,value,notes
+development_start,2015-07-01,inclusive
+development_end,2022-09-30,inclusive; no holdout opened
+event_legs,339,one row per added or removed ticker
+effective_dates,133,unique dates
+additions,170,discovery inventory
+deletions,169,discovery inventory
+primary_evidence_rows,0,required for returns
+forced_quantity_rows,0,requires pre-effective holdings and price
+eligible_return_rows,0,none may use guessed clocks or quantities
+conclusion,coverage inventory only,No return study until primary clocks and quantities are verified.

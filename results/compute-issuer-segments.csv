@@ -1,0 +1,17 @@
+ticker,cik,why,fiscal_year_end,filed,period,total_revenue,segment_axis,segments_reported,rental_like_segments,rental_like_share,largest_segment,largest_segment_share
+CRWV,1769628,"AI cloud rental, whole business",2025-12-31,2026-03-02,2024-01-01 to 2024-12-31,1915000000.0,srt:StatementGeographicalAxis,2,0,0.0,country:US,0.9384
+APLD,1144879,data centre and compute hosting,2026-05-31,2026-07-29,2023-06-01 to 2024-05-31,165575000.0,us-gaap:RelatedPartyTransactionsByRelatedPartyAxis,2,0,0.0,us-gaap:NonrelatedPartyMember,0.9109
+IREN,1878848,bitcoin mining to AI cloud pivot,2026-06-30,2026-08-27,2023-07-01 to 2024-06-30,187192000.0,srt:ProductOrServiceAxis,2,1,0.0166,iren:BitcoinMiningMember,0.9834
+WULF,1083301,bitcoin mining to compute hosting,2025-12-31,2026-02-27,2024-01-01 to 2024-12-31,140051000.0,us-gaap:StatementBusinessSegmentsAxis,1,0,0.0,wulf:DigitalAssetMiningSegmentMember,1.0
+CORZ,1839341,bitcoin mining to compute hosting,2025-12-31,2026-03-02,2024-01-01 to 2024-12-31,510672000.0,"srt:ConsolidationItemsAxis, srt:ProductOrServiceAxis, us-gaap:StatementBusinessSegmentsAxis",3,1,0.0477,us-gaap:OperatingSegmentsMember | core:DigitalAssetSelfMiningServiceMember | core:DigitalAssetSelfMiningSegmentMember,0.8004
+CIFR,1819989,bitcoin mining with compute hosting,2025-12-31,2026-02-24,2024-01-01 to 2024-12-31,151270000.0,us-gaap:StatementBusinessSegmentsAxis,1,0,0.0,cifr:BitcoinMiningMember,1.0
+HUT,1964789,mining and compute hosting,2025-12-31,2026-02-25,2024-01-01 to 2024-12-31,162385000.0,srt:ProductOrServiceAxis,4,1,0.497,hut:HighPerformanceComputingColocationAndCloudMember,0.497
+GLXY,1859392,digital asset and compute infrastructure,2025-12-31,2026-02-26,2024-01-01 to 2024-12-31,42596673000.0,us-gaap:StatementBusinessSegmentsAxis,3,0,0.0,glxy:DigitalAssetsMember,0.9977
+SMCI,1375365,GPU server supplier,2026-06-30,2026-08-31,2023-07-01 to 2024-06-30,14989251000.0,srt:StatementGeographicalAxis,4,0,0.0,country:US,0.6796
+DELL,1571996,"server and storage supplier, diversified",2026-01-30,2026-03-16,2025-02-01 to 2026-01-30,113538000000.0,srt:ProductOrServiceAxis,2,0,0.0,us-gaap:ProductMember,0.7963
+HPE,1645590,"server supplier, diversified",2025-10-31,2025-12-18,2023-11-01 to 2024-10-31,30127000000.0,us-gaap:StatementBusinessSegmentsAxis,5,1,0.175,hpe:ServerSegmentMember,0.5254
+VRT,1674101,data centre power and cooling,2025-12-31,2026-02-13,2024-01-01 to 2024-12-31,8011800000.0,"srt:ProductOrServiceAxis, us-gaap:StatementBusinessSegmentsAxis",6,0,0.0,vrt:ProductExcludingSparesMember | vrt:AmericasSegmentMember,0.4467
+DLR,1297996,"data centre REIT, diversified",2025-12-31,2026-02-13,2024-01-01 to 2024-12-31,5554968000.0,srt:ProductOrServiceAxis,2,1,0.9869,dlr:RentalAndOtherServicesMember,0.9869
+EQIX,1101239,"data centre REIT, diversified",2025-12-31,2026-02-11,2024-01-01 to 2024-12-31,8748000000.0,us-gaap:StatementBusinessSegmentsAxis,3,0,0.0,eqix:AmericasSegmentMember,0.4415
+ETN,1551182,"electrical equipment, diversified",2025-12-31,2026-02-26,2024-01-01 to 2024-12-31,24878000000.0,srt:ConsolidationItemsAxis,1,0,0.0,us-gaap:OperatingSegmentsMember,1.0
+PWR,1050915,"electrical construction, diversified",2025-12-31,2026-02-19,2024-01-01 to 2024-12-31,23672795000.0,us-gaap:ContractWithCustomerBasisOfPricingAxis,3,0,0.0,us-gaap:FixedPriceContractMember,0.5621

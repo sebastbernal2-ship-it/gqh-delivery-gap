@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from edgar.filings import sealed_start  # noqa: E402
 
 FIELDS = ["event_id", "source", "source_receipt", "entity_key", "vintage", "observed_at",
-          "available_at", "usable_at", "unit", "evidence_status", "expectation_kind",
+          "available_at", "usable_at", "unit", "evidence_status", "expectation_kind", "expectation_status",
           "prior_value", "current_value", "missingness_reason", "in_sealed_window"]
 
 
@@ -53,6 +53,7 @@ def build_events(rows: list[dict], history_start: dt.date, history_end: dt.date)
             "unit": "MW",
             "evidence_status": "downloaded",
             "expectation_kind": "public_plan",
+            "expectation_status": "measured",
             "prior_value": prior,
             "current_value": current,
             "missingness_reason": "",

@@ -1,0 +1,40 @@
+{
+  "generated_by": "scripts/build_deal_ratings.py",
+  "route": "agency press releases, free and fetchable, located by search",
+  "seeds_declared": 17,
+  "seeds_fetched": 15,
+  "class_rows_with_rating": 16,
+  "deals_covered": [
+    "Compass Datacenters Issuer II, LLC Series 2025-2",
+    "Switch ABS Issuer, LLC Series 2025-2",
+    "Vantage Data Centers Jersey Borrower SPV Limited",
+    "Vantage Data Centers Jersey Borrower SPV Limited Class B",
+    "Vantage Data Centers Jersey Borrower SPV Limited Class B final",
+    "Vantage Data Centers Jersey Borrower SPV Limited finalised",
+    "Vantage Data Centers Jersey Borrower SPV Limited provisional"
+  ],
+  "deals_matched_to_the_edgar_register": [
+    "Compass Datacenters Issuer II, LLC Series 2025-2",
+    "Switch ABS Issuer, LLC Series 2025-2",
+    "Vantage Data Centers Jersey Borrower SPV Limited",
+    "Vantage Data Centers Jersey Borrower SPV Limited Class B",
+    "Vantage Data Centers Jersey Borrower SPV Limited Class B final",
+    "Vantage Data Centers Jersey Borrower SPV Limited finalised",
+    "Vantage Data Centers Jersey Borrower SPV Limited provisional"
+  ],
+  "coupon_rows": 5,
+  "amount_rows": 7,
+  "failures": [
+    "KBRA | Cologix Canadian Issuer LP Series 2026-1/2 | __FETCH_FAILED__ HTTP Error 403: Forbidden",
+    "S&P Global Ratings | Vantage Data Centers Issuer LLC Series 2025-2 | __FETCH_FAILED__ HTTP Error 403: Forbidden"
+  ],
+  "boundaries": [
+    "the seed list is declared, not crawled, so this is a proof of extractability with a measured coverage rather than a census of all 42 deals",
+    "agencies rate deals outside the EDGAR register and the reverse, so matches are reported and never forced",
+    "S&P regulatory pages and some agency pages may refuse a non browser client, which is recorded as a fetch failure rather than a missing deal"
+  ],
+  "register_issuers_available": 28,
+  "operation_metrics_found": 6,
+  "operation_metrics_note": "KBRA releases carry portfolio operating metrics: data center count, sellable square feet, critical load in MW, annualized revenue and annualized adjusted net operating income, with site level revenue defined. The DBRS releases do not.",
+  "universe_finding": "the KBRA index shows data center tagged securitizations outside the EDGAR register built by name token, including Zayo, TierPoint and FirstLight, whose collateral includes data centers but whose issuer names carry no data center token, so the EDGAR register under counts the universe"
+}

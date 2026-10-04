@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from imagery.cog import (  # noqa: E402
     Tiff, undo_horizontal_predictor,
 )
+from imagery.validation import validate_label, validate_probe_row, validate_scene  # noqa: E402
 from imagery.progress import (  # noqa: E402
     as_number, bright_fraction, brightness, difference_in_differences, patch_centre, summarise, texture,
 )
@@ -59,17 +60,23 @@ x, y = patch_centre(31.0, -100.0, item, size=200)
 check("a corner is clamped inside the raster", (x, y), (0, 0))
 
 # Scene choice prefers the least cloud and skips items whose asset is not reachable over HTTPS.
-cloudy = {"id": "cloudy", "properties": {"eo:cloud_cover": 40.0, "datetime": "2021-01-01T00:00:00Z"},
+cloudy = {"id": "cloudy", "bbox": [-100, 30, -99, 31], "properties": {"eo:cloud_cover": 40.0, "datetime": "2021-01-01T00:00:00Z"},
           "assets": {"visual": {"href": "https://example.invalid/a.tif"}}}
-clear = {"id": "clear", "properties": {"eo:cloud_cover": 3.0, "datetime": "2021-01-02T00:00:00Z"},
+clear = {"id": "clear", "bbox": [-100, 30, -99, 31], "properties": {"eo:cloud_cover": 3.0, "datetime": "2021-01-02T00:00:00Z"},
          "assets": {"visual": {"href": "https://example.invalid/b.tif"}}}
-s3_only = {"id": "s3", "properties": {"eo:cloud_cover": 1.0, "datetime": "2021-01-03T00:00:00Z"},
+s3_only = {"id": "s3", "bbox": [-100, 30, -99, 31], "properties": {"eo:cloud_cover": 1.0, "datetime": "2021-01-03T00:00:00Z"},
            "assets": {"visual": {"href": "s3://bucket/c.tif"}}}
 check("the least cloudy reachable scene is chosen", choose([cloudy, clear, s3_only])["id"], "clear")
 check("a scene with no reachable asset is refused", choose([s3_only]), None)
 check("no scenes means no choice", choose([]), None)
 check("the scene date is read from the item", scene_date(clear), "2021-01-02")
 check("the visual url is read from the asset", visual_url(clear), "https://example.invalid/b.tif")
+scene = {"bbox": [-100, 30, -99, 31], "properties": {"eo:cloud_cover": 3, "datetime": "2021-01-02T00:00:00Z"}, "assets": {"visual": {"href": "https://example.invalid/b.tif"}}}
+check("a valid scene passes validation", validate_scene(scene)["bbox"], [-100, 30, -99, 31])
+label = {"plant_id": "1", "generator_id": "A", "promised": "2021-01", "realized": "2021-03", "latitude": "30", "longitude": "-99", "capacity_mw": "10", "slip_months": "2"}
+check("a label passes validation", validate_label(label)["plant_id"], "1")
+probe = {"plant_id": "1", "promise_scene": "a", "realized_scene": "b", "promise_brightness": "1", "realized_brightness": "2", "brightness_did": "1"}
+check("a probe row passes validation", validate_probe_row(probe)["plant_id"], "1")
 
 start, end = month_window("2021-06")
 check("the month window starts before the month", start, "2021-05-01")
@@ -90,4 +97,4 @@ if failures:
     print("\n".join(f"  FAIL {f}" for f in failures))
     print(f"\n{26 - len(failures)}/26 passed")
     raise SystemExit(1)
-print("\n26/26 passed")
+print("\n30/30 passed")

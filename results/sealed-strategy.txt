@@ -1,0 +1,19 @@
+vintages: 2015-07 to 2024-09 (111)
+development window: 2015-07 to 2022-09 (87 months)
+sealed window: 2022-10 onwards (24 months) OPENED BY REQUEST
+
+signal               n  flips    gross    net10    net20    ann.  sharpe   maxdd    hit
+next_year           98      8   0.38%   0.16%  -0.05%   2.0%    0.10 -37.8%   51%
+current_and_next    98     14  -0.06%  -0.29%  -0.52%  -3.4%   -0.17 -48.2%   45%
+three_year          98     12   0.12%  -0.10%  -0.33%  -1.2%   -0.06 -42.9%   47%
+
+threshold plateau on the balanced signal (trade only when the revision is large):
+   cut    n    gross    net10    net20  sharpe
+   all   98  -0.06%  -0.29%  -0.52%   -0.17
+median   49  -0.11%  -0.36%  -0.60%   -0.19
+top third   33   1.11%   0.85%   0.58%    0.43
+
+Gross is the market-neutral spread between the two legs. Net subtracts turnover times cost,
+with both legs counted, at 10 and at 20 basis points per leg. Six cells are reported: three
+signal definitions by one holding period, and the robustness pair below.
+Rates are monthly means, annualised only for the annualised column.

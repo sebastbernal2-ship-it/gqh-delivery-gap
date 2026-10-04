@@ -15,6 +15,7 @@ _ALLOWED_EXPOSURE_STATUS = {"verified", "proposed", "ambiguous", "unmatched"}
 _ALLOWED_DIRECTIONS = {"positive", "negative", "neutral"}
 _ALLOWED_PHYSICAL_STATUS = {"planned", "permitted", "under_construction", "energized", "operating", "cancelled"}
 _ALLOWED_EXPECTATIONS = {"guidance", "consensus", "market_implied", "public_plan"}
+_PRIMARY_EXPECTATIONS = {"guidance", "consensus", "market_implied"}
 
 
 def _timestamp(row: Mapping[str, object], name: str) -> dt.datetime:
@@ -112,4 +113,16 @@ def validate_physical(row: Mapping[str, object]) -> Mapping[str, object]:
     if row["status"] not in _ALLOWED_PHYSICAL_STATUS:
         raise ValueError(f"unknown physical status: {row['status']}")
     _number(row, "capacity_mw", nonnegative=True)
+    return row
+
+
+def validate_primary_expectation(row: Mapping[str, object]) -> Mapping[str, object]:
+    """Require an issuer-linked expectation for the financial pilot."""
+    validate_revision(row)
+    if row["expectation_kind"] not in _PRIMARY_EXPECTATIONS:
+        raise ValueError("public-plan and other proxy evidence cannot drive the primary strategy")
+    if not str(row["entity_key"]).startswith("issuer:"):
+        raise ValueError("primary expectation must be issuer-linked")
+    if row.get("expectation_status") != "measured":
+        raise ValueError("primary expectation is not measured")
     return row

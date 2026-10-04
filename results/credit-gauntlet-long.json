@@ -1,0 +1,117 @@
+{
+  "measure_set": "long",
+  "measures": [
+    "credit:baa:10y",
+    "credit:aaa:10y",
+    "credit:quality-gap"
+  ],
+  "declared_grid": 24,
+  "measured_grid": 24,
+  "grid_printed_before_statistics": true,
+  "development_window": [
+    "1983-01-03",
+    "2026-02-24"
+  ],
+  "holdout_opened": false,
+  "draws": 500,
+  "block": 20,
+  "seed": 20261003,
+  "effective_breadth": {
+    "names": 4,
+    "average_pairwise_correlation": 0.2001857558201868,
+    "effective_bets_from_average_correlation": 0.6247823931889654
+  },
+  "nominal_hits_at_p_0.05": 9,
+  "bh_survivors": 6,
+  "expected_false_hits_at_p_0.05": 1.2,
+  "median_observed_correlation": 0.025025,
+  "median_placebo_correlation": null,
+  "ceiling": "descriptive_only",
+  "falsifier_2_raw_minus_adjusted_median": -0.004324,
+  "survivors": [
+    {
+      "measure": "credit:aaa:10y",
+      "name": "ETN",
+      "horizon_days": 1,
+      "n": 2462,
+      "correlation": -0.080226,
+      "beta_per_pct_spread": -0.02844185,
+      "raw_correlation": -0.070355,
+      "placebo_percentile": 99.8,
+      "placebo_p": 0.003992,
+      "beats_placebo_95": true,
+      "bh_rank": 4,
+      "bh_survivor": true
+    },
+    {
+      "measure": "credit:aaa:10y",
+      "name": "PWR",
+      "horizon_days": 1,
+      "n": 2462,
+      "correlation": -0.092186,
+      "beta_per_pct_spread": -0.04148822,
+      "raw_correlation": -0.085848,
+      "placebo_percentile": 100.0,
+      "placebo_p": 0.001996,
+      "beats_placebo_95": true,
+      "bh_rank": 1,
+      "bh_survivor": true
+    },
+    {
+      "measure": "credit:quality-gap",
+      "name": "DLR",
+      "horizon_days": 1,
+      "n": 2470,
+      "correlation": 0.059363,
+      "beta_per_pct_spread": 0.03675959,
+      "raw_correlation": 0.057705,
+      "placebo_percentile": 99.6,
+      "placebo_p": 0.005988,
+      "beats_placebo_95": true,
+      "bh_rank": 5,
+      "bh_survivor": true
+    },
+    {
+      "measure": "credit:quality-gap",
+      "name": "DLR",
+      "horizon_days": 5,
+      "n": 2463,
+      "correlation": 0.04814,
+      "beta_per_pct_spread": 0.06659208,
+      "raw_correlation": 0.054252,
+      "placebo_percentile": 99.6,
+      "placebo_p": 0.005988,
+      "beats_placebo_95": true,
+      "bh_rank": 6,
+      "bh_survivor": true
+    },
+    {
+      "measure": "credit:quality-gap",
+      "name": "ETN",
+      "horizon_days": 1,
+      "n": 2470,
+      "correlation": 0.111763,
+      "beta_per_pct_spread": 0.05814508,
+      "raw_correlation": 0.083492,
+      "placebo_percentile": 100.0,
+      "placebo_p": 0.001996,
+      "beats_placebo_95": true,
+      "bh_rank": 2,
+      "bh_survivor": true
+    },
+    {
+      "measure": "credit:quality-gap",
+      "name": "PWR",
+      "horizon_days": 1,
+      "n": 2470,
+      "correlation": 0.088348,
+      "beta_per_pct_spread": 0.05834873,
+      "raw_correlation": 0.074974,
+      "placebo_percentile": 100.0,
+      "placebo_p": 0.001996,
+      "beats_placebo_95": true,
+      "bh_rank": 3,
+      "bh_survivor": true
+    }
+  ]
+}

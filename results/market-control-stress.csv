@@ -1,0 +1,1 @@
+event_id,firm_return,market_return,sector_return,gross_return,entry_cost_bps,exit_cost_bps,borrow_bps_per_day,holding_days,side,borrow_available,price,adv_dollars,quantity,spread_bps,max_spread_bps,market_abnormal,sector_abnormal,capacity_shares,trade_status,no_trade_reasons,net_return,double_cost_return

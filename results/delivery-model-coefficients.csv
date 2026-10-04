@@ -1,0 +1,17 @@
+name,odds_ratio,odds_low,odds_high,spans_one,note
+precip_anomaly,0.9776,0.9405,1.0125,True,
+drought_severity,0.9303,0.8786,0.9619,False,
+gas_level,0.9234,0.8728,0.9596,False,"exploratory, no sign declared"
+rate_level,1.0101,0.9435,1.0897,True,"exploratory, no sign declared"
+lead_time_share_negative,0.9778,0.9094,1.0426,True,
+lead_time_growth,0.9487,0.8977,1.0071,True,
+pipeline_momentum,0.918,0.8735,0.9626,False,
+promise_horizon_months,0.6456,0.5672,0.6958,False,
+missing_precip_anomaly,0.9874,0.8664,1.208,True,
+missing_drought_severity,0.7805,0.6863,0.8816,False,
+missing_gas_level,1.0,1.0,1.0,True,
+missing_rate_level,1.0,1.0,1.0,True,
+missing_lead_time_share_negative,1.1918,1.0009,1.3628,False,
+missing_lead_time_growth,0.7137,0.6276,0.8116,False,
+missing_pipeline_momentum,0.727,0.6295,0.8656,False,
+missing_promise_horizon_months,1.0,1.0,1.0,True,

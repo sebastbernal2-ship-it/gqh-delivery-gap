@@ -3,8 +3,10 @@ from __future__ import annotations
 
 from typing import Mapping
 
+from strategy.leakage import validate_no_leakage
 from strategy.contracts import (
-    _required, validate_exposure, validate_physical, validate_revision, validate_trade,
+    _required, validate_exposure, validate_physical, validate_primary_expectation,
+    validate_revision, validate_trade,
 )
 
 
@@ -17,7 +19,17 @@ def validate_event_record(row: Mapping[str, object]) -> Mapping[str, object]:
     if "missingness_reason" not in row:
         raise ValueError("missing required fields: missingness_reason")
     _receipt(row)
-    return validate_revision(row)
+    validate_revision(row)
+    return validate_no_leakage(row)
+
+
+def validate_primary_event_record(row: Mapping[str, object]) -> Mapping[str, object]:
+    _required(row, "event_id", "vintage")
+    if "missingness_reason" not in row:
+        raise ValueError("missing required fields: missingness_reason")
+    _receipt(row)
+    validate_primary_expectation(row)
+    return validate_no_leakage(row)
 
 
 def validate_exposure_record(row: Mapping[str, object]) -> Mapping[str, object]:
@@ -37,6 +49,7 @@ def validate_trade_record(row: Mapping[str, object]) -> Mapping[str, object]:
 
 _VALIDATORS = {
     "events": validate_event_record,
+    "primary_events": validate_primary_event_record,
     "exposures": validate_exposure_record,
     "physical": validate_physical_record,
     "trades": validate_trade_record,

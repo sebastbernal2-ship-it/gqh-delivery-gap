@@ -1,4 +1,4 @@
-.PHONY: sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test secrets check strategy-check status
+.PHONY: sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test secrets check strategy-check manifest pdf-check gate-status status ownership-layer index-mandate
 
 # Pull the team's work and load their shared memory. Run this first, every session.
 sync:
@@ -32,6 +32,54 @@ chain:
 # Resolve our nodes, representations and sources against the algoterminal stack.
 graph:
 	@python3 scripts/link_algoterminal.py
+
+# Land the credit and equity panel, then run the pre-registered credit gauntlet.
+# The declaration it obeys is docs/plan/credit-gauntlet.md. Artifacts land in results/.
+# The named deal registry for data center securitizations, straight from EDGAR. No key, no entitlement.
+credit-deals:
+	@python3 scripts/build_credit_deal_registry.py --pages 3
+
+# The deal register with parties, series and dates, parsed from every ABS-15G cover page in the register.
+deal-structure:
+	@python3 scripts/build_deal_structure.py
+
+# The diligence record, the agency class ladders and the per deal operating metrics.
+deal-diligence:
+	@python3 scripts/build_deal_diligence.py --workers 4
+
+deal-ratings:
+	@python3 scripts/build_deal_ratings.py
+
+# The six gates scored across the named deals, with blanks admitted.
+gate-scorecard:
+	@python3 scripts/build_gate_scorecard.py
+
+# The class level terms from the series supplements the holding trusts file as Exhibit 4.
+tranche-table:
+	@python3 scripts/build_tranche_table.py --workers 6
+	@python3 scripts/build_indenture_layer.py --workers 6
+
+# The agency named deals that no SEC filing reaches, each with its blocker.
+agency-deals:
+	@python3 scripts/build_agency_only_deals.py --workers 10
+	@python3 scripts/declare_deal_nodes.py
+
+# The ICE grid needs no key. The long grid needs FRED_API_KEY in the environment when the panel is built,
+# because the Moody's long history family is served through the official API only.
+credit-gauntlet:
+	@python3 scripts/build_credit_panel.py
+	@python3 scripts/run_credit_gauntlet.py --draws 500 --block 20
+
+credit-gauntlet-long:
+	@python3 scripts/build_credit_panel.py
+	@python3 scripts/run_credit_gauntlet.py --set long --draws 500 --block 20
+	@python3 scripts/check_credit_stability.py
+
+ownership-layer:
+	@python3 scripts/build_ownership_crosswalk.py
+
+index-mandate:
+	@python3 scripts/build_index_mandate_study.py
 
 # Ownership: one roster, one claim table, every claimed path real.
 owners:
@@ -88,7 +136,18 @@ test:
 	@python3 tests/test_eia.py
 	@python3 tests/test_event.py
 	@python3 tests/test_strategy_contracts.py
+	@python3 tests/test_market_runner.py
+	@python3 tests/test_market_control_panel.py
+	@python3 tests/test_tradeability_panel.py
+	@python3 tests/test_crosswalk_review.py
+	@python3 tests/test_ownership_layer.py
+	@python3 tests/test_index_mandate.py
+	@python3 tests/test_pdf_renderer.py
 	@python3 tests/test_strategy_builders.py
+	@python3 tests/test_strategy_sources.py
+	@python3 tests/test_strategy_e2e.py
+	@python3 tests/test_run_manifest.py
+	@python3 tests/test_controls_metrics.py
 	@python3 tests/test_strategy_identification.py
 	@python3 tests/test_universe.py
 	@python3 tests/test_scan.py
@@ -98,10 +157,17 @@ test:
 	@python3 tests/test_scan_fdr.py
 	@python3 tests/test_ideas.py
 	@python3 tests/test_live.py
+	@python3 tests/test_cascade_evaluation.py
 	@python3 tests/test_variant_ledger.py
 	@python3 tests/test_imagery.py
+	@python3 tests/test_hazard.py
+	@python3 tests/test_factors.py
 	@python3 tests/test_scan_compute.py
 	@python3 tests/test_scan_windows.py
+
+# Fit the delivery model: what moves a promise, controls first then factors.
+delivery-model:
+	@python3 scripts/run_delivery_model.py
 
 # Count every variant tried, from the artifacts that recorded them.
 variants:
@@ -117,8 +183,20 @@ secrets:
 
 # Validate any supplied typed strategy package. Usage: make strategy-check EVENTS=...
 strategy-check:
-	@test -n "$(EVENTS)$(EXPOSURES)$(PHYSICAL)$(TRADES)" || (echo 'usage: make strategy-check EVENTS=... [EXPOSURES=...] [PHYSICAL=...] [TRADES=...]' && exit 1)
+	@test -n "$(EVENTS)$(EXPOSURES)$(PHYSICAL)$(TRADES)$(CROSSWALK)" || (echo 'usage: make strategy-check EVENTS=... [EXPOSURES=...] [PHYSICAL=...] [TRADES=...]' && exit 1)
 	@python3 scripts/check_strategy_ledger.py $(if $(EVENTS),--events $(EVENTS),) $(if $(EXPOSURES),--exposures $(EXPOSURES),) $(if $(PHYSICAL),--physical $(PHYSICAL),) $(if $(TRADES),--trades $(TRADES),) $(if $(CROSSWALK),--crosswalk $(CROSSWALK),)
+
+# Hash current strategy inputs and record the code revision.
+manifest:
+	@python3 scripts/build_run_manifest.py
+
+# Report the closed or open strategy promotion gate.
+gate-status:
+	@python3 scripts/report_promotion_gate.py
+
+# Report the selected HTML-to-PDF renderer. Use RENDER=1 to render when installed.
+pdf-check:
+	@python3 scripts/check_pdf_renderer.py $(if $(RENDER),--render,)
 
 # Public repo gate: no credentials, and the ledger is valid.
 check: secrets

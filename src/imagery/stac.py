@@ -11,6 +11,8 @@ import datetime as dt
 
 import requests
 
+from imagery.validation import validate_scene
+
 UA = {"User-Agent": "gqh-delivery-gap research research@example.com"}
 SEARCH = "https://earth-search.aws.element84.com/v1/search"
 COLLECTIONS = ("sentinel-2-c1-l2a", "sentinel-2-l2a", "sentinel-2-pre-c1-l2a")
@@ -57,8 +59,13 @@ def search(lat: float, lon: float, month: str, span: float = 0.05, max_cloud: fl
 
 def choose(items: list[dict]) -> dict | None:
     """Least cloud, then closest to the middle of the month asked for."""
-    usable = [item for item in items if "visual" in item.get("assets", {})
-              and str(item["assets"]["visual"].get("href", "")).startswith("https://")]
+    usable = []
+    for item in items:
+        try:
+            validate_scene(item)
+        except (TypeError, ValueError):
+            continue
+        usable.append(item)
     if not usable:
         return None
     return min(usable, key=lambda item: (item["properties"].get("eo:cloud_cover", 100.0),

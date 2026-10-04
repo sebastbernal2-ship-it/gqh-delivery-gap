@@ -22,6 +22,7 @@ capacity = build_events([
 ], dt.date(2022, 1, 1), dt.date(2023, 12, 31))
 assert len(capacity) == 1
 assert capacity[0]["expectation_kind"] == "public_plan"
+assert capacity[0]["expectation_status"] == "measured"
 assert validate_rows(capacity, "events") == 1
 
 physical = build_observations([{

@@ -21,7 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 TOP_LEVEL = {
-    ".cursor", ".cursorrules", ".githooks", ".gitignore", "AGENTS.md", "CLAUDE.md", "Makefile", "OWNERS.md",
+    ".cursor", ".cursorrules", ".github", ".githooks", ".vscode", ".gitignore", "AGENTS.md", "CLAUDE.md", "Makefile", "OWNERS.md",
     "README.md", "data", "docs", "hpc", "memory", "pyproject.toml", "results", "scripts", "src",
     "tests",
 }

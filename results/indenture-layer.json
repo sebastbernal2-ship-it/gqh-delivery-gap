@@ -1,0 +1,27 @@
+{
+  "generated_by": "scripts/build_indenture_layer.py",
+  "route": "EDGAR Exhibit 4 filings by the registered trusts that hold the deals. Free, no entitlement",
+  "why": "a 144A securitization files no prospectus, but a registered fund files the instruments that define its security holders' rights as Exhibit 4, and those instruments are the deal documents",
+  "documents": 20,
+  "documents_fetched": 20,
+  "with_dscr_clause": 3,
+  "with_cash_trap_clause": 1,
+  "with_cross_default_clause": 0,
+  "with_concentration_clause": 0,
+  "with_coupon_clause": 0,
+  "with_maturity_clause": 0,
+  "with_reserve_clause": 11,
+  "series_seen": [
+    "2019-1",
+    "2019-2",
+    "2020-1",
+    "2021-1",
+    "2023-1",
+    "2023-2",
+    "2023-3",
+    "2024-1",
+    "2025-1",
+    "2026-1"
+  ],
+  "boundary": "terms are searched and the sentence is stored with each one. A term that is absent is written empty and counted, never inferred from a sibling document"
+}
