@@ -1,0 +1,23 @@
+{
+ "status": "exploratory development only",
+ "matched_queue_rows": 1208,
+ "plants_with_slips": 1553,
+ "joined_pairs": 65,
+ "caveats": [
+  "development only: both sealed windows are spent and were not touched",
+  "the matched subset is selected toward larger and older plants, not a random sample",
+  "no instrument and no cost model are tested; this is an association, not an edge",
+  "exploratory: the split at 1000 days was chosen after seeing the pairs"
+ ],
+ "spearman_rho": 0.2076,
+ "slow_queue": {
+  "threshold_days": 1000,
+  "n": 19,
+  "mean_slip_months": 10.73
+ },
+ "fast_queue": {
+  "threshold_days": 1000,
+  "n": 46,
+  "mean_slip_months": 9.14
+ }
+}
