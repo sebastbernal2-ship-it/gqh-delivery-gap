@@ -431,6 +431,23 @@ demeaning, one price source, development only.
 association is retired as a priced charge and kept as a falsifiable hypothesis about the expectation
 channel, to be tested with filing based surprise measures (8-K items, guidance, RPO conversion).
 
+## T34. Compute rental levels lead queue withdrawals by about two quarters
+
+**Statement**: on 28 overlapping months, the cross family median rental price against its trailing twelve
+month mean is negatively associated with the queue withdrawal hazard six months later: pooled rho -0.60
+with the observed beyond every one of the 19 circular shifts, solar -0.57, wind -0.42, battery -0.61, gas
+-0.21. The three month change reading is positive at one and three month lags and negative at six, so only
+the level reading is kept. Speculative technologies carry a mean hazard of 0.00156 against 0.0001 for firm
+ones, fifteen times the risk.
+**Evidence**: `results/compute-queue-study.json`; `scripts/build_compute_queue_study.py`;
+`docs/plan/compute-queue-study.md`.
+**Scope**: one queue snapshot with recalled dates, 2022-05 to 2024-12, compute prices that are policy
+prices in ten separate markets, thirty cells tested across lags, groups and readings, shift test with 19
+shifts so the attainable share is 0.05. Development only.
+**Consequence**: the compute rental level is the demand side sensor for thesis C, with a two quarter lead
+on the withdrawal hazard, and it is the first measured link from compute markets to the physical queue.
+It stays a phase marker, never a required link.
+
 ---
 
 # What these truths are pointing at

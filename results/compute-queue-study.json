@@ -1,0 +1,246 @@
+{
+ "status": "development only; protocol docs/plan/compute-queue-study.md",
+ "window": {
+  "from": "2022-05",
+  "to": "2024-12"
+ },
+ "months": 32,
+ "tests": {
+  "change_3m": {
+   "lag1": {
+    "all": {
+     "n": 28,
+     "rho": 0.236,
+     "share_shifts_ge": 0.148,
+     "shifts": 27
+    },
+    "solar": {
+     "n": 28,
+     "rho": 0.269,
+     "share_shifts_ge": 0.148,
+     "shifts": 27
+    },
+    "wind": {
+     "n": 28,
+     "rho": 0.446,
+     "share_shifts_ge": 0.0,
+     "shifts": 27
+    },
+    "battery": {
+     "n": 28,
+     "rho": 0.033,
+     "share_shifts_ge": 0.519,
+     "shifts": 27
+    },
+    "gas": {
+     "n": 28,
+     "rho": 0.028,
+     "share_shifts_ge": 0.407,
+     "shifts": 27
+    },
+    "other": {
+     "n": 28,
+     "rho": -0.037,
+     "share_shifts_ge": 0.593,
+     "shifts": 27
+    }
+   },
+   "lag3": {
+    "all": {
+     "n": 26,
+     "rho": 0.228,
+     "share_shifts_ge": 0.16,
+     "shifts": 25
+    },
+    "solar": {
+     "n": 26,
+     "rho": 0.281,
+     "share_shifts_ge": 0.12,
+     "shifts": 25
+    },
+    "wind": {
+     "n": 26,
+     "rho": 0.124,
+     "share_shifts_ge": 0.24,
+     "shifts": 25
+    },
+    "battery": {
+     "n": 26,
+     "rho": 0.209,
+     "share_shifts_ge": 0.28,
+     "shifts": 25
+    },
+    "gas": {
+     "n": 26,
+     "rho": 0.427,
+     "share_shifts_ge": 0.0,
+     "shifts": 25
+    },
+    "other": {
+     "n": 26,
+     "rho": 0.149,
+     "share_shifts_ge": 0.12,
+     "shifts": 25
+    }
+   },
+   "lag6": {
+    "all": {
+     "n": 23,
+     "rho": -0.218,
+     "share_shifts_ge": 0.909,
+     "shifts": 22
+    },
+    "solar": {
+     "n": 23,
+     "rho": -0.141,
+     "share_shifts_ge": 0.818,
+     "shifts": 22
+    },
+    "wind": {
+     "n": 23,
+     "rho": -0.075,
+     "share_shifts_ge": 0.682,
+     "shifts": 22
+    },
+    "battery": {
+     "n": 23,
+     "rho": -0.376,
+     "share_shifts_ge": 0.909,
+     "shifts": 22
+    },
+    "gas": {
+     "n": 23,
+     "rho": -0.373,
+     "share_shifts_ge": 0.955,
+     "shifts": 22
+    },
+    "other": {
+     "n": 23,
+     "rho": -0.066,
+     "share_shifts_ge": 0.591,
+     "shifts": 22
+    }
+   }
+  },
+  "level_z": {
+   "lag1": {
+    "all": {
+     "n": 24,
+     "rho": 0.115,
+     "share_shifts_ge": 0.261,
+     "shifts": 23
+    },
+    "solar": {
+     "n": 24,
+     "rho": 0.044,
+     "share_shifts_ge": 0.435,
+     "shifts": 23
+    },
+    "wind": {
+     "n": 24,
+     "rho": 0.323,
+     "share_shifts_ge": 0.174,
+     "shifts": 23
+    },
+    "battery": {
+     "n": 24,
+     "rho": 0.013,
+     "share_shifts_ge": 0.565,
+     "shifts": 23
+    },
+    "gas": {
+     "n": 24,
+     "rho": -0.097,
+     "share_shifts_ge": 0.696,
+     "shifts": 23
+    },
+    "other": {
+     "n": 24,
+     "rho": -0.068,
+     "share_shifts_ge": 0.652,
+     "shifts": 23
+    }
+   },
+   "lag3": {
+    "all": {
+     "n": 22,
+     "rho": 0.002,
+     "share_shifts_ge": 0.571,
+     "shifts": 21
+    },
+    "solar": {
+     "n": 22,
+     "rho": 0.074,
+     "share_shifts_ge": 0.429,
+     "shifts": 21
+    },
+    "wind": {
+     "n": 22,
+     "rho": 0.101,
+     "share_shifts_ge": 0.429,
+     "shifts": 21
+    },
+    "battery": {
+     "n": 22,
+     "rho": -0.064,
+     "share_shifts_ge": 0.714,
+     "shifts": 21
+    },
+    "gas": {
+     "n": 22,
+     "rho": 0.212,
+     "share_shifts_ge": 0.143,
+     "shifts": 21
+    },
+    "other": {
+     "n": 22,
+     "rho": 0.249,
+     "share_shifts_ge": 0.143,
+     "shifts": 21
+    }
+   },
+   "lag6": {
+    "all": {
+     "n": 19,
+     "rho": -0.602,
+     "share_shifts_ge": 1.0,
+     "shifts": 18
+    },
+    "solar": {
+     "n": 19,
+     "rho": -0.565,
+     "share_shifts_ge": 1.0,
+     "shifts": 18
+    },
+    "wind": {
+     "n": 19,
+     "rho": -0.418,
+     "share_shifts_ge": 1.0,
+     "shifts": 18
+    },
+    "battery": {
+     "n": 19,
+     "rho": -0.614,
+     "share_shifts_ge": 0.944,
+     "shifts": 18
+    },
+    "gas": {
+     "n": 19,
+     "rho": -0.214,
+     "share_shifts_ge": 0.778,
+     "shifts": 18
+    },
+    "other": {
+     "n": 19,
+     "rho": 0.006,
+     "share_shifts_ge": 0.5,
+     "shifts": 18
+    }
+   }
+  }
+ },
+ "placebo": {
+  "speculative_mean_hazard": 0.00156,
+  "firm_mean_hazard": 0.0001
+ }
+}

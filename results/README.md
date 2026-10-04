@@ -157,3 +157,7 @@ generated-path: results/intensity-controls-study.json
 Produced by `scripts/fetch_complex_margins.py`:
 
 generated-path: results/complex-margins-quarterly.csv
+
+Produced by `scripts/build_compute_queue_study.py`:
+
+generated-path: results/compute-queue-study.json
