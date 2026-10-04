@@ -22,13 +22,15 @@ def metrics(p,y):
             'mean_query_brier':float(((flat-one)**2).sum(-1).mean())}
 
 
-def fit(x,y,pretraining,epochs,seed,device):
+def fit(x,y,pretraining_x,pretraining,epochs,seed,device):
     torch.manual_seed(seed)
     model=ExecutionJev().to(device);opt=torch.optim.AdamW(model.parameters(),lr=1e-3)
     losses=[]
     if pretraining:
         for _ in range(pretraining):
-            for batch in x.split(32):
+            order=torch.randperm(len(pretraining_x))
+            for indexes in order.split(32):
+                batch=pretraining_x[indexes]
                 batch=batch.to(device);mask=torch.rand(batch.shape[:2],device=device)<.2
                 if not mask.any():mask[0,0]=True
                 opt.zero_grad();loss=model.masked_loss(batch,mask)
@@ -67,14 +69,17 @@ def apply(p,cal):
 def run(dataset,output,epochs=3,pretraining=3,seed=20261003,device='cpu'):
     if epochs<1 or pretraining<1:raise ValueError('positive epoch budgets required')
     spec,a=load_cache(dataset);roles=a['roles'];raw=np.asarray(a['features']);labels=np.asarray(a['targets'])
-    train=raw[roles==0].astype(np.float64)
+    pretraining_raw=np.asarray(a['pretraining_features'])
+    train=pretraining_raw.astype(np.float64)
     mean=train.mean(axis=(0,1));scale=train.std(axis=(0,1));scale=np.where(scale<1e-6,1.,scale)
-    x=torch.tensor((raw-mean)/scale,dtype=torch.float32);y=torch.tensor(labels,dtype=torch.long)
+    x=torch.tensor((raw-mean)/scale,dtype=torch.float32)
+    pretraining_x=torch.tensor((pretraining_raw-mean)/scale,dtype=torch.float32)
+    y=torch.tensor(labels,dtype=torch.long)
     if not torch.isfinite(x).all():raise ValueError('nonfinite standardized model input')
     out=Path(output);out.mkdir(parents=True,exist_ok=False)
     scores={};models={};gate={};predictions={};calibrators={}
     for name,budget in [('scratch',0),('masked_pretrained',pretraining)]:
-        model,losses=fit(x[roles==0],y[roles==0],budget,epochs,seed,device)
+        model,losses=fit(x[roles==0],y[roles==0],pretraining_x,budget,epochs,seed,device)
         cal=calibrate(probabilities(model,x[roles==1]),labels[roles==1]);calibrators[name]=[asdict(c) for c in cal]
         gate[name]=metrics(apply(probabilities(model,x[roles==2]),cal),labels[roles==2])
         # Both variants are reported; evaluation never determines the selected checkpoint.
@@ -96,6 +101,9 @@ def run(dataset,output,epochs=3,pretraining=3,seed=20261003,device='cpu'):
             'git_revision':subprocess.check_output(['git','rev-parse','HEAD'],cwd=Path(__file__).parent,text=True).strip(),
             'code_sha256':{p.name:digest(p) for p in [Path(__file__),Path(__file__).with_name('execution_model.py'),Path(__file__).with_name('execution_dataset.py')]},
             'normalizer':{'mean':mean.tolist(),'scale':scale.tolist()},'losses':models,'calibration':calibrators,
+            'pretraining_corpus':{'windows':len(pretraining_x),'sessions':spec['pretraining_sessions'],
+                                  'stride_seconds':spec['pretraining_stride_seconds'],
+                                  'training_only':True},
             'gate_metrics':gate,'gate_selected':selected,'evaluation_metrics':scores,
             'role_cases':{str(i):int(sum(roles==i)) for i in range(5)},'unused_role':'pool_calibration',
             'artifacts':{p.name:digest(p) for p in out.iterdir()},
