@@ -31,3 +31,10 @@ OOS or a trading result. See [the protocol, commands and limitations](../MULTISE
 training variants, 41 parent cases, twelve correlated queries per case, separate chronological
 roles and train-frequency reference. Both variants fail to beat that reference. The declared
 protocol was committed before this target run. See [model/cache interfaces and limitations](../EXECUTION_JEV.md).
+
+`jev_view_ablation_smoke_20261003.json` is a local CPU wiring run of the book-only (A), trade-only
+(B), early-fusion (A+B), and calibrated equal late-pool comparison on the same 41-case cache. It
+reuses an eight-case final date already examined by the earlier smoke, so it is not new evidence
+and cannot select a production view. B was gate-selected under the fixed rule, while A, B, early
+fusion, and the late pool all scored worse than smoothed training prevalence on that single date.
+See the [predeclared view plan](../../../docs/inbox/aidan-2026-10-03/jev-ablation-plan.md).

@@ -82,17 +82,49 @@ def validate_plan(plan):
         raise ValueError('unique source objects required')
     if any(not re.fullmatch('[0-9a-f]{64}',e['sha256']) or type(e['size']) is not int or e['size']<=0 for e in entries):
         raise ValueError('source hash and positive integer size required')
-    if sum(e['size'] for e in entries)>750_000_000:
+    max_bytes=plan.get('max_bytes',750_000_000)
+    if type(max_bytes) is not int or not 0<max_bytes<=2_000_000_000 or sum(e['size'] for e in entries)>max_bytes:
         raise ValueError('plan exceeds bounded acquisition cap')
     sessions=sorted(set(e['session'] for e in entries))
-    if len(sessions)!=6:
-        raise ValueError('six declared sessions required')
     for s in sessions:
         day=datetime.strptime(s,'%Y-%m-%d')
         if not 2025<=day.year<=2026:
             raise ValueError('sessions must be development dates in 2025-2026')
-        if Counter(e['kind'] for e in entries if e['session']==s)!=Counter({'books':2,'trades':2}):
-            raise ValueError('each session requires two book and two trade files')
+    if 'session_roles' in plan:
+        roles=plan['session_roles']
+        if set(roles)!=set(sessions) or set(roles.values())!=set(PARTITIONS):
+            raise ValueError('every session needs exactly one of the five declared chronological roles')
+        ranks=[PARTITIONS.index(roles[s]) for s in sessions]
+        if ranks!=sorted(ranks):
+            raise ValueError('session roles must form nonempty chronological blocks')
+        minimum=plan.get('minimum_sessions_per_role',3)
+        if type(minimum) is not int or minimum<3:
+            raise ValueError('at least three sessions per role are required')
+        if any(ranks.count(i)<minimum for i in range(len(PARTITIONS))):
+            raise ValueError('too few metadata-selected sessions in a role')
+        for s in sessions:
+            current=[e for e in entries if e['session']==s]
+            counts=Counter(e['kind'] for e in current)
+            if counts['books']!=counts['trades'] or counts['books']<1:
+                raise ValueError('each session needs matched book and trade file counts')
+            if any('pair_id' not in e for e in current):
+                raise ValueError('explicit-role plans require paired source ids')
+            by_pair={}
+            for e in current:by_pair.setdefault(e['pair_id'],[]).append(e['kind'])
+            if any(Counter(kinds)!=Counter({'books':1,'trades':1}) for kinds in by_pair.values()):
+                raise ValueError('each pair id must identify one book file and one trade file')
+            entries_by_pair={}
+            for e in current:entries_by_pair.setdefault(e['pair_id'],[]).append(e)
+            for paired in entries_by_pair.values():
+                stamps=[e.get('filename_timestamp_s') for e in paired]
+                if any(type(t) is not int for t in stamps) or abs(stamps[0]-stamps[1])>2:
+                    raise ValueError('book/trade filename clocks must match within two seconds')
+    else:
+        if len(sessions)!=6:
+            raise ValueError('legacy plan requires six declared sessions')
+        for s in sessions:
+            if Counter(e['kind'] for e in entries if e['session']==s)!=Counter({'books':2,'trades':2}):
+                raise ValueError('each legacy session requires two book and two trade files')
     return sessions
 
 
@@ -124,7 +156,7 @@ def build(plan_path, objects, output):
         rows,audit,excluded,overlap=session_cases(books,trades,s)
         if not rows:
             raise ValueError('no causal cases in a declared session')
-        role=PARTITIONS[max(0,index-1)]
+        role=plan.get('session_roles',{}).get(s,PARTITIONS[max(0,index-1)])
         for r in rows:r['partition']=role
         panel.extend(rows);labels.extend(audit)
         coverage[s]=dict(books=summarize(books),trades=summarize(trades),overlap=overlap,
@@ -153,6 +185,7 @@ def build(plan_path, objects, output):
                   development_end=utc(max(x.recorded_ns for c in collected.values() for x in c['books'])+NS),
                   panel_sha256=digest(panel_path),plan_sha256=digest(plan_path),adapter_sha256=digest(__file__),
                   causal_adapter_sha256=digest(Path(__file__).with_name('synchronized_tape.py')),
+                  session_roles=plan.get('session_roles',{s:coverage[s]['partition'] for s in sessions}),
                   source_counts=source_counts,source_files=plan['files'],session_coverage=coverage,
                   partition_boundary_purges=dict(purged),panel_rows=len(kept),
                   label_audit_sha256=digest(out/'label_audit.jsonl'),
