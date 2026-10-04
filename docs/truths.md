@@ -932,3 +932,28 @@ because no side exists; both are complex names with the same price and cost conv
 only through a **concept-agnostic surprise scaling**, a declared z-score of the change against its own
 trailing volatility before binning, which is the next declared variant and must be tested on the
 surviving revenue sleeve as well before it is adopted anywhere.
+
+## T54. The surviving sleeve's model is honest in the tails and overconfident in its confident calls
+
+**Statement**: out-of-sample predictions from the revenue model, pooled across eight rolling origins,
+1,144 rows, five classes. The reliability table is close in the bulk, gaps of +0.040 at a mean
+confidence of 0.268, -0.064 at 0.339 and -0.082 at 0.437, and clearly **overconfident when it is
+confident**: -0.200 at 0.547, -0.321 at 0.738 and -0.188 at 0.855. Pooled ECE 0.0683 with a
+resampled interval of 0.0440 to 0.0971, maximum bin error 0.321, sharpness 0.354. The extreme classes
+are honest: the lowest class is predicted at 0.135 and realised at 0.144, the highest at 0.231 and
+0.248, so the marginal tails of the distribution are slightly under-confident. Return tails, walk
+forward: the revenue sleeve has a five percent value at risk of -3.09 percent, expected shortfall
+-5.15, a worst day of -27.7 and a worst twenty-session window of -31.2 percent. The gated intensity
+sleeve is -0.70, -1.11, -3.5 and -7.5. The combined inverse-volatility portfolio is -0.90, -1.49,
+-5.74 and -8.4 percent, and volatility-targeted -0.99, -1.50, -4.70 and -8.7.
+**Evidence**: `results/calibration-report.json`; `scripts/run_calibration_report.py`;
+`src/filing_specialist/calibration_diagnostics.py`; `tests/test_calibration_diagnostics.py`;
+`docs/plan/variant-registry.jsonl`.
+**Scope**: development only, pooled origins are not independent, five classes make bins coarse.
+**Consequence**: any confidence gate must be calibrated, because the rows a gate would act on are
+exactly the overconfident ones; the extreme-bin honesty is what makes the tail-focused decision rule
+defensible. T56 later tested the calibration fix and found the miscalibration era-specific, so the gate
+keeps its raw probabilities. The variant registry records every tried variant from 38 entries onward
+and states plainly that the historic count before it is not fully reconstructible.
+**Restored 2026-10-04**: this entry was dropped by another session's rewrite of this shared file and
+re-added from its artifact. Check the ledger's numbering after any shared-file rewrite.

@@ -90,7 +90,10 @@ armed and awaiting its first new filing. Nothing in the repository is a fresh-ho
    per run by the drivers but not by the intensity engine, whose calendar was diluted once already.
    Needed: one quarantine list consulted by every load path.
 
-2b. **Shared tracked files are being rewritten by another session.** Both the Makefile and
+2b. **Shared tracked files are being rewritten by another session, and one truth was lost that
+   way.** Truth T54 was dropped from `docs/truths.md` by such a rewrite and restored from its artifact.
+   The same happened to lines in the Makefile and `results/README.md`. After editing any shared tracked
+   file, verify the change is still present before committing, and commit the same minute. Both the Makefile and
    `results/README.md` have had my lines dropped by that session's rewrites, and both had to be
    restored and re-committed. Rule for the next session: after editing a shared tracked file, verify
    the line is still there before committing, and commit the same minute.
