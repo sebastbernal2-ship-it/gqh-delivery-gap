@@ -68,6 +68,9 @@ results/sec-complex/
 # Local price cache: fetched, never committed.
 results/bar-cache/
 
+# Local volume cache: fetched, never committed.
+results/bar-volume/
+
 # Reduced per-vintage aggregates: regenerable, so not committed.
 results/vintage-aggregates/
 

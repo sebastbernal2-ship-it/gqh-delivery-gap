@@ -31,7 +31,9 @@ TOKEN = re.compile(r"(?<![A-Za-z0-9/:@_.-])"
 SKIP_CHARS = set("<>*{}[]$|")
 # Fixtures name paths on purpose. History snapshots and the memory mirror are records of what
 # was true then, and renames are expected to leave them untouched.
-SKIP_PREFIXES = ("tests/", "memory/", "docs/history/")
+# The orderbook engine is a nested project with its own docs root: its internal references
+# resolve there, not against this repository.
+SKIP_PREFIXES = ("tests/", "memory/", "docs/history/", "orderbook-engine/")
 SKIP_NAMES = ("TEMPLATE",)
 # Explicit output contracts may precede generation; only result artifacts qualify.
 GENERATED_PATH = re.compile(r"^generated-path: (results/[A-Za-z0-9._/-]+)$", re.MULTILINE)

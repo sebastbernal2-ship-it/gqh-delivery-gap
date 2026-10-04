@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parent.parent
 TOP_LEVEL = {
     ".github", ".vscode", ".cursor", ".cursorrules", ".githooks", ".gitignore", "AGENTS.md", "CLAUDE.md", "Makefile", "OWNERS.md",
     "README.md", "data", "docs", "hpc", "memory", "pyproject.toml", "results", "scripts", "src",
-    "tests",
+    "tests", "orderbook-engine",
 }
 AREAS = ["src", "hpc"]
 
