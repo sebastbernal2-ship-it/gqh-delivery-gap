@@ -79,7 +79,7 @@ def validate(spec, arrays):
             or spec.get("horizons") != list(HORIZONS) or spec.get("sides") != ["buy", "sell"]
             or spec.get("tasks") != ["terminal_loss", "observed_adverse"]
             or spec.get("feature_order") != list(FEATURES) or spec.get("partitions") != list(PARTITIONS)
-            or spec.get("availability_basis") != "retrospective_assumption"
+            or spec.get("availability_basis") not in ("retrospective_assumption", "local_receipt")
             or spec.get("eligible_for_performance_claim") is not False):
         raise ValueError("risk cache contract mismatch")
     x, y, roles, clocks = (arrays[name] for name in FILES)
@@ -97,6 +97,21 @@ def validate(spec, arrays):
             or (y[:, :, :, 1] < 0).any() or (np.diff(y[:, :, :, 1], axis=1) < -1e-6).any()
             or (y[:, :, :, 1] + 1e-5 < y[:, :, :, 0]).any()):
         raise ValueError("risk label geometry mismatch")
+    if spec["availability_basis"] == "local_receipt":
+        from datetime import datetime, timezone
+        import re
+        journals = spec.get("capture_journal_sha256", [])
+        segments = spec.get("segments", [])
+        if (not journals or len(journals) != len(set(journals))
+                or any(not re.fullmatch(r"[0-9a-f]{64}", sha) for sha in journals)
+                or len(segments) != n):
+            raise ValueError("local receipt provenance mismatch")
+        for index, segment in enumerate(segments):
+            sha, separator, number = segment.partition(":")
+            date = datetime.fromtimestamp(int(clocks[index, 0]) // 1_000_000_000, timezone.utc).date().isoformat()
+            if (sha not in journals or separator != ":" or not number.isdigit()
+                    or int(number) < 1 or date != spec["sessions"][index]):
+                raise ValueError("local receipt segment/session mismatch")
     seen = set()
     for role in range(5):
         mask = roles == role
