@@ -105,6 +105,10 @@ def main() -> int:
     rows: list[dict] = []
     level1 = 0
     level2 = 0
+    level3 = 0
+    level4 = 0
+    manifest_seconds: list[dict] = []
+    curated_seconds: list[dict] = []
     for node in nodes:
         dimensions = TEMPLATES.get(node.get("layer", ""), GENERIC)
         for dimension in dimensions:
@@ -116,6 +120,7 @@ def main() -> int:
             for deeper in GENERIC[:5]:
                 second = child_of(first, deeper)
                 rows.append(second)
+                manifest_seconds.append(second)
                 level2 += 1
                 rows.append({"kind": "split", "id": f"split:{second['id']}", "from": first["id"],
                              "to": second["id"], "relation": "splits_into", "status": "proposed"})
@@ -144,10 +149,40 @@ def main() -> int:
                         second = child_of(first, deeper)
                         second["status"] = "seeded_parent"
                         rows.append(second)
+                        curated_seconds.append(second)
                         curated_level2 += 1
                         rows.append({"kind": "split", "id": f"split:{second['id']}", "from": first["id"],
                                      "to": second["id"], "relation": "splits_into",
                                      "status": "proposed"})
+
+    # Depth three: every grandchild of the manifest expands again, per the deepening directive.
+    for second in manifest_seconds:
+        for dimension in GENERIC[:4]:
+            third = child_of(second, dimension)
+            rows.append(third)
+            level3 += 1
+            rows.append({"kind": "split", "id": f"split:{third['id']}", "from": second["id"],
+                         "to": third["id"], "relation": "splits_into", "status": "proposed"})
+
+    # Depth three and four for the curated digs: they carry the real depth.
+    curated_thirds: list[dict] = []
+    for second in curated_seconds:
+        for dimension in GENERIC[:4]:
+            third = child_of(second, dimension)
+            third["status"] = "seeded_parent"
+            rows.append(third)
+            curated_thirds.append(third)
+            level3 += 1
+            rows.append({"kind": "split", "id": f"split:{third['id']}", "from": second["id"],
+                         "to": third["id"], "relation": "splits_into", "status": "proposed"})
+    for third in curated_thirds:
+        for dimension in GENERIC[:3]:
+            fourth = child_of(third, dimension)
+            fourth["status"] = "seeded_parent"
+            rows.append(fourth)
+            level4 += 1
+            rows.append({"kind": "split", "id": f"split:{fourth['id']}", "from": third["id"],
+                         "to": fourth["id"], "relation": "splits_into", "status": "proposed"})
 
     import gzip
     out = args.out if args.out.endswith(".gz") else args.out + ".gz"
@@ -161,12 +196,14 @@ def main() -> int:
         "manifest_nodes": len(nodes),
         "level1_children": level1,
         "level2_children": level2,
-        "subnodes_total": level1 + level2,
-        "split_edges": level1 + level2,
-        "written_graph_total": len(nodes) + level1 + level2,
+        "level3_children": level3,
+        "level4_curated_children": level4,
+        "subnodes_total": level1 + level2 + level3 + level4,
+        "split_edges": level1 + level2 + level3 + level4,
+        "written_graph_total": len(nodes) + level1 + level2 + level3 + level4,
         "curated_dig_nodes": curated,
         "curated_children": curated_level1 + curated_level2,
-        "written_total_with_curated": len(nodes) + level1 + level2 + curated_level1 + curated_level2,
+        "written_total_with_curated": len(nodes) + level1 + level2 + level3 + level4 + curated_level1 + curated_level2,
         "children_per_parent_min": min(len(TEMPLATES.get(node.get("layer", ""), GENERIC))
                                        for node in nodes),
         "by_layer": dict(by_layer.most_common()),
@@ -175,10 +212,8 @@ def main() -> int:
     }
     Path(args.summary).write_text(json.dumps(summary, indent=1) + "\n")
     print(f"wrote {args.out} and {args.summary}")
-    print(f"manifest {len(nodes)} nodes -> {level1} children -> {level2} grandchildren; "
-          f"{len(nodes) + level1 + level2} nodes written in total, {level1 + level2} split edges")
-    print(f"curated dig nodes {curated} -> {curated_level1} children -> {curated_level2} grandchildren; "
-          f"written total with curated: {len(nodes) + level1 + level2 + curated_level1 + curated_level2}")
+    print(f"manifest {len(nodes)} nodes -> {level1} children -> {level2} grandchildren -> {level3} great-grandchildren")
+    print(f"written nodes {len(nodes) + level1 + level2 + level3 + level4}; split edges {level1 + level2 + level3 + level4}")
     return 0
 
 

@@ -1,0 +1,121 @@
+{
+ "nodes": 156543,
+ "connections": 1093132,
+ "distributions": 86,
+ "hidden_objects": {
+  "total": 29,
+  "by_kind": {
+   "hidden_node": 1,
+   "hidden_assumption": 21,
+   "hidden_edge": 5,
+   "hidden_gap": 2
+  },
+  "hidden_nodes": 1,
+  "hidden_edges": 5
+ },
+ "propagation": {
+  "seeds": 155,
+  "paths": 1500,
+  "testable_now": 1500,
+  "partially_testable": 0,
+  "needs_data": 0,
+  "payers": 15,
+  "evidence_floor": {
+   "E2": 1500
+  }
+ },
+ "delineation": {
+  "nodes": 156543,
+  "connections": 1093132,
+  "by_layer": {
+   "raw": 86371,
+   "mechanism": 41063,
+   "feature": 26037,
+   "asset": 1023,
+   "entity": 412,
+   "dataset": 210,
+   "event": 172,
+   "outcome": 158,
+   "rule": 149,
+   "source": 133,
+   "assumption": 132,
+   "factor": 127,
+   "experiment": 117,
+   "evidence": 98,
+   "implementation": 98,
+   "claim": 84,
+   "contract": 80,
+   "strategy": 66,
+   "concept": 11,
+   "accounting": 2
+  },
+  "by_status": {
+   "declared": 1065650,
+   "inferred": 24870,
+   "proposed": 2058,
+   "curated": 532,
+   "blocked": 22
+  },
+  "by_type": {
+   "sibling_subnode": 450090,
+   "part_of": 156492,
+   "splits_into": 155842,
+   "refined_by": 151650,
+   "refines": 151636,
+   "co_layer_peer": 17371,
+   "ties_by_source": 3848,
+   "shares_semantics": 1604,
+   "ties_by_observable": 1005,
+   "candidate_for": 914,
+   "conditions": 674,
+   "same_dig_context": 664,
+   "ties_by_player": 378,
+   "contains": 162,
+   "chain_precedes": 128,
+   "chain_follows": 128,
+   "requires": 110,
+   "belongs_to": 96,
+   "anchors": 38,
+   "feeds": 32,
+   "gates": 20,
+   "observes": 18,
+   "drives": 18,
+   "measures": 14,
+   "competes_for": 14,
+   "supports": 12,
+   "exposes": 12,
+   "has_field": 12,
+   "tested_by": 10,
+   "indicates": 10
+  },
+  "degree_histogram": {
+   "0": 130680,
+   "10": 17070,
+   "20": 3900,
+   "30": 4194,
+   "40": 2,
+   "50": 89,
+   "60": 123,
+   "70": 243,
+   "80": 50,
+   "90": 176,
+   "100": 9,
+   "110": 2,
+   "130": 1,
+   "140": 1,
+   "150": 3
+  },
+  "coverage": {
+   "connections_with_condition_pct": 99.99,
+   "connections_with_falsifier_pct": 99.99
+  },
+  "components": {
+   "count": 1,
+   "largest": 156543,
+   "nodes_in_components_of_3_or_less": 0
+  },
+  "anchors": 227,
+  "reachable_from_anchors": 156543,
+  "unreachable_from_anchors": 0
+ }
+}

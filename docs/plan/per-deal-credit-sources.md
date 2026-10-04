@@ -365,3 +365,60 @@ cross-default and concentration clauses in none. That is a coverage statement an
 a series supplement is a short instrument that defines the series, and the base indenture that holds the
 covenants is a separate, longer document.
 
+## 14. The covenant layer, in writing
+
+    make indenture-covenants     # python3 scripts/build_indenture_covenants.py
+
+Artifacts: `results/indenture-covenants.csv`, `results/indenture-covenants.json`. Seventeen documents over 200
+kilobytes, read in parallel.
+
+**The constraint now has a quote.** Two documents carry it, and both are credit agreements the holding trust
+files as exhibits rather than the securitization's own indentures:
+
+1. **The revolving credit facility**, 1.57 megabytes, defines the test:
+   *"Debt Service Coverage Ratio shall mean, for any Calculation Date, the ratio of Consolidated Net Operating
+   Income to Debt Service for the Test Period ending on such Calculation Date"*, with 29 mentions of events of
+   default and a section headed *"Remedies Upon Event of Default"*.
+2. **A project credit agreement**, 1.69 megabytes, carries the mechanism that matters for gate three:
+   *"with respect to a Cash Sweep Event caused by an Event of Default, no Event of Default is continuing, with
+   respect to a Cash Sweep Event caused by a Mezzanine Loan Event of Default, no Mezzanine Loan Event of Default
+   is continuing, or with respect to a Cash Sweep Event as a result of a Single Tenant"* condition.
+
+**That last clause is the concentration constraint in the document's own words.** A cash sweep event can be
+triggered by the tenant mix itself, which means the pool's concentration is not only a fact we measure, it is a
+contractual trigger that moves cash from the equity holders to the lenders when a single tenant dominates. Gate
+one no longer has a blank: the constrained counterparty is visible, the test is a coverage ratio, and the
+punishment for concentration is written down.
+
+The family counts across the seventeen documents: a coverage test in two, a cash trap in one, a reserve in
+eight, cross default in none found, and a stated ratio threshold in none, because thresholds sit in the loan
+agreements rather than in the filing's prose. Turning these sentences into structured thresholds is the next
+step and needs a reader per document.
+
+## 15. The covenant threshold, and the queue
+
+    make indenture-covenants     # also writes results/dscr-thresholds.csv
+
+**The coverage test states 1.25 to 1.00.** Verbatim from the trust's revolving credit facility: *"the Borrower
+shall be in compliance on a Pro Forma Basis with (A) an LTV that does not exceed the Maximum LTV, (B) a Debt
+Service Coverage Ratio of not less than 1.25 to 1.00 and (C) a Net Asset Value of not less than the Minimum
+NAV."* Three tests bound together, and the coverage one is the number gate one was missing.
+
+**The interconnection queue is now an ingest, not a blocker.** `make queue-panel` reads the public queue pages:
+**CAISO delivered 86 rows** with queue number, capacity in megawatts and fuel. MISO gates its queue behind an
+account login, SPP publishes through `marketplace.spp.org` instead of as files, ERCOT's workbook links timed out
+from this host, and PJM's planning path refuses. One of four ingested, three pending with stated reasons.
+
+## 16. The queue routes, resolved one by one
+
+| Market | Outcome |
+|---|---|
+| **CAISO** | **86 project rows ingested**: queue number, capacity in megawatts, fuel type |
+| **ERCOT** | reachable and parsed: **172 download links** on the GIS Report index and the **September 2026** workbook in hand at 673 kilobytes. The workbook presents a summary by fuel, technology and milestone stage, so the project level table needs a sheet selection rather than a new route |
+| **SPP** | served by a script driven application, and its marketplace API needs a key. The blocker is now stated as an API key rather than as missing data |
+| **MISO** | queue behind an account login, interactive queue script driven |
+| **PJM** | planning path refused from this host |
+
+So one market is ingested, one is downloaded with a pending sheet choice, and three have a stated reason. The
+candidate's data blocker is closed at CAISO and ERCOT.
+

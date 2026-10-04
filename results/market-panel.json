@@ -1,0 +1,609 @@
+{
+  "generated_by": "scripts/build_market_panel.py",
+  "route": "the cached daily loader, which fetches through yfinance on a miss",
+  "panel": {},
+  "groups": {
+    "data_center_reit": {
+      "declared": 7,
+      "arrived": 7,
+      "failed": [],
+      "series": [
+        {
+          "ticker": "DLR",
+          "observations": 5516,
+          "first": "2004-10-29",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "EQIX",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "IRM",
+          "observations": 7717,
+          "first": "1996-02-01",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "AMT",
+          "observations": 7194,
+          "first": "1998-02-27",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "CCI",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "SBAC",
+          "observations": 6867,
+          "first": "1999-06-16",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "WY",
+          "observations": 13468,
+          "first": "1973-05-03",
+          "last": "2026-10-02"
+        }
+      ]
+    },
+    "compute_and_ai": {
+      "declared": 16,
+      "arrived": 16,
+      "failed": [],
+      "series": [
+        {
+          "ticker": "NVDA",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "AMD",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "AVGO",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "MRVL",
+          "observations": 6603,
+          "first": "2000-06-30",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "MU",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "SMCI",
+          "observations": 4910,
+          "first": "2007-03-29",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "CRWV",
+          "observations": 381,
+          "first": "2025-03-28",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "NBIS",
+          "observations": 489,
+          "first": "2024-10-21",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "ARM",
+          "observations": 766,
+          "first": "2023-09-14",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "AI",
+          "observations": 1460,
+          "first": "2020-12-09",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "APLD",
+          "observations": 1122,
+          "first": "2022-04-13",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "IREN",
+          "observations": 1223,
+          "first": "2021-11-17",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "CORZ",
+          "observations": 676,
+          "first": "2024-01-24",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "WULF",
+          "observations": 8179,
+          "first": "1994-04-05",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "BTDR",
+          "observations": 1302,
+          "first": "2021-07-28",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "CIFR",
+          "observations": 1495,
+          "first": "2020-10-20",
+          "last": "2026-10-02"
+        }
+      ]
+    },
+    "hyperscaler": {
+      "declared": 6,
+      "arrived": 5,
+      "failed": [
+        "GOOGL"
+      ],
+      "series": [
+        {
+          "ticker": "MSFT",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "AMZN",
+          "observations": 7392,
+          "first": "1997-05-15",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "META",
+          "observations": 3614,
+          "first": "2012-05-18",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "AAPL",
+          "observations": 11544,
+          "first": "1980-12-12",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "ORCL",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        }
+      ]
+    },
+    "buildout": {
+      "declared": 15,
+      "arrived": 15,
+      "failed": [],
+      "series": [
+        {
+          "ticker": "PWR",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "EME",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "MTZ",
+          "observations": 2831,
+          "first": "2015-07-01",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "DY",
+          "observations": 2831,
+          "first": "2015-07-01",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "ETN",
+          "observations": 2831,
+          "first": "2015-07-01",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "J",
+          "observations": 2831,
+          "first": "2015-07-01",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "HUBB",
+          "observations": 2831,
+          "first": "2015-07-01",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "ROK",
+          "observations": 2831,
+          "first": "2015-07-01",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "VRT",
+          "observations": 2053,
+          "first": "2018-08-02",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "GEV",
+          "observations": 632,
+          "first": "2024-03-27",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "NVT",
+          "observations": 2123,
+          "first": "2018-04-24",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "FIX",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "STRL",
+          "observations": 8870,
+          "first": "1991-07-12",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "AGX",
+          "observations": 7832,
+          "first": "1995-08-18",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "PRIM",
+          "observations": 4568,
+          "first": "2008-08-06",
+          "last": "2026-10-02"
+        }
+      ]
+    },
+    "power": {
+      "declared": 15,
+      "arrived": 15,
+      "failed": [],
+      "series": [
+        {
+          "ticker": "NRG",
+          "observations": 2831,
+          "first": "2015-07-01",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "VST",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "D",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "SO",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "NEE",
+          "observations": 2831,
+          "first": "2015-07-01",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "EXC",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "CEG",
+          "observations": 1181,
+          "first": "2022-01-19",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "TLN",
+          "observations": 837,
+          "first": "2023-06-02",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "AEP",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "DUK",
+          "observations": 11732,
+          "first": "1980-03-17",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "PPL",
+          "observations": 11732,
+          "first": "1980-03-17",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "ETR",
+          "observations": 13698,
+          "first": "1972-06-01",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "PCG",
+          "observations": 13698,
+          "first": "1972-06-01",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "SRE",
+          "observations": 7110,
+          "first": "1998-06-29",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "EIX",
+          "observations": 13468,
+          "first": "1973-05-03",
+          "last": "2026-10-02"
+        }
+      ]
+    },
+    "fuel_and_nuclear": {
+      "declared": 11,
+      "arrived": 11,
+      "failed": [],
+      "series": [
+        {
+          "ticker": "URA",
+          "observations": 4000,
+          "first": "2010-11-05",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "CCJ",
+          "observations": 7688,
+          "first": "1996-03-14",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "OKLO",
+          "observations": 1316,
+          "first": "2021-07-08",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "SMR",
+          "observations": 1153,
+          "first": "2022-03-01",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "NNE",
+          "observations": 603,
+          "first": "2024-05-08",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "LEU",
+          "observations": 7093,
+          "first": "1998-07-23",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "BWXT",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "FSLR",
+          "observations": 4998,
+          "first": "2006-11-17",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "ENPH",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "BE",
+          "observations": 2059,
+          "first": "2018-07-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "PLUG",
+          "observations": 6772,
+          "first": "1999-10-29",
+          "last": "2026-10-02"
+        }
+      ]
+    },
+    "rates_and_credit": {
+      "declared": 8,
+      "arrived": 8,
+      "failed": [],
+      "series": [
+        {
+          "ticker": "TLT",
+          "observations": 6084,
+          "first": "2002-07-30",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "IEF",
+          "observations": 6084,
+          "first": "2002-07-30",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "HYG",
+          "observations": 4902,
+          "first": "2007-04-11",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "LQD",
+          "observations": 6084,
+          "first": "2002-07-30",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "JNK",
+          "observations": 4737,
+          "first": "2007-12-04",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "BKLN",
+          "observations": 3920,
+          "first": "2011-03-03",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "AGG",
+          "observations": 5790,
+          "first": "2003-09-29",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "EMB",
+          "observations": 4726,
+          "first": "2007-12-19",
+          "last": "2026-10-02"
+        }
+      ]
+    },
+    "market_and_vol": {
+      "declared": 6,
+      "arrived": 6,
+      "failed": [],
+      "series": [
+        {
+          "ticker": "SPY",
+          "observations": 2184,
+          "first": "2018-01-25",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "QQQ",
+          "observations": 6935,
+          "first": "1999-03-10",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "^VIX",
+          "observations": 9258,
+          "first": "1990-01-02",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "^TNX",
+          "observations": 16176,
+          "first": "1962-01-02",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "^GSPC",
+          "observations": 24806,
+          "first": "1927-12-30",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "^NDX",
+          "observations": 10331,
+          "first": "1985-10-01",
+          "last": "2026-10-02"
+        }
+      ]
+    },
+    "commodity": {
+      "declared": 6,
+      "arrived": 6,
+      "failed": [],
+      "series": [
+        {
+          "ticker": "NG=F",
+          "observations": 6553,
+          "first": "2000-08-30",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "HG=F",
+          "observations": 6552,
+          "first": "2000-08-30",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "CL=F",
+          "observations": 6556,
+          "first": "2000-08-23",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "GC=F",
+          "observations": 6548,
+          "first": "2000-08-30",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "SI=F",
+          "observations": 6549,
+          "first": "2000-08-30",
+          "last": "2026-10-02"
+        },
+        {
+          "ticker": "URA",
+          "observations": 4000,
+          "first": "2010-11-05",
+          "last": "2026-10-02"
+        }
+      ]
+    }
+  },
+  "series_available": 89,
+  "observations": 437869,
+  "boundary": "daily closes from a free loader. No intraday, no options, no futures term structure, and the futures series are continuous front month rather than back adjusted, so a roll is a jump in the series"
+}

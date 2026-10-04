@@ -1,0 +1,55 @@
+{
+  "generated_by": "scripts/build_queue_panel.py",
+  "route": "the public interconnection queue pages of MISO, SPP, CAISO and ERCOT",
+  "rows": 86,
+  "by_iso": {
+    "MISO": 0,
+    "SPP": 0,
+    "CAISO": 86,
+    "ERCOT": 0
+  },
+  "files_read": {
+    "MISO": 0,
+    "SPP": 0,
+    "CAISO": 2,
+    "ERCOT": 0
+  },
+  "notes": {
+    "MISO": {
+      "page": "https://www.misoenergy.org/planning/resource-utilization/GI_Queue/",
+      "links": 0,
+      "files_read": 0,
+      "rows": 0,
+      "notes": []
+    },
+    "SPP": {
+      "page": "https://www.spp.org/engineering/generator-interconnection/",
+      "links": 0,
+      "files_read": 0,
+      "rows": 0,
+      "notes": []
+    },
+    "CAISO": {
+      "page": "https://www.caiso.com/planning/Pages/GeneratorInterconnection/Default.aspx",
+      "links": 3,
+      "files_read": 2,
+      "rows": 86,
+      "notes": [
+        "cluster-15-interconnection-requests.xlsx: columns ['Queue Number', 'Project Number', 'Project Name', 'Generation/Fuel 1', 'NET MW 1', 'Generation/Fuel 2']",
+        "generator-interconnection-resource-id-report.xlsx: fetch or parse failed: 2 columns passed, passed data had 3 columns"
+      ]
+    },
+    "ERCOT": {
+      "page": "https://www.ercot.com/gridinfo/resource",
+      "links": 58,
+      "files_read": 0,
+      "rows": 0,
+      "notes": [
+        "MORA_December2026.xlsx: fetch or parse failed: <urlopen error _ssl.c:983: The handshake operation timed out",
+        "MORA_October2026.xlsx: fetch or parse failed: 3 columns passed, passed data had 2 columns",
+        "MORA_September2026.xlsx: fetch or parse failed: <urlopen error _ssl.c:983: The handshake operation timed out"
+      ]
+    }
+  },
+  "boundary": "capacity in megawatts per queue entry. A queue position and a status column are not yet normalised across operators, and PJM is not in this pull because its planning path did not answer from this host"
+}

@@ -1,0 +1,16 @@
+{
+  "generated_by": "scripts/build_indenture_covenants.py",
+  "threshold_sentences": 2,
+  "threshold_values": [
+    "1.25"
+  ],
+  "route": "the base and combined indentures filed by the holding trust as Exhibit 4",
+  "documents_read": 17,
+  "min_bytes": 200000,
+  "documents_with_a_coverage_test": 2,
+  "documents_with_a_cash_trap": 1,
+  "documents_with_cross_default": 0,
+  "documents_with_a_reserve": 8,
+  "documents_with_a_stated_ratio": 0,
+  "boundary": "a sentence is stored with each family, not a parsed threshold. Turning these into structured tests is a separate step and would need a reader per document"
+}

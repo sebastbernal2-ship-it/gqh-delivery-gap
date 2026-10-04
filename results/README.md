@@ -65,3 +65,7 @@ generated-path: results/compute-lead-study.json
 Produced by `scripts/build_queue_exit_study.py`:
 
 generated-path: results/queue-exit-study.json
+
+Produced by `scripts/build_graph_propagation.py`:
+
+generated-path: results/graph-propagation-summary.json

@@ -1,0 +1,42 @@
+{
+  "snapshots": [
+    {
+      "taken_utc": "20261004T020341Z",
+      "file": "snapshot-20261004T020341Z.json",
+      "names": 12,
+      "contracts": 3929
+    },
+    {
+      "taken_utc": "20261004T022204Z",
+      "file": "snapshot-20261004T022204Z.json",
+      "names": 12,
+      "contracts": 3929
+    },
+    {
+      "taken_utc": "20261004T022925Z",
+      "file": "snapshot-20261004T022925Z.json",
+      "names": 12,
+      "contracts": 3929
+    }
+  ],
+  "names_declared": [
+    "DLR",
+    "EQIX",
+    "IRM",
+    "AMT",
+    "PWR",
+    "ETN",
+    "VRT",
+    "GEV",
+    "CEG",
+    "VST",
+    "NRG",
+    "CRWV",
+    "NBIS",
+    "ORCL",
+    "NVDA",
+    "TLN"
+  ],
+  "first_snapshot_utc": "20261004T020341Z",
+  "boundary": "forward capture only. Historical chains are a paid product, so any history this archive has is the history that starts at the first snapshot"
+}

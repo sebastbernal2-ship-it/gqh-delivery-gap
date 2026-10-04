@@ -126,3 +126,34 @@ measures are mechanically related and load with opposite signs on the same names
 bets, and at a two legged 20 bps round trip **none of the six clear costs**. Status unchanged and now better
 supported: gate 4 fails as stated, gate 5 fails on the aggregate expression, and the per site route stays the
 only one that could answer gate 4.
+
+### Update, 2026-10-04: two of the blanks above are now filled
+
+**Queue gated capacity, row 5, the data blocker is open.** MISO, SPP and CAISO serve their generator
+interconnection queue pages to an ordinary fetch: `misoenergy.org/planning/resource-utilization/GI_Queue/`,
+`spp.org/engineering/generator-interconnection/`, `caiso.com/planning/Pages/GeneratorInterconnection/`, and
+ERCOT serves its resource adequacy pages. PJM's planning path did not answer from this host and needs a
+different route. So the queue history is reachable, free, at four of the five largest markets, and the fix
+recorded as "requested, not reached" can be replaced with an ingest.
+
+**Per site project credit, row 7, the covenant is no longer blank.** The holding trust files its credit
+agreements as exhibits, and they state the constraint: a debt service coverage test defined as consolidated net
+operating income over debt service, remedies on event of default, and a **cash sweep trigger that can fire on a
+single tenant condition**. Concentration is therefore a contractual trigger and not only a measurement, which
+strengthens gate 3 for this candidate and leaves gate 4, reachability, as the one that still decides it.
+
+### Update, 2026-10-04: the numbers behind the two blanks
+
+**The coverage test has a threshold: 1.25 to 1.00.** From the trust's revolving credit facility, verbatim:
+*"the Borrower shall be in compliance on a Pro Forma Basis with (A) an LTV that does not exceed the Maximum LTV,
+(B) a Debt Service Coverage Ratio of not less than 1.25 to 1.00 and (C) a Net Asset Value of not less than the
+Minimum NAV."* So gate one now reads: the constrained counterparty is a ring fenced borrower, the test is a
+coverage ratio of at least 1.25 times debt service, and it is bound together with an LTV ceiling and a net asset
+value floor. `make indenture-covenants` writes `results/dscr-thresholds.csv`.
+
+**The queue ingest has begun, at one market of four.** CAISO's cluster fifteen request list parsed into **86
+queue rows** with queue number, capacity in megawatts and fuel type, writing `results/queue-panel.csv`. MISO
+serves its queue behind an account login and its interactive queue is script driven, SPP publishes through
+`marketplace.spp.org` rather than as files on the page, and ERCOT's workbook links timed out from this host.
+Each is recorded with its reason rather than dropped, and PJM still needs a route.
+
