@@ -889,3 +889,23 @@ honest extension looks as it does: the effect is regime-dependent, appearing whe
 active buildout theme and failing in 2015-2018 when it was not, and it is not an artefact of which
 names exist today. The fixed-era record stays primary; the matched extended record is the declared
 secondary, never merged with it.
+
+## T56. Recalibrating the gate does not help, because the miscalibration is era specific
+
+**Statement**: a single temperature fitted on the earlier sixty percent of walk-forward
+out-of-sample revenue predictions chooses T = 3.75 and improves the negative log likelihood from 1.6757
+to 1.5724, confirming the overconfidence T54 found. On the held-out later forty percent it makes
+calibration **worse**: expected calibration error 0.0572 raw against 0.1279 recalibrated. The engine
+agrees: on the T44 window, the raw gate returns +11.29 percent net at Sharpe 1.043 with a -16.3
+percent drawdown, the recalibrated gate +11.00 percent at 1.021 with -16.7 percent, a difference of
+-0.31 percent with interval -1.95 to +1.28. Doubled costs keep the same order. The ungated run stays
+at -9.49 percent.
+**Evidence**: `results/gate-recalibration.json`; `scripts/run_gate_recalibration.py`;
+`tests/test_temperature_scaling.py`.
+**Scope**: development only, one scalar temperature cannot fix class-specific overconfidence, and the
+fitted period and the evaluated period are both out of sample with respect to the classifier but not
+with respect to each other.
+**Consequence**: the gate keeps its raw probabilities, and the declared falsifier of the recalibration
+stage fired. The deeper finding is that the model's miscalibration is not stable across periods, so
+calibration fixes must be fitted and validated inside the same era, and the forward window is where
+that will be tested.

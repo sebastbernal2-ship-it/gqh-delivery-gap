@@ -349,3 +349,7 @@ generated-path: results/calibration-report.json
 Produced by `scripts/run_matched_universe.py`:
 
 generated-path: results/matched-universe.json
+
+Produced by `scripts/run_gate_recalibration.py`:
+
+generated-path: results/gate-recalibration.json
