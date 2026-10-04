@@ -30,21 +30,31 @@ HORIZON = 20
 COSTS = {"base": 20.0, "doubled": 40.0}
 
 
-def sleeve_events(panel: Path, direction: float, split: float) -> list[dict]:
-    """Out-of-sample events with a conviction weight in [-1, 1] and both clocks."""
+def sleeve_events(panel: Path, direction: float, split: float, sample: str = "test") -> list[dict]:
+    """Events with a conviction weight in [-1, 1]. `sample` is test (out of sample) or train."""
+    if sample not in ("train", "test"):
+        raise ValueError("sample must be train or test")
     rows, _ = prepare_rows(list(csv.DictReader(panel.open())))
     fitted = fit_and_forecast(rows, tuple(FEATURES), fraction=split)
-    test_rows = [row for row in rows if row["label_available"] >= fitted["split"]["test_from"]]
-    if len(test_rows) != len(fitted["test_labels"]):
+    if sample == "test":
+        chosen = [row for row in rows if row["label_available"] >= fitted["split"]["test_from"]]
+        probabilities = fitted["softmax_probabilities"]
+        labels = fitted["test_labels"]
+    else:
+        chosen = [row for row in rows if row["label_available"] < fitted["split"]["test_from"]]
+        probabilities = fitted["train_probabilities"]
+        labels = [int(row["label_bin"]) for row in chosen]
+    if len(chosen) != len(labels) or len(chosen) != len(probabilities):
         raise SystemExit(f"{panel.name}: the split and the forecast rows disagree")
     events = []
-    for row, values in zip(test_rows, fitted["softmax_probabilities"]):
+    for row, values in zip(chosen, probabilities):
         expected = sum(k * float(p) for k, p in zip(fitted["classes"], values))
         conviction = direction * (expected - 2.0) / 2.0
         if abs(conviction) < 1e-9:
             continue
         events.append({"ticker": str(row["ticker"]), "decision": str(row["label_available"])[:10],
-                       "weight": conviction, "period_end": str(row["period_end"])})
+                       "weight": conviction, "period_end": str(row["period_end"]),
+                       "sample": sample})
     return events
 
 
@@ -144,6 +154,24 @@ def main() -> int:
                   "flat round-trip costs, capacity from 60-session median dollar volume",
                   "the models are frozen from the first seventy percent of each panel",
               ]}
+    report["splits"] = {}
+    splits_dailies = {}
+    for name, path, direction in (("revenue", args.revenue, 1.0), ("capex", args.capex, -1.0)):
+        for sample in ("train", "test"):
+            sample_events = sleeve_events(path, direction=direction, split=args.split, sample=sample)
+            sample_daily, sample_info = sleeve_daily(sample_events, args.cache, COSTS["base"])
+            splits_dailies[f"{name}_{sample}"] = sample_daily
+            report["splits"][f"{name}_{sample}"] = {"events": sample_info, "cost_bps": COSTS["base"],
+                                                    "metrics": portfolio_metrics(sample_daily)}
+    for sample in ("train", "test"):
+        left, right = splits_dailies[f"revenue_{sample}"], splits_dailies[f"capex_{sample}"]
+        common = {row["date"] for row in left} & {row["date"] for row in right}
+        right_lookup = {row["date"]: row["net"] for row in right}
+        combined = [{"date": row["date"], "net": 0.5 * row["net"] + 0.5 * right_lookup[row["date"]],
+                     "gross": row["gross"]} for row in left if row["date"] in common]
+        report["splits"][f"two_sleeve_{sample}"] = {"metrics": portfolio_metrics(combined),
+                                                    "metrics_vol_target": portfolio_metrics(
+                                                        apply_vol_target(combined, args.target_vol))}
     dailies = {}
     for name, events in (("revenue", revenue), ("capex", capex)):
         for cost_label, cost_bps in COSTS.items():
@@ -181,6 +209,12 @@ def main() -> int:
     }
     args.output.write_text(json.dumps(report, indent=1) + "\n")
 
+    print("split samples (base costs)")
+    for name in ("revenue_train", "revenue_test", "capex_train", "capex_test"):
+        m = report["splits"][name]["metrics"]
+        print("  %-16s days %4d net %+7.2f%% vol %6.1f%% sharpe %+6.3f maxDD %+7.1f%%" % (
+            name, m["days"], m["annual_return"] * 100, m["annual_vol"] * 100,
+            m["sharpe"] or float("nan"), m["max_drawdown"] * 100))
     print("sleeve                       days   net      vol     sharpe   maxDD")
     for name in ("revenue_base", "revenue_doubled", "capex_base", "capex_doubled"):
         m = report["sleeves"][name]["metrics"]

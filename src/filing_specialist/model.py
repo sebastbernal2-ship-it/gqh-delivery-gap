@@ -142,6 +142,7 @@ def fit_and_forecast(rows: list[dict], features: tuple[str, ...],
         "prior": prior,
         "prevalence_probabilities": np.tile(prior, (len(test), 1)),
         "softmax_probabilities": predict_softmax(parameters, apply_scaler(test_matrix, stats)),
+        "train_probabilities": predict_softmax(parameters, apply_scaler(train_matrix, stats)),
         "training_prevalence": {int(label): float(value) for label, value in zip(classes, prior)},
         "coefficients": parameters.tolist(),
     }

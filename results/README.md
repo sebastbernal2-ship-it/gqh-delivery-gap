@@ -261,6 +261,8 @@ Produced by `scripts/run_sleeve_portfolio.py`:
 
 generated-path: results/sleeve-portfolio.json
 
+The ignored bar cache is repaired by `scripts/repair_unadjusted_bars.py` and `scripts/sanitize_bar_cache.py`; neither writes a tracked artifact.
+
 Produced by `scripts/run_three_sleeve_portfolio.py`:
 
 generated-path: results/three-sleeve-portfolio.json

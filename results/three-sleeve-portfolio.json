@@ -94,28 +94,28 @@
   "inverse_vol": {
    "metrics": {
     "days": 633,
-    "annual_return": 0.18312600145905433,
-    "annual_vol": 0.13419220677841492,
-    "sharpe": 1.364654519479223,
-    "total_return": 0.5484508907479848,
+    "annual_return": 0.19123647426991347,
+    "annual_vol": 0.13512455619404215,
+    "sharpe": 1.4152607020983903,
+    "total_return": 0.5798070455065125,
     "max_drawdown": -0.1447199989669904,
-    "hit_rate": 0.5513428120063191
+    "hit_rate": 0.5529225908372828
    },
    "weights_mean": [
-    0.181,
-    0.136,
-    0.674
+    0.184,
+    0.14,
+    0.677
    ]
   },
   "inverse_vol_vol_target": {
    "metrics": {
     "days": 633,
-    "annual_return": 0.1633671167784723,
-    "annual_vol": 0.10953702445260281,
-    "sharpe": 1.491432851995738,
-    "total_return": 0.48465059802166155,
-    "max_drawdown": -0.08964294658141436,
-    "hit_rate": 0.5513428120063191
+    "annual_return": 0.17139317503448237,
+    "annual_vol": 0.11068219410882542,
+    "sharpe": 1.5485162398024426,
+    "total_return": 0.5143942091656142,
+    "max_drawdown": -0.08964294658141458,
+    "hit_rate": 0.5529225908372828
    }
   }
  },
@@ -126,6 +126,18 @@
   "flat costs; capacity from 60-session median dollar volume",
   "the sleeves' calendars differ, so the combined window is their intersection"
  ],
+ "intensity_full_period_ungated": {
+  "cohorts": 260,
+  "metrics": {
+   "days": 13697,
+   "annual_return": -0.008062274341097903,
+   "annual_vol": 0.03277550651080785,
+   "sharpe": -0.24598473675576413,
+   "total_return": -0.37342697163435545,
+   "max_drawdown": -0.46334394951088376,
+   "hit_rate": 0.05950208074760897
+  }
+ },
  "common_window": {
   "from": "2023-08-04",
   "to": "2026-08-31",
