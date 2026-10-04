@@ -64,10 +64,10 @@ def main() -> int:
              "along the dimensions of its layer, and every child decomposes again. The skeleton is written",
              "out and labelled `proposed_unverified`; the curated digs are where domain knowledge fills the",
              "levels with named minerals, suppliers, observables and payers.", "",
-             f"**Written graph: {summary['written_total_with_curated']:,} nodes** "
-             f"({summary['manifest_nodes']:,} declared + {summary['subnodes_total']:,} skeleton children + "
-             f"{summary['curated_children']:,} children of curated dig nodes), "
-             f"{summary['split_edges'] + summary['curated_children']:,} split edges.", "",
+             f"**Written graph: {summary['written_graph_total']:,} nodes** "
+             f"({summary['manifest_nodes']:,} declared + {summary['manifest_skeleton_children']:,} skeleton children + "
+             f"{summary['curated_children']:,} curated children + {summary['conceptual_children']:,} conceptual children), "
+             f"{summary['split_edges']:,} split edges.", "",
              f"- Manifest nodes decomposed: {summary['manifest_nodes']:,}, minimum children per node: "
              f"{summary['children_per_parent_min']}", "",
              f"- Curated dig nodes: {summary['curated_dig_nodes']}, digs: {len(digs)}", "",
@@ -177,9 +177,10 @@ def main() -> int:
  .meta{{color:#8b949e;font-size:.85rem}}
 </style></head><body><main>
 <h1>Decomposition: the graph at sub-node resolution</h1>
-<p>{summary['written_total_with_curated']:,} written nodes:
-{summary['manifest_nodes']:,} declared, {summary['subnodes_total']:,} skeleton children,
-{summary['curated_children']:,} children of curated dig nodes. {len(digs)} curated digs.
+<p>{summary['written_graph_total']:,} written nodes:
+{summary['manifest_nodes']:,} declared, {summary['manifest_skeleton_children']:,} skeleton children,
+{summary['curated_children']:,} curated children, {summary['conceptual_children']:,} conceptual children.
+{summary['split_edges']:,} split edges. {len(digs)} curated digs.
 Method owner: <code>docs/plan/decomposition.md</code>.</p>
 {cycle_body}
 {body}

@@ -5,13 +5,14 @@ Three owners feed this view:
 
   docs/scan/nodes.jsonl             the measured layer: 27 declared nodes, each with a
                                     representation, a clock, an availability rule and a blocker
-  docs/scan/quantgraph.jsonl        the expanded manifest: 555 nodes and 1,319 typed edges
+  docs/scan/quantgraph.jsonl        the expanded manifest and its typed edges
   docs/scan/node-measurements.jsonl the modelling ledger: one row per node with the rung the
                                     evidence reached, the measured summary, and the evidence paths
+  docs/scan/node-crosswalk.jsonl    the explicit measured-to-manifest identity map
 
 Writes docs/scan/node-sheets.md and docs/scan/node-sheets.html. The renderer validates the
-ledger: nodes resolve, rungs and results are from the declared vocabulary, evidence paths
-exist (globs allowed), and bridged manifest ids exist in the manifest.
+ledger and crosswalk: nodes resolve, rungs and results are from the declared vocabulary, evidence
+paths exist (globs allowed), and every crosswalk target exists in the manifest.
 
     python3 scripts/render_node_sheets.py
 """
@@ -21,10 +22,13 @@ import html
 import json
 from pathlib import Path
 
+from check_scan_artifacts import crosswalk_problems
+
 ROOT = Path(__file__).resolve().parent.parent
 REGISTRY = ROOT / "docs" / "scan" / "nodes.jsonl"
 MANIFEST = ROOT / "docs" / "scan" / "quantgraph.jsonl"
 LEDGER = ROOT / "docs" / "scan" / "node-measurements.jsonl"
+CROSSWALK = ROOT / "docs" / "scan" / "node-crosswalk.jsonl"
 MARKDOWN = ROOT / "docs" / "scan" / "node-sheets.md"
 HTML = ROOT / "docs" / "scan" / "node-sheets.html"
 
@@ -37,8 +41,9 @@ def load(path: Path) -> list[dict]:
     return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
 
 
-def validate(registry, manifest, ledger) -> list[str]:
+def validate(registry, manifest, ledger, crosswalk) -> list[str]:
     problems: list[str] = []
+    problems.extend(crosswalk_problems(registry, manifest, crosswalk))
     known = {node["id"] for node in registry} | {node["id"] for node in manifest if node.get("kind") == "node"}
     seen: set[str] = set()
     manifest_ids = {node["id"] for node in manifest if node.get("kind") == "node"}
@@ -90,6 +95,9 @@ def format_stats(stats: dict) -> str:
     return "stats: " + "; ".join(parts)
 
 
+CROSSWALK_BY_NODE: dict[str, dict] = {}
+
+
 def sheet(record: dict, measurement: dict | None, manifest_nodes: dict, manifest_edges: list[dict],
           degree: dict[str, int], as_html: bool) -> str:
     esc = html.escape if as_html else (lambda text: text)
@@ -127,7 +135,9 @@ def sheet(record: dict, measurement: dict | None, manifest_nodes: dict, manifest
             "<br>".join(html.escape(row) for row in rows)
         lines.append(f"Representation: {body}" if not as_html else f"<p>Representation: {body}</p>")
     bridges = [record["id"]] if record["id"] in manifest_nodes else []
+    bridges += CROSSWALK_BY_NODE.get(record["id"], {}).get("manifest_ids", [])
     bridges += next((row.get("manifest_ids", []) for row in MEASUREMENTS if row["node"] == record["id"]), [])
+    bridges = list(dict.fromkeys(bridges))
     if bridges:
         top = neighbours(manifest_edges, set(bridges))
         total = sum(degree.get(bridge, 0) for bridge in bridges)
@@ -148,9 +158,10 @@ def sheet(record: dict, measurement: dict | None, manifest_nodes: dict, manifest
 MEASUREMENTS: list[dict] = []
 
 
-def build_markdown(registry, manifest, ledger) -> str:
-    global MEASUREMENTS
+def build_markdown(registry, manifest, ledger, crosswalk) -> str:
+    global MEASUREMENTS, CROSSWALK_BY_NODE
     MEASUREMENTS = ledger
+    CROSSWALK_BY_NODE = {row["node"]: row for row in crosswalk}
     manifest_nodes = {node["id"]: node for node in manifest if node.get("kind") == "node"}
     manifest_edges = [record for record in manifest if record.get("kind") == "edge"]
     degree = degree_of(manifest_edges)
@@ -170,8 +181,8 @@ def build_markdown(registry, manifest, ledger) -> str:
         f"declared and the write-up open or thin.",
         f"- Measured layer: **{len(registry)}** declared nodes, **{measured_registry}** with a ledger row.",
         f"- Expanded manifest: **{len(manifest_nodes)}** nodes and **{len(manifest_edges)}** edges.",
-        f"- Crosswalk: {sum(1 for row in ledger if row.get('manifest_ids'))} of the measured nodes are linked "
-        "to the expanded manifest; the rest are recorded as not yet crosswalked.",
+        f"- Crosswalk: {sum(1 for row in crosswalk if row['status'] != 'unmapped')} of {len(registry)} "
+        "measured nodes have explicit manifest targets; unresolved nodes remain recorded as unmapped.",
         "",
         "The rung is the highest step of the confidence ladder the evidence reached: documentation, "
         "entitlement, downloaded, point in time panel, correct label, calibrated forecast, joint tails, "
@@ -271,13 +282,14 @@ def main() -> int:
                         help="manifest to render; use a committed export to avoid a dirty tree")
     args = parser.parse_args()
     registry, manifest, ledger = load(REGISTRY), load(Path(args.manifest)), load(LEDGER)
-    problems = validate(registry, manifest, ledger)
+    crosswalk = load(CROSSWALK)
+    problems = validate(registry, manifest, ledger, crosswalk)
     if problems:
         print("node sheets: invalid ledger")
         for problem in problems:
             print(f"  PROBLEM: {problem}")
         return 1
-    markdown_text = build_markdown(registry, manifest, ledger)
+    markdown_text = build_markdown(registry, manifest, ledger, crosswalk)
     MARKDOWN.write_text(markdown_text)
     HTML.write_text(build_html(markdown_text))
     measured = {row["node"] for row in ledger}

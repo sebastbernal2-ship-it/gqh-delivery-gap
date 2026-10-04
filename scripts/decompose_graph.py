@@ -107,6 +107,9 @@ def main() -> int:
     level2 = 0
     level3 = 0
     level4 = 0
+    manifest_level3 = 0
+    curated_level3 = 0
+    curated_level4 = 0
     manifest_seconds: list[dict] = []
     curated_seconds: list[dict] = []
     for node in nodes:
@@ -161,6 +164,7 @@ def main() -> int:
             third = child_of(second, dimension)
             rows.append(third)
             level3 += 1
+            manifest_level3 += 1
             rows.append({"kind": "split", "id": f"split:{third['id']}", "from": second["id"],
                          "to": third["id"], "relation": "splits_into", "status": "proposed"})
 
@@ -173,6 +177,7 @@ def main() -> int:
             rows.append(third)
             curated_thirds.append(third)
             level3 += 1
+            curated_level3 += 1
             rows.append({"kind": "split", "id": f"split:{third['id']}", "from": second["id"],
                          "to": third["id"], "relation": "splits_into", "status": "proposed"})
     for third in curated_thirds:
@@ -181,6 +186,7 @@ def main() -> int:
             fourth["status"] = "seeded_parent"
             rows.append(fourth)
             level4 += 1
+            curated_level4 += 1
             rows.append({"kind": "split", "id": f"split:{fourth['id']}", "from": third["id"],
                          "to": fourth["id"], "relation": "splits_into", "status": "proposed"})
 
@@ -223,18 +229,26 @@ def main() -> int:
 
     by_layer = collections.Counter(row["layer"] for row in rows if row["kind"] == "subnode")
     by_dimension = collections.Counter(row["dimension"] for row in rows if row["kind"] == "subnode")
+    subnodes_total = sum(1 for row in rows if row["kind"] == "subnode")
+    split_edges = sum(1 for row in rows if row["kind"] == "split")
+    skeleton_children = level1 + level2 + manifest_level3
+    curated_children = curated_level1 + curated_level2 + curated_level3 + curated_level4
+    conceptual_children = concept_level1 + concept_level2
     summary = {
         "manifest_nodes": len(nodes),
-        "level1_children": level1,
-        "level2_children": level2,
-        "level3_children": level3,
-        "level4_curated_children": level4,
-        "subnodes_total": level1 + level2 + level3 + level4,
-        "split_edges": level1 + level2 + level3 + level4,
-        "written_graph_total": len(nodes) + level1 + level2 + level3 + level4,
+        "level1_children": level1 + curated_level1 + concept_level1,
+        "level2_children": level2 + curated_level2 + concept_level2,
+        "level3_children": manifest_level3 + curated_level3,
+        "level4_curated_children": curated_level4,
+        "manifest_skeleton_children": skeleton_children,
         "curated_dig_nodes": curated,
-        "curated_children": curated_level1 + curated_level2,
-        "written_total_with_curated": len(nodes) + level1 + level2 + level3 + level4 + curated_level1 + curated_level2,
+        "curated_children": curated_children,
+        "conceptual_children": conceptual_children,
+        "conceptual_split_edges": conceptual_children,
+        "subnodes_total": subnodes_total,
+        "split_edges": split_edges,
+        "written_graph_total": len(nodes) + subnodes_total,
+        "written_total_with_curated": len(nodes) + subnodes_total,
         "children_per_parent_min": min(len(TEMPLATES.get(node.get("layer", ""), GENERIC))
                                        for node in nodes),
         "by_layer": dict(by_layer.most_common()),
@@ -245,8 +259,7 @@ def main() -> int:
     print(f"wrote {args.out} and {args.summary}")
     print(f"manifest {len(nodes)} nodes -> {level1} children -> {level2} grandchildren -> {level3} great-grandchildren")
     print(f"conceptual children {concept_level1} and grandchildren {concept_level2}")
-    print(f"written nodes {len(nodes) + level1 + level2 + level3 + level4 + concept_level1 + concept_level2}; "
-          f"split edges {level1 + level2 + level3 + level4 + concept_level1 + concept_level2}")
+    print(f"written nodes {len(nodes) + subnodes_total}; split edges {split_edges}")
     return 0
 
 

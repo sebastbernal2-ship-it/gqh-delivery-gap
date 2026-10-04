@@ -5,11 +5,11 @@ along the dimensions of its layer, and every child decomposes again. The skeleto
 out and labelled `proposed_unverified`; the curated digs are where domain knowledge fills the
 levels with named minerals, suppliers, observables and payers.
 
-**Written graph: 168,281 nodes** (569 declared + 162,204 skeleton children + 5,508 children of curated dig nodes), 167,712 split edges.
+**Written graph: 175,673 nodes** (569 declared + 88,764 skeleton children + 81,012 curated children + 5,328 conceptual children), 175,104 split edges.
 
 - Manifest nodes decomposed: 569, minimum children per node: 6
 
-- Curated dig nodes: 153, digs: 20
+- Curated dig nodes: 157, digs: 20
 
 ## The dimensions
 
@@ -635,13 +635,13 @@ Sub-items to fetch for every node above: composition, inputs, constraints, obser
 
 ### Compute rentals to provider revenue to equity, written as nodes
 
-`dig:compute:provider-transmission` · root `feature:compute:rental-price` · ceiling **testable** · nodes 11 · edges 11
+`dig:compute:provider-transmission` · root `feature:compute:rental-price` · ceiling **testable** · nodes 13 · edges 16
 
 **Why.** The provider family claims rental change reaches provider economics through revenue. The aggregate was tested and came back inside the null (T19), and the family level signs disagree, which leaves the middle object open: which rental family each provider actually sells, and what its revenue is levered to.
 
 **Chain.** `feature:compute:rental-price` -> `dig:compute:provider-revenue-line` -> `dig:compute:revenue-per-mw` -> `dig:compute:equity-transmission`
 
-**Greatest assumption.** Each provider's revenue is levered to one identifiable rental family, and the aggregate median washes that structure out rather than the mechanism being absent.
+**Greatest assumption.** Provider revenue is levered to level variables, revenue per megawatt and contracted share, once family price mapping is removed, and filings are enough to measure them.
 
 **Kill test.** After the exposure map is written, family specific transmission shows no association for any provider family pair.
 
@@ -649,8 +649,8 @@ Sub-items to fetch for every node above: composition, inputs, constraints, obser
 |---|---|---|---|---|---|---|
 | **Provider revenue line** `dig:compute:provider-revenue-line` | outcome | AMZN, MSFT, GOOGL, META, ORCL, CRWV, IREN, APLD, CORZ, EQIX | SEC XBRL revenue concepts, quarterly durations | provider shareholders | E2 | SEC XBRL; results/provider-revenue-quarterly.csv |
 | **Rental to revenue link** `dig:compute:rental-to-revenue-link` | mechanism | providers, rental marketplaces | results/provider-transmission-study.json | provider shareholders | E2 | own study, T19 |
-| **Provider to family exposure map** `dig:compute:family-exposure-map` | feature | providers, cloud resellers, neocloud hosts | provider disclosures; instance type catalogues | provider shareholders | E4 | to be built |
-| **Revenue per contracted megawatt** `dig:compute:revenue-per-mw` | feature | providers, utilities | provider filings | provider shareholders | E3 | provider filings |
+| **Provider to family exposure map** `dig:compute:family-exposure-map` | feature | providers, cloud resellers, neocloud hosts | provider disclosures; instance type catalogues | provider shareholders | E2 | own study, T21: falsified raw and relative; strongest association on the provider the map excludes |
+| **Revenue per contracted megawatt** `dig:compute:revenue-per-mw` | feature | providers, utilities | provider filings | provider shareholders | E2 | own study, T21: the level object that replaces family price mapping |
 | **Contracted against merchant share** `dig:compute:contracted-share` | feature | providers, hyperscalers | provider disclosures | provider shareholders | E3 | provider filings |
 | **Lease and renewal spread** `dig:compute:lease-spread` | feature | providers, tenants | provider disclosures | provider shareholders | E3 | provider filings |
 | **Power cost pass through** `dig:compute:power-cost-pass-through` | contract | providers, utilities, tenants | contract excerpts; utility tariffs | provider shareholders or tenants | E3 | contracts |
@@ -658,6 +658,8 @@ Sub-items to fetch for every node above: composition, inputs, constraints, obser
 | **Tenant concentration** `dig:compute:tenant-concentration` | entity | providers, hyperscalers | provider disclosures | provider shareholders | E3 | provider filings |
 | **Financing cost and structure** `dig:compute:financing-cost` | contract | providers, lenders, rating agencies | agency publications; results/agency-universe.csv | provider equity and debt holders | E2 | agency data in hand |
 | **Equity transmission** `dig:compute:equity-transmission` | asset | providers, investors | results/provider-capex-quarterly.csv; price and multiple panels | end holder | E4 | to be built |
+| **Capex intensity against revenue** `dig:compute:capex-intensity` | feature | hyperscalers, neocloud hosts, colocation | SEC XBRL capex and revenue concepts | provider shareholders | E2 | own study, T23: MSFT 0.471 last against 0.136 mean, ORCL 2.017 against 0.212 |
+| **The intensity charge** `dig:compute:intensity-charge` | factor | hyperscalers, compute and AI names, buildout contractors | results/intensity-pricing-study.json; results/intensity-preboom-study.json; SEC XBRL capex and revenue against daily closes | equity holders | E2 | own studies T25, T29, T30: negative at five and twenty days in three regimes, not asset growth, capacity unknown |
 
 Sub-items to fetch for every node above: composition, inputs, constraints, observables, substitutes, payers.
 
@@ -674,16 +676,21 @@ Sub-items to fetch for every node above: composition, inputs, constraints, obser
 | `dig:compute:financing-cost` -> `dig:compute:equity-transmission` | drives | Funding cost sets the discount applied to capacity cash flows. | Equity reaction to capacity news is unrelated to funding structure. |
 | `dig:compute:revenue-per-mw` -> `dig:compute:equity-transmission` | drives | Revenue per megawatt is the cash flow line that equity prices. | Equity revisions follow total revenue while revenue per megawatt stays flat. |
 | `dig:compute:financing-cost` -> `dig:compute:provider-revenue-line` | feeds | Securitised and debt funded capacity shows up as contracted revenue before it shows up as equity value. | Funded capacity adds no contracted revenue. |
+| `dig:compute:family-exposure-map` -> `dig:compute:revenue-per-mw` | refines | With family price mapping retired, the transmission object is the level variable: revenue per contracted megawatt. | Revenue per megawatt is fixed by signed contracts across the whole window and carries no rental information. |
+| `dig:compute:capex-intensity` -> `dig:compute:provider-revenue-line` | conditions | Investment outruns revenue before it either lifts revenue or compresses margin. | Capex intensity is flat across the panel, as META and EQIX show. |
+| `dig:compute:capex-intensity` -> `dig:compute:depreciation-policy` | drives | High intensity becomes depreciation and interest inside reported earnings. | Earnings absorb intensity without any change in useful life or leverage. |
+| `dig:compute:capex-intensity` -> `dig:compute:intensity-charge` | drives | A capex intensity surprise relative to revenue is charged in the equity over weeks. | Intensity surprises carry no forward return association once time effects are controlled. |
+| `dig:compute:intensity-charge` -> `dig:compute:equity-transmission` | refines | The charge is the fastest leg of the equity transmission, faster than any cash flow revision. | The equity responds to cash flow revisions only, with no intensity response. |
 
 ### The forced seller, written as nodes, and the cost hurdle it faces
 
-`dig:flow:forced-seller` · root `dig:flow:trigger-identity` · ceiling **testable** · nodes 12 · edges 10
+`dig:flow:forced-seller` · root `dig:flow:trigger-identity` · ceiling **testable** · nodes 14 · edges 13
 
 **Why.** The cascade family claims a forced seller creates a dislocation that reverts enough to pay for entry after the flow. The reversion was measured on the recorded tape (T20): the percentile levels do not clear the cost hurdle, and the frozen conjunction's gross does, on six events. The nodes here write the mechanism and the constraint, so the next pass tests identity and cheaper entry rather than wider ladders.
 
 **Chain.** `dig:flow:trigger-identity` -> `dig:flow:liquidation-engine` -> `dig:flow:oi-collapse` -> `dig:flow:depth-vacuum` -> `dig:flow:reversion-half-life` -> `dig:flow:cost-hurdle`
 
-**Greatest assumption.** The forced seller is identifiable in real time from the observable conjunction, and that identity does not require a speed advantage.
+**Greatest assumption.** The forced seller is identifiable and the unfilled events are the reversion, so entry is taken immediately and maker orders serve size rather than edge.
 
 **Kill test.** Extended tape shows the conjunction's gross reversion inside the cost hurdle at the same horizons.
 
@@ -697,10 +704,12 @@ Sub-items to fetch for every node above: composition, inputs, constraints, obser
 | **Dislocation magnitude** `dig:flow:dislocation-magnitude` | outcome | takers, forced accounts | one minute and five minute moves | the counterparty side | E2 | recorded tape; 103 events at the top one percent |
 | **Reversion half life** `dig:flow:reversion-half-life` | feature | liquidity providers | results/cascade-reversion-study.json | liquidity providers | E2 | own study, T20 |
 | **Cost hurdle** `dig:flow:cost-hurdle` | rule | venues, takers | fee schedules, measured spreads | takers | E2 | own study, T20 |
-| **Maker entry candidate** `dig:flow:maker-entry-candidate` | claim | liquidity providers | best bid and ask from the tape | fill counterparties | E4 | to be tested |
+| **Maker entry candidate** `dig:flow:maker-entry-candidate` | claim | liquidity providers | best bid and ask from the tape | fill counterparties | E2 | own study, T22: fills 33 to 47 percent, paired +4.6 to +17.3 bps, absolute net at or below zero |
 | **Capacity by depth** `dig:flow:capacity-by-depth` | feature | takers | median depth at events: about 1.9 million dollars at the top one percent level, 950 dollars when the book is thin | takers | E2 | recorded tape |
 | **Market heterogeneity** `dig:flow:market-heterogeneity` | feature | perpetual traders | results/cascade-reversion-study.json | takers | E2 | own study, T20 |
 | **Zero latency entry rule** `dig:flow:zero-latency-entry-rule` | strategy | us | results/cascade-reversion-study.json | end holder | E2 | declared protocol and measured |
+| **Fill selection** `dig:flow:fill-selection` | mechanism | liquidity providers, forced accounts | results/maker-entry-study.json; resting order fills against recorded book | fill counterparties | E2 | own study, T22 pass two: filled events worse than unfilled at every level; a stricter penetration rule removes the good fills (top one percent net +0.83 to -3.02 bps) |
+| **Cross market expression** `dig:flow:cross-market-expression` | strategy | perpetual traders | results/spillover-study.json | end holder | E2 | own study, T24: every entry into BTC or ETH nets negative; only thin markets show positive cells under 5k depth |
 
 Sub-items to fetch for every node above: composition, inputs, constraints, observables, substitutes, payers.
 
@@ -716,6 +725,9 @@ Sub-items to fetch for every node above: composition, inputs, constraints, obser
 | `dig:flow:capacity-by-depth` -> `dig:flow:maker-entry-candidate` | conditions | Maker entry is only possible where the book has size to fill. | Fills appear at events whose depth is too thin to matter. |
 | `dig:flow:market-heterogeneity` -> `dig:flow:reversion-half-life` | conditions | Reversion pools only markets whose structure supports it. | The per market differences vanish with more events. |
 | `dig:flow:zero-latency-entry-rule` -> `dig:flow:reversion-half-life` | conditions | The measured reversion is the one available at bar close, with no speed used. | The reversion exists only inside the first seconds after the event. |
+| `dig:flow:fill-selection` -> `dig:flow:maker-entry-candidate` | conditions | A resting order fills precisely when the market keeps going, so the fill set is not the event set. | Filled events and unfilled events show the same forward reversion. |
+| `dig:flow:reversion-half-life` -> `dig:flow:fill-selection` | refines | The reversion lives in the events that do not come back to a resting price. | Unfilled events are the ones that continue. |
+| `dig:flow:cross-market-expression` -> `dig:flow:capacity-by-depth` | conditions | A cross market cell is only a trade when the target market carries depth. | The positive cells appear in markets whose depth is trivial, as the measurement shows. |
 
 
 ## The analogue cycles, the temporal backbone

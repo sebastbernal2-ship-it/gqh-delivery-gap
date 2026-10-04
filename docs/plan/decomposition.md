@@ -49,13 +49,11 @@ Two rules keep this honest:
 
 ## Recursion policy
 
-- **Template depth 2.** Every manifest node gets its six children, and every child gets five more.
-  That marks the shape of the whole space and takes the graph past twenty thousand written nodes.
-  It is a skeleton, and it is labelled as one.
-- **Curated depth 4 to 6.** Where a chain carries edge, a human or a model with domain knowledge fills
-  the levels with named minerals, named suppliers, named data sources and named payers. That is where
-  `deep-digs.jsonl` lives, and it is the part worth reading.
-- Nothing templated goes deeper than level 2, because templated depth is noise dressed as rigour.
+- **Manifest skeleton depth 3.** Every manifest node gets its layer dimensions, each child gets five generic children, and each grandchild gets four generic children.
+  The rows remain `proposed_unverified` and exist to expose missing questions, not to claim evidence.
+- **Curated depth 4.** Where a chain carries edge, a human or a model with domain knowledge fills the levels with named minerals, named suppliers, named data sources and named payers.
+  That is where `deep-digs.jsonl` lives, and it is the part worth reading.
+- **Conceptual depth 2.** Forces and assumptions receive their own first and second conceptual children so their payers, tests and failure modes remain countable.
 
 ## Statuses
 
