@@ -171,3 +171,33 @@ shared-query probabilities, pretraining gradients, checkpoint inference parity a
 threshold tails. Altering only evaluation labels leaves trained tensors, normalization, losses,
 calibration, gate scores and selection unchanged. Spool tests isolate the new Jev-only workload,
 and the retired mixed job starts nothing. Live HiPerGator execution remains unverified.
+
+## A/B/A+B view ablation
+
+The next Jev experiment holds the target, sequence length, model width, initialization, supervised
+budget and split rule fixed while varying inputs: A is order-book state, B is observed reported
+trade flow, and A+B is early fusion. The exact question, feature mapping, gate rule and caveats live
+in the [A/B/A+B plan](../../../docs/inbox/aidan-2026-10-03/jev-ablation-plan.md). The metadata-only
+sample is pinned in [synchronized_ablation_plan.json](synchronized_ablation_plan.json). Its 30 dates
+span December 2025–July 2026, with a long December-to-May gap; this cannot test long-run regimes.
+
+`execution_ablation.py` trains three same-shape Jev instances. Omitted inputs are standardized to
+zero, preserving parameter count and shared initialization. The first comparison is scratch-only;
+masked sequence pretraining is held for a later experiment so it cannot confound the input-view
+question. It reports an A/B equal probability pool as an additional late-fusion comparison. The new
+`run-execution-ablation.slurm` runs only these Jev fits. Fetching, parsing, synchronization, labels,
+normalization and classical baselines run off-cluster.
+
+After the public source and clock audit passes, prepare a private cache off-cluster:
+
+```sh
+python fetch_public_plan.py --plan synchronized_ablation_plan.json \
+  --objects /private/staging/hl-objects --workers 4
+python execution_dataset.py --plan synchronized_ablation_plan.json \
+  --objects /private/staging/hl-objects --output /private/staging/jev-ab-cache
+```
+
+Transfer only the validated numerical cache and manifest to HiPerGator, then set the same job
+variables documented above and submit `run-execution-ablation.slurm`. The pinned plan is 1.92 GB;
+it is metadata-selected but its objects have not yet passed the downstream schema, completeness or
+availability checks. No HPG run or performance conclusion is implied by the plan or local smoke.
