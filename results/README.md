@@ -226,6 +226,10 @@ Produced by `scripts/run_decision_layer.py`:
 
 generated-path: results/decision-layer.json
 
+Produced by `scripts/run_rpo_market_council.py`:
+
+generated-path: results/rpo-market-council.json
+
 Produced by `scripts/build_rpo_vintages.py`:
 
 generated-path: results/rpo-vintages.csv
