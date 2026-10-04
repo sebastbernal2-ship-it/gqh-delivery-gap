@@ -169,3 +169,7 @@ generated-path: results/regime-state-daily.csv
 Produced by `scripts/build_regime_state.py`:
 
 generated-path: results/regime-state-summary.json
+
+Produced by `scripts/hyperliquid_capability_test.py`:
+
+generated-path: results/hyperliquid-capability.json
