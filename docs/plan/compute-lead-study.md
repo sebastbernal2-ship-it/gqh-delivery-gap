@@ -60,3 +60,21 @@ verdict is a development read on a phase marker, not an edge. Both sealed window
 
     python3 scripts/fetch_provider_capex.py
     python3 scripts/build_compute_lead_study.py
+
+## Result, 2026-10-04
+
+Run as declared on 42 provider-quarters. The declared positive mechanism does not hold. The aggregate
+test is nominally significant and points the **wrong way**: rho = -0.326, p = 0.044, meaning higher
+compute price changes precede **slower** next-quarter capex growth. The family tests are at chance: 2
+nominal survivors out of 13 tested against 0.65 expected under the null, names g5 and g5g. The groups
+split the same way: hyperscalers rho -0.22 (p 0.32), hosts -0.60 (p 0.12), REITs 0.01 (p 1.0).
+
+Verdict: the compute link as declared is dead. The compute index does not lead provider capex in the
+declared direction, and the one significant number is negative and marginal on 42 observations, so it
+is not read as a reversed signal. What the negative sign most plausibly shows is that prices are
+policy responses to inventory, not a leading demand signal: providers already building tend to list
+softer prices, and price spikes arrive when capacity is already tight rather than before capex turns.
+That reading is a hypothesis for a new study, not a result.
+
+Both the compute index removal clause and the falsifier are met by the data: only the aggregate
+produces anything, and it is not a positive association. The chain must stand on its other links.

@@ -176,6 +176,19 @@ wind and solar sites.
 feasibility fact: sixteen of forty sites could not produce a usable before and after pair at all, mostly for want
 of a cloud free control patch inside the scene.
 
+## T17. Compute prices do not lead provider capex, and the aggregate points the wrong way
+
+**Statement**: across 42 provider-quarters, the cross-family median compute price change associates
+negatively with next-quarter provider capex growth (rho -0.33, permutation p 0.04), and the family-level
+tests are at chance: 2 nominal survivors out of 13 tested against 0.65 expected under the null. The
+declared positive mechanism, where scarcity prices invite capital, is not supported.
+**Evidence**: `results/compute-lead-study.json`; `results/provider-capex-quarterly.csv`;
+`results/compute-price-monthly.csv`; `scripts/build_compute_lead_study.py`.
+**Scope**: 18 rental families, monthly medians 2022-05 to 2026-09; twelve listed providers, quarterly
+capex from SEC XBRL; development only, both sealed windows spent.
+**Consequence**: the compute index stays a phase marker and a monitoring read, never a leading feed into
+the capex chain. The reversed sign is a hypothesis for a separate study, not a finding.
+
 ---
 
 # What these truths are pointing at

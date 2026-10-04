@@ -56,3 +56,8 @@ generated-path: results/queue-tail-study.json
 Produced by `scripts/probe_queue_slip.py`:
 
 generated-path: results/queue-slip-probe.json
+
+Produced by `scripts/fetch_provider_capex.py` and `scripts/build_compute_lead_study.py`:
+
+generated-path: results/provider-capex-quarterly.csv
+generated-path: results/compute-lead-study.json

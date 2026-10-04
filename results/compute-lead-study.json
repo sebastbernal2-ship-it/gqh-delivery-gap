@@ -1,0 +1,135 @@
+{
+ "status": "development only; both sealed windows spent; declared protocol docs/plan/compute-lead-study.md",
+ "window": {
+  "compute": "2022-05 to 2025-02",
+  "capex_quarters": 16
+ },
+ "providers": {
+  "AMZN": 26,
+  "APLD": 3,
+  "CORZ": 6,
+  "CRWV": 2,
+  "EQIX": 38,
+  "GOOGL": 23,
+  "IREN": 1,
+  "META": 14,
+  "MSFT": 53,
+  "ORCL": 16
+ },
+ "tests": {
+  "aggregate_cross_family": {
+   "n": 42,
+   "rho": -0.3261,
+   "p_value": 0.0438,
+   "null_median": -0.0533
+  },
+  "families": {
+   "g3": {
+    "n": 30,
+    "rho": -0.199,
+    "p_value": 0.1688,
+    "null_median": -0.0335
+   },
+   "g3s": {
+    "n": 30,
+    "rho": 0.0353,
+    "p_value": 0.8714,
+    "null_median": 0.0632
+   },
+   "g4ad": {
+    "n": 42,
+    "rho": -0.3268,
+    "p_value": 0.0518,
+    "null_median": 0.0208
+   },
+   "g4dn": {
+    "n": 42,
+    "rho": 0.076,
+    "p_value": 0.5961,
+    "null_median": -0.0744
+   },
+   "g5": {
+    "n": 42,
+    "rho": -0.3563,
+    "p_value": 0.0306,
+    "null_median": 0.0062
+   },
+   "g5g": {
+    "n": 42,
+    "rho": -0.3954,
+    "p_value": 0.0244,
+    "null_median": -0.0719
+   },
+   "g6": {
+    "n": 20,
+    "rho": -0.3193,
+    "p_value": 0.3251,
+    "null_median": -0.1993
+   },
+   "g6e": {
+    "n": 19,
+    "rho": -0.2897,
+    "p_value": 0.2903,
+    "null_median": -0.1225
+   },
+   "p3": {
+    "n": 42,
+    "rho": 0.0564,
+    "p_value": 0.7467,
+    "null_median": -0.0879
+   },
+   "p3dn": {
+    "n": 42,
+    "rho": -0.2627,
+    "p_value": 0.0768,
+    "null_median": -0.0215
+   },
+   "p4d": {
+    "n": 42,
+    "rho": -0.0338,
+    "p_value": 0.8442,
+    "null_median": -0.0554
+   },
+   "p5": {
+    "n": 30,
+    "rho": -0.0419,
+    "p_value": 0.803,
+    "null_median": -0.0893
+   },
+   "p5en": {
+    "n": 13,
+    "rho": -0.0686,
+    "p_value": 0.6843,
+    "null_median": -0.0775
+   }
+  },
+  "families_summary": {
+   "families_tested": 13,
+   "significant_at_5pct": 2,
+   "expected_under_null": 0.65,
+   "names": [
+    "g5",
+    "g5g"
+   ],
+   "note": "18 families were permuted; the count of nominal survivors is compared with the null expectation, not read as discovery."
+  },
+  "group_hyperscalers": {
+   "n": 22,
+   "rho": -0.2231,
+   "p_value": 0.3203,
+   "null_median": -0.0102
+  },
+  "group_hosts": {
+   "n": 10,
+   "rho": -0.5994,
+   "p_value": 0.115,
+   "null_median": -0.055
+  },
+  "group_reits": {
+   "n": 10,
+   "rho": 0.0061,
+   "p_value": 1.0,
+   "null_median": -0.0061
+  }
+ }
+}

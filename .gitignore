@@ -60,6 +60,9 @@ results/edgar-cache/
 # Local EIA vintage cache: public data, kept out of the repo.
 results/eia-cache/
 
+# Local SEC capex cache: fetched, never committed.
+results/sec-capex/
+
 # Local price cache: fetched, never committed.
 results/bar-cache/
 
