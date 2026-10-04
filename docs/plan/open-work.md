@@ -78,10 +78,9 @@ armed and awaiting its first new filing. Nothing in the repository is a fresh-ho
    owner must write them or drop the references; nothing of theirs was touched.
 2. **The Makefile holds another session's uncommitted hunk** (eight targets). It has been preserved
    through every commit by staging only my own hunk. Do not discard it.
-3. **Superseded byproducts** from the early build (`results/revenue-vintages.csv`,
-   `capex-vintages.csv`, `revenue-universe-vintages.csv`, `capex-universe-vintages.csv`) are
-   untracked and unusable because of the 400-day clock. They were deleted at the end of the session;
-   the `-pit` and `universe-` versions are the owners.
+3. **Superseded byproducts** from the early build, the first revenue and capex driver vintages and
+   their universe twins, were unusable because of the 400-day clock. They were deleted at the end of
+   the session; the corrected-clock `-pit` files and the `universe-` files are the owners.
 4. **Scheduling is installed.** `quanthacks-daily.timer` runs the forward snapshot and the option
    capture at 02:17 UTC daily, `quanthacks-tape.timer` starts one BTC block at 08:02 UTC daily until
    five whole dates exist (`scripts/tape_block_due.py` makes it self-limiting). Units live in
