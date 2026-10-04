@@ -7,7 +7,7 @@ from pathlib import Path
 import sys
 
 
-MAX_ROWS = 20_000
+MAX_ROWS = 30_000
 EXPECTED_COLUMNS = (
     "SOURCE_ID", "BATCH_SHA256", "ROW_INDEX", "ROW_SHA256", "LOADED_AT", "PAYLOAD_JSON"
 )
@@ -86,7 +86,7 @@ def export(output, limit=MAX_ROWS, env=None):
 
     checksum = hashlib.sha256(target.read_bytes()).hexdigest()
     return {"rows": len(rows), "sha256": checksum, "permissions": "0600",
-            "study_window_end": "2022-09-30", "path": str(target)}
+            "study_window_end": "2024-10-02", "path": str(target)}
 
 
 def main():
