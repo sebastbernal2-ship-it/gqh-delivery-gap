@@ -201,3 +201,7 @@ generated-path: results/filing-specialist-scores.json
 Produced by `scripts/fetch_filing_texts.py`:
 
 generated-path: results/filing-text-manifest.json
+
+Produced by `hpc/probabilistic-council/filing_scorer.py`:
+
+generated-path: results/filing-text-scores.json

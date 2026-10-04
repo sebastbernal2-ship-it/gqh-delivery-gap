@@ -182,6 +182,7 @@ def feature_row(ticker: str, concept: str, decision: datetime.datetime, filings:
         "decision_time": decision.isoformat(),
         "filing_accession": deciding.accession,
         "filing_form": deciding.form,
+        "filing_items": deciding.items,
         "decision_clock_coarse": deciding.clock_flag,
         "form_is_8k": 1.0 if deciding.form.startswith("8-K") else 0.0,
         "has_item_101": 1.0 if "1.01" in deciding.items else 0.0,

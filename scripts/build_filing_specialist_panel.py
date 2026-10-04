@@ -19,7 +19,7 @@ from filing_specialist.panel import (BIN_LABELS, FLAG_FEATURES, build_panel, loa
                                      load_obligations, load_revisions)
 
 COLUMNS = (
-    "ticker", "concept", "decision_time", "filing_accession", "filing_form",
+    "ticker", "concept", "decision_time", "filing_accession", "filing_form", "filing_items",
     "decision_clock_coarse", "form_is_8k", "has_item_101", "has_item_202", "has_item_701",
     "filings_last_90d", "days_since_last_filing", "last_change_rel", "trailing_mean_change_rel",
     "prior_revision_count", "last_surprise_rel", "days_since_last_obligation", "concept_is_rpo",
