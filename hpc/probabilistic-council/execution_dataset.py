@@ -101,9 +101,10 @@ def prepare(plan_path,objects,output):
             seen[kind]|=keys
         rows,excluded=cases(streams['books'],streams['trades'])
         if not rows:raise ValueError('empty session')
-        role=max(0,i-1)
+        role_name=plan.get('session_roles',{}).get(s,PARTITIONS[max(0,i-1)])
+        role=PARTITIONS.index(role_name)
         for row in rows:row.update(role=role,session=s)
-        all_rows+=rows;coverage[s]={'cases':len(rows),'exclusions':excluded}
+        all_rows+=rows;coverage[s]={'cases':len(rows),'exclusions':excluded,'role':role_name}
         if role==0:
             windows,clocks=pretraining_windows(streams['books'],streams['trades'])
             pretrain_rows.extend(windows);pretrain_clocks.extend(clocks);pretrain_sessions.extend([s]*len(windows))
@@ -132,6 +133,7 @@ def prepare(plan_path,objects,output):
           'pretraining_sessions':sorted(set(pretrain_sessions)),
           'pretraining_window_sessions':pretrain_sessions,
           'pretraining_clock_range_ns':[min(pretrain_clocks),max(pretrain_clocks)],
+          'session_roles':plan.get('session_roles',{s:PARTITIONS[max(0,i-1)] for i,s in enumerate(sessions)}),
           'session_coverage':coverage,'sources':plan['files'],
           'plan_sha256':digest(plan_path),'adapter_sha256':digest(__file__),
           'causal_adapter_sha256':digest(Path(__file__).with_name('synchronized_tape.py')),
