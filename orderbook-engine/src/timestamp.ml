@@ -11,18 +11,22 @@ let add_seconds (t : t) (s : float) : t =
 
 let sub (t1 : t) (t2 : t) : float = Ptime.Span.to_float_s (Ptime.diff t1 t2)
 
-(** [add_ns t nanoseconds] adds an exact nanosecond offset. Negative offsets
-    subtract, which needs a day and a positive remainder because a span is
-    stored as days plus nonnegative picoseconds. *)
+(** [add_ns t nanoseconds] adds an exact nanosecond offset. Split the offset
+    into whole days and a nonnegative sub-day remainder before conversion to
+    picoseconds, avoiding overflow and Ptime's sub-day range constraint. *)
 let add_ns (t : t) (nanoseconds : int64) : t =
-  let picoseconds = Int64.mul nanoseconds 1000L in
-  let days, remainder =
-    if picoseconds >= 0L then (0, picoseconds)
-    else (-1, Int64.add 86_400_000_000_000_000L picoseconds)
+  let day_ns = 86_400_000_000_000L in
+  let quotient = Int64.div nanoseconds day_ns in
+  let modulus = Int64.rem nanoseconds day_ns in
+  let days, remainder_ns =
+    if modulus >= 0L then (quotient, modulus)
+    else (Int64.sub quotient 1L, Int64.add day_ns modulus)
   in
-  match Ptime.Span.of_d_ps (days, remainder) with
+  let remainder_ps = Int64.mul remainder_ns 1000L in
+  match Ptime.Span.of_d_ps (Int64.to_int days, remainder_ps) with
   | None -> t
   | Some span -> ( match Ptime.add_span t span with Some t' -> t' | None -> t)
+
 let compare = Ptime.compare
 let equal = Ptime.equal
 let to_ptime t = t

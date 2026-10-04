@@ -41,6 +41,20 @@
 )
 
 (test
+ (name asset_account_test)
+ (modules asset_account_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name asset_loop_test)
+ (modules asset_loop_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
  (name exec_fills_test)
  (modules exec_fills_test)
  (libraries market_simulator alcotest)
