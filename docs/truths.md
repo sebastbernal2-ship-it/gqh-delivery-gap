@@ -650,3 +650,23 @@ twenty basis point costs, no borrow and no capacity model.
 **Consequence**: the expectation gap now covers the strategy's own universe, both halves carry the
 economic sign the thesis expects, and gating the intensity cohorts by these signals is the next
 test.
+
+## T44. A revenue-surprise gate rescues the intensity expression out of sample, and the capex condition hurts
+
+**Statement**: on the corrected clock, inside the out-of-sample window 2023-07-28 to 2026-10-02
+where the surprise model never saw the rows, the ungated intensity expression returns -9.49 percent
+net at Sharpe -0.904 with a -38.0 percent drawdown, 97 cohorts. Confirming each leg with the
+revenue surprise, long when the expected bin is at or above expectation and short when below,
+returns +10.48 percent net at Sharpe 0.971 with a -16.3 percent drawdown, and +9.96 percent at
+doubled costs. The month-blocked interval for the difference is +7.75 to +35.30 percent annualised,
+with 99.9 percent of 1,000 resamples positive and 40 months of blocks. Adding a capex condition on
+top of the revenue gate destroys the result: -7.25 percent net, difference against the revenue gate
+-17.80 percent with interval -31.71 to -2.99.
+**Evidence**: `results/intensity-gate-test.json`; `scripts/run_intensity_gate_test.py`;
+`docs/plan/alpha-build.md`; `scripts/run_intensity_strategy.py` gate argument.
+**Scope**: development only, one out-of-sample window of about three years, 97 cohorts, a median of
+five names per gated cohort, no borrow cost, no capacity expansion, one price source. Both sealed
+windows are spent, so this is not a fresh holdout.
+**Consequence**: the gate is the first interval-backed improvement in the programme and the
+drawdown target is met in this window while the Sharpe target is not; breadth expansion and sleeves
+are the next stages, and the combined gate is recorded as a rejected variant.

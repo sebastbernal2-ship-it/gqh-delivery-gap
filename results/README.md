@@ -253,6 +253,10 @@ Produced by `scripts/run_driver_surprise.py`:
 generated-path: results/revenue-surprise.json
 generated-path: results/capex-surprise.json
 
+Produced by `scripts/run_intensity_gate_test.py`:
+
+generated-path: results/intensity-gate-test.json
+
 Produced by `scripts/build_rpo_vintages.py`:
 
 generated-path: results/rpo-vintages.csv
