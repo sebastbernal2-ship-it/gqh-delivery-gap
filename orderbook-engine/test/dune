@@ -1,0 +1,145 @@
+(test
+ (name test_suite)
+ (modules test_suite)
+ (libraries incr market_simulator alcotest lwt lwt.unix)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name exec_units_test)
+ (modules exec_units_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name exec_event_test)
+ (modules exec_event_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name depth_chain_test)
+ (modules depth_chain_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name l2_book_test)
+ (modules l2_book_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name exec_account_test)
+ (modules exec_account_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name exec_fills_test)
+ (modules exec_fills_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name exec_loop_test)
+ (modules exec_loop_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name exec_strategy_test)
+ (modules exec_strategy_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name naive_backtest_test)
+ (modules naive_backtest_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name regime_test)
+ (modules regime_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name binance_l2_test)
+ (modules binance_l2_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name binance_trades_test)
+ (modules binance_trades_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name binance_backtest_test)
+ (modules binance_backtest_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name binance_account_test)
+ (modules binance_account_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name binance_units_test)
+ (modules binance_units_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name binance_maker_model_test)
+ (modules binance_maker_model_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name l2_backtest_latency_test)
+ (modules l2_backtest_latency_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(test
+ (name property_test)
+ (modules property_test)
+ (libraries market_simulator qcheck)
+)
+
+(test
+ (name binance_account_property_test)
+ (modules binance_account_property_test)
+ (libraries market_simulator qcheck)
+)
+
+(library
+ (name expect_test_lib)
+ (modules expect_test)
+ (libraries market_simulator)
+ (inline_tests)
+ (preprocess (pps ppx_expect))
+)

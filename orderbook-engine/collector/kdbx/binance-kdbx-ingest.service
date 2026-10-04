@@ -1,0 +1,9 @@
+[Unit]
+Description=Load validated Binance captures into KDB-X
+After=docker.service
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/home/ubuntu/collector/kdbx
+ExecStart=/home/ubuntu/collector/kdbx/ingest.sh

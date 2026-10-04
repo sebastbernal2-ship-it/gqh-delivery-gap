@@ -1,0 +1,5 @@
+(lang dune 3.24)
+
+; Single-project workspace for the market simulator.
+; The incr sub-package lives under lib/incr and is resolved via the root
+; dune-project which defines both packages.

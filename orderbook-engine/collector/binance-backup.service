@@ -1,0 +1,10 @@
+[Unit]
+Description=Back up Binance capture evidence to OCI Object Storage
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/ubuntu/collector
+Environment=HOME=/home/ubuntu
+Environment=PATH=/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+EnvironmentFile=-/etc/market-simulator-backup.env
+ExecStart=/home/ubuntu/collector/backup.sh
