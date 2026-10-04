@@ -91,6 +91,11 @@ armed and awaiting its first new filing. Nothing in the repository is a fresh-ho
    per run by the drivers but not by the intensity engine, whose calendar was diluted once already.
    Needed: one quarantine list consulted by every load path.
 
+2b. **Shared tracked files are being rewritten by another session.** Both the Makefile and
+   `results/README.md` have had my lines dropped by that session's rewrites, and both had to be
+   restored and re-committed. Rule for the next session: after editing a shared tracked file, verify
+   the line is still there before committing, and commit the same minute.
+
 ## 5. Vision gaps, unchanged from the architecture document
 
 1. **The bundle ladder** is implemented once, not as a routine with entry rules at each level.

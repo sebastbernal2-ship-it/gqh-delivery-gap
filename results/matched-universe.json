@@ -1,0 +1,164 @@
+{
+ "schema": "matched-universe-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/alpha-build.md",
+ "matched_names": [
+  "AGG",
+  "AMZN",
+  "BKLN",
+  "CCJ",
+  "DLR",
+  "DUK",
+  "DY",
+  "EIX",
+  "EMB",
+  "ETN",
+  "ETR",
+  "FSLR",
+  "HUBB",
+  "HYG",
+  "IEF",
+  "IRM",
+  "J",
+  "JNK",
+  "LQD",
+  "META",
+  "MRVL",
+  "MTZ",
+  "NEE",
+  "NRG",
+  "PPL",
+  "QQQ",
+  "ROK",
+  "SRE",
+  "TLT",
+  "URA",
+  "WULF",
+  "WY"
+ ],
+ "cost_basis": "flat 20 basis points; volume does not exist before 2017",
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only; both sealed windows are spent",
+  "pre-2017 the cross section is rates and utilities, so the matched set still differs in composition from the recent one, only the names are constant",
+  "the revenue sleeve only; the intensity sleeve's signals begin in 2017"
+ ],
+ "matched_extended": {
+  "events": 563,
+  "origins": [
+   "2011-01-01",
+   "2012-01-01",
+   "2013-01-01",
+   "2014-01-01",
+   "2015-01-01",
+   "2016-01-01",
+   "2017-01-01",
+   "2018-01-01",
+   "2019-01-01",
+   "2020-01-01",
+   "2021-01-01",
+   "2022-01-01",
+   "2023-01-01",
+   "2024-01-01",
+   "2025-01-01",
+   "2026-01-01"
+  ],
+  "training_rows_by_origin": {
+   "2013-01-01": 56,
+   "2014-01-01": 94,
+   "2015-01-01": 123,
+   "2016-01-01": 155,
+   "2017-01-01": 186,
+   "2018-01-01": 216,
+   "2019-01-01": 234,
+   "2020-01-01": 284,
+   "2021-01-01": 341,
+   "2022-01-01": 396,
+   "2023-01-01": 445,
+   "2024-01-01": 494,
+   "2025-01-01": 543,
+   "2026-01-01": 591
+  },
+  "metrics": {
+   "days": 2056,
+   "annual_return": 0.17896504446176317,
+   "annual_vol": 0.40851941521702745,
+   "sharpe": 0.4380821028216917,
+   "total_return": 1.2365603968420218,
+   "max_drawdown": -0.5782678624587871,
+   "hit_rate": 0.4970817120622568
+  },
+  "eras": {
+   "2011-2014": {
+    "days": 230,
+    "annual_return": 0.27960339248846056,
+    "annual_vol": 0.5226977813522864,
+    "sharpe": 0.534923625971954,
+    "total_return": 0.15628020173621548,
+    "max_drawdown": -0.32386971349219706,
+    "hit_rate": 0.5043478260869565
+   },
+   "2015-2018": {
+    "days": 527,
+    "annual_return": -0.16702460333073813,
+    "annual_vol": 0.22623442432088042,
+    "sharpe": -0.7382811162895272,
+    "total_return": -0.33267887588825307,
+    "max_drawdown": -0.5099165094827417,
+    "hit_rate": 0.4781783681214421
+   },
+   "2019-2022": {
+    "days": 679,
+    "annual_return": 0.3868284335508037,
+    "annual_vol": 0.47966583622821574,
+    "sharpe": 0.8064540026293602,
+    "total_return": 1.1012205000400455,
+    "max_drawdown": -0.5097479935523958,
+    "hit_rate": 0.5110456553755522
+   },
+   "2023-2026": {
+    "days": 620,
+    "annual_return": 0.2080787269602297,
+    "annual_vol": 0.3949440709493289,
+    "sharpe": 0.5268561861431921,
+    "total_return": 0.3794661213842543,
+    "max_drawdown": -0.29839931251272445,
+    "hit_rate": 0.49516129032258066
+   }
+  }
+ },
+ "recent_era": {
+  "matched": {
+   "days": 1299,
+   "metrics": {
+    "days": 1299,
+    "annual_return": 0.30151294618655744,
+    "annual_vol": 0.44129860591249476,
+    "sharpe": 0.6832401964268714,
+    "total_return": 1.8985624933633218,
+    "max_drawdown": -0.5097479935523958,
+    "hit_rate": 0.5034642032332564
+   }
+  },
+  "full": {
+   "days": 1869,
+   "metrics": {
+    "days": 1869,
+    "annual_return": 0.2764660251816777,
+    "annual_vol": 0.36563091160670286,
+    "sharpe": 0.7561341681062872,
+    "total_return": 3.685380489665415,
+    "max_drawdown": -0.581087100164883,
+    "hit_rate": 0.5296950240770465
+   }
+  },
+  "difference_interval": {
+   "point": -0.12865528436028104,
+   "lower": -1.8484233916608288,
+   "upper": 1.3832973738051961,
+   "months": 92,
+   "share_positive": 0.437,
+   "resamples": 1000
+  }
+ }
+}

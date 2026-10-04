@@ -867,3 +867,25 @@ target is a distribution and not a trade.
 the second independent council win after the RPO breadth panel (T46's sibling comparison), and it is
 the first with both intervals excluding zero. The council belongs in the pipeline for the complex, and
 the specialists themselves remain weak enough that the gain is relative rather than absolute.
+
+## T55. Composition is not the driver of the recent record, and the same names still fail one era
+
+**Statement**: the matched-universe test runs one name set, the 32 complex companies whose prices reach
+back before 2017, across extended annual origins from 2011. In the recent era the matched names give
++30.15 percent net at Sharpe 0.683 against +27.65 percent at Sharpe 0.756 for the full complex, a
+difference of -12.87 percent whose interval spans -184.8 to +138.3, so **the recent record is not a
+composition artefact**: the same names deliver it. Across eras on those same names: 2011-2014 +27.96
+percent at Sharpe 0.535 with a -32.4 percent drawdown, **2015-2018 -16.70 percent at Sharpe -0.738 with
+a -51.0 percent drawdown**, 2019-2022 +38.68 percent at 0.806, 2023-2026 +20.81 percent at 0.527. The
+stitched extended record is +17.90 percent at Sharpe 0.438 over 2,056 sessions, dragged by the middle
+era.
+**Evidence**: `results/matched-universe.json`; `scripts/run_matched_universe.py`;
+`tests/test_matched_universe.py`.
+**Scope**: development only, revenue sleeve only because the intensity sleeve's signals begin in 2017,
+flat twenty basis point costs because volume does not exist before 2017, and the matched set is still
+compositionally different from the recent one even though the names are constant.
+**Consequence**: a naive backward extension would have been improper, and this test shows why the
+honest extension looks as it does: the effect is regime-dependent, appearing when the complex is an
+active buildout theme and failing in 2015-2018 when it was not, and it is not an artefact of which
+names exist today. The fixed-era record stays primary; the matched extended record is the declared
+secondary, never merged with it.

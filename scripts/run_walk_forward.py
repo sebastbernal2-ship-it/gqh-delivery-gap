@@ -41,14 +41,16 @@ ORIGINS = ("2019-01-01", "2020-01-01", "2021-01-01", "2022-01-01", "2023-01-01",
 COMPLEX = ROOT / "results" / "market-panel.json"
 
 
-def blocks() -> list[tuple[str, str]]:
+def blocks(origins: tuple[str, ...] = ORIGINS) -> list[tuple[str, str]]:
     """(start, end) pairs; the last block runs to the data edge."""
-    return [(ORIGINS[index], ORIGINS[index + 1] if index + 1 < len(ORIGINS) else "2030-01-01")
-            for index in range(len(ORIGINS))]
+    return [(origins[index], origins[index + 1] if index + 1 < len(origins) else "2030-01-01")
+            for index in range(len(origins))]
 
 
-def fit_at(rows: list[dict], origin: str) -> dict:
+def fit_at(rows: list[dict], origin: str, tickers: set[str] | None = None) -> dict:
     """Fit the declared recipe on rows available before the origin; predict the rest."""
+    if tickers is not None:
+        rows = [row for row in rows if str(row["ticker"]) in tickers]
     train = [row for row in rows if str(row["label_available"])[:10] < origin]
     later = [row for row in rows if str(row["label_available"])[:10] >= origin]
     if len(train) < 50 or not later:
@@ -62,12 +64,14 @@ def fit_at(rows: list[dict], origin: str) -> dict:
             "probabilities": predict_softmax(parameters, apply_scaler(later_matrix, stats))}
 
 
-def sleeve_walk_forward(panel: Path, direction: float) -> tuple[list[dict], list[dict], dict]:
+def sleeve_walk_forward(panel: Path, direction: float, tickers: set[str] | None = None,
+                        origins: tuple[str, ...] = ORIGINS
+                        ) -> tuple[list[dict], list[dict], dict]:
     """One continuous event list and a per-block contribution table for one sleeve."""
     rows, _ = prepare_rows(list(csv.DictReader(panel.open())))
     events, contributions, digests = [], [], {}
-    for start, end in blocks():
-        fitted = fit_at(rows, start)
+    for start, end in blocks(origins):
+        fitted = fit_at(rows, start, tickers)
         if fitted["probabilities"] is None:
             continue
         digests[start] = len(fitted["train"])
@@ -92,7 +96,8 @@ def contributions_by_year(events: list[dict], cache: Path, cost_bps: float) -> l
     return daily_by_block
 
 
-def intensity_walk_forward(cost_mult: float) -> tuple[list[dict], dict]:
+def intensity_walk_forward(cost_mult: float, tickers: set[str] | None = None,
+                           origins: tuple[str, ...] = ORIGINS) -> tuple[list[dict], dict]:
     """Rerun the gated engine block by block with the gate model refit at each origin."""
     dates, prices = load_prices()
     adv = load_adv()
@@ -100,10 +105,12 @@ def intensity_walk_forward(cost_mult: float) -> tuple[list[dict], dict]:
     group_of = {series["ticker"]: group for group, payload in panel["groups"].items()
                 for series in payload["series"]}
     signals = load_signals(CORRECTED["capex"], CORRECTED["revenue"])
+    if tickers is not None:
+        signals = [signal for signal in signals if signal["ticker"] in tickers]
     revenue_rows, _ = prepare_rows(list(csv.DictReader(VINTAGES["revenue"].open())))
     stitched, info = [], {}
-    for start, end in blocks():
-        fitted = fit_at(revenue_rows, start)
+    for start, end in blocks(origins):
+        fitted = fit_at(revenue_rows, start, tickers)
         if fitted["probabilities"] is None:
             continue
         expected = {}

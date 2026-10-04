@@ -341,3 +341,11 @@ generated-path: results/filings-register-rpo.csv
 Produced by `scripts/run_rpo_filing_panel.py`:
 
 generated-path: results/rpo-filing-panel-scores.json
+
+Produced by `scripts/run_calibration_report.py`:
+
+generated-path: results/calibration-report.json
+
+Produced by `scripts/run_matched_universe.py`:
+
+generated-path: results/matched-universe.json
