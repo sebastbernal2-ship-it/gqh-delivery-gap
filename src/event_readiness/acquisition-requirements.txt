@@ -1,0 +1,5 @@
+# Optional acquisition tools. Tested with Python 3.12; no change to the core runtime.
+certifi==2026.7.22
+openpyxl==3.1.5
+snowflake-connector-python==4.8.0
+pyarrow==23.0.1
