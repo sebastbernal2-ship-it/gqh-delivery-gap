@@ -1,0 +1,119 @@
+{
+ "status": "development only; protocol docs/plan/intensity-timesplit-study.md",
+ "observations": 640,
+ "windows": {
+  "early": {
+   "horizons": {
+    "5": {
+     "n": 229,
+     "names": 28,
+     "quarters": 21,
+     "mean_within_quarter_rho": -0.1173,
+     "two_sided_permutation_p": 0.2084,
+     "tercile_spread": -0.0215
+    },
+    "20": {
+     "n": 229,
+     "names": 28,
+     "quarters": 21,
+     "mean_within_quarter_rho": -0.1802,
+     "two_sided_permutation_p": 0.0496,
+     "tercile_spread": -0.0596
+    },
+    "60": {
+     "n": 229,
+     "names": 28,
+     "quarters": 21,
+     "mean_within_quarter_rho": -0.092,
+     "two_sided_permutation_p": 0.3255,
+     "tercile_spread": -0.0749
+    }
+   },
+   "late_segments": {},
+   "names": 28
+  },
+  "late": {
+   "horizons": {
+    "5": {
+     "n": 105,
+     "names": 32,
+     "quarters": 5,
+     "mean_within_quarter_rho": -0.2613,
+     "two_sided_permutation_p": 0.0432,
+     "tercile_spread": -0.0315
+    },
+    "20": {
+     "n": 101,
+     "names": 32,
+     "quarters": 5,
+     "mean_within_quarter_rho": -0.0923,
+     "two_sided_permutation_p": 0.4807,
+     "tercile_spread": -0.0231
+    },
+    "60": {
+     "n": 97,
+     "names": 32,
+     "quarters": 4,
+     "mean_within_quarter_rho": 0.1354,
+     "two_sided_permutation_p": 0.3039,
+     "tercile_spread": 0.1237
+    }
+   },
+   "late_segments": {
+    "owned_capital": {
+     "5": {
+      "n": 105,
+      "names": 32,
+      "quarters": 5,
+      "mean_within_quarter_rho": -0.2613,
+      "two_sided_permutation_p": 0.0432,
+      "tercile_spread": -0.0315
+     },
+     "20": {
+      "n": 101,
+      "names": 32,
+      "quarters": 5,
+      "mean_within_quarter_rho": -0.0923,
+      "two_sided_permutation_p": 0.4807,
+      "tercile_spread": -0.0231
+     },
+     "60": {
+      "n": 97,
+      "names": 32,
+      "quarters": 4,
+      "mean_within_quarter_rho": 0.1354,
+      "two_sided_permutation_p": 0.3039,
+      "tercile_spread": 0.1237
+     }
+    },
+    "leased_or_regulated": {
+     "5": {
+      "n": 67,
+      "names": 21,
+      "quarters": 3,
+      "mean_within_quarter_rho": -0.2231,
+      "two_sided_permutation_p": 0.0856,
+      "tercile_spread": -0.0175
+     },
+     "20": {
+      "n": 67,
+      "names": 21,
+      "quarters": 3,
+      "mean_within_quarter_rho": -0.1921,
+      "two_sided_permutation_p": 0.1476,
+      "tercile_spread": -0.0508
+     },
+     "60": {
+      "n": 67,
+      "names": 21,
+      "quarters": 3,
+      "mean_within_quarter_rho": 0.0506,
+      "two_sided_permutation_p": 0.6963,
+      "tercile_spread": 0.0046
+     }
+    }
+   },
+   "names": 32
+  }
+ }
+}

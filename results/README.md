@@ -117,3 +117,11 @@ generated-path: results/complex-capex-quarterly.csv
 Produced by `scripts/fetch_complex_fundamentals.py`:
 
 generated-path: results/complex-revenue-quarterly.csv
+
+Produced by `scripts/build_intensity_segment_study.py`:
+
+generated-path: results/intensity-segment-study.json
+
+Produced by `scripts/build_intensity_timesplit_study.py`:
+
+generated-path: results/intensity-timesplit-study.json

@@ -325,6 +325,34 @@ against daily closes, development only.
 **Consequence**: the intensity surprise is retired as a complex wide factor and kept as a segment level
 hypothesis: charged where capital is owned, not charged where capacity is leased or regulated.
 
+## T27. The intensity charge appears where capital is owned, and not where capacity is leased
+
+**Statement**: in owned capital segments (hyperscaler, compute and AI, buildout), 334 observations across
+33 names show a mean within-quarter correlation of -0.16 (p 0.031) at five days and -0.15 (p 0.048) at
+twenty, with tercile spreads of -1.9 and -5.2 percentage points, and nothing at sixty days. In leased or
+regulated segments (data center REIT, power, fuel and nuclear), 306 observations across 25 names show
+-0.05, +0.006 and +0.03 at the same horizons (p 0.46, 0.94, 0.58), with tercile spreads at or above zero.
+**Evidence**: `results/intensity-segment-study.json`; `scripts/build_intensity_segment_study.py`.
+**Scope**: a declared second look at the 640 observation panel from T26, re cut by ownership of capital;
+modest p values; development only.
+**Consequence**: the working hypothesis is that the market charges capital intensity only where the
+capital is owned. The next evidence must come from a different sample, which is the declared time split.
+See T28 for its result, which keeps the charge and downgrades the ownership mechanism.
+
+## T28. The intensity charge is sign stable in time, and the ownership mechanism is not
+
+**Statement**: in the owned capital segments the early window (through 2024) shows a mean within-quarter
+correlation of -0.12 (p 0.21) at five days, -0.18 (p 0.050) at twenty and -0.09 at sixty, and the late
+window (2025 onward) shows -0.26 (p 0.043), -0.09 (p 0.48) and +0.14 (p 0.30). In the late window the
+leased and regulated segment is also negative at five and twenty days (-0.22 and -0.19), so the charge
+is not confined to capital owners, and the sixty day reading flips positive.
+**Evidence**: `results/intensity-timesplit-study.json`; `scripts/build_intensity_timesplit_study.py`.
+**Scope**: the same panel as T26 and T27, split by filing date at 2024-12-31; 229 early and 105 late
+observations; development only.
+**Consequence**: the stable object is a broad negative association between intensity surprises and
+relative equity returns over five to twenty trading days, with a reversal candidate at sixty days. The
+ownership mechanism is downgraded and the reversal is the next declared object.
+
 ---
 
 # What these truths are pointing at

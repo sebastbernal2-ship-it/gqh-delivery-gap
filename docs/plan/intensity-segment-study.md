@@ -41,3 +41,18 @@ so capacity is unknown. Development only.
 ## Reproduce
 
     python3 scripts/build_intensity_segment_study.py
+
+## Result, 2026-10-04
+
+The split is as declared. Owned capital, 33 names and 334 observations: rho -0.16 (p 0.031) at five
+days, -0.15 (p 0.048) at twenty, -0.03 (p 0.75) at sixty, with tercile spreads of -1.9 and -5.2
+percentage points. Leased or regulated, 25 names and 306 observations: -0.05 (p 0.46), +0.006 (p 0.94),
++0.03 (p 0.58), with tercile spreads at or slightly above zero.
+
+The p values are modest and this is a declared second look at one dataset, so the honest reading is a
+supported hypothesis with a mechanism, not an established factor. The market charges the intensity
+surprise where the capital is owned and carries it into depreciation and funding, and does not charge it
+where capacity is leased or returns flow through a rate base.
+
+The next evidence must be a different sample: the declared time split, training on the early quarters and
+testing on the later ones, follows in `docs/plan/intensity-timesplit-study.md`.

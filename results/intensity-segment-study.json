@@ -1,0 +1,74 @@
+{
+ "status": "development only; declared second look at one dataset; protocol docs/plan/intensity-segment-study.md",
+ "observations": 640,
+ "segments": {
+  "owned_capital": {
+   "groups": [
+    "buildout",
+    "compute_and_ai",
+    "hyperscaler"
+   ],
+   "names": 33,
+   "horizons": {
+    "5": {
+     "n": 334,
+     "names": 33,
+     "quarters": 26,
+     "mean_within_quarter_rho": -0.1622,
+     "two_sided_permutation_p": 0.0308,
+     "tercile_spread": -0.0186
+    },
+    "20": {
+     "n": 330,
+     "names": 33,
+     "quarters": 26,
+     "mean_within_quarter_rho": -0.1528,
+     "two_sided_permutation_p": 0.0484,
+     "tercile_spread": -0.0521
+    },
+    "60": {
+     "n": 326,
+     "names": 33,
+     "quarters": 25,
+     "mean_within_quarter_rho": -0.025,
+     "two_sided_permutation_p": 0.7534,
+     "tercile_spread": -0.0249
+    }
+   }
+  },
+  "leased_or_regulated": {
+   "groups": [
+    "data_center_reit",
+    "fuel_and_nuclear",
+    "power"
+   ],
+   "names": 25,
+   "horizons": {
+    "5": {
+     "n": 306,
+     "names": 25,
+     "quarters": 20,
+     "mean_within_quarter_rho": -0.0483,
+     "two_sided_permutation_p": 0.4643,
+     "tercile_spread": -0.0021
+    },
+    "20": {
+     "n": 306,
+     "names": 25,
+     "quarters": 20,
+     "mean_within_quarter_rho": 0.0056,
+     "two_sided_permutation_p": 0.9362,
+     "tercile_spread": -0.0001
+    },
+    "60": {
+     "n": 306,
+     "names": 25,
+     "quarters": 20,
+     "mean_within_quarter_rho": 0.0336,
+     "two_sided_permutation_p": 0.5819,
+     "tercile_spread": 0.0223
+    }
+   }
+  }
+ }
+}
