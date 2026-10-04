@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VECTOR | Promised Delivery and the Price of Slippage</title>
+<style>
+  html, body { margin: 0; height: 100%; font: 14px/1.45 -apple-system, "Segoe UI", Roboto, sans-serif; color: #111; }
+  header { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline; justify-content: space-between;
+           padding: 10px 16px; border-bottom: 1px solid #dde3ea; background: #fff; }
+  header .title strong { letter-spacing: .04em; }
+  header .muted { color: #667; }
+  nav a { margin-left: 14px; color: #1a4a7a; text-decoration: none; font-weight: 600; }
+  nav a:hover { text-decoration: underline; }
+  #frame { width: 100%; height: calc(100vh - 52px); border: 0; display: block; }
+  .note { padding: 0 16px 4px; color: #556; font-size: 13px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="title"><strong>VECTOR</strong> &middot; Promised Delivery and the Price of Slippage
+    <span class="muted">&middot; Gator Quant Hacks 2026, Systematic Trading</span></div>
+  <nav>
+    <a href="note.pdf">Note (PDF)</a>
+    <a href="note.html">Note (HTML)</a>
+    <a href="scan/quantgraph.svg">Graph (static)</a>
+  </nav>
+</header>
+<div class="note">The QuantGraph declarations: nodes, typed edges, statuses and falsifiers, generated from
+<code>docs/scan/quantgraph.jsonl</code>. Pan, zoom, hover a node, filter by layer or status.</div>
+<iframe id="frame" src="scan/quantgraph.html" title="QuantGraph declarations"></iframe>
+</body>
+</html>
