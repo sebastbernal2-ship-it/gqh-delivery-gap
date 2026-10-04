@@ -234,6 +234,10 @@ Produced by `scripts/run_filing_obligation_panel.py`:
 
 generated-path: results/filing-obligation-scores.json
 
+Produced by `hpc/probabilistic-council/run_filing_obligation_text.py`:
+
+generated-path: results/filing-obligation-text.json
+
 Produced by `scripts/run_rpo_specialist.py`:
 
 generated-path: results/rpo-specialist-scores.json

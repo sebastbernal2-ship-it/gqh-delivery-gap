@@ -598,3 +598,20 @@ text, development only, both sealed windows spent.
 **Consequence**: the four-firm label set is now point-in-time and covers more disclosure periods
 than the 81-label revision panel, and the metadata model predicts it better than prevalence. The
 next step is the text comparison on the same rows using the cached 8-K corpus.
+
+## T41. On the obligation panel, metadata dominates and text adds only a little
+
+**Statement**: on the 87 deciding filings labelled by point-in-time obligation surprises, 61
+train and 26 evaluation rows, metadata reaches log loss 1.238 and Brier 0.650, text alone 1.290
+and 0.659, and the combination 1.214 and 0.658, against prevalence at 1.558 and 0.763. The
+every-filing robustness view shows the same order: metadata 1.196, text 1.290, combined 1.192,
+prevalence 1.287. Text adds about two hundredths of log loss on the deciding view and four
+thousandths on the every-filing view, so the obligation surprise is mostly a function of the
+firm's own disclosure history and the filing text adds little. This tempers T38, where text alone
+beat metadata on the revision panel: the value of text is panel-dependent.
+**Evidence**: `results/filing-obligation-text.json`; `results/filing-obligation-decisions.csv`;
+`hpc/probabilistic-council/run_filing_obligation_text.py`; `docs/plan/filing-obligation-panel.md`.
+**Scope**: PWR and ETN only, 26 evaluation rows over about 50 distinct disclosure periods, one
+frozen encoder, development only, both sealed windows spent.
+**Consequence**: further text work should target the panel where text carried information, the
+revision panel, or a larger label set. On this panel metadata is enough.

@@ -42,3 +42,19 @@ The fitted model does not beat prevalence on the later rows of the deciding view
 
 PWR and ETN only; EME and DLR file no measured obligation facts. About 50 effective disclosure
 periods, metadata only, no text, no returns and no costs.
+
+## Text results
+
+| View | Model | Log loss | Brier | Accuracy |
+|---|---|---|---|---|
+| Deciding, 61/26 | Prevalence | 1.558 | 0.763 | 0.577 |
+| | Metadata | 1.238 | 0.650 | 0.538 |
+| | Text | 1.290 | 0.659 | 0.538 |
+| | Both | **1.214** | 0.658 | 0.462 |
+| Every filing, 4,157/1,734 | Prevalence | 1.287 | 0.656 | 0.561 |
+| | Metadata | 1.196 | 0.629 | 0.556 |
+| | Text | 1.290 | 0.650 | 0.561 |
+| | Both | **1.192** | **0.627** | 0.561 |
+
+Text adds a little on top of metadata and loses as a standalone block here, unlike the revision
+panel where text alone won. Runner: `hpc/probabilistic-council/run_filing_obligation_text.py`.

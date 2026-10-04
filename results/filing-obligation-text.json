@@ -1,0 +1,150 @@
+{
+ "schema": "filing-obligation-text-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/filing-obligation-panel.md",
+ "encoder": "sentence-transformers/all-MiniLM-L6-v2",
+ "documents_embedded": 208,
+ "components": 8,
+ "deciding_filing": {
+  "split": {
+   "train_rows": 61,
+   "test_rows": 26,
+   "train_through": "2023-10-31T16:46:56+00:00",
+   "test_from": "2023-11-02T14:18:08+00:00",
+   "classes": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  "components": 8,
+  "prevalence": {
+   "rows": 26,
+   "log_loss": 1.5583786681482796,
+   "brier": 0.7628381719290811,
+   "accuracy": 0.5769230769230769,
+   "class_support": {
+    "0": 0,
+    "1": 1,
+    "2": 15,
+    "3": 7,
+    "4": 3
+   }
+  },
+  "metadata_only": {
+   "rows": 26,
+   "log_loss": 1.2379057551935637,
+   "brier": 0.649791769329915,
+   "accuracy": 0.5384615384615384,
+   "class_support": {
+    "0": 0,
+    "1": 1,
+    "2": 15,
+    "3": 7,
+    "4": 3
+   }
+  },
+  "text_only": {
+   "rows": 26,
+   "log_loss": 1.2897661315925235,
+   "brier": 0.658666559690701,
+   "accuracy": 0.5384615384615384,
+   "class_support": {
+    "0": 0,
+    "1": 1,
+    "2": 15,
+    "3": 7,
+    "4": 3
+   }
+  },
+  "metadata_and_text": {
+   "rows": 26,
+   "log_loss": 1.2138909955378674,
+   "brier": 0.6578384653337613,
+   "accuracy": 0.46153846153846156,
+   "class_support": {
+    "0": 0,
+    "1": 1,
+    "2": 15,
+    "3": 7,
+    "4": 3
+   }
+  }
+ },
+ "every_filing": {
+  "split": {
+   "train_rows": 4157,
+   "test_rows": 1734,
+   "train_through": "2024-08-01T14:10:33+00:00",
+   "test_from": "2024-10-31T14:44:28+00:00",
+   "classes": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  "components": 8,
+  "prevalence": {
+   "rows": 1734,
+   "log_loss": 1.2868630238446739,
+   "brier": 0.6556495823421781,
+   "accuracy": 0.5605536332179931,
+   "class_support": {
+    "0": 0,
+    "1": 0,
+    "2": 972,
+    "3": 535,
+    "4": 227
+   }
+  },
+  "metadata_only": {
+   "rows": 1734,
+   "log_loss": 1.1955648532531633,
+   "brier": 0.6292094964715644,
+   "accuracy": 0.5559400230680508,
+   "class_support": {
+    "0": 0,
+    "1": 0,
+    "2": 972,
+    "3": 535,
+    "4": 227
+   }
+  },
+  "text_only": {
+   "rows": 1734,
+   "log_loss": 1.2902064036144494,
+   "brier": 0.6503665812347265,
+   "accuracy": 0.5605536332179931,
+   "class_support": {
+    "0": 0,
+    "1": 0,
+    "2": 972,
+    "3": 535,
+    "4": 227
+   }
+  },
+  "metadata_and_text": {
+   "rows": 1734,
+   "log_loss": 1.1920455779997168,
+   "brier": 0.6267403744550314,
+   "accuracy": 0.5605536332179931,
+   "class_support": {
+    "0": 0,
+    "1": 0,
+    "2": 972,
+    "3": 535,
+    "4": 227
+   }
+  }
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "PWR and ETN only; the deciding view has 87 rows over about 50 distinct periods",
+  "the every-filing view reuses each label many times and is a robustness row only",
+  "frozen encoder, training-only PCA, no returns and no costs"
+ ]
+}
