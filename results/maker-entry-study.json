@@ -1,10 +1,10 @@
 {
  "status": "development only; recorded window; protocol docs/plan/maker-entry-study.md",
  "markets": {
-  "BTC": 2469,
-  "ETH": 2471,
-  "GAS": 2471,
-  "SPX": 2471
+  "BTC": 2483,
+  "ETH": 2485,
+  "GAS": 2485,
+  "SPX": 2485
  },
  "levels": {
   "L1": {
@@ -17,7 +17,27 @@
     "taker_net_mean_bps": -8.2,
     "paired_difference_bps": 4.64,
     "null_p": 0.6,
-    "doubled_cost_maker_bps": -14.65
+    "doubled_cost_maker_bps": -14.65,
+    "filled_taker_mean_bps": -12.05,
+    "unfilled_taker_mean_bps": -6.27,
+    "unfilled_share": 0.667,
+    "penetration": {
+     "0.0": {
+      "fills": 2,
+      "misses": 0,
+      "net_mean_bps": -8.65
+     },
+     "0.5": {
+      "fills": 1,
+      "misses": 1,
+      "net_mean_bps": -8.11
+     },
+     "1.0": {
+      "fills": 1,
+      "misses": 1,
+      "net_mean_bps": -8.11
+     }
+    }
    },
    "20": {
     "events": 6,
@@ -27,8 +47,28 @@
     "maker_net_median_bps": -11.41,
     "taker_net_mean_bps": -13.21,
     "paired_difference_bps": 5.35,
-    "null_p": 0.8,
-    "doubled_cost_maker_bps": -17.41
+    "null_p": 1.0,
+    "doubled_cost_maker_bps": -17.41,
+    "filled_taker_mean_bps": -14.12,
+    "unfilled_taker_mean_bps": -12.76,
+    "unfilled_share": 0.667,
+    "penetration": {
+     "0.0": {
+      "fills": 2,
+      "misses": 0,
+      "net_mean_bps": -11.41
+     },
+     "0.5": {
+      "fills": 1,
+      "misses": 1,
+      "net_mean_bps": -10.92
+     },
+     "1.0": {
+      "fills": 1,
+      "misses": 1,
+      "net_mean_bps": -10.92
+     }
+    }
    },
    "60": {
     "events": 6,
@@ -39,7 +79,27 @@
     "taker_net_mean_bps": 6.94,
     "paired_difference_bps": 5.52,
     "null_p": 0.8,
-    "doubled_cost_maker_bps": -14.52
+    "doubled_cost_maker_bps": -14.52,
+    "filled_taker_mean_bps": -13.22,
+    "unfilled_taker_mean_bps": 17.01,
+    "unfilled_share": 0.667,
+    "penetration": {
+     "0.0": {
+      "fills": 2,
+      "misses": 0,
+      "net_mean_bps": -8.52
+     },
+     "0.5": {
+      "fills": 1,
+      "misses": 1,
+      "net_mean_bps": -10.22
+     },
+     "1.0": {
+      "fills": 1,
+      "misses": 1,
+      "net_mean_bps": -10.22
+     }
+    }
    }
   },
   "L2": {
@@ -52,7 +112,27 @@
     "taker_net_mean_bps": -12.45,
     "paired_difference_bps": 8.64,
     "null_p": 0.6,
-    "doubled_cost_maker_bps": -16.32
+    "doubled_cost_maker_bps": -16.32,
+    "filled_taker_mean_bps": -19.74,
+    "unfilled_taker_mean_bps": -6.09,
+    "unfilled_share": 0.534,
+    "penetration": {
+     "0.0": {
+      "fills": 48,
+      "misses": 0,
+      "net_mean_bps": -10.32
+     },
+     "0.5": {
+      "fills": 36,
+      "misses": 12,
+      "net_mean_bps": -9.66
+     },
+     "1.0": {
+      "fills": 29,
+      "misses": 19,
+      "net_mean_bps": -11.01
+     }
+    }
    },
    "20": {
     "events": 103,
@@ -63,7 +143,27 @@
     "taker_net_mean_bps": -14.49,
     "paired_difference_bps": 8.76,
     "null_p": 1.0,
-    "doubled_cost_maker_bps": -19.35
+    "doubled_cost_maker_bps": -19.35,
+    "filled_taker_mean_bps": -22.4,
+    "unfilled_taker_mean_bps": -7.59,
+    "unfilled_share": 0.534,
+    "penetration": {
+     "0.0": {
+      "fills": 48,
+      "misses": 0,
+      "net_mean_bps": -13.35
+     },
+     "0.5": {
+      "fills": 36,
+      "misses": 12,
+      "net_mean_bps": -9.75
+     },
+     "1.0": {
+      "fills": 29,
+      "misses": 19,
+      "net_mean_bps": -10.24
+     }
+    }
    },
    "60": {
     "events": 103,
@@ -74,42 +174,122 @@
     "taker_net_mean_bps": -8.05,
     "paired_difference_bps": 8.86,
     "null_p": 0.2,
-    "doubled_cost_maker_bps": -5.17
+    "doubled_cost_maker_bps": -5.17,
+    "filled_taker_mean_bps": -7.0,
+    "unfilled_taker_mean_bps": -8.97,
+    "unfilled_share": 0.534,
+    "penetration": {
+     "0.0": {
+      "fills": 48,
+      "misses": 0,
+      "net_mean_bps": 0.83
+     },
+     "0.5": {
+      "fills": 36,
+      "misses": 12,
+      "net_mean_bps": -1.84
+     },
+     "1.0": {
+      "fills": 29,
+      "misses": 19,
+      "net_mean_bps": -3.02
+     }
+    }
    }
   },
   "L3": {
    "4": {
-    "events": 496,
+    "events": 499,
     "fills": 210,
-    "fill_rate": 0.423,
+    "fill_rate": 0.421,
     "maker_net_mean_bps": -9.56,
     "maker_net_median_bps": -7.86,
-    "taker_net_mean_bps": -10.29,
+    "taker_net_mean_bps": -10.28,
     "paired_difference_bps": 5.22,
     "null_p": 0.6,
-    "doubled_cost_maker_bps": -15.56
+    "doubled_cost_maker_bps": -15.56,
+    "filled_taker_mean_bps": -14.83,
+    "unfilled_taker_mean_bps": -6.97,
+    "unfilled_share": 0.579,
+    "penetration": {
+     "0.0": {
+      "fills": 210,
+      "misses": 0,
+      "net_mean_bps": -9.56
+     },
+     "0.5": {
+      "fills": 156,
+      "misses": 54,
+      "net_mean_bps": -9.58
+     },
+     "1.0": {
+      "fills": 139,
+      "misses": 71,
+      "net_mean_bps": -9.8
+     }
+    }
    },
    "20": {
-    "events": 496,
+    "events": 499,
     "fills": 210,
-    "fill_rate": 0.423,
+    "fill_rate": 0.421,
     "maker_net_mean_bps": -7.32,
     "maker_net_median_bps": -6.84,
-    "taker_net_mean_bps": -9.1,
+    "taker_net_mean_bps": -9.11,
     "paired_difference_bps": 5.31,
     "null_p": 0.6,
-    "doubled_cost_maker_bps": -13.32
+    "doubled_cost_maker_bps": -13.32,
+    "filled_taker_mean_bps": -12.51,
+    "unfilled_taker_mean_bps": -6.64,
+    "unfilled_share": 0.579,
+    "penetration": {
+     "0.0": {
+      "fills": 210,
+      "misses": 0,
+      "net_mean_bps": -7.32
+     },
+     "0.5": {
+      "fills": 156,
+      "misses": 54,
+      "net_mean_bps": -6.66
+     },
+     "1.0": {
+      "fills": 139,
+      "misses": 71,
+      "net_mean_bps": -7.44
+     }
+    }
    },
    "60": {
-    "events": 494,
+    "events": 497,
     "fills": 210,
-    "fill_rate": 0.425,
+    "fill_rate": 0.423,
     "maker_net_mean_bps": -3.96,
     "maker_net_median_bps": -4.36,
-    "taker_net_mean_bps": -7.79,
+    "taker_net_mean_bps": -7.85,
     "paired_difference_bps": 5.3,
     "null_p": 0.2,
-    "doubled_cost_maker_bps": -9.96
+    "doubled_cost_maker_bps": -9.96,
+    "filled_taker_mean_bps": -8.87,
+    "unfilled_taker_mean_bps": -7.1,
+    "unfilled_share": 0.577,
+    "penetration": {
+     "0.0": {
+      "fills": 210,
+      "misses": 0,
+      "net_mean_bps": -3.96
+     },
+     "0.5": {
+      "fills": 156,
+      "misses": 54,
+      "net_mean_bps": -6.05
+     },
+     "1.0": {
+      "fills": 139,
+      "misses": 71,
+      "net_mean_bps": -7.37
+     }
+    }
    }
   },
   "L6": {
@@ -122,7 +302,27 @@
     "taker_net_mean_bps": -17.36,
     "paired_difference_bps": 16.93,
     "null_p": 1.0,
-    "doubled_cost_maker_bps": -20.49
+    "doubled_cost_maker_bps": -20.49,
+    "filled_taker_mean_bps": -31.69,
+    "unfilled_taker_mean_bps": -6.77,
+    "unfilled_share": 0.575,
+    "penetration": {
+     "0.0": {
+      "fills": 17,
+      "misses": 0,
+      "net_mean_bps": -14.49
+     },
+     "0.5": {
+      "fills": 12,
+      "misses": 5,
+      "net_mean_bps": -13.52
+     },
+     "1.0": {
+      "fills": 11,
+      "misses": 6,
+      "net_mean_bps": -13.24
+     }
+    }
    },
    "20": {
     "events": 40,
@@ -133,7 +333,27 @@
     "taker_net_mean_bps": -21.73,
     "paired_difference_bps": 16.85,
     "null_p": 1.0,
-    "doubled_cost_maker_bps": -27.71
+    "doubled_cost_maker_bps": -27.71,
+    "filled_taker_mean_bps": -38.68,
+    "unfilled_taker_mean_bps": -9.2,
+    "unfilled_share": 0.575,
+    "penetration": {
+     "0.0": {
+      "fills": 17,
+      "misses": 0,
+      "net_mean_bps": -21.71
+     },
+     "0.5": {
+      "fills": 12,
+      "misses": 5,
+      "net_mean_bps": -15.91
+     },
+     "1.0": {
+      "fills": 11,
+      "misses": 6,
+      "net_mean_bps": -16.68
+     }
+    }
    },
    "60": {
     "events": 40,
@@ -144,7 +364,27 @@
     "taker_net_mean_bps": -8.74,
     "paired_difference_bps": 17.32,
     "null_p": 0.2,
-    "doubled_cost_maker_bps": -3.36
+    "doubled_cost_maker_bps": -3.36,
+    "filled_taker_mean_bps": -14.27,
+    "unfilled_taker_mean_bps": -4.66,
+    "unfilled_share": 0.575,
+    "penetration": {
+     "0.0": {
+      "fills": 17,
+      "misses": 0,
+      "net_mean_bps": 2.64
+     },
+     "0.5": {
+      "fills": 12,
+      "misses": 5,
+      "net_mean_bps": -0.56
+     },
+     "1.0": {
+      "fills": 11,
+      "misses": 6,
+      "net_mean_bps": -0.58
+     }
+    }
    }
   }
  },

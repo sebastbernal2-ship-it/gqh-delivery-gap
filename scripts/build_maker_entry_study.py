@@ -92,6 +92,8 @@ def main() -> int:
         for horizon in HORIZONS:
             maker_net, taker_net, pair_diff, gone = [], [], [], 0
             fills_hit = fills_miss = 0
+            filled_taker, unfilled_taker = [], []
+            penetration = {0.0: [0, 0, []], 0.5: [0, 0, []], 1.0: [0, 0, []]}
             for market, hits in store.items():
                 rows = markets[market]
                 mid = [float(row["mid"]) for row in rows]
@@ -117,8 +119,21 @@ def main() -> int:
                                            if bid[j] >= limit), None)
                     if fill_index is None or fill_index + horizon >= len(rows):
                         fills_miss += 1
+                        unfilled_taker.append(taker_gross - taker_cost)
                         continue
                     fills_hit += 1
+                    filled_taker.append(taker_gross - taker_cost)
+                    for step in (0.0, 0.5, 1.0):
+                        buffer = step * spread[fill_index] / 1e4
+                        crossed = (ask[fill_index] <= limit - buffer if direction > 0
+                                   else bid[fill_index] >= limit + buffer)
+                        if crossed:
+                            penetration[step][0] += 1
+                            penetration[step][2].append(
+                                direction * (mid[fill_index + horizon] / limit - 1) * 1e4
+                                - (MAKER_BPS + TAKER_BPS + spread[fill_index + horizon] / 2))
+                        else:
+                            penetration[step][1] += 1
                     exit_index = fill_index + horizon
                     maker_gross = direction * (mid[exit_index] / limit - 1) * 1e4
                     maker_cost = MAKER_BPS + TAKER_BPS + spread[exit_index] / 2
@@ -175,6 +190,12 @@ def main() -> int:
                 "null_p": round(p_value, 4) if p_value is not None else None,
                 "doubled_cost_maker_bps": round(statistics.mean(
                     [value - (MAKER_BPS + TAKER_BPS) for value in maker_net]), 2),
+                "filled_taker_mean_bps": round(statistics.mean(filled_taker), 2) if filled_taker else None,
+                "unfilled_taker_mean_bps": round(statistics.mean(unfilled_taker), 2) if unfilled_taker else None,
+                "unfilled_share": round(len(unfilled_taker) / max(1, len(filled_taker) + len(unfilled_taker)), 3),
+                "penetration": {str(step): {"fills": data[0], "misses": data[1],
+                                            "net_mean_bps": round(statistics.mean(data[2]), 2) if data[2] else None}
+                                for step, data in penetration.items()},
             }
     report = {
         "status": "development only; recorded window; protocol docs/plan/maker-entry-study.md",
@@ -187,9 +208,9 @@ def main() -> int:
     for name in levels:
         for horizon, stats in levels[name].items():
             print(f"{name} h={horizon}: events {stats['events']} fills {stats['fills']} "
-                  f"({stats['fill_rate']:.0%}) maker net {stats['maker_net_mean_bps']:+.2f} bps, "
-                  f"taker {stats['taker_net_mean_bps']:+.2f}, paired {stats['paired_difference_bps']:+.2f}, "
-                  f"p {stats['null_p']}")
+                  f"({stats['fill_rate']:.0%}) maker {stats['maker_net_mean_bps']:+.2f} bps, "
+                  f"taker {stats['taker_net_mean_bps']:+.2f}, filled {stats['filled_taker_mean_bps']}, "
+                  f"unfilled {stats['unfilled_taker_mean_bps']}, p {stats['null_p']}")
     return 0
 
 

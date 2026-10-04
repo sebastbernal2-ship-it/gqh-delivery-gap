@@ -254,14 +254,18 @@ filing level data rather than rental prices.
 percent at the top one percent level, and 42 percent at the top five percent and thin book levels. The
 paired result against taker entry is +4.6 to +17.3 basis points on the same events, but the absolute
 maker net is at or below zero everywhere except +0.83 and +2.64 basis points at fifteen minutes on two
-levels, both inside their nulls. At the frozen conjunction the maker variant nets -8.5 against the taker
-+6.9, because the two fills are the events that kept moving.
+levels, both inside their nulls. The filled and unfilled split shows adverse selection: at the frozen
+conjunction the two filled events net -13.2 basis points under the taker convention against +17.0 for the
+four unfilled ones, and filled events are worse than unfilled at every level and horizon. A stricter fill
+rule, standing in for queue position, removes the good fills and keeps the bad ones: at the top one
+percent level the net falls from +0.83 to -1.84 to -3.02 basis points as required penetration rises from
+zero to half a spread to a full spread.
 **Evidence**: `results/maker-entry-study.json`; `scripts/build_maker_entry_study.py`; `data/tape`.
 **Scope**: recorded window, four markets, one venue, best bid and ask snapshots at fifteen seconds, no
 queue position modelled; development only.
-**Consequence**: the binding constraint shifts from the cost hurdle to fill selection. The unfilled
-events are the reversion, so the next object is a fill model with queue position before maker entry can
-be treated as anything more than a size tool.
+**Consequence**: the binding constraint is fill selection. The positive maker cells are an artifact of
+optimistic fills, so maker entry is a size tool rather than a source of edge on this window, and the
+reversion that exists is taken immediately at the event.
 
 ---
 
