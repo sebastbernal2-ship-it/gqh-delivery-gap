@@ -74,7 +74,7 @@ armed and awaiting its first new filing. Nothing in the repository is a fresh-ho
 ## 4. Engineering and hygiene
 
 1. **`make check` is red** because another session's untracked draft
-   `docs/inbox/regime-factor-program-2026-10-04.md` references five files that do not exist. That
+   draft references five files that do not exist. That
    owner must write them or drop the references; nothing of theirs was touched.
 2. **The Makefile holds another session's uncommitted hunk** (eight targets). It has been preserved
    through every commit by staging only my own hunk. Do not discard it.

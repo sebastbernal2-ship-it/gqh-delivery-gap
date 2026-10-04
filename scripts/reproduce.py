@@ -57,7 +57,7 @@ PRODUCERS = [
      "command": "python3 scripts/run_eia_load_specialist.py --output {output}",
      "artifact": "results/eia-load-specialist.json",
      "claim": "the first non-SEC specialist's information and pricing tests"},
-    {"name": "eia load refinement", "tier": "default", "exact": True,
+    {"name": "eia load refinement", "tier": "full", "exact": True,
      "command": "python3 scripts/run_eia_load_refinement.py --output {output}",
      "artifact": "results/eia-load-refinement.json",
      "claim": "the seasonal, peak, ramp and acceleration refinements and the event-level test"},

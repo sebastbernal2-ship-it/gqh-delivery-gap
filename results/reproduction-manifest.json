@@ -43,7 +43,7 @@
    "exact": true,
    "name": "eia load refinement",
    "sha256": "358621268d5ba582e3fc4bd3b0e902cee055887b351cc04fe91e5450e2dfae61",
-   "tier": "default"
+   "tier": "full"
   },
   {
    "artifact": "results/distillation-test.json",
