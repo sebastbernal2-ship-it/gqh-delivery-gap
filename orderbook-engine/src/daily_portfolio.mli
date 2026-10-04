@@ -89,6 +89,9 @@ type position = {
   source_sha256 : string;
 }
 
+(** Portfolio statistics. Return-distribution fields are calculated per daily
+    portfolio period, never per individual position or trade. Floating point is
+    confined to statistical summaries; P&L and drawdown remain fixed-point. *)
 type metric = {
   periods : int;
   start_session : string option;
@@ -98,10 +101,26 @@ type metric = {
   annualized_return : float option;
   annualized_volatility : float option;
   sharpe : float option;
+  (** Zero risk-free target; annualized using configured periods per year. *)
+  sortino : float option;
+  (** Zero target and downside RMS across all observed periods; [None] if there
+      are no negative periods. *)
+  calmar : float option;
+  (** Annualized return divided by absolute maximum drawdown; [None] at zero DD. *)
   max_drawdown_bps : int64;
+  total_pnl_money_units : int64;
   annualized_turnover : float option;
   total_turnover_bps : int64;
   mean_period_return_bps : float option;
+  (** Positive / absolute negative sums of daily net period returns; undefined
+      ([None]) when the sample has no negative periods. *)
+  profit_factor : float option;
+  (** Fraction of observed periods with strictly positive daily return. *)
+  win_rate : float option;
+  (** Arithmetic average daily return among positive periods, not trade P&L. *)
+  average_positive_period_return : float option;
+  (** Signed arithmetic average daily return among negative periods. *)
+  average_negative_period_return : float option;
   worst_period_return_1e8 : int64 option;
   best_period_return_1e8 : int64 option;
 }

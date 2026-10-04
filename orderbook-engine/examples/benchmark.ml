@@ -27,6 +27,20 @@ let run_iteration (event_groups : event list list) : float =
     event_groups;
   timestamp () -. t0
 
+(** Measure the strict, project-facing feed replay path, including stream identity,
+    sequence/clock checks, book invariant validation, snapshots, and fills. *)
+let run_strict_replay_iteration
+    (events : Market_simulator.Market_data.feed_event list) : float =
+  let replay = Market_simulator.Event_replay.create () in
+  let t0 = timestamp () in
+  List.iter
+    (fun event ->
+      match Market_simulator.Event_replay.apply replay event with
+      | Ok _ -> ()
+      | Error message -> failwith message)
+    events;
+  timestamp () -. t0
+
 (** Run a snapshot/stats benchmark iteration, returning elapsed seconds. *)
 let run_snapshot_iteration (book : Market_simulator.Order_book.t) (count : int)
     : float =
@@ -52,6 +66,19 @@ let run_benchmark () =
     }
   in
   let feed = Market_simulator.Market_data.generate_feed config in
+  (* The generator's metadata sequence is global across symbols, while the strict replay API
+     expects a contiguous sequence per venue/symbol/epoch. Normalize only this synthetic
+     benchmark envelope; event payloads, order and timestamps remain unchanged. *)
+  let sequence_by_stream = Hashtbl.create 16 in
+  let replay_feed =
+    List.map
+      (fun (event : Market_simulator.Market_data.feed_event) ->
+        let key = (event.venue, event.symbol, event.epoch) in
+        let sequence = 1 + Option.value (Hashtbl.find_opt sequence_by_stream key) ~default:0 in
+        Hashtbl.replace sequence_by_stream key sequence;
+        { event with sequence })
+      feed
+  in
   let event_groups =
     Market_simulator.Market_data.group_by_symbol feed |> List.map snd
   in
@@ -86,6 +113,18 @@ let run_benchmark () =
     (sqrt
        (Array.fold_left (fun acc t -> acc +. ((t -. mean_t) ** 2.0)) 0.0 times
        /. float iterations));
+
+  (* 2b. Strict event replay benchmark. Unlike the order-book microbenchmark above,
+     this includes the checks and output construction used by the feed replay API. *)
+  Printf.printf "\n2b. Strict event replay throughput (%d iterations)...\n%!" iterations;
+  let replay_times = Array.init iterations (fun _ -> run_strict_replay_iteration replay_feed) in
+  let replay_min = Array.fold_left min Float.max_float replay_times in
+  let replay_max = Array.fold_left max 0.0 replay_times in
+  let replay_mean = Array.fold_left ( +. ) 0.0 replay_times /. float iterations in
+  Printf.printf "   Events: %d per iteration\n" n;
+  Printf.printf "   Min: %.3fs (%s)\n" replay_min (fmt_throughput n replay_min);
+  Printf.printf "   Max: %.3fs (%s)\n" replay_max (fmt_throughput n replay_max);
+  Printf.printf "   Mean: %.3fs (%s)\n%!" replay_mean (fmt_throughput n replay_mean);
 
   (* 3. Snapshot + stats retrieval benchmark *)
   let snap_count = 1000000 in

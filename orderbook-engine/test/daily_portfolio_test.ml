@@ -126,6 +126,75 @@ let test_large_fixed_point_product () =
   check int64 "NAV times 100% return fits even though product overflows"
     2_000_000_000_000_000_000L (List.hd output.P.all_days).P.net_equity
 
+let test_period_risk_and_win_metrics () =
+  let first = row ~session:"2025-01-02" ~decision:"2025-01-01T20:00:00Z"
+      ~entry:"2025-01-02T14:30:00Z" ~exit:"2025-01-03T14:30:00Z"
+      ~weight:1000 ~ret:10_000_000L () in
+  let second = row ~session:"2025-01-03" ~decision:"2025-01-02T14:29:00Z"
+      ~entry:"2025-01-03T14:30:00Z" ~exit:"2025-01-06T14:30:00Z"
+      ~weight:1000 ~ret:(-5_000_000L) () in
+  let metric = (ok (P.run config [first; second])).P.full_net in
+  check int64 "total P&L fixed money units" 49_500_000L metric.P.total_pnl_money_units;
+  check int64 "drawdown after +1%, -0.5% portfolio periods" 50L metric.P.max_drawdown_bps;
+  check (option (float 1e-10)) "Sortino, zero target and all-period downside RMS"
+    (Some (0.025 *. sqrt 252. /. sqrt (0.05 *. 0.05 /. 2.))) metric.P.sortino;
+  check (option (float 1e-10)) "Calmar annualized return / 0.5% drawdown"
+    (Option.map (fun annual -> annual /. 0.005) metric.P.annualized_return) metric.P.calmar;
+  check (option (float 1e-12)) "period profit factor" (Some 2.) metric.P.profit_factor;
+  check (option (float 1e-12)) "period win rate" (Some 0.5) metric.P.win_rate;
+  check (option (float 1e-12)) "average positive period return" (Some 0.01)
+    metric.P.average_positive_period_return;
+  check (option (float 1e-12)) "average negative period return is signed" (Some (-0.005))
+    metric.P.average_negative_period_return
+
+let test_no_downside_or_losing_periods_are_undefined () =
+  let first = row ~session:"2025-01-02" ~decision:"2025-01-01T20:00:00Z"
+      ~entry:"2025-01-02T14:30:00Z" ~exit:"2025-01-03T14:30:00Z"
+      ~weight:1000 ~ret:10_000_000L () in
+  let second = row ~session:"2025-01-03" ~decision:"2025-01-02T14:29:00Z"
+      ~entry:"2025-01-03T14:30:00Z" ~exit:"2025-01-06T14:30:00Z"
+      ~weight:1000 ~ret:20_000_000L () in
+  let metric = (ok (P.run config [first; second])).P.full_net in
+  check (option (float 1e-12)) "no negative periods => undefined Sortino" None metric.P.sortino;
+  check (option (float 1e-12)) "no losses => undefined profit factor" None metric.P.profit_factor;
+  check (option (float 1e-12)) "no losing periods => no average loss" None
+    metric.P.average_negative_period_return;
+  check (option (float 1e-12)) "all periods win" (Some 1.) metric.P.win_rate;
+  check (option (float 1e-12)) "zero drawdown => undefined Calmar" None metric.P.calmar
+
+let test_calmar_uses_unrounded_drawdown () =
+  let first = row ~session:"2025-01-02" ~decision:"2025-01-01T20:00:00Z"
+      ~entry:"2025-01-02T14:30:00Z" ~exit:"2025-01-03T14:30:00Z"
+      ~weight:1000 ~ret:0L () in
+  let second = row ~session:"2025-01-03" ~decision:"2025-01-02T14:29:00Z"
+      ~entry:"2025-01-03T14:30:00Z" ~exit:"2025-01-06T14:30:00Z"
+      ~weight:1000 ~ret:(-40_000L) () in
+  let metric = (ok (P.run config [first; second])).P.full_net in
+  check int64 "sub-half-basis-point drawdown rounds to zero in displayed bps"
+    0L metric.P.max_drawdown_bps;
+  check bool "nonzero exact drawdown still yields Calmar" true
+    (Option.is_some metric.P.calmar)
+
+let test_multisymbol_previous_weights_lookup_and_accounting () =
+  let multi_config = { config with P.universe = ["AAA"; "BBB"];
+    max_gross_exposure_bps = 1000; max_abs_net_exposure_bps = 0;
+    max_abs_name_weight_bps = 500 } in
+  let make symbol session decision entry exit weight =
+    { (row ~session ~decision ~entry ~exit ~weight ~ret:0L ~cost:10 ()) with P.symbol = symbol }
+  in
+  let rows = [
+    make "AAA" "2025-01-02" "2025-01-01T20:00:00Z" "2025-01-02T14:30:00Z" "2025-01-03T14:30:00Z" 500;
+    make "BBB" "2025-01-02" "2025-01-01T20:00:00Z" "2025-01-02T14:30:00Z" "2025-01-03T14:30:00Z" (-500);
+    make "AAA" "2025-01-03" "2025-01-02T14:29:00Z" "2025-01-03T14:30:00Z" "2025-01-06T14:30:00Z" 250;
+    make "BBB" "2025-01-03" "2025-01-02T14:29:00Z" "2025-01-03T14:30:00Z" "2025-01-06T14:30:00Z" (-250);
+  ] in
+  let output = ok (P.run multi_config rows) in
+  let first, second = match output.P.all_days with [a; b] -> a, b | _ -> failwith "expected two sessions" in
+  check int64 "first session turnover" 1000L first.P.turnover_bps;
+  check int64 "first session costs" 10_000L first.P.transaction_cost_1e8;
+  check int64 "next session finds each prior symbol weight" 500L second.P.turnover_bps;
+  check int64 "second session costs from prior weights" 5_000L second.P.transaction_cost_1e8
+
 let () =
   run "daily_portfolio"
     [ ("portfolio", [
@@ -134,4 +203,8 @@ let () =
         test_case "timing and borrow guards" `Quick test_timing_and_borrow_guards;
         test_case "risk and liquidity caps" `Quick test_risk_and_liquidity_caps_fail_closed;
         test_case "large fixed-point product" `Quick test_large_fixed_point_product;
+        test_case "period risk and win metrics" `Quick test_period_risk_and_win_metrics;
+        test_case "no downside or losses" `Quick test_no_downside_or_losing_periods_are_undefined;
+        test_case "Calmar uses unrounded drawdown" `Quick test_calmar_uses_unrounded_drawdown;
+        test_case "multi-symbol weight lookup and accounting" `Quick test_multisymbol_previous_weights_lookup_and_accounting;
       ]) ]

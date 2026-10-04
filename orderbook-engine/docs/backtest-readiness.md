@@ -43,6 +43,15 @@ calendar-completeness manifest upstream: the runner detects timestamp discontinu
 holes within supplied sessions but cannot infer an omitted expected exchange session without a
 versioned session calendar.
 
+The report includes annualized return/volatility, zero-rate Sharpe, zero-target Sortino, Calmar,
+maximum drawdown, fixed-unit total P&L, annualized/total turnover, and period-return diagnostics.
+Sortino downside deviation is the root mean square of negative daily returns with all observed
+periods in the denominator. Profit factor is summed positive daily net returns divided by the
+absolute sum of negative daily net returns; win rate and average win/loss are likewise daily-period
+statistics. A period is one portfolio session, not a trade. Consequently these fields must not be
+described as trade win rate, average trade P&L, or trade profit factor. Undefined zero-denominator
+statistics are null in JSON and blank in CSV.
+
 The included 10-session synthetic fixture exists only to prove plumbing and arithmetic; it is not
 evidence of profitability or realistic execution. There is not yet an implemented adapter from the
 PWR/ETN/EME/DLR event-study data into this target panel, and no real backtest has been run with this

@@ -143,10 +143,16 @@ let metric_json (m : P.metric) =
     ("final_equity_money_units", j64 m.final_equity);
     ("annualized_return", jfloat m.annualized_return);
     ("annualized_volatility", jfloat m.annualized_volatility);
-    ("sharpe_zero_rf", jfloat m.sharpe); ("max_drawdown_bps", j64 m.max_drawdown_bps);
+    ("sharpe_zero_rf", jfloat m.sharpe); ("sortino_zero_target", jfloat m.sortino);
+    ("calmar", jfloat m.calmar); ("max_drawdown_bps", j64 m.max_drawdown_bps);
+    ("total_pnl_money_units", j64 m.total_pnl_money_units);
     ("annualized_turnover", jfloat m.annualized_turnover);
     ("total_turnover_bps", j64 m.total_turnover_bps);
     ("mean_period_return_bps", jfloat m.mean_period_return_bps);
+    ("profit_factor_period_returns", jfloat m.profit_factor);
+    ("win_rate_periods", jfloat m.win_rate);
+    ("average_positive_period_return", jfloat m.average_positive_period_return);
+    ("average_negative_period_return", jfloat m.average_negative_period_return);
     ("worst_period_return_1e8", (match m.worst_period_return_1e8 with None -> `Null | Some x -> j64 x));
     ("best_period_return_1e8", (match m.best_period_return_1e8 with None -> `Null | Some x -> j64 x));
   ]
@@ -156,8 +162,11 @@ let metric_csv_row key (m : P.metric) =
   [key; string_of_int m.periods; Option.value m.start_session ~default:"";
    Option.value m.end_session ~default:""; Int64.to_string m.initial_equity;
    Int64.to_string m.final_equity; opt m.annualized_return; opt m.annualized_volatility;
-   opt m.sharpe; Int64.to_string m.max_drawdown_bps; opt m.annualized_turnover;
-   Int64.to_string m.total_turnover_bps]
+   opt m.sharpe; opt m.sortino; opt m.calmar; Int64.to_string m.max_drawdown_bps;
+   Int64.to_string m.total_pnl_money_units; opt m.annualized_turnover;
+   Int64.to_string m.total_turnover_bps; opt m.mean_period_return_bps;
+   opt m.profit_factor; opt m.win_rate; opt m.average_positive_period_return;
+   opt m.average_negative_period_return]
 
 let csv_escape text =
   if String.contains text ',' || String.contains text '"' || String.contains text '\n' then
@@ -258,7 +267,7 @@ let write_outputs ~config_path ~input_path ~report_path ~curve_path ~positions_p
     @ List.map (fun (year, m) -> metric_csv_row ("year:" ^ string_of_int year) m) result.P.annual_net
     @ List.map (fun (regime, m) -> metric_csv_row ("regime:" ^ regime) m) result.P.regime_net in
   write_csv breakdown_path
-    ["scope";"periods";"start_session";"end_session";"initial_equity_money_units";"final_equity_money_units";"annualized_return";"annualized_volatility";"sharpe_zero_rf";"max_drawdown_bps";"annualized_turnover";"total_turnover_bps"] rows;
+    ["scope";"periods";"start_session";"end_session";"initial_equity_money_units";"final_equity_money_units";"annualized_return";"annualized_volatility";"sharpe_zero_rf";"sortino_zero_target";"calmar";"max_drawdown_bps";"total_pnl_money_units";"annualized_turnover";"total_turnover_bps";"mean_period_return_bps";"profit_factor_period_returns";"win_rate_periods";"average_positive_period_return";"average_negative_period_return"] rows;
   let report_json = `Assoc [
     ("schema_version", `String "daily-portfolio-report-v1");
     ("strategy_name", `String config.P.strategy_name);
@@ -292,6 +301,7 @@ let write_outputs ~config_path ~input_path ~report_path ~curve_path ~positions_p
     ("return_unit", `String "fraction scaled by 1e8; decimal input prohibited");
     ("money_unit", `String "USD scaled by 1e8");
     ("sharpe_convention", `String "zero risk-free rate; sample volatility annualized using periods_per_year");
+    ("period_diagnostics_convention", `String "Sortino uses zero target and downside RMS over all observed periods; profit factor, win rate, and average positive/negative returns are computed from daily net period returns, not individual trades; profit factor is null when there are no losing periods; Sortino and Calmar are null when their denominators are zero");
     ("periods_per_year", `Int config.P.periods_per_year);
     ("source_sha256", `List (List.map (fun h -> `String h) result.P.source_hashes));
     ("input_sha256", `String input_sha); ("config_sha256", `String config_sha);

@@ -102,10 +102,17 @@ type metric = {
   annualized_return : float option;
   annualized_volatility : float option;
   sharpe : float option;
+  sortino : float option;
+  calmar : float option;
   max_drawdown_bps : int64;
+  total_pnl_money_units : int64;
   annualized_turnover : float option;
   total_turnover_bps : int64;
   mean_period_return_bps : float option;
+  profit_factor : float option;
+  win_rate : float option;
+  average_positive_period_return : float option;
+  average_negative_period_return : float option;
   worst_period_return_1e8 : int64 option;
   best_period_return_1e8 : int64 option;
 }
@@ -338,9 +345,9 @@ let validate_panel c (groups : (string * observation list) list) =
   in
   loop None None groups
 
-type account = { mutable nav : int64; mutable weights : (string * int64) list }
+type account = { mutable nav : int64; weights : (string, int64) Hashtbl.t }
 
-let held_weight symbol account = Option.value (List.assoc_opt symbol account.weights) ~default:0L
+let held_weight symbol account = Option.value (Hashtbl.find_opt account.weights symbol) ~default:0L
 
 let nav_after_return nav return_1e8 =
   if return_1e8 <= Int64.neg return_scale then Error "portfolio return would eliminate all equity"
@@ -374,6 +381,24 @@ let metrics ~periods_per_year ~initial_equity ~(days : day list) ~return_of ~equ
     | Some mu, Some sigma when sigma > 0. -> Some (mu *. sqrt (float_of_int periods_per_year) /. sigma)
     | _ -> None
   in
+  (* Downside deviation is the root mean square of all observed shortfalls
+     below the zero-return target, with all periods in the denominator. *)
+  let downside_deviation =
+    match rets with
+    | [] -> None
+    | xs ->
+        let sum_squares = List.fold_left
+            (fun acc value -> if value < 0. then acc +. (value *. value) else acc)
+            0. xs
+        in
+        Some (sqrt (sum_squares /. float_of_int (List.length xs)))
+  in
+  let sortino =
+    match mean, downside_deviation with
+    | Some mu, Some downside when downside > 0. ->
+        Some (mu *. sqrt (float_of_int periods_per_year) /. downside)
+    | _ -> None
+  in
   let curve = List.map equity_of days in
   let rec max_dd peak largest = function
     | [] -> largest
@@ -388,6 +413,33 @@ let metrics ~periods_per_year ~initial_equity ~(days : day list) ~return_of ~equ
   in
   let years = float_of_int periods /. float_of_int periods_per_year in
   let sorted_returns = List.map return_of days in
+  let positive, negative = List.partition (( < ) 0L) sorted_returns in
+  let sum_returns values =
+    List.fold_left (fun sum value -> sum +. Int64.to_float value /. Int64.to_float return_scale) 0. values
+  in
+  let gross_profit = sum_returns positive and gross_loss = sum_returns negative in
+  let average values =
+    match values with
+    | [] -> None
+    | xs -> Some (sum_returns xs /. float_of_int (List.length xs))
+  in
+  let max_drawdown_bps = max_dd initial_equity 0L curve in
+  let rec max_drawdown_fraction peak largest = function
+    | [] -> largest
+    | equity :: rest ->
+        let peak = Int64.max peak equity in
+        let fraction =
+          if peak <= 0L then 0.
+          else Int64.to_float (Int64.sub peak equity) /. Int64.to_float peak
+        in
+        max_drawdown_fraction peak (Float.max largest fraction) rest
+  in
+  let max_drawdown_fraction = max_drawdown_fraction initial_equity 0. curve in
+  let final_equity = match List.rev days with [] -> initial_equity | day :: _ -> equity_of day in
+  let calmar =
+    if max_drawdown_fraction = 0. then None
+    else Option.map (fun annual -> annual /. max_drawdown_fraction) annualized_return
+  in
   {
     periods;
     start_session = (match days with [] -> None | x :: _ -> Some x.session);
@@ -397,10 +449,17 @@ let metrics ~periods_per_year ~initial_equity ~(days : day list) ~return_of ~equ
     annualized_return;
     annualized_volatility;
     sharpe;
-    max_drawdown_bps = max_dd initial_equity 0L curve;
+    sortino;
+    calmar;
+    max_drawdown_bps;
+    total_pnl_money_units = Int64.sub final_equity initial_equity;
     annualized_turnover = if years <= 0. then None else Some (Int64.to_float total_turnover /. 10_000. /. years);
     total_turnover_bps = total_turnover;
     mean_period_return_bps = Option.map (fun x -> x *. 10_000.) mean;
+    profit_factor = if negative = [] then None else Some (gross_profit /. Float.abs gross_loss);
+    win_rate = if periods = 0 then None else Some (float_of_int (List.length positive) /. float_of_int periods);
+    average_positive_period_return = average positive;
+    average_negative_period_return = average negative;
     worst_period_return_1e8 = (match sorted_returns with [] -> None | xs -> Some (List.fold_left Int64.min Int64.max_int xs));
     best_period_return_1e8 = (match sorted_returns with [] -> None | xs -> Some (List.fold_left Int64.max Int64.min_int xs));
   }
@@ -446,7 +505,7 @@ let run config (rows : observation list) =
     let* () = validate_panel config groups in
     let* split_start_session = split_start groups |> Result.map (fun s -> s) in
     let accounts =
-      List.init 5 (fun _ -> { nav = config.initial_equity_money_units; weights = [] })
+      List.init 5 (fun _ -> { nav = config.initial_equity_money_units; weights = Hashtbl.create (List.length config.universe) })
     in
     let gross_account = List.nth accounts 0
     and net_account = List.nth accounts 1
@@ -510,19 +569,25 @@ let run config (rows : observation list) =
         let* turnover = sum_int64 (List.map (fun (_, delta, _, _, _, _, _) -> delta) trades) in
         let starting_equity = account.nav in
         let* new_nav = nav_after_return starting_equity net_return in
-        let* new_weights =
-          List.fold_left
-            (fun acc (row : observation) ->
-              let* acc = acc in
+        let new_weights = Hashtbl.create (List.length group) in
+        let rec update_weights = function
+          | [] -> Ok ()
+          | (row : observation) :: rest ->
               let growth = Int64.add return_scale row.forward_total_return_1e8 in
               let denominator = Int64.add return_scale net_return in
               let* post_return = mul_div ~divisor:return_scale
                   (Int64.of_int row.target_weight_bps) growth in
               let* effective = mul_div ~divisor:denominator post_return return_scale in
-              Ok ((row.symbol, effective) :: acc)) (Ok []) group
+              (* [List.assoc_opt] used to return the first occurrence. Keep that
+                 behavior even if a malformed panel repeats a symbol. *)
+              if not (Hashtbl.mem new_weights row.symbol) then
+                Hashtbl.add new_weights row.symbol effective;
+              update_weights rest
         in
+        let* () = update_weights group in
         account.nav <- new_nav;
-        account.weights <- List.rev new_weights;
+        Hashtbl.clear account.weights;
+        Hashtbl.iter (Hashtbl.replace account.weights) new_weights;
         Ok (starting_equity, new_nav, net_return, gross_return, transaction_cost, borrow_cost, turnover, trades)
       in
       let* gross = scenario gross_account 0 in

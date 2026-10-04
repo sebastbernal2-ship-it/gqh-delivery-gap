@@ -7,7 +7,9 @@ type stream = {
   mutable last_received_time : Timestamp.t option;
 }
 
-type t = { streams : (string, stream) Hashtbl.t }
+type stream_key = string * string * int
+
+type t = { streams : (stream_key, stream) Hashtbl.t }
 
 type applied = {
   feed_event : Market_data.feed_event;
@@ -18,7 +20,7 @@ type applied = {
 let create () = { streams = Hashtbl.create 16 }
 
 let key (event : Market_data.feed_event) =
-  Printf.sprintf "%s\000%s\000%d" event.venue event.symbol event.epoch
+  (event.venue, event.symbol, event.epoch)
 
 let valid_identity (event : Market_data.feed_event) =
   String.length event.venue > 0 && String.length event.symbol > 0
