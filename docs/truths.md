@@ -222,3 +222,19 @@ obstruction:
 
 Everything else we have tried is blocked either by an instrument, by attribution, or by a data source we do not
 hold. That is not a list of failures, it is a map of where the doors are.
+
+## State of the three doors, 2026-10-04
+
+Two doors have since been tested and closed on evidence. The compute lead is dead: family price changes
+do not lead provider capex, and the aggregate points the wrong way (T17). Queue crowding is dead as an
+exit predictor: within state and cohort it orders nothing, while technology orders a lot (T18). The
+delivery tail remains real but intrinsic to projects (T10, T14), so it needs a name set and an
+attribution path before it is anything, and no listed instrument isolates the queue units (T6).
+
+That leaves one door with a full stack behind it: **forced flow on continuous venues**. The mechanism
+has external evidence, the instrument exists, the tape is running, and the engine now exists in this
+repository. What is missing is a live protocol under the frozen-protocol rule and a measurement of the
+dislocation net of costs at zero latency advantage, which is the clause every edge here must satisfy.
+
+No edge is established tonight. What is established is where the edge has to be, and that is worth
+more than a story about the last five years going up.
