@@ -334,6 +334,56 @@ and obligation panels were verified clean at 38 and 55 days, so the expectation-
 5. A raw-close download turns a split into a ninety percent drop; the price sanity rule is not
    optional.
 
+## Post-stage record, 2026-10-04: T51 to T57, after the stages were closed
+
+The stage list in `docs/plan/alpha-build.md` ended at Stage 4. What followed, in order, with the truth
+that owns each:
+
+1. **T51, the rolling origin.** Eight annual refits, 2019-02 to 2026-08. The revenue sleeve is positive
+   in every year, Sharpe 0.756; the gated intensity sleeve returns 6.49 percent at Sharpe 0.830 with a
+   -10.7 percent drawdown; **the capex sleeve loses in every era and is retired**. Removing it raises
+   the two-sleeve inverse-volatility composite to **+17.35 percent at Sharpe 1.493 with a -12.3 percent
+   drawdown**, volatility-targeted 1.376 at -10.2.
+2. **T52, capacity.** Gross-normalised, one percent participation: 0.92 million for revenue alone, 1.83
+   for intensity alone, **8.14 million combined** with a tenth percentile of 1.55; binding names are
+   small caps, PLUG, APLD, LEU, PRIM. T47's earlier capacity figures used un-normalised weights and are
+   corrected as optimistic.
+3. **T53, the council on the complex panel.** Two bundles, disclosure history and market state, 1,706
+   rows. Prevalence 1.6078, issuer facts 1.7935, market state 1.6942, concatenation 1.9878, and the
+   **council 1.5378**, beating the best single by 0.1564 with interval 0.0863 to 0.2316 and
+   concatenation by 0.4607, both with one hundred percent of resamples. The first council win with both
+   intervals excluding zero.
+4. **T54, calibration and tails.** The revenue model is honest in the bulk, overconfident in the
+   confident bins (-0.200 at 0.547, -0.321 at 0.738) and honest in the extremes (predicted 0.135
+   against realised 0.144 at the bottom class). Pooled ECE 0.0683. Combined portfolio tails: five
+   percent value at risk -0.90 percent, worst day -5.74, worst twenty sessions -8.4. The variant
+   registry opens with 38 variants across fifteen axes and states that the earlier count is not
+   reconstructible.
+5. **T55, the matched universe.** Same names, extended origins. Composition is **not** the driver of
+   the recent record, and the same names still fail one era: 2015-2018 at -16.70 percent, Sharpe
+   -0.738, drawdown -51 percent, against positive eras either side. The effect is regime-dependent.
+6. **T56, the gate recalibration.** Temperature 3.75 improves the fitting half and **worsens the
+   held-out half** (ECE 0.0572 to 0.1279); the engine's raw gate stays. The miscalibration is era
+   specific, so calibration fixes must be fitted and validated inside one era.
+7. **T57, the siblings.** Margins had the same 403-day clock defect and was rebuilt to 36 days at an
+   identical 6,544 rows; on the corrected clock it does not price and is declined. Assets is clean at 37
+   days but its surprises fall inside the middle declared bin, so no spread forms at all: a label
+   geometry mismatch. The concept-agnostic z-scored surprise is the declared next variant.
+
+### Live and scheduled at handoff
+
+- **Timers**: `quanthacks-daily.timer` at 02:17 UTC runs the forward snapshot and the option capture;
+  `quanthacks-tape.timer` at 08:02 UTC starts one BTC block until five whole dates exist, self-limited
+  by `scripts/tape_block_days`/`tape_block_due.py`. Units live in `scripts/systemd/` and are installed
+  under the user manager, matching the house convention of systemd timers over cron.
+- **Forward window**: declared in `docs/plan/forward-window.md`, five falsifiers, append-only snapshots
+  with parameter digests, first snapshots armed with zero events pending new filings.
+- **`make test` green**; **`make check` red only from another session's untracked draft**
+  (`docs/inbox/regime-factor-program-2026-10-04.md`, five references to files that do not exist).
+- **Hazard**: that session also rewrites shared tracked files. The Makefile and `results/README.md`
+  each lost lines of mine to their rewrites and had to be restored; commit shared-file edits the same
+  minute and verify before committing.
+
 ## Traps this session, worth not repeating
 
 - The Pi task-control guard needs `CONTROL_WORK_ID` on mutating bash, and when several work records

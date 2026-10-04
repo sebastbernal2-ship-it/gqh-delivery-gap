@@ -36,3 +36,11 @@
 {"artifact": "coupling tests", "axis": "coupling", "declared_before": true, "id": "V036", "question": "reference coupling", "status": "adopted", "variant": "martingale constrained"}
 {"artifact": "quantum receipt", "axis": "quantum", "declared_before": true, "id": "V037", "question": "generator", "status": "prototype", "variant": "QCBM numpy simulator"}
 {"artifact": "-", "axis": "quantum", "declared_before": false, "id": "V038", "question": "generator", "status": "unverified", "variant": "QCBM GPU or IBM device"}
+{"artifact": "T55", "axis": "split", "declared_before": true, "id": "V039", "question": "evaluation split", "status": "adopted", "variant": "matched universe across extended origins"}
+{"artifact": "T56", "axis": "calibration", "declared_before": true, "id": "V040", "question": "probability calibration", "status": "adopted", "variant": "raw probabilities"}
+{"artifact": "T56", "axis": "calibration", "declared_before": true, "id": "V041", "question": "probability calibration", "status": "rejected", "variant": "single temperature scaling"}
+{"artifact": "T57", "axis": "concept", "declared_before": true, "id": "V042", "question": "expectation gap target", "status": "rejected", "variant": "operating income margins"}
+{"artifact": "T57", "axis": "concept", "declared_before": true, "id": "V043", "question": "expectation gap target", "status": "rejected", "variant": "balance-sheet assets under raw bins"}
+{"artifact": "T36 to T57", "axis": "labels", "declared_before": true, "id": "V044", "question": "surprise binning", "status": "adopted", "variant": "raw relative change with fixed edges"}
+{"artifact": "T57", "axis": "labels", "declared_before": true, "id": "V045", "question": "surprise binning", "status": "untried", "variant": "z-scored change against trailing volatility"}
+{"artifact": "T55", "axis": "universe", "declared_before": true, "id": "V046", "question": "long-history design", "status": "untried", "variant": "point-in-time rule-based universe"}

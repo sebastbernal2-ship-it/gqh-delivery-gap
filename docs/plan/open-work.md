@@ -118,14 +118,35 @@ armed and awaiting its first new filing. Nothing in the repository is a fresh-ho
 
 ## 7. Priority order
 
-1. Rolling-origin evaluation of the three sleeves, per era. Nothing else can be quoted safely
-   without it.
-2. The capex sleeve decision (hedge, gate, or drop).
-3. The council on the complex driver panels, with the three numbers.
-4. The combined portfolio's capacity curve and the binding size.
-5. Within-complex breadth for the charge signal, the capacity bottleneck.
-6. The scheduled captures: forward snapshots daily, options daily, BTC blocks until five dates.
-7. Calibration, tails, and the variant registry.
+Completed on 2026-10-04, with the truth that owns each: rolling origin and the capex retirement (T51),
+combined capacity and its correction (T52), the council on the complex panels (T53), calibration,
+tails and the variant registry (T54), the matched-universe test (T55), the gate recalibration, which
+failed its falsifier (T56), and the margins and assets candidates (T57). The scheduled captures run
+unattended (daily forward snapshot, daily option capture, daily tape block until five dates).
+
+What remains, in order:
+
+1. **The concept-agnostic surprise scaling**, the z-scored change against its own trailing volatility
+   before binning, declared in T57. It is the only fair test left for assets and margins, and it must
+   also be measured on the surviving revenue sleeve before it is adopted anywhere.
+2. **Reconcile the promotion gate with the expectation vintages.** Another session's
+   `scripts/report_promotion_gate.py` still reports "expectation vintages missing" while the repository
+   holds over eleven thousand measured, clock-verified vintages (T45 to T46). That edit is theirs and
+   needs the captain's word; the matching convention is that every specialist in
+   `docs/specialists/registry.jsonl` names the manifest node ids it reads, so the two registries cannot
+   drift apart.
+3. **The council fusion of the surviving specialists** into one distribution per event with a decision
+   rule, accepted only if it beats the two-sleeve portfolio on walk-forward Sharpe and drawdown with
+   intervals excluding zero.
+4. **The risk track**, once the tape has five whole dates: the declared council comparison and the
+   coupling layer over its twelve marginals.
+5. **The forward window**, running; it closes at 250 scored events or twelve months.
+6. **The vision gaps** unchanged: the bundle ladder as a routine, fine-tune rounds with drift monitors
+   and rollback, the full policy layer, a model registry, quantum only against an equal-budget
+   classical win, and scenario and tail diagnostics beyond what T54 covers.
+
+One cheap test from the retirement list is still open: whether a capex surprise works as a **risk
+gate** rather than a sleeve. It is optional and low priority given T51.
 
 ## 8. Stop conditions
 
