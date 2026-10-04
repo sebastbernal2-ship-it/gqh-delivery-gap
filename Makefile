@@ -128,6 +128,7 @@ test:
 	@python3 tests/test_rpo_specialist.py
 	@python3 tests/test_rpo_filing_panel.py
 	@python3 tests/test_text_ab.py
+	@python3 tests/test_live_risk_plan.py
 	@python3 tests/test_build_hyperliquid_fixture.py
 	@python3 tests/test_split_hyperliquid_engine_fixture.py
 	@python3 tests/test_compute_lead_dependence_audit.py
