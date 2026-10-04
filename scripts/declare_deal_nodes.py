@@ -28,6 +28,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 STRUCTURE = ROOT / "results" / "deal-structure.csv"
 MANIFEST = ROOT / "docs" / "scan" / "quantgraph.jsonl"
+FRAGMENT = ROOT / "docs" / "scan" / "credit-layer-nodes.jsonl"
 AGENCY = ROOT / "results" / "agency-only-deals.csv"
 AGENCY_DATASET_ID = "dataset:agency:datacenter-deals"
 AGENCY_PREFIX = "asset:agency-deal:"
@@ -175,6 +176,13 @@ def main() -> int:
         "falsifier": "A listed deal resolves to a filing, which moves it into the SEC register",
     }
 
+    # The credit layer's own nodes and edges are checked in as a fragment and rewritten whenever this runs, so
+    # a branch reconcile cannot silently drop them the way one did on 2026-10-03: the artifacts survived while
+    # the manifest lines referencing them did not, and the manifest then failed validation on 84 edges.
+    fragment: list[dict] = []
+    if FRAGMENT.exists():
+        fragment = [json.loads(line) for line in FRAGMENT.read_text().splitlines() if line.strip()]
+
     kept: list[str] = []
     removed = 0
     for line in MANIFEST.read_text().splitlines():
@@ -184,7 +192,8 @@ def main() -> int:
         identifier = str(record.get("id", ""))
         if (identifier.startswith(DEAL_PREFIX) or identifier.startswith(EDGE_PREFIX)
                 or identifier == REGISTER_ID or identifier.startswith(AGENCY_PREFIX)
-                or identifier.startswith("e-agency-") or identifier == AGENCY_DATASET_ID):
+                or identifier.startswith("e-agency-") or identifier == AGENCY_DATASET_ID
+                or identifier in {row["id"] for row in fragment}):
             removed += 1
             continue
         kept.append(line)
@@ -192,7 +201,7 @@ def main() -> int:
     with MANIFEST.open("w") as handle:
         for line in kept:
             handle.write(line + "\n")
-        for record in [register, agency_dataset] + nodes + agency_nodes + edges + agency_edges:
+        for record in [register, agency_dataset] + fragment + nodes + agency_nodes + edges + agency_edges:
             handle.write(json.dumps(record) + "\n")
 
     print(f"removed {removed} previous deal lines, wrote 2 dataset nodes, {len(nodes)} filing backed deals, "
