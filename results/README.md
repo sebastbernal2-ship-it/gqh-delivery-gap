@@ -275,6 +275,10 @@ Produced by `scripts/run_capacity_curve.py`:
 
 generated-path: results/capacity-curve.json
 
+Produced by `scripts/run_complex_council.py`:
+
+generated-path: results/complex-council.json
+
 Produced by `scripts/run_forward_snapshot.py` (append-only, tracked on purpose so the frozen predictions are tamper-evident):
 
 generated-path: results/forward/snapshots/*.json

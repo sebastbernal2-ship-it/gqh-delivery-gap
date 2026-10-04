@@ -844,3 +844,26 @@ its normalisation.
 **Consequence**: the combined portfolio can carry single-digit millions at one percent participation,
 the constraint is small-cap names rather than the charge signal's universe, and widening the strategy
 means either dropping the smallest names or accepting larger participation.
+
+## T53. On the complex revenue panel the council beats every single block and concatenation, with intervals excluding zero
+
+**Statement**: 1,706 rows, 59 issuers, two data bundles, the disclosure history and the market state
+into the disclosure with a declared peer map. Prevalence scores 1.6078 log loss, the issuer facts
+block 1.7935, the market state block 1.6942 and naive concatenation 1.9878, all weak because the five
+partition design trains each specialist on about seven hundred rows. The **council scores 1.5378**,
+better than prevalence and every single block, and the paired differences clear zero: council minus
+the best single block +0.1564 with interval 0.0863 to 0.2316 and 100 percent of issuer-blocked
+resamples favouring the council, council minus concatenation +0.4607 with interval 0.2052 to 0.7659.
+Redundancy is low, a total-variation distance of 0.345, top-probability correlation 0.057 and argmax
+agreement 21 percent, so the bundles really are different views. Leave-one-out costs 0.062 log loss
+for the issuer facts and 0.030 for the market state, so both earn their place. The ordinal decision
+view acts on 15.9 percent of cases at 33.8 percent exact hits, and on 2.6 percent at 66.7 percent.
+**Evidence**: `results/complex-council.json`; `scripts/run_complex_council.py`;
+`tests/test_complex_council.py`; `hpc/probabilistic-council/panel_council.py`.
+**Scope**: development only, complex names, one split from the council's own partition design, the
+peer map declared in the runner and not part of any frozen recipe, flat costs irrelevant because the
+target is a distribution and not a trade.
+**Consequence**: fusion beats both singles and concatenation on the surviving sleeve's panel, which is
+the second independent council win after the RPO breadth panel (T46's sibling comparison), and it is
+the first with both intervals excluding zero. The council belongs in the pipeline for the complex, and
+the specialists themselves remain weak enough that the gain is relative rather than absolute.
