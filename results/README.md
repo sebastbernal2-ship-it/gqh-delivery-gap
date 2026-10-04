@@ -33,3 +33,8 @@ generated-path: results/crosswalk-review.csv
 Produced by `scripts/run_market_control_stress.py`:
 
 generated-path: results/market-control-stress.csv
+
+Produced by `scripts/summarize_capacity_strategy.py`:
+
+generated-path: results/capacity-strategy-summary.json
+generated-path: results/capacity-equity.svg

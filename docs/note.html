@@ -4,24 +4,24 @@
 <meta charset="utf-8">
 <title>Promised Delivery and the Price of Slippage</title>
 <style>
-  @page { size: letter; margin: 13mm 14mm; }
-  body { font: 9.9pt/1.34 Georgia, "Times New Roman", serif; color: #111; margin: 0; }
-  h1 { font-size: 16pt; margin: 0 0 2mm 0; line-height: 1.2; }
-  h2 { font-size: 11.2pt; margin: 3.4mm 0 1.1mm 0; border-bottom: 0.4pt solid #bbb; padding-bottom: 0.6mm; }
-  h3 { font-size: 10.4pt; margin: 3mm 0 1mm 0; }
-  p { margin: 0 0 1.3mm 0; text-align: justify; }
-  table { border-collapse: collapse; width: 100%; font-size: 8.7pt; margin: 1.4mm 0 2mm 0; }
-  th, td { border-bottom: 0.4pt solid #ddd; padding: 0.7mm 1.4mm; text-align: left; }
+  @page { size: letter; margin: 20mm; }
+  body { font: 11pt/1.26 Georgia, "Times New Roman", serif; color: #111; margin: 0; }
+  h1 { font-size: 17pt; margin: 0 0 1.5mm 0; line-height: 1.2; }
+  h2 { font-size: 12.5pt; margin: 2.4mm 0 0.8mm 0; border-bottom: 0.4pt solid #bbb; padding-bottom: 0.5mm; }
+  h3 { font-size: 11.5pt; margin: 2.4mm 0 0.8mm 0; }
+  p { margin: 0 0 0.9mm 0; text-align: justify; }
+  ul { margin: 0 0 1.2mm 4.4mm; padding: 0; }
+  li { margin-bottom: 0.5mm; }
+  table { border-collapse: collapse; width: 100%; font-size: 11pt; margin: 1mm 0 1.2mm 0; }
+  th, td { border-bottom: 0.4pt solid #ddd; padding: 0.5mm 1.2mm; text-align: left; }
   th { background: #f2f2f2; font-weight: 600; }
   td.n, th.n { text-align: right; }
-  li { margin-bottom: 0.4mm; }
-  .meta { font-size: 9.2pt; color: #444; margin-bottom: 3mm; }
-  .box { border: 0.5pt solid #999; background: #fafafa; padding: 2mm 2.6mm; margin: 2mm 0; }
-  code, pre { font-family: "DejaVu Sans Mono", monospace; font-size: 8.4pt; }
-  pre { background: #f7f7f7; border-left: 1.6pt solid #bbb; padding: 1.6mm 2mm; margin: 1.4mm 0; white-space: pre-wrap; }
-  ul { margin: 0 0 1.6mm 4.6mm; padding: 0; }
-  li { margin-bottom: 0.7mm; }
-  .small { font-size: 8.6pt; color: #444; }
+  .meta { font-size: 11pt; color: #444; margin-bottom: 2mm; }
+  .box { border: 0.5pt solid #999; background: #fafafa; padding: 1.6mm 2.2mm; margin: 1.6mm 0; }
+  img { width: 78%; display: block; margin: 1mm auto 0.6mm auto; }
+  code, pre { font-family: "DejaVu Sans Mono", monospace; font-size: 10pt; }
+  pre { background: #f7f7f7; border-left: 1.6pt solid #bbb; padding: 1.2mm 1.6mm; margin: 1.2mm 0; white-space: pre-wrap; }
+  .small { font-size: 11pt; color: #444; }
 </style>
 </head>
 <body>
@@ -29,244 +29,179 @@
 <h1>Promised Delivery and the Price of Slippage</h1>
 <div class="meta">
 Callsign <strong>VECTOR</strong> &middot; Gator Quant Hacks 2026, Systematic Trading track, sponsored by Webull &middot;
-3 October 2026 &middot; <code>github.com/sebastbernal2-ship-it/gqh-delivery-gap</code><br>
+4 October 2026 &middot; <code>github.com/sebastbernal2-ship-it/gqh-delivery-gap</code><br>
 Team: sebastbernal2-ship-it, aidanq06, vshnu1, lucyrunner.
 </div>
 <div class="box">
-<strong>Protocol status.</strong> This note contains historical diagnostic results from a legacy
-within-firm revision proxy. It is not an active trading thesis. The current protocol requires a
-point-in-time public expectation, verified issuer exposure, and a sealed holdout that remains closed.
-Results are being regenerated before promotion.
+<strong>Status.</strong> The mechanism is measured and the measurement is large. Both sealed windows were opened
+once, by their owner, on 2026-10-03; all three declared tests are null, and the aggregate strategy fails the
+tradability gate. The record is <code>docs/plan/sealed-test-record.md</code>. This note reports the negative
+result whether good or bad. Nothing here is a promoted strategy, and the repository's promotion gate is
+CLOSED.
 </div>
 
 <h2>1. The claim, and who is on the other side</h2>
-<p>Long-lived infrastructure is sold before it is built, so a schedule is a published promise. When it
-moves, the cash flow moves: a delayed substation defers a utility's rate base, a slipped turbine defers a
-developer's revenue, a postponed commencement defers rent. The party holding schedule risk pays the party
-paid on delivery, and that transfer is what this study measures.</p>
-<p>The reason it is not simply priced away is structural rather than clever. The revision hides in a
-monthly inventory of planned generators and in filing notes; the median revision is <strong>exactly twelve
-months</strong>, which reads as routine roll-forward rather than as news; the same obligation must be joined
-across sources by plant and generator identity; and the measured information lag from period end to public
-disclosure is <strong>33 to 94 days</strong> depending on the field. A reader who waits for a headline never
-sees the revision at all.</p>
+<p>Long-lived infrastructure is sold before it is built, so a schedule is a published promise. When it moves,
+the cash flow moves: a delayed substation defers a utility's rate base, a slipped turbine defers a developer's
+revenue, a postponed commencement defers rent. The party holding schedule risk pays the party paid on delivery,
+and that transfer is the object of this study.</p>
+<p>It is not simply priced away. The revision hides in a monthly inventory of planned generators and in filing
+notes; the median revision is <strong>exactly twelve months</strong>, which reads as routine roll-forward
+rather than news; the same obligation must be joined across sources by plant and generator identity; and the
+measured lag from period end to public disclosure is <strong>33 to 94 days</strong> depending on the field. A
+reader who waits for a headline never sees the revision at all.</p>
+<p><strong>What the design does not establish, stated first.</strong> The counterparty is named but not
+measured. No test here observes a forced payer, so the tests can falsify a return claim and cannot confirm the
+mechanism. That limit is stated before any number below.</p>
 
 <h2>2. What we measured, and it is large</h2>
-<p>Nine annual vintages of the EIA-860M monthly generator inventory, November 2015 to November 2023, one
-vintage per year at the same month so comparisons are like for like. Every generator is a row, and a
-promise that moved is a revision.</p>
 <table>
 <tr><th>Project level, 2015&ndash;2023</th><th class="n">Value</th><th>Meaning</th></tr>
 <tr><td>Promises that moved</td><td class="n">3,783</td><td>3,687 later, 96 earlier</td></tr>
 <tr><td>Median slip</td><td class="n">12 months</td><td>mean 13.2, worst 120</td></tr>
-<tr><td>Most common slips</td><td class="n">12 / 24 / 6 / 9</td><td>797 / 334 / 256 / 177 cases</td></tr>
-<tr><td>Left the planned sheet</td><td class="n">3,451</td><td>mostly by starting to run</td></tr>
 <tr><td>Cancelled or postponed</td><td class="n">711</td><td>formal withdrawals</td></tr>
 <tr><td>Promised against realized</td><td class="n">64% late</td><td>of 721 generators promised in 2015 and running by 2023; median 2 months, worst 83</td></tr>
 <tr><td>Concentration</td><td class="n">solar 1,682</td><td>then onshore wind 435, hydro 371, batteries 362, gas CC 272</td></tr>
+<tr><td>Promised next-year capacity</td><td class="n">+41.7% a year</td><td>median growth, 2016&ndash;2024; the series is one-signed in 89% of months</td></tr>
 </table>
-<p>A monthly series over 111 vintages adds the second finding: the capacity promised for the next year grew
-at a <strong>median 41.7 percent per year</strong> across 2016&ndash;2024, so slippage never reversed the
-pipeline. Any naive slippage signal is therefore positive in 89 percent of months, which is the trap in
-section 4.</p>
+<p>Tracking 6,407 generators across monthly vintages sharpens the picture: a first revision arrives a median
+of <strong>5 months</strong> after a project first appears, <strong>36 percent are a nudge of one month or
+less</strong> and 27 percent are six months or more, and <strong>44 percent of tracked generators</strong>
+still had a real revision. The hazard rises with age (23 percent in the first six months, 44 percent between
+one and two years), so a promise is not safer for having survived. A signal built on all revisions is
+dominated by month-sized noise; the tail is where information lives, and the one-signed growth series is the
+trap section 4 documents.</p>
 
-
-<p><strong>The shape of a revision, at monthly resolution.</strong> Tracking 6,407 generators across the
-development vintages gives a sharper picture than the annual comparison can. A first revision arrives quickly,
-a median of <strong>5 months</strong> after a project first appears, and it is usually small: <strong>36
-percent of first revisions are a nudge of one month or less</strong>, while 27 percent are six months or more.
-Excluding nudges, <strong>44 percent of tracked generators</strong> still had a real revision. The hazard rises
-with age rather than falling (23 percent in the first six months, 44 percent between one and two years), so a
-promise is not safer for having survived. Between annual snapshots, where those increments accumulate, the
-modal move is twelve months.</p>
-<p>That decomposition matters for the search rather than only for the description. **A revision signal built
-from all revisions is dominated by month-sized noise**, which is one plausible reason the firm-level tests
-found so little: the median revision carries almost no information, and whatever is there lives in the tail.
-Any future signal should be defined on revisions of six months or more, and that is a change of definition
-made on mechanism evidence rather than on a result.</p>
 <h2>3. Firm level: what a company discloses about itself</h2>
-<p>Project revisions rarely belong to a listed company: an EIA entity is a developer or operator, and only
-<strong>6.2 percent</strong> of slipped capacity sits with an entity whose name carries a large listed owner,
-against <strong>80 percent</strong> held by project and holding companies. So the tradable trace must be what
-a firm says about itself. SEC XBRL gives that, because every fact names the filing that reported it, which
-joins to an acceptance timestamp.</p>
-<table>
-<tr><th>Firm level</th><th class="n">Filings</th><th class="n">Lag to public</th></tr>
-<tr><td>PWR remaining performance obligations</td><td class="n">45 facts</td><td class="n">median 56 days</td></tr>
-<tr><td>ETN remaining performance obligations</td><td class="n">15 facts</td><td class="n">median 33 days</td></tr>
-<tr><td>PWR unapproved change orders</td><td class="n">26 facts</td><td class="n">median 94 days</td></tr>
-</table>
-<p>Remaining obligations fall as work is delivered, so a fall is a revision to the disclosed book, not a
-delay, and each change is measured against the firm's own typical change.</p>
+<p>Project revisions rarely belong to a listed company: only <strong>6.2 percent</strong> of slipped capacity
+sits with an entity whose name carries a large listed owner, against <strong>80 percent</strong> held by
+project and holding companies, so the project route was abandoned at that attribution ceiling. The tradable
+trace must be what a firm says about itself, and SEC XBRL provides it: every fact names the filing that
+reported it, which joins to an acceptance timestamp. Measured lags to public availability are 56 days for
+PWR's remaining performance obligations, 33 for ETN's, and 94 for PWR's disputed change orders. Remaining
+obligations fall as work is delivered, so a fall is a revision to the disclosed book, not a delay, and each
+change is measured against the firm's own typical change.</p>
 
-<h2>4. Three tests, and the honest answer each gave</h2>
+<h2>4. The tests, and the honest answer each gave</h2>
 <h3>Test one: the disclosing firm's own price</h3>
 <p>84 timestamped revisions across PWR and ETN, signal lagged to the session after availability, adjusted
-against a sector benchmark. Negative surprises, the direction the mechanism predicts, show no consistent
-move at any horizon (25 events, every |t| below 1.3). Positive surprises drift 3.83 percent over twenty
-sessions, but 70 of the 84 events are one firm across 41 weeks, so the simple explanation is that firm's
-own multi-year run.</p>
+against a sector benchmark. Negative surprises, the direction the mechanism predicts, show no consistent move
+at any horizon (25 events, every |t| below 1.3). Positive surprises drift +3.83 percent over twenty sessions,
+but 70 of the 84 events are one firm across 41 weeks, so the simple explanation is that firm's own run.</p>
 <h3>Test two: breadth, by a rule declared in advance</h3>
 <p>Every filer reporting remaining performance obligations at least three times between 2015Q1 and 2024Q3,
-grouped by its own SIC code. 1,285 filers qualify, 382 fall in a declared industry group and 903 form a
-placebo. That yields <strong>5,663 timestamped revisions</strong>, 4,634 usable, 267 sealed and excluded.</p>
-<table>
-<tr><th>Group</th><th class="n">Down surprise, 10d</th><th class="n">Down surprise, 20d</th><th class="n">n</th></tr>
-<tr><td>Contractors</td><td class="n">&mdash;</td><td class="n">+2.40%</td><td class="n">27</td></tr>
-<tr><td>Equipment</td><td class="n">+0.82%</td><td class="n">+0.30%</td><td class="n">300</td></tr>
-<tr><td>Electric services</td><td class="n">&minus;1.18%</td><td class="n">&minus;1.29%</td><td class="n">87</td></tr>
-<tr><td>Data centre and real estate</td><td class="n">+0.87%</td><td class="n">+1.84%</td><td class="n">996</td></tr>
-</table>
-<p>Fifty cells were examined, being four groups, two directions and five horizons. Nothing is both
-meaningful and strong in the predicted direction. <strong>A downward surprise, which should be the bad news,
-is flat or mildly positive in every group.</strong></p>
-<div class="box">
-<strong>Placebo control.</strong> Re-running the identical pipeline with each event's date swapped for
-another date the same firm also published something gives <strong>seven</strong> cells with |t| above 2,
-against <strong>two</strong> in the real data, and the same average cell mean (+0.284% against +0.281%).
-The pipeline does not manufacture associations; the real cells are noise at this sample size.
-</div>
+grouped by its own SIC code: 1,285 filers qualify, 382 fall in a declared industry group and 903 form a
+placebo, yielding <strong>4,634 usable timestamped revisions</strong>. Fifty cells were examined, four groups
+by two directions by five horizons, and nothing is both meaningful and strong in the predicted direction: a
+downward surprise, which should be bad news, is flat or mildly positive in every group. The placebo re-runs
+the identical pipeline with each event's date swapped for another date the same firm published: it produces
+<strong>seven</strong> cells with |t| above 2 against <strong>two</strong> in the real data, with the same
+average cell mean (+0.284% against +0.281%). These cells are noise at this sample size.</p>
 <h3>Test three: the aggregate revision, as a relative-value pair</h3>
 <p>For each month-end vintage, the capacity promised for the next calendar year against the same promise a
-year earlier. Long contractors and electrical equipment, short merchant generators and large utilities when
-the promise grows, and the reverse when it slips. Both legs are liquid large caps, dollar neutral.</p>
+year earlier, long contractors and electrical equipment, short merchant generators and large utilities when
+the promise grows and the reverse when it slips, dollar neutral, both legs liquid large caps. Development is
+2016-07 to 2022-08; the sealed window 2022-10 to 2024-09 was opened once. The opened row's means are implied
+from the two recorded runs (full-run minus development, divided by 24 months); the frozen script did not
+archive the opened window's month-by-month path, and the holdout was not re-opened for it.</p>
 <table>
-<tr><th>Signal definition</th><th class="n">n</th><th class="n">Gross</th><th class="n">Net, 10bp</th><th class="n">Net, 20bp</th><th class="n">Annualised</th><th class="n">Sharpe</th><th class="n">Max drawdown</th><th class="n">Hit</th></tr>
-<tr><td>Next year</td><td class="n">74</td><td class="n">+0.29%</td><td class="n">+0.07%</td><td class="n">&minus;0.15%</td><td class="n">+0.8%</td><td class="n">0.04</td><td class="n">&minus;37.8%</td><td class="n">50%</td></tr>
-<tr><td>Current and next year</td><td class="n">74</td><td class="n">&minus;0.08%</td><td class="n">&minus;0.30%</td><td class="n">&minus;0.53%</td><td class="n">&minus;3.6%</td><td class="n">&minus;0.18</td><td class="n">&minus;40.0%</td><td class="n">47%</td></tr>
-<tr><td>Three years</td><td class="n">74</td><td class="n">+0.13%</td><td class="n">&minus;0.10%</td><td class="n">&minus;0.32%</td><td class="n">&minus;1.2%</td><td class="n">&minus;0.06</td><td class="n">&minus;43.0%</td><td class="n">47%</td></tr>
+<tr><th>Signal</th><th class="n">n</th><th class="n">Gross</th><th class="n">Net 10bp</th><th class="n">Net 20bp</th><th class="n">Turnover</th><th class="n">Max DD</th></tr>
+<tr><td>Next year, development</td><td class="n">74</td><td class="n">+0.29%</td><td class="n">+0.07%</td><td class="n">&minus;0.15%</td><td class="n">1.1x</td><td class="n">&minus;37.8%</td></tr>
+<tr><td>Next year, opened window</td><td class="n">24</td><td class="n">+0.66%</td><td class="n">+0.45%</td><td class="n">+0.27%</td><td class="n">1.1x</td><td class="n">not archived</td></tr>
+<tr><td>Current and next, development</td><td class="n">74</td><td class="n">&minus;0.08%</td><td class="n">&minus;0.30%</td><td class="n">&minus;0.53%</td><td class="n">1.1x</td><td class="n">&minus;40.0%</td></tr>
+<tr><td>Current and next, opened window</td><td class="n">24</td><td class="n">&minus;0.05%</td><td class="n">&minus;0.26%</td><td class="n">&minus;0.50%</td><td class="n">1.1x</td><td class="n">not archived</td></tr>
 </table>
-<p><strong>Diagnostic that matters more than the table.</strong> The next-year signal is positive in 89
-percent of months, so that row is a nearly static pair, not a test of a signal: both legs returned about
-+1.9 and +1.6 percent a month and the spread between them nets to nothing. The balanced definition, positive
-in 50 percent of months, is negative after costs. A selectivity plateau was also run: trading only the
-largest third of revisions gives +0.56 percent a month net, against &minus;0.15 percent at the median cut,
-but that is monotone in selectivity with 25 observations and a Sharpe of 0.28, which points at selection
-rather than at a plateau.</p>
+<p><strong>The diagnostic that matters more than the table.</strong> The next-year signal is positive in 89
+percent of months, so its row is a near-static pair rather than a test of a signal, and its opened-window
++0.45 percent is the spread between the buildout and scarcity baskets in 2022&ndash;2024, not information from
+the revision. The balanced definition, positive in half the months, is negative after costs in both windows. A
+selectivity plateau was run: trading only the largest third of revisions gives +0.85 percent a month net at
+10bp and +0.58 at doubled costs over 33 months, but that subset is chosen by magnitude and was already visible
+in development, so it needs a fresh holdout this study cannot give it, and it stays a hypothesis with no
+evidence.</p>
+<img src="../results/capacity-equity.svg" alt="Development-window equity curve, net of 10 basis points per leg">
+<p class="small">Development-window equity, net of 10bp per leg, for the next-year and balanced signals (the
+opened window has no archived path and is reported numerically above). The 2022&ndash;2024 buildout regime is
+what the opened window adds.</p>
+<h3>Test four: the scan, coverage first</h3>
+<p>Before measuring, the node space is declared: 231 pairs, of which 105 are measurable and the rest are
+blocked with a written reason. In the mechanism window the scan measured <strong>51 series-level pairs</strong>,
+each against its own generated null; the cross-family count, the one that matters, is <strong>none against 0.9
+expected</strong>. With the holdout opened it measured 62 pairs and found <strong>two cross-family survivors
+against 1.1 expected</strong>, both commodity or basket pairs whose legs share constituents. Inside the compute
+era the same scan found three cross-family survivors against 1.1 expected in development, and after the opened
+months <strong>two against 1.1</strong>: the development survivors do not hold up, and the compute price series
+itself clears its own null against none of eleven partners. A firewall separates the windows because they
+overlap: nothing found in the compute era may change the mechanism study's design.</p>
 
-
-<h2>5. The scan: coverage first, then associations</h2>
-<p>Before measuring anything, the node space is declared: <strong>22 nodes, 231 pairs, of which 116 are
-measurable and 115 are blocked with a written reason.</strong> A node needs a representation with a clock
-and an availability rule, or it must explain its absence. The blocked record is the honest map of what this
-data cannot answer:</p>
-<table>
-<tr><th>Missing family</th><th>Why it cannot be measured here</th></tr>
-<tr><td>Compute rental price</td><td>only current values are public; the history is a paid tier, and the two open datasets that looked promising are empty shells</td></tr>
-<tr><td>Spot power price</td><td>the market operator did not respond from this host</td></tr>
-<tr><td>Interconnection queues</td><td>no queue source reached</td></tr>
-<tr><td>Positioning and crowding</td><td>the only non-crypto perpetual markets reach back thirteen months</td></tr>
-<tr><td>Option implied moves</td><td>no entitlement for historical chains</td></tr>
-</table>
-<p>In the mechanism window the scan measured <strong>51 series-level pairs</strong>, each against its own
-generated null: a block shuffle that keeps short-run autocorrelation, and a twelve-month shift that keeps
-seasonality. Every survivor inside one family is asset co-movement rather than a relation, so the count that
-matters is the cross-family one, and there it found <strong>none against 0.9 expected</strong>. The two
-corrections below are what make that statement possible:</p>
-<ul>
-<li><strong>One series per node.</strong> Three representations of the promise node are highly correlated,
-so that node could vote three times in one direction. Keeping one representation leaves <strong>zero
-cross-family survivors</strong> in this window.</li>
-<li><strong>Specificity.</strong> A relation that appears in unrelated industries is a common factor, not
-the mechanism. The only mechanism-relevant survivor, firm disclosure revisions against gas prices, was
-recomputed per industry group: <strong>+0.31 in the data-centre group, and &minus;0.06 in the contractor
-and equipment groups.</strong> It belongs to the comparison group, not to the mechanism. The other two
-survivors are the known relations of utilities against rates and copper against rates.</li>
-</ul>
-<p>The scan finds real structure in asset co-movement and in known macro links, and <strong>no survivor that
-belongs to this mechanism.</strong> That is the fourth negative, and the first that searched the space
-rather than one hand-picked path.</p>
-
-<p><strong>Two studies, two windows, one firewall.</strong> The mechanism and strategy study keeps its
-history from July 2015 and its twenty-four month holdout from October 2022. The compute era study has its
-own window: history from June 2022, because that is where the compute price archive begins, development to
-March 2024, and a six month holdout. Re-running everything inside the compute window was measured and
-rejected, because with a twelve month lookback on twenty-two months of history the strategy has about ten
-observations, which is not a tested strategy but an untestable one. The rule between them is a firewall:
-<strong>nothing found in the compute era may change the strategy's design</strong>, because the two windows
-overlap and a discovery in one would otherwise spend the other's held-out data.</p>
-<p>Inside the compute-era window the same scan measured <strong>62 series-level pairs</strong>. Six beat
-their own null against 3.1 expected; after the canonical and family corrections, <strong>three cross-family
-survivors remain against 1.1 expected</strong>. Two are the known relations of power equities and copper
-against rates. The third links firm disclosure revisions to the promised pipeline, which is the mechanism
-itself, and it is the only survivor worth a mechanism conversation. It is not evidence: twenty-two months,
-one surviving relation, and its seasonal control only partly explains it. <strong>The compute price series, the node this window exists
-for, is now in the study</strong>: a monthly median of provider spot prices per instance family, rebased
-across families, twenty-two development months, read straight from the archive rather than from a summary.
-Measured against eleven partners it clears its own null on none of them. Its strongest association is the
-scarcity basket at the 88th percentile, with a change correlation of &minus;0.36 and a level correlation of
-&minus;0.49; fuel, copper, uranium, rates, both equity baskets, the promise revisions and firm disclosures
-all sit between the 7th and 76th percentile. Either the relation is absent at monthly frequency, or
-twenty-two months is too short, or a provider spot price is too noisy a proxy for what compute actually
-rents for. Naming all three is the honest end of this line, and choosing one without a test would be the
-mistake this framework exists to prevent.</p>
-<h2>6. Risk management</h2>
+<h2>5. Risk management</h2>
 <ul>
 <li><strong>Position limits, declared in advance and enforced in the chain log:</strong> 2 percent of NAV per
 core edge, 1 percent for the expression, and a cap of three unmeasured pilot edges at a time.</li>
 <li><strong>Structure:</strong> dollar-neutral pairs, so market and sector beta are removed by construction
-rather than asserted. The one thing the pair cannot remove is the shared AI-infrastructure factor, which both
-legs carry; that is the main tail risk and it is why the legs are chosen from different positions in the
-value chain.</li>
-<li><strong>Observed drawdown:</strong> &minus;37.8 percent on the next-year variant and &minus;43.0 percent
-on the three-year variant, both worse than the return justifies.</li>
-<li><strong>De-risking rule:</strong> a position closes on the next vintage if the promise it rests on is not
-reaffirmed, and the whole pair is stood down when the revision series has been one-signed for six months,
-because that is when the trade is a static bet rather than a signal.</li>
-<li><strong>Falsifiers, recorded per edge before measurement:</strong> if the revision stops predicting the
-firm's own reported obligations, or if the price move is explained by market and sector movement after
-benchmarking, the study reports a negative rather than a weaker version of the same claim.</li>
+rather than asserted. The factor the pair cannot remove is the shared AI-infrastructure exposure both legs
+carry; that is the main tail risk, and it is why the legs sit at different points of the value chain.</li>
+<li><strong>Observed drawdown:</strong> &minus;37.8 percent on the next-year variant, &minus;48.2 percent on
+the balanced variant, both worse than the return justifies.</li>
+<li><strong>De-risking and falsifiers:</strong> a position closes on the next vintage if the promise it rests
+on is not reaffirmed, and the pair is stood down when the revision series has been one-signed for six months.
+Falsifiers are recorded per edge before measurement: if the revision stops moving the firm's own reported
+obligations, or the price move is explained by market and sector movement after benchmarking, the study
+reports a negative rather than a weaker version of the same claim.</li>
 </ul>
 
-<h2>7. Liquidity and capital</h2>
+<h2>6. Liquidity and capital</h2>
 <p>Both legs are large-capitalisation US listings with deep daylight liquidity: contractors and electrical
 equipment on one side (PWR, EME, MTZ, DY, ETN, J, HUBB, ROK), merchant generation and utilities on the other
-(NRG, VST, D, SO, NEE, EXC). Monthly rebalancing with a position change in roughly one month in seven gives
-about 1.1 times monthly turnover, so costs are small in absolute terms: 10 basis points per leg per
-rebalance costs about 22 basis points a month in the worst case where both legs flip, and the tables above
-report the same run at double that. The binding constraint on capacity is not liquidity, it is the absence of
-an edge: a pair trading for years at a 0.04 Sharpe cannot carry meaningful capital, and the honest statement
-is that capacity is moot until an association survives its own placebo.</p>
+(NRG, VST, D, SO, NEE, EXC). Monthly rebalancing gives about 1.1 times monthly turnover, so 10 basis points
+per leg per rebalance costs about 22 basis points a month when both legs flip, and every table reports the run
+at double that. The binding constraint is not liquidity, it is the absence of an edge: a pair trading for
+years at a 0.04 Sharpe cannot carry meaningful capital, so capacity is moot until an association survives its
+own placebo.</p>
 
-<h2>8. Evidence discipline</h2>
+<h2>7. Evidence discipline</h2>
 <ul>
 <li><strong>Variants tried, stated in one place:</strong> <code>docs/variants.md</code>, generated from the
 artifacts. Across every search, <strong>135 comparisons produced 6 survivors against 5.5 expected by
-chance.</strong> The control is reported separately because it measures the pipeline rather than the search,
-and it produced <strong>7 against 2.5 expected</strong>, which says our calibrated threshold is on the loose
-side for autocorrelated series and is why the family correction and the specificity test are not optional.
-Measurements with no null test are listed apart and excluded from those counts.</li>
+chance</strong>. The control is reported separately because it measures the pipeline rather than the search:
+50 comparisons, <strong>7 survivors against 2.5 expected</strong>.</li>
 <li><strong>Every signal lagged:</strong> a filing is usable at its acceptance timestamp plus a declared
-processing lag; a monthly inventory is usable at the end of its own month. Fills are the close of the first
-session strictly after that moment, and the code refuses same-bar fills.</li>
+processing lag; a monthly inventory at the end of its own month. Fills are the close of the first session
+strictly after that moment, and the code refuses same-bar fills.</li>
 <li><strong>Point-in-time throughout:</strong> vintages are read as published, never as revised series.</li>
-<li><strong>Out-of-sample, defined and still closed:</strong> the sealed window is the shorter of a fifth of
-the series or two years, which here is the final 24 monthly vintages, 2022-10 to 2024-09. Nothing in this
-note uses them. One command opens it, once, and reports whatever it says:
-<pre>python scripts/run_capacity_strategy.py --open-sealed</pre></li>
-<li><strong>Reproducible:</strong> twelve test suites over the same code paths; the data are public, with a
-source receipt on every row.</li>
+<li><strong>Out-of-sample, opened once and reported:</strong> the sealed window is the shorter of a fifth of
+the series or two years, here the final 24 monthly vintages, 2022-10 to 2024-09. It was opened once, by its
+owner, on 2026-10-03; all three declared tests are null and are reported in
+<code>docs/plan/sealed-test-record.md</code>. Nothing was re-opened, no threshold was changed after the fact,
+and the one positive cell is disclosed with its regime explanation above.</li>
+<li><strong>Reproducible:</strong> the gates are <code>make check</code> and <code>make test</code>; every
+number above comes from a file in <code>results/</code>; each result file carries its own reproduce command in
+<code>results/README.md</code>.</li>
 </ul>
 
-<h2>9. What this study concludes, and what it does not</h2>
+<h2>8. What this study concludes, and what it does not</h2>
 <p>The phenomenon is real, large and measurable: promises move, they move in whole-year steps, and two thirds
 of promised generators arrive late. Four increasingly broad tests then fail to turn that into a return
-signal, the last of them searching the declared node space rather than one hand-picked path, and a placebo
-shows the failures are not an artefact of the pipeline. The most useful sentence this
-study can offer a reader is therefore a measurement rather than a strategy: <strong>the slippage in this
-buildout is too slow and too routine to trade against the firms that disclose it, but it is large enough to
-change what should be built and where.</strong></p>
+signal, the last searching the declared node space rather than one hand-picked path, and the opened windows
+confirm the nulls. The most useful sentence this study can offer is a measurement rather than a strategy:
+<strong>the slippage in this buildout is too slow and too routine to trade against the firms that disclose it,
+but it is large enough to change what should be built and where.</strong></p>
 <p><strong>Design-time exposure, disclosed.</strong> The aggregate capacity signal was defined while the full
-series was visible, including the months that later became the holdout, so the holdout is clean for
-*evaluation* and not for *definition*. The evaluation itself used development months only, and the definition
-is frozen. A fresh holdout would be needed before any claim about that signal could be called out-of-sample in
-the strict sense.</p>
-<p>Limits, stated plainly. Attribution stops at the party that reports the obligation, which is why the
-project-level route was abandoned at a 6.2 percent coverage ceiling. Obligations fall when work is delivered,
-so a revision is not a delay. The sealed window is 24 months, which is small. The study has no intraday or
-option data, because no entitlement was available, so horizons inside a session were never tested. And the
-modal one-year revision is a descriptive fact; its cause, whether reporting convention or real slippage,
-remains open.</p>
+series was visible, including the months that later became the sealed window, so the window is clean for
+evaluation and not for definition; the evaluation used development months only, the definition is frozen, and
+a fresh holdout would be needed before that signal could be called out-of-sample in the strict sense. The
+opened-window means here are implied from the recorded runs, not from a re-open.</p>
+<p><strong>Limits, stated plainly.</strong> Attribution stops at the party that reports the obligation, so
+the project route closed at a 6.2 percent ceiling. Obligations fall when work is delivered, so a revision is
+not a delay. The sealed window is 24 months, which is small. There is no intraday or option data, because no
+entitlement was available, so horizons inside a session were never tested. The mechanism's counterparty was
+never measured, so no result here can confirm it, only falsify a return claim that rests on it.</p>
+<p><strong>The sibling directions, each with its own record.</strong> Three further directions were tested the
+same day and are not pooled here: forced liquidation on a perpetual venue passes the mechanism gates but
+fails economics on the evidence (<code>docs/plan/forced-flow-verdict.md</code>); the credit layer found the
+aggregate expression null and the per-site instrument blocked by an entitlement
+(<code>docs/plan/credit-gauntlet.md</code>); ten-metre imagery does not separate construction states well
+enough to read delivery (<code>docs/plan/imagery-test.md</code>).</p>
 
 <h2>Appendix: data, code and reproduction</h2>
 <table>
@@ -275,16 +210,15 @@ remains open.</p>
 <tr><td>SEC EDGAR submissions and XBRL company facts</td><td>firm disclosures, with acceptance times</td><td><code>data.sec.gov</code></td></tr>
 <tr><td>Daily adjusted closes</td><td>price side, sector benchmarks</td><td>provider daily bars</td></tr>
 </table>
-<pre>make check          # gates: secrets, ledger, structure, paths, owners, chain, link
-make test           # twelve suites
-python scripts/build_capacity_expectations.py    # 111 vintages to one aggregate panel
-python scripts/build_delivery_panel.py --years 2015-2023
-python scripts/build_rpo_universe.py &amp;&amp; python scripts/build_rpo_events.py
-python scripts/run_group_event_study.py --placebo
-python scripts/run_capacity_strategy.py</pre>
-<p class="small">Negative results are recorded in <code>docs/decisions.md</code> with their numbers, and the
-claim path with a falsifier per edge is in <code>docs/chains/t-capacity-revision.jsonl</code>. A submitted
-PDF is generated from this file; the repository is the deliverable of record.</p>
+<pre>make check          # gates: secrets, ledger, structure, paths, owners, chain, market, truths
+make test           # the full suite
+python scripts/run_capacity_strategy.py          # development window result
+python scripts/summarize_capacity_strategy.py    # in-sample and opened-window split
+python scripts/run_group_event_study.py --placebo</pre>
+<p class="small">The sealed record is <code>docs/plan/sealed-test-record.md</code>; the result files behind
+every number are in <code>results/</code>; the claim path with a falsifier per edge is in
+<code>docs/chains/t-capacity-revision.jsonl</code>. A submitted PDF is generated from this file, and the
+repository is the deliverable of record.</p>
 
 </body>
 </html>
