@@ -71,7 +71,7 @@ measurement contract for a later simulator/QPU adapter, not evidence for using Q
 
 ## Modular inference engine (`council/`)
 
-Runtime contract `council-distribution-0.2.0`. See [`council/README.md`](council/README.md)
+Runtime contract `council-distribution-0.3.0`. See [`council/README.md`](council/README.md)
 for API details. The engine validates specialist class order, full probability mass, version and
 time metadata; fits specialist temperatures, context reliability weights, and pool calibration from
 three separate data partitions; supports linear and logarithmic pooling; and returns the fused

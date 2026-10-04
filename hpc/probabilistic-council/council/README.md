@@ -1,6 +1,6 @@
 # Council runtime API
 
-Contract: `council-distribution-0.2.0`. Python standard library only; compatible with Python 3.9+.
+Contract: `council-distribution-0.3.0`. Python standard library only; compatible with Python 3.9+.
 
 ## Modules
 
@@ -10,6 +10,10 @@ Contract: `council-distribution-0.2.0`. Python standard library only; compatible
   must be timezone-aware and satisfy `information_cutoff <= forecast_time < valid_until`. Joint
   forecasts can declare named dimensions and one state tuple per probability; `marginalize()` keeps
   the fitted joint distribution intact while deriving a requested marginal.
+  `QuantileForecast` carries the same provenance for a marginal quantile function, and
+  `to_categorical()` / `from_categorical()` convert between the two representations. The conversion
+  is approximate and its measured error is pinned in
+  `hpc/probabilistic-council/tests/test_quantile_representation.py`.
 - `calibration.py` fits multiclass temperature scaling by minimum log loss.
 - `gating.py` learns global and sufficiently supported context weights from multiclass Brier loss.
   A minimum weight prevents any specialist from receiving zero weight during fit.
@@ -23,6 +27,9 @@ Contract: `council-distribution-0.2.0`. Python standard library only; compatible
 - `jevlike_adapter.py` wraps an initialized JevLike scorer as a categorical specialist, preserving
   caller-supplied option order and requiring explicit model/data version strings. The separate C++
   `JevLikeTinyScorer` supports the exported tiny byte encoder.
+- `risk_adapter.py` turns the execution-risk track's (3, 2, 2, 3) marginal quantiles into twelve
+  categorical forecasts over the declared bin edges, so the continuous track and the council share
+  one contract. `execution_dataset.py` keeps owning the bin geometry.
 
 ## Minimal use
 
