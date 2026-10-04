@@ -779,3 +779,23 @@ stability diagnostic rather than a performance number, and the out-of-sample win
 effect. No cross-era alpha is established, the composite's recent strength may be regime, and the
 frozen forward window is now the only honest way to claim anything. The capex sleeve in particular
 does not deserve weight on its own record; it is kept only for its negative correlation.
+
+## T50. The forward window is declared and armed; nothing in the repository is a window result
+
+**Statement**: the forward window opens at the first trading session after 2026-10-04 and closes at
+250 scored events or twelve months, whichever comes first. The protocol in
+`docs/plan/forward-window.md` freezes the universe, the three sleeve recipes, the gate, the inverse
+volatility weighting, the ten percent volatility target, the cost tiers and the metrics, and it names
+five falsifiers before any observation exists. Snapshots are append-only and recorded with the
+SHA-256 of their inputs and their fitted parameters; the evaluator refuses any event whose exit
+session is not yet in the price cache; the window is scored once, at the end, and reported whether
+good or bad.
+**Evidence**: `docs/plan/forward-window.md`; `scripts/run_forward_snapshot.py`;
+`scripts/evaluate_forward_window.py`; `tests/test_forward_window.py`;
+`results/forward/snapshots/`.
+**Scope**: the first snapshots carry zero events because no new complex filing had landed at their
+run time; that is the expected armed state, not a result. Every development number in this repository,
+including the best measured configuration at Sharpe 1.549 and a -9.0 percent drawdown, is not evidence
+about this window, as T49 explains.
+**Consequence**: any new performance claim must come from this window. Until it closes, the honest
+statement of the programme is the development record plus an open, instrumented test.

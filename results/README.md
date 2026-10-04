@@ -267,6 +267,14 @@ Produced by `scripts/run_three_sleeve_portfolio.py`:
 
 generated-path: results/three-sleeve-portfolio.json
 
+Produced by `scripts/run_forward_snapshot.py` (append-only, tracked on purpose so the frozen predictions are tamper-evident):
+
+generated-path: results/forward/snapshots/*.json
+
+Scored once, at the end, by `scripts/evaluate_forward_window.py`:
+
+generated-path: results/forward/evaluation.json
+
 Produced by `scripts/build_rpo_universe_panel.py` (broad cached frames, acceptance clocks):
 
 generated-path: results/rpo-universe-vintages.csv

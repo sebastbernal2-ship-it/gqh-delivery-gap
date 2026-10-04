@@ -81,3 +81,5 @@ results/vintage-aggregates/
 results/usdm-cache/
 
 .venv-pdf/
+results/forward/raw/
+results/forward/*-quarterly.csv

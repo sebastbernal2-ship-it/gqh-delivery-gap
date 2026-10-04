@@ -44,7 +44,8 @@ class Disclosure:
 def disclosure_from_row(row: dict) -> tuple[Disclosure | None, str | None]:
     if (row.get("expectation_status") or "") != "measured":
         return None, "not_measured"
-    relative = (row.get("relative_surprise_pit") or "").strip()
+    raw_relative = row.get("relative_surprise_pit")
+    relative = "" if raw_relative in (None, "") else str(raw_relative).strip()
     if not relative:
         return None, "no_relative_surprise"
     ticker = (row.get("ticker") or "").strip()
@@ -54,8 +55,11 @@ def disclosure_from_row(row: dict) -> tuple[Disclosure | None, str | None]:
     if available is None:
         return None, "no_availability"
     try:
-        previous = float(row["previous_value"]) if (row.get("previous_value") or "").strip() else None
-        change = float(row["change"]) if (row.get("change") or "").strip() else None
+        def number(value):
+            return None if value in (None, "") or str(value).strip() == "" else float(value)
+
+        previous = number(row.get("previous_value"))
+        change = number(row.get("change"))
         quarter = (int(row["period_end"][5:7]) - 1) // 3 + 1
     except (KeyError, TypeError, ValueError):
         return None, "no_quarter"
