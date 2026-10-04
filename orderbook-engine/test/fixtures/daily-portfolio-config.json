@@ -1,0 +1,18 @@
+{
+  "strategy_name": "synthetic-plumbing-only",
+  "hypothesis_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "primary_specification_id": "fixture-spec-v1",
+  "source_name": "synthetic test fixture",
+  "source_url": "https://example.invalid/synthetic-fixture",
+  "license": "test-only synthetic data",
+  "cost_model_id": "synthetic-zero-cost-v1",
+  "cost_source": "synthetic fixture only",
+  "universe": ["TEST"],
+  "initial_equity_money_units": "100000000000000",
+  "max_gross_exposure_bps": 5000,
+  "max_abs_net_exposure_bps": 5000,
+  "max_abs_name_weight_bps": 5000,
+  "max_participation_bps": 1000,
+  "variants_attempted": 1,
+  "periods_per_year": 12
+}

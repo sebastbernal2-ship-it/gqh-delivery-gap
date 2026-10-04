@@ -55,6 +55,38 @@
 )
 
 (test
+ (name daily_portfolio_test)
+ (modules daily_portfolio_test)
+ (libraries market_simulator alcotest)
+ (flags (:standard -w -8-11))
+)
+
+(rule
+ (alias runtest)
+ (deps fixtures/daily-portfolio-config.json fixtures/daily-portfolio-panel.jsonl)
+ (targets daily-portfolio-report.json daily-portfolio-curve.csv
+          daily-portfolio-positions.csv daily-portfolio-breakdowns.csv
+          daily-portfolio-dashboard.html daily-portfolio-report.json.manifest.json)
+ (action
+  (run %{exe:../examples/daily_portfolio_backtest.exe}
+   %{dep:fixtures/daily-portfolio-config.json}
+   %{dep:fixtures/daily-portfolio-panel.jsonl}
+   daily-portfolio-report.json daily-portfolio-curve.csv
+   daily-portfolio-positions.csv daily-portfolio-breakdowns.csv
+   daily-portfolio-dashboard.html --open-oos)))
+
+(rule
+ (alias runtest)
+ (deps fixtures/asset-replay-config.json fixtures/asset-replay.jsonl)
+ (targets asset-replay-report.json asset-replay-curve.jsonl)
+ (action
+  (run %{exe:../examples/asset_fixture_report.exe}
+   %{dep:fixtures/asset-replay-config.json}
+   %{dep:fixtures/asset-replay.jsonl}
+   asset-replay-report.json
+   asset-replay-curve.jsonl)))
+
+(test
  (name exec_fills_test)
  (modules exec_fills_test)
  (libraries market_simulator alcotest)

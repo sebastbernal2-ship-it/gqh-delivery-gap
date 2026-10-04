@@ -7,6 +7,16 @@ type fill = {
   fee : int64;
 }
 
+type equity_point = {
+  event_time : Timestamp.t;
+  receive_time : Timestamp.t;
+  event_kind : string;
+  equity : int64;
+  cash : int64;
+  position_units : int64;
+  mark_ticks : int64 option;
+}
+
 type result = {
   account : Asset_account.t;
   book : L2_book.t;
@@ -15,6 +25,7 @@ type result = {
   unfilled : int;
   fills : fill list;
   last_mark_ticks : int64 option;
+  equity_curve : equity_point list;
 }
 
 let ( let* ) result f = Result.bind result f
@@ -28,9 +39,7 @@ let valid_sha256 text =
 let book_mark book =
   match (L2_book.best_bid book, L2_book.best_ask book) with
   | Some bid, Some ask -> Some (Int64.div (Int64.add bid ask) 2L)
-  | Some bid, None -> Some bid
-  | None, Some ask -> Some ask
-  | None, None -> None
+  | _ -> None
 
 let validate_depth_levels spec ~snapshot levels =
   List.fold_left
@@ -88,6 +97,8 @@ let run spec ~initial_cash ~taker_fee_bps ~latency_ns ~equity_settlement events
     let unfilled = ref 0 in
     let fills = ref [] in
     let last_mark_ticks = ref None in
+    let venue_mark_seen = ref false in
+    let equity_curve = ref [] in
     let pending = ref [] in
     let next_seq = ref 0 in
     let seen_orders = Hashtbl.create 16 in
@@ -241,6 +252,7 @@ let run spec ~initial_cash ~taker_fee_bps ~latency_ns ~equity_settlement events
               unfilled = !unfilled + List.length !pending;
               fills = List.rev !fills;
               last_mark_ticks = !last_mark_ticks;
+              equity_curve = List.rev !equity_curve;
             }
       | event :: rest ->
           let* () = validate_event spec previous event in
@@ -263,7 +275,7 @@ let run spec ~initial_cash ~taker_fee_bps ~latency_ns ~equity_settlement events
                 (match snapshot.last_update_id with
                 | Some last -> Depth_chain.reset chain last
                 | None -> ());
-                last_mark_ticks := book_mark !book;
+                if not !venue_mark_seen then last_mark_ticks := book_mark !book;
                 Ok ()
             | Exec_event.Depth_update update -> (
                 let* () =
@@ -286,7 +298,8 @@ let run spec ~initial_cash ~taker_fee_bps ~latency_ns ~equity_settlement events
                     book :=
                       L2_book.apply_update !book ~bids:update.bids
                         ~asks:update.asks;
-                    last_mark_ticks := book_mark !book;
+                    if not !venue_mark_seen then
+                      last_mark_ticks := book_mark !book;
                     Ok ()
                 | Depth_chain.Superseded -> Ok ()
                 | Depth_chain.Gap -> Serror.fail "depth sequence gap")
@@ -306,6 +319,7 @@ let run spec ~initial_cash ~taker_fee_bps ~latency_ns ~equity_settlement events
                     ~mark_ticks:funding.mark_ticks ~rate_units:funding.rate
                 in
                 account := updated;
+                venue_mark_seen := true;
                 last_mark_ticks := Some funding.mark_ticks;
                 Ok ()
             | Exec_event.Mark mark ->
@@ -314,6 +328,7 @@ let run spec ~initial_cash ~taker_fee_bps ~latency_ns ~equity_settlement events
                   || mark.mark_ticks > Exec_units.price_ticks_max
                 then Serror.fail "mark price must be positive"
                 else begin
+                  venue_mark_seen := true;
                   last_mark_ticks := Some mark.mark_ticks;
                   Ok ()
                 end
@@ -340,6 +355,24 @@ let run spec ~initial_cash ~taker_fee_bps ~latency_ns ~equity_settlement events
                       "maintenance breach needs a venue liquidation rule"
                   else Ok ()
           in
+          let* marked_equity =
+            match !last_mark_ticks with
+            | Some mark -> Asset_account.equity !account ~mark_ticks:mark
+            | None when (!account).Asset_account.position_units = 0L ->
+                Asset_account.equity !account ~mark_ticks:0L
+            | None -> Serror.fail "open position has no mark for equity curve"
+          in
+          equity_curve :=
+            {
+              event_time = event.Exec_event.event_time;
+              receive_time = at;
+              event_kind = Exec_event.kind_name event.Exec_event.payload;
+              equity = marked_equity;
+              cash = (!account).Asset_account.cash;
+              position_units = (!account).Asset_account.position_units;
+              mark_ticks = !last_mark_ticks;
+            }
+            :: !equity_curve;
           process (Some at) rest
     in
     process None events

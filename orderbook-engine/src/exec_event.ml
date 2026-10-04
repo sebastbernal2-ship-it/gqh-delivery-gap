@@ -124,7 +124,7 @@ let json_opt_string = function Some value -> `String value | None -> `Null
 (* Nine fractional digits keep nanosecond precision, unlike
    [Timestamp.to_string] which defaults to whole seconds. *)
 let timestamp_to_string (value : Timestamp.t) =
-  Ptime.to_rfc3339 ~frac_s:9 (Timestamp.to_ptime value)
+  Ptime.to_rfc3339 ~tz_offset_s:0 ~frac_s:9 (Timestamp.to_ptime value)
 
 let json_side = function Buy -> `String "buy" | Sell -> `String "sell"
 

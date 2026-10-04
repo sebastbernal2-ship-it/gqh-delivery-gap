@@ -23,9 +23,20 @@ For source-neutral accounting, `Instrument_spec`, `Asset_account`, `Asset_replay
 provide a tested opt-in library path for a single cash equity, listed future, perpetual, or long
 cash-settled option. It consumes the canonical event contract, executes visible-depth IOC/FOK
 taker orders, and posts fees, settlement, funding, and expiry to a fixed-point account. It is not
-yet wired to the legacy CLI/report and does not certify passive fills, multi-symbol portfolios,
-physical option exercise, short stock, or venue liquidation rules. The exact scope and remaining
-gates are in `orderbook-engine/docs/adr/ADR-008-instrument-accounting.md`.
+the legacy `msim` CSV command. Use `asset_fixture_report.exe` for a strategy-neutral canonical JSONL
+replay, marked equity curve, source/config/executable hashes and integer accounting summary. It
+consumes explicit order intents; it does not create alpha. It does not certify passive fills,
+multi-symbol portfolios, physical option exercise, short stock, or venue liquidation rules. Daily
+equity event studies do not need L2 and remain in the research pipeline. See
+`orderbook-engine/docs/backtest-readiness.md` and `orderbook-engine/docs/adr/ADR-008-instrument-accounting.md`.
+
+The separate `daily_portfolio_backtest.exe` is the daily strategy/portfolio evaluation path. It
+consumes a frozen point-in-time target-weight JSONL panel (not raw bars and not order-book events)
+and emits net/gross/doubled-cost metrics, chronological development/OOS summaries, benchmark and
+regime/year breakdowns, equity/position/capacity CSVs, a judge-facing SVG dashboard, and hashed
+manifest. Start with `examples/daily-portfolio-config.template.json`; full input contract and
+limitations are in `docs/backtest-readiness.md`. Its synthetic fixture is plumbing-only. The
+real-data adapter and strategy target panel are still required before this is a project result.
 
 ## Deploy on a machine
 

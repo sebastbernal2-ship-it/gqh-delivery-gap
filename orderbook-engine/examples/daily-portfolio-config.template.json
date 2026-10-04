@@ -1,0 +1,18 @@
+{
+  "strategy_name": "name-the-strategy",
+  "hypothesis_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "primary_specification_id": "primary-spec-v1",
+  "source_name": "provider dataset and vintage",
+  "source_url": "https://example.invalid/dataset",
+  "license": "record the applicable license/terms",
+  "cost_model_id": "frozen-cost-model-v1",
+  "cost_source": "cite spread/fee/slippage/borrow evidence or state proxy assumptions",
+  "universe": ["PWR", "ETN", "EME", "DLR"],
+  "initial_equity_money_units": "100000000000000",
+  "max_gross_exposure_bps": 10000,
+  "max_abs_net_exposure_bps": 2000,
+  "max_abs_name_weight_bps": 2500,
+  "max_participation_bps": 100,
+  "variants_attempted": 1,
+  "periods_per_year": 252
+}

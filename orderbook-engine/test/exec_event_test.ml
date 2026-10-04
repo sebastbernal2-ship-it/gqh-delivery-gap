@@ -36,6 +36,12 @@ let round_trip name payload =
       check string (name ^ ": text") text (E.to_string parsed);
       check bool (name ^ ": event time") true
         (T.equal parsed.E.event_time event.E.event_time);
+      check string (name ^ ": event time is UTC")
+        "2024-01-01T00:00:00.100000000Z"
+        (E.timestamp_to_string event.E.event_time);
+      check string (name ^ ": receive time is UTC")
+        "2024-01-01T00:00:00.150000000Z"
+        (E.timestamp_to_string event.E.receive_time);
       check bool (name ^ ": payload") true (parsed.E.payload = payload);
       parsed
 

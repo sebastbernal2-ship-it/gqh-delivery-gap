@@ -1,0 +1,15 @@
+{
+  "venue": "test-venue",
+  "symbol": "TEST",
+  "currency": "USD",
+  "effective_from": "2024-01-01T00:00:00Z",
+  "effective_until": null,
+  "price_increment_ticks": 100,
+  "quantity_increment_units": 1000000,
+  "multiplier": 1,
+  "kind": { "type": "equity" },
+  "initial_cash": "10000000000",
+  "taker_fee_bps": 5,
+  "latency_ns": "0",
+  "equity_settlement_lag_ns": "86400000000000"
+}

@@ -11,6 +11,16 @@ type fill = {
   fee : int64;
 }
 
+type equity_point = {
+  event_time : Timestamp.t;
+  receive_time : Timestamp.t;
+  event_kind : string;
+  equity : int64;
+  cash : int64;
+  position_units : int64;
+  mark_ticks : int64 option;
+}
+
 type result = {
   account : Asset_account.t;
   book : L2_book.t;
@@ -19,6 +29,7 @@ type result = {
   unfilled : int;
   fills : fill list;
   last_mark_ticks : int64 option;
+  equity_curve : equity_point list;
 }
 
 val run :

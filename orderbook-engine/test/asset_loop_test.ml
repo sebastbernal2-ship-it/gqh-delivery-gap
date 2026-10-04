@@ -78,7 +78,19 @@ let test_ioc_visible_depth_and_fee () =
     result.L.account.A.cash;
   check int64 "fee recorded" 10_000_000L result.L.account.A.fees;
   check int64 "best ask depleted" 101_000L
-    (Option.get (Market_simulator.L2_book.best_ask result.L.book))
+    (Option.get (Market_simulator.L2_book.best_ask result.L.book));
+  check int "one equity point per input event" 2
+    (List.length result.L.equity_curve);
+  let summary =
+    ok
+      (Market_simulator.Asset_report.summarize ~initial_cash:(money 100L)
+         ~events:[ snapshot; intent () ] result)
+  in
+  check int64 "net return includes spread and fees" (-15L) summary.net_return_bps;
+  check int64 "mark-to-market drawdown includes open inventory" 15L
+    summary.max_drawdown_bps;
+  check int "intent count" 1 summary.order_intent_count;
+  check int "fill count" 1 summary.fill_count
 
 let test_fok_and_partial_ioc () =
   let two = Int64.mul 2L unit in
