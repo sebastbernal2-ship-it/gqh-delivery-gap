@@ -1,24 +1,31 @@
 # Daily factor panel preparation
 
-This is the next input-preparation stage for the unified exposure model. It keeps the defined development
-window at 2016-01-04 through 2022-09-30, before the existing October 2022 sealed window. It does not fit
-or tune a model, and it never exports or reads a post-September-2022 label.
+This prepares the daily input panel for the unified exposure model. Development uses 2016-01-04 through
+2024-10-02. It does not fit or tune a model, and it never exports or parses labels after that date.
+
+The warehouse inventory contains 2,703 XNYS sessions through 2026-10-02. The latest fifth is 541 sessions
+(rounding up); the latest two calendar years, 2024-10-03 through 2026-10-02, are 501 sessions. The contest
+rule sets aside whichever is shorter, so this factor-panel study reserves those latest two years as its
+separate sealed holdout. Only dates/counts from the aggregate inventory were used to set this boundary; the
+holdout's daily market values are excluded from the pinned SQL and parser, and have not been inspected.
 
 ## Inputs found and selected
 
 Snowflake currently holds two pinned Massive batch versions of 2,703 daily bars for each of PWR, ETN, EME,
 DLR and SPY, plus dividends and split-coverage receipts. The development export query selects those exact
-batch hashes and cuts source sessions at 2022-09-30. The separate 20-row PWR canary is excluded. No new
-vendor API key is needed; the repository's existing Snowflake query workflow can read the data.
+batch hashes and cuts source sessions at 2024-10-02. The separate 20-row PWR canary is excluded. The output
+limit allows for the 22,020 paired development bars plus corporate-action records.
 
 Four public daily archives are retrieved from the official [Kenneth French Data Library](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html):
-FF3, FF5, momentum and value-weighted daily 12-industry portfolios. At retrieval, all four files parsed
-with exactly 1,699 XNYS sessions spanning 2016-01-04 to 2022-09-30. Return values are percentage units in
-the source and are divided by 100 once. The factor files are separate: FF3 and FF5 keep their distinct SMB
+FF3, FF5, momentum and value-weighted daily 12-industry portfolios. The original checked snapshot parsed
+with exactly 1,699 XNYS sessions through 2022-09-30. When building the expanded development window, the same
+hash-pinned archives are bounded to the 2,202 XNYS sessions through 2024-10-02; no later factor or return
+rows are parsed. Return values are percentages in the source and are divided by 100 once. The factor files
+are separate: FF3 and FF5 keep their distinct SMB
 series; Mkt-RF and RF must match exactly before they can be compared. MOM is an additional separate series.
 The captured retrieval receipt is `french-snapshot-2026-10-03.json`; its four archive hashes are part of
 the reproducibility record. This proves what was parsed for this research run, not the historical publication
-time or the exact values available to a trader in 2016–2022.
+time or the exact values available to a trader in 2016–2024.
 
 The official library uses CRSP FIZ through December 2024 and CIZ beginning with its January 2025 release,
 with documented dividend-timing differences. Its histories are reconstructed and revisable. A snapshot
@@ -50,16 +57,12 @@ universe membership, not simply adding current tickers.
 
 `development_export.sql` exports raw historical vendor bars and dividend records for the named five tickers,
 inside the development date bound. A security review blocked the proposed Actions artifact export because
-raw vendor data would leave Snowflake and the artifact destination/republication rights were not yet approved.
-That query has not been run. The audit used only aggregate Snowflake queries. Before build.py can produce the
-panel, the user must either specifically approve raw data egress to the project's Actions artifact and confirm
-that sponsor/vendor permission covers storing/downloading those records there, or provide an approved local
-read-only Snowflake connection whose owner can export the same pinned development rows to a private local
-file. The local exporter uses only this checked-in pinned query, writes outside the repository with mode
-0600, refuses to overwrite, and errors if the result exceeds its row cap. Do not put the export or French
-archives in Git. It accepts standard `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, and `SNOWFLAKE_WAREHOUSE`
-settings with password, key-pair, OAuth token, or authenticator-based local credentials. Configure these
-through your private local secret store or shell, not in chat or a tracked file.
+raw vendor data would leave Snowflake and artifact storage rights were not established. The approved local
+route uses the checked-in pinned query and writes outside the repository with mode 0600; it refuses to
+overwrite and errors if the result exceeds its row cap. Do not put the export or French archives in Git. The
+exporter accepts standard `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, and `SNOWFLAKE_WAREHOUSE` settings with
+password, key-pair, OAuth token, or authenticator-based local credentials. Configure these through a private
+local secret store or shell, not in chat or a tracked file.
 
 ```sh
 python -m pip install -r src/unified_factors/panel/requirements-local.txt
@@ -67,9 +70,28 @@ PYTHONPATH=src python -m unified_factors.panel.export_local \
   --output /private/tmp/development-export.csv
 ```
 
-The export limit defaults to 20,000 rows and is fetched with a one-row overflow check, so an oversized
+The export limit defaults to 30,000 rows and is fetched with a one-row overflow check, so an oversized
 result is never silently truncated. Do not use the Actions artifact workflow for raw records unless that
 route and its vendor terms are explicitly approved.
+
+## Local execution receipt (2026-10-03)
+
+The pinned local query completed and the builder created a private development panel. The raw export contains
+22,189 records: 22,020 adjusted/unadjusted price bars, 164 dividend records and five split-coverage receipts.
+Its SHA-256 is `b8225bfa4dcbc5f1fac8a75424fd61c9905e10fdc5cb4e30cc75fe2b4dbfbbac`. The builder validated
+2,202 XNYS price sessions and emitted 2,201 daily return rows from 2016-01-05 through 2024-10-02 for PWR,
+ETN, EME, DLR and SPY. FF3, FF5, momentum and 12-industry source hashes, output hashes, package versions,
+row-level source hashes and the excluded holdout boundary are recorded in the private `manifest.json`.
+Raw exports, built panels and a separate descriptive in-sample audit remain under `/private/tmp`; none are
+tracked in Git.
+
+This is a retrospective diagnostic run only. The adapter correctly marks the panel `retrospective_only`,
+because current French archives and revised historical market bars do not establish what was published or
+available on each historical date. The standard model runner rejects this panel for training or evaluation.
+An exploratory OLS summary on development dates found that FF5 explains roughly 46%–59% of in-sample daily
+excess-return variation in the four operating-company names and about 99.6% for SPY; adding momentum to FF5
+changed operating-company R-squared by less than 0.2 percentage points. These descriptive fits are not alpha,
+forecast, hedge, or out-of-sample evidence. Unexplained residual variation is not thereby proven diversifiable.
 
 Once the authorized CSV is at `development-export.csv` and official French archives are in
 `/tmp/french-daily-20261003`:
@@ -80,15 +102,17 @@ PYTHONPATH=src python -m unified_factors.panel.french --output /tmp/french-daily
 PYTHONPATH=src python -m unified_factors.panel.build \
   --export /private/path/development-export.csv \
   --french-dir /tmp/french-daily-20261003 \
-  --output /tmp/factor-panel-2016-2022
+  --output /tmp/factor-panel-2016-2024
 ```
 
 The supplied example uses the manually fetched, hash-pinned snapshot. The actual fetch writes archives to the
-supplied new directory, so run it once to create a new receipt instead of overwriting a prior snapshot.
+supplied new directory, so run it once to create a new receipt instead of overwriting a prior snapshot. The
+builder's development and holdout bounds are fixed in code rather than caller-selectable.
 The builder validates every warehouse row hash and source batch, bar session and OHLCV, asset/session
 completeness, split coverage, dividends, calendar, factor archive hashes, factor dates, FF3/FF5 common
 columns and units. It writes separate FF3 and FF5 JSON panels, a 12-industry control CSV and an immutable
-manifest with source/code/output hashes. Never edit a panel in place; make a new version/output directory.
+manifest with source/code/output hashes and the excluded sealed-window bounds. Never edit a panel in place;
+make a new version/output directory.
 
 ## What must happen before these panels can be fitted
 
@@ -100,8 +124,10 @@ manifest with source/code/output hashes. Never edit a panel in place; make a new
    historical factor snapshots. Current retrieval stamps are not historical publication dates.
 4. Name the factor panel's responsible strategy owner, lock its primary outcome, costs, universe and model
    comparisons before examining returns. Keep monthly SEC/event labels as a distinct low-frequency study.
-5. Open no sealed window; the existing gate and owner rules remain in force. The present adapter cannot be
-   passed to the factor/GARCH development runner because its retrospective status is intentionally refused.
+5. Keep 2024-10-03 through 2026-10-02 sealed. The prior strategy and compute-era holdouts documented in
+   `docs/plan/sealed-test-record.md` are already spent and are separate studies. Name the owner and authorize
+   this factor-panel holdout before any evaluation reads its daily values. The present adapter remains
+   retrospective-only because historical availability of the source revisions is unverified.
 
 References: [French Data Library and CRSP transition](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html),
 [Massive split versus dividend adjustment](https://massive.com/knowledge-base/article/is-massives-stock-data-adjusted-for-splits-or-dividends).
