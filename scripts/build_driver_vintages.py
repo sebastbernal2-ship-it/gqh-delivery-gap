@@ -7,7 +7,7 @@ names. Availability is the filing date recorded on the fact, at end of day, whic
 strategy already uses.
 
     python3 scripts/build_driver_vintages.py --panel results/complex-capex-quarterly.csv \
-        --preferred PaymentsToAcquirePropertyPlantAndEquipment --output results/capex-vintages.csv
+        --preferred PaymentsToAcquirePropertyPlantAndEquipment --output results/capex-vintages-pit.csv
 """
 from __future__ import annotations
 
