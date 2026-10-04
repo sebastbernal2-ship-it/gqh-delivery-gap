@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Declare the positioning and leverage family, so leverage stops living in prose.
 
-Why: `docs/alignment.md` section 18.4 names "crowding and narrative leverage" as a node fed by perpetual
+Why: the alignment method, section 18.4, names "crowding and narrative leverage" as a node fed by perpetual
 funding and open interest, and until now it had no node id, no layer, no representation, no clock and no
 measurement anywhere in the graph. The cascade protocol and the Hyperliquid tape exist, so the family can be
 declared with the tape as its representation and the genuine blockers written in.

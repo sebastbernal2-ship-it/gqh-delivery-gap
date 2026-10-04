@@ -7,7 +7,7 @@ Two rules, in this order:
 2. Redact, then drop. Any entry whose content still looks like it carries a live
    credential or a machine-specific path is dropped rather than published.
 
-Used by `make share`. Tested by tests/test_memory_filter.py.
+Shared by the secrets scanner: patterns that look like credentials.
 """
 from __future__ import annotations
 

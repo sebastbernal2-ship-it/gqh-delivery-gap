@@ -25,7 +25,7 @@ six months or more, or on cancellation. This is a design rule, not a preference.
 
 **Statement**: the hazard of revision rises with age, from 23 percent in the first six months to 44 percent
 between one and two years, then flattens. There is no seasoning effect.
-**Evidence**: the hazard table in `docs/decisions.md` and the survival panel.
+**Evidence**: the hazard analysis and the survival panel.
 **Scope**: same.
 **Consequence**: waiting does not de-risk a schedule. It accumulates exposure.
 
@@ -98,7 +98,7 @@ queue specific. Do not build on this link.
 
 **Statement**: whether a project can get an interconnection position, and how long it waits, is the binding
 constraint on energising capacity, and it is not reachable from this host.
-**Evidence**: the source audit in `docs/inbox/data-request-queue-2026-10-03.md`; 403 from the national lab,
+**Evidence**: the access audit of 2026-10-03 (internal note, retired with the repository cleanup); 403 from the national lab,
 scripted operator tables, no usable DOE file.
 **Scope**: our access, not the world.
 **Consequence**: the single highest value data acquisition available to us. Everything else on delivery is
@@ -868,6 +868,31 @@ the second independent council win after the RPO breadth panel (T46's sibling co
 the first with both intervals excluding zero. The council belongs in the pipeline for the complex, and
 the specialists themselves remain weak enough that the gain is relative rather than absolute.
 
+## T54. The surviving sleeve's model is honest in the tails and overconfident in its confident calls
+
+**Statement**: out-of-sample predictions from the revenue model, pooled across eight rolling origins,
+1,144 rows, five classes. The reliability table is close in the bulk, gaps of +0.040 at a mean
+confidence of 0.268, -0.064 at 0.339 and -0.082 at 0.437, and clearly **overconfident when it is
+confident**: -0.200 at 0.547, -0.321 at 0.738 and -0.188 at 0.855. Pooled ECE 0.0683 with a
+resampled interval of 0.0440 to 0.0971, maximum bin error 0.321, sharpness 0.354. The extreme classes
+are honest: the lowest class is predicted at 0.135 and realised at 0.144, the highest at 0.231 and
+0.248, so the marginal tails of the distribution are slightly under-confident. Return tails, walk
+forward: the revenue sleeve has a five percent value at risk of -3.09 percent, expected shortfall
+-5.15, a worst day of -27.7 and a worst twenty-session window of -31.2 percent. The gated intensity
+sleeve is -0.70, -1.11, -3.5 and -7.5. The combined inverse-volatility portfolio is -0.90, -1.49,
+-5.74 and -8.4 percent, and volatility-targeted -0.99, -1.50, -4.70 and -8.7.
+**Evidence**: `results/calibration-report.json`; `scripts/run_calibration_report.py`;
+`src/filing_specialist/calibration_diagnostics.py`; `tests/test_calibration_diagnostics.py`;
+`docs/plan/variant-registry.jsonl`.
+**Scope**: development only, pooled origins are not independent, five classes make bins coarse.
+**Consequence**: any confidence gate must be calibrated, because the rows a gate would act on are
+exactly the overconfident ones; the extreme-bin honesty is what makes the tail-focused decision rule
+defensible. T56 later tested the calibration fix and found the miscalibration era-specific, so the gate
+keeps its raw probabilities. The variant registry records every tried variant from 38 entries onward
+and states plainly that the historic count before it is not fully reconstructible.
+**Restored 2026-10-04**: this entry was dropped by another session's rewrite of this shared file and
+re-added from its artifact. Check the ledger's numbering after any shared-file rewrite.
+
 ## T55. Composition is not the driver of the recent record, and the same names still fail one era
 
 **Statement**: the matched-universe test runs one name set, the 32 complex companies whose prices reach
@@ -932,31 +957,6 @@ because no side exists; both are complex names with the same price and cost conv
 only through a **concept-agnostic surprise scaling**, a declared z-score of the change against its own
 trailing volatility before binning, which is the next declared variant and must be tested on the
 surviving revenue sleeve as well before it is adopted anywhere.
-
-## T54. The surviving sleeve's model is honest in the tails and overconfident in its confident calls
-
-**Statement**: out-of-sample predictions from the revenue model, pooled across eight rolling origins,
-1,144 rows, five classes. The reliability table is close in the bulk, gaps of +0.040 at a mean
-confidence of 0.268, -0.064 at 0.339 and -0.082 at 0.437, and clearly **overconfident when it is
-confident**: -0.200 at 0.547, -0.321 at 0.738 and -0.188 at 0.855. Pooled ECE 0.0683 with a
-resampled interval of 0.0440 to 0.0971, maximum bin error 0.321, sharpness 0.354. The extreme classes
-are honest: the lowest class is predicted at 0.135 and realised at 0.144, the highest at 0.231 and
-0.248, so the marginal tails of the distribution are slightly under-confident. Return tails, walk
-forward: the revenue sleeve has a five percent value at risk of -3.09 percent, expected shortfall
--5.15, a worst day of -27.7 and a worst twenty-session window of -31.2 percent. The gated intensity
-sleeve is -0.70, -1.11, -3.5 and -7.5. The combined inverse-volatility portfolio is -0.90, -1.49,
--5.74 and -8.4 percent, and volatility-targeted -0.99, -1.50, -4.70 and -8.7.
-**Evidence**: `results/calibration-report.json`; `scripts/run_calibration_report.py`;
-`src/filing_specialist/calibration_diagnostics.py`; `tests/test_calibration_diagnostics.py`;
-`docs/plan/variant-registry.jsonl`.
-**Scope**: development only, pooled origins are not independent, five classes make bins coarse.
-**Consequence**: any confidence gate must be calibrated, because the rows a gate would act on are
-exactly the overconfident ones; the extreme-bin honesty is what makes the tail-focused decision rule
-defensible. T56 later tested the calibration fix and found the miscalibration era-specific, so the gate
-keeps its raw probabilities. The variant registry records every tried variant from 38 entries onward
-and states plainly that the historic count before it is not fully reconstructible.
-**Restored 2026-10-04**: this entry was dropped by another session's rewrite of this shared file and
-re-added from its artifact. Check the ledger's numbering after any shared-file rewrite.
 
 ## T58. The standardized surprise ranks better and trades worse, so the sleeve keeps raw labels
 

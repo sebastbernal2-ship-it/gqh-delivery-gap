@@ -38,7 +38,7 @@ def problems(tracked: list[str], top_level=TOP_LEVEL, areas=AREAS) -> list[str]:
     top = {path.split("/")[0] for path in tracked}
     for name in sorted(top - top_level):
         found.append(f"{name}: not a known area. Put it inside one, or add it to "
-                     f"scripts/check_structure.py and say why in docs/decisions.md")
+                     f"scripts/check_structure.py and say why in the decision log")
     for area in areas:
         prefix = f"{area}/"
         components = {path.split("/")[1] for path in tracked

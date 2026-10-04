@@ -114,7 +114,7 @@ def render(records: list[dict]) -> str:
         "Supersede, never overwrite. The old record is evidence of what the team rejected, which is",
         "worth points in the note.",
         "",
-        "Anything you are not ready to make a thesis yet goes in `docs/inbox/`.",
+        "Anything not ready to be a thesis yet stays in working notes until it earns a record.",
         "",
     ]
     return "\n".join(lines) + "\n"

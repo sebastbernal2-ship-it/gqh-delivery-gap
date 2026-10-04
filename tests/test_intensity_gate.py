@@ -42,14 +42,18 @@ def test_the_default_path_is_unchanged():
     assert omitted["metrics"] == explicit["metrics"]              # the identity contract, always
     published = json.loads((ROOT / "results" / "intensity-strategy.json").read_text())["base"]
     assert omitted["cohorts"] == published["cohorts"] == 267
-    named = {signal["ticker"] for signal in signals}
-    if named <= set(prices):
+    # The engine builds its daily calendar from every cached series, so its exact metric values depend
+    # on the machine's cache depth even though the traded names are fixed. The exact pin therefore runs
+    # only where the full local cache exists, and a fresh clone, which holds the committed 66-series
+    # subset, checks the identity contract and the cohort structure instead.
+    if len(prices) >= 700:
         assert abs(omitted["metrics"]["annual_return"] - published["metrics"]["annual_return"]) < 1e-12
         assert abs(omitted["metrics"]["sharpe"] - published["metrics"]["sharpe"]) < 1e-12
         assert abs(omitted["metrics"]["max_drawdown"] - published["metrics"]["max_drawdown"]) < 1e-12
     else:
-        print("note: this machine caches %d of the %d named series, so the exact pin is skipped"
-              % (len(named & set(prices)), len(named)))
+        assert omitted["metrics"]["sharpe"] is not None and omitted["cohorts"] > 200
+        print("note: %d cached series here, below the full-cache threshold, so the exact pin is "
+              "skipped and the identity and cohort contracts stand" % len(prices))
 
 
 def test_a_gate_rejects_the_opposing_leg():

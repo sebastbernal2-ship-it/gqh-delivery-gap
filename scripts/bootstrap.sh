@@ -36,30 +36,13 @@ python -m pip install --quiet --upgrade pip
 python -m pip install --quiet -e .
 echo "environment ready: $(python -V)"
 
-# Wire the agent harness wrappers for this machine (idempotent).
-bash scripts/install-hooks.sh
-
-# Mechanical capture: every commit refreshes and stages the shared memory.
-git config core.hooksPath .githooks
-chmod +x .githooks/* scripts/*.sh 2>/dev/null || true
-
-# Load the team's shared memory so recall works from the first session.
-if [ -s memory/shared.json ]; then
-  bash scripts/memory-absorb.sh
-fi
-
 cat <<'PROTOCOL'
 
-Capture is automatic:  agent hook (AGENTS.md) + pre-commit hook
-Before you start:      make sync
-Work in your paths:    see OWNERS.md
-Commit a unit of work: make save M="what changed"
-Check the gates:       make check
-See who is in flight:  make claims
-Stop for the night:    make sync
+Check the gates:    make check
+Run the tests:      make test
+Reproduce the work: make reproduce
 
-Two rules that decide the score:
-  1. If it is not in this repo, it is not shared.
-  2. The out-of-sample window is opened once, by its owner, and reported as it lands.
+Every number in the note comes from a file under results/.
+The out-of-sample window is opened once, by its owner, and reported as it lands.
 
 PROTOCOL

@@ -139,7 +139,6 @@ def main() -> int:
 
     # three: Sharpe by era and by sample
     eras = (("2019-01-01", "2022-12-31"), ("2023-01-01", "2026-12-31"))
-    samples = (("IS", "in-sample, before 2019"), ("OOS", "out-of-sample, 2019 onward"))
     figure, axes = plt.subplots(1, 2, figsize=(14, 6))
     names = [key for key in ORDER if key in series]
     positions = np.arange(len(names))
@@ -158,23 +157,6 @@ def main() -> int:
                     "after the 2021 window the conditioned system is the only one above 1.5",
                     fontsize=13)
     writeups += save(figure, "culmination-eras")
-
-    figure, axes = plt.subplots(1, 2, figsize=(14, 6))
-    for axis, (label, _) in zip(axes, samples):
-        values = []
-        for name in names:
-            subset = [row for row in series[name] if row["sample"] == label]
-            values.append(metrics(subset)["sharpe"] or 0.0)
-        axis.bar(positions, values, color=[COLORS[name] for name in names])
-        axis.set_xticks(positions)
-        axis.set_xticklabels([name.split("_")[0] for name in names])
-        axis.set_title(samples[0 if label == "IS" else 1][1])
-        axis.grid(alpha=0.25, axis="y")
-        axis.set_ylabel("Sharpe")
-    figure.suptitle("In-sample against out-of-sample, both views\n"
-                    "the composites only exist after 2019, so their in-sample column is empty by "
-                    "construction and the legs carry that history", fontsize=12)
-    writeups += save(figure, "culmination-is-oos")
 
     # five: behaviour by regime, conditioned against unconditioned
     states = ("low", "mid", "high")

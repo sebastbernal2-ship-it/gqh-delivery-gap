@@ -17,7 +17,7 @@ INDEX = ROOT / "docs" / "theses" / "index.jsonl"
 REQUIRED = ["id", "title", "status", "owner", "date", "note"]
 STATUSES = {"active", "parked", "superseded", "retired"}
 # An active thesis carries one section per rubric criterion, so the rubric is a structural
-# requirement rather than an aspiration. See docs/alignment.md section 15.
+# requirement rather than an aspiration.
 SECTIONS = ["Hypothesis", "Data", "Structure", "Methodology", "Results", "Novelty",
             "Risk", "Liquidity"]
 

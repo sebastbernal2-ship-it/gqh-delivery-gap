@@ -3,7 +3,7 @@
 Scope: repair the reviewed shell/Slurm failures on main `85c3f31`. This is a local
 correctness record, not a HiPerGator job receipt or a q/HDB certification. The Python exporter
 and q storage model retain their existing interfaces. The submission environment gains the
-explicit repository-root contract recorded in `docs/decisions.md`.
+explicit repository-root contract recorded in the project decision log.
 
 ## Root causes and fixes
 

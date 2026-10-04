@@ -3,7 +3,7 @@
 
 A judge has three tiers, cheapest first:
 
-    python3 scripts/reproduce.py --tier checks     structure, paths, claims, the test suite
+    python3 scripts/reproduce.py --tier checks     structure, paths, the test suite
     python3 scripts/reproduce.py                   the checks plus every offline producer (default)
     python3 scripts/reproduce.py --tier full       adds the slow producers, several minutes each
     python3 scripts/reproduce.py --tier network    re-fetches live sources (SEC, EIA, prices)
@@ -35,7 +35,6 @@ MANIFEST = ROOT / "results" / "reproduction-manifest.json"
 CHECKS = [
     {"name": "structure", "command": "python3 scripts/check_structure.py", "artifact": None},
     {"name": "paths", "command": "python3 scripts/check_paths.py", "artifact": None},
-    {"name": "claims", "command": "python3 scripts/claims.py", "artifact": None},
     {"name": "tests", "command": "python3 -m pytest -q tests 2>/dev/null || make -s test",
      "artifact": None},
 ]

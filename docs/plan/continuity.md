@@ -16,7 +16,7 @@ without repeating known mistakes. Read in the order given.
 7. `docs/plan/edge-search.md` - the search method and its gates, including the relevance gate.
 8. `docs/plan/stage-a-report.md` - the factor work on delivery, and its three failures.
 9. `docs/plan/sealed-test.md` - the two holdouts and who may open them.
-10. `docs/decisions.md` - the append-only record, newest last. `docs/variants.md` - every comparison tried.
+10. the append-only decision record, newest last. `docs/variants.md` - every comparison tried.
 11. `docs/ideas/graph.jsonl` - ideas and directions with rationale, falsifier and capacity needs.
 
 ## Where things stand

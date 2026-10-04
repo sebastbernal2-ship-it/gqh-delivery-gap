@@ -49,7 +49,6 @@ receipt component digest identify the delivered version. Tests use fabricated ev
 PYTHONPATH=src python3 -m unittest event_readiness.test_readiness -v
 PYTHONPATH=src python3 -m event_readiness.run demo --out data/readiness/demo-v2.json
 python3 -m unittest discover -s hpc/kdb-timeseries/tests -v
-python3 scripts/check_owners.py
 make secrets
 git diff --check
 ```

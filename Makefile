@@ -1,16 +1,4 @@
-.PHONY: market sync save bootstrap doctor current claims overlaps worktree owners chain graph hooks hooks-global remember share absorb test engine-test secrets check strategy-check manifest pdf-check gate-status status agency-deals tranche-table credit-deals deal-structure deal-diligence deal-ratings gate-scorecard credit-gauntlet credit-gauntlet-long ownership-layer index-mandate cascade-tape
-
-# Pull the team's work and load their shared memory. Run this first, every session.
-sync:
-	git pull --rebase --autostash
-	@bash scripts/memory-absorb.sh
-
-# Commit and push one logical change. Usage: make save M="what changed"
-save:
-	@test -n "$(M)" || (echo 'usage: make save M="what changed"' && exit 1)
-	git add -A
-	git commit -m "$(M)"
-	git push
+.PHONY: market bootstrap current chain graph test engine-test secrets check strategy-check manifest pdf-check gate-status status agency-deals tranche-table credit-deals deal-structure deal-diligence deal-ratings gate-scorecard credit-gauntlet credit-gauntlet-long ownership-layer index-mandate cascade-tape
 
 # First time on a new device.
 bootstrap:
@@ -20,10 +8,6 @@ bootstrap:
 current:
 	@python3 scripts/render_current.py
 
-# Health check for the memory system. Read only, safe to run any time.
-doctor:
-	@bash scripts/doctor.sh
-
 # Chain logs: scope caps, load bearing edges, evidence, and the freeze.
 chain:
 	@python3 scripts/check_chain.py
@@ -32,46 +16,6 @@ chain:
 # Resolve our nodes, representations and sources against the algoterminal stack.
 graph:
 	@python3 scripts/link_algoterminal.py
-
-# Ownership: one roster, one claim table, every claimed path real.
-owners:
-	@python3 scripts/check_owners.py
-	@python3 scripts/check_chain.py
-	@python3 scripts/link_algoterminal.py
-
-# Who is working on what, and where will that collide. Fetches first.
-claims:
-	@python3 scripts/claims.py
-
-# Only the collisions, which is the part that costs hours.
-overlaps:
-	@python3 scripts/claims.py --overlaps
-
-# Give a workstream its own checkout on its own branch. Usage: make worktree NAME=<name>
-worktree:
-	@test -n "$(NAME)" || (echo 'usage: make worktree NAME=<short-name>' && exit 1)
-	@bash scripts/new-worktree.sh "$(NAME)"
-
-# Wire the memory wrapper for the harnesses that only touch committed files. Safe.
-hooks:
-	@bash scripts/install-hooks.sh repo
-
-# Also wire the harnesses that edit your home directory. Affects every project here.
-hooks-global:
-	@bash scripts/install-hooks.sh --global
-
-# Write a memory that the team will see. Usage: make remember M="what you learned"
-remember:
-	@test -n "$(M)" || (echo 'usage: make remember M="what you learned"' && exit 1)
-	hippo remember "$(M)" --tag gqh
-
-# Share this device's memory with the team, filtered for the public repo.
-share:
-	@bash scripts/memory-share.sh
-
-# Load the team's shared memory into this device's local store.
-absorb:
-	@bash scripts/memory-absorb.sh
 
 reproduce:
 	@python3 scripts/reproduce.py --tier default
@@ -84,13 +28,9 @@ test:
 	@python3 tests/test_snowflake_research_sidecar.py
 	@python3 tests/test_regime_risk_control.py
 	@python3 tests/test_market_map.py
-	@python3 tests/test_memory_filter.py
-	@python3 tests/test_memory_absorb.py
 	@python3 tests/test_thesis_index.py
 	@python3 tests/test_structure.py
-	@python3 tests/test_claims.py
 	@python3 tests/test_paths.py
-	@python3 tests/test_owners.py
 	@python3 tests/test_chain.py
 	@python3 tests/test_truths.py
 	@python3 tests/test_link_algoterminal.py
@@ -288,7 +228,6 @@ check: secrets
 	@python3 scripts/check_theses.py
 	@python3 scripts/check_structure.py
 	@python3 scripts/check_paths.py
-	@python3 scripts/check_owners.py
 	@python3 scripts/check_chain.py
 	@python3 scripts/link_algoterminal.py
 	@python3 scripts/render_current.py --check

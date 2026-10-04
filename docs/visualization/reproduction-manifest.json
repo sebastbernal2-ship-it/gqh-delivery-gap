@@ -1,0 +1,61 @@
+{
+  "builder": "docs/inbox/vishnu-2026-10-03/visualization/reproduce.py",
+  "daily_ledger": null,
+  "dashboard_figures": 14,
+  "displayed_summary_rows": 10,
+  "inputs": [
+    {
+      "bytes": 4331,
+      "data_rows": null,
+      "path": "results/three-sleeve-portfolio.json",
+      "sha256": "423a5f1b71a76a6b3eb7429420a5666f27e987c92795368a7b5fcd9bc784d0e4"
+    },
+    {
+      "bytes": 7041,
+      "data_rows": null,
+      "path": "results/walk-forward.json",
+      "sha256": "07ca08d3eb465394223df1cd2865715341f7ff7c71254aa16c99141e7713d76c"
+    },
+    {
+      "bytes": 7039,
+      "data_rows": null,
+      "path": "results/walk-forward-z.json",
+      "sha256": "edc581877d0d3b4aadf12b8be5b6432280b0278d117a124ae409a1faa5f0c748"
+    },
+    {
+      "bytes": 2589,
+      "data_rows": null,
+      "path": "results/intensity-timesplit-study.json",
+      "sha256": "b9eee89275c219f5c68d1f036d2f46a7ee055ca1f0f2396c19c95c5a9eed3386"
+    },
+    {
+      "bytes": 3056,
+      "data_rows": null,
+      "path": "results/intensity-factor-study.json",
+      "sha256": "269457e2686d28e3f74c42ddba4619b64de59da358bd08fe33567d56583d2340"
+    },
+    {
+      "bytes": 24417,
+      "data_rows": 132,
+      "path": "results/regime-state-daily.csv",
+      "sha256": "31e56268c34debda7b6c0fd49d890b10a46218392a3fb9973685f78429732a0a"
+    },
+    {
+      "bytes": 1829,
+      "data_rows": null,
+      "path": "results/regime-state-summary.json",
+      "sha256": "92c564bb1884d0c91d9eb8fe4e6317d84bc2813aa98752c52bd3dcb106c03914"
+    }
+  ],
+  "ledger_metrics": [],
+  "limitations": [
+    "daily price cache results/bar-cache is gitignored and absent from this checkout",
+    "no daily NAV/return/cost ledger is tracked; equity and drawdown paths cannot be reconstructed",
+    "no daily return series means no valid Monte Carlo path, terminal-return, or drawdown distributions",
+    "regime panel ends 2024-12 and is not point-in-time joined to walk-forward returns",
+    "stored three-sleeve results predate the entry-clock correction audit"
+  ],
+  "scope": "deterministic dashboard rebuild from hashed summary artifacts and optional hashed daily/trade ledgers; not a raw-data backtest rerun",
+  "split_date": null,
+  "trade_ledger": null
+}

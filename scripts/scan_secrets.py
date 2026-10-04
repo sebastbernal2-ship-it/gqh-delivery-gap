@@ -49,7 +49,7 @@ def main() -> int:
         print("credential-shaped content found:")
         for hit in hits:
             print(f"  - {hit}")
-        print("Do not push until this is clean. See docs/memory.md.")
+        print("Do not push until this is clean.")
         return 1
     print("clean: no credential shapes")
     return 0
