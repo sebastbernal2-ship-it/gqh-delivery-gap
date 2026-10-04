@@ -737,3 +737,25 @@ target while Sharpe 2 is not, at 0.94. The next increment is a third sleeve, the
 expression of T44 at Sharpe 0.971 and -16.3 percent on the same window, plus more names and concepts
 inside the complex. The sleeves' capacity is twenty to forty times the intensity expression's, so the
 binding constraint on the combined strategy is the charge signal, not the expectation gap.
+
+## T48. Three sleeves, and the gated charge expression is the anchor
+
+**Statement**: on the common calendar of the three sleeves, 633 sessions from 2023-08-04 to
+2026-08-31, the daily correlations are revenue against capex -0.261, revenue against the gated
+intensity expression +0.481, and capex against intensity -0.218. Equal gross, the three-sleeve
+portfolio returns +22.27 percent at 20.5 percent volatility, Sharpe 1.087 and a -16.1 percent
+drawdown. Weighted by inverse volatility, which puts a mean 67 percent on the intensity sleeve, it
+returns +18.31 percent at 13.4 percent volatility, **Sharpe 1.365** and a -14.5 percent drawdown, and
+volatility-targeted to ten percent +16.34 percent at 11.0 percent volatility, **Sharpe 1.491** with a
+**-9.0 percent drawdown**. The three-sleeve minus best-sleeve interval is +8.46 percent with an
+interval of -24.11 to +36.98, and against the two-sleeve composite -4.23 percent, -18.49 to +12.05,
+so the risk-adjusted gain is not a proven return gain.
+**Evidence**: `results/three-sleeve-portfolio.json`; `scripts/run_three_sleeve_portfolio.py`;
+`tests/test_three_sleeve.py`; `src/filing_specialist/portfolio_stats.py`.
+**Scope**: development only, both sealed windows spent, complex names only, flat costs on the driver
+sleeves and the engine's volume-bucket costs on the intensity sleeve, capacity mixed and bound by the
+intensity expression at 1.17 million median, one common window of 37 months.
+**Consequence**: this is the best measured configuration in the programme, Sharpe 1.49 with a
+drawdown under ten percent, and the intensity sleeve carries most of the weight because it is both
+calmer and better on its own. The next levers are within-complex breadth for the intensity sleeve,
+which is the capacity bottleneck, and the frozen forward window.
