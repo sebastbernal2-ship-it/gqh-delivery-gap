@@ -147,6 +147,12 @@ What remains, in order:
 4. **The risk track**, once the tape has five whole dates: the declared council comparison and the
    coupling layer over its twelve marginals.
 5. **The forward window**, running; it closes at 250 scored events or twelve months.
+5b-pre. **First non-SEC results (T63, T64).** The phase overlay was significantly harmful (no phase is
+   losing; the sleeve does best in stress), and grid load growth showed no per-name information with an
+   unproven cross-section. Neither enters the sleeve yet. The load refinements that the evidence points
+   to: load against its own seasonal norm, peak and ramp measures, growth acceleration, and the
+   incremental test at disclosure events.
+
 5b. **Non-SEC specialists, the declared next build.** The complex is a power and compute complex, and
    the physical data under it is free and open today: EIA-930 hourly balancing-authority load and
    generation (200 without a key), FRED CSVs (200), FINRA aggregates under the existing credential (200).

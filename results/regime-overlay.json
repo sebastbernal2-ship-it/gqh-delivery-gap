@@ -1,0 +1,128 @@
+{
+ "schema": "regime-overlay-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/open-work.md",
+ "states": "/home/sebas/kun-agent-workspace/projects/quanthacks/results/regime-state-daily.csv",
+ "window": {
+  "from": "2019-02-01",
+  "to": "2026-08-31",
+  "split": "2023-01-01"
+ },
+ "attribution": {
+  "buildout": {
+   "days": 745,
+   "metrics": {
+    "days": 745,
+    "annual_return": 0.15337236346306066,
+    "annual_vol": 0.08960260038865281,
+    "sharpe": 1.7116954507771585,
+    "total_return": 0.5549494687919772,
+    "max_drawdown": -0.057665447061018615,
+    "hit_rate": 0.5328859060402684
+   }
+  },
+  "overbuild": {
+   "days": 229,
+   "metrics": {
+    "days": 229,
+    "annual_return": 0.2303386855463682,
+    "annual_vol": 0.12299368616505915,
+    "sharpe": 1.8727683731443796,
+    "total_return": 0.22430560131876986,
+    "max_drawdown": -0.060853649727131476,
+    "hit_rate": 0.537117903930131
+   }
+  },
+  "shakeout": {
+   "days": 75,
+   "metrics": {
+    "days": 75,
+    "annual_return": 0.21576427032890916,
+    "annual_vol": 0.07685093206468244,
+    "sharpe": 2.8075686856642,
+    "total_return": 0.06535962966087094,
+    "max_drawdown": -0.024508490753654466,
+    "hit_rate": 0.5733333333333334
+   }
+  },
+  "shortage": {
+   "days": 97,
+   "metrics": {
+    "days": 97,
+    "annual_return": 0.10200324648851121,
+    "annual_vol": 0.09583714108953674,
+    "sharpe": 1.0643394129757453,
+    "total_return": 0.03819949711641768,
+    "max_drawdown": -0.06234635092988661,
+    "hit_rate": 0.5876288659793815
+   }
+  },
+  "unknown": {
+   "days": 346,
+   "metrics": {
+    "days": 346,
+    "annual_return": 0.1902767217290171,
+    "annual_vol": 0.16459617952878974,
+    "sharpe": 1.156021496208152,
+    "total_return": 0.27472168821470033,
+    "max_drawdown": -0.12329689785456366,
+    "hit_rate": 0.5057803468208093
+   }
+  }
+ },
+ "comparison": {
+  "chosen_on_first_half": "overbuild",
+  "first_half_sharpe_by_phase": {
+   "buildout": 1.203,
+   "overbuild": 0.893,
+   "shakeout": 2.808
+  },
+  "second_half_raw": {
+   "days": 747,
+   "annual_return": 0.22879744457096013,
+   "annual_vol": 0.1347551168852715,
+   "sharpe": 1.6978757457184717,
+   "total_return": 0.9178071793352374,
+   "max_drawdown": -0.12329689785456333,
+   "hit_rate": 0.535475234270415
+  },
+  "second_half_overlaid": {
+   "days": 747,
+   "annual_return": 0.20013648818028137,
+   "annual_vol": 0.12801556408455966,
+   "sharpe": 1.5633762160988711,
+   "total_return": 0.766359936985169,
+   "max_drawdown": -0.12329689785456366,
+   "hit_rate": 0.535475234270415
+  },
+  "second_half_vol_targeted_raw": {
+   "days": 747,
+   "annual_return": 0.18920736831934962,
+   "annual_vol": 0.11393885923527267,
+   "sharpe": 1.6606043766741143,
+   "total_return": 0.7185351988638382,
+   "max_drawdown": -0.09750472605593641,
+   "hit_rate": 0.535475234270415
+  },
+  "second_half_vol_targeted_overlaid": {
+   "days": 747,
+   "annual_return": 0.18440041843401556,
+   "annual_vol": 0.11185761014092956,
+   "sharpe": 1.648528143965254,
+   "total_return": 0.6954117237997977,
+   "max_drawdown": -0.10043290176292097,
+   "hit_rate": 0.535475234270415
+  },
+  "interval_overlaid_minus_raw": {
+   "point": -0.025509074198605743,
+   "lower": -0.05479057191161363,
+   "upper": -0.0022060811902397228,
+   "months": 44,
+   "share_positive": 0.017,
+   "resamples": 1000
+  },
+  "multiplier": 0.5
+ },
+ "caveat": "the published phases are not prefix invariant (2 to 4 labels move with the cutoff), so this is a seam test, not a trading rule",
+ "ready_for_performance_claim": false
+}

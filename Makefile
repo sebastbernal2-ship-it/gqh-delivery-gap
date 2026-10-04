@@ -152,6 +152,7 @@ test:
 	@python3 tests/test_temperature_scaling.py
 	@python3 tests/test_council_sleeve.py
 	@python3 tests/test_state_transfer.py
+	@python3 tests/test_eia_load_specialist.py
 	@python3 tests/test_build_hyperliquid_fixture.py
 	@python3 tests/test_split_hyperliquid_engine_fixture.py
 	@python3 tests/test_compute_lead_dependence_audit.py

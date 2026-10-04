@@ -83,3 +83,5 @@ results/usdm-cache/
 .venv-pdf/
 results/forward/raw/
 results/forward/*-quarterly.csv
+results/eia-raw/
+results/eia-*.csv

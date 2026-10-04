@@ -425,3 +425,15 @@ generated-path: results/council-sleeve-split.json
 Produced by `scripts/run_state_transfer_test.py`:
 
 generated-path: results/state-transfer.json
+
+Produced by `scripts/run_regime_overlay_test.py`:
+
+generated-path: results/regime-overlay.json
+
+Produced by `scripts/build_eia930_load_panel.py` (raw files under the ignored `results/eia-raw/`):
+
+generated-path: results/eia-load-daily.csv.gz
+
+Produced by `scripts/run_eia_load_specialist.py`:
+
+generated-path: results/eia-load-specialist.json

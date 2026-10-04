@@ -52,3 +52,6 @@
 {"artifact": "T62", "axis": "architecture", "declared_before": true, "id": "V052", "question": "model capacity", "status": "rejected", "variant": "one hidden layer, single concept"}
 {"artifact": "T62", "axis": "architecture", "declared_before": true, "id": "V053", "question": "model capacity", "status": "reported", "variant": "shared trunk with per-concept decoders"}
 {"artifact": "T62", "axis": "data", "declared_before": true, "id": "V054", "question": "specialist families", "status": "untried", "variant": "EIA-930 grid load and generation, FRED, FINRA"}
+{"artifact": "T63", "axis": "overlay", "declared_before": true, "id": "V055", "question": "risk control", "status": "rejected", "variant": "halve exposure in the phase that was weakest in the first half"}
+{"artifact": "T64", "axis": "data", "declared_before": true, "id": "V056", "question": "specialist families", "status": "reported", "variant": "EIA-930 regional load growth, unconditional tests"}
+{"artifact": "T64", "axis": "data", "declared_before": true, "id": "V057", "question": "specialist families", "status": "untried", "variant": "load against seasonal norm, peaks, ramps, acceleration"}

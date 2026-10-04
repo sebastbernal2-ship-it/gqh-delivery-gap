@@ -1,0 +1,171 @@
+{
+ "schema": "eia-load-specialist-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/open-work.md",
+ "panel": {
+  "authorities": 57,
+  "days": 2738
+ },
+ "exposure": {
+  "CEG": "PJM",
+  "AEP": "PJM",
+  "D": "PJM",
+  "EXC": "PJM",
+  "FE": "PJM",
+  "PPL": "PJM",
+  "EQIX": "PJM",
+  "DLR": "PJM",
+  "AMZN": "PJM",
+  "GOOGL": "PJM",
+  "MSFT": "PJM",
+  "META": "PJM",
+  "VST": "ERCO",
+  "NRG": "ERCO",
+  "APLD": "ERCO",
+  "CIFR": "ERCO",
+  "SO": "SOCO",
+  "NEE": "FPL",
+  "DUK": "DUK",
+  "ED": "NYIS",
+  "ETR": "MISO",
+  "DTE": "MISO",
+  "WEC": "MISO",
+  "AEE": "MISO"
+ },
+ "information": {
+  "AEP": {
+   "authority": "PJM",
+   "samples": 361,
+   "information_coefficient": 0.011086199068476658
+  },
+  "AMZN": {
+   "authority": "PJM",
+   "samples": 361,
+   "information_coefficient": 0.03175137611402744
+  },
+  "APLD": {
+   "authority": "ERCO",
+   "samples": 221,
+   "information_coefficient": -0.030614695320577673
+  },
+  "CEG": {
+   "authority": "PJM",
+   "samples": 233,
+   "information_coefficient": -0.1428594468035048
+  },
+  "CIFR": {
+   "authority": "ERCO",
+   "samples": 295,
+   "information_coefficient": 0.10528247029457684
+  },
+  "D": {
+   "authority": "PJM",
+   "samples": 361,
+   "information_coefficient": -0.05947567377297562
+  },
+  "DLR": {
+   "authority": "PJM",
+   "samples": 361,
+   "information_coefficient": -0.05144574871316121
+  },
+  "DTE": {
+   "authority": "MISO",
+   "samples": 361,
+   "information_coefficient": 0.043012809721308214
+  },
+  "DUK": {
+   "authority": "DUK",
+   "samples": 361,
+   "information_coefficient": -0.007472337429791402
+  },
+  "ED": {
+   "authority": "NYIS",
+   "samples": 361,
+   "information_coefficient": 0.024750156869346965
+  },
+  "EQIX": {
+   "authority": "PJM",
+   "samples": 361,
+   "information_coefficient": -0.01624299189380838
+  },
+  "ETR": {
+   "authority": "MISO",
+   "samples": 361,
+   "information_coefficient": -0.10965243874443305
+  },
+  "EXC": {
+   "authority": "PJM",
+   "samples": 361,
+   "information_coefficient": -0.011955484815557358
+  },
+  "META": {
+   "authority": "PJM",
+   "samples": 361,
+   "information_coefficient": 0.02504195936191161
+  },
+  "MSFT": {
+   "authority": "PJM",
+   "samples": 361,
+   "information_coefficient": -0.07641960382200048
+  },
+  "NEE": {
+   "authority": "FPL",
+   "samples": 361,
+   "information_coefficient": -0.03590803120042036
+  },
+  "NRG": {
+   "authority": "ERCO",
+   "samples": 361,
+   "information_coefficient": -0.10287185687393827
+  },
+  "PPL": {
+   "authority": "PJM",
+   "samples": 361,
+   "information_coefficient": -0.11912454150788428
+  },
+  "SO": {
+   "authority": "SOCO",
+   "samples": 361,
+   "information_coefficient": -0.08212837269095974
+  },
+  "VST": {
+   "authority": "ERCO",
+   "samples": 361,
+   "information_coefficient": 0.015533891431107574
+  }
+ },
+ "information_summary": {
+  "tickers": 20,
+  "mean_ic": -0.029485618036412864,
+  "median_ic": -0.023428843607193026,
+  "share_positive": 0.35
+ },
+ "pricing": {
+  "rebalances": 88,
+  "days": 1740,
+  "metrics": {
+   "days": 1740,
+   "annual_return": 0.08866492362479829,
+   "annual_vol": 0.19761085702397774,
+   "sharpe": 0.4486844749326696,
+   "total_return": 0.6118677273294673,
+   "max_drawdown": -0.3782081364365162,
+   "hit_rate": 0.5045977011494253
+  },
+  "interval": {
+   "point": 0.08851686565973044,
+   "lower": -0.05370921707299388,
+   "upper": 0.23709413628958056,
+   "months": 88,
+   "share_positive": 0.881,
+   "resamples": 1000
+  }
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only",
+  "the exposure map is declared, not fitted",
+  "load is demand, not price: no congestion or energy-price data here",
+  "the long and short legs are equal weighted and hold twenty sessions"
+ ]
+}

@@ -1085,3 +1085,46 @@ authority load and generation is a 200 without a key**, FRED's CSV endpoint answ
 FINRA answers 200 under the existing free credential, while PJM (401), the EIA keyed API (403), the
 LBNL queue file (403), Cloudflare Radar (400) and NOAA CDO (400) need a key or a different endpoint.
 The next specialists therefore read grid load, fuel mix and rates, not more filings.
+
+## T63. The published infrastructure phase state does not improve the portfolio as a size overlay
+
+**Statement**: Aidan's regime audit publishes a monthly phase for 2014 to 2024
+(`results/regime-state-daily.csv`: buildout 79, overbuild 39, shakeout 8, shortage 6) and proposes a
+size overlay after the strategy's own portfolio. Attribution over the composite's window says **no phase
+is losing**: annualised Sharpe 1.712 in buildout, 1.873 in overbuild, **2.808 in shakeout**, 1.064 in
+shortage, and 1.156 across the twenty months the state file does not cover (2025-01 to 2026-08, a
+coverage gap, not a bug). Choosing the weakest phase on the first half of the window alone selects
+overbuild, and halving exposure there on the second half **reduces** the result: net +22.88 percent to
++20.01, Sharpe 1.698 to 1.563, with the month-blocked difference at -0.0255 and interval -0.0548 to
+-0.0022, positive in only 1.7 percent of forty-four months. The overlay is significantly harmful.
+**Evidence**: `results/regime-overlay.json`; `scripts/run_regime_overlay_test.py`;
+`results/regime-state-daily.csv` (owned by the other workstream); the phase caveat below.
+**Scope**: development only; the state file's own audit reports that its labels are not prefix
+invariant, 2 to 4 labels move when the cutoff moves, so it is not a trading input; the test window starts
+in 2019 because that is where the composite's common window starts.
+**Consequence**: the risk-overlay seam is not worth wiring for this portfolio as published. The reason is
+informative: the sleeve earns its return from disclosure events and does **best** in the stressed phase,
+so cutting exposure in stress removes its best days. Any future overlay must be tested against a state
+that actually predicts *this* portfolio's drawdowns, and the execution-stage overlay remains the only
+place where the seam is still plausibly useful.
+
+## T64. Grid load growth is a weak first signal: no per-name information and a positive but unproven cross-section
+
+**Statement**: the open EIA-930 six-month files were aggregated into a daily regional load panel, 69
+balancing authorities, 171,195 authority-days, 2019-01-01 to 2026-06-30, built without any key. A
+declared exposure map ties 24 tickers to the authority their own fleet or facilities sit in. Two tests.
+**Information**: the rank correlation between a region's 30-day load growth and the forward 20-session
+return of its mapped names, sampled weekly, is **-0.0295** on average and -0.0234 at the median, positive
+in only 35 percent of the twenty names with prices. **Pricing**: a monthly cross-sectional long-short by
+regional load growth returns **+8.87 percent annualised at Sharpe 0.449 with a -37.8 percent drawdown**,
+and its mean is positive in 88.1 percent of resamples but the interval [-5.37, +23.71] **includes zero**.
+**Evidence**: `results/eia-load-daily.csv.gz`; `scripts/build_eia930_load_panel.py`;
+`scripts/run_eia_load_specialist.py`; `results/eia-load-specialist.json`;
+`tests/test_eia_load_specialist.py`. Raw source files are ignored under `results/eia-raw/`.
+**Scope**: development only; the exposure map is declared, not fitted; load is demand, not price, so
+congestion and energy prices are absent; the legs are equal weighted with twenty-session holds.
+**Consequence**: grid load as measured does not add per-name information yet, so it does not enter the
+sleeve or the council. The refinements that follow from the evidence are load against its own seasonal
+norm rather than growth, peak and ramping measures rather than means, load growth acceleration, and the
+incremental test at disclosure events rather than the unconditional one. The dataset itself is retained
+because it is the first non-SEC family in the repository and its clock is trivially clean.
