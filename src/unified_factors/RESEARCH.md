@@ -76,11 +76,22 @@ events remain explicit limitations rather than invented additive factors.
 
 ## Data and validation
 
-Begin with an authorized daily equity development panel and compatible published factor vintages. Long-run
-standard-factor histories validate the risk layer, not a 20-year compute strategy. No OOS window is selected
-or opened here. Compare all five baselines; no silent model selection on their evaluation results. Next add
-rolling origin evaluation, blocked uncertainty intervals, predeclared model variants and a final untouched
-test under the team's existing ownership rules.
+The local daily equity/factor panel has now been built and its descriptive-only OLS audit is recorded in
+`panel/README.md`. That fixed-basket analysis describes historical co-movement; it does not identify economic
+causes or validate a forecast, tradable hedge or alpha. The output remains `retrospective_only`; the normal
+runner rejects it. Detailed private run hashes, output QA and limitations are recorded alongside the panel
+workflow and in the untracked local manifest. Long-run standard-factor histories validate the risk layer,
+not a 20-year compute strategy.
+For the pinned 2016-01-04
+through 2026-10-02 daily inventory, development is fixed through 2024-10-02 and the shorter-of rule reserves
+2024-10-03 through 2026-10-02 (501 XNYS sessions) as a new, still-closed holdout. This boundary used only
+aggregate date/count metadata; the panel export and parser exclude the holdout. The previously opened
+2022-10 through 2024-09 strategy holdout belongs to another study and cannot serve as validation here.
+Current factor snapshots are revised and their historical availability is unverified, so any panel produced
+from them remains retrospective and cannot support a tradable forecast claim. Compare the fixed baseline
+families without selecting a winner on later results. Open the new holdout once, by its named owner, only after
+data rights, source QA, hypothesis, estimand, cost model and report protocol are frozen. Rolling-origin
+evaluation and blocked uncertainty intervals remain development research, not a substitute for that test.
 
 No automatic currency conversion: later adapters must convert asset P&L and FX translation consistently
 before adding FX hedges. No universal common factor set across equities, rates, compute products and perps.

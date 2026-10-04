@@ -1,7 +1,8 @@
 -- Read-only, pinned daily equity development input. Do not run through an artifact
 -- channel until both raw-data egress and vendor/licensor rights are explicitly cleared.
 -- Result columns are the minimum provenance and payload needed by panel.build.load_export.
--- Expected < 20,000 rows for the pinned 2016-01-04..2022-09-30 five-name window.
+-- Development window ends 2024-10-02; expected < 30,000 rows for five names.
+-- The separately sealed 2024-10-03..2026-10-02 holdout is intentionally excluded.
 WITH selected AS (
     SELECT SOURCE_ID, BATCH_SHA256, ROW_INDEX, ROW_SHA256, LOADED_AT, PAYLOAD_JSON,
            TRY_PARSE_JSON(PAYLOAD_JSON) AS P
@@ -21,10 +22,10 @@ WITH selected AS (
     WHERE
       (SOURCE_ID IN ('massive_bars', 'massive_bars_unadjusted')
        AND P:ticker::STRING IN ('PWR', 'ETN', 'EME', 'DLR', 'SPY')
-       AND TRY_TO_DATE(LEFT(P:bar_time_utc::STRING, 10)) BETWEEN '2016-01-04' AND '2022-09-30')
+       AND TRY_TO_DATE(LEFT(P:bar_time_utc::STRING, 10)) BETWEEN '2016-01-04' AND '2024-10-02')
       OR (SOURCE_ID = 'massive_dividends'
        AND P:ticker::STRING IN ('PWR', 'ETN', 'EME', 'DLR', 'SPY')
-       AND TRY_TO_DATE(P:ex_dividend_date::STRING) BETWEEN '2016-01-04' AND '2022-09-30')
+       AND TRY_TO_DATE(P:ex_dividend_date::STRING) BETWEEN '2016-01-04' AND '2024-10-02')
       OR (SOURCE_ID = 'massive_splits'
        AND P:ticker::STRING IN ('PWR', 'ETN', 'EME', 'DLR', 'SPY'))
 )
