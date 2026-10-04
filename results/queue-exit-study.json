@@ -1,0 +1,70 @@
+{
+ "status": "development only; both sealed windows spent; protocol docs/plan/queue-exit-study.md",
+ "population": 36441,
+ "base_withdrawal_share": 0.5741,
+ "primary_crowding": {
+  "observed_rho": -0.171,
+  "permutation_p": 1.0,
+  "null_mean": 0.5327,
+  "null_p95": 0.5329,
+  "high_low_gap": 0.0003,
+  "gap_permutation_p": 0.4875
+ },
+ "secondary_size": {
+  "observed_rho": -0.023,
+  "permutation_p": 1.0
+ },
+ "secondary_technology": {
+  "technologies": 9,
+  "top": "Offshore Wind",
+  "top_share": 0.7234,
+  "bottom": "Hydro",
+  "bottom_share": 0.4447,
+  "spread": 0.2787,
+  "permutation_p": 0.0184,
+  "table": {
+   "Offshore Wind": {
+    "n": 235,
+    "share": 0.7234
+   },
+   "Wind": {
+    "n": 6265,
+    "share": 0.6827
+   },
+   "Other": {
+    "n": 1714,
+    "share": 0.6639
+   },
+   "Coal": {
+    "n": 422,
+    "share": 0.6066
+   },
+   "Gas": {
+    "n": 3278,
+    "share": 0.6004
+   },
+   "Solar": {
+    "n": 13509,
+    "share": 0.5919
+   },
+   "Solar+Battery": {
+    "n": 3689,
+    "share": 0.4977
+   },
+   "Battery": {
+    "n": 5531,
+    "share": 0.4502
+   },
+   "Hydro": {
+    "n": 488,
+    "share": 0.4447
+   }
+  }
+ },
+ "test_count": 3,
+ "caveats": [
+  "development only, both sealed windows open and spent",
+  "crowding uses request MW only, outcomes never enter the feature",
+  "the queue panel has no position to hold; this orders a state variable only"
+ ]
+}

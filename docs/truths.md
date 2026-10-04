@@ -189,6 +189,21 @@ capex from SEC XBRL; development only, both sealed windows spent.
 **Consequence**: the compute index stays a phase marker and a monitoring read, never a leading feed into
 the capex chain. The reversed sign is a hypothesis for a separate study, not a finding.
 
+## T18. Exit is ordered by what the project is, not by how crowded the queue was
+
+**Statement**: within state-year blocks, queue crowding has no effect on withdrawal: the high-low
+gap in withdrawal share is +0.0003 (permutation p 0.49), and the pooled negative correlation of -0.171
+is a cohort artifact because later requests are both more crowded and younger. Technology does order
+exits: the spread between the highest and lowest withdrawal share among technologies with at least 200
+projects is 27.9 points (p 0.018), offshore wind 72.3 percent against hydro 44.5 percent. Size has no
+positive effect within blocks (rho -0.023).
+**Evidence**: `results/queue-exit-study.json`; `scripts/build_queue_exit_study.py`.
+**Scope**: all 36,441 queue projects, snapshot through February 2025; crowding is cumulative earlier
+request MW within the state, point-in-time safe. Development only; both sealed windows are spent.
+**Consequence**: the exit object is usable as a ranking through project characteristics, and the queue
+crowding variable is retired as an exit predictor. Any device that leans on queue age or crowding to
+order exits inherits a dead link.
+
 ---
 
 # What these truths are pointing at

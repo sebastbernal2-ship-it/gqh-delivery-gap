@@ -61,3 +61,7 @@ Produced by `scripts/fetch_provider_capex.py` and `scripts/build_compute_lead_st
 
 generated-path: results/provider-capex-quarterly.csv
 generated-path: results/compute-lead-study.json
+
+Produced by `scripts/build_queue_exit_study.py`:
+
+generated-path: results/queue-exit-study.json
