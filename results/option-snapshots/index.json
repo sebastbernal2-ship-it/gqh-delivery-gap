@@ -17,6 +17,12 @@
       "file": "snapshot-20261004T022925Z.json",
       "names": 12,
       "contracts": 3929
+    },
+    {
+      "taken_utc": "20261004T120442Z",
+      "file": "snapshot-20261004T120442Z.json",
+      "names": 12,
+      "contracts": 3929
     }
   ],
   "names_declared": [

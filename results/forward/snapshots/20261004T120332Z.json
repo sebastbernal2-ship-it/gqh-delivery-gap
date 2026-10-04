@@ -1,0 +1,39 @@
+{
+ "schema": "forward-window-snapshot-v1",
+ "run_utc": "20261004T120332Z",
+ "as_of": "2026-10-04",
+ "protocol": "docs/plan/forward-window.md",
+ "refresh": true,
+ "manifest": {
+  "results/forward/20261004T120332Z-revenue-quarterly.csv": "223262b3fef835a345a3178a885dce0958161b05291cc768d3c47f90c970ed3e",
+  "results/forward/20261004T120332Z-capex-quarterly.csv": "f87042154e38182f450fc1d47eb3dbb4e44044d9f9c3a0a1da128b19741dd01c"
+ },
+ "sleeves": {
+  "revenue": {
+   "events": [],
+   "parameter_digest": "288c23fb3a65c5cbcf7d52bb68a3620b7660fb73f1c852bad0d4cfa519ddd602",
+   "rows": 803,
+   "classes": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  "capex": {
+   "events": [],
+   "parameter_digest": "5e28fbc20a5b99d0e22efc8cd49e98a274920c5e29cc3f39b48e7dac661c976e",
+   "rows": 652,
+   "classes": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ]
+  }
+ },
+ "positions": {},
+ "note": "predictions recorded before any window outcome exists"
+}
