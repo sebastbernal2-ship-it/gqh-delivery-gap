@@ -1,0 +1,2 @@
+# Optional learned regime sidecar; pinned reproducible API baseline.
+hmmlearn==0.3.3
