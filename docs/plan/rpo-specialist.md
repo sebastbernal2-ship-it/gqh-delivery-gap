@@ -50,3 +50,14 @@ No returns, no costs, no trading claim. Availability is end-of-day for most disc
 identity is the current ticker, and both competition windows are spent. A pass here would mean
 the expectation gap is predictable and worth carrying into the council; a fail would mean the
 gap is real but not forecastable from a name's own history alone.
+
+## Council interface
+
+The fitted model is wrapped by `hpc/probabilistic-council/rpo_specialist.py` as a council
+specialist with the id `rpo-surprise:<model-version>`. The forecast window ends at the reveal:
+`information_cutoff` is the latest prior disclosure clock used, `forecast_time` is one second
+before the disclosure, and `valid_until` is the disclosure itself. A disclosure with no prior
+history carries `abstain=True` and the training prior as its distribution, so the council can
+drop it rather than treat it as evidence. The adapter is covered by three contracts, including a
+fit and fuse through `CouncilModel` with a second opinion, and `results/rpo-specialist-scores.json`
+emits five example forecasts for inspection.

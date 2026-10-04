@@ -208,6 +208,133 @@
   "surprise-up-large": 513
  },
  "issuers": 210,
+ "example_forecasts": [
+  {
+   "context": "FTV:2023-09-29",
+   "specialist_id": "rpo-surprise:rpo-softmax-v1",
+   "outcome_space": [
+    "surprise-down-large",
+    "surprise-down-small",
+    "flat",
+    "surprise-up-small",
+    "surprise-up-large"
+   ],
+   "probabilities": [
+    0.220824,
+    0.174802,
+    0.168194,
+    0.201896,
+    0.234283
+   ],
+   "information_cutoff": "2022-10-25T23:59:59+00:00",
+   "forecast_time": "2023-10-25T23:59:58+00:00",
+   "valid_until": "2023-10-25T23:59:59+00:00",
+   "abstain": false,
+   "model_version": "rpo-softmax-v1",
+   "data_version": "rpo-vintages-20261004",
+   "label_bin": 3
+  },
+  {
+   "context": "GOOGL:2023-09-30",
+   "specialist_id": "rpo-surprise:rpo-softmax-v1",
+   "outcome_space": [
+    "surprise-down-large",
+    "surprise-down-small",
+    "flat",
+    "surprise-up-small",
+    "surprise-up-large"
+   ],
+   "probabilities": [
+    0.040008,
+    0.260641,
+    0.322692,
+    0.342163,
+    0.034497
+   ],
+   "information_cutoff": "2022-10-25T23:59:59+00:00",
+   "forecast_time": "2023-10-25T23:59:58+00:00",
+   "valid_until": "2023-10-25T23:59:59+00:00",
+   "abstain": false,
+   "model_version": "rpo-softmax-v1",
+   "data_version": "rpo-vintages-20261004",
+   "label_bin": 3
+  },
+  {
+   "context": "PEGA:2022-09-30",
+   "specialist_id": "rpo-surprise:rpo-softmax-v1",
+   "outcome_space": [
+    "surprise-down-large",
+    "surprise-down-small",
+    "flat",
+    "surprise-up-small",
+    "surprise-up-large"
+   ],
+   "probabilities": [
+    0.094388,
+    0.261369,
+    0.264225,
+    0.267526,
+    0.112492
+   ],
+   "information_cutoff": "2022-10-25T23:59:59+00:00",
+   "forecast_time": "2023-10-25T23:59:58+00:00",
+   "valid_until": "2023-10-25T23:59:59+00:00",
+   "abstain": false,
+   "model_version": "rpo-softmax-v1",
+   "data_version": "rpo-vintages-20261004",
+   "label_bin": 2
+  },
+  {
+   "context": "EME:2023-09-30",
+   "specialist_id": "rpo-surprise:rpo-softmax-v1",
+   "outcome_space": [
+    "surprise-down-large",
+    "surprise-down-small",
+    "flat",
+    "surprise-up-small",
+    "surprise-up-large"
+   ],
+   "probabilities": [
+    0.061125,
+    0.167397,
+    0.234738,
+    0.344613,
+    0.192125
+   ],
+   "information_cutoff": "2022-10-26T11:33:31+00:00",
+   "forecast_time": "2023-10-26T11:33:30+00:00",
+   "valid_until": "2023-10-26T11:33:31+00:00",
+   "abstain": false,
+   "model_version": "rpo-softmax-v1",
+   "data_version": "rpo-vintages-20261004",
+   "label_bin": 2
+  },
+  {
+   "context": "ENPH:2023-09-30",
+   "specialist_id": "rpo-surprise:rpo-softmax-v1",
+   "outcome_space": [
+    "surprise-down-large",
+    "surprise-down-small",
+    "flat",
+    "surprise-up-small",
+    "surprise-up-large"
+   ],
+   "probabilities": [
+    0.214516,
+    0.188277,
+    0.151613,
+    0.181613,
+    0.263981
+   ],
+   "information_cutoff": "2022-10-26T23:59:59+00:00",
+   "forecast_time": "2023-10-26T23:59:58+00:00",
+   "valid_until": "2023-10-26T23:59:59+00:00",
+   "abstain": false,
+   "model_version": "rpo-softmax-v1",
+   "data_version": "rpo-vintages-20261004",
+   "label_bin": 2
+  }
+ ],
  "ready_for_performance_claim": false,
  "limitations": [
   "point-in-time vintages only; the legacy column is not used",

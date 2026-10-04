@@ -16,8 +16,35 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
-from filing_specialist.model import compare  # noqa: E402
+sys.path.insert(0, str(ROOT / "hpc" / "probabilistic-council"))
+from filing_specialist.model import chronological_split, compare  # noqa: E402
 from filing_specialist.rpo_model import BIN_LABELS, FEATURES, prepare_rows  # noqa: E402
+from rpo_specialist import disclosure_window, fit_rpo_specialist  # noqa: E402
+
+
+def example_forecasts(rows: list[dict], split: float, count: int = 5) -> list[dict]:
+    """Council-shaped forecasts for the first test rows, emitted for inspection."""
+    train_rows, test_rows = chronological_split(rows, split)
+    fitted = fit_rpo_specialist(train_rows, FEATURES, "rpo-softmax-v1", "rpo-vintages-20261004")
+    out = []
+    for row in test_rows[:count]:
+        cutoff, forecast_time, valid_until = disclosure_window(row, None)
+        forecast = fitted.forecast(row, f"{row['ticker']}:{row['period_end']}",
+                                   cutoff, forecast_time, valid_until)
+        out.append({
+            "context": forecast.context,
+            "specialist_id": forecast.specialist_id,
+            "outcome_space": list(forecast.outcome_space),
+            "probabilities": [round(value, 6) for value in forecast.probabilities],
+            "information_cutoff": forecast.information_cutoff,
+            "forecast_time": forecast.forecast_time,
+            "valid_until": forecast.valid_until,
+            "abstain": forecast.abstain,
+            "model_version": forecast.model_version,
+            "data_version": forecast.data_version,
+            "label_bin": int(row["label_bin"]),
+        })
+    return out
 
 
 def main() -> int:
@@ -43,6 +70,7 @@ def main() -> int:
         "drops": drops,
         "bins": {label: bins.get(label, 0) for label in BIN_LABELS},
         "issuers": len({row["ticker"] for row in rows}),
+        "example_forecasts": example_forecasts(rows, args.split),
         "ready_for_performance_claim": False,
         "limitations": [
             "point-in-time vintages only; the legacy column is not used",
