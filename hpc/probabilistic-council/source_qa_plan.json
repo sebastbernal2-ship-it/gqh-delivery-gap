@@ -1,0 +1,29 @@
+{
+  "scope": "development_only",
+  "max_bytes": 100000000,
+  "files": [
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "filename_timestamp_s": 1765370844,
+      "kind": "books",
+      "pair_id": "BTC:2025-12-10:1765370844",
+      "path": "data/l4_l2book/l4_l2book_1765370844.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-10",
+      "sha256": "a8b4fd401949af4466f364a670f3b626b4036a9a83a625d63fefeeeb542e66fe",
+      "size": 51429665
+    },
+    {
+      "dataset": "gionuibk/hyperliquidL2Book-v2",
+      "filename_timestamp_s": 1765370844,
+      "kind": "trades",
+      "pair_id": "BTC:2025-12-10:1765370844",
+      "path": "data/l4_trades/l4_trades_1765370844.parquet",
+      "revision": "e28ac5f9139033a3e991b3db52702dad1350683e",
+      "session": "2025-12-10",
+      "sha256": "15e6bf83b3d5b85ea8d62ce1879b46c139d2ceaf6088a1f8a7fee64761aca8be",
+      "size": 729354
+    }
+  ],
+  "purpose": "training-role source QA only, no outcomes"
+}

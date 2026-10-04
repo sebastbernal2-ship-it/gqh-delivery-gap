@@ -38,3 +38,13 @@ reuses an eight-case final date already examined by the earlier smoke, so it is 
 and cannot select a production view. B was gate-selected under the fixed rule, while A, B, early
 fusion, and the late pool all scored worse than smoothed training prevalence on that single date.
 See the [predeclared view plan](../../../docs/inbox/aidan-2026-10-03/jev-ablation-plan.md).
+
+`jev_training_source_clock_audit_20261003.json` is the unedited `source_clock_audit.py` receipt
+for the hash-pinned training-only pair in `source_qa_plan.json`. It contains clock/coverage counts,
+not price features, labels, model scores or verified availability claims.
+
+`jev_live_capture_smoke_20261003.json` and `jev_live_source_inventory_smoke_20261003.json` are
+unedited operational receipts from a bounded direct BTC capture and its segment-separated export.
+No journal/market payload or checkpoint is published. The one-minute recording cannot form the
+existing 30-second-history/60-second-label supervised case and is explicitly not ready for training.
+See [source gate, limitations and reproduction](../../../docs/inbox/aidan-2026-10-03/jev-data-clock-gate.md).
