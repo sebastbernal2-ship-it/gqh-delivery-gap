@@ -44,3 +44,5 @@
 {"artifact": "T36 to T57", "axis": "labels", "declared_before": true, "id": "V044", "question": "surprise binning", "status": "adopted", "variant": "raw relative change with fixed edges"}
 {"artifact": "T57", "axis": "labels", "declared_before": true, "id": "V045", "question": "surprise binning", "status": "untried", "variant": "z-scored change against trailing volatility"}
 {"artifact": "T55", "axis": "universe", "declared_before": true, "id": "V046", "question": "long-history design", "status": "untried", "variant": "point-in-time rule-based universe"}
+{"artifact": "T58", "axis": "labels", "declared_before": true, "id": "V047", "question": "surprise binning", "status": "rejected", "variant": "z-scored change against trailing volatility, pure replacement"}
+{"artifact": "T58", "axis": "sizing", "declared_before": true, "id": "V048", "question": "position sizing", "status": "untried", "variant": "raw extremes select, standardized surprise sizes"}

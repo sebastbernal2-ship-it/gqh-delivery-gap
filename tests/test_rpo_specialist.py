@@ -77,6 +77,23 @@ def test_comparison_runs_on_synthetic_rows_and_returns_finite_scores():
     assert report["split"]["train_through"] < report["split"]["test_from"]
 
 
+def test_prepare_rows_reads_a_file_wide_edge_declaration_and_the_standardized_column():
+    base = {"ticker": "T", "expectation_status": "measured", "availability": "2020-01-01T23:59:59+00:00",
+            "period_end": "2019-12-31", "previous_value": "100", "change": "5", "group": "g"}
+    rows = []
+    for index, value in enumerate(("1.0", "-1.0", "2.0", "0.0")):
+        row = dict(base, relative_surprise_pit="0.01", relative_surprise_z=value,
+                   change_relative_z="0.1", label_edges="-1.5,-0.5,0.5,1.5",
+                   availability=f"2020-01-0{index+1}T23:59:59+00:00", period_end=f"2019-0{index+1}-01")
+        rows.append(row)
+    prepared, _ = prepare_rows(rows, surprise_column="relative_surprise_z",
+                               change_column="change_relative_z")
+    labels = [row["label_bin"] for row in prepared]
+    assert labels == [3, 1, 4, 2]                        # the z edges apply, not the default ones
+    default_prepared, _ = prepare_rows(rows[1:2])
+    assert default_prepared[0]["label_bin"] == 2         # default edges unchanged: 0.01 sits in the middle
+
+
 if __name__ == "__main__":
     tests = [value for name, value in sorted(globals().items()) if name.startswith("test_")]
     for test in tests:

@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT / "src"))
 from build_complex_panels_pit import quarterly_earliest  # noqa: E402
-from build_driver_vintages import build_input_rows  # noqa: E402
+from build_driver_vintages import apply_zscore, build_input_rows  # noqa: E402
 
 
 def payload(facts: list[dict]) -> dict:
@@ -75,6 +75,21 @@ def test_level_mode_accepts_rows_without_a_period_start():
     with_level, drops = build_input_rows(rows, "Assets", {}, level=True)
     assert len(with_level) == 1 and with_level[0]["change"] == 40.0
     assert drops["no_previous_value"] == 1
+
+
+def test_zscore_scaling_needs_history_scales_by_own_volatility_and_clips():
+    records = []
+    for index in range(6):
+        records.append({"ticker": "T", "availability": f"2020-01-0{index+1}",
+                        "change": "10" if index % 2 == 0 else "-10", "previous_value": "100",
+                        "relative_surprise_pit": "40" if index == 5 else ""})
+    scored, info = apply_zscore(records)
+    assert info["z_published"] == 1                       # only the row with a surprise and enough history
+    assert info["z_without_volatility"] == 4              # the first four rows lack four prior changes
+    published = [record for record in scored if record.get("relative_surprise_z")]
+    assert published and abs(published[0]["relative_surprise_z"]) <= 5.0
+    assert published[0]["label_edges"] == "-1.5,-0.5,0.5,1.5"
+    assert all("relative_surprise_z" not in record for record in scored[:-1])
 
 
 if __name__ == "__main__":

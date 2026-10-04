@@ -1,0 +1,1139 @@
+{
+ "schema": "driver-surprise-v1",
+ "scope": "development_only",
+ "protocol": "docs/plan/driver-surprise.md",
+ "vintages": "results/margins-vintages-z.csv",
+ "panel": {
+  "rows": 2086,
+  "train_rows": 1460,
+  "test_rows": 626,
+  "issuers": 49,
+  "drops": {
+   "not_measured": 434,
+   "no_relative_surprise": 10
+  },
+  "return_coverage": {
+   "rows": 626,
+   "rows_with_the_longest_horizon": 623,
+   "share": 0.9952
+  },
+  "series_with_unexplained_drops": [
+   "OKLO",
+   "PCG",
+   "PLUG",
+   "PRIM",
+   "SMCI",
+   "VRT"
+  ],
+  "rows_dropped_for_dirty_series": 171
+ },
+ "classes": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "scores": {
+  "prevalence": {
+   "rows": 626,
+   "log_loss": 1.2183036304195758,
+   "brier": 0.6089453668501911,
+   "accuracy": 0.5846645367412141,
+   "class_support": {
+    "0": 25,
+    "1": 69,
+    "2": 366,
+    "3": 104,
+    "4": 62
+   }
+  },
+  "softmax": {
+   "rows": 626,
+   "log_loss": 1.2521621454047567,
+   "brier": 0.6035399720042881,
+   "accuracy": 0.5878594249201278,
+   "class_support": {
+    "0": 25,
+    "1": 69,
+    "2": 366,
+    "3": 104,
+    "4": 62
+   }
+  },
+  "rows": 626
+ },
+ "variants": {
+  "raw": {
+   "1": {
+    "by_predicted_bin": [
+     {
+      "group": 2,
+      "n": 609,
+      "mean": 0.0010975985343803988
+     },
+     {
+      "group": 3,
+      "n": 1,
+      "mean": 0.004509578621094468
+     },
+     {
+      "group": 4,
+      "n": 16,
+      "mean": 0.015326983766268606
+     }
+    ],
+    "information_coefficient": 0.08537202912633345,
+    "long_short": [
+     {
+      "horizon": 1,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     },
+     {
+      "horizon": 1,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": null,
+     "lower": null,
+     "upper": null,
+     "issuers": 13
+    },
+    "by_scope": {
+     "complex": {
+      "rows": 626,
+      "long_short": [
+       {
+        "horizon": 1,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 1,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 13
+      }
+     },
+     "rest": {
+      "rows": 0,
+      "long_short": [
+       {
+        "horizon": 1,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 1,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "by_predicted_bin": [
+     {
+      "group": 2,
+      "n": 609,
+      "mean": 0.004680159321993592
+     },
+     {
+      "group": 3,
+      "n": 1,
+      "mean": -0.022547893105472228
+     },
+     {
+      "group": 4,
+      "n": 16,
+      "mean": 0.014960787663600698
+     }
+    ],
+    "information_coefficient": -0.01236728385236858,
+    "long_short": [
+     {
+      "horizon": 5,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     },
+     {
+      "horizon": 5,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": null,
+     "lower": null,
+     "upper": null,
+     "issuers": 13
+    },
+    "by_scope": {
+     "complex": {
+      "rows": 626,
+      "long_short": [
+       {
+        "horizon": 5,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 5,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 13
+      }
+     },
+     "rest": {
+      "rows": 0,
+      "long_short": [
+       {
+        "horizon": 5,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 5,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 0
+      }
+     }
+    }
+   },
+   "20": {
+    "by_predicted_bin": [
+     {
+      "group": 2,
+      "n": 607,
+      "mean": 0.017496142742528906
+     },
+     {
+      "group": 3,
+      "n": 1,
+      "mean": -0.06651636529876936
+     },
+     {
+      "group": 4,
+      "n": 15,
+      "mean": 0.07707731623264398
+     }
+    ],
+    "information_coefficient": -0.06533394093365735,
+    "long_short": [
+     {
+      "horizon": 20,
+      "n_long": 15,
+      "n_short": 0,
+      "spread": null
+     },
+     {
+      "horizon": 20,
+      "n_long": 15,
+      "n_short": 0,
+      "spread": null
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": null,
+     "lower": null,
+     "upper": null,
+     "issuers": 13
+    },
+    "by_scope": {
+     "complex": {
+      "rows": 623,
+      "long_short": [
+       {
+        "horizon": 20,
+        "n_long": 15,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 20,
+        "n_long": 15,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 13
+      }
+     },
+     "rest": {
+      "rows": 0,
+      "long_short": [
+       {
+        "horizon": 20,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 20,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 0
+      }
+     }
+    }
+   }
+  },
+  "winsor": {
+   "1": {
+    "by_predicted_bin": [
+     {
+      "group": 2,
+      "n": 609,
+      "mean": 0.0010975985343803988
+     },
+     {
+      "group": 3,
+      "n": 1,
+      "mean": 0.004509578621094468
+     },
+     {
+      "group": 4,
+      "n": 16,
+      "mean": 0.015326983766268606
+     }
+    ],
+    "information_coefficient": 0.08537202912633345,
+    "long_short": [
+     {
+      "horizon": 1,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     },
+     {
+      "horizon": 1,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": null,
+     "lower": null,
+     "upper": null,
+     "issuers": 13
+    },
+    "by_scope": {
+     "complex": {
+      "rows": 626,
+      "long_short": [
+       {
+        "horizon": 1,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 1,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 13
+      }
+     },
+     "rest": {
+      "rows": 0,
+      "long_short": [
+       {
+        "horizon": 1,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 1,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "by_predicted_bin": [
+     {
+      "group": 2,
+      "n": 609,
+      "mean": 0.004680159321993592
+     },
+     {
+      "group": 3,
+      "n": 1,
+      "mean": -0.022547893105472228
+     },
+     {
+      "group": 4,
+      "n": 16,
+      "mean": 0.014960787663600698
+     }
+    ],
+    "information_coefficient": -0.01236728385236858,
+    "long_short": [
+     {
+      "horizon": 5,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     },
+     {
+      "horizon": 5,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": null,
+     "lower": null,
+     "upper": null,
+     "issuers": 13
+    },
+    "by_scope": {
+     "complex": {
+      "rows": 626,
+      "long_short": [
+       {
+        "horizon": 5,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 5,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 13
+      }
+     },
+     "rest": {
+      "rows": 0,
+      "long_short": [
+       {
+        "horizon": 5,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 5,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 0
+      }
+     }
+    }
+   },
+   "20": {
+    "by_predicted_bin": [
+     {
+      "group": 2,
+      "n": 607,
+      "mean": 0.016431125115597207
+     },
+     {
+      "group": 3,
+      "n": 1,
+      "mean": -0.06651636529876936
+     },
+     {
+      "group": 4,
+      "n": 15,
+      "mean": 0.04891958472481846
+     }
+    ],
+    "information_coefficient": -0.06536125202091365,
+    "long_short": [
+     {
+      "horizon": 20,
+      "n_long": 15,
+      "n_short": 0,
+      "spread": null
+     },
+     {
+      "horizon": 20,
+      "n_long": 15,
+      "n_short": 0,
+      "spread": null
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": null,
+     "lower": null,
+     "upper": null,
+     "issuers": 13
+    },
+    "by_scope": {
+     "complex": {
+      "rows": 623,
+      "long_short": [
+       {
+        "horizon": 20,
+        "n_long": 15,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 20,
+        "n_long": 15,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 13
+      }
+     },
+     "rest": {
+      "rows": 0,
+      "long_short": [
+       {
+        "horizon": 20,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 20,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 0
+      }
+     }
+    }
+   }
+  },
+  "month_neutral": {
+   "1": {
+    "by_predicted_bin": [
+     {
+      "group": 2,
+      "n": 609,
+      "mean": -0.00034256037143149727
+     },
+     {
+      "group": 3,
+      "n": 1,
+      "mean": 0.02723897163797484
+     },
+     {
+      "group": 4,
+      "n": 16,
+      "mean": 0.011336268410237941
+     }
+    ],
+    "information_coefficient": 0.07341511009642297,
+    "long_short": [
+     {
+      "horizon": 1,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     },
+     {
+      "horizon": 1,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": null,
+     "lower": null,
+     "upper": null,
+     "issuers": 13
+    },
+    "by_scope": {
+     "complex": {
+      "rows": 626,
+      "long_short": [
+       {
+        "horizon": 1,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 1,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 13
+      }
+     },
+     "rest": {
+      "rows": 0,
+      "long_short": [
+       {
+        "horizon": 1,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 1,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "by_predicted_bin": [
+     {
+      "group": 2,
+      "n": 609,
+      "mean": -0.00020432210634998635
+     },
+     {
+      "group": 3,
+      "n": 1,
+      "mean": 0.030205697322946555
+     },
+     {
+      "group": 4,
+      "n": 16,
+      "mean": 0.005889154090262189
+     }
+    ],
+    "information_coefficient": -0.0040094785413042075,
+    "long_short": [
+     {
+      "horizon": 5,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     },
+     {
+      "horizon": 5,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": null,
+     "lower": null,
+     "upper": null,
+     "issuers": 13
+    },
+    "by_scope": {
+     "complex": {
+      "rows": 626,
+      "long_short": [
+       {
+        "horizon": 5,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 5,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 13
+      }
+     },
+     "rest": {
+      "rows": 0,
+      "long_short": [
+       {
+        "horizon": 5,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 5,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 0
+      }
+     }
+    }
+   },
+   "20": {
+    "by_predicted_bin": [
+     {
+      "group": 2,
+      "n": 607,
+      "mean": -0.0009119750590644113
+     },
+     {
+      "group": 3,
+      "n": 1,
+      "mean": -0.033060555868582545
+     },
+     {
+      "group": 4,
+      "n": 15,
+      "mean": 0.03910862778137867
+     }
+    ],
+    "information_coefficient": -0.08133575931790993,
+    "long_short": [
+     {
+      "horizon": 20,
+      "n_long": 15,
+      "n_short": 0,
+      "spread": null
+     },
+     {
+      "horizon": 20,
+      "n_long": 15,
+      "n_short": 0,
+      "spread": null
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": null,
+     "lower": null,
+     "upper": null,
+     "issuers": 13
+    },
+    "by_scope": {
+     "complex": {
+      "rows": 623,
+      "long_short": [
+       {
+        "horizon": 20,
+        "n_long": 15,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 20,
+        "n_long": 15,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 13
+      }
+     },
+     "rest": {
+      "rows": 0,
+      "long_short": [
+       {
+        "horizon": 20,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 20,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 0
+      }
+     }
+    }
+   }
+  },
+  "month_group_neutral": {
+   "1": {
+    "by_predicted_bin": [
+     {
+      "group": 2,
+      "n": 609,
+      "mean": -0.0003783040690197278
+     },
+     {
+      "group": 3,
+      "n": 1,
+      "mean": 0.031329257545217204
+     },
+     {
+      "group": 4,
+      "n": 16,
+      "mean": 0.012441120030487312
+     }
+    ],
+    "information_coefficient": 0.062181514172544444,
+    "long_short": [
+     {
+      "horizon": 1,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     },
+     {
+      "horizon": 1,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": null,
+     "lower": null,
+     "upper": null,
+     "issuers": 13
+    },
+    "by_scope": {
+     "complex": {
+      "rows": 626,
+      "long_short": [
+       {
+        "horizon": 1,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 1,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 13
+      }
+     },
+     "rest": {
+      "rows": 0,
+      "long_short": [
+       {
+        "horizon": 1,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 1,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "by_predicted_bin": [
+     {
+      "group": 2,
+      "n": 609,
+      "mean": -0.00033983229495447147
+     },
+     {
+      "group": 3,
+      "n": 1,
+      "mean": 0.052741003524917285
+     },
+     {
+      "group": 4,
+      "n": 16,
+      "mean": 0.009638554006397241
+     }
+    ],
+    "information_coefficient": 0.029444620819922784,
+    "long_short": [
+     {
+      "horizon": 5,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     },
+     {
+      "horizon": 5,
+      "n_long": 16,
+      "n_short": 0,
+      "spread": null
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": null,
+     "lower": null,
+     "upper": null,
+     "issuers": 13
+    },
+    "by_scope": {
+     "complex": {
+      "rows": 626,
+      "long_short": [
+       {
+        "horizon": 5,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 5,
+        "n_long": 16,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 13
+      }
+     },
+     "rest": {
+      "rows": 0,
+      "long_short": [
+       {
+        "horizon": 5,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 5,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 0
+      }
+     }
+    }
+   },
+   "20": {
+    "by_predicted_bin": [
+     {
+      "group": 2,
+      "n": 607,
+      "mean": -0.00034366952221596937
+     },
+     {
+      "group": 3,
+      "n": 1,
+      "mean": -0.10068184851379
+     },
+     {
+      "group": 4,
+      "n": 15,
+      "mean": 0.02061928323325888
+     }
+    ],
+    "information_coefficient": -0.04799297206520818,
+    "long_short": [
+     {
+      "horizon": 20,
+      "n_long": 15,
+      "n_short": 0,
+      "spread": null
+     },
+     {
+      "horizon": 20,
+      "n_long": 15,
+      "n_short": 0,
+      "spread": null
+     }
+    ],
+    "long_short_interval_20bps": {
+     "point": null,
+     "lower": null,
+     "upper": null,
+     "issuers": 13
+    },
+    "by_scope": {
+     "complex": {
+      "rows": 623,
+      "long_short": [
+       {
+        "horizon": 20,
+        "n_long": 15,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 20,
+        "n_long": 15,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 13
+      }
+     },
+     "rest": {
+      "rows": 0,
+      "long_short": [
+       {
+        "horizon": 20,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       },
+       {
+        "horizon": 20,
+        "n_long": 0,
+        "n_short": 0,
+        "spread": null
+       }
+      ],
+      "long_short_interval_20bps": {
+       "point": null,
+       "lower": null,
+       "upper": null,
+       "issuers": 0
+      }
+     }
+    }
+   }
+  }
+ },
+ "ready_for_performance_claim": false,
+ "limitations": [
+  "development only; the sealed windows are spent",
+  "one price source; no borrow, no capacity model",
+  "quarterly windows overlap; the traded bins hold few independent issuers"
+ ],
+ "label": "margins-z"
+}

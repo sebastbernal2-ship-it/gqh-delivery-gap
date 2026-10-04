@@ -129,9 +129,10 @@ unattended (daily forward snapshot, daily option capture, daily tape block until
 
 What remains, in order:
 
-1. **The concept-agnostic surprise scaling**, the z-scored change against its own trailing volatility
-   before binning, declared in T57. It is the only fair test left for assets and margins, and it must
-   also be measured on the surviving revenue sleeve before it is adopted anywhere.
+1. **Sizing and selection decoupling**, the declared follow-up to T58: raw extreme bins select the
+   trade, the standardized surprise sizes it. This is where the measured driver gain of the z-variant
+   can still be harvested, because the sleeve keeps its 635 extreme events while gaining the better
+   ranking inside them. The pure z-variant is rejected and assets and margins stay declined.
 2. **Reconcile the promotion gate with the expectation vintages.** Another session's
    `scripts/report_promotion_gate.py` still reports "expectation vintages missing" while the repository
    holds over eleven thousand measured, clock-verified vintages (T45 to T46). That edit is theirs and

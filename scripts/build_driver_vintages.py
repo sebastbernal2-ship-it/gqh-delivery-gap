@@ -87,10 +87,66 @@ def build_input_rows(rows: list[dict], preferred: str, group_of: dict[str, str],
     return out, dict(drops)
 
 
+
+
+Z_EDGES = (-1.5, -0.5, 0.5, 1.5)          # declared edges for the standardized surprise
+Z_CLIP = 5.0
+VOL_WINDOW = 8                             # prior relative changes used for the trailing volatility
+VOL_FLOOR = 0.005                          # a floor keeps the ratio finite for very calm series
+VOL_MINIMUM = 4                            # fewer prior changes than this and no z is published
+
+
+def apply_zscore(records: list[dict]) -> tuple[list[dict], dict]:
+    """Scale the surprise and the change by each ticker's own trailing volatility of changes.
+
+    The declared bin edges are calibrated for series that swing by about ten percent a quarter, so a
+    balance-sheet level that moves two percent lands in one bin and a series with a tiny denominator
+    throws outliers that dominate the fit. Dividing by the trailing volatility of the *change* makes
+    the target dimensionless and concept agnostic, and the clip keeps single rows from owning the fit.
+    Only vintages available before the row in question enter its volatility, so the clock is intact.
+    """
+    import statistics
+
+    by_ticker: dict[str, list[dict]] = {}
+    for record in records:
+        by_ticker.setdefault(record["ticker"], []).append(record)
+    published = 0
+    dropped = 0
+    for ticker, items in by_ticker.items():
+        items.sort(key=lambda record: str(record.get("availability") or ""))
+        history: list[float] = []
+        for record in items:
+            try:
+                change = float(record["change"])
+                previous = float(record["previous_value"])
+            except (KeyError, TypeError, ValueError):
+                history.append(0.0)
+                continue
+            relative_change = (change / abs(previous)) if previous else None
+            if len(history) >= VOL_MINIMUM:
+                volatility = max(statistics.stdev(history[-VOL_WINDOW:]), VOL_FLOOR)
+                raw_surprise = record.get("relative_surprise_pit")
+                if raw_surprise not in (None, ""):
+                    z = float(raw_surprise) / volatility
+                    record["relative_surprise_z"] = max(-Z_CLIP, min(Z_CLIP, z))
+                    published += 1
+                if relative_change is not None:
+                    record["change_relative_z"] = max(-Z_CLIP, min(Z_CLIP, relative_change / volatility))
+                record["label_edges"] = ",".join(str(edge) for edge in Z_EDGES)
+            else:
+                dropped += 1
+            if relative_change is not None:
+                history.append(relative_change)
+    return records, {"z_published": published, "z_without_volatility": dropped,
+                     "vol_window": VOL_WINDOW, "vol_floor": VOL_FLOOR, "clip": Z_CLIP}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--panel", type=Path, required=True)
     parser.add_argument("--preferred", default="")
+    parser.add_argument("--scale", choices=("raw", "zscore"), default="raw",
+                        help="zscore: surprise and change scaled by trailing volatility of changes")
     parser.add_argument("--level", action="store_true",
                         help="balance-sheet level: no period_start, cadence from the observation gap")
     parser.add_argument("--output", type=Path, required=True)
@@ -108,6 +164,9 @@ def main() -> int:
     rows = list(csv.DictReader(args.panel.open()))
     prepared, drops = build_input_rows(rows, args.preferred, group_of, level=args.level)
     records, vintage_drops = build_vintages(prepared)
+    zscored = {}
+    if args.scale == "zscore":
+        records, zscored = apply_zscore(records)
 
     with args.output.open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(COLUMNS), extrasaction="ignore")
@@ -126,7 +185,7 @@ def main() -> int:
     print(json.dumps({
         "panel": str(args.panel), "rows_in": len(rows), "prepared": len(prepared),
         "build_drops": drops, "vintage_drops": vintage_drops,
-        "vintages": len(records), "measured": len(measured),
+        "vintages": len(records), "measured": len(measured), "zscore": zscored,
         "tickers": len({r["ticker"] for r in records}),
         "median_filing_lag_days": statistics.median(lags) if lags else None,
         "share_lag_over_300_days": round(sum(1 for lag in lags if lag > 300) / max(1, len(lags)), 3),

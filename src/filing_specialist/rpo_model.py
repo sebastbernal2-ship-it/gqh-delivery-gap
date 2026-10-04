@@ -26,8 +26,19 @@ FEATURES = (
 )
 
 
-def surprise_bin(value: float) -> int:
-    return bisect.bisect_right(BIN_EDGES, value)
+def surprise_bin(value: float, edges: tuple[float, ...] = BIN_EDGES) -> int:
+    return bisect.bisect_right(edges, value)
+
+
+def resolve_edges(vintages: list[dict], explicit: tuple[float, ...] | None) -> tuple[float, ...]:
+    """Declared edges win; otherwise a file-wide label_edges column; otherwise the default bins."""
+    if explicit is not None:
+        return tuple(explicit)
+    for row in vintages:
+        raw = row.get("label_edges")
+        if raw not in (None, ""):
+            return tuple(float(part) for part in str(raw).split(","))
+    return BIN_EDGES
 
 
 @dataclass(frozen=True)
@@ -41,10 +52,11 @@ class Disclosure:
     group: str
 
 
-def disclosure_from_row(row: dict) -> tuple[Disclosure | None, str | None]:
+def disclosure_from_row(row: dict, surprise_column: str = "relative_surprise_pit",
+                        change_column: str | None = None) -> tuple[Disclosure | None, str | None]:
     if (row.get("expectation_status") or "") != "measured":
         return None, "not_measured"
-    raw_relative = row.get("relative_surprise_pit")
+    raw_relative = row.get(surprise_column)
     relative = "" if raw_relative in (None, "") else str(raw_relative).strip()
     if not relative:
         return None, "no_relative_surprise"
@@ -63,7 +75,11 @@ def disclosure_from_row(row: dict) -> tuple[Disclosure | None, str | None]:
         quarter = (int(row["period_end"][5:7]) - 1) // 3 + 1
     except (KeyError, TypeError, ValueError):
         return None, "no_quarter"
-    change_relative = (change / abs(previous)) if (change is not None and previous) else None
+    if change_column is not None:
+        raw_change = row.get(change_column)
+        change_relative = None if raw_change in (None, "") else float(raw_change)
+    else:
+        change_relative = (change / abs(previous)) if (change is not None and previous) else None
     return Disclosure(ticker, available, float(relative), change_relative, previous, quarter,
                       (row.get("group") or "").strip()), None
 
@@ -85,11 +101,14 @@ def _prior_features(disclosure: Disclosure, prior: list[Disclosure]) -> dict:
     }
 
 
-def prepare_rows(vintages: list[dict]) -> tuple[list[dict], dict]:
+def prepare_rows(vintages: list[dict], surprise_column: str = "relative_surprise_pit",
+                 change_column: str | None = None,
+                 edges: tuple[float, ...] | None = None) -> tuple[list[dict], dict]:
     by_ticker: dict[str, list[Disclosure]] = {}
     drops: dict[str, int] = {}
+    resolved = resolve_edges(vintages, edges)
     for row in vintages:
-        disclosure, reason = disclosure_from_row(row)
+        disclosure, reason = disclosure_from_row(row, surprise_column, change_column)
         if disclosure is None:
             drops[reason] = drops.get(reason, 0) + 1
             continue
@@ -109,8 +128,8 @@ def prepare_rows(vintages: list[dict]) -> tuple[list[dict], dict]:
                 "period_end": record.get("period_end", ""),
                 "label_available": disclosure.available.isoformat(),
                 "label_relative_surprise": disclosure.relative,
-                "label_bin": surprise_bin(disclosure.relative),
-                "label_bin_label": BIN_LABELS[surprise_bin(disclosure.relative)],
+                "label_bin": surprise_bin(disclosure.relative, resolved),
+                "label_bin_label": BIN_LABELS[surprise_bin(disclosure.relative, resolved)],
                 "seasonal_history_count": float(seasonal_count) if str(seasonal_count).strip() else 0.0,
                 "history_span_days": float(span) if str(span).strip() else 0.0,
                 "log_previous_value": (math.log1p(abs(disclosure.previous_value))

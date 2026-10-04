@@ -373,3 +373,31 @@ generated-path: results/margins-surprise.json
 Produced by `scripts/run_driver_surprise.py` on assets:
 
 generated-path: results/assets-surprise.json
+
+Produced by `scripts/build_driver_vintages.py --scale zscore` applied to the live revenue vintages:
+
+generated-path: results/revenue-z-on-pit.csv
+
+Produced by the z-score variant of the assets vintages:
+
+generated-path: results/assets-vintages-z.csv
+
+Produced by the z-score variant of the margins vintages:
+
+generated-path: results/margins-vintages-z.csv
+
+Produced by `scripts/run_driver_surprise.py --scale zscore` on revenue:
+
+generated-path: results/revenue-surprise-z.json
+
+Produced by `scripts/run_driver_surprise.py --scale zscore` on assets:
+
+generated-path: results/assets-surprise-z.json
+
+Produced by `scripts/run_driver_surprise.py --scale zscore` on margins:
+
+generated-path: results/margins-surprise-z.json
+
+Produced by `scripts/run_walk_forward.py --revenue results/revenue-z-on-pit.csv`:
+
+generated-path: results/walk-forward-z.json

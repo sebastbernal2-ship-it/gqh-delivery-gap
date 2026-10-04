@@ -957,3 +957,31 @@ keeps its raw probabilities. The variant registry records every tried variant fr
 and states plainly that the historic count before it is not fully reconstructible.
 **Restored 2026-10-04**: this entry was dropped by another session's rewrite of this shared file and
 re-added from its artifact. Check the ledger's numbering after any shared-file rewrite.
+
+## T58. The standardized surprise ranks better and trades worse, so the sleeve keeps raw labels
+
+**Statement**: scaling each surprise by its own ticker's trailing volatility of quarterly changes,
+with declared edges at -1.5, -0.5, +0.5 and +1.5 and a clip at five, is a declared variant tested on
+identical rows. At the driver level it **improves** the revenue ranking: on the same 1,706 measured
+events, the twenty-session long-short spread moves from +0.0317 month neutral with interval -0.0952 to
++0.1490 and +0.0262 month and group neutral with interval -0.0197 to +0.0642, to **+0.2447** and
+**+0.1275** respectively, roughly a five-fold gain in the neutral arm. At the sleeve level it
+**loses**: the walk-forward revenue sleeve returns +18.39 percent at Sharpe 0.405 with a -57.5 percent
+drawdown against the raw sleeve's +27.65 percent at 0.756, with two negative years (2020 and 2021)
+where the raw sleeve is positive every year, and the composite without capex falls from Sharpe 1.493
+to 1.176. The mechanism is visible in the counts: the raw labels put 635 events in the two extreme
+bins and the standardized labels 250, so the sleeve harvests fewer, better-ranked trades and the
+position sizing cannot make up the difference. Assets and margins remain unusable: the standardized
+labels are well distributed at last (assets 218, 407, 1,346, 544 and 430 across the five bins) but the
+fitted model still does not separate them, so no long or short side can be formed at all.
+**Evidence**: `results/revenue-z-on-pit.csv`; `results/assets-vintages-z.csv`;
+`results/margins-vintages-z.csv`; `results/revenue-surprise-z.json`; `results/walk-forward-z.json`;
+`results/assets-surprise-z.json`; `results/margins-surprise-z.json`;
+`scripts/build_driver_vintages.py --scale zscore`; `tests/test_driver_vintages.py`;
+`tests/test_rpo_specialist.py`.
+**Scope**: development only; the A/B shares rows, prices, costs and the decision rule, so the
+difference is the target definition alone. The driver gain is measured on the same 1,706 events.
+**Consequence**: the revenue sleeve keeps raw bins, and the standardized surprise is kept only as an
+input for **sizing and selection decoupling**, a declared untried variant in which raw extremes select
+the trade and the standardized value sizes it. A concept-agnostic target alone does not rescue assets
+or margins, so their decline stands.

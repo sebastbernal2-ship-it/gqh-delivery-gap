@@ -20,7 +20,8 @@ COLUMNS = (
     "ticker", "cik", "name", "concept", "sic", "group", "period_end", "quarter", "availability",
     "availability_resolution", "value", "previous_value", "change", "expectation_kind",
     "expectation_status", "history_count", "history_span_days", "expected_change_pit",
-    "surprise_pit", "relative_surprise_pit", "in_sealed_window", "accession", "source_receipt",
+    "surprise_pit", "relative_surprise_pit",
+    "relative_surprise_z", "change_relative_z", "label_edges", "in_sealed_window", "accession", "source_receipt",
 )
 MINIMUM_HISTORY = 2
 

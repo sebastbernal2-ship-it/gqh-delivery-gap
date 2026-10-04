@@ -37,12 +37,19 @@ def main() -> int:
     parser.add_argument("--cache", type=Path, default=ROOT / "results" / "bar-cache")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--split", type=float, default=0.7)
+    parser.add_argument("--scale", choices=("raw", "zscore"), default="raw",
+                        help="zscore reads the standardized surprise and change columns")
     parser.add_argument("--label", default="")
     parser.add_argument("--complex-panel", type=Path,
                         default=ROOT / "results" / "market-panel.json")
     args = parser.parse_args()
 
-    rows, drops = prepare_rows(list(csv.DictReader(args.vintages.open())))
+    vintages = list(csv.DictReader(args.vintages.open()))
+    if args.scale == "zscore":
+        rows, drops = prepare_rows(vintages, surprise_column="relative_surprise_z",
+                                   change_column="change_relative_z")
+    else:
+        rows, drops = prepare_rows(vintages)
     dirty = set()
     for ticker in {str(row["ticker"]) for row in rows}:
         series = load_series(ticker, args.cache)
