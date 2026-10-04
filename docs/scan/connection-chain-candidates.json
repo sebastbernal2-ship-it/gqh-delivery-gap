@@ -1,0 +1,640 @@
+{
+ "manifest": "/tmp/quantgraph-head.jsonl",
+ "anchors": [
+  "mechanism:delivery:revision-to-cash-flow",
+  "mechanism:capacity:transformer-bottleneck",
+  "mechanism:capacity:interconnection-bottleneck",
+  "mechanism:capacity:cooling-bottleneck",
+  "mechanism:capacity:labor-bottleneck",
+  "feature:power:queue-age",
+  "feature:revision:delivery-surprise",
+  "entity:datacenter:site",
+  "outcome:firm:cash-flow-revision"
+ ],
+ "missing_anchors": [],
+ "nodes": 555,
+ "substantive_edges": 57,
+ "candidates": 10,
+ "chains": [
+  {
+   "anchor": "feature:power:queue-age",
+   "path": [
+    "feature:power:queue-age",
+    "event:power:queue-milestone",
+    "source:eia:860m",
+    "dataset:eia:generator-vintages"
+   ],
+   "layers": [
+    "dataset",
+    "event",
+    "feature",
+    "source"
+   ],
+   "links": [
+    {
+     "from": "feature:power:queue-age",
+     "to": "event:power:queue-milestone",
+     "relation": "derived_from",
+     "status": "blocked",
+     "condition": "Queue history is point in time",
+     "falsifier": "Keep queue age blocked"
+    },
+    {
+     "from": "source:eia:860m",
+     "to": "event:power:queue-milestone",
+     "relation": "observes",
+     "status": "blocked",
+     "condition": "An official queue archive is acquired",
+     "falsifier": "Keep queue branch blocked"
+    },
+    {
+     "from": "source:eia:860m",
+     "to": "dataset:eia:generator-vintages",
+     "relation": "exposes",
+     "status": "proposed",
+     "condition": "Monthly vintages preserve release history",
+     "falsifier": "Drop vintage-derived signals"
+    }
+   ],
+   "nodes": [
+    {
+     "id": "feature:power:queue-age",
+     "layer": "feature",
+     "meaning": "Age and delay of an interconnection request"
+    },
+    {
+     "id": "event:power:queue-milestone",
+     "layer": "event",
+     "meaning": "Interconnection queue acceptance, delay, or withdrawal"
+    },
+    {
+     "id": "source:eia:860m",
+     "layer": "source",
+     "meaning": "Monthly generator inventory vintages"
+    },
+    {
+     "id": "dataset:eia:generator-vintages",
+     "layer": "dataset",
+     "meaning": "Versioned generator promises and operating status"
+    }
+   ],
+   "assumptions": {}
+  },
+  {
+   "anchor": "feature:power:queue-age",
+   "path": [
+    "feature:power:queue-age",
+    "event:power:queue-milestone",
+    "source:eia:860m",
+    "dataset:eia:generator-vintages",
+    "feature:power:energized-capacity"
+   ],
+   "layers": [
+    "dataset",
+    "event",
+    "feature",
+    "source"
+   ],
+   "links": [
+    {
+     "from": "feature:power:queue-age",
+     "to": "event:power:queue-milestone",
+     "relation": "derived_from",
+     "status": "blocked",
+     "condition": "Queue history is point in time",
+     "falsifier": "Keep queue age blocked"
+    },
+    {
+     "from": "source:eia:860m",
+     "to": "event:power:queue-milestone",
+     "relation": "observes",
+     "status": "blocked",
+     "condition": "An official queue archive is acquired",
+     "falsifier": "Keep queue branch blocked"
+    },
+    {
+     "from": "source:eia:860m",
+     "to": "dataset:eia:generator-vintages",
+     "relation": "exposes",
+     "status": "proposed",
+     "condition": "Monthly vintages preserve release history",
+     "falsifier": "Drop vintage-derived signals"
+    },
+    {
+     "from": "dataset:eia:generator-vintages",
+     "to": "feature:power:energized-capacity",
+     "relation": "feeds",
+     "status": "proposed",
+     "condition": "Operating status is observed in the vintage",
+     "falsifier": "Use no physical label"
+    }
+   ],
+   "nodes": [
+    {
+     "id": "feature:power:queue-age",
+     "layer": "feature",
+     "meaning": "Age and delay of an interconnection request"
+    },
+    {
+     "id": "event:power:queue-milestone",
+     "layer": "event",
+     "meaning": "Interconnection queue acceptance, delay, or withdrawal"
+    },
+    {
+     "id": "source:eia:860m",
+     "layer": "source",
+     "meaning": "Monthly generator inventory vintages"
+    },
+    {
+     "id": "dataset:eia:generator-vintages",
+     "layer": "dataset",
+     "meaning": "Versioned generator promises and operating status"
+    },
+    {
+     "id": "feature:power:energized-capacity",
+     "layer": "feature",
+     "meaning": "Capacity reported as energized or operating"
+    }
+   ],
+   "assumptions": {}
+  },
+  {
+   "anchor": "outcome:firm:cash-flow-revision",
+   "path": [
+    "outcome:firm:cash-flow-revision",
+    "outcome:firm:revenue-timing",
+    "feature:firm:backlog-timing",
+    "dataset:sec:exhibits",
+    "source:sec:edgar"
+   ],
+   "layers": [
+    "dataset",
+    "feature",
+    "outcome",
+    "source"
+   ],
+   "links": [
+    {
+     "from": "outcome:firm:revenue-timing",
+     "to": "outcome:firm:cash-flow-revision",
+     "relation": "affects",
+     "status": "proposed",
+     "condition": "Margin and capex assumptions are explicit",
+     "falsifier": "Keep only revenue timing"
+    },
+    {
+     "from": "feature:firm:backlog-timing",
+     "to": "outcome:firm:revenue-timing",
+     "relation": "affects",
+     "status": "proposed",
+     "condition": "Backlog timing maps to a named reporting period",
+     "falsifier": "Do not claim cash-flow effect"
+    },
+    {
+     "from": "dataset:sec:exhibits",
+     "to": "feature:firm:backlog-timing",
+     "relation": "feeds",
+     "status": "proposed",
+     "condition": "Backlog timing has a named period",
+     "falsifier": "No cash-flow bridge"
+    },
+    {
+     "from": "source:sec:edgar",
+     "to": "dataset:sec:exhibits",
+     "relation": "exposes",
+     "status": "declared",
+     "condition": "Exhibits remain tied to accessions",
+     "falsifier": "Drop contract-derived signals"
+    }
+   ],
+   "nodes": [
+    {
+     "id": "outcome:firm:cash-flow-revision",
+     "layer": "outcome",
+     "meaning": "Revision to expected free cash flow"
+    },
+    {
+     "id": "outcome:firm:revenue-timing",
+     "layer": "outcome",
+     "meaning": "Revision to expected revenue or cost timing"
+    },
+    {
+     "id": "feature:firm:backlog-timing",
+     "layer": "feature",
+     "meaning": "Expected timing of backlog conversion to revenue"
+    },
+    {
+     "id": "dataset:sec:exhibits",
+     "layer": "dataset",
+     "meaning": "Original exhibits containing contracts and schedules"
+    },
+    {
+     "id": "source:sec:edgar",
+     "layer": "source",
+     "meaning": "Original SEC filings and exhibits"
+    }
+   ],
+   "assumptions": {}
+  },
+  {
+   "anchor": "outcome:firm:cash-flow-revision",
+   "path": [
+    "outcome:firm:cash-flow-revision",
+    "outcome:firm:revenue-timing",
+    "feature:firm:backlog-timing",
+    "dataset:sec:exhibits",
+    "evidence:source:filing-passage"
+   ],
+   "layers": [
+    "dataset",
+    "evidence",
+    "feature",
+    "outcome"
+   ],
+   "links": [
+    {
+     "from": "outcome:firm:revenue-timing",
+     "to": "outcome:firm:cash-flow-revision",
+     "relation": "affects",
+     "status": "proposed",
+     "condition": "Margin and capex assumptions are explicit",
+     "falsifier": "Keep only revenue timing"
+    },
+    {
+     "from": "feature:firm:backlog-timing",
+     "to": "outcome:firm:revenue-timing",
+     "relation": "affects",
+     "status": "proposed",
+     "condition": "Backlog timing maps to a named reporting period",
+     "falsifier": "Do not claim cash-flow effect"
+    },
+    {
+     "from": "dataset:sec:exhibits",
+     "to": "feature:firm:backlog-timing",
+     "relation": "feeds",
+     "status": "proposed",
+     "condition": "Backlog timing has a named period",
+     "falsifier": "No cash-flow bridge"
+    },
+    {
+     "from": "dataset:sec:exhibits",
+     "to": "evidence:source:filing-passage",
+     "relation": "supports",
+     "status": "proposed",
+     "condition": "Every extracted field has a source passage",
+     "falsifier": "Downgrade field to unverified"
+    }
+   ],
+   "nodes": [
+    {
+     "id": "outcome:firm:cash-flow-revision",
+     "layer": "outcome",
+     "meaning": "Revision to expected free cash flow"
+    },
+    {
+     "id": "outcome:firm:revenue-timing",
+     "layer": "outcome",
+     "meaning": "Revision to expected revenue or cost timing"
+    },
+    {
+     "id": "feature:firm:backlog-timing",
+     "layer": "feature",
+     "meaning": "Expected timing of backlog conversion to revenue"
+    },
+    {
+     "id": "dataset:sec:exhibits",
+     "layer": "dataset",
+     "meaning": "Original exhibits containing contracts and schedules"
+    },
+    {
+     "id": "evidence:source:filing-passage",
+     "layer": "evidence",
+     "meaning": "Reviewed source passage supporting a field or event"
+    }
+   ],
+   "assumptions": {}
+  },
+  {
+   "anchor": "mechanism:delivery:revision-to-cash-flow",
+   "path": [
+    "mechanism:delivery:revision-to-cash-flow",
+    "feature:revision:delivery-surprise",
+    "rule:entry:dated-revision"
+   ],
+   "layers": [
+    "feature",
+    "mechanism",
+    "rule"
+   ],
+   "links": [
+    {
+     "from": "feature:revision:delivery-surprise",
+     "to": "mechanism:delivery:revision-to-cash-flow",
+     "relation": "indicates",
+     "status": "proposed",
+     "condition": "Revision changes a named project expectation",
+     "falsifier": "Drop core mechanism"
+    },
+    {
+     "from": "feature:revision:delivery-surprise",
+     "to": "rule:entry:dated-revision",
+     "relation": "gates",
+     "status": "proposed",
+     "condition": "Revision event is available before entry",
+     "falsifier": "Abstain"
+    }
+   ],
+   "nodes": [
+    {
+     "id": "mechanism:delivery:revision-to-cash-flow",
+     "layer": "mechanism",
+     "meaning": "A dated delivery revision changes future cash-flow timing"
+    },
+    {
+     "id": "feature:revision:delivery-surprise",
+     "layer": "feature",
+     "meaning": "Revision against the earlier promise"
+    },
+    {
+     "id": "rule:entry:dated-revision",
+     "layer": "rule",
+     "meaning": "Enter only after a dated public revision passes eligibility"
+    }
+   ],
+   "assumptions": {}
+  },
+  {
+   "anchor": "feature:revision:delivery-surprise",
+   "path": [
+    "feature:revision:delivery-surprise",
+    "mechanism:delivery:revision-to-cash-flow",
+    "claim:revision:predicts-cash-flow"
+   ],
+   "layers": [
+    "claim",
+    "feature",
+    "mechanism"
+   ],
+   "links": [
+    {
+     "from": "feature:revision:delivery-surprise",
+     "to": "mechanism:delivery:revision-to-cash-flow",
+     "relation": "indicates",
+     "status": "proposed",
+     "condition": "Revision changes a named project expectation",
+     "falsifier": "Drop core mechanism"
+    },
+    {
+     "from": "mechanism:delivery:revision-to-cash-flow",
+     "to": "claim:revision:predicts-cash-flow",
+     "relation": "supports",
+     "status": "proposed",
+     "condition": "The mechanism has a measurable cash-flow link",
+     "falsifier": "Reject the claim"
+    }
+   ],
+   "nodes": [
+    {
+     "id": "feature:revision:delivery-surprise",
+     "layer": "feature",
+     "meaning": "Revision against the earlier promise"
+    },
+    {
+     "id": "mechanism:delivery:revision-to-cash-flow",
+     "layer": "mechanism",
+     "meaning": "A dated delivery revision changes future cash-flow timing"
+    },
+    {
+     "id": "claim:revision:predicts-cash-flow",
+     "layer": "claim",
+     "meaning": "A dated revision predicts future firm cash-flow timing"
+    }
+   ],
+   "assumptions": {}
+  },
+  {
+   "anchor": "feature:revision:delivery-surprise",
+   "path": [
+    "feature:revision:delivery-surprise",
+    "mechanism:delivery:revision-to-cash-flow",
+    "concept:thesis:delivery-gap"
+   ],
+   "layers": [
+    "concept",
+    "feature",
+    "mechanism"
+   ],
+   "links": [
+    {
+     "from": "feature:revision:delivery-surprise",
+     "to": "mechanism:delivery:revision-to-cash-flow",
+     "relation": "indicates",
+     "status": "proposed",
+     "condition": "Revision changes a named project expectation",
+     "falsifier": "Drop core mechanism"
+    },
+    {
+     "from": "concept:thesis:delivery-gap",
+     "to": "mechanism:delivery:revision-to-cash-flow",
+     "relation": "governs",
+     "status": "declared",
+     "condition": "The path remains promise versus delivery",
+     "falsifier": "Split into a new thesis"
+    }
+   ],
+   "nodes": [
+    {
+     "id": "feature:revision:delivery-surprise",
+     "layer": "feature",
+     "meaning": "Revision against the earlier promise"
+    },
+    {
+     "id": "mechanism:delivery:revision-to-cash-flow",
+     "layer": "mechanism",
+     "meaning": "A dated delivery revision changes future cash-flow timing"
+    },
+    {
+     "id": "concept:thesis:delivery-gap",
+     "layer": "concept",
+     "meaning": "Gap between a public promise and delivery"
+    }
+   ],
+   "assumptions": {}
+  },
+  {
+   "anchor": "mechanism:delivery:revision-to-cash-flow",
+   "path": [
+    "mechanism:delivery:revision-to-cash-flow",
+    "feature:revision:delivery-surprise",
+    "feature:expectation:prior-promise",
+    "raw:filing:prior-value"
+   ],
+   "layers": [
+    "feature",
+    "mechanism",
+    "raw"
+   ],
+   "links": [
+    {
+     "from": "feature:revision:delivery-surprise",
+     "to": "mechanism:delivery:revision-to-cash-flow",
+     "relation": "indicates",
+     "status": "proposed",
+     "condition": "Revision changes a named project expectation",
+     "falsifier": "Drop core mechanism"
+    },
+    {
+     "from": "feature:expectation:prior-promise",
+     "to": "feature:revision:delivery-surprise",
+     "relation": "derived_from",
+     "status": "proposed",
+     "condition": "Revision is computed without future labels",
+     "falsifier": "Delete the revision signal"
+    },
+    {
+     "from": "raw:filing:prior-value",
+     "to": "feature:expectation:prior-promise",
+     "relation": "feeds",
+     "status": "proposed",
+     "condition": "Prior value predates event",
+     "falsifier": "No feature"
+    }
+   ],
+   "nodes": [
+    {
+     "id": "mechanism:delivery:revision-to-cash-flow",
+     "layer": "mechanism",
+     "meaning": "A dated delivery revision changes future cash-flow timing"
+    },
+    {
+     "id": "feature:revision:delivery-surprise",
+     "layer": "feature",
+     "meaning": "Revision against the earlier promise"
+    },
+    {
+     "id": "feature:expectation:prior-promise",
+     "layer": "feature",
+     "meaning": "Earlier public delivery or capacity expectation"
+    },
+    {
+     "id": "raw:filing:prior-value",
+     "layer": "raw",
+     "meaning": "Earlier public value used as the expectation"
+    }
+   ],
+   "assumptions": {}
+  },
+  {
+   "anchor": "feature:power:queue-age",
+   "path": [
+    "feature:power:queue-age",
+    "event:power:queue-milestone",
+    "source:eia:860m"
+   ],
+   "layers": [
+    "event",
+    "feature",
+    "source"
+   ],
+   "links": [
+    {
+     "from": "feature:power:queue-age",
+     "to": "event:power:queue-milestone",
+     "relation": "derived_from",
+     "status": "blocked",
+     "condition": "Queue history is point in time",
+     "falsifier": "Keep queue age blocked"
+    },
+    {
+     "from": "source:eia:860m",
+     "to": "event:power:queue-milestone",
+     "relation": "observes",
+     "status": "blocked",
+     "condition": "An official queue archive is acquired",
+     "falsifier": "Keep queue branch blocked"
+    }
+   ],
+   "nodes": [
+    {
+     "id": "feature:power:queue-age",
+     "layer": "feature",
+     "meaning": "Age and delay of an interconnection request"
+    },
+    {
+     "id": "event:power:queue-milestone",
+     "layer": "event",
+     "meaning": "Interconnection queue acceptance, delay, or withdrawal"
+    },
+    {
+     "id": "source:eia:860m",
+     "layer": "source",
+     "meaning": "Monthly generator inventory vintages"
+    }
+   ],
+   "assumptions": {}
+  },
+  {
+   "anchor": "outcome:firm:cash-flow-revision",
+   "path": [
+    "outcome:firm:cash-flow-revision",
+    "outcome:firm:revenue-timing",
+    "feature:firm:backlog-timing",
+    "dataset:sec:exhibits"
+   ],
+   "layers": [
+    "dataset",
+    "feature",
+    "outcome"
+   ],
+   "links": [
+    {
+     "from": "outcome:firm:revenue-timing",
+     "to": "outcome:firm:cash-flow-revision",
+     "relation": "affects",
+     "status": "proposed",
+     "condition": "Margin and capex assumptions are explicit",
+     "falsifier": "Keep only revenue timing"
+    },
+    {
+     "from": "feature:firm:backlog-timing",
+     "to": "outcome:firm:revenue-timing",
+     "relation": "affects",
+     "status": "proposed",
+     "condition": "Backlog timing maps to a named reporting period",
+     "falsifier": "Do not claim cash-flow effect"
+    },
+    {
+     "from": "dataset:sec:exhibits",
+     "to": "feature:firm:backlog-timing",
+     "relation": "feeds",
+     "status": "proposed",
+     "condition": "Backlog timing has a named period",
+     "falsifier": "No cash-flow bridge"
+    }
+   ],
+   "nodes": [
+    {
+     "id": "outcome:firm:cash-flow-revision",
+     "layer": "outcome",
+     "meaning": "Revision to expected free cash flow"
+    },
+    {
+     "id": "outcome:firm:revenue-timing",
+     "layer": "outcome",
+     "meaning": "Revision to expected revenue or cost timing"
+    },
+    {
+     "id": "feature:firm:backlog-timing",
+     "layer": "feature",
+     "meaning": "Expected timing of backlog conversion to revenue"
+    },
+    {
+     "id": "dataset:sec:exhibits",
+     "layer": "dataset",
+     "meaning": "Original exhibits containing contracts and schedules"
+    }
+   ],
+   "assumptions": {}
+  }
+ ]
+}
