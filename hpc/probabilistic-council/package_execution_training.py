@@ -17,24 +17,26 @@ root="$PWD"
 mkdir -p "$root/runs" "$root/logs"
 module load pytorch/2.8.0
 python - <<'VERIFY'
-import hashlib,json
+import hashlib
+import json
 from pathlib import Path
-spec=json.loads(Path('bundle.json').read_text())
-for name,expected in spec['files_sha256'].items():
-    assert hashlib.sha256(Path(name).read_bytes()).hexdigest()==expected, name
+
+spec = json.loads(Path('bundle.json').read_text())
+for name, expected in spec['files_sha256'].items():
+    actual = hashlib.sha256(Path(name).read_bytes()).hexdigest()
+    if actual != expected:
+        raise SystemExit(f'Bundle hash mismatch: {name}')
 print('Bundle file hashes verified')
 VERIFY
 export GQH_REPO_ROOT="$root"
 export GQH_JEV_DATASET="$root/dataset"
-export GQH_JEV_REFERENCE="$root/reference"
-export GQH_TAPE_RUN_DIR="$root/runs/ablation-$(date -u +%Y%m%dT%H%M%SZ)"
+export GQH_TAPE_RUN_DIR="$root/runs/pretraining-$(date -u +%Y%m%dT%H%M%SZ)"
 export GQH_PYTHON="$(command -v python)"
 export GQH_JEV_DEVICE=cuda
-export PYTHONUNBUFFERED=1
 sbatch --account=ai-workshop --qos=ai-workshop --partition=hpg-turin \\
   --gpus=l4:1 --chdir="$root/hpc/probabilistic-council" \\
-  --output="$root/logs/ablation-%j.out" --error="$root/logs/ablation-%j.err" \\
-  "$root/hpc/probabilistic-council/run-execution-ablation.slurm"
+  --output="$root/logs/pretraining-%j.out" --error="$root/logs/pretraining-%j.err" \\
+  "$root/hpc/probabilistic-council/run-execution-pretraining.slurm"
 '''
 
 
@@ -60,11 +62,13 @@ def package(dataset,reference,output):
         for path in sorted(component.glob(pattern)):
             files['jev-training/hpc/probabilistic-council/'+path.relative_to(component).as_posix()]=path.read_bytes()
     files['jev-training/hpc/probabilistic-council/run-execution-ablation.slurm']=(component/'run-execution-ablation.slurm').read_bytes()
+    files['jev-training/hpc/probabilistic-council/run-execution-pretraining.slurm']=(component/'run-execution-pretraining.slurm').read_bytes()
     files['jev-training/submit.sh']=LAUNCH.encode()
     files['jev-training/README.txt']=(
         'Development only. This package does not establish alpha or competition OOS.\n'
         'On HiPerGator: cd jev-training; bash submit.sh\n'
-        'The job trains scratch A/B/AB and evaluates the frozen development roles.\n'
+        'The job compares scratch fitting with masked reconstruction pretraining on the same real BTC pilot cache.\n'
+        'Both models then receive equal supervised training and are scored on frozen development roles.\n'
         'Linear reference was fitted off-cluster. No acquisition/parsing runs on HPG.\n'
         'Verify bundle.json and the external ZIP SHA-256 before use.\n').encode()
     report={'schema_version':'execution-training-bundle-v1','scope':'development_only',
@@ -73,7 +77,7 @@ def package(dataset,reference,output):
         'role_sessions':{name:sorted({spec['sessions'][j] for j in np.flatnonzero(arrays['roles']==i)})
                          for i,name in enumerate(spec['partitions'])},
         'pretraining_rows':spec['pretraining_rows'],'supervised_epochs':3,'seed':20261003,
-        'masked_pretraining_epochs':0,'linear_reference_manifest':ref,
+        'masked_pretraining_epochs':3,'linear_reference_manifest':ref,
         'files_sha256':{name.removeprefix('jev-training/'):hashlib.sha256(value).hexdigest()
                         for name,value in files.items()},
         'limitations':['archive deployment may have null git revision; code hashes pin actual sources',
