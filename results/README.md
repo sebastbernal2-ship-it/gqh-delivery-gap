@@ -149,3 +149,11 @@ generated-path: results/universe-adv-monthly.csv
 Produced by `scripts/run_intensity_strategy.py`:
 
 generated-path: results/intensity-strategy.json
+
+Produced by `scripts/build_intensity_controls_study.py`:
+
+generated-path: results/intensity-controls-study.json
+
+Produced by `scripts/fetch_complex_margins.py`:
+
+generated-path: results/complex-margins-quarterly.csv

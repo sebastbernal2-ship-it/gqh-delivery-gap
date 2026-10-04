@@ -7,25 +7,34 @@ spent, so the split below is early against late, not a sealed test.
 
 ## Hypothesis
 
-A capex intensive firm that raises capex as a share of revenue spends ahead of the revenue that spend
-serves. Depreciation and funding land inside the measurement window, and the equity market charges the
-surprise in relative performance over the following weeks before the cash flow arrives. The payer is the
-holder of the capital intensive name whose spending outran its revenue base. The other side is whoever
-sells it the equity.
+This thesis is a falsifiable association, not a claim that the market charges overspending. Capex over
+revenue measures investment intensity. On its own it does not show that spending exceeded expectations or
+failed to convert into revenue, and the controlled test below confirms that it does not (T33). What
+remains open is the expectation channel: whether intensity predicts weaker relative returns when the
+filing record shows the spend was a surprise, or when guidance, backlog or revenue conversion fails to
+keep pace.
+
+The mechanism, if the channel exists: a firm that raises capex as a share of revenue while its conversion
+disappoints carries spending that the market has not yet been told will pay off. The payer would be the
+holder of that name. The counterparty is whoever sells it the equity. Until the conversion or surprise
+measure is identified, the counterparty is unidentified and the claim stays an association.
 
 The simplest rival explanation is the long known asset growth effect, where high asset growth
 underperforms. That was tested directly and rejected as the explanation: intensity and asset growth are
 near orthogonal in this panel (mean within quarter correlation -0.006), and asset growth is rewarded here
-(+0.13 at twenty days) while intensity is charged (T29). The second rival is that the effect is one
-buildout regime. Three regimes carry the same sign, strongest in the buildout (T30).
+(+0.13 at twenty days) while intensity was charged in the simple design (T29). The second rival is that
+the effect is one buildout regime. Three regimes carried the same sign in the simple design (T30). The
+third rival, tested last and decisive so far, is that intensity adds nothing once sector, growth,
+profitability and the common investment factor are controlled: it does not (T33).
 
-Falsifier: the charge carries no forward relative return on a disjoint name set, or its sign flips once
-filing timestamps are lagged conservatively, or it lives entirely inside the disclosure names that
-produced it (partly true today, see Robustness).
+Falsifiers: the association carries no forward relative return on a disjoint name set; its sign flips once
+filing timestamps are lagged conservatively; the controlled coefficient stays at or above zero (already
+observed, T33); the expectation channel shows no interaction once guidance, backlog or conversion
+surprises are measured.
 
-**Why us:** the edge channel is data and processing, not latency. The signal needs point in time
-quarterly facts joined to daily prices, with filing dates as the clock. A latency budget is irrelevant:
-the information half life is weeks.
+**Why us:** the edge channel, if it exists, is data and processing, not latency: point in time quarterly
+facts, filing dates, and the filing surfaces that carry the expectation. A latency budget is irrelevant
+because the information half life is weeks.
 
 ## Data
 
@@ -95,8 +104,14 @@ floor, base costs.
 
 Full window: net annual return 13.1 percent, gross 15.9 percent, annual volatility 34.3 percent, Sharpe
 0.381, hit rate 33.6 percent, profit factor 1.111, max drawdown -65.8 percent, 231 cohorts. With doubled
-costs: net annual return 10.2 percent, Sharpe 0.299. Status: association strength is modest and positive,
-causal status is descriptive, evidence status is development, and promotion status is open.
+costs: net annual return 10.2 percent, Sharpe 0.299. Status: association strength is weak, causal status is
+descriptive, evidence status is development, and promotion status is open.
+
+**Attribution is unresolved and this is the honest headline.** The controlled cross sectional test (T33)
+gives an intensity coefficient of -0.0068 (t -0.98) univariate and +0.0061 (t 0.65) with sector, growth,
+profitability and the common investment factor controlled. Under the tightened test the association does
+not survive, so the backtest above is a measured P&L whose mechanism is not yet identified. It stays a
+candidate chain, not a demonstrated edge.
 
 **Breadth and capacity.** 231 cohorts, median 14 names. Capacity at one percent participation of the
 binding name's dollar volume: median 3.87 million dollars, tenth percentile 1.31 million. At five percent:
@@ -115,6 +130,9 @@ tenth percentile cohorts is the constraint, not the average.
   growth sorting (T29).
 - **Failed iteration**: a trailing volatility overlay, scaling each cohort to a ten percent target, cut
   the Sharpe from 0.381 to 0.174 because it scales down after losses. Recorded as rejected.
+- **Controls**: sector, revenue growth, asset growth and operating margin, with the common investment
+  factor, remove the association and flip its sign (T33). The realised revenue conversion split does not
+  rescue it, and the backlog split has too few quarters to test.
 - **Fragility**: removing the ten disclosure names halves the association and removes its significance
   (T31). This is the main threat to the thesis and the reason capacity and cost discipline matter more
   than the headline return.

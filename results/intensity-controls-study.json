@@ -1,0 +1,122 @@
+{
+ "status": "development only; both sealed windows spent; protocol docs/plan/intensity-controls-study.md",
+ "observations": 637,
+ "names": 58,
+ "horizon_days": 20,
+ "controls": {
+  "quarters": 22,
+  "coefficients": {
+   "intensity": {
+    "quarters": 22,
+    "mean": 0.00614,
+    "t": 0.65,
+    "negative_share": 0.455
+   },
+   "revenue_growth": {
+    "quarters": 22,
+    "mean": -0.00045,
+    "t": -0.05,
+    "negative_share": 0.455
+   },
+   "asset_growth": {
+    "quarters": 22,
+    "mean": 0.01425,
+    "t": 1.14,
+    "negative_share": 0.409
+   },
+   "margin": {
+    "quarters": 22,
+    "mean": -0.00999,
+    "t": -1.68,
+    "negative_share": 0.545
+   }
+  }
+ },
+ "univariate": {
+  "quarters": 22,
+  "coefficients": {
+   "intensity": {
+    "quarters": 22,
+    "mean": -0.00677,
+    "t": -0.98,
+    "negative_share": 0.5
+   }
+  }
+ },
+ "conversion_revenue": {
+  "fail": {
+   "quarters": 9,
+   "coefficients": {
+    "intensity": {
+     "quarters": 9,
+     "mean": 0.01052,
+     "t": 1.05,
+     "negative_share": 0.333
+    }
+   }
+  },
+  "pass": {
+   "quarters": 6,
+   "coefficients": {
+    "intensity": {
+     "quarters": 6,
+     "mean": -0.00756,
+     "t": -0.54,
+     "negative_share": 0.333
+    }
+   }
+  }
+ },
+ "conversion_backlog": {
+  "observations": 192,
+  "names": 21,
+  "fail": {
+   "quarters": 0,
+   "coefficients": {}
+  },
+  "pass": {
+   "quarters": 2,
+   "coefficients": {
+    "intensity": {
+     "quarters": 2,
+     "status": "insufficient"
+    }
+   }
+  }
+ },
+ "with_common_factor": {
+  "quarters": 22,
+  "coefficients": {
+   "intensity": {
+    "quarters": 22,
+    "mean": 0.00614,
+    "t": 0.65,
+    "negative_share": 0.455
+   },
+   "common_factor": {
+    "quarters": 22,
+    "mean": 0.0,
+    "t": 1.12,
+    "negative_share": 0.273
+   },
+   "revenue_growth": {
+    "quarters": 22,
+    "mean": -0.00045,
+    "t": -0.05,
+    "negative_share": 0.455
+   },
+   "asset_growth": {
+    "quarters": 22,
+    "mean": 0.01425,
+    "t": 1.14,
+    "negative_share": 0.409
+   },
+   "margin": {
+    "quarters": 22,
+    "mean": -0.00999,
+    "t": -1.68,
+    "negative_share": 0.545
+   }
+  }
+ }
+}

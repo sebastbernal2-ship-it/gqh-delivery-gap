@@ -411,7 +411,25 @@ at the tenth percentile; at five percent, 19.4 million. A trailing volatility ov
 the fragility result (T31) remains the main threat.
 **Consequence**: the strategy is the first chain in this repository with a measured P&L role, and its
 binding limits are risk (drawdown) and capacity, not the signal. The next declared iterations are a
-cluster capped risk overlay, a disjoint name test, and borrow data.
+cluster capped risk overlay, a disjoint name test, and borrow data. Attribution is unresolved: the
+controlled test (T33) does not support the intensity association, so the strategy's P&L is not yet
+explained by the tested mechanism.
+
+## T33. Intensity does not survive controls, and the realised-conversion split does not rescue it
+
+**Statement**: on 637 observations across 58 names and 127 quarters, the Fama-MacBeth cross sectional
+regressions give an intensity coefficient of -0.0068 (t -0.98) univariate, and +0.0061 (t 0.65) once peer
+group, revenue growth, asset growth and operating margin are controlled; adding the common investment
+factor changes nothing. The revenue conversion split is the opposite of the declared expectation
+(failure group +0.0105, t 1.05; passing group -0.0076, t -0.54), and the backlog conversion split has too
+few quarters to test (192 observations over fewer than four usable quarters, reported as insufficient).
+**Evidence**: `results/intensity-controls-study.json`; `scripts/build_intensity_controls_study.py`;
+`docs/plan/intensity-controls-study.md`.
+**Scope**: 59 name universe, forward twenty day group excess returns, quarterly cross sections with group
+demeaning, one price source, development only.
+**Consequence**: capex intensity is investment intensity, not a proven expectation surprise. The
+association is retired as a priced charge and kept as a falsifiable hypothesis about the expectation
+channel, to be tested with filing based surprise measures (8-K items, guidance, RPO conversion).
 
 ---
 

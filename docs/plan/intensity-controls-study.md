@@ -51,3 +51,28 @@ The candidate coefficient is zero or positive once the controls are in, or the i
 
 Small cross sections per quarter, one price source, RPO coverage limited to 22 names, and no guidance data
 yet. Development only.
+
+## Reproduce
+
+    python3 scripts/build_intensity_controls_study.py
+
+## Result, 2026-10-04
+
+The tightened test fails. 637 observations across 58 names and 127 quarters, 22 quarters with a large
+enough cross section.
+
+- Univariate, Fama-MacBeth: mean coefficient -0.0068, t -0.98. Even without controls the association is
+  not significant under this estimator.
+- With sector (group fixed effect), revenue growth, asset growth and operating margin controlled: the
+  intensity coefficient is +0.0061, t 0.65. The sign flips and nothing survives.
+- Adding the common investment factor changes nothing: +0.0061, t 0.65.
+- Conversion interaction, revenue version: failure group +0.0105 (t 1.05), passing group -0.0076 (t -0.54).
+  That is the opposite of the declared expectation.
+- Conversion interaction, backlog version: 192 observations, fewer than four usable quarters, reported as
+  insufficient rather than as a result.
+
+The fact this leaves: capex intensity does not predict weaker relative returns once sector, growth,
+profitability and the common investment factor are controlled, and the realised revenue conversion split
+does not rescue it. The correction is confirmed empirically: capex over revenue measures investment
+intensity, and on this panel intensity alone is not a priced expectation surprise. The association stays
+only as a falsifiable hypothesis about the expectation channel, which is stage C.
