@@ -1,0 +1,105 @@
+{
+ "entries": [
+  {
+   "artifact": "results/intensity-strategy.json",
+   "claim": "the gated charge expression's published ledger",
+   "command": "python3 scripts/run_intensity_strategy.py --output {output}",
+   "exact": true,
+   "name": "intensity ledger",
+   "sha256": "5a761d21538a97944deebca9300a45a517b710c5033be93d12a9ac8c4d3fc143",
+   "tier": "default"
+  },
+  {
+   "artifact": "results/intensity-strategy-doubled.json",
+   "claim": "the same ledger at doubled costs",
+   "command": "python3 scripts/run_intensity_strategy.py --output {output} --cost-mult 2",
+   "exact": true,
+   "name": "intensity doubled",
+   "sha256": "d9e1091daf9a1487963a393afd81608ef69196091eabf1b0d649099106a70f06",
+   "tier": "default"
+  },
+  {
+   "artifact": "results/sleeve-portfolio.json",
+   "claim": "the driver sleeves and their composite",
+   "command": "python3 scripts/run_sleeve_portfolio.py --output {output}",
+   "exact": true,
+   "name": "sleeve portfolio",
+   "sha256": "5c8d451c5d507c62551b3b318c5eba3762366cf8223b54e09a0221e211d08660",
+   "tier": "default"
+  },
+  {
+   "artifact": "results/eia-load-specialist.json",
+   "claim": "the first non-SEC specialist's information and pricing tests",
+   "command": "python3 scripts/run_eia_load_specialist.py --output {output}",
+   "exact": true,
+   "name": "eia load specialist",
+   "sha256": "85332d326f28c707a66ab9ffb9a33b0d098651124e9610f10089353052cf0532",
+   "tier": "default"
+  },
+  {
+   "artifact": "results/walk-forward-baseline.json",
+   "claim": "the rolling-origin record and the two-sleeve composite",
+   "command": "python3 scripts/run_walk_forward.py --output {output}",
+   "exact": true,
+   "name": "walk-forward baseline",
+   "sha256": "92f20279efdcbc57607832b856f528221809459081e1fc382862e8499ffa8f29",
+   "tier": "full"
+  },
+  {
+   "artifact": "results/walk-forward-decoupled.json",
+   "claim": "the decoupled sizing variant",
+   "command": "python3 scripts/run_walk_forward.py --size-panel results/revenue-z-on-pit.csv --output {output}",
+   "exact": true,
+   "name": "walk-forward decoupled",
+   "sha256": "4f873e37e37712b2598393b98b8069662a0261893015c3063a32533ef7f86e85",
+   "tier": "full"
+  },
+  {
+   "artifact": "results/council-sleeve.json",
+   "claim": "the fusion as a sleeve and its mechanism table",
+   "command": "python3 scripts/run_council_sleeve.py --output {output}",
+   "exact": true,
+   "name": "council sleeve",
+   "sha256": "12c390d9a01b77860c050531c5e36041f3b3c0536b2d196aebbef5a13ac3c45e",
+   "tier": "full"
+  },
+  {
+   "artifact": "results/state-transfer.json",
+   "claim": "the shared-encoder transfer test",
+   "command": "python3 scripts/run_state_transfer_test.py --output {output}",
+   "exact": true,
+   "name": "state transfer",
+   "sha256": "d9979ab5b9352335241061fab16125e07ef79827d2311fd0b1669654b964af73",
+   "tier": "full"
+  },
+  {
+   "artifact": "results/gate-recalibration.json",
+   "claim": "the temperature-scaling falsifier",
+   "command": "python3 scripts/run_gate_recalibration.py --output {output}",
+   "exact": true,
+   "name": "gate recalibration",
+   "sha256": "4014ea614ebe3dcd5417612de466abdbc86787da5a84aafe9ed1afb51979be37",
+   "tier": "full"
+  },
+  {
+   "artifact": "results/eia-load-daily.csv.gz",
+   "claim": "the open hourly grid panel, rebuilt from live EIA files",
+   "command": "python3 scripts/build_eia930_load_panel.py",
+   "exact": false,
+   "name": "eia load panel",
+   "sha256": "c5f909221ac6fbe0607a92e5b8bcee4034e3a3eceb001190e1f65a2ae1370468",
+   "tier": "network"
+  },
+  {
+   "artifact": null,
+   "claim": "the forward window's append-only capture, live filings move",
+   "command": "python3 scripts/run_forward_snapshot.py --refresh",
+   "exact": false,
+   "name": "forward snapshot",
+   "sha256": null,
+   "tier": "network"
+  }
+ ],
+ "note": "digests of the committed artifacts; regenerate with --write",
+ "schema": "reproduction-manifest-v1"
+}

@@ -437,3 +437,11 @@ generated-path: results/eia-load-daily.csv.gz
 Produced by `scripts/run_eia_load_specialist.py`:
 
 generated-path: results/eia-load-specialist.json
+
+Produced by `scripts/build_price_subset.py` (the tracked price subset a fresh clone needs):
+
+generated-path: results/price-subset/
+
+Produced by `scripts/reproduce.py --write` (digests, tiers and claims for every reproduced artifact):
+
+generated-path: results/reproduction-manifest.json

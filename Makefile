@@ -73,6 +73,12 @@ share:
 absorb:
 	@bash scripts/memory-absorb.sh
 
+reproduce:
+	@python3 scripts/reproduce.py --tier default
+
+reproduce-full:
+	@python3 scripts/reproduce.py --tier full
+
 test:
 	@python3 tests/test_snowflake_research_sidecar.py
 	@python3 tests/test_regime_risk_control.py
@@ -153,6 +159,7 @@ test:
 	@python3 tests/test_council_sleeve.py
 	@python3 tests/test_state_transfer.py
 	@python3 tests/test_eia_load_specialist.py
+	@python3 tests/test_reproduction_manifest.py
 	@python3 tests/test_build_hyperliquid_fixture.py
 	@python3 tests/test_split_hyperliquid_engine_fixture.py
 	@python3 tests/test_compute_lead_dependence_audit.py
@@ -183,6 +190,37 @@ ideas:
 agency-deals:
 	@python3 scripts/build_agency_only_deals.py --workers 10
 	@python3 scripts/declare_deal_nodes.py
+
+# The parents' bond marks from fund holdings on EDGAR. Free, quarterly, per CUSIP.
+parent-bond-panel:
+	@python3 scripts/build_parent_bond_panel.py --funds 10
+
+# The declared market panel for the complex, and the forward option snapshot archive.
+market-panel:
+	@python3 scripts/build_market_panel.py
+
+option-snapshots:
+	@python3 scripts/collect_option_snapshots.py --names 12 --expiries 4
+
+# The positioning and leverage family.
+positioning-nodes:
+	@python3 scripts/declare_positioning_nodes.py
+
+# The interconnection queue from the public ISO pages.
+queue-panel:
+	@python3 scripts/build_queue_panel.py --max-files 3
+
+# The covenant families and their sentences, from the credit agreements on EDGAR.
+indenture-covenants:
+	@python3 scripts/build_indenture_covenants.py --workers 4
+
+# The options leg: implied volatility against realized, on the captured snapshot.
+implied-vol-test:
+	@python3 scripts/run_implied_vol_test.py
+
+# The declared credit response test on the free parent bond marks.
+credit-response-test:
+	@python3 scripts/run_credit_response_test.py --draws 500 --block 4
 
 tranche-table:
 	@python3 scripts/build_tranche_table.py --workers 6

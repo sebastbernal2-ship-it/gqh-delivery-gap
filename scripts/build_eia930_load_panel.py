@@ -5,7 +5,7 @@ Every hourly row is a balancing authority. The panel keeps, per balancing author
 the mean and peak demand, the mean net generation, and the mean solar, wind, gas and nuclear output.
 No key, no rate limit, and the source files are the grid monitor's published six-month balance files.
 
-    python3 scripts/build_eia_load_panel.py
+    python3 scripts/build_eia930_load_panel.py
 """
 from __future__ import annotations
 

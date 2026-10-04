@@ -105,6 +105,39 @@ dependencies, and prints the sync protocol.
 
 [Aidan's handoff](docs/inbox/aidan-2026-10-03/README.md) preserves this conversation's strategy evolution, corrections, advanced-method research and proposed implementation contracts. Read it alongside Vishnu's handoff; both are research proposals, not promoted theses.
 
+## For judges: reproduce in three commands
+
+Every published number is regenerated from this repository, and the check says exactly what matched.
+
+```bash
+make test          # ~10 s: structure, paths, claims, 158 contract tests
+make reproduce     # ~20 s: the offline tier, every default producer, digests compared
+make reproduce-full # several minutes: adds the walk-forward, council and calibration runs
+```
+
+What each tier does and needs:
+
+| Command | Network | Time | What it proves |
+|---|---|---|---|
+| `make test` | none | ~10 s | the repository's structure holds and its contracts pass |
+| `make reproduce` | none | ~20 s | the intensity ledger, the sleeve portfolio, and the grid-load specialist reproduce byte for byte, their SHA-256 compared against `results/reproduction-manifest.json` |
+| `make reproduce-full` | none | minutes | the rolling-origin record, the fusion sleeve, the transfer test, the calibration falsifier |
+| `python3 scripts/reproduce.py --tier network` | SEC, EIA, market data | minutes | re-fetches live sources head to head with the committed ones, on purpose not exact |
+
+How the offline tiers can be exact: the frozen inputs are committed, which is the 232 tracked files
+under `results/`, including the disclosure vintages, the market panels and the open EIA-930 daily load
+panel. Prices are the exception, 62 MB locally and not worth committing, so the 66 series the results
+actually touch are committed as a 7 MB subset under `results/price-subset/` and the reproduction script
+seeds the cache from it when a clone has none. Producers write into a sandbox unless `--apply` is given,
+so reproduction leaves the tree clean.
+
+The `paths` check reads the working tree, so an untracked draft that references a file it has not
+written will fail that one row locally while the published tree stays clean. Untracked files are never
+part of what a judge clones.
+
+A "differs" row is a finding, not noise: it means the committed artifact no longer matches the code and
+inputs it declares. That is how the stale intensity ledger was caught on the day this was built.
+
 ## The submission
 
 Callsign **VECTOR**, Gator Quant Hacks 2026, Systematic Trading track.

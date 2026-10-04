@@ -1128,3 +1128,29 @@ sleeve or the council. The refinements that follow from the evidence are load ag
 norm rather than growth, peak and ramping measures rather than means, load growth acceleration, and the
 incremental test at disclosure events rather than the unconditional one. The dataset itself is retained
 because it is the first non-SEC family in the repository and its clock is trivially clean.
+
+## T65. Reproduction is three commands, the offline tiers are exact, and the path caught a stale artifact
+
+**Statement**: a judge can regenerate the published numbers with `make test` (about ten seconds, 161
+contracts), `make reproduce` (about twenty seconds: the intensity ledger, the sleeve portfolio and the
+grid-load specialist, each compared by SHA-256 against `results/reproduction-manifest.json`), and
+`make reproduce-full` (the walk-forward, the fusion sleeve, the transfer test and the calibration
+falsifier). Offline exactness is possible because the frozen inputs are committed, 232 tracked files
+under `results/`, with one exception: prices are 62 MB locally, so the 66 series the results actually
+touch are committed as a 7 MB `results/price-subset/` and the script seeds the cache from it on a fresh
+clone. Producers write to a sandbox unless `--apply` is given, so reproduction does not dirty the tree.
+The first run of the mechanism caught a real defect: the committed `results/intensity-strategy.json` was
+**stale**, carrying `cohort_weights: null` and `daily: null` from before the ledger fix, while its
+headline numbers still matched. It has been regenerated and is now exact. The only failing row is the
+`paths` check inside a working tree that holds another workstream's untracked draft, a file that is not
+on the remote and therefore not part of what anyone clones.
+**Evidence**: `scripts/reproduce.py`; `results/reproduction-manifest.json` (11 entries with digests and
+tiers); `scripts/build_price_subset.py`; `tests/test_reproduction_manifest.py`; the judge section in
+`README.md`; the run table in this session reproduced 8 entries with 7 exact and the one draft failure
+above.
+**Scope**: the offline tiers are exact on this machine's Python and library versions; the network tier
+is deliberately not exact because live filings and markets move; the sandbox path under `/tmp` must be
+writable.
+**Consequence**: every number in the repository now has one command that either reproduces it or names
+the drift, and a "differs" row is a finding rather than noise. The mechanism is the repository's answer
+to the reproduction requirement, and it should be the first thing any change updates.

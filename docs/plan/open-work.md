@@ -161,6 +161,10 @@ What remains, in order:
    the filings panel cannot: daily or hourly observations, tens of thousands of rows, and a causal link
    to the names the sleeve already trades. Test each with the council's three numbers and the sleeve
    comparison, and let the sequence models run where the sample actually supports depth.
+5c. **The judge path is wired (T65).** `make test`, `make reproduce` and `make reproduce-full` cover
+   the published numbers with digest comparison; the network tier is opt-in. Any new artifact belongs in
+   `results/reproduction-manifest.json` in the same commit that creates it.
+
 6. **The vision gaps** unchanged: the bundle ladder as a routine, fine-tune rounds with drift monitors
    and rollback, the full policy layer, a model registry, quantum only against an equal-budget
    classical win, and scenario and tail diagnostics beyond what T54 covers.
