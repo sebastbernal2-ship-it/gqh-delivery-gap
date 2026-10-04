@@ -1,5 +1,11 @@
 # Structured JevLike execution prototype
 
+The current next experiment separates learned movement risk from known order
+costs: [movement risk with analytical costs](EXECUTION_RISK.md). The older
+[action-conditioned scaffold](ACTION_CONDITIONED_EXECUTION.md) remains a research
+comparator awaiting action/fill labels. The categorical experiment below is
+historical context, not evidence that either model has a trading edge.
+
 HiPerGator is reserved for JevLike model work: training, model pretraining, calibration and
 model evaluation. Acquisition, raw parsing, feature/label construction, classical model training,
 strategy backtests and unrelated research run elsewhere. The existing BTC mirror is an engineering
