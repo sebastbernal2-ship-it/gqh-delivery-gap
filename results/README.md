@@ -217,3 +217,11 @@ generated-path: results/rpo-vintages.csv
 Produced by `scripts/run_rpo_specialist.py`:
 
 generated-path: results/rpo-specialist-scores.json
+
+Produced by `scripts/build_filings_register.py --out results/filings-register-rpo.csv`:
+
+generated-path: results/filings-register-rpo.csv
+
+Produced by `scripts/run_rpo_filing_panel.py`:
+
+generated-path: results/rpo-filing-panel-scores.json

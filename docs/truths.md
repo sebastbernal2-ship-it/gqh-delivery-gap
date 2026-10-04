@@ -521,3 +521,22 @@ current-ticker identity, development only, both sealed windows spent.
 **Consequence**: the expectation channel has a point-in-time, large-sample foundation. The next steps
 are the filing-joined version for the four candidate firms, the text specialist on the same rows, and
 carrying the forecast into the council as one specialist rather than a standalone claim.
+
+## T37. Filing metadata adds a little to the disclosure history for RPO surprises
+
+**Statement**: on 2,782 RPO decisions from 210 issuers, split chronologically 1,949/833, adding the
+latest filing's metadata features, meaning form, item flags, filing cadence and days since filing,
+to the disclosure-history model improves every metric over the history-only model: log loss 1.461
+against 1.473, Brier 0.744 against 0.751, and accuracy 0.325 against 0.293. Training prevalence
+stands at 1.609, 0.800 and 0.197. The lift is small, twelve thousandths of log loss and three points
+of accuracy, on a model whose absolute accuracy is a third of a five-class problem. The declared
+falsifier was that the filing features do not improve the proper scores; they improve them slightly,
+so the filing route into the expectation gap is not decoration, but this is far from a mechanism
+claim.
+**Evidence**: `results/rpo-filing-panel-scores.json`; `results/filings-register-rpo.csv`;
+`scripts/run_rpo_filing_panel.py`; `docs/plan/rpo-filing-join.md`.
+**Scope**: 197 issuers with filings, 27,673 filings, metadata only, one filing per decision, no
+document text, no returns, development only, both sealed windows spent.
+**Consequence**: the equity bridge has a small measured lift from filing metadata. The next tests are
+whether document text adds beyond metadata on the four-firm corpus where text exists, and whether the
+forecast carries useful weight inside the council.
