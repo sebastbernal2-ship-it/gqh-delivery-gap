@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "checkpoints": 9,
+  "scope": "synthetic_portability_only",
+  "max_absolute_difference_bps": {
+    "AB_masked3_supervised3.pt": 8.663880439740979e-07,
+    "AB_scratch3.pt": 8.663880430859194e-07,
+    "AB_scratch6.pt": 8.66388043307964e-07,
+    "A_masked3_supervised3.pt": 8.663880430859194e-07,
+    "A_scratch3.pt": 8.663880430859194e-07,
+    "A_scratch6.pt": 8.663880430859194e-07,
+    "B_masked3_supervised3.pt": 8.663880430859194e-07,
+    "B_scratch3.pt": 8.663880430859194e-07,
+    "B_scratch6.pt": 6.497910325364842e-07
+  },
+  "torch": "2.14.1",
+  "numpy": "2.5.3",
+  "device": "cpu",
+  "reference_gpu": "NVIDIA L4",
+  "calibrated": false
+}

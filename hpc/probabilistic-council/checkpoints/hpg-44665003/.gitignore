@@ -1,0 +1,10 @@
+# Explicitly authorized research checkpoint publication, scoped to this release.
+!AB_masked3_supervised3.pt
+!AB_scratch3.pt
+!AB_scratch6.pt
+!A_masked3_supervised3.pt
+!A_scratch3.pt
+!A_scratch6.pt
+!B_masked3_supervised3.pt
+!B_scratch3.pt
+!B_scratch6.pt
