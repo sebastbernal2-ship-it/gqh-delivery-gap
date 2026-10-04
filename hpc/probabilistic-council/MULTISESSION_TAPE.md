@@ -1,5 +1,8 @@
 # Multi-session causal tape experiment
 
+Historical experiment. Its mixed cluster submission is retired under the user's Jev-only
+HiPerGator reservation. Current prepared-cache submission lives in [the execution prototype](EXECUTION_JEV.md).
+
 Follow-up to [the rejected short candidate](SYNCHRONIZED_TAPE.md). This is development-only
 forecast engineering. It does not establish an economic trading edge, executable fill model,
 liquidation specialist, queue reconstruction, or quantum advantage.

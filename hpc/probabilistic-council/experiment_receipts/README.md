@@ -26,3 +26,8 @@ run on the six-session panel. The acquisition rule and panel adapter were commit
 evaluation was opened. It reports all 14 model checkpoints and 18 evaluation forecasts, including
 the gate-selected model's failure to beat prevalence. This is development evidence, not competition
 OOS or a trading result. See [the protocol, commands and limitations](../MULTISESSION_TAPE.md).
+
+`btc_execution_jev_smoke_20261003.json` is the unedited structured Jev execution run: two fixed
+training variants, 41 parent cases, twelve correlated queries per case, separate chronological
+roles and train-frequency reference. Both variants fail to beat that reference. The declared
+protocol was committed before this target run. See [model/cache interfaces and limitations](../EXECUTION_JEV.md).

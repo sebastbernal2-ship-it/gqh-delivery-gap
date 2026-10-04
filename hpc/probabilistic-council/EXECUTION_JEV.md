@@ -49,3 +49,99 @@ Numeric caches and manifests are prepared outside HiPerGator. The cluster job re
 validated caches and runs JevLike model operations. Historical mixed preprocessing/baseline
 submission is disabled. No live cluster job, quantum integration, distillation, order-impact model
 or production deployment is implied by this prototype.
+
+## Implementation and reproduction
+
+`execution_dataset.py` verifies every raw object against the acquisition plan before parsing.
+It writes `features.npy`, `targets.npy`, `clocks.npy`, `roles.npy`, a manifest and a private label
+provenance audit. The four numerical arrays are hash-verified and loaded without pickle, using
+memory mapping. Training currently materializes the small prepared cache in CPU RAM; GPU
+transfers are bounded minibatches (32 training, 128 inference). A genuinely out-of-core/sharded
+trainer remains future work, rather than an assumed scaling property.
+
+`execution_model.py` projects 24 typed numerical features per step into width 32, adds learned
+positions and uses one temporal transformer layer. The vendored JevLike `AttentionHead` scores
+60 learned option vectors, grouped into twelve five-bin distributions, using that one shared
+sequence encoding. This is a new structured JevLike research variant, not TypeSafe Jev or Laya.
+It has no generic pretrained weights and is not compatible with the existing tiny byte-scorer's
+C++ exporter. Native/compiled serving and latency benchmarking require a separate acceptance gate.
+
+`execution_train.py` uses the prepared cache only. It fits train-only standardization in double
+precision, transfers minibatches to the chosen device, runs the two fixed model schedules,
+calibrates each query on calibration cases and chooses on gate cases. Pretrained and scratch
+variants share the supervised shuffle seed and budget; the pretrained variant receives additional
+explicitly disclosed reconstruction compute. Nonfinite losses or invalid probability vectors fail.
+All twelve labels share their parent case; neither the loss nor query count establishes independence.
+
+Prepare data **off-cluster**, from this component directory:
+
+```sh
+python execution_dataset.py --plan multisession_plan.json --objects OBJECTS --output NEW_CACHE
+python execution_train.py --dataset NEW_CACHE --output NEW_MODELS \
+  --epochs 3 --pretraining-epochs 3 --device cpu
+```
+
+Parsing requires NumPy and PyArrow 23.0.1. Model training/inference require NumPy and PyTorch;
+PyArrow is not required on HiPerGator. The reported local run used Python 3.12, NumPy 2.5.3,
+PyTorch 2.14.1 and CPU execution. Transfer only the prepared arrays and manifest for model fitting;
+retain the raw acquisition and full label audit outside Git/off-cluster.
+
+```sh
+export GQH_REPO_ROOT=/shared/path/to/checkout
+export GQH_JEV_DATASET=/shared/path/to/validated-cache
+export GQH_TAPE_RUN_DIR=/shared/path/to/new-model-run
+export GQH_PYTHON=/shared/path/to/model-environment/bin/python
+# CPU default. For GPU training, set GQH_JEV_DEVICE=cuda and request your allocation's GPU.
+sbatch --account=YOUR_ACCOUNT --partition=YOUR_PARTITION \
+  "$GQH_REPO_ROOT/hpc/probabilistic-council/run-execution.slurm"
+```
+
+The job verifies the cache before fitting and refuses missing/relative/wrong roots or existing
+output directories. Its source never invokes acquisition, label construction, a strategy backtest
+or classical model fitting. `run-multisession.slurm` is retired and fails closed; its older
+submission instructions are historical. The prevalence reference in the report is a count-based
+training-label diagnostic, not a separately trained classical model workload.
+
+`ExecutionPredictor` in `execution_predict.py` verifies the expected checkpoint hash, loads the
+structured checkpoint once, and applies its saved train-only normalizer and query calibrators.
+One finite 16x24 sequence returns arrays ordered `[horizon][side][task][bin]`; adverse threshold
+tails are sums of bin mass and therefore monotone across increasing thresholds. Monotonicity
+across horizons is NOT enforced, and these marginals are not a joint scenario distribution.
+
+```sh
+python execution_predict.py --checkpoint MODEL.pt --sha256 EXPECTED_SHA256 \
+  --sequence ONE_NUMERIC_SEQUENCE.json
+```
+
+The output is a development forecast, not a trade instruction. Quote age, own order size/impact,
+fees, fill uncertainty, strategy urgency and cost of waiting require separate policy validation.
+No passive-fill probability or automatic trade timing is supplied by this interface.
+
+## Fixed smoke outcome
+
+The unedited [experiment receipt](experiment_receipts/btc_execution_jev_smoke_20261003.json)
+owns the actual metrics, source/array/code hashes, training losses, calibration and artifact hashes.
+There are 41 parent cases: 13 training, 7 calibration, 6 gate, 7 reserved/unused pool calibration
+and 8 development evaluation. Sixty-second label maturity, sixty-five-second stride and gap/stale
+rejection reduce cases relative to the earlier five-second overlapping-history experiment. These
+are different targets and samples; their scores cannot be compared as architecture improvement.
+Twelve queries per parent do not turn eight evaluation cases into 96 independent observations.
+
+| Fixed variant | Mean query log loss | Mean query multiclass Brier |
+|---|---:|---:|
+| Scratch (gate selected) | 1.641925 | 0.812573 |
+| Masked-sequence pretrained | 1.639551 | 0.812242 |
+| Smoothed training prevalence | 1.590406 | 0.798483 |
+
+Neither variant beats the frequency reference. Scratch remains the gate-selected variant; the
+slightly lower pretrained evaluation score does not authorize switching selection post hoc.
+No target edges, architectures, epochs, labels or selection rules were changed after evaluating
+this smoke target. This demonstrates implementation, not pretraining effectiveness, trustworthy
+tails, latency, stable calibration, execution improvement or quantum advantage. Wider prepared
+session coverage is required before spending substantial HiPerGator training budget.
+
+Regression checks cover future-path isolation, observed-gap rejection, cache/hash/schema guards,
+shared-query probabilities, pretraining gradients, checkpoint inference parity and monotone
+threshold tails. Altering only evaluation labels leaves trained tensors, normalization, losses,
+calibration, gate scores and selection unchanged. Spool tests isolate the new Jev-only workload,
+and the retired mixed job starts nothing. Live HiPerGator execution remains unverified.
