@@ -24,7 +24,10 @@ def main() -> int:
     complex_tickers = sorted({row["ticker"] for row in csv.DictReader(COMPLEX.open())})
     records = []
 
+    terms_path = ROOT / "results" / "hyperliquid-contract-terms.json"
+    terms = json.loads(terms_path.read_text()) if terms_path.exists() else {"contracts": {}, "retrieved_at": None}
     for coin, depth in (("BTC", 3_499_318), ("ETH", 8_737_856), ("GAS", 1_169), ("SPX", 3_991)):
+        venue_terms = terms.get("contracts", {}).get(coin, {})
         records.append({
             "id": f"instrument:perp:{coin}",
             "class": "perpetual_future",
@@ -36,9 +39,13 @@ def main() -> int:
             "funding_interval_hours": 1,
             "taker_fee_bps": 4.5,
             "maker_fee_bps": 1.5,
+            "fee_source": "declared in docs/plan/cascade-protocol.md; matches the base tier range on the venue fee page",
+            "fee_verified": False,
+            "size_decimals": venue_terms.get("size_decimals"),
+            "max_leverage": venue_terms.get("max_leverage"),
+            "terms_source": "results/hyperliquid-contract-terms.json",
+            "terms_retrieved_at": terms.get("retrieved_at"),
             "tick_size": "to_confirm",
-            "min_size": "to_confirm",
-            "max_leverage": "to_confirm",
             "short_borrow": "not required, shorts are native",
             "depth_10bps_usd_median": depth,
             "usable": coin in ("BTC", "ETH"),

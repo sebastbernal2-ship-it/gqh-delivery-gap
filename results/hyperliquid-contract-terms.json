@@ -1,0 +1,56 @@
+{
+ "retrieved_at": "2026-10-04T07:18:42Z",
+ "sources": {
+  "contracts": "https://api.hyperliquid.xyz/info",
+  "fees": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees"
+ },
+ "contracts": {
+  "BTC": {
+   "listed": true,
+   "size_decimals": 5,
+   "max_leverage": 40,
+   "only_isolated": null
+  },
+  "ETH": {
+   "listed": true,
+   "size_decimals": 4,
+   "max_leverage": 25,
+   "only_isolated": null
+  },
+  "GAS": {
+   "listed": true,
+   "size_decimals": 1,
+   "max_leverage": 3,
+   "only_isolated": null
+  },
+  "SPX": {
+   "listed": true,
+   "size_decimals": 1,
+   "max_leverage": 5,
+   "only_isolated": null
+  }
+ },
+ "universe_size": 234,
+ "fees": {
+  "page": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees",
+  "fetched": true,
+  "bytes": 932156,
+  "taker_snippet": "taker fees, maker rebates, and user volume contribution",
+  "maker_snippet": "Maker rebates are paid out continuously on each trade directly to the trading wallet",
+  "percentages_seen": [
+   "0.00",
+   "0.000",
+   "0.0000",
+   "0.001",
+   "0.002",
+   "0.0024",
+   "0.0028",
+   "0.003",
+   "0.0032",
+   "0.0034",
+   "0.0036",
+   "0.0038"
+  ],
+  "note": "percentages are captured verbatim from the page; the registry keeps the declared taker and maker rates used by the studies until a human confirms the tier"
+ }
+}

@@ -173,3 +173,11 @@ generated-path: results/regime-state-summary.json
 Produced by `scripts/hyperliquid_capability_test.py`:
 
 generated-path: results/hyperliquid-capability.json
+
+Produced by `scripts/build_hyperliquid_contract_terms.py`:
+
+generated-path: results/hyperliquid-contract-terms.json
+
+Produced by `scripts/build_hyperliquid_fixture.py`:
+
+generated-path: results/hyperliquid-fixture/
