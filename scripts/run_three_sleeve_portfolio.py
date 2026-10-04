@@ -116,6 +116,22 @@ def main() -> int:
         report["sleeves"][name] = {"events": info, "metrics": portfolio_metrics(daily),
                                    "capacity": capacity_report(events)}
     intensity_base, intensity_info = gated_intensity_daily(COSTS["base"] / 20.0, args.split)
+    # the full-period ungated expression, for the in-sample column of the table
+    dates_full, prices_full = load_prices()
+    adv_full = load_adv()
+    panel_full = json.loads(COMPLEX.read_text())
+    group_full = {series["ticker"]: group for group, payload in panel_full["groups"].items()
+                  for series in payload["series"]}
+    signals_full = load_signals(CORRECTED["capex"], CORRECTED["revenue"])
+    # keep the calendar to the signal tickers only: the broad bar cache holds junk series whose
+    # stray timestamps would otherwise inflate the date list and dilute the annualisation
+    wanted = {signal["ticker"] for signal in signals_full}
+    prices_full = {ticker: series for ticker, series in prices_full.items() if ticker in wanted}
+    dates_full = sorted({day for series in prices_full.values() for day in series})
+    full_result = run({**BASE, "cost_mult": COSTS["base"] / 20.0, "target_vol": None}, signals_full,
+                      dates_full, prices_full, adv_full, group_full)
+    report["intensity_full_period_ungated"] = {"cohorts": full_result["cohorts"],
+                                               "metrics": portfolio_metrics(full_result["daily"])}
     report["sleeves"]["intensity_gated"] = {"events": intensity_info,
                                             "metrics": portfolio_metrics(intensity_base)}
     series["intensity_gated"] = intensity_base
@@ -164,6 +180,10 @@ def main() -> int:
             label, m["annual_return"] * 100, m["annual_vol"] * 100, m["sharpe"] or float("nan"),
             m["max_drawdown"] * 100, v["annual_return"] * 100, v["annual_vol"] * 100,
             v["sharpe"] or float("nan"), v["max_drawdown"] * 100))
+    full = report["intensity_full_period_ungated"]["metrics"]
+    print("  %-21s days %4d net %+7.2f%% vol %6.1f%% sharpe %+6.3f maxDD %+7.1f%%" % (
+        "intensity_full_ungated", full["days"], full["annual_return"] * 100, full["annual_vol"] * 100,
+        full["sharpe"] or float("nan"), full["max_drawdown"] * 100))
     print("best sleeve", report["best_sleeve"], "intervals:", json.dumps(report["intervals"], indent=0))
     print("written", args.output)
     return 0

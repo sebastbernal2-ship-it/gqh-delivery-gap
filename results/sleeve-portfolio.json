@@ -145,6 +145,112 @@
   "flat round-trip costs, capacity from 60-session median dollar volume",
   "the models are frozen from the first seventy percent of each panel"
  ],
+ "splits": {
+  "revenue_train": {
+   "events": {
+    "events_used": 1197,
+    "sessions": 2148
+   },
+   "cost_bps": 20.0,
+   "metrics": {
+    "days": 2143,
+    "annual_return": 0.1649792015934968,
+    "annual_vol": 0.3365985045420034,
+    "sharpe": 0.4901364663457957,
+    "total_return": 1.4449225124969103,
+    "max_drawdown": -0.5700924705837898,
+    "hit_rate": 0.5160989267382174
+   }
+  },
+  "revenue_test": {
+   "events": {
+    "events_used": 506,
+    "sessions": 798
+   },
+   "cost_bps": 20.0,
+   "metrics": {
+    "days": 797,
+    "annual_return": 0.35943131818006274,
+    "annual_vol": 0.5107900615697142,
+    "sharpe": 0.7036771958238394,
+    "total_return": 1.0179532579825081,
+    "max_drawdown": -0.6506970314170826,
+    "hit_rate": 0.5156838143036386
+   }
+  },
+  "capex_train": {
+   "events": {
+    "events_used": 558,
+    "sessions": 1628
+   },
+   "cost_bps": 20.0,
+   "metrics": {
+    "days": 1624,
+    "annual_return": -0.49464764596429783,
+    "annual_vol": 0.4320026353523902,
+    "sharpe": -1.1450107140221664,
+    "total_return": -0.9782198389237179,
+    "max_drawdown": -0.9840116453707901,
+    "hit_rate": 0.4685960591133005
+   }
+  },
+  "capex_test": {
+   "events": {
+    "events_used": 237,
+    "sessions": 837
+   },
+   "cost_bps": 20.0,
+   "metrics": {
+    "days": 836,
+    "annual_return": 0.010142751513105222,
+    "annual_vol": 0.49409071722261994,
+    "sharpe": 0.020528115909806202,
+    "total_return": -0.31474044600256335,
+    "max_drawdown": -0.613054769091468,
+    "hit_rate": 0.4916267942583732
+   }
+  },
+  "two_sleeve_train": {
+   "metrics": {
+    "days": 1445,
+    "annual_return": -0.13862273758616397,
+    "annual_vol": 0.19507305735722488,
+    "sharpe": -0.7106195979299846,
+    "total_return": -0.5952422175922463,
+    "max_drawdown": -0.697833872403652,
+    "hit_rate": 0.47750865051903113
+   },
+   "metrics_vol_target": {
+    "days": 1445,
+    "annual_return": -0.08298153550278915,
+    "annual_vol": 0.13934150947454935,
+    "sharpe": -0.5955263138436554,
+    "total_return": -0.4122688028480783,
+    "max_drawdown": -0.5307795040203862,
+    "hit_rate": 0.47750865051903113
+   }
+  },
+  "two_sleeve_test": {
+   "metrics": {
+    "days": 633,
+    "annual_return": 0.2753003094055491,
+    "annual_vol": 0.2936214408530411,
+    "sharpe": 0.9376028828335402,
+    "total_return": 0.7925133448350041,
+    "max_drawdown": -0.20209924592970274,
+    "hit_rate": 0.4881516587677725
+   },
+   "metrics_vol_target": {
+    "days": 633,
+    "annual_return": 0.11276962439870943,
+    "annual_vol": 0.16124528052212989,
+    "sharpe": 0.6993669770274767,
+    "total_return": 0.2851316971421829,
+    "max_drawdown": -0.15553194649828572,
+    "hit_rate": 0.4881516587677725
+   }
+  }
+ },
  "intervals": {
   "composite_minus_revenue_base": {
    "point": -0.14946141264287896,

@@ -759,3 +759,23 @@ intensity expression at 1.17 million median, one common window of 37 months.
 drawdown under ten percent, and the intensity sleeve carries most of the weight because it is both
 calmer and better on its own. The next levers are within-complex breadth for the intensity sleeve,
 which is the capacity bottleneck, and the frozen forward window.
+
+## T49. The sleeve results are window-dependent: the composite is negative in sample
+
+**Statement**: the same construction that returns +27.53 percent out of sample, Sharpe 0.938, returns
+-13.86 percent in sample over 1,445 sessions, Sharpe -0.711, and -8.30 percent volatility-targeted.
+The capex sleeve is the source: -49.46 percent in sample, Sharpe -1.145 and a -98.4 percent drawdown,
+against +1.01 percent out of sample. The revenue sleeve is positive in both eras but weaker in sample,
++16.50 percent at Sharpe 0.490 against +35.94 at 0.704. The intensity expression is also era
+dependent: -4.89 percent over its full period ungated, Sharpe -0.630, and +10.48 percent gated inside
+the out-of-sample window where the gate model never saw the rows.
+**Evidence**: `results/sleeve-portfolio.json` (`splits`), `results/three-sleeve-portfolio.json`,
+`results/intensity-clock-test.json`, `results/intensity-gate-test.json`,
+`scripts/run_sleeve_portfolio.py`.
+**Scope**: development only; the in-sample era overlaps the code's own training rows, so it is a
+stability diagnostic rather than a performance number, and the out-of-sample window is the 2023 to
+2026 AI-capex boom, so it is favorable by construction in a way no other window is.
+**Consequence**: T47 and T48 stand as measured on their window and are not evidence of a stable
+effect. No cross-era alpha is established, the composite's recent strength may be regime, and the
+frozen forward window is now the only honest way to claim anything. The capex sleeve in particular
+does not deserve weight on its own record; it is kept only for its negative correlation.
