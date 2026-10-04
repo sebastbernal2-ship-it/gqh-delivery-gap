@@ -221,15 +221,16 @@ the transmission variable.
 ## T20. The cascade cost hurdle binds, and the frozen conjunction's gross clears it
 
 **Statement**: on the recorded tape, percentile dislocation levels (top 1 percent and top 5 percent of
-one minute moves, funding beyond two sigma, thin books) land between -8 and -22 basis points net of base
-costs, with gross means of at most +3.9 basis points at fifteen minutes, all inside their random-time
+one minute moves, funding beyond two sigma, thin books) land between -5 and -22 basis points net of base
+costs, with gross means of at most +6.1 basis points at fifteen minutes, all inside their random-time
 nulls. The frozen conjunction fired six times, and its gross reversion at fifteen minutes is +17.9 basis
-points: +6.9 net of base costs, -4.0 net of doubled costs, permutation p 0.085. Reversion is market
-specific, SPX +14.7 against GAS -4.0 on the same level.
+points: +6.9 net of base costs, -4.0 net of doubled costs, permutation p 0.068. Reversion is market
+specific, SPX +20.4 against GAS -0.0 on the same level.
 **Evidence**: `results/cascade-reversion-study.json`; `scripts/build_cascade_reversion_study.py`;
 `data/tape`.
-**Scope**: one recorded window, four markets (BTC, ETH, GAS, SPX), one venue, 7.3 nominal hours, entry at
-the condition bar close with no speed advantage used; development only.
+**Scope**: recorded window of about fourteen hours of samples across six tape files, four markets (BTC,
+ETH, GAS, SPX), one venue, entry at the condition bar close with no speed advantage used; development
+only.
 **Consequence**: the binding constraint is the cost hurdle near ten basis points round trip, not the
 presence of reversion. The conjunction is the only condition whose gross clears it, on six events, so the
 family's next work is more events and cheaper entry, not wider level ladders.
@@ -250,16 +251,15 @@ filing level data rather than rental prices.
 
 ## T22. Maker entry improves the paired result and fails the absolute one
 
-**Statement**: resting at the dislocation extreme fills 33 percent of frozen conjunction events, 47
-percent at the top one percent level, and 42 percent at the top five percent and thin book levels. The
-paired result against taker entry is +4.6 to +17.3 basis points on the same events, but the absolute
-maker net is at or below zero everywhere except +0.83 and +2.64 basis points at fifteen minutes on two
-levels, both inside their nulls. The filled and unfilled split shows adverse selection: at the frozen
-conjunction the two filled events net -13.2 basis points under the taker convention against +17.0 for the
-four unfilled ones, and filled events are worse than unfilled at every level and horizon. A stricter fill
-rule, standing in for queue position, removes the good fills and keeps the bad ones: at the top one
-percent level the net falls from +0.83 to -1.84 to -3.02 basis points as required penetration rises from
-zero to half a spread to a full spread.
+**Statement**: resting at the dislocation extreme fills 33 percent of frozen conjunction events and 48
+percent at the top one percent level. The paired result against taker entry is +5.5 to +7.8 basis points
+on the same events, but the absolute maker net is at or below zero at most cells: +3.28 basis points at
+the top one percent level at fifteen minutes, inside the null (p 0.2) and negative once costs are doubled
+(-2.72). The filled and unfilled split shows adverse selection: at the frozen conjunction the two filled
+events net -13.2 basis points under the taker convention against +17.0 for the four unfilled ones. A
+stricter fill rule, standing in for queue position, removes the good fills and keeps the bad ones: at the
+top one percent level the net falls from +3.28 to -0.66 to -1.27 basis points as required penetration
+rises from zero to half a spread to a full spread.
 **Evidence**: `results/maker-entry-study.json`; `scripts/build_maker_entry_study.py`; `data/tape`.
 **Scope**: recorded window, four markets, one venue, best bid and ask snapshots at fifteen seconds, no
 queue position modelled; development only.
@@ -283,11 +283,11 @@ equity market prices the intensity rise, which requires the market panel.
 
 ## T24. Cross market entry does not rescue the cascade family at size
 
-**Statement**: every cross market entry into BTC or ETH nets negative at both dislocation levels,
-between -7.0 and -10.3 basis points on the median, and the same market cells are negative as well. The
-only positive cells enter the thin markets: ETH events followed by an SPX position net +5.9 basis points
-on 126 events (p 0.013) at the top five percent level, and ETH followed by GAS nets +5.4 on 28 events
-(p 0.0016) at the top one percent level, with median depth at entry of 3,400 and 1,489 dollars. The
+**Statement**: every cross market entry into BTC or ETH nets negative at both dislocation levels, and the
+same market cells are negative as well. The only positive cells enter the thin markets: ETH events
+followed by an SPX position net +4.8 basis points on 172 events (p 0.003) at the top five percent level,
+and ETH followed by GAS nets +3.7 on 35 events (p 0.002) and BTC followed by SPX +6.4 on 35 events
+(p 0.083) at the top one percent level, with median depth at entry between 1,178 and 3,976 dollars. The
 target is entered against the source move, so those cells say the thin targets move against the source
 dislocation.
 **Evidence**: `results/spillover-study.json`; `scripts/build_spillover_study.py`; `data/tape`.

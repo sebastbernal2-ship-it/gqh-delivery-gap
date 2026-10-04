@@ -1,10 +1,10 @@
 {
  "status": "development only; recorded window; protocol docs/plan/maker-entry-study.md",
  "markets": {
-  "BTC": 2483,
-  "ETH": 2485,
-  "GAS": 2485,
-  "SPX": 2485
+  "BTC": 3423,
+  "ETH": 3425,
+  "GAS": 3425,
+  "SPX": 3425
  },
  "levels": {
   "L1": {
@@ -47,7 +47,7 @@
     "maker_net_median_bps": -11.41,
     "taker_net_mean_bps": -13.21,
     "paired_difference_bps": 5.35,
-    "null_p": 1.0,
+    "null_p": 0.8,
     "doubled_cost_maker_bps": -17.41,
     "filled_taker_mean_bps": -14.12,
     "unfilled_taker_mean_bps": -12.76,
@@ -104,285 +104,285 @@
   },
   "L2": {
    "4": {
-    "events": 103,
-    "fills": 48,
-    "fill_rate": 0.466,
-    "maker_net_mean_bps": -10.32,
-    "maker_net_median_bps": -8.23,
-    "taker_net_mean_bps": -12.45,
-    "paired_difference_bps": 8.64,
+    "events": 140,
+    "fills": 70,
+    "fill_rate": 0.5,
+    "maker_net_mean_bps": -9.66,
+    "maker_net_median_bps": -8.11,
+    "taker_net_mean_bps": -11.87,
+    "paired_difference_bps": 7.41,
     "null_p": 0.6,
-    "doubled_cost_maker_bps": -16.32,
-    "filled_taker_mean_bps": -19.74,
-    "unfilled_taker_mean_bps": -6.09,
-    "unfilled_share": 0.534,
+    "doubled_cost_maker_bps": -15.66,
+    "filled_taker_mean_bps": -17.68,
+    "unfilled_taker_mean_bps": -6.05,
+    "unfilled_share": 0.5,
     "penetration": {
      "0.0": {
-      "fills": 48,
+      "fills": 70,
       "misses": 0,
-      "net_mean_bps": -10.32
-     },
-     "0.5": {
-      "fills": 36,
-      "misses": 12,
       "net_mean_bps": -9.66
      },
+     "0.5": {
+      "fills": 54,
+      "misses": 16,
+      "net_mean_bps": -9.43
+     },
      "1.0": {
-      "fills": 29,
-      "misses": 19,
-      "net_mean_bps": -11.01
+      "fills": 47,
+      "misses": 23,
+      "net_mean_bps": -10.23
      }
     }
    },
    "20": {
-    "events": 103,
-    "fills": 48,
-    "fill_rate": 0.466,
-    "maker_net_mean_bps": -13.35,
-    "maker_net_median_bps": -7.65,
-    "taker_net_mean_bps": -14.49,
-    "paired_difference_bps": 8.76,
-    "null_p": 1.0,
-    "doubled_cost_maker_bps": -19.35,
-    "filled_taker_mean_bps": -22.4,
-    "unfilled_taker_mean_bps": -7.59,
-    "unfilled_share": 0.534,
+    "events": 140,
+    "fills": 70,
+    "fill_rate": 0.5,
+    "maker_net_mean_bps": -9.32,
+    "maker_net_median_bps": -6.73,
+    "taker_net_mean_bps": -12.17,
+    "paired_difference_bps": 7.51,
+    "null_p": 0.6,
+    "doubled_cost_maker_bps": -15.32,
+    "filled_taker_mean_bps": -17.46,
+    "unfilled_taker_mean_bps": -6.89,
+    "unfilled_share": 0.5,
     "penetration": {
      "0.0": {
-      "fills": 48,
+      "fills": 70,
       "misses": 0,
-      "net_mean_bps": -13.35
+      "net_mean_bps": -9.32
      },
      "0.5": {
-      "fills": 36,
-      "misses": 12,
-      "net_mean_bps": -9.75
+      "fills": 54,
+      "misses": 16,
+      "net_mean_bps": -7.43
      },
      "1.0": {
-      "fills": 29,
-      "misses": 19,
-      "net_mean_bps": -10.24
+      "fills": 47,
+      "misses": 23,
+      "net_mean_bps": -7.39
      }
     }
    },
    "60": {
-    "events": 103,
-    "fills": 48,
-    "fill_rate": 0.466,
-    "maker_net_mean_bps": 0.83,
-    "maker_net_median_bps": -0.03,
-    "taker_net_mean_bps": -8.05,
-    "paired_difference_bps": 8.86,
+    "events": 138,
+    "fills": 66,
+    "fill_rate": 0.478,
+    "maker_net_mean_bps": 3.28,
+    "maker_net_median_bps": -0.01,
+    "taker_net_mean_bps": -5.52,
+    "paired_difference_bps": 7.75,
     "null_p": 0.2,
-    "doubled_cost_maker_bps": -5.17,
-    "filled_taker_mean_bps": -7.0,
-    "unfilled_taker_mean_bps": -8.97,
-    "unfilled_share": 0.534,
+    "doubled_cost_maker_bps": -2.72,
+    "filled_taker_mean_bps": -3.4,
+    "unfilled_taker_mean_bps": -7.46,
+    "unfilled_share": 0.522,
     "penetration": {
      "0.0": {
-      "fills": 48,
+      "fills": 66,
       "misses": 0,
-      "net_mean_bps": 0.83
+      "net_mean_bps": 3.28
      },
      "0.5": {
-      "fills": 36,
-      "misses": 12,
-      "net_mean_bps": -1.84
+      "fills": 50,
+      "misses": 16,
+      "net_mean_bps": -0.66
      },
      "1.0": {
-      "fills": 29,
-      "misses": 19,
-      "net_mean_bps": -3.02
+      "fills": 43,
+      "misses": 23,
+      "net_mean_bps": -1.27
      }
     }
    }
   },
   "L3": {
    "4": {
-    "events": 499,
-    "fills": 210,
-    "fill_rate": 0.421,
-    "maker_net_mean_bps": -9.56,
-    "maker_net_median_bps": -7.86,
-    "taker_net_mean_bps": -10.28,
-    "paired_difference_bps": 5.22,
+    "events": 687,
+    "fills": 288,
+    "fill_rate": 0.419,
+    "maker_net_mean_bps": -9.62,
+    "maker_net_median_bps": -7.7,
+    "taker_net_mean_bps": -10.16,
+    "paired_difference_bps": 4.9,
     "null_p": 0.6,
-    "doubled_cost_maker_bps": -15.56,
-    "filled_taker_mean_bps": -14.83,
-    "unfilled_taker_mean_bps": -6.97,
-    "unfilled_share": 0.579,
+    "doubled_cost_maker_bps": -15.62,
+    "filled_taker_mean_bps": -14.66,
+    "unfilled_taker_mean_bps": -6.92,
+    "unfilled_share": 0.581,
     "penetration": {
      "0.0": {
-      "fills": 210,
+      "fills": 288,
       "misses": 0,
-      "net_mean_bps": -9.56
+      "net_mean_bps": -9.62
      },
      "0.5": {
-      "fills": 156,
-      "misses": 54,
-      "net_mean_bps": -9.58
+      "fills": 213,
+      "misses": 75,
+      "net_mean_bps": -9.66
      },
      "1.0": {
-      "fills": 139,
-      "misses": 71,
-      "net_mean_bps": -9.8
+      "fills": 187,
+      "misses": 101,
+      "net_mean_bps": -9.77
      }
     }
    },
    "20": {
-    "events": 499,
-    "fills": 210,
-    "fill_rate": 0.421,
-    "maker_net_mean_bps": -7.32,
-    "maker_net_median_bps": -6.84,
-    "taker_net_mean_bps": -9.11,
-    "paired_difference_bps": 5.31,
-    "null_p": 0.6,
-    "doubled_cost_maker_bps": -13.32,
-    "filled_taker_mean_bps": -12.51,
-    "unfilled_taker_mean_bps": -6.64,
-    "unfilled_share": 0.579,
+    "events": 685,
+    "fills": 286,
+    "fill_rate": 0.418,
+    "maker_net_mean_bps": -6.95,
+    "maker_net_median_bps": -7.06,
+    "taker_net_mean_bps": -8.77,
+    "paired_difference_bps": 4.97,
+    "null_p": 0.2,
+    "doubled_cost_maker_bps": -12.95,
+    "filled_taker_mean_bps": -11.7,
+    "unfilled_taker_mean_bps": -6.67,
+    "unfilled_share": 0.582,
     "penetration": {
      "0.0": {
-      "fills": 210,
+      "fills": 286,
       "misses": 0,
-      "net_mean_bps": -7.32
+      "net_mean_bps": -6.95
      },
      "0.5": {
-      "fills": 156,
-      "misses": 54,
-      "net_mean_bps": -6.66
+      "fills": 211,
+      "misses": 75,
+      "net_mean_bps": -5.85
      },
      "1.0": {
-      "fills": 139,
-      "misses": 71,
-      "net_mean_bps": -7.44
+      "fills": 185,
+      "misses": 101,
+      "net_mean_bps": -7.28
      }
     }
    },
    "60": {
-    "events": 497,
-    "fills": 210,
-    "fill_rate": 0.423,
-    "maker_net_mean_bps": -3.96,
-    "maker_net_median_bps": -4.36,
-    "taker_net_mean_bps": -7.85,
-    "paired_difference_bps": 5.3,
+    "events": 677,
+    "fills": 280,
+    "fill_rate": 0.414,
+    "maker_net_mean_bps": -4.79,
+    "maker_net_median_bps": -4.12,
+    "taker_net_mean_bps": -7.91,
+    "paired_difference_bps": 5.01,
     "null_p": 0.2,
-    "doubled_cost_maker_bps": -9.96,
-    "filled_taker_mean_bps": -8.87,
-    "unfilled_taker_mean_bps": -7.1,
-    "unfilled_share": 0.577,
+    "doubled_cost_maker_bps": -10.79,
+    "filled_taker_mean_bps": -9.27,
+    "unfilled_taker_mean_bps": -6.94,
+    "unfilled_share": 0.586,
     "penetration": {
      "0.0": {
-      "fills": 210,
+      "fills": 280,
       "misses": 0,
-      "net_mean_bps": -3.96
+      "net_mean_bps": -4.79
      },
      "0.5": {
-      "fills": 156,
-      "misses": 54,
-      "net_mean_bps": -6.05
+      "fills": 205,
+      "misses": 75,
+      "net_mean_bps": -6.98
      },
      "1.0": {
-      "fills": 139,
-      "misses": 71,
-      "net_mean_bps": -7.37
+      "fills": 179,
+      "misses": 101,
+      "net_mean_bps": -7.15
      }
     }
    }
   },
   "L6": {
    "4": {
-    "events": 40,
-    "fills": 17,
-    "fill_rate": 0.425,
-    "maker_net_mean_bps": -14.49,
-    "maker_net_median_bps": -8.23,
-    "taker_net_mean_bps": -17.36,
-    "paired_difference_bps": 16.93,
-    "null_p": 1.0,
-    "doubled_cost_maker_bps": -20.49,
-    "filled_taker_mean_bps": -31.69,
-    "unfilled_taker_mean_bps": -6.77,
-    "unfilled_share": 0.575,
+    "events": 56,
+    "fills": 28,
+    "fill_rate": 0.5,
+    "maker_net_mean_bps": -11.75,
+    "maker_net_median_bps": -8.11,
+    "taker_net_mean_bps": -15.32,
+    "paired_difference_bps": 12.07,
+    "null_p": 0.8,
+    "doubled_cost_maker_bps": -17.75,
+    "filled_taker_mean_bps": -24.58,
+    "unfilled_taker_mean_bps": -6.06,
+    "unfilled_share": 0.5,
     "penetration": {
      "0.0": {
-      "fills": 17,
+      "fills": 28,
       "misses": 0,
-      "net_mean_bps": -14.49
+      "net_mean_bps": -11.75
      },
      "0.5": {
-      "fills": 12,
-      "misses": 5,
-      "net_mean_bps": -13.52
+      "fills": 20,
+      "misses": 8,
+      "net_mean_bps": -11.02
      },
      "1.0": {
-      "fills": 11,
-      "misses": 6,
-      "net_mean_bps": -13.24
+      "fills": 19,
+      "misses": 9,
+      "net_mean_bps": -10.72
      }
     }
    },
    "20": {
-    "events": 40,
-    "fills": 17,
-    "fill_rate": 0.425,
-    "maker_net_mean_bps": -21.71,
-    "maker_net_median_bps": -7.41,
-    "taker_net_mean_bps": -21.73,
-    "paired_difference_bps": 16.85,
+    "events": 56,
+    "fills": 28,
+    "fill_rate": 0.5,
+    "maker_net_mean_bps": -11.91,
+    "maker_net_median_bps": -6.17,
+    "taker_net_mean_bps": -15.59,
+    "paired_difference_bps": 12.03,
     "null_p": 1.0,
-    "doubled_cost_maker_bps": -27.71,
-    "filled_taker_mean_bps": -38.68,
-    "unfilled_taker_mean_bps": -9.2,
-    "unfilled_share": 0.575,
+    "doubled_cost_maker_bps": -17.91,
+    "filled_taker_mean_bps": -24.92,
+    "unfilled_taker_mean_bps": -6.25,
+    "unfilled_share": 0.5,
     "penetration": {
      "0.0": {
-      "fills": 17,
+      "fills": 28,
       "misses": 0,
-      "net_mean_bps": -21.71
+      "net_mean_bps": -11.91
      },
      "0.5": {
-      "fills": 12,
-      "misses": 5,
-      "net_mean_bps": -15.91
+      "fills": 20,
+      "misses": 8,
+      "net_mean_bps": -9.24
      },
      "1.0": {
-      "fills": 11,
-      "misses": 6,
-      "net_mean_bps": -16.68
+      "fills": 19,
+      "misses": 9,
+      "net_mean_bps": -9.33
      }
     }
    },
    "60": {
-    "events": 40,
-    "fills": 17,
-    "fill_rate": 0.425,
-    "maker_net_mean_bps": 2.64,
-    "maker_net_median_bps": -0.03,
-    "taker_net_mean_bps": -8.74,
-    "paired_difference_bps": 17.32,
+    "events": 56,
+    "fills": 26,
+    "fill_rate": 0.464,
+    "maker_net_mean_bps": 6.46,
+    "maker_net_median_bps": 1.77,
+    "taker_net_mean_bps": -2.9,
+    "paired_difference_bps": 12.98,
     "null_p": 0.2,
-    "doubled_cost_maker_bps": -3.36,
-    "filled_taker_mean_bps": -14.27,
-    "unfilled_taker_mean_bps": -4.66,
-    "unfilled_share": 0.575,
+    "doubled_cost_maker_bps": 0.46,
+    "filled_taker_mean_bps": -5.84,
+    "unfilled_taker_mean_bps": -0.35,
+    "unfilled_share": 0.536,
     "penetration": {
      "0.0": {
-      "fills": 17,
+      "fills": 26,
       "misses": 0,
-      "net_mean_bps": 2.64
+      "net_mean_bps": 6.46
      },
      "0.5": {
-      "fills": 12,
-      "misses": 5,
-      "net_mean_bps": -0.56
+      "fills": 18,
+      "misses": 8,
+      "net_mean_bps": 0.7
      },
      "1.0": {
-      "fills": 11,
-      "misses": 6,
-      "net_mean_bps": -0.58
+      "fills": 17,
+      "misses": 9,
+      "net_mean_bps": 0.76
      }
     }
    }
