@@ -93,3 +93,7 @@ generated-path: results/provider-family-tests-relative.json
 Produced by `scripts/build_maker_entry_study.py`:
 
 generated-path: results/maker-entry-study.json
+
+Produced by `scripts/build_capex_revenue_gap.py`:
+
+generated-path: results/capex-revenue-gap.json
