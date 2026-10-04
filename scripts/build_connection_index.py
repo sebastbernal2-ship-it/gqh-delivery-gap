@@ -25,6 +25,10 @@ ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "docs" / "scan" / "connection-index.jsonl.gz"
 SUMMARY = ROOT / "docs" / "scan" / "connection-index-summary.json"
 DIGS = ROOT / "docs" / "scan" / "deep-digs.jsonl"
+CONCEPT_FORCES = ROOT / "docs" / "scan" / "forces.jsonl"
+CONCEPT_INTERACTIONS = ROOT / "docs" / "scan" / "interactions.jsonl"
+CONCEPT_ASSUMPTIONS = ROOT / "docs" / "scan" / "assumptions.jsonl"
+CONCEPT_CHAINS = ROOT / "docs" / "scan" / "conceptual-chains.jsonl"
 BRIDGES = ROOT / "docs" / "scan" / "deep-bridges.jsonl"
 SKELETON = ROOT / "docs" / "scan" / "decomposition.jsonl.gz"
 MAX_INFERRED = 120
@@ -76,6 +80,26 @@ def load_nodes_edges(manifest: str) -> tuple[dict[str, dict], list[dict]]:
             edges.append({"kind": "edge", "from": edge["from"], "to": edge["to"],
                           "relation": edge.get("relation", "links"), "status": "curated",
                           "condition": edge.get("condition", ""), "falsifier": edge.get("falsifier", "")})
+    # The conceptual layer: forces and assumptions become nodes with their own meaning and payer.
+    if CONCEPT_FORCES.exists():
+        for line in CONCEPT_FORCES.open():
+            if not line.strip():
+                continue
+            force = json.loads(line)
+            nodes[force["id"]] = {"id": force["id"], "layer": "force", "meaning": force.get("meaning", ""),
+                                  "origin": "concept", "domain": force.get("domain", ""),
+                                  "players": [], "observables": [force.get("observables", "")],
+                                  "source": force.get("source", ""), "payer": force.get("payer", "")}
+    if CONCEPT_ASSUMPTIONS.exists():
+        for line in CONCEPT_ASSUMPTIONS.open():
+            if not line.strip():
+                continue
+            assumption = json.loads(line)
+            nodes[assumption["id"]] = {"id": assumption["id"], "layer": "assumption",
+                                       "meaning": assumption.get("statement", ""), "origin": "concept",
+                                       "observables": [assumption.get("test", "")],
+                                       "source": assumption.get("owner", ""),
+                                       "kill": assumption.get("kill", "")}
     return nodes, edges
 
 
@@ -116,11 +140,13 @@ def main() -> int:
     connections: dict[str, list[dict]] = collections.defaultdict(list)
 
     def connect(source: str, target: str, ctype: str, status: str, why: str,
-                condition: str = "", falsifier: str = "") -> None:
+                condition: str = "", falsifier: str = "", **extra) -> None:
         if source == target or source not in nodes or target not in nodes:
             return
-        connections[source].append({"to": target, "type": ctype, "status": status, "why": why,
-                                    "condition": condition, "falsifier": falsifier})
+        payload = {"to": target, "type": ctype, "status": status, "why": why,
+                   "condition": condition, "falsifier": falsifier}
+        payload.update({key: value for key, value in extra.items() if value not in ("", None, {})})
+        connections[source].append(payload)
 
     # Declared and curated edges, both directions.
     for edge in edges:
@@ -129,6 +155,44 @@ def main() -> int:
                 edge.get("condition", ""), edge.get("falsifier", ""))
         connect(edge["to"], edge["from"], edge["relation"], status, "declared or curated edge reverse",
                 edge.get("condition", ""), edge.get("falsifier", ""))
+
+    # The conceptual layer: every interaction is an inference carrying its channel, condition,
+    # assumption, kill, load, lag and phase signs. Assumptions attach to whatever they bound.
+    if CONCEPT_INTERACTIONS.exists():
+        for line in CONCEPT_INTERACTIONS.open():
+            if not line.strip():
+                continue
+            interaction = json.loads(line)
+            payload = {"assumption": interaction.get("assumption", ""), "load": interaction.get("load", 0),
+                       "lag": interaction.get("lag", ""), "sign_by_phase": interaction.get("sign_by_phase", {}),
+                       "evidence": interaction.get("evidence", "E4")}
+            connect(interaction["from"], interaction["to"], interaction["relation"], "inferred",
+                    interaction.get("channel", ""), interaction.get("condition", ""),
+                    interaction.get("kill", ""), **payload)
+            connect(interaction["to"], interaction["from"], interaction["relation"], "inferred",
+                    interaction.get("channel", ""), interaction.get("condition", ""),
+                    interaction.get("kill", ""), **payload)
+    if CONCEPT_ASSUMPTIONS.exists():
+        for line in CONCEPT_ASSUMPTIONS.open():
+            if not line.strip():
+                continue
+            assumption = json.loads(line)
+            owner = assumption.get("owner", "")
+            endpoints = []
+            if owner.startswith("interaction:"):
+                body = owner.split("interaction:", 1)[1]
+                source, rest = body.split("->", 1)
+                target = rest.rsplit(":", 1)[0]
+                endpoints = [(source, "left"), (target, "right")]
+            elif owner in nodes:
+                endpoints = [(owner, "owner")]
+            for endpoint, side in endpoints:
+                connect(endpoint, assumption["id"], "bounded_by", "declared",
+                        f"assumption on the {side} side", assumption.get("statement", ""),
+                        assumption.get("kill", ""), load=assumption.get("load", 0))
+                connect(assumption["id"], endpoint, "bounds", "declared",
+                        f"bounds the {side} side", assumption.get("statement", ""),
+                        assumption.get("kill", ""), load=assumption.get("load", 0))
 
     # Structural: parent, children, siblings.
     for node_id in nodes:
@@ -268,6 +332,18 @@ def main() -> int:
             hop_list.append(hop)
             hops_total += 1
         chains[dig["id"]] = hop_list
+    if CONCEPT_CHAINS.exists():
+        for line in CONCEPT_CHAINS.open():
+            if not line.strip():
+                continue
+            chain_row = json.loads(line)
+            hop_list = []
+            for index, (start, end) in enumerate(zip(chain_row["hops"], chain_row["hops"][1:]), start=1):
+                hop_list.append({"hop": f"hop:{chain_row['id']}:{index:02d}", "from": start, "to": end,
+                                 "relation": "chain_precedes", "condition": chain_row.get("intuition", ""),
+                                 "falsifier": chain_row.get("greatest_assumption", "")})
+                hops_total += 1
+            chains[chain_row["id"]] = hop_list
     for bridge in bridges:
         hop = {"hop": f"hop:{bridge['id']}:01", "from": bridge["from"], "to": bridge["to"],
                "relation": bridge["relation"], "condition": bridge.get("condition", ""),
@@ -291,6 +367,39 @@ def main() -> int:
                         f"next hop in {chain_id}", hop.get("condition", ""), hop.get("falsifier", ""))
                 connect(hop["to"], hop["from"], "chain_precedes", "curated",
                         f"previous hop in {chain_id}", hop.get("condition", ""), hop.get("falsifier", ""))
+
+    # Attach assumption nodes that would otherwise float, by token overlap against the non-assumption graph.
+    for assumption_id, assumption in nodes.items():
+        if assumption.get("layer") != "assumption":
+            continue
+        attached = [connection for connection in connections.get(assumption_id, [])
+                    if nodes.get(connection["to"], {}).get("layer") != "assumption"
+                    and not connection["to"].startswith("sub:")]
+        if attached:
+            continue
+        assumption_tokens = tokens(assumption.get("meaning", "") + " " + assumption_id)
+        best, best_score = None, 0
+        for candidate_id, candidate in nodes.items():
+            if candidate.get("layer") == "assumption" or candidate_id.startswith("sub:"):
+                continue
+            score = len(assumption_tokens & tokens(candidate.get("meaning", "") + " " + candidate_id))
+            if score > best_score:
+                best, best_score = candidate_id, score
+        if best is None:
+            candidates = [(candidate_id, candidate) for candidate_id, candidate in nodes.items()
+                          if candidate.get("layer") != "assumption" and not candidate_id.startswith("sub:")]
+            if candidates:
+                best = max(candidates, key=lambda item: item[1].get("degree", 0))[0]
+                connect(assumption_id, best, "bounds", "inferred",
+                        "assumption attached to the graph hub: no single mechanism owns it",
+                        "The assumption concerns the research process rather than one mechanism.",
+                        "The assumption turns out to concern exactly one mechanism.")
+                continue
+        if best:
+            connect(assumption_id, best, "bounds", "inferred",
+                    "assumption attached to the mechanism by token overlap",
+                    "The assumption bears on this mechanism rather than on an unrelated one.",
+                    "The token overlap is generic vocabulary and the mechanism is unrelated.")
 
     records = []
     for node_id, node in nodes.items():

@@ -1,0 +1,52 @@
+{
+ "forces": 89,
+ "forces_by_domain": {
+  "power": 10,
+  "demand": 8,
+  "silicon": 8,
+  "grid": 8,
+  "materials": 8,
+  "providers": 8,
+  "financing": 7,
+  "policy": 6,
+  "cycles": 6,
+  "micro": 6,
+  "labor": 5,
+  "sites": 5,
+  "water": 4
+ },
+ "interactions": 149,
+ "interactions_by_relation": {
+  "drives": 49,
+  "dampens": 34,
+  "reveals": 12,
+  "gates": 11,
+  "conditions": 8,
+  "complements": 6,
+  "substitutes": 6,
+  "amplifies": 5,
+  "crowds_in": 5,
+  "accelerates": 3,
+  "competes_for": 2,
+  "bounds": 2,
+  "delays": 2,
+  "crowds_out": 1,
+  "re_rates": 1,
+  "finances": 1,
+  "prices": 1
+ },
+ "interactions_by_evidence": {
+  "E4": 147,
+  "E2": 2
+ },
+ "phase_conditional_interactions": 14,
+ "mean_load": 3.13,
+ "high_load_links": 41,
+ "assumptions_total": 59,
+ "assumptions_seeded": 18,
+ "assumptions_from_links": 41,
+ "chains": 11,
+ "chain_hops": 53,
+ "isolated_forces": [],
+ "note": "every interaction is an inference with a condition, an assumption and a kill"
+}

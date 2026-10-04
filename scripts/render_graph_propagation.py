@@ -30,6 +30,11 @@ def main() -> int:
     distributions = [json.loads(line) for line in (SCAN / "distributions.jsonl").open() if line.strip()]
     propagation = [json.loads(line) for line in (SCAN / "propagation.jsonl").open() if line.strip()]
 
+    concept = json.loads((SCAN / "conceptual-summary.json").read_text())
+    interactions = [json.loads(line) for line in (SCAN / "interactions.jsonl").open() if line.strip()]
+    assumptions = [json.loads(line) for line in (SCAN / "assumptions.jsonl").open() if line.strip()]
+    concept_chains = [json.loads(line) for line in (SCAN / "conceptual-chains.jsonl").open() if line.strip()]
+    heaviest = sorted(interactions, key=lambda row: (-row["load"], row["from"]))[:20]
     by_kind = summary["hidden_objects"]["by_kind"]
     top_paths = propagation[:25]
     volatile = sorted([entry for entry in distributions if entry["sample"] not in ("",)],
@@ -67,6 +72,26 @@ def main() -> int:
                 [[entry["sample"], entry["dataset"].split("/")[-1], str(entry["stats"].get("n")),
                   str(entry["stats"].get("tail_ratio_p90_median")), str(entry["stats"].get("top1pct_share"))]
                  for entry in tails]),
+          "", "## The conceptual layer", "",
+          f"- Forces: **{concept['forces']}** across {len(concept['forces_by_domain'])} domains",
+          f"- Interactions: **{concept['interactions']}** typed pushes, mean assumption load "
+          f"{concept['mean_load']}, {concept['high_load_links']} at load four or five, "
+          f"{concept['phase_conditional_interactions']} with phase dependent signs",
+          f"- Assumptions as nodes: **{concept['assumptions_total']}**",
+          f"- Conceptual chains: **{concept['chains']}** carrying {concept['chain_hops']} hops", "",
+          "Relations in use: " + ", ".join(f"{name} {count}" for name, count in list(concept["interactions_by_relation"].items())[:12]) + ".", "",
+          "### The heaviest links", "",
+          table(["From", "Relation", "To", "Load", "Channel", "Kill"],
+                [[f"`{row['from']}`", row["relation"], f"`{row['to']}`", str(row["load"]),
+                  row["channel"], row["kill"]] for row in heaviest]),
+          "", "### Conceptual chains", "",
+          table(["Chain", "Hops", "Intuition", "Greatest assumption"],
+                [[f"`{chain['id']}`", " -> ".join(hop.split(":")[-1] for hop in chain["hops"]),
+                  chain["intuition"], chain["greatest_assumption"]] for chain in concept_chains]),
+          "", "### Assumptions as first class nodes", "",
+          table(["Assumption", "Statement", "Kill", "Load"],
+                [[f"`{row['id'].split('assumption:')[1]}`", row["statement"], row["kill"],
+                  str(row.get("load", ""))] for row in assumptions[:30]]),
           "", "## Hidden layer", "",
           table(["Kind", "Id", "Reason", "Action"],
                 [[entry["kind"], f"`{entry.get('id') or (entry.get('from', '') + ' -> ' + entry.get('to', ''))}`",
@@ -114,6 +139,16 @@ def main() -> int:
 <h2>Distributions, centre, spread, tails</h2>
 <table><thead><tr><th>Sample</th><th>n</th><th>mean</th><th>sd</th><th>median</th><th>p90/median</th><th>skew</th><th>excess kurtosis</th></tr></thead>
 <tbody>{rows_html([[entry['sample'], str(entry['stats'].get('n')), str(entry['stats'].get('mean')), str(entry['stats'].get('sd')), str(entry['stats'].get('median')), str(entry['stats'].get('tail_ratio_p90_median')), str(entry['stats'].get('skew')), str(entry['stats'].get('excess_kurtosis'))] for entry in volatile])}</tbody></table>
+<h2>The conceptual layer</h2>
+<ul>
+<li>{concept['forces']} forces across {len(concept['forces_by_domain'])} domains</li>
+<li>{concept['interactions']} typed interactions, mean load {concept['mean_load']}, {concept['high_load_links']} at load four or five</li>
+<li>{concept['assumptions_total']} assumptions as nodes, {concept['chains']} conceptual chains with {concept['chain_hops']} hops</li>
+</ul>
+<table><thead><tr><th>From</th><th>Relation</th><th>To</th><th>Load</th><th>Channel</th><th>Kill</th></tr></thead>
+<tbody>{rows_html([[row['from'], row['relation'], row['to'], str(row['load']), row['channel'], row['kill']] for row in heaviest[:12]])}</tbody></table>
+<table><thead><tr><th>Chain</th><th>Hops</th><th>Intuition</th></tr></thead>
+<tbody>{rows_html([[chain['id'], ' -> '.join(hop.split(':')[-1] for hop in chain['hops']), chain['intuition']] for chain in concept_chains])}</tbody></table>
 <h2>Hidden layer</h2>
 <table><thead><tr><th>Kind</th><th>Id</th><th>Reason</th><th>Action</th></tr></thead>
 <tbody>{rows_html([[entry['kind'], entry.get('id') or (entry.get('from', '') + ' -> ' + entry.get('to', '')), entry['reason'], entry.get('action', '')] for entry in hidden[:30]])}</tbody></table>

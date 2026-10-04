@@ -12,17 +12,18 @@
  "written_total_with_curated": 170345,
  "children_per_parent_min": 6,
  "by_layer": {
-  "raw": 94962,
-  "mechanism": 45236,
-  "feature": 26946,
+  "raw": 97715,
+  "mechanism": 46124,
+  "feature": 27923,
   "asset": 876,
-  "entity": 404,
+  "entity": 493,
+  "assumption": 464,
+  "force": 267,
   "dataset": 180,
   "event": 138,
   "rule": 134,
   "outcome": 132,
   "source": 114,
-  "assumption": 110,
   "experiment": 99,
   "factor": 87,
   "evidence": 84,
@@ -32,12 +33,12 @@
   "strategy": 55
  },
  "by_dimension": {
-  "composition": 45144,
-  "inputs": 45144,
-  "constraints": 45144,
-  "observables": 26304,
-  "substitutes": 4524,
-  "payers": 168,
+  "composition": 46032,
+  "inputs": 46032,
+  "constraints": 46032,
+  "observables": 27281,
+  "substitutes": 5501,
+  "payers": 257,
   "instrument mechanics": 146,
   "liquidity": 146,
   "borrow and short constraints": 146,
@@ -50,8 +51,8 @@
   "lookahead risk": 90,
   "stability": 90,
   "economic meaning": 90,
-  "payer incidence": 50,
-  "entity key": 44
+  "definition": 89,
+  "direction": 89
  },
  "status": "proposed_unverified skeleton; curated depth lives in deep-digs.jsonl"
 }

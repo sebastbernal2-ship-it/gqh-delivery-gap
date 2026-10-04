@@ -37,16 +37,19 @@ OUT_SUMMARY = RESULTS / "graph-propagation-summary.json"
 
 PROP_TYPES = {"drives", "feeds", "conditions", "requires", "exposes", "supports", "gates", "anchors",
               "refines", "ties_by_observable", "ties_by_source", "chain_precedes", "chain_follows",
-              "belongs_to", "candidate_for", "shares_semantics"}
+              "belongs_to", "candidate_for", "shares_semantics", "dampens", "amplifies", "substitutes",
+              "complements", "competes_for", "reveals", "delays", "accelerates", "crowds_in",
+              "crowds_out", "re_rates", "finances", "prices", "bounds", "bounded_by"}
 FUNDAMENTAL = ["constraint", "price", "margin", "capex", "cash_flow", "equity"]
 CASCADE = ["disclosure", "flow", "depth", "dislocation", "reversion"]
 DOMAIN_TOKENS = {
-    "constraint": ["capacity", "constraint", "bottleneck", "scarcity", "queue", "gate", "lead", "congestion", "interconnect"],
+    "constraint": ["capacity", "constraint", "bottleneck", "scarcity", "queue", "gate", "lead", "congestion",
+                   "interconnect", "supply", "demand", "volume", "permitting", "licence", "water", "crews"],
     "price": ["price", "rental", "rate", "tariff", "spot", "cost", "pricing"],
-    "margin": ["margin", "spread", "profitability"],
+    "margin": ["margin", "spread", "profitability", "pricing", "rental", "revenue-per"],
     "capex": ["capex", "order", "backlog", "spending", "plan"],
-    "cash_flow": ["cash", "revenue", "revision", "earnings", "ebitda", "cash-flow"],
-    "equity": ["equity", "basket", "multiple", "valuation", "agent", "share"],
+    "cash_flow": ["cash", "revenue", "revision", "earnings", "ebitda", "cash-flow", "contracted", "intensity", "capex-intensity"],
+    "equity": ["equity", "basket", "multiple", "valuation", "agent", "share", "re_rates", "roic"],
     "disclosure": ["disclosure", "8k", "8-k", "filing", "sec", "event-stamp", "prompt", "material"],
     "flow": ["flow", "forced", "deleveraging", "liquidation", "funding", "hedge", "hedging"],
     "depth": ["depth", "liquidity", "book"],
@@ -189,7 +192,8 @@ def main() -> int:
     components = collections.Counter(find(identifier) for identifier in nodes)
     biggest = components.most_common(1)[0] if components else (None, 0)
     anchor_ids = [identifier for identifier in nodes
-                  if identifier.startswith(("mechanism:", "truth:", "asset:", "factor:", "entity:"))]
+                  if identifier.startswith(("mechanism:", "truth:", "asset:", "factor:", "entity:",
+                                            "force:", "chain:", "interaction:"))]
     reachable = set()
     adjacency = collections.defaultdict(set)
     for record in nodes.values():
@@ -413,9 +417,17 @@ def main() -> int:
                            "reason": "dig has no bridge in either direction",
                            "action": "bridge the dig to the chain it feeds, or declare it standalone"})
 
-    # Under-connected core nodes.
+    # Under-connected core nodes, and conceptual nodes with too few interactions of their own.
     for identifier, record in nodes.items():
-        if record["degree"] < 50 and not identifier.startswith("sub:"):
+        if identifier.startswith("sub:"):
+            continue
+        if identifier.startswith(("force:", "assumption:")):
+            if record["degree"] < 4:
+                hidden.append({"kind": "hidden_gap", "id": identifier,
+                               "reason": f"conceptual node at degree {record['degree']}, under the four link floor",
+                               "action": "connect the force to the mechanisms it touches"})
+            continue
+        if record["degree"] < 50:
             hidden.append({"kind": "hidden_gap", "id": identifier,
                            "reason": f"core node at degree {record['degree']}, under the 50 connection target",
                            "action": "add the missing connections as questions with falsifiers"})
@@ -431,7 +443,14 @@ def main() -> int:
         for node in dig["nodes"]:
             if node.get("evidence") in ("E1", "E2"):
                 evidence_nodes.append(node["id"])
-    seeds = sorted(set(measured_nodes + evidence_nodes))
+    force_nodes = [identifier for identifier in nodes if identifier.startswith("force:")]
+    chain_starts = []
+    for line in (SCAN / "conceptual-chains.jsonl").open() if (SCAN / "conceptual-chains.jsonl").exists() else []:
+        if line.strip():
+            chain_row = json.loads(line)
+            if chain_row.get("hops"):
+                chain_starts.append(chain_row["hops"][0])
+    seeds = sorted(set(measured_nodes + evidence_nodes + force_nodes + chain_starts))
     seed_set = set(seeds)
     edges = collections.defaultdict(list)
     for record in nodes.values():
@@ -451,7 +470,7 @@ def main() -> int:
             current = path[-1]
             current_tags = domain_tags(current, nodes[current].get("meaning", ""))
             for target, conn in edges[current]:
-                if target in path:
+                if target in path or target.startswith("assumption:"):
                     continue
                 target_tags = domain_tags(target, nodes[target].get("meaning", ""))
                 moved = False
@@ -476,7 +495,8 @@ def main() -> int:
     for path, hops in paths:
         tiers = [status_tier.get(hop.get("status", ""), "undeclared") for hop in hops]
         floor = min(tiers, key=lambda tier: tier_rank[tier]) if tiers else "undeclared"
-        weakest = min(hops, key=lambda hop: tier_rank[status_tier.get(hop.get("status", ""), "undeclared")])
+        weakest = min(hops, key=lambda hop: (tier_rank[status_tier.get(hop.get("status", ""), "undeclared")],
+                                             -int(hop.get("load") or 0)))
         endpoint_tokens = set(tokens(path[0])) | set(tokens(path[-1]))
         matched = [file for file, needles in DATA_INVENTORY.items()
                    if endpoint_tokens & set(needles)]
@@ -497,7 +517,11 @@ def main() -> int:
                        "evidence_floor": floor,
                        "greatest_assumption": {"edge": f"{path[len(hops) - 1]}->{path[len(hops)]}",
                                                "status": weakest.get("status"),
+                                               "load": weakest.get("load"),
+                                               "relation": weakest.get("type", ""),
                                                "condition": weakest.get("condition", ""),
+                                               "assumption": weakest.get("assumption", ""),
+                                               "sign_by_phase": weakest.get("sign_by_phase", {}),
                                                "falsifier": weakest.get("falsifier", "")},
                        "testable": {"data_in_hand": matched, "status": test_status},
                        "payer": path[-1] if path[-1].startswith(("asset:", "entity:", "outcome:")) else None})

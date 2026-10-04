@@ -184,6 +184,37 @@ def main() -> int:
             rows.append({"kind": "split", "id": f"split:{fourth['id']}", "from": third["id"],
                          "to": fourth["id"], "relation": "splits_into", "status": "proposed"})
 
+    # The conceptual layer decomposes under its own dimensions: every force and every assumption is a node.
+    FORCE_TEMPLATE = ["definition", "direction", "observables", "thresholds", "substitutes", "payers"]
+    ASSUMPTION_TEMPLATE = ["statement", "test", "kill", "blast-radius", "owner", "monitoring"]
+    forces_path = ROOT / "docs" / "scan" / "forces.jsonl"
+    assumptions_path = ROOT / "docs" / "scan" / "assumptions.jsonl"
+    concept_level1 = concept_level2 = 0
+    for path_obj, template, status in ((forces_path, FORCE_TEMPLATE, "conceptual"),
+                                       (assumptions_path, ASSUMPTION_TEMPLATE, "conceptual")):
+        if not path_obj.exists():
+            continue
+        for line in path_obj.open():
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            node = {"id": row["id"], "layer": "force" if "forces" in path_obj.name else "assumption",
+                    "meaning": row.get("meaning", row.get("statement", row["id"]))}
+            for dimension in template:
+                first = child_of(node, dimension)
+                first["status"] = status
+                rows.append(first)
+                concept_level1 += 1
+                rows.append({"kind": "split", "id": f"split:{first['id']}", "from": node["id"],
+                             "to": first["id"], "relation": "splits_into", "status": "proposed"})
+                for deeper in GENERIC[:5]:
+                    second = child_of(first, deeper)
+                    second["status"] = status
+                    rows.append(second)
+                    concept_level2 += 1
+                    rows.append({"kind": "split", "id": f"split:{second['id']}", "from": first["id"],
+                                 "to": second["id"], "relation": "splits_into", "status": "proposed"})
+
     import gzip
     out = args.out if args.out.endswith(".gz") else args.out + ".gz"
     with gzip.open(out, "wt") as handle:
@@ -213,7 +244,9 @@ def main() -> int:
     Path(args.summary).write_text(json.dumps(summary, indent=1) + "\n")
     print(f"wrote {args.out} and {args.summary}")
     print(f"manifest {len(nodes)} nodes -> {level1} children -> {level2} grandchildren -> {level3} great-grandchildren")
-    print(f"written nodes {len(nodes) + level1 + level2 + level3 + level4}; split edges {level1 + level2 + level3 + level4}")
+    print(f"conceptual children {concept_level1} and grandchildren {concept_level2}")
+    print(f"written nodes {len(nodes) + level1 + level2 + level3 + level4 + concept_level1 + concept_level2}; "
+          f"split edges {level1 + level2 + level3 + level4 + concept_level1 + concept_level2}")
     return 0
 
 
