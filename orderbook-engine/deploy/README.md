@@ -59,6 +59,10 @@ Run the daily job by hand for any day, for example:
 bash deploy/daily-replay.sh 20261004
 ```
 
+## Retention
+
+Capture grows about 300 MB a day. The daily job prunes raw windows, their normalized rows, and their fixtures once they are older than 30 days, and keeps every report. Set `RETAIN_DAYS=0` in the unit to keep everything instead.
+
 ## Where the data lives
 
 Everything the collector and the replay job write is under `collector/data`, which git ignores. Raw capture windows stay immutable, and every fixture gets a manifest with its SHA-256, source hashes, and row count.
