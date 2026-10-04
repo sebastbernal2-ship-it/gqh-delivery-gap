@@ -85,6 +85,7 @@ test:
 	@python3 tests/test_paths.py
 	@python3 tests/test_owners.py
 	@python3 tests/test_chain.py
+	@python3 tests/test_truths.py
 	@python3 tests/test_link_algoterminal.py
 	@python3 tests/test_edgar.py
 	@python3 tests/test_xbrl.py
@@ -163,6 +164,7 @@ check: secrets
 	@python3 scripts/check_scan.py
 	@python3 scripts/check_quantgraph_manifest.py
 	@python3 scripts/check_ideas.py
+	@python3 scripts/check_truths.py
 	@python3 scripts/render_ideas.py --check
 
 status:
