@@ -1,0 +1,37 @@
+{
+ "source": "https://eta-publications.lbl.gov/sites/default/files/2025-08/lbnl_ix_queue_data_file_thru2024_v2.xlsx",
+ "sheet": "03. Complete Queue Data",
+ "projects": 36441,
+ "date_range": {
+  "first_request": "1970-01-01",
+  "last_request": "2024-12-31"
+ },
+ "by_status": {
+  "active": 10538,
+  "operational": 4432,
+  "suspended": 546,
+  "unknown": 4,
+  "withdrawn": 20921
+ },
+ "mw_by_status": {
+  "active": 1898852.8,
+  "operational": 481708.7,
+  "suspended": 112901.5,
+  "unknown": 312.0,
+  "withdrawn": 3765209.3
+ },
+ "regions": 14,
+ "developers": 3526,
+ "days_ir_to_ia": {
+  "n": 2339,
+  "median": 664.0,
+  "p90": 1428.0
+ },
+ "days_ir_to_cod": {
+  "n": 2798,
+  "median": 1268.0,
+  "p90": 2893.0
+ },
+ "completion_share": 0.1216,
+ "withdrawal_share": 0.5741
+}

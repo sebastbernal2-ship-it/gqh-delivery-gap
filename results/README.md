@@ -38,3 +38,8 @@ Produced by `scripts/summarize_capacity_strategy.py`:
 
 generated-path: results/capacity-strategy-summary.json
 generated-path: results/capacity-equity.svg
+
+Produced by `scripts/build_queue_panel.py`:
+
+generated-path: results/queue-panel.csv
+generated-path: results/queue-summary.json

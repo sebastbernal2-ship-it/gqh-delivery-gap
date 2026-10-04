@@ -104,6 +104,13 @@ scripted operator tables, no usable DOE file.
 **Consequence**: the single highest value data acquisition available to us. Everything else on delivery is
 indirect until this exists.
 
+**Update, 2026-10-04.** The data exists and is now in hand. LBNL's Queued Up workbook is public: 36,441 U.S.
+queue projects with request, agreement, withdrawal and operation dates, built into `results/queue-panel.csv`
+and summarized in `results/queue-summary.json`. 57.4 percent were withdrawn and 12.2 percent reached
+operation; the median wait is 664 days from request to interconnection agreement and 1,268 days from request
+to operation. The statement above was true of our access on 2026-10-03 and is corrected here. The remaining
+constraint is the crosswalk from queue projects to listed firms, not the queue data itself.
+
 ## T12. The mechanism has never been turned into a priced signal
 
 **Statement**: four broad searches have produced no survivor that belongs to the mechanism: the pair scan in
